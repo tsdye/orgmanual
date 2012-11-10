@@ -176,10 +176,47 @@ There should be a section about smart-quotes too.
 **** TODO Add smart quotes section
 
 * Org-mode setup                                                   :noexport:
+** init.el file
+#+name: emacs-init
+#+header:  :tangle init.el
+#+header: :results silent
 #+begin_src emacs-lisp
+  (setq load-path (cons "~/.emacs.d/src/org-mode/lisp" load-path))
+  (setq load-path (cons "~/.emacs.d/src/org-mode/contrib/lisp" load-path))
   (require 'org-e-texinfo)
+  (define-key org-mode-map (kbd "C-c e") 'org-export-dispatch)
+  (setq org-src-preserve-indentation t)
+#+end_src
+
+** Makefile
+
+#+name: make-manual
+#+header: :tangle Makefile
+#+header: :results silent
+#+begin_src makefile
+CC=gcc	
+EMACS=/Applications/MacPorts/Emacs.app/Contents/MacOS/Emacs
+BATCH_EMACS=$(EMACS) --batch -Q -l init.el orgmanual.org
+  
+all: orgmanual.texi
+
+orgmanual.texi: orgmanual.org
+	$(BATCH_EMACS) -f org-e-texinfo-export-to-texinfo
+#+end_src
+
+
+*** DONE Figure out how to export with a batch call
+    :LOGBOOK:
+    - State "DONE"       from "TODO"       [2012-11-10 Sat 12:46]
+    :END:
+The correct command is org-e-texinfo-export-to-texinfo
+
+** Run emacs -q
+#+name: run-make
+#+header: :results silent
+#+begin_src sh
+make
 #+end_src
 
 #+results:
-: org-e-texinfo
 
