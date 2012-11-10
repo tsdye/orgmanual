@@ -15,6 +15,11 @@
 #+XSLT:
 
 
+* Org Mode Manual
+** Document structure
+** Hyperlinks
+** Markup for rich export
+** Exporting
 * About orgmanual.org                                              :noexport:
 This document intends to be Org mode source for the Org mode manual
 and the Org mode guide.  It is intended to be a major revision of the
