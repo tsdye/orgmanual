@@ -1,1 +1,5 @@
 *.texi
+*.info
+Makefile
+init.el
+export-test.org
