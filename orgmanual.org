@@ -1,5 +1,5 @@
-#+TITLE:     Org Mode
-#+AUTHOR:    Carsten Dominik and others
+#+TITLE:     The Org Manual
+#+AUTHOR:    by Carsten Dominik with contributions by David O'Toole, Bastien Guerry, Philip Rooke, Dan Davison, Eric Schulte, Thomas Dye and Jambunathan K.
 #+EMAIL:     tsd@tsdye.com
 #+DATE:      2012-11-10 Sat
 #+DESCRIPTION:
@@ -13,13 +13,87 @@
 #+LINK_UP:   
 #+LINK_HOME: 
 #+XSLT:
-
-
+#+TEXINFO_FILENAME: ../../info/org
+#+TEXINFO_HEADER: @c
+#+TEXINFO_HEADER: @c Added by tsd [2012-11-11 Sun]
+#+TEXINFO_HEADER: @documentencoding UTF-8
+#+TEXINFO_HEADER: @c
+#+TEXINFO_HEADER: @include org-version.inc
+#+TEXINFO_HEADER: @c
+#+TEXINFO_HEADER: @c Use proper quote and backtick for code sections in PDF output
+#+TEXINFO_HEADER: @c Cf. Texinfo manual 14.2
+#+TEXINFO_HEADER: @set txicodequoteundirected
+#+TEXINFO_HEADER: @set txicodequotebacktick
+#+TEXINFO_HEADER: @c
+#+TEXINFO_HEADER: @c Version and Contact Info
+#+TEXINFO_HEADER: @set MAINTAINERSITE @uref{http://orgmode.org,maintainers webpage}
+#+TEXINFO_HEADER: @set AUTHOR Carsten Dominik
+#+TEXINFO_HEADER: @set MAINTAINER Carsten Dominik
+#+TEXINFO_HEADER: @set MAINTAINEREMAIL @email{carsten at orgmode dot org}
+#+TEXINFO_HEADER: @set MAINTAINERCONTACT @uref{mailto:carsten at orgmode dot org,contact the maintainer}
+#+SUBTITLE: Release @value{VERSION}
 * Org Mode Manual
+** Copying
+   :PROPERTIES:
+   :copying:  t
+   :END:
+
+This manual is for Org version @@info:@value{VERSION}@@.
+
+Copyright \copy 2004-2012  Free Software Foundation, Inc.
+
+@@info:@quotation@@
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.3 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, with the Front-Cover texts being ``A GNU Manual,''
+and with the Back-Cover Texts as in (a) below.  A copy of the license
+is included in the section entitled ``GNU Free Documentation License.''
+
+(a) The FSF's Back-Cover Text is: ``You have the freedom to copy and
+modify this GNU manual.  Buying copies from the FSF supports it in
+developing GNU and promoting software freedom.''
+
+This document is part of a collection distributed under the GNU Free
+Documentation License.  If you want to distribute this document
+separately from the collection, you can do so by adding a copy of the
+license to the document, as described in section 6 of the license.
+@@info:@end quotation@@
+
 ** Document structure
+@@info:@cindex document structure@@
+@@info:@cindex structure of document@@
+
+Org is based on Outline mode and provides flexible commands to
+edit the structure of the document.
+
+*** Outlines
+
+*** Headlines
+
+*** Visibility cycling
+
+*** Motion
+
+*** Structure editing
+
+*** Sparse trees
+
+*** Plain lists
+
+*** Drawers
+
+*** Blocks
+
+*** Footnotes
+
+*** Orgstruct mode
+
+
 ** Hyperlinks
 ** Markup for rich export
 ** Exporting
+
 * About orgmanual.org                                              :noexport:
 This document intends to be Org mode source for the Org mode manual
 and the Org mode guide.  It is intended to be a major revision of the
@@ -99,6 +173,7 @@ line. Therefore, they are appropriate for small replacements. For more
 complex ones, one may use Babel instead.
 
 **** TODO Write macros section
+Subsections: General, Hard-coded, Specific
 
 *** Filters
 There should also be a section about filters used to customize export
@@ -106,6 +181,13 @@ output and another one about `org-export-define-derived-backend' which
 allow someone to tweak a back-end.
 
 **** TODO Write filters section
+
+*** Define derived back-end
+and another one about `org-export-define-derived-backend' which
+allow someone to tweak a back-end.
+
+**** TODO Write derived back-end section
+
 *** Export Snippets
 A section can be added about export snippets, i.e.
 
@@ -195,6 +277,33 @@ This section contains source code blocks that help translate from
 =texinfo= to =Org=.
 
 * Notes                                                            :noexport:
+** TODO org-version.inc needs to change format
+It is in texinfo format now, but should be in a form that can be
+exported every which way.
+
+** Entities
+
+> With the new exporter's texinfo back-end, I think org-entities and
+> org-entities-user might usefully be augmented with the entities listed
+> in Chapter 14 of the texinfo manual, Special Insertions.
+>
+> Or, is there some other Org mechanism that might be preferable?
+
+AFAIU, texinfo can handle UTF-8 characters with:
+
+  @documentencoding UTF-8
+
+(see section 18.2 from texinfo manual). So I guess it's safe to rely
+on :utf-8 entities.
+
+However, special characters like @dots{} are usually handled with
+"special strings" mechanism, directly at the plain text transcoded (see
+`org-e-latex-plain-text' for example).
+
+
+*** TODO Add @documentencoding UTF-8 to header
+
+*** TODO Investigate special strings mechanism
 * Org-mode setup                                                   :noexport:
 
 ** init.el file
@@ -209,6 +318,7 @@ Modify accordingly.
 (setq load-path (cons "~/.emacs.d/src/org-mode/contrib/lisp" load-path))
 (require 'org-e-texinfo)
 (define-key org-mode-map (kbd "C-c e") 'org-export-dispatch)
+(setq org-pretty-entities nil)
 (setq org-src-preserve-indentation t)
 (setq org-confirm-babel-evaluate nil)
 (org-babel-do-load-languages
@@ -216,9 +326,11 @@ Modify accordingly.
  '((emacs-lisp . t)
    (makefile . t)
    (sh . t)))
+(add-to-list 'org-export-snippet-translation-alist
+             '("info" . "e-texinfo"))
 #+end_src
 
-#+end_src
+
 
 ** Makefile
 This source code block requires information to call your emacs binary.
@@ -232,22 +344,24 @@ or export this source code block.
 #+begin_src makefile
   CC=gcc  
   EMACS=/Applications/MacPorts/Emacs.app/Contents/MacOS/Emacs
-  BATCH_EMACS=$(EMACS) --batch -Q -l init.el orgmanual.org
+  BATCH_EMACS=$(EMACS) --batch -Q -l init.el
 
-  all: orgmanual.texi	
+  manual: clean
+	$(BATCH_EMACS) orgmanual.org -f org-e-texinfo-export-to-texinfo
 
-  info: orgmanual.info
+  info: clean
+	$(BATCH_EMACS) orgmanual.org -f org-e-texinfo-export-to-info
 
-  orgmanual.texi: orgmanual.org
-	$(BATCH_EMACS) -f org-e-texinfo-export-to-texinfo
+  export-test: cleantest
+	$(BATCH_EMACS) export-test.org -f org-e-texinfo-export-to-texinfo
 
-  orgmanual.info: orgmanual.org
-	$(BATCH_EMACS) -f org-e-texinfo-export-to-info
-
-  clean:
+  clean realclean::
 	rm -f *~ orgmanual.texi orgmanual.info
 
-  real-clean: clean
+  cleantest realclean::
+	rm -f export-test.texi
+
+  realclean::
 	rm -f Makefile init.el
 #+end_src
 
