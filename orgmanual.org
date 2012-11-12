@@ -1,5 +1,5 @@
 #+TITLE:     The Org Manual
-#+AUTHOR:    by Carsten Dominik with contributions by David O'Toole, Bastien Guerry, Philip Rooke, Dan Davison, Eric Schulte, Thomas Dye and Jambunathan K.
+#+AUTHOR:    Carsten Dominik
 #+EMAIL:     tsd@tsdye.com
 #+DATE:      2012-11-10 Sat
 #+DESCRIPTION:
@@ -13,7 +13,6 @@
 #+LINK_UP:   
 #+LINK_HOME: 
 #+XSLT:
-#+TEXINFO_FILENAME: ../../info/org
 #+TEXINFO_HEADER: @c
 #+TEXINFO_HEADER: @c Added by tsd [2012-11-11 Sun]
 #+TEXINFO_HEADER: @documentencoding UTF-8
@@ -27,11 +26,11 @@
 #+TEXINFO_HEADER: @c
 #+TEXINFO_HEADER: @c Version and Contact Info
 #+TEXINFO_HEADER: @set MAINTAINERSITE @uref{http://orgmode.org,maintainers webpage}
-#+TEXINFO_HEADER: @set AUTHOR Carsten Dominik
 #+TEXINFO_HEADER: @set MAINTAINER Carsten Dominik
 #+TEXINFO_HEADER: @set MAINTAINEREMAIL @email{carsten at orgmode dot org}
 #+TEXINFO_HEADER: @set MAINTAINERCONTACT @uref{mailto:carsten at orgmode dot org,contact the maintainer}
 #+SUBTITLE: Release @value{VERSION}
+#+SUBAUTHOR:  with contributions by David O'Toole, Bastien Guerry, Philip Rooke, Dan Davison, Eric Schulte, Thomas Dye and Jambunathan K.
 * Org Mode Manual
 ** Copying
    :PROPERTIES:
@@ -40,7 +39,7 @@
 
 This manual is for Org version @@info:@value{VERSION}@@.
 
-Copyright \copy 2004-2012  Free Software Foundation, Inc.
+Copyright © 2004-2012  Free Software Foundation, Inc.
 
 @@info:@quotation@@
 Permission is granted to copy, distribute and/or modify this document
@@ -352,14 +351,35 @@ or export this source code block.
   info: clean
 	$(BATCH_EMACS) orgmanual.org -f org-e-texinfo-export-to-info
 
+  dvi: cleandvi
+	$(BATCH_EMACS) orgmanual.org -f org-e-texinfo-export-to-texinfo
+	texi2dvi orgmanual.texi
+
+  pdf: cleanpdf
+	$(BATCH_EMACS) orgmanual.org -f org-e-texinfo-export-to-texinfo
+	texi2dvi --pdf orgmanual.texi
+
+  info-batch: clean
+	$(BATCH_EMACS) orgmanual.org -f org-e-texinfo-export-to-texinfo
+	makeinfo orgmanual.texi
+
   export-test: cleantest
 	$(BATCH_EMACS) export-test.org -f org-e-texinfo-export-to-texinfo
+
+  info-test: cleantest
+	$(BATCH_EMACS) export-test.org -f org-e-texinfo-export-to-info
 
   clean realclean::
 	rm -f *~ orgmanual.texi orgmanual.info
 
   cleantest realclean::
 	rm -f export-test.texi
+
+  cleandvi realclean::
+	rm -f *.dvi *.toc *.tp *.vr *.pg *.log *.ky *.fn *.cps *.cp *.aux
+
+  cleanpdf realclean::
+	rm -f *.pdf
 
   realclean::
 	rm -f Makefile init.el
