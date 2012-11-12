@@ -5,3 +5,15 @@ Makefile
 init.el
 export-test.org
 org-version.inc
+*.aux
+*.cp
+*.fn
+*.ky
+*.log
+*.pdf
+*.pg
+*.toc
+*.tp
+*.vr
+*.cps
+.DS_Store
