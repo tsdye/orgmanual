@@ -1,4 +1,4 @@
-#+TITLE:     The Org Manual
+#+TITLE:     Org Mode
 #+AUTHOR:    Carsten Dominik
 #+EMAIL:     tsd@tsdye.com
 #+DATE:      2012-11-10 Sat
@@ -31,8 +31,11 @@
 #+TEXINFO_HEADER: @set MAINTAINERCONTACT @uref{mailto:carsten at orgmode dot org,contact the maintainer}
 #+SUBTITLE: Release @value{VERSION}
 #+SUBAUTHOR:  with contributions by David O'Toole, Bastien Guerry, Philip Rooke, Dan Davison, Eric Schulte, Thomas Dye and Jambunathan K.
-* Org Mode Manual
-** Copying
+#+TEXINFO_DIR_CATEGORY: Emacs editing modes
+#+TEXINFO_DIR_TITLE: Org Mode: (org)
+#+TEXINFO_DIR_DESC: Outline-based notes management and organizer
+
+* Copying
    :PROPERTIES:
    :copying:  t
    :END:
@@ -59,40 +62,132 @@ separately from the collection, you can do so by adding a copy of the
 license to the document, as described in section 6 of the license.
 @@info:@end quotation@@
 
-** Document structure
+* Introduction
+  :PROPERTIES:
+  :TITLE: Introduction
+  :DESCRIPTION: Getting started
+  :END:
+* Document Structure
+  :PROPERTIES:
+  :DESCRIPTION: A tree works like your brain
+  :EXPORT_TITLE: Document structure
+  :TITLE:    Document structure
+  :END:
 @@info:@cindex document structure@@
 @@info:@cindex structure of document@@
 
 Org is based on Outline mode and provides flexible commands to
 edit the structure of the document.
 
-*** Outlines
+** Outlines
 
-*** Headlines
+** Headlines
 
-*** Visibility cycling
+** Visibility cycling
 
-*** Motion
+** Motion
 
-*** Structure editing
+** Structure editing
 
-*** Sparse trees
+** Sparse trees
 
-*** Plain lists
+** Plain lists
 
-*** Drawers
+** Drawers
 
-*** Blocks
+** Blocks
 
-*** Footnotes
+** Footnotes
 
-*** Orgstruct mode
+** Orgstruct mode
 
+* Tables
+  :PROPERTIES:
+  :DESCRIPTION: Pure magic for quick formatting
+  :END:
+* Hyperlinks
+  :PROPERTIES:
+  :DESCRIPTION: Notes in context
+  :END:
+* =TODO= Items
+  :PROPERTIES:
+  :DESCRIPTION: Every tree branch can be a TODO item
+  :END:
+* Tags
+  :PROPERTIES:
+  :DESCRIPTION: Tagging headlines and matching sets of tags
+  :END:
+* Properties and columns
+  :PROPERTIES:
+  :DESCRIPTION: Storing information about an entry
+  :END:
+* Dates and times
+  :PROPERTIES:
+  :DESCRIPTION: Making items useful for planning
+  :END:
+* Capture - Refile - Archive
+  :PROPERTIES:
+  :DESCRIPTION: The ins and outs for projects
+  :END:
+* Agenda views
+  :PROPERTIES:
+  :DESCRIPTION: Collecting information into views
+  :END:
+* Markup for rich export
+  :PROPERTIES:
+  :DESCRIPTION: Prepare text for rich export
+  :END:
+* Exporting
+  :PROPERTIES:
+  :DESCRIPTION: Sharing and publishing notes
+  :END:
 
-** Hyperlinks
-** Markup for rich export
-** Exporting
+* Publishing
+  :PROPERTIES:
+  :DESCRIPTION: Create a web site of linked Org files
+  :END:
 
+* Working with source code
+  :PROPERTIES:
+  :DESCRIPTION: Export, evaluate, and tangle code blocks
+  :END:
+
+* The spreadsheet
+* Miscellaneous
+  :PROPERTIES:
+  :DESCRIPTION: All the rest which did not fit elsewhere
+  :END:
+
+* Hacking
+  :PROPERTIES:
+  :DESCRIPTION: How to hack your way around
+  :END:
+
+* MobileOrg
+  :PROPERTIES:
+  :DESCRIPTION: Viewing and capture on a mobile device
+  :END:
+
+* History and acknowledgments
+  :PROPERTIES:
+  :DESCRIPTION: How Org came into being
+  :END:
+
+* Key index
+  :PROPERTIES:
+  :DESCRIPTION: Key bindings and where they are described
+  :END:
+
+* Command and function index
+  :PROPERTIES:
+  :DESCRIPTION: Command names and some internal functions
+  :END:
+
+* Variable index
+  :PROPERTIES:
+  :DESCRIPTION: Variables mentioned in the manual
+  :END:
+* Concept index
 * About orgmanual.org                                              :noexport:
 This document intends to be Org mode source for the Org mode manual
 and the Org mode guide.  It is intended to be a major revision of the
@@ -303,6 +398,19 @@ However, special characters like @dots{} are usually handled with
 *** TODO Add @documentencoding UTF-8 to header
 
 *** TODO Investigate special strings mechanism
+** TODO texinfo export restriction on position of Copying heading 
+[2012-11-12 Mon]
+[[gnus:nnfolder%2Barchive:sent-mail#m1mwympokm.fsf@tsdye.com][Email from Thomas S. Dye: Re: {O} texinfo back-end won't]]
+** TODO Change description of Publishing 
+[2012-11-17 Sat]
+[[file:~/org/orgmanual/orgmanual.org::*Publishing][Publishing]]
+** TODO Edit description for Miscellaneous 
+[2012-11-17 Sat]
+[[file:~/org/orgmanual/orgmanual.org::*Miscellaneous][Miscellaneous]]
+Perhaps shorten to "All the rest"
+** TODO Add concept index to the info version? 
+[2012-11-17 Sat]
+[[file:~/org/orgmanual/orgmanual.org::*Concept%20index][Concept index]]
 * Org-mode setup                                                   :noexport:
 
 ** init.el file
