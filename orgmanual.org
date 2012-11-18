@@ -248,6 +248,72 @@ Do not forget to activate Org as described in the following section.
    :PROPERTIES:
    :DESCRIPTION: How to activate Org-mode for certain buffers
    :END:
+@@info:@cindex activation@@
+@@info:@cindex autoload@@
+@@info:@cindex ELPA@@
+@@info:@cindex global key bindings@@
+@@info:@cindex key bindings, global@@
+@@info:@findex org-agenda@@
+@@info:@findex org-capture@@
+@@info:@findex org-store-link@@
+@@info:@findex org-iswitchb@@
+
+Since Emacs 22.2, files with the @@info:@file{.org}@@ extension use Org mode by
+default.  If you are using an earlier version of Emacs, add this line to your
+@@info:@file{.emacs}@@ file:
+
+#+begin_src example
+(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+#+end_src
+
+Org mode buffers need font-lock to be turned on - this is the default in
+Emacs.[fn:5]
+
+There are compatibility issues between Org mode and some other Elisp
+packages, please take the time to check the list (@@info:@pxref{Conflicts}@@).
+
+The four Org commands @@info:@command{org-store-link}@@, @@info:@command{org-capture}@@,
+@@info:@command{org-agenda}@@, and @@info:@command{org-iswitchb}@@ should be accessible through
+global keys (i.e., anywhere in Emacs, not just in Org buffers).  Here are
+suggested bindings for these keys, please modify the keys to your own
+liking.
+
+#+begin_src example
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+#+end_src
+
+@@info:@cindex Org mode, turning on@@
+With this setup, all files with extension @@info:@samp{.org}@@ will be put
+into Org mode.  As an alternative, make the first line of a file look
+like this:
+
+#+begin_src example
+MY PROJECTS    -*- mode: org; -*-
+#+end_src
+
+
+@@info:@vindex org-insert-mode-line-in-empty-file@@ @@info:@noindent@@
+which will select Org mode for this buffer no matter what the file's
+name is. See also the variable
+@@info:@code{org-insert-mode-line-in-empty-file}@@.
+
+Many commands in Org work on the region if the region is
+@@info:@i{active}@@. To make use of this, you need to have
+@@info:@code{transient-mark-mode}@@ (@@info:@code{zmacs-regions}@@ in
+XEmacs) turned on. In Emacs 23 this is the default, in Emacs 22 you
+need to do this yourself with
+
+#+begin_src example
+(transient-mark-mode 1)
+#+end_src
+
+@@info:@noindent@@ If you do not like
+@@info:@code{transient-mark-mode}@@, you can create an active region
+by using the mouse to select a region, or pressing
+@@info:@kbd{C-@key{SPC}}@@ twice before moving the cursor.
 
 ** Feedback
    :PROPERTIES:
@@ -301,6 +367,10 @@ the function =org-version= will not be defined.
 [fn:3]  The @@info:@code{master}@@ branch is where development takes place.
 
 [fn:4] Export to iCalendar supports TODO and agenda items only.
+
+[fn:5] If you don't use font-lock globally, turn it on in an Org
+buffer with @@info:@code{(add-hook 'org-mode-hook 'turn-on-font-lock)}@@.
+
 
 ** Orgstruct mode
 
