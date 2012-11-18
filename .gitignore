@@ -16,4 +16,5 @@ org-version.inc
 *.tp
 *.vr
 *.cps
+*.pgs
 .DS_Store

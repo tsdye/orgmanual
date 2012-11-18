@@ -291,9 +291,9 @@ use two different versions of install-info.  You may safely ignore the
 message:
 #+begin_src example
 This is not dpkg install-info anymore, but GNU install-info
-See the man page for ginstall-info for command line arguments.
+See the man page for ginstall-info for command line arguments
 #+end_src
-
+.
 
 [fn:2]  If your Emacs distribution does not come with Org,
 the function =org-version= will not be defined.
