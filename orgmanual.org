@@ -319,6 +319,148 @@ by using the mouse to select a region, or pressing
    :PROPERTIES:
    :DESCRIPTION: Bug reports, ideas, patches, etc.
    :END:
+@@info:@cindex feedback@@
+@@info:@cindex bug reports@@
+@@info:@cindex maintainer@@
+@@info:@cindex author@@
+
+If you find problems with Org, or if you have questions, remarks, or
+ideas about it, please mail to the Org mailing list
+[[mailto:emacs-orgmode@gnu.org]]. If you are not a member of
+the mailing list, your mail will be passed to the list after a
+moderator has approved it.[fn:6]
+
+For bug reports, please first try to reproduce the bug with the latest
+version of Org available---if you are running an outdated version, it is
+quite possible that the bug has been fixed already.  If the bug persists,
+prepare a report and provide as much information as possible, including the
+version information of Emacs (@@info:@kbd{M-x emacs-version @key{RET}}@@) and Org
+(@@info:@kbd{M-x org-version @key{RET}}@@), as well as the Org related setup in
+@@info:@file{.emacs}@@.  The easiest way to do this is to use the command
+
+#+begin_src example
+@kbd{M-x org-submit-bug-report}
+#+end_src
+
+@@info:@noindent@@ which will put all this information into an Emacs
+mail buffer so that you only need to add your description. If you are
+not sending the Email from within Emacs, please copy and paste the
+content into your Email program.
+
+Sometimes you might face a problem due to an error in your Emacs or Org mode
+setup.  Before reporting a bug, it is very helpful to start Emacs with minimal
+customizations and reproduce the problem.  Doing so often helps you determine
+if the problem is with your customization or with Org mode itself.  You can
+start a typical minimal session with a command like the example below.
+
+#+begin_src example
+$ emacs -Q -l /path/to/minimal-org.el
+#+end_src
+
+However if you are using Org mode distributed with Emacs, a minimal
+setup is not necessary. In that case it is sufficient to start Emacs
+as @@info:@code{emacs -Q}@@. The @@info:@code{minimal-org.el}@@ setup
+file can have contents as shown below.
+
+#+begin_src example
+;;; Minimal setup to load latest `org-mode'
+
+;; activate debugging
+(setq debug-on-error t
+      debug-on-signal nil
+      debug-on-quit nil)
+
+;; add latest org-mode to load path
+(add-to-list 'load-path (expand-file-name "/path/to/org-mode/lisp"))
+(add-to-list 'load-path (expand-file-name "/path/to/org-mode/contrib/lisp" t))
+#+end_src
+
+If an error occurs, a backtrace can be very useful (see below on how to
+create one).  Often a small example file helps, along with clear information
+about:
+
+  1. What exactly did you do?
+  2. What did you expect to happen?
+  3. What happened instead?
+
+@@info:@noindent@@ Thank you for helping to improve this program.
+
+*** How to create a useful backtrace
+@@info:@cindex backtrace of an error@@
+
+If working with Org produces an error with a message you don't
+understand, you may have hit a bug.  The best way to report this is by
+providing, in addition to what was mentioned above, a @@info:@emph{backtrace}@@.
+This is information from the built-in debugger about where and how the
+error occurred.  Here is how to produce a useful backtrace:
+
+  1. Reload uncompiled versions of all Org mode Lisp files.  The
+     backtrace contains much more information if it is produced with
+     uncompiled code. To do this, use @@info:@key{C-u M-x org-reload
+     RET}@@ or select @@info:@code{Org -> Refresh/Reload -> Reload Org
+     uncompiled}@@ from the menu.
+
+  2. Go to the @@info:@code{Options}@@ menu and select
+     @@info:@code{Enter Debugger on Error}@@ (XEmacs has this option
+     in the @@info:@code{Troubleshooting}@@ sub-menu).
+
+  3. Do whatever you have to do to hit the error. Don't forget to
+     document the steps you take.
+
+  4. When you hit the error, a @@info:@file{*Backtrace*}@@ buffer will
+     appear on the screen.  Save this buffer to a file (for example
+     using @@info:@kbd{C-x C-w}@@) and attach it to your bug report.
+
+
+** Conventions
+   :PROPERTIES:
+   :DESCRIPTION: Typesetting conventions in the manual
+   :END:
+
+@@info:@subsubheading @@TODO keywords, tags, properties, etc.
+
+Org mainly uses three types of keywords: TODO keywords, tags and property
+names.  In this manual we use the following conventions:
+
+
+  - TODO, WAITING :: TODO keywords are written with all capitals, even if they
+    are user-defined.
+  - boss, ARCHIVE :: User-defined tags are written in lowercase; built-in
+               tags with special meaning are written with all capitals.
+  - Release, PRIORITY :: User-defined properties are capitalized; built-in
+                properties with special meaning are written with all capitals.
+
+Moreover, Org uses @@info:@i{option keywords}@@ (like
+@@info:@code{#+TITLE}@@ to set the title) and @@info:@i{environment
+keywords}@@ (like @@info:@code{#+BEGIN_HTML}@@ to start a
+@@info:@code{HTML}@@ environment). They are written in uppercase in
+the manual to enhance its readability, but you can use lowercase in
+your Org files.[fn:7]
+
+@@info:@subsubheading@@ Keybindings and commands
+@@info:@kindex C-c a@@
+@@info:@findex org-agenda@@
+@@info:@kindex C-c c@@
+@@info:@findex org-capture@@
+
+The manual suggests two global keybindings: @@info:@kbd{C-c a}@@ for
+@@info:@code{org-agenda}@@ and @@info:@kbd{C-c c}@@ for
+@@info:@code{org-capture}@@. These are only suggestions, but the rest
+of the manual assumes that you are using these keybindings.
+
+Also, the manual lists both the keys and the corresponding commands
+for accessing a functionality. Org mode often uses the same key for
+different functions, depending on context. The command that is bound
+to such keys has a generic name, like @@info:@code{org-metaright}@@.
+In the manual we will, wherever possible, give the function that is
+internally called by the generic command. For example, in the chapter
+on document structure, @@info:@kbd{M-@key{right}}@@ will be listed to call
+@@info:@code{org-do-demote}@@, while in the chapter on tables, it will
+be listed to call @@info:@code{org-table-move-column-right}@@. If you
+prefer, you can compile the manual without the command names by
+unsetting the flag @@info:@code{cmdnames}@@ in
+@@info:@file{org.texi}@@.
+
 * Document Structure
   :PROPERTIES:
   :DESCRIPTION: A tree works like your brain
@@ -332,47 +474,59 @@ Org is based on Outline mode and provides flexible commands to
 edit the structure of the document.
 
 ** Outlines
+   :PROPERTIES:
+   :DESCRIPTION: Org mode is based on Outline mode
+   :END:
 
 ** Headlines
+   :PROPERTIES:
+   :DESCRIPTION: How to typeset Org tree headlines
+   :END:
 
 ** Visibility cycling
+   :PROPERTIES:
+   :DESCRIPTION: Show and hide, much simplified
+   :END:
 
 ** Motion
+   :PROPERTIES:
+   :DESCRIPTION: Jumping to other headlines
+   :END:
 
 ** Structure editing
+   :PROPERTIES:
+   :DESCRIPTION: Changing sequence and level of headlines
+   :END:
 
 ** Sparse trees
+   :PROPERTIES:
+   :DESCRIPTION: Matches embedded in context
+   :END:
 
 ** Plain lists
+   :PROPERTIES:
+   :DESCRIPTION: Additional structure within an entry
+   :END:
 
 ** Drawers
+   :PROPERTIES:
+   :DESCRIPTION: Tucking stuff away
+   :END:
 
 ** Blocks
+   :PROPERTIES:
+   :DESCRIPTION: Folding blocks
+   :END:
 
 ** Footnotes
-
-[fn:1] The output from install-info
-(if any) is system dependent. In particular, Debian and its derivatives
-use two different versions of install-info.  You may safely ignore the
-message:
-#+begin_src example
-This is not dpkg install-info anymore, but GNU install-info
-See the man page for ginstall-info for command line arguments
-#+end_src
-.
-
-[fn:2]  If your Emacs distribution does not come with Org,
-the function =org-version= will not be defined.
-
-[fn:3]  The @@info:@code{master}@@ branch is where development takes place.
-
-[fn:4] Export to iCalendar supports TODO and agenda items only.
-
-[fn:5] If you don't use font-lock globally, turn it on in an Org
-buffer with @@info:@code{(add-hook 'org-mode-hook 'turn-on-font-lock)}@@.
-
+   :PROPERTIES:
+   :DESCRIPTION: Define footnotes in Org syntax
+   :END:
 
 ** Orgstruct mode
+   :PROPERTIES:
+   :DESCRIPTION: Structure editing outside Org
+   :END:
 
 * Tables
   :PROPERTIES:
@@ -461,12 +615,47 @@ buffer with @@info:@code{(add-hook 'org-mode-hook 'turn-on-font-lock)}@@.
   :DESCRIPTION: Variables mentioned in the manual
   :END:
 * Concept index
+* Footnotes to export
+[fn:1] The output from install-info
+(if any) is system dependent. In particular, Debian and its derivatives
+use two different versions of install-info.  You may safely ignore the
+message:
+#+begin_src example
+This is not dpkg install-info anymore, but GNU install-info
+See the man page for ginstall-info for command line arguments
+#+end_src
+.
+
+[fn:2]  If your Emacs distribution does not come with Org,
+the function =org-version= will not be defined.
+
+[fn:3]  The @@info:@code{master}@@ branch is where development takes place.
+
+[fn:4] Export to iCalendar supports TODO and agenda items only.
+
+[fn:5] If you don't use font-lock globally, turn it on in an Org
+buffer with @@info:@code{(add-hook 'org-mode-hook 'turn-on-font-lock)}@@.
+
+[fn:6] Please consider subscribing to the
+mailing list in order to minimize the work the mailing list
+moderators have to do.
+
+[fn:7] Easy templates insert lowercase keywords and
+Babel dynamically inserts @@info:@code{#+results}@@.
 * About orgmanual.org                                              :noexport:
 This document intends to be Org mode source for the Org mode manual
-and the Org mode guide.  It is intended to be a major revision of the
-manual, primarily to document the new exporter.  It is designed to be
-exported using the new exporter and the texinfo back-end.
+and the Org mode guide. It is intended to be a major revision of the
+manual, primarily to document the new exporter. It is designed to be
+exported using the new exporter, written by Nicolas Goaziou, and the
+texinfo back-end, written by Jonathan Leech-Pepin.
 
+** Set up
+
+Configure emacs to edit texinfo, and to add some handy conversion
+functions, by executing the setup-editing source code block.
+
+The conversion functions wrap various @ constructs.  They are bound
+to =C-c b= and =C-c f=.
 
 ** Exporting
 
@@ -475,7 +664,6 @@ won't pollute the process.
 
 Alternatively, tangle =makefile= and =init.el= with =C-c C-v t= and
 then from a shell run either =make= or =make info=.
-
 * Nicolas Goaziou's instructions                                   :noexport:
 
 ** Global Changes
@@ -702,10 +890,9 @@ Modify accordingly.
 (setq load-path (cons "~/.emacs.d/src/org-mode/lisp" load-path))
 (setq load-path (cons "~/.emacs.d/src/org-mode/contrib/lisp" load-path))
 (require 'org-e-texinfo)
-(define-key org-mode-map (kbd "C-c e") 'org-export-dispatch)
-(setq org-pretty-entities nil)
 (setq org-src-preserve-indentation t)
 (setq org-confirm-babel-evaluate nil)
+(setq org-footnote-section "Footnotes to export")
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
@@ -715,7 +902,50 @@ Modify accordingly.
              '("info" . "e-texinfo"))
 #+end_src
 
+** Editing setup
+#+name: setup-editing
+#+header: :results silent
+#+header: :noweb yes
+#+begin_src emacs-lisp
+(require 'org-e-texinfo)
+(define-key org-mode-map (kbd "C-c e") 'org-export-dispatch)
+(setq org-pretty-entities nil)
+(setq org-src-preserve-indentation t)
+(setq org-confirm-babel-evaluate nil)
+(setq org-footnote-section "Footnotes to export")
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (makefile . t)
+   (sh . t)))
+(add-to-list 'org-export-snippet-translation-alist
+             '("info" . "e-texinfo"))
+<<at-funs-params>>
+<<at-funs-bol>>
+#+end_src
 
+
+*** Texi -> Org helpers
+
+#+name: at-funs-params
+#+header: :results silent
+#+begin_src emacs-lisp
+(defun tsd-texi2org-at-funs ()
+  "Wrap forms like @fun{} in @@info:...@@"
+  (interactive)
+  (query-replace-regexp "\\(@[^@]*}\\)" "@@info:\\1@@" nil))
+(define-key org-mode-map (kbd "C-c f") 'tsd-texi2org-at-funs)
+#+end_src
+
+#+name: at-funs-bol
+#+header: :results silent
+#+begin_src emacs-lisp
+(defun tsd-texi2org-at-bol ()
+  "Wrap forms like @fun at bol in @@info:...@@"
+  (interactive)
+  (query-replace-regexp "\\(^@[a-z,-]*[ $]\\)" "@@info:\\1@@" nil))
+(define-key org-mode-map (kbd "C-c b") 'tsd-texi2org-at-bol)
+#+end_src
 
 ** Makefile
 This source code block requires information to call your emacs binary.
@@ -777,4 +1007,5 @@ or export this source code block.
     - State "DONE"       from "TODO"       [2012-11-10 Sat 12:46]
     :END:
 The correct command is org-e-texinfo-export-to-texinfo
+
 
