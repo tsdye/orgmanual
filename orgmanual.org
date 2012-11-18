@@ -79,19 +79,18 @@ Org is a mode for keeping notes, maintaining TODO lists, and doing
 project planning with a fast and effective plain-text system.
 
 Org develops organizational tasks around NOTES files that contain
-lists or information about projects as plain text.  Org is
-implemented on top of Outline mode, which makes it possible to keep the
-content of large files well structured.  Visibility cycling and
-structure editing help to work with the tree.  Tables are easily created
-with a built-in table editor.  Org supports TODO items, deadlines,
-timestamps, and scheduling.  It dynamically compiles entries into an
-agenda that utilizes and smoothly integrates much of the Emacs calendar
-and diary.  Plain text URL-like links connect to websites, emails,
-Usenet messages, BBDB entries, and any files related to the projects.
-For printing and sharing of notes, an Org file can be exported as a
-structured ASCII file, as HTML, or (TODO and agenda items only) as an
-iCalendar file.  It can also serve as a publishing tool for a set of
-linked web pages.
+lists or information about projects as plain text. Org is implemented
+on top of Outline mode, which makes it possible to keep the content of
+large files well structured. Visibility cycling and structure editing
+help to work with the tree. Tables are easily created with a built-in
+table editor. Org supports TODO items, deadlines, timestamps, and
+scheduling. It dynamically compiles entries into an agenda that
+utilizes and smoothly integrates much of the Emacs calendar and diary.
+Plain text URL-like links connect to websites, emails, Usenet
+messages, BBDB entries, and any files related to the projects. For
+printing and sharing of notes, an Org file can be exported as a
+structured ASCII file, as HTML, or as an iCalendar file.[fn:4] It can
+also serve as a publishing tool for a set of linked web pages.
 
 As a project planning environment, Org works by adding metadata to outline
 nodes.  Based on this data, specific entries can be extracted in queries and
@@ -114,37 +113,136 @@ imposed, but a large amount of functionality is available when you need
 it.  Org is a toolbox and can be used in different ways and for different
 ends, for example:
 
-#+begin_src example
-@r{@bullet{} an outline extension with visibility cycling and structure editing}
-@r{@bullet{} an ASCII system and table editor for taking structured notes}
-@r{@bullet{} a TODO list editor}
-@r{@bullet{} a full agenda and planner with deadlines and work scheduling}
-@pindex GTD, Getting Things Done
-@r{@bullet{} an environment in which to implement David Allen's GTD system}
-@r{@bullet{} a simple hypertext system, with HTML and @LaTeX{} export}
-@r{@bullet{} a publishing tool to create a set of interlinked webpages}
-@r{@bullet{} an environment for literate programming}
-#+end_src
+  - an outline extension with visibility cycling and structure editing
+  - an ASCII system and table editor for taking structured notes
+  - a TODO list editor
+  - a full agenda and planner with deadlines and work scheduling
+    @@info:@pindex GTD, Getting Things Done@@
+  - an environment in which to implement David Allen's GTD system
+  - a simple hypertext system, with HTML and @@info:@LaTeX{}@@ export
+  - a publishing tool to create a set of interlinked web pages
+  - an environment for literate programming
+
 
 
 @@info:@cindex FAQ@@
-There is a website for Org which provides links to the newest
+There is a [[http://orgmode.org][website for Org]] that provides links to the newest
 version of Org, as well as additional information, frequently asked
-questions (FAQ), links to tutorials, etc@.  This page is located at
-@@info:@uref{http://orgmode.org}@@.
+questions (FAQ), links to tutorials, etc.
 
-@@info:@cindex print edition@@
-The version 7.3 of this manual is available as a
-@@info:@uref{http://www.network-theory.co.uk/org/manual/, paperback book from Network
-Theory Ltd.}@@
+@@info:@cindex print edition@@ 
+Version 7.3 of this manual is available
+as a [[http://www.network-theory.co.uk/org/manual/][paperback book from Network Theory Ltd.]].
 
 @@info:@page@@
-
 
 ** Installation
    :PROPERTIES:
    :DESCRIPTION: How to install a downloaded version of Org-mode
    :END:
+
+@@info:@cindex installation@@
+@@info:@cindex XEmacs@@
+
+*Important:* If you have the version of Org that comes with Emacs or
+as a XEmacs package, please skip this section and go directly to
+[[Activation]]. If you downloaded Org as an ELPA package, please read the
+instructions on the [[http://orgmode.org/elpa.html][Org ELPA page]]. To see what version of Org (if any)
+is part of your Emacs distribution, type @@info:@kbd{M-x
+org-version}@@.[fn:2]
+
+Installation of Org mode uses a build system, which is described in more
+detail on [[http://orgmode.org/worg/dev/org-build-system.html][Worg]].
+
+If you have downloaded Org from the Web as a distribution @@info:@file{.zip}@@ or
+@@info:@file{.tar.gz}@@ archive, take the following steps to install it:
+
+  - Unpack the distribution archive.
+  - Change into (@@info:@code{cd}@@) the Org directory.
+  - Run @@info:@code{make help config}@@ and then check and edit the
+    file @@info:@file{local.mk}@@ if the default configuration does
+    not match your system. Set the name of the Emacs binary (likely
+    either @@info:@file{emacs}@@ or @@info:@file{xemacs}@@), and the
+    paths to the directories where local Lisp and Info files will be
+    installed. If the Emacs binary is not in your path, give the full
+    path to the executable. Avoid spaces in any path names.
+  - Run @@info:@code{make config}@@ again to check the configuration.
+  - Run @@info:@code{make install}@@ or @@info:@code{sudo make
+    install}@@ to build and install Org mode on your system.
+
+If you use a cloned Git repository, then the procedure is slightly
+different. The following description assumes that you are using the
+@@info:@code{master}@@ branch.[fn:3] You could also use the
+@@info:@code{maint}@@ branch instead, where the release versions are
+published, just replace @@info:@code{master}@@ with
+@@info:@code{maint}@@ in the description below.
+
+
+  - Change into (@@info:@code{cd}@@) the Org repository.
+  - Run @@info:@code{git checkout master}@@ to switch to the @@info:@code{master}@@ branch of the Org repository.
+  - Run @@info:@code{make help}@@ and then check and edit the file
+    @@info:@file{local.mk}@@. You must set the name of the Emacs
+    binary (likely either @@info:@file{emacs}@@ or
+    @@info:@file{xemacs}@@), and the paths to the directories where
+    local Lisp and Info files will be installed. If the Emacs binary
+    is not in your path, you must give the full path to the
+    executable. Avoid spaces in any path names.
+  - Run @@info:@code{make config}@@ to check the configuration.
+  - Optionally run @@info:@code{make test}@@ to build Org mode and
+    then run the full test suite.
+  - Run @@info:@code{make update2}@@ or @@info:@code{make up2}@@ to
+    update the Git repository and build and install Org mode. The
+    latter invocation runs the complete test suite before installation
+    and installs only if the build passes all tests.
+
+
+If you don't have access to the system-wide directories and you don't
+want to install somewhere into your home directory, you can run Org
+directly from the distribution directory or Org repository by
+compiling Org mode in place:
+
+
+  - Change into (@@info:@code{cd}@@) the Org repository.
+  - Run @@info:@code{git checkout master}@@ to switch to the
+    @@info:@code{master}@@ branch of the Org repository.
+  - Run @@info:@code{make compile}@@
+
+
+Last but not least you can also run Org mode directly from an Org repository
+without any compilation.  Simply replace the last step in the recipe above
+with @@info:@code{make uncompiled}@@.
+
+Then add the following line to @@info:@file{.emacs}@@:
+
+#+begin_src example
+(add-to-list 'load-path "~/path/to/orgdir/lisp")
+#+end_src
+
+@@info:@noindent@@
+If you plan to use code from the @@info:@file{contrib}@@ subdirectory without
+compiling them, do a similar step for this directory:
+
+#+begin_src example
+(add-to-list 'load-path "~/path/to/orgdir/contrib/lisp" t)
+#+end_src
+
+If you want to include those files with the build and install, please
+customize the variable @@info:@code{ORG_ADD_CONTRIB}@@ instead in your
+@@info:@code{local.mk}@@ file, for more details please see this
+[[http://orgmode.org/worg/dev/org-build-system.html#sec-4-1-2][description on Worg]].
+
+Installing Info files is system dependent, because of differences in
+the @@info:@file{install-info}@@ program. The Info documentation is
+installed together with the rest of Org mode. If you don't install Org
+mode, it is possible to install the Info documentation separately if you
+have install-info on your system.[fn:1]  The command to do this is:
+
+#+begin_src example
+make install-info
+#+end_src
+
+Do not forget to activate Org as described in the following section.
+@@info:@page@@
 
 ** Activation
    :PROPERTIES:
@@ -186,6 +284,23 @@ edit the structure of the document.
 ** Blocks
 
 ** Footnotes
+
+[fn:1] The output from install-info
+(if any) is system dependent. In particular, Debian and its derivatives
+use two different versions of install-info.  You may safely ignore the
+message:
+#+begin_src example
+This is not dpkg install-info anymore, but GNU install-info
+See the man page for ginstall-info for command line arguments.
+#+end_src
+
+
+[fn:2]  If your Emacs distribution does not come with Org,
+the function =org-version= will not be defined.
+
+[fn:3]  The @@info:@code{master}@@ branch is where development takes place.
+
+[fn:4] Export to iCalendar supports TODO and agenda items only.
 
 ** Orgstruct mode
 
