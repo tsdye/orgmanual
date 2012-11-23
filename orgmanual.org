@@ -2,17 +2,12 @@
 #+AUTHOR:    Carsten Dominik
 #+EMAIL:     tsd@tsdye.com
 #+DATE:      2012-11-10 Sat
-#+DESCRIPTION:
-#+KEYWORDS:
 #+LANGUAGE:  en
 #+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+SELECT_TAGS: export
 #+EXCLUDE_TAGS: noexport
-#+LINK_UP:   
-#+LINK_HOME: 
-#+XSLT:
 #+TEXINFO_HEADER: @c
 #+TEXINFO_HEADER: @c Added by tsd [2012-11-11 Sun]
 #+TEXINFO_HEADER: @documentencoding UTF-8
@@ -34,33 +29,6 @@
 #+TEXINFO_DIR_CATEGORY: Emacs editing modes
 #+TEXINFO_DIR_TITLE: Org Mode: (org)
 #+TEXINFO_DIR_DESC: Outline-based notes management and organizer
-
-* Copying
-   :PROPERTIES:
-   :copying:  t
-   :END:
-
-This manual is for Org version @@info:@value{VERSION}@@.
-
-Copyright © 2004-2012  Free Software Foundation, Inc.
-
-@@info:@quotation@@
-Permission is granted to copy, distribute and/or modify this document
-under the terms of the GNU Free Documentation License, Version 1.3 or
-any later version published by the Free Software Foundation; with no
-Invariant Sections, with the Front-Cover texts being ``A GNU Manual,''
-and with the Back-Cover Texts as in (a) below.  A copy of the license
-is included in the section entitled ``GNU Free Documentation License.''
-
-(a) The FSF's Back-Cover Text is: ``You have the freedom to copy and
-modify this GNU manual.  Buying copies from the FSF supports it in
-developing GNU and promoting software freedom.''
-
-This document is part of a collection distributed under the GNU Free
-Documentation License.  If you want to distribute this document
-separately from the collection, you can do so by adding a copy of the
-license to the document, as described in section 6 of the license.
-@@info:@end quotation@@
 
 * Introduction
   :PROPERTIES:
@@ -460,12 +428,10 @@ be listed to call @@info:@code{org-table-move-column-right}@@. If you
 prefer, you can compile the manual without the command names by
 unsetting the flag @@info:@code{cmdnames}@@ in
 @@info:@file{org.texi}@@.
-
-* Document Structure
+* Document structure                                               :noexport:
   :PROPERTIES:
   :DESCRIPTION: A tree works like your brain
-  :EXPORT_TITLE: Document structure
-  :TITLE:    Document structure
+  :TEXINFO_MENU_TITLE: Document Structure
   :END:
 @@info:@cindex document structure@@
 @@info:@cindex structure of document@@
@@ -477,16 +443,177 @@ edit the structure of the document.
    :PROPERTIES:
    :DESCRIPTION: Org mode is based on Outline mode
    :END:
+@@info:@cindex@@ outlines
+@@info:@cindex@@ Outline mode
+
+Org is implemented on top of Outline mode. Outlines allow a document
+to be organized in a hierarchical structure, which (at least for me)
+is the best representation of notes and thoughts. An overview of this
+structure is achieved by folding (hiding) large parts of the document
+to show only the general document structure and the parts currently
+being worked on. Org greatly simplifies the use of outlines by
+compressing the entire show/hide functionality into a single command,
+@@info:@command{org-cycle}@@, which is bound to the @@info:@key{TAB}@@
+key.
 
 ** Headlines
    :PROPERTIES:
    :DESCRIPTION: How to typeset Org tree headlines
    :END:
+@@info:@cindex@@ headlines
+@@info:@cindex @@outline tree
+@@info:@vindex @@org-special-ctrl-a/e
+@@info:@vindex @@org-special-ctrl-k
+@@info:@vindex @@org-ctrl-k-protect-subtree
+
+Headlines define the structure of an outline tree.  The headlines in Org
+start with one or more stars, on the left margin.[fn:8]  For example:
+#+begin_src example
+,* Top level headline
+,** Second level
+,*** Third level
+    some text
+,*** Third level
+    more text
+,* Another top level headline
+#+end_src
+
+@@info:@noindent@@ Some people find the many stars too noisy and would
+prefer an outline that has whitespace followed by a single star as
+headline starters. [[Clean view]], describes a setup to realize this.
+
+@@info:@vindex@@ org-cycle-separator-lines
+An empty line after the end of a subtree is considered part of it and
+will be hidden when the subtree is folded.  However, if you leave at
+least two empty lines, one empty line will remain visible after folding
+the subtree, in order to structure the collapsed view.  See the
+variable @@info:@code{org-cycle-separator-lines}@@ to modify this behavior.
 
 ** Visibility cycling
    :PROPERTIES:
    :DESCRIPTION: Show and hide, much simplified
    :END:
+@@info:@cindex@@ cycling, visibility
+@@info:@cindex@@ visibility cycling
+@@info:@cindex@@ trees, visibility
+@@info:@cindex@@ show hidden text
+@@info:@cindex@@ hide text
+
+Outlines make it possible to hide parts of the text in the buffer.
+Org uses just two commands, bound to @@info:@key{TAB}@@ and
+@@info:@kbd{S-@key{TAB}}@@ to change the visibility in the buffer.
+
+*** Subtree cycling
+    :PROPERTIES:
+    :DESCRIPTION: Rotate current subtree among the states
+    :END:
+@@info:@cindex@@ subtree visibility states
+@@info:@cindex@@ subtree cycling
+@@info:@cindex@@ folded, subtree visibility state
+@@info:@cindex@@ children, subtree visibility state
+@@info:@cindex@@ subtree, subtree visibility state
+
+Subtrees can be cycled through three states with the
+@@info:@orgcmd{@key{TAB}, org-cycle}@@ key:
+
+#+begin_src example
+,-> FOLDED -> CHILDREN -> SUBTREE --.
+'-----------------------------------'
+#+end_src
+
+@@info:@vindex@@ org-cycle-emulate-tab 
+@@info:@vindex@@ org-cycle-global-at-bob 
+
+By default, the cursor must be on a headline for this to work, but
+this behavior can be modified with the
+@@info:@code{org-cycle-emulate-tab}@@ option. When the cursor is at
+the beginning of the buffer and the first line is not a headline, then
+@@info:@key{TAB}@@ actually runs [[Global cycling][global cycling]].[fn:9] Also, when
+called with a prefix argument (@@info:@kbd{C-u @key{TAB}}@@), global
+cycling is invoked.
+
+*** Global cycling
+    :PROPERTIES:
+    :DESCRIPTION: Rotate the entire buffer among the states
+    :END:
+@@info:@cindex@@ global visibility states
+@@info:@cindex@@ global cycling
+@@info:@cindex@@ overview, global visibility state
+@@info:@cindex@@ contents, global visibility state
+@@info:@cindex@@ show all, global visibility state
+
+All the subtrees in a buffer can be cycled with either
+@@info:@orgcmd{S-@key{TAB}, org-global-cycle}@@ or
+@@info:@key{C-u @key{TAB}}@@:
+
+#+begin_src example
+,-> OVERVIEW -> CONTENTS -> SHOW ALL --.
+'--------------------------------------'
+#+end_src
+
+When @@info:@kbd{S-@key{TAB}}@@ is called with a numeric prefix
+argument, @@info:@code{N}@@, the CONTENTS view up to headlines of
+level N will be shown. Note that inside tables, @@info:@kbd{S-@key{TAB}}@@
+jumps to the previous field.
+
+@@info:@cindex@@ show all, command
+@@info:@orgcmd{C-u C-u C-u @key{TAB},show-all}@@
+Show all, including drawers.
+@@info:@cindex@@ revealing context
+@@info:@orgcmd{C-c C-r,org-reveal}@@
+Reveal context around point, showing the current entry, the following heading
+and the hierarchy above.  Useful for working near a location that has been
+exposed by a sparse tree command (@@info:@pxref{Sparse trees}@@) or an agenda command
+(@@info:@pxref{Agenda commands}@@).  With a prefix argument show, on each
+level, all sibling headings.  With a double prefix argument, also show the
+entire subtree of the parent.
+@@info:@cindex@@ show branches, command
+@@info:@orgcmd{C-c C-k,show-branches}@@
+Expose all the headings of the subtree, CONTENT view for just one subtree.
+@@info:@cindex@@ show children, command
+@@info:@orgcmd{C-c @key{TAB},show-children}@@
+Expose all direct children of the subtree.  With a numeric prefix argument, @@info:@code{N}@@,
+expose all children down to level N.
+@@info:@orgcmd{C-c C-x b,org-tree-to-indirect-buffer}@@
+Show the current subtree in an indirect buffer.[fn:10]  With a numeric
+prefix argument, @@info:@code{N}@@, go up to level N and then take that tree.  If N is
+negative then go up that many levels.  With a @@info:@kbd{C-u}@@ prefix, do not remove
+the previously used indirect buffer.
+@@info:@orgcmd{C-c C-x v,org-copy-visible}@@
+Copy the @@info:@i{visible}@@ text in the region into the kill ring.
+@end table
+
+@@info:@vindex@@ org-startup-folded
+@@info:@cindex@@ @@info:@code{overview}@@, STARTUP keyword
+@@info:@cindex@@ @@info:@code{content}@@, STARTUP keyword
+@@info:@cindex@@ @@info:@code{showall}@@, STARTUP keyword
+@@info:@cindex@@ @@info:@code{showeverything}@@, STARTUP keyword
+
+When Emacs first visits an Org file, the global state is set to
+OVERVIEW, i.e., only the top level headlines are visible.  This can be
+configured through the variable @@info:@code{org-startup-folded}@@, or on a
+per-file basis by adding one of the following lines anywhere in the
+buffer:
+
+#+begin_src example
+#+STARTUP: overview
+#+STARTUP: content
+#+STARTUP: showall
+#+STARTUP: showeverything
+#+end_src
+
+@@info:@cindex@@ property, VISIBILITY
+@noindent
+Furthermore, any entries with a @@info:@samp{VISIBILITY}@@ property (@@info:@pxref{Properties
+and Columns}@@) will get their visibility adapted accordingly.  Allowed values
+for this property are @@info:@code{folded}@@, @@info:@code{children}@@, @@info:@code{content}@@, and
+@@info:@code{all}@@.
+@@info:@orgcmd{C-u C-u @key{TAB},org-set-startup-visibility}@@
+Switch back to the startup visibility of the buffer, i.e.@: whatever is
+requested by startup options and @@info:@samp{VISIBILITY}@@ properties in individual
+entries.
+
+
 
 ** Motion
    :PROPERTIES:
@@ -527,7 +654,6 @@ edit the structure of the document.
    :PROPERTIES:
    :DESCRIPTION: Structure editing outside Org
    :END:
-
 * Tables
   :PROPERTIES:
   :DESCRIPTION: Pure magic for quick formatting
@@ -536,9 +662,10 @@ edit the structure of the document.
   :PROPERTIES:
   :DESCRIPTION: Notes in context
   :END:
-* =TODO= Items
+* =TODO= items
   :PROPERTIES:
   :DESCRIPTION: Every tree branch can be a TODO item
+  :TEXINFO_MENU_TITLE: TODO Items
   :END:
 * Tags
   :PROPERTIES:
@@ -547,10 +674,12 @@ edit the structure of the document.
 * Properties and columns
   :PROPERTIES:
   :DESCRIPTION: Storing information about an entry
+  :TEXINFO_MENU_TITLE: Properties and Columns
   :END:
 * Dates and times
   :PROPERTIES:
   :DESCRIPTION: Making items useful for planning
+  :TEXINFO_MENU_TITLE: Dates and Times
   :END:
 * Capture - Refile - Archive
   :PROPERTIES:
@@ -559,10 +688,12 @@ edit the structure of the document.
 * Agenda views
   :PROPERTIES:
   :DESCRIPTION: Collecting information into views
+  :TEXINFO_MENU_TITLE: Agenda Views
   :END:
 * Markup for rich export
   :PROPERTIES:
   :DESCRIPTION: Prepare text for rich export
+  :TEXINFO_MENU_TITLE: Markup
   :END:
 * Exporting
   :PROPERTIES:
@@ -577,6 +708,7 @@ edit the structure of the document.
 * Working with source code
   :PROPERTIES:
   :DESCRIPTION: Export, evaluate, and tangle code blocks
+  :TEXINFO_MENU_TITLE: Working With Source Code
   :END:
 
 * The spreadsheet
@@ -598,23 +730,54 @@ edit the structure of the document.
 * History and acknowledgments
   :PROPERTIES:
   :DESCRIPTION: How Org came into being
+  :TEXINFO_MENU_TITLE: History and Acknowledgments
   :END:
 
 * Key index
   :PROPERTIES:
   :DESCRIPTION: Key bindings and where they are described
+  :TEXINFO_MENU_TITLE: Key Index
   :END:
 
 * Command and function index
   :PROPERTIES:
   :DESCRIPTION: Command names and some internal functions
+  :TEXINFO_MENU_TITLE: Command and Function Index
   :END:
 
 * Variable index
   :PROPERTIES:
   :DESCRIPTION: Variables mentioned in the manual
+  :TEXINFO_MENU_TITLE: Variable Index
   :END:
 * Concept index
+* Copying
+   :PROPERTIES:
+   :copying:  t
+   :END:
+
+This manual is for Org version @@info:@value{VERSION}@@.
+
+Copyright © 2004-2012  Free Software Foundation, Inc.
+
+@@info:@quotation@@
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.3 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, with the Front-Cover texts being ``A GNU Manual,''
+and with the Back-Cover Texts as in (a) below.  A copy of the license
+is included in the section entitled ``GNU Free Documentation License.''
+
+(a) The FSF's Back-Cover Text is: ``You have the freedom to copy and
+modify this GNU manual.  Buying copies from the FSF supports it in
+developing GNU and promoting software freedom.''
+
+This document is part of a collection distributed under the GNU Free
+Documentation License.  If you want to distribute this document
+separately from the collection, you can do so by adding a copy of the
+license to the document, as described in section 6 of the license.
+@@info:@end quotation@@
+
 * Footnotes to export
 [fn:1] The output from install-info
 (if any) is system dependent. In particular, Debian and its derivatives
@@ -642,6 +805,28 @@ moderators have to do.
 
 [fn:7] Easy templates insert lowercase keywords and
 Babel dynamically inserts @@info:@code{#+results}@@.
+
+[fn:8] See the variables @@info:@code{org-special-ctrl-a/e}@@,
+@@info:@code{org-special-ctrl-k}@@, and
+@@info:@code{org-ctrl-k-protect-subtree}@@ to configure special
+behavior of @@info:@kbd{C-a}@@, @@info:@kbd{C-e}@@, and
+@info:@kbd{C-k}@@ in headlines. Note that clocking only works with
+headings indented less than 30 stars.
+
+[fn:9]  See the option
+@@info:@code{org-cycle-global-at-bob}@@.
+
+[fn:10] The indirect buffer
+@@info:@ifinfo@@
+(@@info:@pxref{Indirect Buffers,,,emacs,GNU Emacs Manual}@@)
+@@info:@end ifinfo@@
+@@info:@ifnotinfo@@
+(see the Emacs manual for more information about indirect buffers)
+@@info:@end ifnotinfo@@
+will contain the entire buffer, but will be narrowed to the current
+tree.  Editing the indirect buffer will also change the original buffer,
+but without affecting visibility in that buffer.
+
 * About orgmanual.org                                              :noexport:
 This document intends to be Org mode source for the Org mode manual
 and the Org mode guide. It is intended to be a major revision of the
@@ -879,29 +1064,6 @@ Perhaps shorten to "All the rest"
 > EXPORT_TITLE property is meant to provide a title for a subtree export.
 * Org-mode setup                                                   :noexport:
 
-** init.el file
-This source code block requires paths to your Org mode installation.
-Modify accordingly.
-
-#+name: emacs-init
-#+header: :tangle init.el
-#+header: :results silent
-#+begin_src emacs-lisp
-(setq load-path (cons "~/.emacs.d/src/org-mode/lisp" load-path))
-(setq load-path (cons "~/.emacs.d/src/org-mode/contrib/lisp" load-path))
-(require 'org-e-texinfo)
-(setq org-src-preserve-indentation t)
-(setq org-confirm-babel-evaluate nil)
-(setq org-footnote-section "Footnotes to export")
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((emacs-lisp . t)
-   (makefile . t)
-   (sh . t)))
-(add-to-list 'org-export-snippet-translation-alist
-             '("info" . "e-texinfo"))
-#+end_src
-
 ** Editing setup
 #+name: setup-editing
 #+header: :results silent
@@ -943,8 +1105,31 @@ Modify accordingly.
 (defun tsd-texi2org-at-bol ()
   "Wrap forms like @fun at bol in @@info:...@@"
   (interactive)
-  (query-replace-regexp "\\(^@[a-z,-]*[ $]\\)" "@@info:\\1@@" nil))
+  (query-replace-regexp "\\(^@[a-z,-]*\\)[ $]" "@@info:\\1@@ " nil))
 (define-key org-mode-map (kbd "C-c b") 'tsd-texi2org-at-bol)
+#+end_src
+
+** init.el file
+This source code block requires paths to your Org mode installation.
+Modify accordingly.
+
+#+name: emacs-init
+#+header: :tangle init.el
+#+header: :results silent
+#+begin_src emacs-lisp
+(setq load-path (cons "~/.emacs.d/src/org-mode/lisp" load-path))
+(setq load-path (cons "~/.emacs.d/src/org-mode/contrib/lisp" load-path))
+(require 'org-e-texinfo)
+(setq org-src-preserve-indentation t)
+(setq org-confirm-babel-evaluate nil)
+(setq org-footnote-section "Footnotes to export")
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (makefile . t)
+   (sh . t)))
+(add-to-list 'org-export-snippet-translation-alist
+             '("info" . "e-texinfo"))
 #+end_src
 
 ** Makefile
