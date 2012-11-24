@@ -492,6 +492,7 @@ variable @@info:@code{org-cycle-separator-lines}@@ to modify this behavior.
 ** Visibility cycling
    :PROPERTIES:
    :DESCRIPTION: Show and hide, much simplified
+   :TEXINFO_MENU_TITLE: Visibility cycling
    :END:
 @@info:@cindex@@ cycling, visibility
 @@info:@cindex@@ visibility cycling
@@ -614,7 +615,6 @@ requested by startup options and @@info:@samp{VISIBILITY}@@ properties in indivi
 entries.
 
 
-
 ** Motion
    :PROPERTIES:
    :DESCRIPTION: Jumping to other headlines
@@ -623,16 +623,19 @@ entries.
 ** Structure editing
    :PROPERTIES:
    :DESCRIPTION: Changing sequence and level of headlines
+   :TEXINFO_MENU_TITLE: Structure editing
    :END:
 
 ** Sparse trees
    :PROPERTIES:
    :DESCRIPTION: Matches embedded in context
+   :TEXINFO_MENU_TITLE: Sparse trees
    :END:
 
 ** Plain lists
    :PROPERTIES:
    :DESCRIPTION: Additional structure within an entry
+   :TEXINFO_MENU_TITLE: Plain lists
    :END:
 
 ** Drawers
@@ -653,80 +656,506 @@ entries.
 ** Orgstruct mode
    :PROPERTIES:
    :DESCRIPTION: Structure editing outside Org
+   :TEXINFO_MENU_TITLE: Orgstruct mode
    :END:
 * Tables
   :PROPERTIES:
   :DESCRIPTION: Pure magic for quick formatting
   :END:
+** Built-in table editor
+   :PROPERTIES:
+   :DESCRIPTION: Simple tables
+   :END:
+** Column width and alignment
+   :PROPERTIES:
+   :DESCRIPTION: Overrule the automatic settings
+   :END:
+** Column groups
+   :PROPERTIES:
+   :DESCRIPTION: Grouping to trigger vertical lines
+   :END:
+** Orgtbl mode
+   :PROPERTIES:
+   :DESCRIPTION: The table editor as minor mode
+   :END:
+** The spreadsheet
+   :PROPERTIES:
+   :DESCRIPTION: The table editor has spreadsheet capabilities
+   :END:
+** Org-Plot
+   :PROPERTIES:
+   :DESCRIPTION: Plotting from Org tables
+   :END:
 * Hyperlinks
   :PROPERTIES:
   :DESCRIPTION: Notes in context
   :END:
+** Link format
+   :PROPERTIES:
+   :DESCRIPTION: How links in Org are formatted
+   :END:
+** Internal links
+   :PROPERTIES:
+   :DESCRIPTION: Links to other places in the current file
+   :END:
+** Handling links
+   :PROPERTIES:
+   :DESCRIPTION: URL-like links to the world
+   :END:
+** Using links outside Org
+   :PROPERTIES:
+   :DESCRIPTION: Linking from my C source code?
+   :END:
+** Link abbreviations
+   :PROPERTIES:
+   :DESCRIPTION: Shortcuts for writing complex links
+   :END:
+** Search options
+   :PROPERTIES:
+   :DESCRIPTION: Linking to a specific location
+   :END:
+** Custom searches
+   :PROPERTIES:
+   :DESCRIPTION: When the default search is not enough
+   :END:
 * =TODO= items
   :PROPERTIES:
   :DESCRIPTION: Every tree branch can be a TODO item
   :TEXINFO_MENU_TITLE: TODO Items
   :END:
+** =TODO= basics
+   :PROPERTIES:
+   :DESCRIPTION: Marking and displaying TODO entries
+   :END:
+** =TODO= extensions
+   :PROPERTIES:
+   :DESCRIPTION: Work flow and assignments
+   :END:
+** Progress logging
+   :PROPERTIES:
+   :DESCRIPTION: Dates and notes for progress
+   :END:
+** Priorities
+   :PROPERTIES:
+   :DESCRIPTION: Some things are more important than others
+   :END:
+** Breaking down tasks
+   :PROPERTIES:
+   :DESCRIPTION: Splitting a task into manageable pieces
+   :END:
+** Checkboxes
+   :PROPERTIES:
+   :DESCRIPTION: Tick-off lists
+   :END:
 * Tags
   :PROPERTIES:
   :DESCRIPTION: Tagging headlines and matching sets of tags
   :END:
+** Tag inheritance
+   :PROPERTIES:
+   :DESCRIPTION: Tags use the tree structure of an outline
+   :END:
+** Setting tags
+   :PROPERTIES:
+   :DESCRIPTION: How to assign tags to a headline
+   :END:
+** Tag searches
+   :PROPERTIES:
+   :DESCRIPTION: Searching for combinations of tags
+   :END:
 * Properties and columns
   :PROPERTIES:
   :DESCRIPTION: Storing information about an entry
   :TEXINFO_MENU_TITLE: Properties and Columns
   :END:
+** Property syntax
+   :PROPERTIES:
+   :DESCRIPTION: How properties are spelled out
+   :END:
+** Special properties
+   :PROPERTIES:
+   :DESCRIPTION: Access to other Org mode features
+   :END:
+** Property searches
+   :PROPERTIES:
+   :DESCRIPTION: Matching property values
+   :END:
+** Property inheritance
+   :PROPERTIES:
+   :DESCRIPTION: Passing values down a tree
+   :END:
+** Column view
+   :PROPERTIES:
+   :DESCRIPTION: Tabular viewing and editing
+   :END:
+** Property API
+   :PROPERTIES:
+   :DESCRIPTION: Properties for Lisp programmers
+   :END:
 * Dates and times
   :PROPERTIES:
   :DESCRIPTION: Making items useful for planning
   :TEXINFO_MENU_TITLE: Dates and Times
   :END:
+** Timestamps
+   :PROPERTIES:
+   :DESCRIPTION: Assigning a time to a tree entry
+   :END:
+** Creating timestamps
+   :PROPERTIES:
+   :DESCRIPTION: Commands to insert timestamps
+   :END:
+** Deadlines and scheduling
+   :PROPERTIES:
+   :DESCRIPTION: Planning your work
+   :END:
+** Clocking work time
+   :PROPERTIES:
+   :DESCRIPTION: Tracking how long you spend on a task
+   :END:
+** Effort estimates
+   :PROPERTIES:
+   :DESCRIPTION: Planning work effort in advance
+   :END:
+** Relative timer
+   :PROPERTIES:
+   :DESCRIPTION: Notes with a running timer
+   :END:
+** Countdown timer
+   :PROPERTIES:
+   :DESCRIPTION: Starting a countdown timer for a task
+   :END:
 * Capture - Refile - Archive
   :PROPERTIES:
   :DESCRIPTION: The ins and outs for projects
   :END:
+** Capture
+   :PROPERTIES:
+   :DESCRIPTION: Capturing new stuff
+   :END:
+** Attachments
+   :PROPERTIES:
+   :DESCRIPTION: Add files to tasks
+   :END:
+** RSS Feeds
+   :PROPERTIES:
+   :DESCRIPTION: Getting input from RSS feeds
+   :END:
+** Protocols
+   :PROPERTIES:
+   :DESCRIPTION: External (e.g., browser) access to Emacs and Org
+   :END:
+** Refile and copy
+   :PROPERTIES:
+   :DESCRIPTION: Moving/copying a tree from one place to another
+   :END:
+** Archiving
+   :PROPERTIES:
+   :DESCRIPTION: What to do with finished products
+   :END:
 * Agenda views
   :PROPERTIES:
   :DESCRIPTION: Collecting information into views
   :TEXINFO_MENU_TITLE: Agenda Views
   :END:
+** Agenda files
+   :PROPERTIES:
+   :DESCRIPTION: Files being searched for agenda information
+   :END:
+** Agenda dispatcher
+   :PROPERTIES:
+   :DESCRIPTION: Keyboard access to agenda views
+   :END:
+** Built-in agenda views
+   :PROPERTIES:
+   :DESCRIPTION: What is available out of the box?
+   :END:
+** Presentation and sorting
+   :PROPERTIES:
+   :DESCRIPTION: How agenda items are prepared for display
+   :END:
+** Agenda commands
+   :PROPERTIES:
+   :DESCRIPTION: Remote editing of Org trees
+   :END:
+** Custom agenda views
+   :PROPERTIES:
+   :DESCRIPTION: Defining special searches and views
+   :END:
+** Exporting agenda views
+   :PROPERTIES:
+   :DESCRIPTION: Writing a view to a file
+   :END:
+** Agenda column view
+   :PROPERTIES:
+   :DESCRIPTION: Using column view for collected entries
+   :END:
 * Markup for rich export
   :PROPERTIES:
   :DESCRIPTION: Prepare text for rich export
   :TEXINFO_MENU_TITLE: Markup
   :END:
+** Structural markup elements
+   :PROPERTIES:
+   :DESCRIPTION: The basic structure as seen by the exporter
+   :END:
+** Images and tables
+   :PROPERTIES:
+   :DESCRIPTION: Tables and images can be exported
+   :END:
+** Literal examples
+   :PROPERTIES:
+   :DESCRIPTION: Source code examples with special formatting
+   :END:
+** Include files
+   :PROPERTIES:
+   :DESCRIPTION: Include additional files into a document
+   :END:
+** Index entries
+   :PROPERTIES:
+   :DESCRIPTION: Making an index
+   :END:
+** Macro replacement
+   :PROPERTIES:
+   :DESCRIPTION: Use macros to create complex output
+   :END:
+** Embedded LaTeX
+   :PROPERTIES:
+   :DESCRIPTION: LaTeX can be freely used inside Org documents
+   :END:
 * Exporting
   :PROPERTIES:
   :DESCRIPTION: Sharing and publishing notes
   :END:
-
+** Selective export
+   :PROPERTIES:
+   :DESCRIPTION: Using tags to select and exclude trees
+   :END:
+** Export options
+   :PROPERTIES:
+   :DESCRIPTION: Per-file export settings
+   :END:
+** The export dispatcher
+   :PROPERTIES:
+   :DESCRIPTION: How to access exporter commands
+   :END:
+** ASCII/Latin-1/UTF-8 export
+   :PROPERTIES:
+   :DESCRIPTION: Exporting to flat files with encoding
+   :END:
+** HTML export
+   :PROPERTIES:
+   :DESCRIPTION: Exporting to HTML
+   :END:
+** LaTeX and PDF export
+   :PROPERTIES:
+   :DESCRIPTION: Exporting to LaTeX and processing to PDF
+   :END:
+** DocBook export
+   :PROPERTIES:
+   :DESCRIPTION: Exporting to DocBook
+   :END:
+** OpenDocument Text export
+   :PROPERTIES:
+   :DESCRIPTION: Exporting to OpenDocument Text
+   :END:
+** TaskJuggler export
+   :PROPERTIES:
+   :DESCRIPTION: Exporting to TaskJuggler
+   :END:
+** Freemind export
+   :PROPERTIES:
+   :DESCRIPTION: Exporting to Freemind mind maps
+   :END:
+** XOXO export
+   :PROPERTIES:
+   :DESCRIPTION: Exporting to XOXO
+   :END:
+** iCalendar export
+   :PROPERTIES:
+   :DESCRIPTION: Exporting to iCalendar format
+   :END:
 * Publishing
   :PROPERTIES:
   :DESCRIPTION: Create a web site of linked Org files
   :END:
-
+** Configuration
+   :PROPERTIES:
+   :DESCRIPTION: Defining projects
+   :END:
+** Uploading files
+   :PROPERTIES:
+   :DESCRIPTION: How to get files up on the server
+   :END:
+** Sample configuration
+   :PROPERTIES:
+   :DESCRIPTION: Example projects
+   :END:
+** Triggering publication
+   :PROPERTIES:
+   :DESCRIPTION: Publication commands
+   :END:
 * Working with source code
   :PROPERTIES:
   :DESCRIPTION: Export, evaluate, and tangle code blocks
   :TEXINFO_MENU_TITLE: Working With Source Code
   :END:
-
-* The spreadsheet
+** Structure of code blocks
+   :PROPERTIES:
+   :DESCRIPTION: Code block syntax described
+   :END:
+** Editing source code
+   :PROPERTIES:
+   :DESCRIPTION: Language major-mode editing
+   :END:
+** Exporting code blocks
+   :PROPERTIES:
+   :DESCRIPTION: Export contents and/or results
+   :END:
+** Extracting source code
+   :PROPERTIES:
+   :DESCRIPTION: Create pure source code files
+   :END:
+** Evaluating code blocks
+   :PROPERTIES:
+   :DESCRIPTION: Place results in the Org buffer
+   :END:
+** Library of Babel
+   :PROPERTIES:
+   :DESCRIPTION: Use and contribute to a source code library
+   :END:
+** Languages
+   :PROPERTIES:
+   :DESCRIPTION: Supported code block languages
+   :END:
+** Header arguments
+   :PROPERTIES:
+   :DESCRIPTION: Configure code block functionality
+   :END:
+** Results of evaluation
+   :PROPERTIES:
+   :DESCRIPTION: How evaluation results are handled
+   :END:
+** Noweb reference syntax
+   :PROPERTIES:
+   :DESCRIPTION: Literate programming in Org mode
+   :END:
+** Key bindings and useful functions
+   :PROPERTIES:
+   :DESCRIPTION: Work quickly with code blocks
+   :END:
+** Batch execution
+   :PROPERTIES:
+   :DESCRIPTION: Call functions from the command line
+   :END:
 * Miscellaneous
   :PROPERTIES:
   :DESCRIPTION: All the rest which did not fit elsewhere
   :END:
-
+** Completion
+   :PROPERTIES:
+   :DESCRIPTION: M-TAB knows what you need
+   :END:
+** Easy templates
+   :PROPERTIES:
+   :DESCRIPTION: Quick insertion of structural elements
+   :END:
+** Speed keys
+   :PROPERTIES:
+   :DESCRIPTION: Electric commands at the beginning of a headline
+   :END:
+** Code evaluation security
+   :PROPERTIES:
+   :DESCRIPTION: Org mode files evaluate in-line code
+   :END:
+** Customization
+   :PROPERTIES:
+   :DESCRIPTION: Adapting Org to your taste
+   :END:
+** In-buffer settings
+   :PROPERTIES:
+   :DESCRIPTION: Overview of the #+KEYWORDS
+   :END:
+** The busy C-c C-c key
+   :PROPERTIES:
+   :DESCRIPTION: When in doubt, press C-c C-c
+   :END:
+** Clean view
+   :PROPERTIES:
+   :DESCRIPTION: Getting rid of leading stars in the outline
+   :END:
+** TTY keys
+   :PROPERTIES:
+   :DESCRIPTION: Using Org on a tty
+   :END:
+** Interaction
+   :PROPERTIES:
+   :DESCRIPTION: Other Emacs packages
+   :END:
+** org-crypt.el
+   :PROPERTIES:
+   :DESCRIPTION: Encrypting Org files
+   :END:
 * Hacking
   :PROPERTIES:
   :DESCRIPTION: How to hack your way around
   :END:
-
+** Hooks
+   :PROPERTIES:
+   :DESCRIPTION: How to reach into Org's internals
+   :END:
+** Add-on packages
+   :PROPERTIES:
+   :DESCRIPTION: Available extensions
+   :END:
+** Adding hyperlink types
+   :PROPERTIES:
+   :DESCRIPTION: New custom link types
+   :END:
+** Context-sensitive commands
+   :PROPERTIES:
+   :DESCRIPTION: How to add functionality to such commands
+   :END:
+** Tables in arbitrary syntax
+   :PROPERTIES:
+   :DESCRIPTION: Orgtbl for LaTeX and other programs
+   :END:
+** Dynamic blocks
+   :PROPERTIES:
+   :DESCRIPTION: Automatically filled blocks
+   :END:
+** Special agenda views
+   :PROPERTIES:
+   :DESCRIPTION: Customized views
+   :END:
+** Extracting agenda information
+   :PROPERTIES:
+   :DESCRIPTION: Post-processing agenda information
+   :END:
+** Using the property API
+   :PROPERTIES:
+   :DESCRIPTION: Writing programs that use entry properties
+   :END:
+** Using the mapping API
+   :PROPERTIES:
+   :DESCRIPTION: Mapping over all or selected entries
+   :END:
 * MobileOrg
   :PROPERTIES:
   :DESCRIPTION: Viewing and capture on a mobile device
   :END:
-
+** Setting up the staging area
+   :PROPERTIES:
+   :DESCRIPTION: Where to interact with the mobile device
+   :END:
+** Pushing to MobileOrg
+   :PROPERTIES:
+   :DESCRIPTION: Uploading Org files and agendas
+   :END:
+** Pulling from MobileOrg
+   :PROPERTIES:
+   :DESCRIPTION: Integrating captured and flagged items
+   :END:
 * History and acknowledgments
   :PROPERTIES:
   :DESCRIPTION: How Org came into being
