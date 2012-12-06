@@ -30,18 +30,31 @@
 #+TEXINFO_DIR_TITLE: Org Mode: (org)
 #+TEXINFO_DIR_DESC: Outline-based notes management and organizer
 
+# # Macros for simplifying export
+#+MACRO: cindex @@info:@cindex $1@@
+#+MACRO: pindex @@info:@pindex $1@@
+#+MACRO: findex @@info:@findex $1@@
+#+MACRO: vindex @@info:@vindex $1@@
+#+MACRO: kindex @@info:@kindex $1@@
+#+MACRO: kbd @@info:@kbd{@@$1@@info:}@@
+#+MACRO: key @@info:@key{@@$1@@info:}@@
+#+MACRO: command @@info:@command{@@$1@@info:}@@
+#+MACRO: file @@info:@file{@@$1@@info:}@@
+
+#+MACRO: orgcmd {{{kbd($1)}}} ~$2~
+
 * Introduction
   :PROPERTIES:
   :TITLE: Introduction
   :DESCRIPTION: Getting started
   :END:
-@@info:@cindex introduction@@
+{{{cindex(introduction)}}}
 
 ** Summary
    :PROPERTIES:
    :DESCRIPTION: Brief summary of what Org-mode does
    :END:
-@@info:@cindex summary@@
+{{{cindex(summary)}}}
 
 Org is a mode for keeping notes, maintaining TODO lists, and doing
 project planning with a fast and effective plain-text system.
@@ -62,7 +75,7 @@ also serve as a publishing tool for a set of linked web pages.
 
 As a project planning environment, Org works by adding metadata to outline
 nodes.  Based on this data, specific entries can be extracted in queries and
-create dynamic @@info:@i{agenda views}@@.
+create dynamic /agenda views/.
 
 Org mode contains the Org Babel environment which allows you to work with
 embedded source code blocks in a file, to facilitate code evaluation,
@@ -71,7 +84,7 @@ documentation, and literate programming techniques.
 Org's automatic, context-sensitive table editor with spreadsheet
 capabilities can be integrated into any major mode by activating the
 minor Orgtbl mode.  Using a translation step, it can be used to maintain
-tables in arbitrary file types, for example in @@info:@LaTeX{}@@.  The structure
+tables in arbitrary file types, for example in LaTeX.  The structure
 editing and list creation capabilities can be used outside Org with
 the minor Orgstruct mode.
 
@@ -85,20 +98,20 @@ ends, for example:
   - an ASCII system and table editor for taking structured notes
   - a TODO list editor
   - a full agenda and planner with deadlines and work scheduling
-    @@info:@pindex GTD, Getting Things Done@@
+    {{{pindex(GTD\, Getting Things Done)}}}
   - an environment in which to implement David Allen's GTD system
-  - a simple hypertext system, with HTML and @@info:@LaTeX{}@@ export
+  - a simple hypertext system, with HTML and LaTeX export
   - a publishing tool to create a set of interlinked web pages
   - an environment for literate programming
 
 
 
-@@info:@cindex FAQ@@
+{{{cindex(FAQ)}}}
 There is a [[http://orgmode.org][website for Org]] that provides links to the newest
 version of Org, as well as additional information, frequently asked
 questions (FAQ), links to tutorials, etc.
 
-@@info:@cindex print edition@@ 
+{{{cindex(print edition)}}} 
 Version 7.3 of this manual is available
 as a [[http://www.network-theory.co.uk/org/manual/][paperback book from Network Theory Ltd.]].
 
@@ -109,56 +122,56 @@ as a [[http://www.network-theory.co.uk/org/manual/][paperback book from Network 
    :DESCRIPTION: How to install a downloaded version of Org-mode
    :END:
 
-@@info:@cindex installation@@
-@@info:@cindex XEmacs@@
+{{{cindex(installation)}}}
+{{{cindex(XEmacs)}}}
 
 *Important:* If you have the version of Org that comes with Emacs or
 as a XEmacs package, please skip this section and go directly to
 [[Activation]]. If you downloaded Org as an ELPA package, please read the
 instructions on the [[http://orgmode.org/elpa.html][Org ELPA page]]. To see what version of Org (if any)
-is part of your Emacs distribution, type @@info:@kbd{M-x
-org-version}@@.[fn:2]
+is part of your Emacs distribution, type {{{kbd(M-x
+org-version)}}}.[fn:2]
 
 Installation of Org mode uses a build system, which is described in more
 detail on [[http://orgmode.org/worg/dev/org-build-system.html][Worg]].
 
-If you have downloaded Org from the Web as a distribution @@info:@file{.zip}@@ or
-@@info:@file{.tar.gz}@@ archive, take the following steps to install it:
+If you have downloaded Org from the Web as a distribution {{{file(.zip)}}} or
+{{{file(.tar.gz)}}} archive, take the following steps to install it:
 
   - Unpack the distribution archive.
-  - Change into (@@info:@code{cd}@@) the Org directory.
-  - Run @@info:@code{make help config}@@ and then check and edit the
-    file @@info:@file{local.mk}@@ if the default configuration does
+  - Change into (~cd~) the Org directory.
+  - Run ~make help config~ and then check and edit the
+    file {{{file(local.mk)}}} if the default configuration does
     not match your system. Set the name of the Emacs binary (likely
-    either @@info:@file{emacs}@@ or @@info:@file{xemacs}@@), and the
+    either {{{file(emacs)}}} or {{{file(xemacs)}}}), and the
     paths to the directories where local Lisp and Info files will be
     installed. If the Emacs binary is not in your path, give the full
     path to the executable. Avoid spaces in any path names.
-  - Run @@info:@code{make config}@@ again to check the configuration.
-  - Run @@info:@code{make install}@@ or @@info:@code{sudo make
-    install}@@ to build and install Org mode on your system.
+  - Run ~make config~ again to check the configuration.
+  - Run ~make install~ or ~sudo make install~ to build and install Org
+    mode on your system.
 
 If you use a cloned Git repository, then the procedure is slightly
 different. The following description assumes that you are using the
-@@info:@code{master}@@ branch.[fn:3] You could also use the
-@@info:@code{maint}@@ branch instead, where the release versions are
-published, just replace @@info:@code{master}@@ with
-@@info:@code{maint}@@ in the description below.
+~master~ branch.[fn:3] You could also use the
+~maint~ branch instead, where the release versions are
+published, just replace ~master~ with
+~maint~ in the description below.
 
 
-  - Change into (@@info:@code{cd}@@) the Org repository.
-  - Run @@info:@code{git checkout master}@@ to switch to the @@info:@code{master}@@ branch of the Org repository.
-  - Run @@info:@code{make help}@@ and then check and edit the file
-    @@info:@file{local.mk}@@. You must set the name of the Emacs
-    binary (likely either @@info:@file{emacs}@@ or
-    @@info:@file{xemacs}@@), and the paths to the directories where
+  - Change into (~cd~) the Org repository.
+  - Run ~git checkout master~ to switch to the ~master~ branch of the Org repository.
+  - Run ~make help~ and then check and edit the file
+    {{{file(local.mk)}}}. You must set the name of the Emacs
+    binary (likely either {{{file(emacs)}}} or
+    {{{file(xemacs)}}}), and the paths to the directories where
     local Lisp and Info files will be installed. If the Emacs binary
     is not in your path, you must give the full path to the
     executable. Avoid spaces in any path names.
-  - Run @@info:@code{make config}@@ to check the configuration.
-  - Optionally run @@info:@code{make test}@@ to build Org mode and
+  - Run ~make config~ to check the configuration.
+  - Optionally run ~make test~ to build Org mode and
     then run the full test suite.
-  - Run @@info:@code{make update2}@@ or @@info:@code{make up2}@@ to
+  - Run ~make update2~ or ~make up2~ to
     update the Git repository and build and install Org mode. The
     latter invocation runs the complete test suite before installation
     and installs only if the build passes all tests.
@@ -170,24 +183,24 @@ directly from the distribution directory or Org repository by
 compiling Org mode in place:
 
 
-  - Change into (@@info:@code{cd}@@) the Org repository.
-  - Run @@info:@code{git checkout master}@@ to switch to the
-    @@info:@code{master}@@ branch of the Org repository.
-  - Run @@info:@code{make compile}@@
+  - Change into (~cd~) the Org repository.
+  - Run ~git checkout master~ to switch to the
+    ~master~ branch of the Org repository.
+  - Run ~make compile~
 
 
 Last but not least you can also run Org mode directly from an Org repository
 without any compilation.  Simply replace the last step in the recipe above
-with @@info:@code{make uncompiled}@@.
+with ~make uncompiled~.
 
-Then add the following line to @@info:@file{.emacs}@@:
+Then add the following line to {{{file(.emacs)}}}:
 
 #+begin_src example
 (add-to-list 'load-path "~/path/to/orgdir/lisp")
 #+end_src
 
 @@info:@noindent@@
-If you plan to use code from the @@info:@file{contrib}@@ subdirectory without
+If you plan to use code from the {{{file(contrib)}}} subdirectory without
 compiling them, do a similar step for this directory:
 
 #+begin_src example
@@ -195,12 +208,12 @@ compiling them, do a similar step for this directory:
 #+end_src
 
 If you want to include those files with the build and install, please
-customize the variable @@info:@code{ORG_ADD_CONTRIB}@@ instead in your
-@@info:@code{local.mk}@@ file, for more details please see this
+customize the variable ~ORG_ADD_CONTRIB~ instead in your
+~local.mk~ file, for more details please see this
 [[http://orgmode.org/worg/dev/org-build-system.html#sec-4-1-2][description on Worg]].
 
 Installing Info files is system dependent, because of differences in
-the @@info:@file{install-info}@@ program. The Info documentation is
+the {{{file(install-info)}}} program. The Info documentation is
 installed together with the rest of Org mode. If you don't install Org
 mode, it is possible to install the Info documentation separately if you
 have install-info on your system.[fn:1]  The command to do this is:
@@ -216,19 +229,19 @@ Do not forget to activate Org as described in the following section.
    :PROPERTIES:
    :DESCRIPTION: How to activate Org-mode for certain buffers
    :END:
-@@info:@cindex activation@@
-@@info:@cindex autoload@@
-@@info:@cindex ELPA@@
-@@info:@cindex global key bindings@@
-@@info:@cindex key bindings, global@@
-@@info:@findex org-agenda@@
-@@info:@findex org-capture@@
-@@info:@findex org-store-link@@
-@@info:@findex org-iswitchb@@
+{{{cindex(activation)}}}
+{{{cindex(autoload)}}}
+{{{cindex(ELPA)}}}
+{{{cindex(global key bindings)}}}
+{{{cindex(key bindings\, global)}}}
+{{{findex(org-agenda)}}}
+{{{findex(org-capture)}}}
+{{{findex(org-store-link)}}}
+{{{findex(org-iswitchb)}}}
 
-Since Emacs 22.2, files with the @@info:@file{.org}@@ extension use Org mode by
+Since Emacs 22.2, files with the {{{file(.org)}}} extension use Org mode by
 default.  If you are using an earlier version of Emacs, add this line to your
-@@info:@file{.emacs}@@ file:
+{{{file(.emacs)}}} file:
 
 #+begin_src example
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
@@ -240,8 +253,8 @@ Emacs.[fn:5]
 There are compatibility issues between Org mode and some other Elisp
 packages, please take the time to check the list (@@info:@pxref{Conflicts}@@).
 
-The four Org commands @@info:@command{org-store-link}@@, @@info:@command{org-capture}@@,
-@@info:@command{org-agenda}@@, and @@info:@command{org-iswitchb}@@ should be accessible through
+The four Org commands {{{command(org-store-link)}}}, {{{command(org-capture)}}},
+{{{command(org-agenda)}}}, and {{{command(org-iswitchb)}}} should be accessible through
 global keys (i.e., anywhere in Emacs, not just in Org buffers).  Here are
 suggested bindings for these keys, please modify the keys to your own
 liking.
@@ -253,7 +266,7 @@ liking.
 (global-set-key "\C-cb" 'org-iswitchb)
 #+end_src
 
-@@info:@cindex Org mode, turning on@@
+{{{cindex(Org mode\, turning on)}}}
 With this setup, all files with extension @@info:@samp{.org}@@ will be put
 into Org mode.  As an alternative, make the first line of a file look
 like this:
@@ -263,14 +276,14 @@ MY PROJECTS    -*- mode: org; -*-
 #+end_src
 
 
-@@info:@vindex org-insert-mode-line-in-empty-file@@ @@info:@noindent@@
+{{{vindex(org-insert-mode-line-in-empty-file)}}} @@info:@noindent@@
 which will select Org mode for this buffer no matter what the file's
 name is. See also the variable
-@@info:@code{org-insert-mode-line-in-empty-file}@@.
+~org-insert-mode-line-in-empty-file~.
 
 Many commands in Org work on the region if the region is
-@@info:@i{active}@@. To make use of this, you need to have
-@@info:@code{transient-mark-mode}@@ (@@info:@code{zmacs-regions}@@ in
+/active/. To make use of this, you need to have
+~transient-mark-mode~ (~zmacs-regions~ in
 XEmacs) turned on. In Emacs 23 this is the default, in Emacs 22 you
 need to do this yourself with
 
@@ -279,18 +292,18 @@ need to do this yourself with
 #+end_src
 
 @@info:@noindent@@ If you do not like
-@@info:@code{transient-mark-mode}@@, you can create an active region
+~transient-mark-mode~, you can create an active region
 by using the mouse to select a region, or pressing
-@@info:@kbd{C-@key{SPC}}@@ twice before moving the cursor.
+{{{kbd(C-@key{SPC})}}} twice before moving the cursor.
 
 ** Feedback
    :PROPERTIES:
    :DESCRIPTION: Bug reports, ideas, patches, etc.
    :END:
-@@info:@cindex feedback@@
-@@info:@cindex bug reports@@
-@@info:@cindex maintainer@@
-@@info:@cindex author@@
+{{{cindex(feedback)}}}
+{{{cindex(bug reports)}}}
+{{{cindex(maintainer)}}}
+{{{cindex(author)}}}
 
 If you find problems with Org, or if you have questions, remarks, or
 ideas about it, please mail to the Org mailing list
@@ -302,9 +315,9 @@ For bug reports, please first try to reproduce the bug with the latest
 version of Org available---if you are running an outdated version, it is
 quite possible that the bug has been fixed already.  If the bug persists,
 prepare a report and provide as much information as possible, including the
-version information of Emacs (@@info:@kbd{M-x emacs-version @key{RET}}@@) and Org
-(@@info:@kbd{M-x org-version @key{RET}}@@), as well as the Org related setup in
-@@info:@file{.emacs}@@.  The easiest way to do this is to use the command
+version information of Emacs ({{{kbd(M-x emacs-version @key{RET})}}}) and Org
+({{{kbd(M-x org-version @key{RET})}}}), as well as the Org related setup in
+{{{file(.emacs)}}}.  The easiest way to do this is to use the command
 
 #+begin_src example
 @kbd{M-x org-submit-bug-report}
@@ -327,7 +340,7 @@ $ emacs -Q -l /path/to/minimal-org.el
 
 However if you are using Org mode distributed with Emacs, a minimal
 setup is not necessary. In that case it is sufficient to start Emacs
-as @@info:@code{emacs -Q}@@. The @@info:@code{minimal-org.el}@@ setup
+as ~emacs -Q~. The ~minimal-org.el~ setup
 file can have contents as shown below.
 
 #+begin_src example
@@ -354,30 +367,30 @@ about:
 @@info:@noindent@@ Thank you for helping to improve this program.
 
 *** How to create a useful backtrace
-@@info:@cindex backtrace of an error@@
+{{{cindex(backtrace of an error)}}}
 
 If working with Org produces an error with a message you don't
 understand, you may have hit a bug.  The best way to report this is by
-providing, in addition to what was mentioned above, a @@info:@emph{backtrace}@@.
+providing, in addition to what was mentioned above, a /backtrace/.
 This is information from the built-in debugger about where and how the
 error occurred.  Here is how to produce a useful backtrace:
 
   1. Reload uncompiled versions of all Org mode Lisp files.  The
      backtrace contains much more information if it is produced with
-     uncompiled code. To do this, use @@info:@key{C-u M-x org-reload
-     RET}@@ or select @@info:@code{Org -> Refresh/Reload -> Reload Org
-     uncompiled}@@ from the menu.
+     uncompiled code. To do this, use {{{key(C-u M-x org-reload
+     RET)}}} or select ~Org -> Refresh/Reload -> Reload Org uncompiled~
+     from the menu.
 
-  2. Go to the @@info:@code{Options}@@ menu and select
-     @@info:@code{Enter Debugger on Error}@@ (XEmacs has this option
-     in the @@info:@code{Troubleshooting}@@ sub-menu).
+  2. Go to the ~Options~ menu and select
+     ~Enter Debugger on Error~ (XEmacs has this option
+     in the ~Troubleshooting~ sub-menu).
 
   3. Do whatever you have to do to hit the error. Don't forget to
      document the steps you take.
 
-  4. When you hit the error, a @@info:@file{*Backtrace*}@@ buffer will
+  4. When you hit the error, a {{{file(*Backtrace*)}}} buffer will
      appear on the screen.  Save this buffer to a file (for example
-     using @@info:@kbd{C-x C-w}@@) and attach it to your bug report.
+     using {{{kbd(C-x C-w)}}}) and attach it to your bug report.
 
 
 ** Conventions
@@ -398,43 +411,41 @@ names.  In this manual we use the following conventions:
   - Release, PRIORITY :: User-defined properties are capitalized; built-in
                 properties with special meaning are written with all capitals.
 
-Moreover, Org uses @@info:@i{option keywords}@@ (like
-@@info:@code{#+TITLE}@@ to set the title) and @@info:@i{environment
-keywords}@@ (like @@info:@code{#+BEGIN_HTML}@@ to start a
-@@info:@code{HTML}@@ environment). They are written in uppercase in
-the manual to enhance its readability, but you can use lowercase in
-your Org files.[fn:7]
+Moreover, Org uses /option keywords/ (like ~#+TITLE~ to set the title)
+and /environment keywords/ (like ~#+BEGIN_HTML~ to start a ~HTML~
+environment). They are written in uppercase in the manual to enhance
+its readability, but you can use lowercase in your Org files.[fn:7]
 
 @@info:@subsubheading@@ Keybindings and commands
-@@info:@kindex C-c a@@
-@@info:@findex org-agenda@@
-@@info:@kindex C-c c@@
-@@info:@findex org-capture@@
+{{{kindex(C-c a)}}}
+{{{findex(org-agenda)}}}
+{{{kindex(C-c c)}}}
+{{{findex(org-capture)}}}
 
-The manual suggests two global keybindings: @@info:@kbd{C-c a}@@ for
-@@info:@code{org-agenda}@@ and @@info:@kbd{C-c c}@@ for
-@@info:@code{org-capture}@@. These are only suggestions, but the rest
+The manual suggests two global keybindings: {{{kbd(C-c a)}}} for
+~org-agenda~ and {{{kbd(C-c c)}}} for
+~org-capture~. These are only suggestions, but the rest
 of the manual assumes that you are using these keybindings.
 
 Also, the manual lists both the keys and the corresponding commands
 for accessing a functionality. Org mode often uses the same key for
 different functions, depending on context. The command that is bound
-to such keys has a generic name, like @@info:@code{org-metaright}@@.
+to such keys has a generic name, like ~org-metaright~.
 In the manual we will, wherever possible, give the function that is
 internally called by the generic command. For example, in the chapter
-on document structure, @@info:@kbd{M-@key{right}}@@ will be listed to call
-@@info:@code{org-do-demote}@@, while in the chapter on tables, it will
-be listed to call @@info:@code{org-table-move-column-right}@@. If you
+on document structure, {{{kbd(M-@key{right})}}} will be listed to call
+~org-do-demote~, while in the chapter on tables, it will
+be listed to call ~org-table-move-column-right~. If you
 prefer, you can compile the manual without the command names by
-unsetting the flag @@info:@code{cmdnames}@@ in
-@@info:@file{org.texi}@@.
-* Document structure                                               :noexport:
+unsetting the flag ~cmdnames~ in
+{{{file(org.texi)}}}.
+* Document structure
   :PROPERTIES:
   :DESCRIPTION: A tree works like your brain
   :TEXINFO_MENU_TITLE: Document Structure
   :END:
-@@info:@cindex document structure@@
-@@info:@cindex structure of document@@
+{{{cindex(document structure)}}}
+{{{cindex(structure of document)}}}
 
 Org is based on Outline mode and provides flexible commands to
 edit the structure of the document.
@@ -443,8 +454,8 @@ edit the structure of the document.
    :PROPERTIES:
    :DESCRIPTION: Org mode is based on Outline mode
    :END:
-@@info:@cindex@@ outlines
-@@info:@cindex@@ Outline mode
+{{{cindex(outlines)}}}
+{{{cindex(Outline mode)}}}
 
 Org is implemented on top of Outline mode. Outlines allow a document
 to be organized in a hierarchical structure, which (at least for me)
@@ -453,18 +464,18 @@ structure is achieved by folding (hiding) large parts of the document
 to show only the general document structure and the parts currently
 being worked on. Org greatly simplifies the use of outlines by
 compressing the entire show/hide functionality into a single command,
-@@info:@command{org-cycle}@@, which is bound to the @@info:@key{TAB}@@
+{{{command(org-cycle)}}}, which is bound to the {{{key(TAB)}}}
 key.
 
 ** Headlines
    :PROPERTIES:
    :DESCRIPTION: How to typeset Org tree headlines
    :END:
-@@info:@cindex@@ headlines
-@@info:@cindex @@outline tree
-@@info:@vindex @@org-special-ctrl-a/e
-@@info:@vindex @@org-special-ctrl-k
-@@info:@vindex @@org-ctrl-k-protect-subtree
+{{{cindex(headlines)}}}
+{{{cindex(outline tree)}}}
+{{{vindex(org-special-ctrl-a/e)}}}
+{{{vindex(org-special-ctrl-k)}}}
+{{{vindex(org-ctrl-k-protect-subtree)}}}
 
 Headlines define the structure of an outline tree.  The headlines in Org
 start with one or more stars, on the left margin.[fn:8]  For example:
@@ -482,117 +493,130 @@ start with one or more stars, on the left margin.[fn:8]  For example:
 prefer an outline that has whitespace followed by a single star as
 headline starters. [[Clean view]], describes a setup to realize this.
 
-@@info:@vindex@@ org-cycle-separator-lines
+{{{vindex(org-cycle-separator-lines)}}}
 An empty line after the end of a subtree is considered part of it and
 will be hidden when the subtree is folded.  However, if you leave at
 least two empty lines, one empty line will remain visible after folding
 the subtree, in order to structure the collapsed view.  See the
-variable @@info:@code{org-cycle-separator-lines}@@ to modify this behavior.
+variable ~org-cycle-separator-lines~ to modify this behavior.
 
 ** Visibility cycling
    :PROPERTIES:
    :DESCRIPTION: Show and hide, much simplified
    :TEXINFO_MENU_TITLE: Visibility cycling
    :END:
-@@info:@cindex@@ cycling, visibility
-@@info:@cindex@@ visibility cycling
-@@info:@cindex@@ trees, visibility
-@@info:@cindex@@ show hidden text
-@@info:@cindex@@ hide text
+{{{cindex(cycling\, visibility)}}}
+{{{cindex(visibility cycling)}}}
+{{{cindex(trees\, visibility)}}}
+{{{cindex(show hidden text)}}}
+{{{cindex(hide text)}}}
 
 Outlines make it possible to hide parts of the text in the buffer.
-Org uses just two commands, bound to @@info:@key{TAB}@@ and
-@@info:@kbd{S-@key{TAB}}@@ to change the visibility in the buffer.
+Org uses just two commands, bound to {{{key(TAB)}}} and
+{{{kbd(S-@key{TAB})}}} to change the visibility in the buffer.
 
-*** Subtree cycling
-    :PROPERTIES:
-    :DESCRIPTION: Rotate current subtree among the states
-    :END:
-@@info:@cindex@@ subtree visibility states
-@@info:@cindex@@ subtree cycling
-@@info:@cindex@@ folded, subtree visibility state
-@@info:@cindex@@ children, subtree visibility state
-@@info:@cindex@@ subtree, subtree visibility state
+{{{cindex(subtree visibility states)}}}
+{{{cindex(subtree cycling)}}}
+{{{cindex(folded\, subtree visibility state)}}}
+{{{cindex(children\, subtree visibility state)}}}
+{{{cindex(subtree\, subtree visibility state)}}}
 
-Subtrees can be cycled through three states with the
-@@info:@orgcmd{@key{TAB}, org-cycle}@@ key:
+#+attr_texinfo: :indic "@asis"
+- {{{orgcmd({{{key(TAB)}}},org-cycle)}}} :: /Subtree Cycling/: Rotate
+     current subtree among the states 
+     {{{kindex(TAB)}}}
+     {{{findex(org-cycle)}}}
+     
+     #+begin_src example
+       ,-> FOLDED -> CHILDREN -> SUBTREE --.
+       '-----------------------------------'
+     #+end_src
 
-#+begin_src example
-,-> FOLDED -> CHILDREN -> SUBTREE --.
-'-----------------------------------'
-#+end_src
+     {{{vindex(org-cycle-emulate-tab )}}}
+     {{{vindex(org-cycle-global-at-bob )}}}
 
-@@info:@vindex@@ org-cycle-emulate-tab 
-@@info:@vindex@@ org-cycle-global-at-bob 
+     By default, the cursor must be on a headline for this to work,
+     but this behavior can be modified with the
+     ~org-cycle-emulate-tab~ option. When the cursor is at the
+     beginning of the buffer and the first line is not a headline,
+     then {{{key(TAB)}}} actually runs global cycling (see below)[fn:9]. Also,
+     when called with a prefix argument ({{{kbd(C-u @key{TAB})}}}),
+     global cycling is invoked.
 
-By default, the cursor must be on a headline for this to work, but
-this behavior can be modified with the
-@@info:@code{org-cycle-emulate-tab}@@ option. When the cursor is at
-the beginning of the buffer and the first line is not a headline, then
-@@info:@key{TAB}@@ actually runs [[Global cycling][global cycling]].[fn:9] Also, when
-called with a prefix argument (@@info:@kbd{C-u @key{TAB}}@@), global
-cycling is invoked.
+     {{{cindex(global visibility states)}}}
+     {{{cindex(global cycling)}}}
+     {{{cindex(overview\, global visibility state)}}}
+     {{{cindex(contents\, global visibility state)}}}
+     {{{cindex(show all\, global visibility state)}}}
 
-*** Global cycling
-    :PROPERTIES:
-    :DESCRIPTION: Rotate the entire buffer among the states
-    :END:
-@@info:@cindex@@ global visibility states
-@@info:@cindex@@ global cycling
-@@info:@cindex@@ overview, global visibility state
-@@info:@cindex@@ contents, global visibility state
-@@info:@cindex@@ show all, global visibility state
+- {{{orgcmd(S-@key{TAB},org-global-cycle)}}} :: 
+     @@info:@itemx@@ {{{key(C-u @key{TAB})}}}
+     /Global Cycling/: Rotate the entire buffer among the states
 
-All the subtrees in a buffer can be cycled with either
-@@info:@orgcmd{S-@key{TAB}, org-global-cycle}@@ or
-@@info:@key{C-u @key{TAB}}@@:
+     {{{kindex(S-TAB)}}}
+     {{{findex(org-global-cycle)}}}
 
-#+begin_src example
-,-> OVERVIEW -> CONTENTS -> SHOW ALL --.
-'--------------------------------------'
-#+end_src
+     #+begin_src example
+       ,-> OVERVIEW -> CONTENTS -> SHOW ALL --.
+       '--------------------------------------'
+     #+end_src
 
-When @@info:@kbd{S-@key{TAB}}@@ is called with a numeric prefix
-argument, @@info:@code{N}@@, the CONTENTS view up to headlines of
-level N will be shown. Note that inside tables, @@info:@kbd{S-@key{TAB}}@@
-jumps to the previous field.
+     When {{{kbd(S-@key{TAB})}}} is called with a numeric prefix
+     argument, ~N~, the CONTENTS view up to headlines of level N will
+     be shown. Note that inside tables, {{{kbd(S-@key{TAB})}}} jumps
+     to the previous field.
 
-@@info:@cindex@@ show all, command
-@@info:@orgcmd{C-u C-u C-u @key{TAB},show-all}@@
-Show all, including drawers.
-@@info:@cindex@@ revealing context
-@@info:@orgcmd{C-c C-r,org-reveal}@@
-Reveal context around point, showing the current entry, the following heading
-and the hierarchy above.  Useful for working near a location that has been
-exposed by a sparse tree command (@@info:@pxref{Sparse trees}@@) or an agenda command
-(@@info:@pxref{Agenda commands}@@).  With a prefix argument show, on each
-level, all sibling headings.  With a double prefix argument, also show the
-entire subtree of the parent.
-@@info:@cindex@@ show branches, command
-@@info:@orgcmd{C-c C-k,show-branches}@@
-Expose all the headings of the subtree, CONTENT view for just one subtree.
-@@info:@cindex@@ show children, command
-@@info:@orgcmd{C-c @key{TAB},show-children}@@
-Expose all direct children of the subtree.  With a numeric prefix argument, @@info:@code{N}@@,
-expose all children down to level N.
-@@info:@orgcmd{C-c C-x b,org-tree-to-indirect-buffer}@@
-Show the current subtree in an indirect buffer.[fn:10]  With a numeric
-prefix argument, @@info:@code{N}@@, go up to level N and then take that tree.  If N is
-negative then go up that many levels.  With a @@info:@kbd{C-u}@@ prefix, do not remove
-the previously used indirect buffer.
-@@info:@orgcmd{C-c C-x v,org-copy-visible}@@
-Copy the @@info:@i{visible}@@ text in the region into the kill ring.
-@end table
+     {{{cindex(show all\, command)}}}
+- {{{orgcmd(C-u C-u C-u @key{TAB},show-all)}}} :: Show all, including drawers.
+     {{{kindex(C-u C-u C-u TAB)}}}
+     {{{findex(show-all)}}}
 
-@@info:@vindex@@ org-startup-folded
-@@info:@cindex@@ @@info:@code{overview}@@, STARTUP keyword
-@@info:@cindex@@ @@info:@code{content}@@, STARTUP keyword
-@@info:@cindex@@ @@info:@code{showall}@@, STARTUP keyword
-@@info:@cindex@@ @@info:@code{showeverything}@@, STARTUP keyword
+     {{{cindex(revealing context)}}}
+- {{{orgcmd(C-c C-r,org-reveal)}}} :: Reveal context around point,
+     showing the current entry, the following heading and the
+     hierarchy above.  Useful for working near a location that has
+     been exposed by a sparse tree command (@@info:@pxref{Sparse
+     trees}@@) or an agenda command (@@info:@pxref{Agenda
+     commands}@@).  With a prefix argument show, on each level, all
+     sibling headings.  With a double prefix argument, also show the
+     entire subtree of the parent.
+
+     {{{kindex(C-c C-r)}}}
+     {{{findex(org-reveal)}}}
+
+     {{{cindex(show branches\, command)}}}
+- {{{orgcmd(C-c C-k,show-branches)}}} :: Expose all the headings of
+     the subtree, CONTENT view for just one subtree.
+     {{{kindex(C-c C-k)}}}
+     {{{findex(show-branches)}}}
+
+     {{{cindex(show children\, command)}}}
+- {{{orgcmd(C-c @key{TAB},show-children)}}} :: Expose all direct
+     children of the subtree.  With a numeric prefix argument, ~N~,
+     expose all children down to level N.
+     {{{kindex(C-c TAB)}}}
+     {{{findex(show-children)}}}
+- {{{orgcmd(C-c C-x b,org-tree-to-indirect-buffer)}}} :: Show the
+     current subtree in an indirect buffer.[fn:10] With a numeric
+     prefix argument, ~N~, go up to level N and then take that tree.
+     If N is negative then go up that many levels.  With a
+     {{{kbd(C-u)}}} prefix, do not remove the previously used indirect
+     buffer.
+     {{{kindex(C-c C-x b)}}}
+     {{{findex(org-tree-to-indirect-buffer)}}}
+
+- {{{orgcmd(C-c C-x v,org-copy-visible)}}} :: Copy the /visible/ text
+     in the region into the kill ring.
+
+{{{vindex(org-startup-folded)}}}
+{{{cindex(~overview~\, STARTUP keyword)}}}
+{{{cindex(~content~\, STARTUP keyword)}}}
+{{{cindex(~showall~\, STARTUP keyword)}}}
+{{{cindex(~showeverything~\, STARTUP keyword)}}}
 
 When Emacs first visits an Org file, the global state is set to
 OVERVIEW, i.e., only the top level headlines are visible.  This can be
-configured through the variable @@info:@code{org-startup-folded}@@, or on a
+configured through the variable ~org-startup-folded~, or on a
 per-file basis by adding one of the following lines anywhere in the
 buffer:
 
@@ -603,16 +627,17 @@ buffer:
 #+STARTUP: showeverything
 #+end_src
 
-@@info:@cindex@@ property, VISIBILITY
-@noindent
+{{{cindex(property\, VISIBILITY)}}}
+@@info:@noindent@@
 Furthermore, any entries with a @@info:@samp{VISIBILITY}@@ property (@@info:@pxref{Properties
 and Columns}@@) will get their visibility adapted accordingly.  Allowed values
-for this property are @@info:@code{folded}@@, @@info:@code{children}@@, @@info:@code{content}@@, and
-@@info:@code{all}@@.
-@@info:@orgcmd{C-u C-u @key{TAB},org-set-startup-visibility}@@
-Switch back to the startup visibility of the buffer, i.e.@: whatever is
-requested by startup options and @@info:@samp{VISIBILITY}@@ properties in individual
-entries.
+for this property are ~folded~, ~children~, ~content~, and
+~all~.
+#+attr_texinfo: :indic "@asis"
+- {{{kbd(C-u C-u @key{TAB})}}} ~org-set-startup-visibility~ :: Switch
+     back to the startup visibility of the buffer, i.e.@: whatever is
+     requested by startup options and @@info:@samp{VISIBILITY}@@
+     properties in individual entries.
 
 
 ** Motion
@@ -718,12 +743,13 @@ entries.
    :PROPERTIES:
    :DESCRIPTION: When the default search is not enough
    :END:
-* =TODO= items
+* TODO items
   :PROPERTIES:
   :DESCRIPTION: Every tree branch can be a TODO item
   :TEXINFO_MENU_TITLE: TODO Items
   :END:
-** =TODO= basics
+Test
+** TODO basics
    :PROPERTIES:
    :DESCRIPTION: Marking and displaying TODO entries
    :END:
@@ -1096,6 +1122,16 @@ entries.
    :PROPERTIES:
    :DESCRIPTION: Encrypting Org files
    :END:
+* Interaction with other packages
+
+** Cooperation
+:PROPERTIES:
+:DESCRIPTION: Packages Org cooperates with
+:END:
+** Conflicts
+:PROPERTIES:
+:DESCRIPTION: Packages that lead to conflicts
+:END:
 * Hacking
   :PROPERTIES:
   :DESCRIPTION: How to hack your way around
@@ -1189,7 +1225,7 @@ This manual is for Org version @@info:@value{VERSION}@@.
 
 Copyright © 2004-2012  Free Software Foundation, Inc.
 
-@@info:@quotation@@
+#+BEGIN_QUOTE
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
 any later version published by the Free Software Foundation; with no
@@ -1205,7 +1241,7 @@ This document is part of a collection distributed under the GNU Free
 Documentation License.  If you want to distribute this document
 separately from the collection, you can do so by adding a copy of the
 license to the document, as described in section 6 of the license.
-@@info:@end quotation@@
+#+END_QUOTE
 
 * Footnotes to export
 [fn:1] The output from install-info
@@ -1221,29 +1257,29 @@ See the man page for ginstall-info for command line arguments
 [fn:2]  If your Emacs distribution does not come with Org,
 the function =org-version= will not be defined.
 
-[fn:3]  The @@info:@code{master}@@ branch is where development takes place.
+[fn:3]  The ~master~ branch is where development takes place.
 
 [fn:4] Export to iCalendar supports TODO and agenda items only.
 
 [fn:5] If you don't use font-lock globally, turn it on in an Org
-buffer with @@info:@code{(add-hook 'org-mode-hook 'turn-on-font-lock)}@@.
+buffer with ~(add-hook 'org-mode-hook 'turn-on-font-lock)~.
 
 [fn:6] Please consider subscribing to the
 mailing list in order to minimize the work the mailing list
 moderators have to do.
 
 [fn:7] Easy templates insert lowercase keywords and
-Babel dynamically inserts @@info:@code{#+results}@@.
+Babel dynamically inserts ~#+results~.
 
-[fn:8] See the variables @@info:@code{org-special-ctrl-a/e}@@,
-@@info:@code{org-special-ctrl-k}@@, and
-@@info:@code{org-ctrl-k-protect-subtree}@@ to configure special
-behavior of @@info:@kbd{C-a}@@, @@info:@kbd{C-e}@@, and
-@info:@kbd{C-k}@@ in headlines. Note that clocking only works with
+[fn:8] See the variables ~org-special-ctrl-a/e~,
+~org-special-ctrl-k~, and
+~org-ctrl-k-protect-subtree~ to configure special
+behavior of {{{kbd(C-a)}}}, {{{kbd(C-e)}}}, and
+{{{kbd(C-k)}}} in headlines. Note that clocking only works with
 headings indented less than 30 stars.
 
 [fn:9]  See the option
-@@info:@code{org-cycle-global-at-bob}@@.
+~org-cycle-global-at-bob~.
 
 [fn:10] The indirect buffer
 @@info:@ifinfo@@
