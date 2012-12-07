@@ -1222,12 +1222,11 @@ to disable them individually.
        the current one. {{{vindex(org-M-RET-may-split-line)}}}
        {{{vindex(org-list-automatic-rules)}}}
 
-
-{{{kindex(M-S-@key{RET})}}}
 #+attr_texinfo: :table-type "table" :indic "@kbd"
   - M-S-RET :: Insert a new item with a checkbox ({{{pxref(Checkboxes)}}}).
-    {{{kindex(S-@key{down})}}}
+    {{{kindex(M-S-@key{RET})}}}
   - S-up :: XXX
+    {{{kindex(S-@key{down})}}}
   - S-down ::
     {{{cindex(shift-selection-mode)}}}
     {{{vindex(org-support-shift-select)}}}
@@ -1236,20 +1235,18 @@ to disable them individually.
     {{{code(org-support-shift-select)}}} is off.  If not, you can still use paragraph
     jumping commands like {{{kbd(C-@key{up})}}} and {{{kbd(C-@key{down})}}} to quite
     similar effect.
-    {{{kindex(M-@key{up})}}}
-    {{{kindex(M-@key{down})}}}
   - M-up :: XXX
   - M-down ::
     Move the item including subitems up/down[fn:22] (swap with
     previous/next item of same indentation).  If the list is ordered, renumbering
     is automatic.
-    {{{kindex(M-@key{left})}}}
-    {{{kindex(M-@key{right})}}}
+    {{{kindex(M-@key{up})}}}
+    {{{kindex(M-@key{down})}}}
   - M-left :: XXX
   - M-right ::
     Decrease/increase the indentation of an item, leaving children alone.
-    {{{kindex(M-S-@key{left})}}}
-    {{{kindex(M-S-@key{right})}}}
+    {{{kindex(M-@key{left})}}}
+    {{{kindex(M-@key{right})}}}
   - M-S-left :: XXX
   - M-S-right ::
     Decrease/increase the indentation of the item, including subitems.
@@ -1258,18 +1255,18 @@ to disable them individually.
     selected region is used, even if the new indentation would imply a different
     hierarchy.  To use the new hierarchy, break the command chain with a cursor
     motion or so.
+    {{{kindex(M-S-@key{left})}}}
+    {{{kindex(M-S-@key{right})}}}
 
     As a special case, using this command on the very first item of a list will
     move the whole list.  This behavior can be disabled by configuring
     {{{code(org-list-automatic-rules)}}}.  The global indentation of a list has no
     influence on the text /after/ the list.
-    {{{kindex(C-c C-c)}}}
   - C-c C-c ::
     If there is a checkbox ({{{pxref(Checkboxes)}}}) in the item line, toggle the
     state of the checkbox.  In any case, verify bullets and indentation
     consistency in the whole list.
-    {{{kindex(C-c -)}}}
-    {{{vindex(org-plain-list-ordered-item-terminator)}}}
+    {{{kindex(C-c C-c)}}}
   - C-c - ::
     Cycle the entire list level through the different itemize/enumerate bullets
     ({{{samp(-)}}}, {{{samp(+)}}}, {{{samp(*)}}}, {{{samp(1.)}}}, {{{samp(1))}}}) or a subset of them,
@@ -1280,28 +1277,30 @@ to disable them individually.
     converted to list items.  If the first line already was a list item, any item
     marker will be removed from the list.  Finally, even without an active
     region, a normal line will be converted into a list item.
-    {{{kindex(C-c *)}}}
+    {{{kindex(C-c -)}}}
+    {{{vindex(org-plain-list-ordered-item-terminator)}}}
   - C-c * ::
     Turn a plain list item into a headline (so that it becomes a subheading at
     its location).  {{{xref(Structure editing)}}}, for a detailed explanation.
-    {{{kindex(C-c C-*)}}}
+    {{{kindex(C-c *)}}}
   - C-c C-* ::
     Turn the whole plain list into a subtree of the current heading.  Checkboxes
     ({{{pxref(Checkboxes)}}}) will become TODO (resp. DONE) keywords when unchecked
     (resp. checked).
-    {{{kindex(S-@key{left})}}}
-    {{{kindex(S-@key{right})}}}
+    {{{kindex(C-c C-*)}}}
   - S-left/right ::
     {{{vindex(org-support-shift-select)}}}
     This command also cycles bullet styles when the cursor in on the bullet or
     anywhere in an item line, details depending on
-    {{{code(org-support-shift-select)}}}.
-    {{{kindex(C-c ^)}}}
+    {{{code(org-support-shift-select)}}}. 
+    {{{kindex(S-@key{left})}}}
+    {{{kindex(S-@key{right})}}}
   - C-c ^ ::
     Sort the plain list.  You will be prompted for the sorting method:
     numerically, alphabetically, by time, or by custom function.
+    {{{kindex(C-c ^)}}}
 
-** Drawers                                                         :noexport:
+** Drawers
    :PROPERTIES:
    :DESCRIPTION: Tucking stuff away
    :END:
@@ -1313,44 +1312,46 @@ to disable them individually.
 {{{cindex(org-insert-drawer)}}}
 {{{kindex(C-c C-x d)}}}
 Sometimes you want to keep information associated with an entry, but you
-normally don't want to see it.  For this, Org mode has @emph{drawers}.
+normally don't want to see it.  For this, Org mode has /drawers/.
 Drawers need to be configured with the variable
-@code{org-drawers}@footnote{You can define additional drawers on a
-per-file basis with a line like @code{#+DRAWERS: HIDDEN STATE}}.  Drawers
+{{{code(org-drawers)}}}.[fn:24]  Drawers
 look like this:
 
-@example
-** This is a headline                                              :noexport:
+#+begin_example
+,** This is a headline
    Still outside the drawer
    :DRAWERNAME:
    This is inside the drawer.
    :END:
    After the drawer.
-@end example
+#+end_example
+
 
 You can interactively insert drawers at point by calling
-@code{org-insert-drawer}, which is bound to @key{C-c C-x d}.  With an active
-region, this command will put the region inside the drawer.  With a prefix
-argument, this command calls @code{org-insert-property-drawer} and add a
-property drawer right below the current headline.  Completion over drawer
-keywords is also possible using @key{M-TAB}.
+{{{code(org-insert-drawer)}}}, which is bound to {{{key(C-c C-x d)}}}.
+With an active region, this command will put the region inside the
+drawer. With a prefix argument, this command calls
+{{{code(org-insert-property-drawer)}}} and add a property drawer right
+below the current headline. Completion over drawer keywords is also
+possible using {{{key(M-TAB)}}}.
 
-Visibility cycling ({{{pxref(Visibility cycling)}}}) on the headline will hide and
-show the entry, but keep the drawer collapsed to a single line.  In order to
-look inside the drawer, you need to move the cursor to the drawer line and
-press @key{TAB} there.  Org mode uses the @code{PROPERTIES} drawer for
-storing properties ({{{pxref(Properties and Columns)}}}), and you can also arrange
-for state change notes ({{{pxref(Tracking TODO state changes)}}}) and clock times
-({{{pxref(Clocking work time)}}}) to be stored in a drawer @code{LOGBOOK}.  If you
-want to store a quick note in the LOGBOOK drawer, in a similar way to state changes, use
+Visibility cycling ({{{pxref(Visibility cycling)}}}) on the headline
+will hide and show the entry, but keep the drawer collapsed to a
+single line. In order to look inside the drawer, you need to move the
+cursor to the drawer line and press {{{key(TAB)}}} there. Org mode
+uses the {{{code(PROPERTIES)}}} drawer for storing properties
+({{{pxref(Properties and Columns)}}}), and you can also arrange for
+state change notes ({{{pxref(Tracking TODO state changes)}}}) and
+clock times ({{{pxref(Clocking work time)}}}) to be stored in a drawer
+{{{code(LOGBOOK)}}}. If you want to store a quick note in the LOGBOOK
+drawer, in a similar way to state changes, use
 
-@table @kbd
-{{{kindex(C-c C-z)}}}
-@item C-c C-z
-Add a time-stamped note to the LOGBOOK drawer.
-@end table
+#+attr_texinfo: :table-type "table" :indic "@kbd"
+ - C-c C-z :: Add a time-stamped note to the LOGBOOK drawer.
+   {{{kindex(C-c C-z)}}}
 
-** Blocks                                                          :noexport:
+
+** Blocks 
    :PROPERTIES:
    :DESCRIPTION: Folding blocks
    :END:
@@ -1360,15 +1361,15 @@ Org mode uses begin...end blocks for various purposes from including source
 code examples ({{{pxref(Literal examples)}}}) to capturing time logging
 information ({{{pxref(Clocking work time)}}}).  These blocks can be folded and
 unfolded by pressing TAB in the begin line.  You can also get all blocks
-folded at startup by configuring the variable @code{org-hide-block-startup}
+folded at startup by configuring the variable {{{code(org-hide-block-startup)}}}
 or on a per-file basis by using
 
 {{{cindex(@code{hideblocks}, STARTUP keyword)}}}
 {{{cindex(@code{nohideblocks}, STARTUP keyword)}}}
-@example
-#+STARTUP: hideblocks
-#+STARTUP: nohideblocks
-@end example
+#+begin_example
+,#+STARTUP: hideblocks
+,#+STARTUP: nohideblocks
+#+end_example
 
 ** Footnotes                                                       :noexport:
    :PROPERTIES:
@@ -1376,72 +1377,76 @@ or on a per-file basis by using
    :END:
 {{{cindex(footnotes)}}}
 
-Org mode supports the creation of footnotes.  In contrast to the
-@file{footnote.el} package, Org mode's footnotes are designed for work on a
-larger document, not only for one-off documents like emails.  The basic
-syntax is similar to the one used by @file{footnote.el}, i.e.@: a footnote is
-defined in a paragraph that is started by a footnote marker in square
-brackets in column 0, no indentation allowed.  If you need a paragraph break
-inside a footnote, use the @LaTeX{} idiom @samp{\par}.  The footnote reference
-is simply the marker in square brackets, inside text.  For example:
+Org mode supports the creation of footnotes. In contrast to the
+{{{file(footnote.el)}}} package, Org mode's footnotes are designed for
+work on a larger document, not only for one-off documents like emails.
+The basic syntax is similar to the one used by
+{{{file(footnote.el)}}}, i.e.: a footnote is defined in a paragraph
+that is started by a footnote marker in square brackets in column 0,
+no indentation allowed. If you need a paragraph break inside a
+footnote, use the @@info:@LaTeX{}@@ idiom {{{samp(\par)}}}. The
+footnote reference is simply the marker in square brackets, inside
+text. For example:
 
-@example
+#+begin_example
 The Org homepage[fn:1] now looks a lot better than it used to.
 ...
 [fn:1] The link is: http://orgmode.org
-@end example
+#+end_example
 
-Org mode extends the number-based syntax to @emph{named} footnotes and
-optional inline definition.  Using plain numbers as markers (as
-@file{footnote.el} does) is supported for backward compatibility, but not
-encouraged because of possible conflicts with @LaTeX{} snippets ({{{pxref(Embedded
-@LaTeX{)}}}}).  Here are the valid references:
+Org mode extends the number-based syntax to /named/ footnotes and
+optional inline definition. Using plain numbers as markers (as
+{{{file(footnote.el)}}} does) is supported for backward compatibility,
+but not encouraged because of possible conflicts with
+@@info:@LaTeX{}@@ snippets ({{{pxref(Embedded @LaTeX{)}}}}). Here are
+the valid references:
 
 @table @code
-@item [1]
-A plain numeric footnote marker.  Compatible with @file{footnote.el}, but not
-recommended because something like @samp{[1]} could easily be part of a code
-snippet.
-@item [fn:name]
-A named footnote reference, where @code{name} is a unique label word, or, for
-simplicity of automatic creation, a number.
-@item [fn:: This is the inline definition of this footnote]
-A @LaTeX{}-like anonymous footnote where the definition is given directly at the
-reference point.
-@item [fn:name: a definition]
-An inline definition of a footnote, which also specifies a name for the note.
-Since Org allows multiple references to the same note, you can then use
-@code{[fn:name]} to create additional references.
-@end table
+  - [1] :: A plain numeric footnote marker. Compatible with
+           {{{file(footnote.el)}}}, but not recommended because
+           something like {{{samp([1])}}} could easily be part of a
+           code snippet.
+
+  - [fn:name] :: A named footnote reference, where {{{code(name)}}} is
+                 a unique label word, or, for simplicity of automatic
+                 creation, a number.
+  - [fn:: This is the inline definition of this footnote] :: A
+       @@info:@LaTeX{}@@-like anonymous footnote where the definition
+       is given directly at the reference point.
+  - [fn:name: a definition] :: An inline definition of a footnote,
+       which also specifies a name for the note. Since Org allows
+       multiple references to the same note, you can then use
+       {{{code([fn:name])}}} to create additional references.
+
 
 {{{vindex(org-footnote-auto-label)}}}
-Footnote labels can be created automatically, or you can create names yourself.
-This is handled by the variable @code{org-footnote-auto-label} and its
-corresponding @code{#+STARTUP} keywords.  See the docstring of that variable
-for details.
+Footnote labels can be created automatically, or you can create names
+yourself. This is handled by the variable
+{{{code(org-footnote-auto-label)}}} and its corresponding
+{{{code(#+STARTUP)}}} keywords. See the docstring of that variable for
+details.
 
-@noindent The following command handles footnotes:
+{{{noindent}}} The following command handles footnotes:
 
-@table @kbd
-{{{kindex(C-c C-x f)}}}
-@item C-c C-x f
-The footnote action command.
+#+attr_texinfo: :table-type "table" :indic "@kbd"
+  - C-c C-x f :: The footnote action command.
+    {{{kindex(C-c C-x f)}}}
 
-When the cursor is on a footnote reference, jump to the definition.  When it
-is at a definition, jump to the (first) reference.
+    When the cursor is on a footnote reference, jump to the
+    definition.  When it is at a definition, jump to the (first) reference.
 
-{{{vindex(org-footnote-define-inline)}}}
-{{{vindex(org-footnote-section)}}}
-{{{vindex(org-footnote-auto-adjust)}}}
-Otherwise, create a new footnote.  Depending on the variable
-@code{org-footnote-define-inline}@footnote{The corresponding in-buffer
-setting is: @code{#+STARTUP: fninline} or @code{#+STARTUP: nofninline}}, the
-definition will be placed right into the text as part of the reference, or
-separately into the location determined by the variable
-@code{org-footnote-section}.
+    {{{vindex(org-footnote-define-inline)}}}
+    {{{vindex(org-footnote-section)}}}
+    {{{vindex(org-footnote-auto-adjust)}}}
+    Otherwise, create a new footnote.  Depending on the variable 
+    {{{code(org-footnote-define-inline)}}}@footnote{The corresponding in-buffer
+    setting is: {{{code(#+STARTUP: fninline)}}} or {{{code(#+STARTUP: nofninline)}}}}, the
+    definition will be placed right into the text as part of the reference, or
+    separately into the location determined by the variable
+    {{{code(org-footnote-section)}}}.
 
-When this command is called with a prefix argument, a menu of additional
-options is offered:
+    When this command is called with a prefix argument, a menu of additional
+    options is offered:
 @example
 s   @r{Sort the footnote definitions by reference sequence.  During editing,}
     @r{Org makes no effort to sort footnote definitions into a particular}
@@ -1471,7 +1476,7 @@ deletion.
 @item C-c C-c
 If the cursor is on a footnote reference, jump to the definition.  If it is a
 the definition, jump back to the reference.  When called at a footnote
-location with a prefix argument, offer the same menu as @kbd{C-c C-x f}.
+location with a prefix argument, offer the same menu as {{{kbd(C-c C-x f)}}}.
 {{{kindex(C-c C-o)}}}
 {{{kindex(mouse-1)}}}
 {{{kindex(mouse-2)}}}
@@ -3315,6 +3320,9 @@ cycle around items that way, you may customize
 
 [fn:23] You can filter out any of them by configuring
     {{{code(org-plain-list-ordered-item-terminator)}}}.
+
+[fn:24] You can define additional drawers on a
+per-file basis with a line like {{{code(#+DRAWERS: HIDDEN STATE)}}}.
 
 * About orgmanual.org                                              :noexport:
 This document intends to be Org mode source for the Org mode manual
