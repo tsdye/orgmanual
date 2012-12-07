@@ -29,6 +29,245 @@
 #+TEXINFO_DIR_CATEGORY: Emacs editing modes
 #+TEXINFO_DIR_TITLE: Org Mode: (org)
 #+TEXINFO_DIR_DESC: Outline-based notes management and organizer
+#+TEXINFO_POST_HEADER: @c -----------------------------------------------------------------------------
+#+TEXINFO_POST_HEADER: 
+#+TEXINFO_POST_HEADER: @c Macro definitions for commands and keys
+#+TEXINFO_POST_HEADER: @c =======================================
+#+TEXINFO_POST_HEADER: 
+#+TEXINFO_POST_HEADER: @c The behavior of the key/command macros will depend on the flag cmdnames
+#+TEXINFO_POST_HEADER: @c When set, commands names are shown.  When clear, they are not shown.
+#+TEXINFO_POST_HEADER: 
+#+TEXINFO_POST_HEADER: @set cmdnames
+#+TEXINFO_POST_HEADER: 
+#+TEXINFO_POST_HEADER: @c Below we define the following macros for Org key tables:
+#+TEXINFO_POST_HEADER: 
+#+TEXINFO_POST_HEADER: @c orgkey{key}                        A key item
+#+TEXINFO_POST_HEADER: @c orgcmd{key,cmd}                    Key with command name
+#+TEXINFO_POST_HEADER: @c xorgcmd{key,cmd}                   Key with command name as @itemx
+#+TEXINFO_POST_HEADER: @c orgcmdnki{key,cmd}                 Like orgcmd, but do not index the key
+#+TEXINFO_POST_HEADER: @c orgcmdtkc{text,key,cmd}            Like orgcmd,special text instead of key
+#+TEXINFO_POST_HEADER: @c orgcmdkkc{key1,key2,cmd}           Two keys with one command name, use "or"
+#+TEXINFO_POST_HEADER: @c orgcmdkxkc{key1,key2,cmd}          Two keys with one command name, but
+#+TEXINFO_POST_HEADER: @c                                    different functions, so format as @itemx
+#+TEXINFO_POST_HEADER: @c orgcmdkskc{key1,key2,cmd}          Same as orgcmdkkc, but use "or short"
+#+TEXINFO_POST_HEADER: @c xorgcmdkskc{key1,key2,cmd}         Same as previous, but use @itemx
+#+TEXINFO_POST_HEADER: @c orgcmdkkcc{key1,key2,cmd1,cmd2}    Two keys and two commands
+#+TEXINFO_POST_HEADER: 
+#+TEXINFO_POST_HEADER: @c a key but no command
+#+TEXINFO_POST_HEADER: @c    Inserts:    @item key
+#+TEXINFO_POST_HEADER: @macro orgkey{key}
+#+TEXINFO_POST_HEADER: @kindex \key\
+#+TEXINFO_POST_HEADER: @item @kbd{\key\}
+#+TEXINFO_POST_HEADER: @end macro
+#+TEXINFO_POST_HEADER: 
+#+TEXINFO_POST_HEADER: @macro xorgkey{key}
+#+TEXINFO_POST_HEADER: @kindex \key\
+#+TEXINFO_POST_HEADER: @itemx @kbd{\key\}
+#+TEXINFO_POST_HEADER: @end macro
+#+TEXINFO_POST_HEADER: 
+#+TEXINFO_POST_HEADER: @c one key with a command
+#+TEXINFO_POST_HEADER: @c   Inserts:    @item KEY               COMMAND
+#+TEXINFO_POST_HEADER: @macro orgcmd{key,command}
+#+TEXINFO_POST_HEADER: @ifset cmdnames
+#+TEXINFO_POST_HEADER: @kindex \key\
+#+TEXINFO_POST_HEADER: @findex \command\
+#+TEXINFO_POST_HEADER: @iftex
+#+TEXINFO_POST_HEADER: @item @kbd{\key\} @hskip 0pt plus 1filll @code{\command\}
+#+TEXINFO_POST_HEADER: @end iftex
+#+TEXINFO_POST_HEADER: @ifnottex
+#+TEXINFO_POST_HEADER: @item @kbd{\key\} @tie{}@tie{}@tie{}@tie{}(@code{\command\})
+#+TEXINFO_POST_HEADER: @end ifnottex
+#+TEXINFO_POST_HEADER: @end ifset
+#+TEXINFO_POST_HEADER: @ifclear cmdnames
+#+TEXINFO_POST_HEADER: @kindex \key\
+#+TEXINFO_POST_HEADER: @item @kbd{\key\}
+#+TEXINFO_POST_HEADER: @end ifclear
+#+TEXINFO_POST_HEADER: @end macro
+#+TEXINFO_POST_HEADER: 
+#+TEXINFO_POST_HEADER: @c One key with one command, formatted using @itemx
+#+TEXINFO_POST_HEADER: @c   Inserts:    @itemx KEY               COMMAND
+#+TEXINFO_POST_HEADER: @macro xorgcmd{key,command}
+#+TEXINFO_POST_HEADER: @ifset cmdnames
+#+TEXINFO_POST_HEADER: @kindex \key\
+#+TEXINFO_POST_HEADER: @findex \command\
+#+TEXINFO_POST_HEADER: @iftex
+#+TEXINFO_POST_HEADER: @itemx @kbd{\key\} @hskip 0pt plus 1filll @code{\command\}
+#+TEXINFO_POST_HEADER: @end iftex
+#+TEXINFO_POST_HEADER: @ifnottex
+#+TEXINFO_POST_HEADER: @itemx @kbd{\key\} @tie{}@tie{}@tie{}@tie{}(@code{\command\})
+#+TEXINFO_POST_HEADER: @end ifnottex
+#+TEXINFO_POST_HEADER: @end ifset
+#+TEXINFO_POST_HEADER: @ifclear cmdnames
+#+TEXINFO_POST_HEADER: @kindex \key\
+#+TEXINFO_POST_HEADER: @itemx @kbd{\key\}
+#+TEXINFO_POST_HEADER: @end ifclear
+#+TEXINFO_POST_HEADER: @end macro
+#+TEXINFO_POST_HEADER: 
+#+TEXINFO_POST_HEADER: @c one key with a command, bit do not index the key
+#+TEXINFO_POST_HEADER: @c   Inserts:    @item KEY               COMMAND
+#+TEXINFO_POST_HEADER: @macro orgcmdnki{key,command}
+#+TEXINFO_POST_HEADER: @ifset cmdnames
+#+TEXINFO_POST_HEADER: @findex \command\
+#+TEXINFO_POST_HEADER: @iftex
+#+TEXINFO_POST_HEADER: @item @kbd{\key\} @hskip 0pt plus 1filll @code{\command\}
+#+TEXINFO_POST_HEADER: @end iftex
+#+TEXINFO_POST_HEADER: @ifnottex
+#+TEXINFO_POST_HEADER: @item @kbd{\key\} @tie{}@tie{}@tie{}@tie{}(@code{\command\})
+#+TEXINFO_POST_HEADER: @end ifnottex
+#+TEXINFO_POST_HEADER: @end ifset
+#+TEXINFO_POST_HEADER: @ifclear cmdnames
+#+TEXINFO_POST_HEADER: @item @kbd{\key\}
+#+TEXINFO_POST_HEADER: @end ifclear
+#+TEXINFO_POST_HEADER: @end macro
+#+TEXINFO_POST_HEADER: 
+#+TEXINFO_POST_HEADER: @c one key with a command, and special text to replace key in item
+#+TEXINFO_POST_HEADER: @c   Inserts:    @item TEXT                    COMMAND
+#+TEXINFO_POST_HEADER: @macro orgcmdtkc{text,key,command}
+#+TEXINFO_POST_HEADER: @ifset cmdnames
+#+TEXINFO_POST_HEADER: @kindex \key\
+#+TEXINFO_POST_HEADER: @findex \command\
+#+TEXINFO_POST_HEADER: @iftex
+#+TEXINFO_POST_HEADER: @item @kbd{\text\} @hskip 0pt plus 1filll @code{\command\}
+#+TEXINFO_POST_HEADER: @end iftex
+#+TEXINFO_POST_HEADER: @ifnottex
+#+TEXINFO_POST_HEADER: @item @kbd{\text\} @tie{}@tie{}@tie{}@tie{}(@code{\command\})
+#+TEXINFO_POST_HEADER: @end ifnottex
+#+TEXINFO_POST_HEADER: @end ifset
+#+TEXINFO_POST_HEADER: @ifclear cmdnames
+#+TEXINFO_POST_HEADER: @kindex \key\
+#+TEXINFO_POST_HEADER: @item @kbd{\text\}
+#+TEXINFO_POST_HEADER: @end ifclear
+#+TEXINFO_POST_HEADER: @end macro
+#+TEXINFO_POST_HEADER: 
+#+TEXINFO_POST_HEADER: @c two keys with one command
+#+TEXINFO_POST_HEADER: @c   Inserts:    @item KEY1 or KEY2            COMMAND
+#+TEXINFO_POST_HEADER: @macro orgcmdkkc{key1,key2,command}
+#+TEXINFO_POST_HEADER: @ifset cmdnames
+#+TEXINFO_POST_HEADER: @kindex \key1\
+#+TEXINFO_POST_HEADER: @kindex \key2\
+#+TEXINFO_POST_HEADER: @findex \command\
+#+TEXINFO_POST_HEADER: @iftex
+#+TEXINFO_POST_HEADER: @item @kbd{\key1\} @ @r{or} @ @kbd{\key2\} @hskip 0pt plus 1filll @code{\command\}
+#+TEXINFO_POST_HEADER: @end iftex
+#+TEXINFO_POST_HEADER: @ifnottex
+#+TEXINFO_POST_HEADER: @item @kbd{\key1\} @ @r{or} @ @kbd{\key2\} @tie{}@tie{}@tie{}@tie{}(@code{\command\})
+#+TEXINFO_POST_HEADER: @end ifnottex
+#+TEXINFO_POST_HEADER: @end ifset
+#+TEXINFO_POST_HEADER: @ifclear cmdnames
+#+TEXINFO_POST_HEADER: @kindex \key1\
+#+TEXINFO_POST_HEADER: @kindex \key2\
+#+TEXINFO_POST_HEADER: @item @kbd{\key1\} @ @r{or} @ @kbd{\key2\}
+#+TEXINFO_POST_HEADER: @end ifclear
+#+TEXINFO_POST_HEADER: @end macro
+#+TEXINFO_POST_HEADER: 
+#+TEXINFO_POST_HEADER: @c Two keys with one command name, but different functions, so format as
+#+TEXINFO_POST_HEADER: @c @itemx
+#+TEXINFO_POST_HEADER: @c   Inserts:    @item KEY1
+#+TEXINFO_POST_HEADER: @c               @itemx KEY2                COMMAND
+#+TEXINFO_POST_HEADER: @macro orgcmdkxkc{key1,key2,command}
+#+TEXINFO_POST_HEADER: @ifset cmdnames
+#+TEXINFO_POST_HEADER: @kindex \key1\
+#+TEXINFO_POST_HEADER: @kindex \key2\
+#+TEXINFO_POST_HEADER: @findex \command\
+#+TEXINFO_POST_HEADER: @iftex
+#+TEXINFO_POST_HEADER: @item @kbd{\key1\}
+#+TEXINFO_POST_HEADER: @itemx @kbd{\key2\} @hskip 0pt plus 1filll @code{\command\}
+#+TEXINFO_POST_HEADER: @end iftex
+#+TEXINFO_POST_HEADER: @ifnottex
+#+TEXINFO_POST_HEADER: @item @kbd{\key1\}
+#+TEXINFO_POST_HEADER: @itemx @kbd{\key2\} @tie{}@tie{}@tie{}@tie{}(@code{\command\})
+#+TEXINFO_POST_HEADER: @end ifnottex
+#+TEXINFO_POST_HEADER: @end ifset
+#+TEXINFO_POST_HEADER: @ifclear cmdnames
+#+TEXINFO_POST_HEADER: @kindex \key1\
+#+TEXINFO_POST_HEADER: @kindex \key2\
+#+TEXINFO_POST_HEADER: @item @kbd{\key1\}
+#+TEXINFO_POST_HEADER: @itemx @kbd{\key2\}
+#+TEXINFO_POST_HEADER: @end ifclear
+#+TEXINFO_POST_HEADER: @end macro
+#+TEXINFO_POST_HEADER: 
+#+TEXINFO_POST_HEADER: @c Same as previous, but use "or short"
+#+TEXINFO_POST_HEADER: @c   Inserts:    @item KEY1 or short KEY2            COMMAND
+#+TEXINFO_POST_HEADER: @macro orgcmdkskc{key1,key2,command}
+#+TEXINFO_POST_HEADER: @ifset cmdnames
+#+TEXINFO_POST_HEADER: @kindex \key1\
+#+TEXINFO_POST_HEADER: @kindex \key2\
+#+TEXINFO_POST_HEADER: @findex \command\
+#+TEXINFO_POST_HEADER: @iftex
+#+TEXINFO_POST_HEADER: @item @kbd{\key1\} @ @r{or short} @ @kbd{\key2\} @hskip 0pt plus 1filll @code{\command\}
+#+TEXINFO_POST_HEADER: @end iftex
+#+TEXINFO_POST_HEADER: @ifnottex
+#+TEXINFO_POST_HEADER: @item @kbd{\key1\} @ @r{or short} @ @kbd{\key2\} @tie{}@tie{}@tie{}@tie{}(@code{\command\})
+#+TEXINFO_POST_HEADER: @end ifnottex
+#+TEXINFO_POST_HEADER: @end ifset
+#+TEXINFO_POST_HEADER: @ifclear cmdnames
+#+TEXINFO_POST_HEADER: @kindex \key1\
+#+TEXINFO_POST_HEADER: @kindex \key2\
+#+TEXINFO_POST_HEADER: @item @kbd{\key1\} @ @r{or short} @ @kbd{\key2\}
+#+TEXINFO_POST_HEADER: @end ifclear
+#+TEXINFO_POST_HEADER: @end macro
+#+TEXINFO_POST_HEADER: 
+#+TEXINFO_POST_HEADER: @c Same as previous, but use @itemx
+#+TEXINFO_POST_HEADER: @c   Inserts:    @itemx KEY1 or short KEY2            COMMAND
+#+TEXINFO_POST_HEADER: @macro xorgcmdkskc{key1,key2,command}
+#+TEXINFO_POST_HEADER: @ifset cmdnames
+#+TEXINFO_POST_HEADER: @kindex \key1\
+#+TEXINFO_POST_HEADER: @kindex \key2\
+#+TEXINFO_POST_HEADER: @findex \command\
+#+TEXINFO_POST_HEADER: @iftex
+#+TEXINFO_POST_HEADER: @itemx @kbd{\key1\} @ @r{or short} @ @kbd{\key2\} @hskip 0pt plus 1filll @code{\command\}
+#+TEXINFO_POST_HEADER: @end iftex
+#+TEXINFO_POST_HEADER: @ifnottex
+#+TEXINFO_POST_HEADER: @itemx @kbd{\key1\} @ @r{or short} @ @kbd{\key2\} @tie{}@tie{}@tie{}@tie{}(@code{\command\})
+#+TEXINFO_POST_HEADER: @end ifnottex
+#+TEXINFO_POST_HEADER: @end ifset
+#+TEXINFO_POST_HEADER: @ifclear cmdnames
+#+TEXINFO_POST_HEADER: @kindex \key1\
+#+TEXINFO_POST_HEADER: @kindex \key2\
+#+TEXINFO_POST_HEADER: @itemx @kbd{\key1\} @ @r{or short} @ @kbd{\key2\}
+#+TEXINFO_POST_HEADER: @end ifclear
+#+TEXINFO_POST_HEADER: @end macro
+#+TEXINFO_POST_HEADER: 
+#+TEXINFO_POST_HEADER: @c two keys with two commands
+#+TEXINFO_POST_HEADER: @c   Inserts:    @item KEY1                        COMMAND1
+#+TEXINFO_POST_HEADER: @c               @itemx KEY2                       COMMAND2
+#+TEXINFO_POST_HEADER: @macro orgcmdkkcc{key1,key2,command1,command2}
+#+TEXINFO_POST_HEADER: @ifset cmdnames
+#+TEXINFO_POST_HEADER: @kindex \key1\
+#+TEXINFO_POST_HEADER: @kindex \key2\
+#+TEXINFO_POST_HEADER: @findex \command1\
+#+TEXINFO_POST_HEADER: @findex \command2\
+#+TEXINFO_POST_HEADER: @iftex
+#+TEXINFO_POST_HEADER: @item @kbd{\key1\} @hskip 0pt plus 1filll @code{\command1\}
+#+TEXINFO_POST_HEADER: @itemx @kbd{\key2\} @hskip 0pt plus 1filll @code{\command2\}
+#+TEXINFO_POST_HEADER: @end iftex
+#+TEXINFO_POST_HEADER: @ifnottex
+#+TEXINFO_POST_HEADER: @item @kbd{\key1\} @tie{}@tie{}@tie{}@tie{}(@code{\command1\})
+#+TEXINFO_POST_HEADER: @itemx @kbd{\key2\} @tie{}@tie{}@tie{}@tie{}(@code{\command2\})
+#+TEXINFO_POST_HEADER: @end ifnottex
+#+TEXINFO_POST_HEADER: @end ifset
+#+TEXINFO_POST_HEADER: @ifclear cmdnames
+#+TEXINFO_POST_HEADER: @kindex \key1\
+#+TEXINFO_POST_HEADER: @kindex \key2\
+#+TEXINFO_POST_HEADER: @item @kbd{\key1\}
+#+TEXINFO_POST_HEADER: @itemx @kbd{\key2\}
+#+TEXINFO_POST_HEADER: @end ifclear
+#+TEXINFO_POST_HEADER: @end macro
+#+TEXINFO_POST_HEADER: @c -----------------------------------------------------------------------------
+#+TEXINFO_POST_HEADER: 
+#+TEXINFO_POST_HEADER: @iftex
+#+TEXINFO_POST_HEADER: @c @hyphenation{time-stamp time-stamps time-stamp-ing time-stamp-ed}
+#+TEXINFO_POST_HEADER: @end iftex
+#+TEXINFO_POST_HEADER: 
+#+TEXINFO_POST_HEADER: @c Subheadings inside a table.
+#+TEXINFO_POST_HEADER: @macro tsubheading{text}
+#+TEXINFO_POST_HEADER: @ifinfo
+#+TEXINFO_POST_HEADER: @subsubheading \text\
+#+TEXINFO_POST_HEADER: @end ifinfo
+#+TEXINFO_POST_HEADER: @ifnotinfo
+#+TEXINFO_POST_HEADER: @item @b{\text\}
+#+TEXINFO_POST_HEADER: @end ifnotinfo
+#+TEXINFO_POST_HEADER: @end macro
 
 * Introduction
   :PROPERTIES:
@@ -428,7 +667,7 @@ be listed to call @@info:@code{org-table-move-column-right}@@. If you
 prefer, you can compile the manual without the command names by
 unsetting the flag @@info:@code{cmdnames}@@ in
 @@info:@file{org.texi}@@.
-* Document structure                                               :noexport:
+* Document structure
   :PROPERTIES:
   :DESCRIPTION: A tree works like your brain
   :TEXINFO_MENU_TITLE: Document Structure
@@ -501,88 +740,73 @@ variable @@info:@code{org-cycle-separator-lines}@@ to modify this behavior.
 @@info:@cindex@@ hide text
 
 Outlines make it possible to hide parts of the text in the buffer.
-Org uses just two commands, bound to @@info:@key{TAB}@@ and
+Org uses just two commands, bound to @@info:@kbd{@key{TAB}}@@ and
 @@info:@kbd{S-@key{TAB}}@@ to change the visibility in the buffer.
 
-*** Subtree cycling
-    :PROPERTIES:
-    :DESCRIPTION: Rotate current subtree among the states
-    :END:
 @@info:@cindex@@ subtree visibility states
 @@info:@cindex@@ subtree cycling
 @@info:@cindex@@ folded, subtree visibility state
 @@info:@cindex@@ children, subtree visibility state
 @@info:@cindex@@ subtree, subtree visibility state
 
-Subtrees can be cycled through three states with the
-@@info:@orgcmd{@key{TAB}, org-cycle}@@ key:
+#+attr_texinfo: :table-type "table" :indic "@asis"
+  - @@info:@orgcmd{@key{TAB},org-cycle}@@ :: Subtrees can be cycled
+       through three states: 
+       #+begin_src example
+       ,-> FOLDED -> CHILDREN -> SUBTREE --.
+       '-----------------------------------'
+       #+end_src
+       @@info:@vindex@@ org-cycle-emulate-tab 
+       @@info:@vindex@@ org-cycle-global-at-bob 
+    
+      By default, the cursor must be on a headline for this to work, but this behavior can be modified with the @@info:@code{org-cycle-emulate-tab}@@ option. When the cursor is at the beginning of the buffer and the first line is not a headline, then @@info:@key{TAB}@@ actually runs [[Global
+            cycling][global cycling]].[fn:9] Also, when called with a prefix argument (@@info:@kbd{C-u @key{TAB}}@@), global cycling is invoked.
 
-#+begin_src example
-,-> FOLDED -> CHILDREN -> SUBTREE --.
-'-----------------------------------'
-#+end_src
+       @@info:@cindex@@ global visibility states 
+       @@info:@cindex@@ global cycling 
+       @@info:@cindex@@ overview, global visibility state
+       @@info:@cindex@@ contents, global visibility state
+       @@info:@cindex@@ show all, global visibility state
+  - @@info:@orgcmd{S-@key{TAB},org-global-cycle}@@ @@info:@orgcmd{C-u @key{TAB},org-global-cycle}@@ :: 
+    All the subtrees in a buffer can be cycled:
 
-@@info:@vindex@@ org-cycle-emulate-tab 
-@@info:@vindex@@ org-cycle-global-at-bob 
+    #+begin_src example 
+      ,-> OVERVIEW -> CONTENTS -> SHOW ALL --.
+      '--------------------------------------' 
+    #+end_src
 
-By default, the cursor must be on a headline for this to work, but
-this behavior can be modified with the
-@@info:@code{org-cycle-emulate-tab}@@ option. When the cursor is at
-the beginning of the buffer and the first line is not a headline, then
-@@info:@key{TAB}@@ actually runs [[Global cycling][global cycling]].[fn:9] Also, when
-called with a prefix argument (@@info:@kbd{C-u @key{TAB}}@@), global
-cycling is invoked.
+    When @@info:@kbd{S-@key{TAB}}@@ is called with a numeric prefix
+    argument, @@info:@code{N}@@, the CONTENTS view up to headlines of
+    level N will be shown. Note that inside tables,
+    @@info:@kbd{S-@key{TAB}}@@ jumps to the previous field.
+    @@info:@cindex@@ show all, command 
+  - @@info:@orgcmd{C-u C-u C-u @key{TAB},show-all}@@ :: Show all,
+       including drawers.
+       @@info:@cindex@@ revealing context
+  - @@info:@orgcmd{C-c C-r,org-reveal}@@ :: Reveal context around
+       point, showing the current entry, the following heading and the
+       hierarchy above.  Useful for working near a location that has
+       been exposed by a sparse tree command (@@info:@pxref{Sparse
+       trees}@@) or an agenda command (@@info:@pxref{Agenda
+       commands}@@).  With a prefix argument show, on each level, all
+       sibling headings.  With a double prefix argument, also show the
+       entire subtree of the parent.
+    @@info:@cindex@@ show branches, command
+  - @@info:@orgcmd{C-c C-k,show-branches}@@ :: Expose all the headings
+       of the subtree, CONTENT view for just one subtree.
+       @@info:@cindex@@ show children, command
+  - @@info:@orgcmd{C-c @key{TAB},show-children}@@ :: Expose all direct
+       children of the subtree. With a numeric prefix argument,
+       @@info:@code{N}@@, expose all children down to level N.
+  - @@info:@orgcmd{C-c C-x b,org-tree-to-indirect-buffer}@@ :: Show
+       the current subtree in an indirect buffer.[fn:10] With a
+       numeric prefix argument, @@info:@code{N}@@, go up to level N
+       and then take that tree. If N is negative then go up that many
+       levels. With a @@info:@kbd{C-u}@@ prefix, do not remove the
+       previously used indirect buffer.
+  - @@info:@orgcmd{C-c C-x v,org-copy-visible}@@ :: 
+       Copy the @@info:@i{visible}@@ text in the region into the kill ring.
 
-*** Global cycling
-    :PROPERTIES:
-    :DESCRIPTION: Rotate the entire buffer among the states
-    :END:
-@@info:@cindex@@ global visibility states
-@@info:@cindex@@ global cycling
-@@info:@cindex@@ overview, global visibility state
-@@info:@cindex@@ contents, global visibility state
-@@info:@cindex@@ show all, global visibility state
-
-All the subtrees in a buffer can be cycled with either
-@@info:@orgcmd{S-@key{TAB}, org-global-cycle}@@ or
-@@info:@key{C-u @key{TAB}}@@:
-
-#+begin_src example
-,-> OVERVIEW -> CONTENTS -> SHOW ALL --.
-'--------------------------------------'
-#+end_src
-
-When @@info:@kbd{S-@key{TAB}}@@ is called with a numeric prefix
-argument, @@info:@code{N}@@, the CONTENTS view up to headlines of
-level N will be shown. Note that inside tables, @@info:@kbd{S-@key{TAB}}@@
-jumps to the previous field.
-
-@@info:@cindex@@ show all, command
-@@info:@orgcmd{C-u C-u C-u @key{TAB},show-all}@@
-Show all, including drawers.
-@@info:@cindex@@ revealing context
-@@info:@orgcmd{C-c C-r,org-reveal}@@
-Reveal context around point, showing the current entry, the following heading
-and the hierarchy above.  Useful for working near a location that has been
-exposed by a sparse tree command (@@info:@pxref{Sparse trees}@@) or an agenda command
-(@@info:@pxref{Agenda commands}@@).  With a prefix argument show, on each
-level, all sibling headings.  With a double prefix argument, also show the
-entire subtree of the parent.
-@@info:@cindex@@ show branches, command
-@@info:@orgcmd{C-c C-k,show-branches}@@
-Expose all the headings of the subtree, CONTENT view for just one subtree.
-@@info:@cindex@@ show children, command
-@@info:@orgcmd{C-c @key{TAB},show-children}@@
-Expose all direct children of the subtree.  With a numeric prefix argument, @@info:@code{N}@@,
-expose all children down to level N.
-@@info:@orgcmd{C-c C-x b,org-tree-to-indirect-buffer}@@
-Show the current subtree in an indirect buffer.[fn:10]  With a numeric
-prefix argument, @@info:@code{N}@@, go up to level N and then take that tree.  If N is
-negative then go up that many levels.  With a @@info:@kbd{C-u}@@ prefix, do not remove
-the previously used indirect buffer.
-@@info:@orgcmd{C-c C-x v,org-copy-visible}@@
-Copy the @@info:@i{visible}@@ text in the region into the kill ring.
-@end table
 
 @@info:@vindex@@ org-startup-folded
 @@info:@cindex@@ @@info:@code{overview}@@, STARTUP keyword
@@ -604,88 +828,1868 @@ buffer:
 #+end_src
 
 @@info:@cindex@@ property, VISIBILITY
-@noindent
+@@info:@noindent@@
 Furthermore, any entries with a @@info:@samp{VISIBILITY}@@ property (@@info:@pxref{Properties
 and Columns}@@) will get their visibility adapted accordingly.  Allowed values
 for this property are @@info:@code{folded}@@, @@info:@code{children}@@, @@info:@code{content}@@, and
 @@info:@code{all}@@.
-@@info:@orgcmd{C-u C-u @key{TAB},org-set-startup-visibility}@@
-Switch back to the startup visibility of the buffer, i.e.@: whatever is
-requested by startup options and @@info:@samp{VISIBILITY}@@ properties in individual
-entries.
 
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+  - @@info:@orgcmd{C-u C-u @key{TAB},org-set-startup-visibility}@@ ::
+       Switch back to the startup visibility of the buffer, i.e.:
+       whatever is requested by startup options and
+       @@info:@samp{VISIBILITY}@@ properties in individual entries.
 
 ** Motion
    :PROPERTIES:
    :DESCRIPTION: Jumping to other headlines
    :END:
+@@info:@cindex@@ motion, between headlines
+@@info:@cindex@@ jumping, to headlines
+@@info:@cindex@@ headline navigation
+The following commands jump to other headlines in the buffer.
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+  - @@info:@orgcmd{C-c C-n,outline-next-visible-heading}@@ :: Next heading.
+  - @@info:@orgcmd{C-c C-p,outline-previous-visible-heading}@@ :: Previous heading.
+  - @@info:@orgcmd{C-c C-f,org-forward-same-level}@@ :: Next heading same level.
+  - @@info:@orgcmd{C-c C-b,org-backward-same-level}@@ :: Previous heading same level.
+  - @@info:@orgcmd{C-c C-u,outline-up-heading}@@ :: Backward to higher level heading.
+  - @@info:@orgcmd{C-c C-j,org-goto}@@ :: Jump to a different place
+       without changing the current outline visibility.  Shows the
+       document structure in a temporary buffer, where you can use the following keys to find your destination:
+       @@info:@vindex@@ org-goto-auto-isearch
+    #+begin_src example
+      @key{TAB}         @r{Cycle visibility.}
+      @key{down} / @key{up}   @r{Next/previous visible headline.}
+      @key{RET}      @r{Select this location.}
+      @kbd{/}           @r{Do a Sparse-tree search}
+      @r{The following keys work if you turn off @code{org-goto-auto-isearch}}
+      n / p        @r{Next/previous visible headline.}
+      f / b        @r{Next/previous headline same level.}
+      u            @r{One level up.}
+      0-9          @r{Digit argument.}
+      q            @r{Quit}
+    #+end_src
+    @@info:@vindex@@ org-goto-interface
+    @@info:@noindent@@ See also the variable @@info:@code{org-goto-interface}@@.
+
 
 ** Structure editing
    :PROPERTIES:
    :DESCRIPTION: Changing sequence and level of headlines
    :TEXINFO_MENU_TITLE: Structure editing
    :END:
+@@info:@cindex@@ structure editing
+@@info:@cindex@@ headline, promotion and demotion
+@@info:@cindex@@ promotion, of subtrees
+@@info:@cindex@@ demotion, of subtrees
+@@info:@cindex@@ subtree, cut and paste
+@@info:@cindex@@ pasting, of subtrees
+@@info:@cindex@@ cutting, of subtrees
+@@info:@cindex@@ copying, of subtrees
+@@info:@cindex@@ sorting, of subtrees
+@@info:@cindex@@ subtrees, cut and paste
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+  - @@info:@orgcmd{M-@key{RET},org-insert-heading}@@ ::
+     @@info:@vindex@@ org-M-RET-may-split-line 
+       Insert new heading with
+       same level as current. If the cursor is in a plain list item, a
+       new item is created (@@info:@pxref{Plain lists}@@). To force
+       creation of a new headline, use a prefix argument. When this
+       command is used in the middle of a line, the line is split and
+       the rest of the line becomes the new headline.[fn:11] If the
+       command is used at the beginning of a headline, the new
+       headline is created before the current line. If at the
+       beginning of any other line, the content of that line is made
+       the new heading. If the command is used at the end of a folded
+       subtree (i.e.@: behind the ellipses at the end of a headline),
+       then a headline like the current one will be inserted after the
+       end of the subtree.
+  - @@info:@orgcmd{C-@key{RET},org-insert-heading-respect-content}@@ ::
+     Just like @@info:@kbd{M-@key{RET}}@@, except when adding a new heading
+       below the current heading, the new heading is placed after the
+       body instead of before it. This command works from anywhere in
+       the entry.
+  - @@info:@orgcmd{M-S-@key{RET},org-insert-todo-heading}@@ ::
+     @@info:@vindex@@ org-treat-insert-todo-heading-as-state-change
+     Insert new TODO entry with same level as current heading.  See
+       also the variable @@info:@code{org-treat-insert-todo-heading-as-state-change}@@.
+  - @@info:@orgcmd{C-S-@key{RET},org-insert-todo-heading-respect-content}@@ ::
+      Insert new TODO entry with same level as current heading. Like
+       @@info:@kbd{C-@key{RET}}@@, the new headline will be inserted
+       after the current subtree.
+  - @@info:@orgcmd{@key{TAB},org-cycle}@@ :: In a new entry with no
+       text yet, the first @@info:@key{TAB}@@ demotes the entry to
+       become a child of the previous one. The next @@info:@key{TAB}@@
+       makes it a parent, and so on, all the way to top level. Yet
+       another @@info:@key{TAB}@@, and you are back to the initial
+       level.
+  - @@info:@orgcmd{M-@key{left},org-do-promote}@@ :: Promote current
+       heading by one level.
+  - @@info:@orgcmd{M-@key{right},org-do-demote}@@ :: Demote current
+       heading by one level.
+  - @@info:@orgcmd{M-S-@key{left},org-promote-subtree}@@ :: Promote
+       the current subtree by one level.
+  - @@info:@orgcmd{M-S-@key{right},org-demote-subtree}@@ ::
+       Demote the current subtree by one level.
+  - @@info:@orgcmd{M-S-@key{up},org-move-subtree-up}@@ :: Move subtree
+       up (swap with previous subtree of same level).
+  - @@info:@orgcmd{M-S-@key{down},org-move-subtree-down}@@ :: Move
+       subtree down (swap with next subtree of same level).
+  - @@info:@orgcmd{C-c C-x C-w,org-cut-subtree}@@ :: Kill subtree,
+       i.e.: remove it from buffer but save in kill ring. With a
+       numeric prefix argument N, kill N sequential subtrees.
+  - @@info:@orgcmd{C-c C-x M-w,org-copy-subtree}@@ :: Copy subtree to
+       kill ring.  With a numeric prefix argument N, copy the N sequential subtrees.
+  - @@info:@orgcmd{C-c C-x C-y,org-paste-subtree}@@ :: Yank subtree
+       from kill ring. This does modify the level of the subtree to
+       make sure the tree fits in nicely at the yank position. The
+       yank level can also be specified with a numeric prefix
+       argument, or by yanking after a headline marker like
+       @@info:@samp{****}@@.
+  - @@info:@orgcmd{C-y,org-yank}@@ ::
+     @@info:@vindex@@ org-yank-adjusted-subtrees
+     @@info:@vindex@@ org-yank-folded-subtrees
+     Depending on the variables
+     @@info:@code{org-yank-adjusted-subtrees}@@ and
+     @@info:@code{org-yank-folded-subtrees}@@, Org's internal
+     @@info:@code{yank}@@ command will paste subtrees folded and in
+     a clever way, using the same command as @@info:@kbd{C-c C-x C-y}@@.  
+     With the default settings, no level adjustment will
+     take place, but the yanked tree will be folded unless doing so
+     would swallow text previously visible.  Any prefix argument to
+     this command will force a normal @@info:@code{yank}@@ to be
+     executed, with the prefix passed along.  A good way to force a
+     normal yank is @@info:@kbd{C-u C-y}@@.  If you use
+     @@info:@code{yank-pop}@@ after a yank, it will yank previous
+     kill items plainly, without adjustment and folding.
+  - @@info:@orgcmd{C-c C-x c,org-clone-subtree-with-time-shift}@@ ::
+       Clone a subtree by making a number of sibling copies of it. You
+       will be prompted for the number of copies to make, and you can
+       also specify if any timestamps in the entry should be shifted.
+       This can be useful, for example, to create a number of tasks
+       related to a series of lectures to prepare. For more details,
+       see the docstring of the command
+       @@info:@code{org-clone-subtree-with-time-shift}@@.
+  - @@info:@orgcmd{C-c C-w,org-refile}@@ :: Refile entry or region to
+       a different location. @@info:@xref{Refile and copy}@@.
+  - @@info:@orgcmd{C-c ^,org-sort}@@ :: Sort same-level entries.  When
+       there is an active region, all entries in the region will be
+       sorted.  Otherwise the children of the current headline are
+       sorted.  The command prompts for the sorting method, which can
+       be alphabetically, numerically, by time (first timestamp with
+       active preferred, creation time, scheduled time, deadline
+       time), by priority, by TODO keyword (in the sequence the
+       keywords have been defined in the setup) or by the value of a
+       property.  Reverse sorting is possible as well.  You can also
+       supply your own function to extract the sorting key.  With a
+       @@info:@kbd{C-u}@@ prefix, sorting will be case-sensitive.
+  - @@info:@orgcmd{C-x n s,org-narrow-to-subtree}@@ :: Narrow buffer to current subtree.
+  - @@info:@orgcmd{C-x n b,org-narrow-to-block}@@ :: Narrow buffer to current block.
+  - @@info:@orgcmd{C-x n w,widen}@@ :: Widen buffer to remove narrowing.
+  - @@info:@orgcmd{C-c *,org-toggle-heading}@@ :: Turn a normal line
+       or plain list item into a headline (so that it becomes a
+       subheading at its location). Also turn a headline into a normal
+       line by removing the stars. If there is an active region, turn
+       all lines in the region into headlines. If the first line in
+       the region was an item, turn only the item lines into
+       headlines. Finally, if the first line is a headline, remove the
+       stars from all headlines in the region.
+
+
+@@info:@cindex@@ region, active
+@@info:@cindex@@ active region
+@@info:@cindex@@ transient mark mode
+When there is an active region (Transient Mark mode), promotion and
+demotion work on all headlines in the region.  To select a region of
+headlines, it is best to place both point and mark at the beginning of a
+line, mark at the beginning of the first headline, and point at the line
+just after the last headline to change.  Note that when the cursor is
+inside a table (@@info:@pxref{Tables}@@), the Meta-Cursor keys have different
+functionality.
 
 ** Sparse trees
    :PROPERTIES:
    :DESCRIPTION: Matches embedded in context
    :TEXINFO_MENU_TITLE: Sparse trees
    :END:
+@@info:@cindex@@ sparse trees
+@@info:@cindex@@ trees, sparse
+@@info:@cindex@@ folding, sparse trees
+@@info:@cindex@@ occur, command
 
-** Plain lists
+@@info:@vindex@@ org-show-hierarchy-above
+@@info:@vindex@@ org-show-following-heading
+@@info:@vindex@@ org-show-siblings
+@@info:@vindex@@ org-show-entry-below
+An important feature of Org mode is the ability to construct /sparse
+trees/ for selected information in an outline tree, so that the entire
+document is folded as much as possible, but the selected information is made
+visible along with the headline structure above it.[fn:14]  Just try it out
+and you will see immediately how it works.
+
+Org mode contains several commands creating such trees, all these
+commands can be accessed through a dispatcher:
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+  - @@info:@orgcmd{C-c /,org-sparse-tree}@@ ::
+     This prompts for an extra key to select a sparse-tree creating command.
+  - @@info:@orgcmd{C-c / r,org-occur}@@ ::
+     @@info:@vindex@@ org-remove-highlights-with-change 
+     
+     Prompts for a regexp and shows a sparse tree with all matches. If
+     the match is in a headline, the headline is made visible. If
+     the match is in the body of an entry, headline and body are
+     made visible. In order to provide minimal context, also the
+     full hierarchy of headlines above the match is shown, as well
+     as the headline following the match. Each match is also
+     highlighted; the highlights disappear when the buffer is
+     changed by an editing command,[fn:13] or by pressing
+     @@info:@kbd{C-c C-c}@@. When called with a @@info:@kbd{C-u}@@
+     prefix argument, previous highlights are kept, so several calls
+     to this command can be stacked.
+
+  - @@info:@orgcmdkkc{M-g n,M-g M-n,next-error}@@ :: Jump to the next sparse tree match in this buffer.
+  - @@info:@orgcmdkkc{M-g p,M-g M-p,previous-error}@@ Jump to the previous sparse tree match in this buffer.
+
+@@info:@vindex@@ org-agenda-custom-commands 
+@@info:@noindent@@
+For frequently used sparse trees of specific search strings, you can
+use the variable @@info:@code{org-agenda-custom-commands}@@ to define fast
+keyboard access to specific sparse trees. These commands will then be
+accessible through the agenda dispatcher (@@info:@pxref{Agenda dispatcher}@@). For example:
+
+#+begin_src lisp
+(setq org-agenda-custom-commands
+      '(("f" occur-tree "FIXME")))
+#+end_src
+
+@@info:@noindent@@ will define the key @@info:@kbd{C-c a f}@@ as a
+shortcut for creating a sparse tree matching the string
+@@info:@samp{FIXME}@@.
+
+The other sparse tree commands select headings based on TODO keywords,
+tags, or properties and will be discussed later in this manual.
+
+@@info:@kindex@@ C-c C-e v 
+@@info:@cindex@@ printing sparse trees
+@@info:@cindex@@ visible text, printing 
+
+To print a sparse tree, you can use the Emacs command
+@@info:@code{ps-print-buffer-with-faces}@@ which does not print
+invisible parts of the document.[fn:12] Or you can use the command
+@@info:@kbd{C-c C-e v}@@ to export only the visible part of the
+document and print the resulting file.
+
+** Plain lists                                                     :noexport:
    :PROPERTIES:
    :DESCRIPTION: Additional structure within an entry
    :TEXINFO_MENU_TITLE: Plain lists
    :END:
+@cindex plain lists
+@cindex lists, plain
+@cindex lists, ordered
+@cindex ordered lists
 
-** Drawers
+Within an entry of the outline tree, hand-formatted lists can provide
+additional structure.  They also provide a way to create lists of checkboxes
+(@pxref{Checkboxes}).  Org supports editing such lists, and every exporter
+(@pxref{Exporting}) can parse and format them.
+
+Org knows ordered lists, unordered lists, and description lists.
+@itemize @bullet
+@item
+@emph{Unordered} list items start with @samp{-}, @samp{+}, or
+@samp{*}@footnote{When using @samp{*} as a bullet, lines must be indented or
+they will be seen as top-level headlines.  Also, when you are hiding leading
+stars to get a clean outline view, plain list items starting with a star may
+be hard to distinguish from true headlines.  In short: even though @samp{*}
+is supported, it may be better to not use it for plain list items.}  as
+bullets.
+@item
+@vindex org-plain-list-ordered-item-terminator
+@vindex org-alphabetical-lists
+@emph{Ordered} list items start with a numeral followed by either a period or
+a right parenthesis@footnote{You can filter out any of them by configuring
+@code{org-plain-list-ordered-item-terminator}.}, such as @samp{1.} or
+@samp{1)}@footnote{You can also get @samp{a.}, @samp{A.}, @samp{a)} and
+@samp{A)} by configuring @code{org-alphabetical-lists}.  To minimize
+confusion with normal text, those are limited to one character only.  Beyond
+that limit, bullets will automatically fallback to numbers.}.  If you want a
+list to start with a different value (e.g.@: 20), start the text of the item
+with @code{[@@20]}@footnote{If there's a checkbox in the item, the cookie
+must be put @emph{before} the checkbox.  If you have activated alphabetical
+lists, you can also use counters like @code{[@@b]}.}.  Those constructs can
+be used in any item of the list in order to enforce a particular numbering.
+@item
+@emph{Description} list items are unordered list items, and contain the
+separator @samp{ :: } to distinguish the description @emph{term} from the
+description.
+@end itemize
+
+Items belonging to the same list must have the same indentation on the first
+line.  In particular, if an ordered list reaches number @samp{10.}, then the
+2--digit numbers must be written left-aligned with the other numbers in the
+list.  An item ends before the next line that is less or equally indented
+than its bullet/number.
+
+@vindex org-empty-line-terminates-plain-lists
+A list ends whenever every item has ended, which means before any line less
+or equally indented than items at top level.  It also ends before two blank
+lines@footnote{See also @code{org-empty-line-terminates-plain-lists}.}.  In
+that case, all items are closed.  Here is an example:
+
+@example
+@group
+** Lord of the Rings                                               :noexport:
+   My favorite scenes are (in this order)
+   1. The attack of the Rohirrim
+   2. Eowyn's fight with the witch king
+      + this was already my favorite scene in the book
+      + I really like Miranda Otto.
+   3. Peter Jackson being shot by Legolas
+      - on DVD only
+      He makes a really funny face when it happens.
+   But in the end, no individual scenes matter but the film as a whole.
+   Important actors in this film are:
+   - @b{Elijah Wood} :: He plays Frodo
+   - @b{Sean Austin} :: He plays Sam, Frodo's friend.  I still remember
+     him very well from his role as Mikey Walsh in @i{The Goonies}.
+@end group
+@end example
+
+Org supports these lists by tuning filling and wrapping commands to deal with
+them correctly@footnote{Org only changes the filling settings for Emacs.  For
+XEmacs, you should use Kyle E. Jones' @file{filladapt.el}.  To turn this on,
+put into @file{.emacs}: @code{(require 'filladapt)}}, and by exporting them
+properly (@pxref{Exporting}).  Since indentation is what governs the
+structure of these lists, many structural constructs like @code{#+BEGIN_...}
+blocks can be indented to signal that they belong to a particular item.
+
+@vindex org-list-demote-modify-bullet
+@vindex org-list-indent-offset
+If you find that using a different bullet for a sub-list (than that used for
+the current list-level) improves readability, customize the variable
+@code{org-list-demote-modify-bullet}.  To get a greater difference of
+indentation between items and theirs sub-items, customize
+@code{org-list-indent-offset}.
+
+@vindex org-list-automatic-rules
+The following commands act on items when the cursor is in the first line of
+an item (the line with the bullet or number).  Some of them imply the
+application of automatic rules to keep list structure intact.  If some of
+these actions get in your way, configure @code{org-list-automatic-rules}
+to disable them individually.
+
+@table @asis
+@orgcmd{@key{TAB},org-cycle}
+@cindex cycling, in plain lists
+@vindex org-cycle-include-plain-lists
+Items can be folded just like headline levels.  Normally this works only if
+the cursor is on a plain list item.  For more details, see the variable
+@code{org-cycle-include-plain-lists}.  If this variable is set to
+@code{integrate}, plain list items will be treated like low-level
+headlines.  The level of an item is then given by the indentation of the
+bullet/number.  Items are always subordinate to real headlines, however; the
+hierarchies remain completely separated.  In a new item with no text yet, the
+first @key{TAB} demotes the item to become a child of the previous
+one.  Subsequent @key{TAB}s move the item to meaningful levels in the list
+and eventually get it back to its initial position.
+@orgcmd{M-@key{RET},org-insert-heading}
+@vindex org-M-RET-may-split-line
+@vindex org-list-automatic-rules
+Insert new item at current level.  With a prefix argument, force a new
+heading (@pxref{Structure editing}).  If this command is used in the middle
+of an item, that item is @emph{split} in two, and the second part becomes the
+new item@footnote{If you do not want the item to be split, customize the
+variable @code{org-M-RET-may-split-line}.}.  If this command is executed
+@emph{before item's body}, the new item is created @emph{before} the current
+one.
+@end table
+
+@table @kbd
+@kindex M-S-@key{RET}
+@item M-S-RET
+Insert a new item with a checkbox (@pxref{Checkboxes}).
+@kindex S-@key{down}
+@item S-up
+@itemx S-down
+@cindex shift-selection-mode
+@vindex org-support-shift-select
+@vindex org-list-use-circular-motion
+Jump to the previous/next item in the current list@footnote{If you want to
+cycle around items that way, you may customize
+@code{org-list-use-circular-motion}.}, but only if
+@code{org-support-shift-select} is off.  If not, you can still use paragraph
+jumping commands like @kbd{C-@key{up}} and @kbd{C-@key{down}} to quite
+similar effect.
+@kindex M-@key{up}
+@kindex M-@key{down}
+@item M-up
+@itemx M-down
+Move the item including subitems up/down@footnote{See
+@code{org-liste-use-circular-motion} for a cyclic behavior.} (swap with
+previous/next item of same indentation).  If the list is ordered, renumbering
+is automatic.
+@kindex M-@key{left}
+@kindex M-@key{right}
+@item M-left
+@itemx M-right
+Decrease/increase the indentation of an item, leaving children alone.
+@kindex M-S-@key{left}
+@kindex M-S-@key{right}
+@item M-S-left
+@itemx M-S-right
+Decrease/increase the indentation of the item, including subitems.
+Initially, the item tree is selected based on current indentation.  When
+these commands are executed several times in direct succession, the initially
+selected region is used, even if the new indentation would imply a different
+hierarchy.  To use the new hierarchy, break the command chain with a cursor
+motion or so.
+
+As a special case, using this command on the very first item of a list will
+move the whole list.  This behavior can be disabled by configuring
+@code{org-list-automatic-rules}.  The global indentation of a list has no
+influence on the text @emph{after} the list.
+@kindex C-c C-c
+@item C-c C-c
+If there is a checkbox (@pxref{Checkboxes}) in the item line, toggle the
+state of the checkbox.  In any case, verify bullets and indentation
+consistency in the whole list.
+@kindex C-c -
+@vindex org-plain-list-ordered-item-terminator
+@item C-c -
+Cycle the entire list level through the different itemize/enumerate bullets
+(@samp{-}, @samp{+}, @samp{*}, @samp{1.}, @samp{1)}) or a subset of them,
+depending on @code{org-plain-list-ordered-item-terminator}, the type of list,
+and its indentation.  With a numeric prefix argument N, select the Nth bullet
+from this list.  If there is an active region when calling this, selected
+text will be changed into an item.  With a prefix argument, all lines will be
+converted to list items.  If the first line already was a list item, any item
+marker will be removed from the list.  Finally, even without an active
+region, a normal line will be converted into a list item.
+@kindex C-c *
+@item C-c *
+Turn a plain list item into a headline (so that it becomes a subheading at
+its location).  @xref{Structure editing}, for a detailed explanation.
+@kindex C-c C-*
+@item C-c C-*
+Turn the whole plain list into a subtree of the current heading.  Checkboxes
+(@pxref{Checkboxes}) will become TODO (resp. DONE) keywords when unchecked
+(resp. checked).
+@kindex S-@key{left}
+@kindex S-@key{right}
+@item S-left/right
+@vindex org-support-shift-select
+This command also cycles bullet styles when the cursor in on the bullet or
+anywhere in an item line, details depending on
+@code{org-support-shift-select}.
+@kindex C-c ^
+@item C-c ^
+Sort the plain list.  You will be prompted for the sorting method:
+numerically, alphabetically, by time, or by custom function.
+@end table
+
+** Drawers                                                         :noexport:
    :PROPERTIES:
    :DESCRIPTION: Tucking stuff away
    :END:
+@cindex drawers
+@cindex #+DRAWERS
+@cindex visibility cycling, drawers
 
-** Blocks
+@vindex org-drawers
+@cindex org-insert-drawer
+@kindex C-c C-x d
+Sometimes you want to keep information associated with an entry, but you
+normally don't want to see it.  For this, Org mode has @emph{drawers}.
+Drawers need to be configured with the variable
+@code{org-drawers}@footnote{You can define additional drawers on a
+per-file basis with a line like @code{#+DRAWERS: HIDDEN STATE}}.  Drawers
+look like this:
+
+@example
+** This is a headline                                              :noexport:
+   Still outside the drawer
+   :DRAWERNAME:
+   This is inside the drawer.
+   :END:
+   After the drawer.
+@end example
+
+You can interactively insert drawers at point by calling
+@code{org-insert-drawer}, which is bound to @key{C-c C-x d}.  With an active
+region, this command will put the region inside the drawer.  With a prefix
+argument, this command calls @code{org-insert-property-drawer} and add a
+property drawer right below the current headline.  Completion over drawer
+keywords is also possible using @key{M-TAB}.
+
+Visibility cycling (@pxref{Visibility cycling}) on the headline will hide and
+show the entry, but keep the drawer collapsed to a single line.  In order to
+look inside the drawer, you need to move the cursor to the drawer line and
+press @key{TAB} there.  Org mode uses the @code{PROPERTIES} drawer for
+storing properties (@pxref{Properties and Columns}), and you can also arrange
+for state change notes (@pxref{Tracking TODO state changes}) and clock times
+(@pxref{Clocking work time}) to be stored in a drawer @code{LOGBOOK}.  If you
+want to store a quick note in the LOGBOOK drawer, in a similar way to state changes, use
+
+@table @kbd
+@kindex C-c C-z
+@item C-c C-z
+Add a time-stamped note to the LOGBOOK drawer.
+@end table
+
+** Blocks                                                          :noexport:
    :PROPERTIES:
    :DESCRIPTION: Folding blocks
    :END:
+@vindex org-hide-block-startup
+@cindex blocks, folding
+Org mode uses begin...end blocks for various purposes from including source
+code examples (@pxref{Literal examples}) to capturing time logging
+information (@pxref{Clocking work time}).  These blocks can be folded and
+unfolded by pressing TAB in the begin line.  You can also get all blocks
+folded at startup by configuring the variable @code{org-hide-block-startup}
+or on a per-file basis by using
 
-** Footnotes
+@cindex @code{hideblocks}, STARTUP keyword
+@cindex @code{nohideblocks}, STARTUP keyword
+@example
+#+STARTUP: hideblocks
+#+STARTUP: nohideblocks
+@end example
+
+** Footnotes                                                       :noexport:
    :PROPERTIES:
    :DESCRIPTION: Define footnotes in Org syntax
    :END:
+@cindex footnotes
 
-** Orgstruct mode
+Org mode supports the creation of footnotes.  In contrast to the
+@file{footnote.el} package, Org mode's footnotes are designed for work on a
+larger document, not only for one-off documents like emails.  The basic
+syntax is similar to the one used by @file{footnote.el}, i.e.@: a footnote is
+defined in a paragraph that is started by a footnote marker in square
+brackets in column 0, no indentation allowed.  If you need a paragraph break
+inside a footnote, use the @LaTeX{} idiom @samp{\par}.  The footnote reference
+is simply the marker in square brackets, inside text.  For example:
+
+@example
+The Org homepage[fn:1] now looks a lot better than it used to.
+...
+[fn:1] The link is: http://orgmode.org
+@end example
+
+Org mode extends the number-based syntax to @emph{named} footnotes and
+optional inline definition.  Using plain numbers as markers (as
+@file{footnote.el} does) is supported for backward compatibility, but not
+encouraged because of possible conflicts with @LaTeX{} snippets (@pxref{Embedded
+@LaTeX{}}).  Here are the valid references:
+
+@table @code
+@item [1]
+A plain numeric footnote marker.  Compatible with @file{footnote.el}, but not
+recommended because something like @samp{[1]} could easily be part of a code
+snippet.
+@item [fn:name]
+A named footnote reference, where @code{name} is a unique label word, or, for
+simplicity of automatic creation, a number.
+@item [fn:: This is the inline definition of this footnote]
+A @LaTeX{}-like anonymous footnote where the definition is given directly at the
+reference point.
+@item [fn:name: a definition]
+An inline definition of a footnote, which also specifies a name for the note.
+Since Org allows multiple references to the same note, you can then use
+@code{[fn:name]} to create additional references.
+@end table
+
+@vindex org-footnote-auto-label
+Footnote labels can be created automatically, or you can create names yourself.
+This is handled by the variable @code{org-footnote-auto-label} and its
+corresponding @code{#+STARTUP} keywords.  See the docstring of that variable
+for details.
+
+@noindent The following command handles footnotes:
+
+@table @kbd
+@kindex C-c C-x f
+@item C-c C-x f
+The footnote action command.
+
+When the cursor is on a footnote reference, jump to the definition.  When it
+is at a definition, jump to the (first) reference.
+
+@vindex org-footnote-define-inline
+@vindex org-footnote-section
+@vindex org-footnote-auto-adjust
+Otherwise, create a new footnote.  Depending on the variable
+@code{org-footnote-define-inline}@footnote{The corresponding in-buffer
+setting is: @code{#+STARTUP: fninline} or @code{#+STARTUP: nofninline}}, the
+definition will be placed right into the text as part of the reference, or
+separately into the location determined by the variable
+@code{org-footnote-section}.
+
+When this command is called with a prefix argument, a menu of additional
+options is offered:
+@example
+s   @r{Sort the footnote definitions by reference sequence.  During editing,}
+    @r{Org makes no effort to sort footnote definitions into a particular}
+    @r{sequence.  If you want them sorted, use this command, which will}
+    @r{also move entries according to @code{org-footnote-section}.  Automatic}
+    @r{sorting after each insertion/deletion can be configured using the}
+    @r{variable @code{org-footnote-auto-adjust}.}
+r   @r{Renumber the simple @code{fn:N} footnotes.  Automatic renumbering}
+    @r{after each insertion/deletion can be configured using the variable}
+    @r{@code{org-footnote-auto-adjust}.}
+S   @r{Short for first @code{r}, then @code{s} action.}
+n   @r{Normalize the footnotes by collecting all definitions (including}
+    @r{inline definitions) into a special section, and then numbering them}
+    @r{in sequence.  The references will then also be numbers.  This is}
+    @r{meant to be the final step before finishing a document (e.g.@: sending}
+    @r{off an email).  The exporters do this automatically, and so could}
+    @r{something like @code{message-send-hook}.}
+d   @r{Delete the footnote at point, and all definitions of and references}
+    @r{to it.}
+@end example
+Depending on the variable @code{org-footnote-auto-adjust}@footnote{the
+corresponding in-buffer options are @code{fnadjust} and @code{nofnadjust}.},
+renumbering and sorting footnotes can be automatic after each insertion or
+deletion.
+
+@kindex C-c C-c
+@item C-c C-c
+If the cursor is on a footnote reference, jump to the definition.  If it is a
+the definition, jump back to the reference.  When called at a footnote
+location with a prefix argument, offer the same menu as @kbd{C-c C-x f}.
+@kindex C-c C-o
+@kindex mouse-1
+@kindex mouse-2
+@item C-c C-o  @r{or} mouse-1/2
+Footnote labels are also links to the corresponding definition/reference, and
+you can use the usual commands to follow these links.
+@end table
+
+** Orgstruct mode                                                  :noexport:
    :PROPERTIES:
    :DESCRIPTION: Structure editing outside Org
    :TEXINFO_MENU_TITLE: Orgstruct mode
    :END:
-* Tables
+@cindex Orgstruct mode
+@cindex minor mode for structure editing
+
+If you like the intuitive way the Org mode structure editing and list
+formatting works, you might want to use these commands in other modes like
+Text mode or Mail mode as well.  The minor mode @code{orgstruct-mode} makes
+this possible.   Toggle the mode with @kbd{M-x orgstruct-mode}, or
+turn it on by default, for example in Message mode, with one of:
+
+@lisp
+(add-hook 'message-mode-hook 'turn-on-orgstruct)
+(add-hook 'message-mode-hook 'turn-on-orgstruct++)
+@end lisp
+
+When this mode is active and the cursor is on a line that looks to Org like a
+headline or the first line of a list item, most structure editing commands
+will work, even if the same keys normally have different functionality in the
+major mode you are using.  If the cursor is not in one of those special
+lines, Orgstruct mode lurks silently in the shadows.  When you use
+@code{orgstruct++-mode}, Org will also export indentation and autofill
+settings into that mode, and detect item context after the first line of an
+item.
+
+* Tables                                                           :noexport:
   :PROPERTIES:
   :DESCRIPTION: Pure magic for quick formatting
   :END:
+@cindex tables
+@cindex editing tables
+
+Org comes with a fast and intuitive table editor.  Spreadsheet-like
+calculations are supported using the Emacs @file{calc} package
+(@pxref{Top, Calc, , calc, Gnu Emacs Calculator Manual}).
+
 ** Built-in table editor
    :PROPERTIES:
    :DESCRIPTION: Simple tables
    :END:
+@cindex table editor, built-in
+
+Org makes it easy to format tables in plain ASCII.  Any line with @samp{|} as
+the first non-whitespace character is considered part of a table.  @samp{|}
+is also the column separator@footnote{To insert a vertical bar into a table
+field, use @code{\vert} or, inside a word @code{abc\vert@{@}def}.}.  A table
+might look like this:
+
+@example
+| Name  | Phone | Age |
+|-------+-------+-----|
+| Peter |  1234 |  17 |
+| Anna  |  4321 |  25 |
+@end example
+
+A table is re-aligned automatically each time you press @key{TAB} or
+@key{RET} or @kbd{C-c C-c} inside the table.  @key{TAB} also moves to
+the next field (@key{RET} to the next row) and creates new table rows
+at the end of the table or before horizontal lines.  The indentation
+of the table is set by the first line.  Any line starting with
+@samp{|-} is considered as a horizontal separator line and will be
+expanded on the next re-align to span the whole table width.  So, to
+create the above table, you would only type
+
+@example
+|Name|Phone|Age|
+|-
+@end example
+
+@noindent and then press @key{TAB} to align the table and start filling in
+fields.  Even faster would be to type @code{|Name|Phone|Age} followed by
+@kbd{C-c @key{RET}}.
+
+@vindex org-enable-table-editor
+@vindex org-table-auto-blank-field
+When typing text into a field, Org treats @key{DEL},
+@key{Backspace}, and all character keys in a special way, so that
+inserting and deleting avoids shifting other fields.  Also, when
+typing @emph{immediately after the cursor was moved into a new field
+with @kbd{@key{TAB}}, @kbd{S-@key{TAB}} or @kbd{@key{RET}}}, the
+field is automatically made blank.  If this behavior is too
+unpredictable for you, configure the variables
+@code{org-enable-table-editor} and @code{org-table-auto-blank-field}.
+
+@table @kbd
+@tsubheading{Creation and conversion}
+@orgcmd{C-c |,org-table-create-or-convert-from-region}
+Convert the active region to table.  If every line contains at least one
+TAB character, the function assumes that the material is tab separated.
+If every line contains a comma, comma-separated values (CSV) are assumed.
+If not, lines are split at whitespace into fields.  You can use a prefix
+argument to force a specific separator: @kbd{C-u} forces CSV, @kbd{C-u
+C-u} forces TAB, and a numeric argument N indicates that at least N
+consecutive spaces, or alternatively a TAB will be the separator.
+@*
+If there is no active region, this command creates an empty Org
+table.  But it is easier just to start typing, like
+@kbd{|Name|Phone|Age @key{RET} |- @key{TAB}}.
+
+@tsubheading{Re-aligning and field motion}
+@orgcmd{C-c C-c,org-table-align}
+Re-align the table without moving the cursor.
+@c
+@orgcmd{<TAB>,org-table-next-field}
+Re-align the table, move to the next field.  Creates a new row if
+necessary.
+@c
+@orgcmd{S-@key{TAB},org-table-previous-field}
+Re-align, move to previous field.
+@c
+@orgcmd{@key{RET},org-table-next-row}
+Re-align the table and move down to next row.  Creates a new row if
+necessary.  At the beginning or end of a line, @key{RET} still does
+NEWLINE, so it can be used to split a table.
+@c
+@orgcmd{M-a,org-table-beginning-of-field}
+Move to beginning of the current table field, or on to the previous field.
+@orgcmd{M-e,org-table-end-of-field}
+Move to end of the current table field, or on to the next field.
+
+@tsubheading{Column and row editing}
+@orgcmdkkcc{M-@key{left},M-@key{right},org-table-move-column-left,org-table-move-column-right}
+Move the current column left/right.
+@c
+@orgcmd{M-S-@key{left},org-table-delete-column}
+Kill the current column.
+@c
+@orgcmd{M-S-@key{right},org-table-insert-column}
+Insert a new column to the left of the cursor position.
+@c
+@orgcmdkkcc{M-@key{up},M-@key{down},org-table-move-row-up,org-table-move-row-down}
+Move the current row up/down.
+@c
+@orgcmd{M-S-@key{up},org-table-kill-row}
+Kill the current row or horizontal line.
+@c
+@orgcmd{M-S-@key{down},org-table-insert-row}
+Insert a new row above the current row.  With a prefix argument, the line is
+created below the current one.
+@c
+@orgcmd{C-c -,org-table-insert-hline}
+Insert a horizontal line below current row.  With a prefix argument, the line
+is created above the current line.
+@c
+@orgcmd{C-c @key{RET},org-table-hline-and-move}
+Insert a horizontal line below current row, and move the cursor into the row
+below that line.
+@c
+@orgcmd{C-c ^,org-table-sort-lines}
+Sort the table lines in the region.  The position of point indicates the
+column to be used for sorting, and the range of lines is the range
+between the nearest horizontal separator lines, or the entire table.  If
+point is before the first column, you will be prompted for the sorting
+column.  If there is an active region, the mark specifies the first line
+and the sorting column, while point should be in the last line to be
+included into the sorting.  The command prompts for the sorting type
+(alphabetically, numerically, or by time).  When called with a prefix
+argument, alphabetic sorting will be case-sensitive.
+
+@tsubheading{Regions}
+@orgcmd{C-c C-x M-w,org-table-copy-region}
+Copy a rectangular region from a table to a special clipboard.  Point and
+mark determine edge fields of the rectangle.  If there is no active region,
+copy just the current field.  The process ignores horizontal separator lines.
+@c
+@orgcmd{C-c C-x C-w,org-table-cut-region}
+Copy a rectangular region from a table to a special clipboard, and
+blank all fields in the rectangle.  So this is the ``cut'' operation.
+@c
+@orgcmd{C-c C-x C-y,org-table-paste-rectangle}
+Paste a rectangular region into a table.
+The upper left corner ends up in the current field.  All involved fields
+will be overwritten.  If the rectangle does not fit into the present table,
+the table is enlarged as needed.  The process ignores horizontal separator
+lines.
+@c
+@orgcmd{M-@key{RET},org-table-wrap-region}
+Split the current field at the cursor position and move the rest to the line
+below.  If there is an active region, and both point and mark are in the same
+column, the text in the column is wrapped to minimum width for the given
+number of lines.  A numeric prefix argument may be used to change the number
+of desired lines.  If there is no region, but you specify a prefix argument,
+the current field is made blank, and the content is appended to the field
+above.
+
+@tsubheading{Calculations}
+@cindex formula, in tables
+@cindex calculations, in tables
+@cindex region, active
+@cindex active region
+@cindex transient mark mode
+@orgcmd{C-c +,org-table-sum}
+Sum the numbers in the current column, or in the rectangle defined by
+the active region.  The result is shown in the echo area and can
+be inserted with @kbd{C-y}.
+@c
+@orgcmd{S-@key{RET},org-table-copy-down}
+@vindex org-table-copy-increment
+When current field is empty, copy from first non-empty field above.  When not
+empty, copy current field down to next row and move cursor along with it.
+Depending on the variable @code{org-table-copy-increment}, integer field
+values will be incremented during copy.  Integers that are too large will not
+be incremented.  Also, a @code{0} prefix argument temporarily disables the
+increment.  This key is also used by shift-selection and related modes
+(@pxref{Conflicts}).
+
+@tsubheading{Miscellaneous}
+@orgcmd{C-c `,org-table-edit-field}
+Edit the current field in a separate window.  This is useful for fields that
+are not fully visible (@pxref{Column width and alignment}).  When called with
+a @kbd{C-u} prefix, just make the full field visible, so that it can be
+edited in place.  When called with two @kbd{C-u} prefixes, make the editor
+window follow the cursor through the table and always show the current
+field.  The follow mode exits automatically when the cursor leaves the table,
+or when you repeat this command with @kbd{C-u C-u C-c `}.
+@c
+@item M-x org-table-import
+Import a file as a table.  The table should be TAB or whitespace
+separated.  Use, for example, to import a spreadsheet table or data
+from a database, because these programs generally can write
+TAB-separated text files.  This command works by inserting the file into
+the buffer and then converting the region to a table.  Any prefix
+argument is passed on to the converter, which uses it to determine the
+separator.
+@orgcmd{C-c |,org-table-create-or-convert-from-region}
+Tables can also be imported by pasting tabular text into the Org
+buffer, selecting the pasted text with @kbd{C-x C-x} and then using the
+@kbd{C-c |} command (see above under @i{Creation and conversion}).
+@c
+@item M-x org-table-export
+@findex org-table-export
+@vindex org-table-export-default-format
+Export the table, by default as a TAB-separated file.  Use for data
+exchange with, for example, spreadsheet or database programs.  The format
+used to export the file can be configured in the variable
+@code{org-table-export-default-format}.  You may also use properties
+@code{TABLE_EXPORT_FILE} and @code{TABLE_EXPORT_FORMAT} to specify the file
+name and the format for table export in a subtree.  Org supports quite
+general formats for exported tables.  The exporter format is the same as the
+format used by Orgtbl radio tables, see @ref{Translator functions}, for a
+detailed description.
+@end table
+
+If you don't like the automatic table editor because it gets in your
+way on lines which you would like to start with @samp{|}, you can turn
+it off with
+
+@lisp
+(setq org-enable-table-editor nil)
+@end lisp
+
+@noindent Then the only table command that still works is
+@kbd{C-c C-c} to do a manual re-align.
+
 ** Column width and alignment
    :PROPERTIES:
    :DESCRIPTION: Overrule the automatic settings
    :END:
+@cindex narrow columns in tables
+@cindex alignment in tables
+
+The width of columns is automatically determined by the table editor.  And
+also the alignment of a column is determined automatically from the fraction
+of number-like versus non-number fields in the column.
+
+Sometimes a single field or a few fields need to carry more text, leading to
+inconveniently wide columns.  Or maybe you want to make a table with several
+columns having a fixed width, regardless of content.  To set@footnote{This
+feature does not work on XEmacs.} the width of a column, one field anywhere
+in the column may contain just the string @samp{<N>} where @samp{N} is an
+integer specifying the width of the column in characters.  The next re-align
+will then set the width of this column to this value.
+
+@example
+@group
+|---+------------------------------|               |---+--------|
+|   |                              |               |   | <6>    |
+| 1 | one                          |               | 1 | one    |
+| 2 | two                          |     ----\     | 2 | two    |
+| 3 | This is a long chunk of text |     ----/     | 3 | This=> |
+| 4 | four                         |               | 4 | four   |
+|---+------------------------------|               |---+--------|
+@end group
+@end example
+
+@noindent
+Fields that are wider become clipped and end in the string @samp{=>}.
+Note that the full text is still in the buffer but is hidden.
+To see the full text, hold the mouse over the field---a tool-tip window
+will show the full content.  To edit such a field, use the command
+@kbd{C-c `} (that is @kbd{C-c} followed by the backquote).  This will
+open a new window with the full field.  Edit it and finish with @kbd{C-c
+C-c}.
+
+@vindex org-startup-align-all-tables
+When visiting a file containing a table with narrowed columns, the
+necessary character hiding has not yet happened, and the table needs to
+be aligned before it looks nice.  Setting the option
+@code{org-startup-align-all-tables} will realign all tables in a file
+upon visiting, but also slow down startup.  You can also set this option
+on a per-file basis with:
+
+@example
+#+STARTUP: align
+#+STARTUP: noalign
+@end example
+
+If you would like to overrule the automatic alignment of number-rich columns
+to the right and of string-rich column to the left, you can use @samp{<r>},
+@samp{<c>}@footnote{Centering does not work inside Emacs, but it does have an
+effect when exporting to HTML.} or @samp{<l>} in a similar fashion.  You may
+also combine alignment and field width like this: @samp{<l10>}.
+
+Lines which only contain these formatting cookies will be removed
+automatically when exporting the document.
+
+
 ** Column groups
    :PROPERTIES:
    :DESCRIPTION: Grouping to trigger vertical lines
    :END:
-** Orgtbl mode
+@cindex grouping columns in tables
+
+When Org exports tables, it does so by default without vertical
+lines because that is visually more satisfying in general.  Occasionally
+however, vertical lines can be useful to structure a table into groups
+of columns, much like horizontal lines can do for groups of rows.  In
+order to specify column groups, you can use a special row where the
+first field contains only @samp{/}.  The further fields can either
+contain @samp{<} to indicate that this column should start a group,
+@samp{>} to indicate the end of a column, or @samp{<>} (no space between @samp{<}
+and @samp{>}) to make a column
+a group of its own.  Boundaries between column groups will upon export be
+marked with vertical lines.  Here is an example:
+
+@example
+| N | N^2 | N^3 | N^4 | sqrt(n) | sqrt[4](N) |
+|---+-----+-----+-----+---------+------------|
+| / |   < |     |   > |       < |          > |
+| 1 |   1 |   1 |   1 |       1 |          1 |
+| 2 |   4 |   8 |  16 |  1.4142 |     1.1892 |
+| 3 |   9 |  27 |  81 |  1.7321 |     1.3161 |
+|---+-----+-----+-----+---------+------------|
+#+TBLFM: $2=$1^2::$3=$1^3::$4=$1^4::$5=sqrt($1)::$6=sqrt(sqrt(($1)))
+@end example
+
+It is also sufficient to just insert the column group starters after
+every vertical line you would like to have:
+
+@example
+|  N | N^2 | N^3 | N^4 | sqrt(n) | sqrt[4](N) |
+|----+-----+-----+-----+---------+------------|
+| /  | <   |     |     | <       |            |
+@end example
+
+
+** The Orgtbl mode minor mode
    :PROPERTIES:
    :DESCRIPTION: The table editor as minor mode
+   :TEXINFO_MENU_TITLE: Ogtbl mode
    :END:
+
+@cindex Orgtbl mode
+@cindex minor mode for tables
+
+If you like the intuitive way the Org table editor works, you
+might also want to use it in other modes like Text mode or Mail mode.
+The minor mode Orgtbl mode makes this possible.  You can always toggle
+the mode with @kbd{M-x orgtbl-mode}.  To turn it on by default, for
+example in Message mode, use
+
+@lisp
+(add-hook 'message-mode-hook 'turn-on-orgtbl)
+@end lisp
+
+Furthermore, with some special setup, it is possible to maintain tables
+in arbitrary syntax with Orgtbl mode.  For example, it is possible to
+construct @LaTeX{} tables with the underlying ease and power of
+Orgtbl mode, including spreadsheet capabilities.  For details, see
+@ref{Tables in arbitrary syntax}.
+
 ** The spreadsheet
    :PROPERTIES:
    :DESCRIPTION: The table editor has spreadsheet capabilities
    :END:
+@cindex calculations, in tables
+@cindex spreadsheet capabilities
+@cindex @file{calc} package
+
+The table editor makes use of the Emacs @file{calc} package to implement
+spreadsheet-like capabilities.  It can also evaluate Emacs Lisp forms to
+derive fields from other fields.  While fully featured, Org's implementation
+is not identical to other spreadsheets.  For example, Org knows the concept
+of a @emph{column formula} that will be applied to all non-header fields in a
+column without having to copy the formula to each relevant field.  There is
+also a formula debugger, and a formula editor with features for highlighting
+fields in the table corresponding to the references at the point in the
+formula, moving these references by arrow keys
+
+*** References
+    :PROPERTIES:
+    :DESCRIPTION: How to refer to another field or range
+    :END:
+@cindex references
+
+To compute fields in the table from other fields, formulas must
+reference other fields or ranges.  In Org, fields can be referenced
+by name, by absolute coordinates, and by relative coordinates.  To find
+out what the coordinates of a field are, press @kbd{C-c ?} in that
+field, or press @kbd{C-c @}} to toggle the display of a grid.
+
+@subsubheading Field references
+@cindex field references
+@cindex references, to fields
+
+Formulas can reference the value of another field in two ways.  Like in
+any other spreadsheet, you may reference fields with a letter/number
+combination like @code{B3}, meaning the 2nd field in the 3rd row.
+@vindex org-table-use-standard-references
+However, Org prefers@footnote{Org will understand references typed by the
+user as @samp{B4}, but it will not use this syntax when offering a formula
+for editing.  You can customize this behavior using the variable
+@code{org-table-use-standard-references}.}  to use another, more general
+representation that looks like this:
+@example
+@@@var{row}$@var{column}
+@end example
+
+Column specifications can be absolute like @code{$1},
+@code{$2},...@code{$@var{N}}, or relative to the current column (i.e.@: the
+column of the field which is being computed) like @code{$+1} or @code{$-2}.
+@code{$<} and @code{$>} are immutable references to the first and last
+column, respectively, and you can use @code{$>>>} to indicate the third
+column from the right.
+
+The row specification only counts data lines and ignores horizontal separator
+lines (hlines).  Like with columns, you can use absolute row numbers
+@code{@@1}, @code{@@2},...@code{@@@var{N}}, and row numbers relative to the
+current row like @code{@@+3} or @code{@@-1}.  @code{@@<} and @code{@@>} are
+immutable references the first and last@footnote{For backward compatibility
+you can also use special names like @code{$LR5} and @code{$LR12} to refer in
+a stable way to the 5th and 12th field in the last row of the table.
+However, this syntax is deprecated, it should not be used for new documents.
+Use @code{@@>$} instead.} row in the table, respectively.  You may also
+specify the row relative to one of the hlines: @code{@@I} refers to the first
+hline, @code{@@II} to the second, etc@.  @code{@@-I} refers to the first such
+line above the current line, @code{@@+I} to the first such line below the
+current line.  You can also write @code{@@III+2} which is the second data line
+after the third hline in the table.
+
+@code{@@0} and @code{$0} refer to the current row and column, respectively,
+i.e. to the row/column for the field being computed.  Also, if you omit
+either the column or the row part of the reference, the current row/column is
+implied.
+
+Org's references with @emph{unsigned} numbers are fixed references
+in the sense that if you use the same reference in the formula for two
+different fields, the same field will be referenced each time.
+Org's references with @emph{signed} numbers are floating
+references because the same reference operator can reference different
+fields depending on the field being calculated by the formula.
+
+Here are a few examples:
+
+@example
+@@2$3      @r{2nd row, 3rd column (same as @code{C2})}
+$5        @r{column 5 in the current row (same as @code{E&})}
+@@2        @r{current column, row 2}
+@@-1$-3    @r{the field one row up, three columns to the left}
+@@-I$2     @r{field just under hline above current row, column 2}
+@@>$5      @r{field in the last row, in column 5}
+@end example
+
+@subsubheading Range references
+@cindex range references
+@cindex references, to ranges
+
+You may reference a rectangular range of fields by specifying two field
+references connected by two dots @samp{..}.  If both fields are in the
+current row, you may simply use @samp{$2..$7}, but if at least one field
+is in a different row, you need to use the general @code{@@row$column}
+format at least for the first field (i.e the reference must start with
+@samp{@@} in order to be interpreted correctly).  Examples:
+
+@example
+$1..$3        @r{first three fields in the current row}
+$P..$Q        @r{range, using column names (see under Advanced)}
+$<<<..$>>     @r{start in third column, continue to the one but last}
+@@2$1..@@4$3    @r{6 fields between these two fields (same as @code{A2..C4})}
+@@-1$-2..@@-1   @r{3 numbers from the column to the left, 2 up to current row}
+@@I..II        @r{between first and second hline, short for @code{@@I..@@II}}
+@end example
+
+@noindent Range references return a vector of values that can be fed
+into Calc vector functions.  Empty fields in ranges are normally
+suppressed, so that the vector contains only the non-empty fields (but
+see the @samp{E} mode switch below).  If there are no non-empty fields,
+@samp{[0]} is returned to avoid syntax errors in formulas.
+
+@subsubheading Field coordinates in formulas
+@cindex field coordinates
+@cindex coordinates, of field
+@cindex row, of field coordinates
+@cindex column, of field coordinates
+
+For Calc formulas and Lisp formulas @code{@@#} and @code{$#} can be used to
+get the row or column number of the field where the formula result goes.
+The traditional Lisp formula equivalents are @code{org-table-current-dline}
+and @code{org-table-current-column}.  Examples:
+
+@example
+if(@@# % 2, $#, string(""))   @r{column number on odd lines only}
+$3 = remote(FOO, @@@@#$2)      @r{copy column 2 from table FOO into}
+                             @r{column 3 of the current table}
+@end example
+
+@noindent For the second example, table FOO must have at least as many rows
+as the current table.  Note that this is inefficient@footnote{The computation time scales as
+O(N^2) because table FOO is parsed for each field to be copied.} for large
+number of rows.
+
+@subsubheading Named references
+@cindex named references
+@cindex references, named
+@cindex name, of column or field
+@cindex constants, in calculations
+@cindex #+CONSTANTS
+
+@vindex org-table-formula-constants
+@samp{$name} is interpreted as the name of a column, parameter or
+constant.  Constants are defined globally through the variable
+@code{org-table-formula-constants}, and locally (for the file) through a
+line like
+
+@example
+#+CONSTANTS: c=299792458. pi=3.14 eps=2.4e-6
+@end example
+
+@noindent
+@vindex constants-unit-system
+@pindex constants.el
+Also properties (@pxref{Properties and Columns}) can be used as
+constants in table formulas: for a property @samp{:Xyz:} use the name
+@samp{$PROP_Xyz}, and the property will be searched in the current
+outline entry and in the hierarchy above it.  If you have the
+@file{constants.el} package, it will also be used to resolve constants,
+including natural constants like @samp{$h} for Planck's constant, and
+units like @samp{$km} for kilometers@footnote{@file{constants.el} can
+supply the values of constants in two different unit systems, @code{SI}
+and @code{cgs}.  Which one is used depends on the value of the variable
+@code{constants-unit-system}.  You can use the @code{#+STARTUP} options
+@code{constSI} and @code{constcgs} to set this value for the current
+buffer.}.  Column names and parameters can be specified in special table
+lines.  These are described below, see @ref{Advanced features}.  All
+names must start with a letter, and further consist of letters and
+numbers.
+
+@subsubheading Remote references
+@cindex remote references
+@cindex references, remote
+@cindex references, to a different table
+@cindex name, of column or field
+@cindex constants, in calculations
+@cindex #+TBLNAME
+
+You may also reference constants, fields and ranges from a different table,
+either in the current file or even in a different file.  The syntax is
+
+@example
+remote(NAME-OR-ID,REF)
+@end example
+
+@noindent
+where NAME can be the name of a table in the current file as set by a
+@code{#+TBLNAME: NAME} line before the table.  It can also be the ID of an
+entry, even in a different file, and the reference then refers to the first
+table in that entry.  REF is an absolute field or range reference as
+described above for example @code{@@3$3} or @code{$somename}, valid in the
+referenced table.
+
+*** Formula syntax for Calc
+    :PROPERTIES:
+    :DESCRIPTION: Using Calc to compute stuff
+    :END:
+@cindex formula syntax, Calc
+@cindex syntax, of formulas
+
+A formula can be any algebraic expression understood by the Emacs
+@file{Calc} package.  @b{Note that @file{calc} has the
+non-standard convention that @samp{/} has lower precedence than
+@samp{*}, so that @samp{a/b*c} is interpreted as @samp{a/(b*c)}.}  Before
+evaluation by @code{calc-eval} (@pxref{Calling Calc from
+Your Programs, calc-eval, Calling Calc from Your Lisp Programs, calc, GNU
+Emacs Calc Manual}),
+variable substitution takes place according to the rules described above.
+@cindex vectors, in table calculations
+The range vectors can be directly fed into the Calc vector functions
+like @samp{vmean} and @samp{vsum}.
+
+@cindex format specifier
+@cindex mode, for @file{calc}
+@vindex org-calc-default-modes
+A formula can contain an optional mode string after a semicolon.  This
+string consists of flags to influence Calc and other modes during
+execution.  By default, Org uses the standard Calc modes (precision
+12, angular units degrees, fraction and symbolic modes off).  The display
+format, however, has been changed to @code{(float 8)} to keep tables
+compact.  The default settings can be configured using the variable
+@code{org-calc-default-modes}.
+
+@example
+p20           @r{set the internal Calc calculation precision to 20 digits}
+n3 s3 e2 f4   @r{Normal, scientific, engineering, or fixed}
+              @r{format of the result of Calc passed back to Org.}
+              @r{Calc formatting is unlimited in precision as}
+              @r{long as the Calc calculation precision is greater.}
+D R           @r{angle modes: degrees, radians}
+F S           @r{fraction and symbolic modes}
+N             @r{interpret all fields as numbers, use 0 for non-numbers}
+E             @r{keep empty fields in ranges}
+L             @r{literal}
+@end example
+
+@noindent
+Unless you use large integer numbers or high-precision-calculation
+and -display for floating point numbers you may alternatively provide a
+@code{printf} format specifier to reformat the Calc result after it has been
+passed back to Org instead of letting Calc already do the
+formatting@footnote{The @code{printf} reformatting is limited in precision
+because the value passed to it is converted into an @code{integer} or
+@code{double}.  The @code{integer} is limited in size by truncating the
+signed value to 32 bits.  The @code{double} is limited in precision to 64
+bits overall which leaves approximately 16 significant decimal digits.}.
+A few examples:
+
+@example
+$1+$2                @r{Sum of first and second field}
+$1+$2;%.2f           @r{Same, format result to two decimals}
+exp($2)+exp($1)      @r{Math functions can be used}
+$0;%.1f              @r{Reformat current cell to 1 decimal}
+($3-32)*5/9          @r{Degrees F -> C conversion}
+$c/$1/$cm            @r{Hz -> cm conversion, using @file{constants.el}}
+tan($1);Dp3s1        @r{Compute in degrees, precision 3, display SCI 1}
+sin($1);Dp3%.1e      @r{Same, but use printf specifier for display}
+vmean($2..$7)        @r{Compute column range mean, using vector function}
+vmean($2..$7);EN     @r{Same, but treat empty fields as 0}
+taylor($3,x=7,2)     @r{Taylor series of $3, at x=7, second degree}
+@end example
+
+Calc also contains a complete set of logical operations.  For example
+
+@example
+if($1<20,teen,string(""))  @r{"teen" if age $1 less than 20, else empty}
+@end example
+
+Note that you can also use two org-specific flags @code{T} and @code{t} for
+durations computations @ref{Durations and time values}.
+
+You can add your own Calc functions defined in Emacs Lisp with @code{defmath}
+and use them in formula syntax for Calc.
+
+*** Emacs Lisp forms as formulas
+    :PROPERTIES:
+    :DESCRIPTION: Writing formulas in Emacs Lisp
+    :TEXINFO_MENU_TITLE: Formula syntax for Lisp
+    :END:
+@cindex Lisp forms, as table formulas
+
+It is also possible to write a formula in Emacs Lisp.  This can be useful
+for string manipulation and control structures, if Calc's functionality is
+not enough.
+
+If a formula starts with a single-quote followed by an opening parenthesis,
+then it is evaluated as a Lisp form.  The evaluation should return either a
+string or a number.  Just as with @file{calc} formulas, you can specify modes
+and a printf format after a semicolon.
+
+With Emacs Lisp forms, you need to be conscious about the way field
+references are interpolated into the form.  By default, a reference will be
+interpolated as a Lisp string (in double-quotes) containing the field.  If
+you provide the @samp{N} mode switch, all referenced elements will be numbers
+(non-number fields will be zero) and interpolated as Lisp numbers, without
+quotes.  If you provide the @samp{L} flag, all fields will be interpolated
+literally, without quotes.  I.e., if you want a reference to be interpreted
+as a string by the Lisp form, enclose the reference operator itself in
+double-quotes, like @code{"$3"}.  Ranges are inserted as space-separated
+fields, so you can embed them in list or vector syntax.
+
+Here are a few examples---note how the @samp{N} mode is used when we do
+computations in Lisp:
+
+@example
+@r{Swap the first two characters of the content of column 1}
+  '(concat (substring $1 1 2) (substring $1 0 1) (substring $1 2))
+@r{Add columns 1 and 2, equivalent to Calc's @code{$1+$2}}
+  '(+ $1 $2);N
+@r{Compute the sum of columns 1-4, like Calc's @code{vsum($1..$4)}}
+  '(apply '+ '($1..$4));N
+@end example
+
+*** Duration and time values
+    :PROPERTIES:
+    :DESCRIPTION: How to compute duration and time values
+    :END:
+@cindex Duration, computing
+@cindex Time, computing
+@vindex org-table-duration-custom-format
+
+If you want to compute time values use the @code{T} flag, either in Calc
+formulas or Elisp formulas:
+
+@example
+@group
+  |  Task 1 |   Task 2 |    Total |
+  |---------+----------+----------|
+  |    2:12 |     1:47 | 03:59:00 |
+  | 3:02:20 | -2:07:00 |     0.92 |
+  #+TBLFM: @@2$3=$1+$2;T::@@3$3=$1+$2;t
+@end group
+@end example
+
+Input duration values must be of the form @code{[HH:MM[:SS]}, where seconds
+are optional.  With the @code{T} flag, computed durations will be displayed
+as @code{HH:MM:SS} (see the first formula above).  With the @code{t} flag,
+computed durations will be displayed according to the value of the variable
+@code{org-table-duration-custom-format}, which defaults to @code{'hours} and
+will display the result as a fraction of hours (see the second formula in the
+example above).
+
+Negative duration values can be manipulated as well, and integers will be
+considered as seconds in addition and subtraction.
+
+*** Field and range formulas
+    :PROPERTIES:
+    :DESCRIPTION: Formulas for specific (ranges of) fields
+    :END:
+@cindex field formula
+@cindex range formula
+@cindex formula, for individual table field
+@cindex formula, for range of fields
+
+To assign a formula to a particular field, type it directly into the field,
+preceded by @samp{:=}, for example @samp{:=vsum(@@II..III)}.  When you press
+@key{TAB} or @key{RET} or @kbd{C-c C-c} with the cursor still in the field,
+the formula will be stored as the formula for this field, evaluated, and the
+current field will be replaced with the result.
+
+@cindex #+TBLFM
+Formulas are stored in a special line starting with @samp{#+TBLFM:} directly
+below the table.  If you type the equation in the 4th field of the 3rd data
+line in the table, the formula will look like @samp{@@3$4=$1+$2}.  When
+inserting/deleting/swapping column and rows with the appropriate commands,
+@i{absolute references} (but not relative ones) in stored formulas are
+modified in order to still reference the same field.  To avoid this from
+happening, in particular in range references, anchor ranges at the table
+borders (using @code{@@<}, @code{@@>}, @code{$<}, @code{$>}), or at hlines
+using the @code{@@I} notation.  Automatic adaptation of field references does
+of course not happen if you edit the table structure with normal editing
+commands---then you must fix the equations yourself.
+
+Instead of typing an equation into the field, you may also use the following
+command
+
+@table @kbd
+@orgcmd{C-u C-c =,org-table-eval-formula}
+Install a new formula for the current field.  The command prompts for a
+formula with default taken from the @samp{#+TBLFM:} line, applies
+it to the current field, and stores it.
+@end table
+
+The left-hand side of a formula can also be a special expression in order to
+assign the formula to a number of different fields.  There is no keyboard
+shortcut to enter such range formulas.  To add them, use the formula editor
+(@pxref{Editing and debugging formulas}) or edit the @code{#+TBLFM:} line
+directly.
+
+@table @code
+@item $2=
+Column formula, valid for the entire column.  This is so common that Org
+treats these formulas in a special way, see @ref{Column formulas}.
+@item @@3=
+Row formula, applies to all fields in the specified row.  @code{@@>=} means
+the last row.
+@item @@1$2..@@4$3=
+Range formula, applies to all fields in the given rectangular range.  This
+can also be used to assign a formula to some but not all fields in a row.
+@item $name=
+Named field, see @ref{Advanced features}.
+@end table
+
+*** Column formulas
+    :PROPERTIES:
+    :DESCRIPTION: Formulas valid for an entire column
+    :END:
+@cindex column formula
+@cindex formula, for table column
+
+When you assign a formula to a simple column reference like @code{$3=}, the
+same formula will be used in all fields of that column, with the following
+very convenient exceptions: (i) If the table contains horizontal separator
+hlines with rows above and below, everything before the first such hline is
+considered part of the table @emph{header} and will not be modified by column
+formulas.  Therefore a header is mandatory when you use column formulas and
+want to add hlines to group rows, like for example to separate a total row at
+the bottom from the summand rows above.  (ii) Fields that already get a value
+from a field/range formula will be left alone by column formulas.  These
+conditions make column formulas very easy to use.
+
+To assign a formula to a column, type it directly into any field in the
+column, preceded by an equal sign, like @samp{=$1+$2}.  When you press
+@key{TAB} or @key{RET} or @kbd{C-c C-c} with the cursor still in the field,
+the formula will be stored as the formula for the current column, evaluated
+and the current field replaced with the result.  If the field contains only
+@samp{=}, the previously stored formula for this column is used.  For each
+column, Org will only remember the most recently used formula.  In the
+@samp{#+TBLFM:} line, column formulas will look like @samp{$4=$1+$2}.  The
+left-hand side of a column formula can not be the name of column, it must be
+the numeric column reference or @code{$>}.
+
+Instead of typing an equation into the field, you may also use the
+following command:
+
+@table @kbd
+@orgcmd{C-c =,org-table-eval-formula}
+Install a new formula for the current column and replace current field with
+the result of the formula.  The command prompts for a formula, with default
+taken from the @samp{#+TBLFM} line, applies it to the current field and
+stores it.  With a numeric prefix argument(e.g.@: @kbd{C-5 C-c =}) the command
+will apply it to that many consecutive fields in the current column.
+@end table
+
+*** Lookup functions
+    :PROPERTIES:
+    :DESCRIPTION: Lookup functions for searching tables
+    :END:
+@cindex lookup functions in tables
+@cindex table lookup functions
+
+Org has three predefined Emacs Lisp functions for lookups in tables.
+@table @code
+@item (org-lookup-first VAL S-LIST R-LIST &optional PREDICATE)
+@findex org-lookup-first
+Searches for the first element @code{S} in list @code{S-LIST} for which
+@lisp
+(PREDICATE VAL S)
+@end lisp
+is @code{t}; returns the value from the corresponding position in list
+@code{R-LIST}.  The default @code{PREDICATE} is @code{equal}.  Note that the
+parameters @code{VAL} and @code{S} are passed to @code{PREDICATE} in the same
+order as the correspoding parameters are in the call to
+@code{org-lookup-first}, where @code{VAL} precedes @code{S-LIST}.  If
+@code{R-LIST} is @code{nil}, the matching element @code{S} of @code{S-LIST}
+is returned.
+@item (org-lookup-last VAL S-LIST R-LIST &optional PREDICATE)
+@findex org-lookup-last
+Similar to @code{org-lookup-first} above, but searches for the @i{last}
+element for which @code{PREDICATE} is @code{t}.
+@item (org-lookup-all VAL S-LIST R-LIST &optional PREDICATE)
+@findex org-lookup-all
+Similar to @code{org-lookup-first}, but searches for @i{all} elements for
+which @code{PREDICATE} is @code{t}, and returns @i{all} corresponding
+values.  This function can not be used by itself in a formula, because it
+returns a list of values.  However, powerful lookups can be built when this
+function is combined with other Emacs Lisp functions.
+@end table
+
+If the ranges used in these functions contain empty fields, the @code{E} mode
+for the formula should usually be specified: otherwise empty fields will not be
+included in @code{S-LIST} and/or @code{R-LIST} which can, for example, result
+in an incorrect mapping from an element of @code{S-LIST} to the corresponding
+element of @code{R-LIST}.
+
+These three functions can be used to implement associative arrays, count
+matching cells, rank results, group data etc.  For practical examples
+see @uref{http://orgmode.org/worg/org-tutorials/org-lookups.html, this
+tutorial on Worg}.
+
+*** Editing and debugging formulas
+    :PROPERTIES:
+    :DESCRIPTION: Fixing formulas
+    :END:
+@cindex formula editing
+@cindex editing, of table formulas
+
+@vindex org-table-use-standard-references
+You can edit individual formulas in the minibuffer or directly in the
+field.  Org can also prepare a special buffer with all active
+formulas of a table.  When offering a formula for editing, Org
+converts references to the standard format (like @code{B3} or @code{D&})
+if possible.  If you prefer to only work with the internal format (like
+@code{@@3$2} or @code{$4}), configure the variable
+@code{org-table-use-standard-references}.
+
+@table @kbd
+@orgcmdkkc{C-c =,C-u C-c =,org-table-eval-formula}
+Edit the formula associated with the current column/field in the
+minibuffer.  See @ref{Column formulas}, and @ref{Field and range formulas}.
+@orgcmd{C-u C-u C-c =,org-table-eval-formula}
+Re-insert the active formula (either a
+field formula, or a column formula) into the current field, so that you
+can edit it directly in the field.  The advantage over editing in the
+minibuffer is that you can use the command @kbd{C-c ?}.
+@orgcmd{C-c ?,org-table-field-info}
+While editing a formula in a table field, highlight the field(s)
+referenced by the reference at the cursor position in the formula.
+@kindex C-c @}
+@findex org-table-toggle-coordinate-overlays
+@item C-c @}
+Toggle the display of row and column numbers for a table, using overlays
+(@command{org-table-toggle-coordinate-overlays}).  These are updated each
+time the table is aligned; you can force it with @kbd{C-c C-c}.
+@kindex C-c @{
+@findex org-table-toggle-formula-debugger
+@item C-c @{
+Toggle the formula debugger on and off
+(@command{org-table-toggle-formula-debugger}).  See below.
+@orgcmd{C-c ',org-table-edit-formulas}
+Edit all formulas for the current table in a special buffer, where the
+formulas will be displayed one per line.  If the current field has an
+active formula, the cursor in the formula editor will mark it.
+While inside the special buffer, Org will automatically highlight
+any field or range reference at the cursor position.  You may edit,
+remove and add formulas, and use the following commands:
+@table @kbd
+@orgcmdkkc{C-c C-c,C-x C-s,org-table-fedit-finish}
+Exit the formula editor and store the modified formulas.  With @kbd{C-u}
+prefix, also apply the new formulas to the entire table.
+@orgcmd{C-c C-q,org-table-fedit-abort}
+Exit the formula editor without installing changes.
+@orgcmd{C-c C-r,org-table-fedit-toggle-ref-type}
+Toggle all references in the formula editor between standard (like
+@code{B3}) and internal (like @code{@@3$2}).
+@orgcmd{@key{TAB},org-table-fedit-lisp-indent}
+Pretty-print or indent Lisp formula at point.  When in a line containing
+a Lisp formula, format the formula according to Emacs Lisp rules.
+Another @key{TAB} collapses the formula back again.  In the open
+formula, @key{TAB} re-indents just like in Emacs Lisp mode.
+@orgcmd{M-@key{TAB},lisp-complete-symbol}
+Complete Lisp symbols, just like in Emacs Lisp mode.
+@kindex S-@key{up}
+@kindex S-@key{down}
+@kindex S-@key{left}
+@kindex S-@key{right}
+@findex org-table-fedit-ref-up
+@findex org-table-fedit-ref-down
+@findex org-table-fedit-ref-left
+@findex org-table-fedit-ref-right
+@item S-@key{up}/@key{down}/@key{left}/@key{right}
+Shift the reference at point.  For example, if the reference is
+@code{B3} and you press @kbd{S-@key{right}}, it will become @code{C3}.
+This also works for relative references and for hline references.
+@orgcmdkkcc{M-S-@key{up},M-S-@key{down},org-table-fedit-line-up,org-table-fedit-line-down}
+Move the test line for column formulas in the Org buffer up and
+down.
+@orgcmdkkcc{M-@key{up},M-@key{down},org-table-fedit-scroll-down,org-table-fedit-scroll-up}
+Scroll the window displaying the table.
+@kindex C-c @}
+@findex org-table-toggle-coordinate-overlays
+@item C-c @}
+Turn the coordinate grid in the table on and off.
+@end table
+@end table
+
+Making a table field blank does not remove the formula associated with
+the field, because that is stored in a different line (the @samp{#+TBLFM}
+line)---during the next recalculation the field will be filled again.
+To remove a formula from a field, you have to give an empty reply when
+prompted for the formula, or to edit the @samp{#+TBLFM} line.
+
+@kindex C-c C-c
+You may edit the @samp{#+TBLFM} directly and re-apply the changed
+equations with @kbd{C-c C-c} in that line or with the normal
+recalculation commands in the table.
+
+@subsubheading Debugging formulas
+@cindex formula debugging
+@cindex debugging, of table formulas
+When the evaluation of a formula leads to an error, the field content
+becomes the string @samp{#ERROR}.  If you would like see what is going
+on during variable substitution and calculation in order to find a bug,
+turn on formula debugging in the @code{Tbl} menu and repeat the
+calculation, for example by pressing @kbd{C-u C-u C-c = @key{RET}} in a
+field.  Detailed information will be displayed.
+
+*** Updating the table
+    :PROPERTIES:
+    :DESCRIPTION: Recomputing all dependent fields
+    :END:
+@cindex recomputing table fields
+@cindex updating, table
+
+Recalculation of a table is normally not automatic, but needs to be
+triggered by a command.  See @ref{Advanced features}, for a way to make
+recalculation at least semi-automatic.
+
+In order to recalculate a line of a table or the entire table, use the
+following commands:
+
+@table @kbd
+@orgcmd{C-c *,org-table-recalculate}
+Recalculate the current row by first applying the stored column formulas
+from left to right, and all field/range formulas in the current row.
+@c
+@kindex C-u C-c *
+@item C-u C-c *
+@kindex C-u C-c C-c
+@itemx C-u C-c C-c
+Recompute the entire table, line by line.  Any lines before the first
+hline are left alone, assuming that these are part of the table header.
+@c
+@orgcmdkkc{C-u C-u C-c *,C-u C-u C-c C-c,org-table-iterate}
+Iterate the table by recomputing it until no further changes occur.
+This may be necessary if some computed fields use the value of other
+fields that are computed @i{later} in the calculation sequence.
+@item M-x org-table-recalculate-buffer-tables
+@findex org-table-recalculate-buffer-tables
+Recompute all tables in the current buffer.
+@item M-x org-table-iterate-buffer-tables
+@findex org-table-iterate-buffer-tables
+Iterate all tables in the current buffer, in order to converge table-to-table
+dependencies.
+@end table
+
+*** Advanced features
+    :PROPERTIES:
+    :DESCRIPTION: Field and column names, parameters, and automatic recalc
+    :END:
+If you want the recalculation of fields to happen automatically, or if you
+want to be able to assign @i{names}@footnote{Such names must start by an
+alphabetic character and use only alphanumeric/underscore characters.} to
+fields and columns, you need to reserve the first column of the table for
+special marking characters.
+
+@table @kbd
+@orgcmd{C-#,org-table-rotate-recalc-marks}
+Rotate the calculation mark in first column through the states @samp{ },
+@samp{#}, @samp{*}, @samp{!}, @samp{$}.  When there is an active region,
+change all marks in the region.
+@end table
+
+Here is an example of a table that collects exam results of students and
+makes use of these features:
+
+@example
+@group
+|---+---------+--------+--------+--------+-------+------|
+|   | Student | Prob 1 | Prob 2 | Prob 3 | Total | Note |
+|---+---------+--------+--------+--------+-------+------|
+| ! |         |     P1 |     P2 |     P3 |   Tot |      |
+| # | Maximum |     10 |     15 |     25 |    50 | 10.0 |
+| ^ |         |     m1 |     m2 |     m3 |    mt |      |
+|---+---------+--------+--------+--------+-------+------|
+| # | Peter   |     10 |      8 |     23 |    41 |  8.2 |
+| # | Sam     |      2 |      4 |      3 |     9 |  1.8 |
+|---+---------+--------+--------+--------+-------+------|
+|   | Average |        |        |        |  25.0 |      |
+| ^ |         |        |        |        |    at |      |
+| $ | max=50  |        |        |        |       |      |
+|---+---------+--------+--------+--------+-------+------|
+#+TBLFM: $6=vsum($P1..$P3)::$7=10*$Tot/$max;%.1f::$at=vmean(@@-II..@@-I);%.1f
+@end group
+@end example
+
+@noindent @b{Important}: please note that for these special tables,
+recalculating the table with @kbd{C-u C-c *} will only affect rows that
+are marked @samp{#} or @samp{*}, and fields that have a formula assigned
+to the field itself.  The column formulas are not applied in rows with
+empty first field.
+
+@cindex marking characters, tables
+The marking characters have the following meaning:
+@table @samp
+@item !
+The fields in this line define names for the columns, so that you may
+refer to a column as @samp{$Tot} instead of @samp{$6}.
+@item ^
+This row defines names for the fields @emph{above} the row.  With such
+a definition, any formula in the table may use @samp{$m1} to refer to
+the value @samp{10}.  Also, if you assign a formula to a names field, it
+will be stored as @samp{$name=...}.
+@item _
+Similar to @samp{^}, but defines names for the fields in the row
+@emph{below}.
+@item $
+Fields in this row can define @emph{parameters} for formulas.  For
+example, if a field in a @samp{$} row contains @samp{max=50}, then
+formulas in this table can refer to the value 50 using @samp{$max}.
+Parameters work exactly like constants, only that they can be defined on
+a per-table basis.
+@item #
+Fields in this row are automatically recalculated when pressing
+@key{TAB} or @key{RET} or @kbd{S-@key{TAB}} in this row.  Also, this row
+is selected for a global recalculation with @kbd{C-u C-c *}.  Unmarked
+lines will be left alone by this command.
+@item *
+Selects this line for global recalculation with @kbd{C-u C-c *}, but
+not for automatic recalculation.  Use this when automatic
+recalculation slows down editing too much.
+@item
+Unmarked lines are exempt from recalculation with @kbd{C-u C-c *}.
+All lines that should be recalculated should be marked with @samp{#}
+or @samp{*}.
+@item /
+Do not export this line.  Useful for lines that contain the narrowing
+@samp{<N>} markers or column group markers.
+@end table
+
+Finally, just to whet your appetite for what can be done with the
+fantastic @file{calc.el} package, here is a table that computes the Taylor
+series of degree @code{n} at location @code{x} for a couple of
+functions.
+
+@example
+@group
+|---+-------------+---+-----+--------------------------------------|
+|   | Func        | n | x   | Result                               |
+|---+-------------+---+-----+--------------------------------------|
+| # | exp(x)      | 1 | x   | 1 + x                                |
+| # | exp(x)      | 2 | x   | 1 + x + x^2 / 2                      |
+| # | exp(x)      | 3 | x   | 1 + x + x^2 / 2 + x^3 / 6            |
+| # | x^2+sqrt(x) | 2 | x=0 | x*(0.5 / 0) + x^2 (2 - 0.25 / 0) / 2 |
+| # | x^2+sqrt(x) | 2 | x=1 | 2 + 2.5 x - 2.5 + 0.875 (x - 1)^2    |
+| * | tan(x)      | 3 | x   | 0.0175 x + 1.77e-6 x^3               |
+|---+-------------+---+-----+--------------------------------------|
+#+TBLFM: $5=taylor($2,$4,$3);n3
+@end group
+@end example
+
 ** Org-Plot
    :PROPERTIES:
    :DESCRIPTION: Plotting from Org tables
    :END:
+@cindex graph, in tables
+@cindex plot tables using Gnuplot
+@cindex #+PLOT
+
+Org-Plot can produce 2D and 3D graphs of information stored in org tables
+using @file{Gnuplot} @uref{http://www.gnuplot.info/} and @file{gnuplot-mode}
+@uref{http://cars9.uchicago.edu/~ravel/software/gnuplot-mode.html}.  To see
+this in action, ensure that you have both Gnuplot and Gnuplot mode installed
+on your system, then call @code{org-plot/gnuplot} on the following table.
+
+@example
+@group
+#+PLOT: title:"Citas" ind:1 deps:(3) type:2d with:histograms set:"yrange [0:]"
+| Sede      | Max cites | H-index |
+|-----------+-----------+---------|
+| Chile     |    257.72 |   21.39 |
+| Leeds     |    165.77 |   19.68 |
+| Sao Paolo |     71.00 |   11.50 |
+| Stockholm |    134.19 |   14.33 |
+| Morelia   |    257.56 |   17.67 |
+@end group
+@end example
+
+Notice that Org Plot is smart enough to apply the table's headers as labels.
+Further control over the labels, type, content, and appearance of plots can
+be exercised through the @code{#+PLOT:} lines preceding a table.  See below
+for a complete list of Org-plot options.  For more information and examples
+see the Org-plot tutorial at
+@uref{http://orgmode.org/worg/org-tutorials/org-plot.html}.
+
+@subsubheading Plot Options
+
+@table @code
+@item set
+Specify any @command{gnuplot} option to be set when graphing.
+
+@item title
+Specify the title of the plot.
+
+@item ind
+Specify which column of the table to use as the @code{x} axis.
+
+@item deps
+Specify the columns to graph as a Lisp style list, surrounded by parentheses
+and separated by spaces for example @code{dep:(3 4)} to graph the third and
+fourth columns (defaults to graphing all other columns aside from the @code{ind}
+column).
+
+@item type
+Specify whether the plot will be @code{2d}, @code{3d}, or @code{grid}.
+
+@item with
+Specify a @code{with} option to be inserted for every col being plotted
+(e.g.@: @code{lines}, @code{points}, @code{boxes}, @code{impulses}, etc...).
+Defaults to @code{lines}.
+
+@item file
+If you want to plot to a file, specify @code{"@var{path/to/desired/output-file}"}.
+
+@item labels
+List of labels to be used for the @code{deps} (defaults to the column headers
+if they exist).
+
+@item line
+Specify an entire line to be inserted in the Gnuplot script.
+
+@item map
+When plotting @code{3d} or @code{grid} types, set this to @code{t} to graph a
+flat mapping rather than a @code{3d} slope.
+
+@item timefmt
+Specify format of Org mode timestamps as they will be parsed by Gnuplot.
+Defaults to @samp{%Y-%m-%d-%H:%M:%S}.
+
+@item script
+If you want total control, you can specify a script file (place the file name
+between double-quotes) which will be used to plot.  Before plotting, every
+instance of @code{$datafile} in the specified script will be replaced with
+the path to the generated data file.  Note: even if you set this option, you
+may still want to specify the plot type, as that can impact the content of
+the data file.
+@end table
+
 * Hyperlinks
   :PROPERTIES:
   :DESCRIPTION: Notes in context
@@ -1239,7 +3243,7 @@ Babel dynamically inserts @@info:@code{#+results}@@.
 @@info:@code{org-special-ctrl-k}@@, and
 @@info:@code{org-ctrl-k-protect-subtree}@@ to configure special
 behavior of @@info:@kbd{C-a}@@, @@info:@kbd{C-e}@@, and
-@info:@kbd{C-k}@@ in headlines. Note that clocking only works with
+@@info:@kbd{C-k}@@ in headlines. Note that clocking only works with
 headings indented less than 30 stars.
 
 [fn:9]  See the option
@@ -1255,6 +3259,22 @@ headings indented less than 30 stars.
 will contain the entire buffer, but will be narrowed to the current
 tree.  Editing the indirect buffer will also change the original buffer,
 but without affecting visibility in that buffer.
+
+[fn:11] If you do not want the line to be split, customize the
+variable @@info:@code{org-M-RET-may-split-line}@@.
+
+[fn:12] This does not work under XEmacs, because
+XEmacs uses selective display for outlining, not text properties.
+
+[fn:13] This depends on the option
+@@info:@code{org-remove-highlights-with-change}@@. 
+
+[fn:14] See also the variables
+@@info:@code{org-show-hierarchy-above}@@,
+@@info:@code{org-show-following-heading}@@,
+@@info:@code{org-show-siblings}@@, and
+@@info:@code{org-show-entry-below}@@ for detailed control on how much
+context is shown around each match.
 
 * About orgmanual.org                                              :noexport:
 This document intends to be Org mode source for the Org mode manual
@@ -1524,7 +3544,7 @@ Perhaps shorten to "All the rest"
 (defun tsd-texi2org-at-funs ()
   "Wrap forms like @fun{} in @@info:...@@"
   (interactive)
-  (query-replace-regexp "\\(@[^@]*}\\)" "@@info:\\1@@" nil))
+  (query-replace-regexp "\\(@[^@}]*}\\)" "@@info:\\1@@" nil))
 (define-key org-mode-map (kbd "C-c f") 'tsd-texi2org-at-funs)
 #+end_src
 
