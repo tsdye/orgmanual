@@ -401,8 +401,8 @@ If you have downloaded Org from the Web as a distribution @@info:@file{.zip}@@ o
     installed. If the Emacs binary is not in your path, give the full
     path to the executable. Avoid spaces in any path names.
   - Run {{{code(make config)}}} again to check the configuration.
-  - Run {{{code(make install)}}} or {{{code(sudo make
-    install)}}} to build and install Org mode on your system.
+  - Run {{{code(make install)}}} or {{{code(sudo make install)}}} 
+    to build and install Org mode on your system.
 
 If you use a cloned Git repository, then the procedure is slightly
 different. The following description assumes that you are using the
@@ -529,7 +529,8 @@ MY PROJECTS    -*- mode: org; -*-
 #+end_src
 
 
-@@info:@vindex org-insert-mode-line-in-empty-file@@ {{{noindent}}}
+{{{vindex(org-insert-mode-line-in-empty-file)}}} 
+{{{noindent}}}
 which will select Org mode for this buffer no matter what the file's
 name is. See also the variable
 {{{code(org-insert-mode-line-in-empty-file)}}}.
@@ -547,7 +548,7 @@ need to do this yourself with
 {{{noindent}}} If you do not like
 {{{code(transient-mark-mode)}}}, you can create an active region
 by using the mouse to select a region, or pressing
-@@info:@kbd{C-@key{SPC}}@@ twice before moving the cursor.
+{{{kbd(C-@key{SPC})}}} twice before moving the cursor.
 
 ** Feedback
    :PROPERTIES:
@@ -631,8 +632,7 @@ error occurred.  Here is how to produce a useful backtrace:
   1. Reload uncompiled versions of all Org mode Lisp files.  The
      backtrace contains much more information if it is produced with
      uncompiled code. To do this, use @@info:@key{C-u M-x org-reload
-     RET}@@ or select {{{code(Org -> Refresh/Reload -> Reload Org
-     uncompiled)}}} from the menu.
+     RET}@@ or select {{{code(Org -> Refresh/Reload -> Reload Org uncompiled)}}} from the menu.
 
   2. Go to the {{{code(Options)}}} menu and select
      {{{code(Enter Debugger on Error)}}} (XEmacs has this option
@@ -677,8 +677,8 @@ your Org files.[fn:7]
 {{{kindex(C-c c)}}}
 {{{findex(org-capture)}}}
 
-The manual suggests two global keybindings: @@info:@kbd{C-c a}@@ for
-{{{code(org-agenda)}}} and @@info:@kbd{C-c c}@@ for
+The manual suggests two global keybindings: {{{kbd(C-c a)}}} for
+{{{code(org-agenda)}}} and {{{kbd(C-c c)}}} for
 {{{code(org-capture)}}}. These are only suggestions, but the rest
 of the manual assumes that you are using these keybindings.
 
@@ -688,12 +688,12 @@ different functions, depending on context. The command that is bound
 to such keys has a generic name, like {{{code(org-metaright)}}}.
 In the manual we will, wherever possible, give the function that is
 internally called by the generic command. For example, in the chapter
-on document structure, @@info:@kbd{M-@key{right}}@@ will be listed to call
+on document structure, {{{kbd(M-@key{right})}}} will be listed to call
 {{{code(org-do-demote)}}}, while in the chapter on tables, it will
 be listed to call {{{code(org-table-move-column-right)}}}. If you
 prefer, you can compile the manual without the command names by
-unsetting the flag {{{code(cmdnames)}}} in
-@@info:@file{org.texi}@@.
+unsetting the flag {{{code(cmdnames)}}} in {{{file(org.texi)}}}.
+
 * Document structure
   :PROPERTIES:
   :DESCRIPTION: A tree works like your brain
@@ -719,18 +719,17 @@ structure is achieved by folding (hiding) large parts of the document
 to show only the general document structure and the parts currently
 being worked on. Org greatly simplifies the use of outlines by
 compressing the entire show/hide functionality into a single command,
-@@info:@command{org-cycle}@@, which is bound to the @@info:@key{TAB}@@
-key.
+{{{command(org-cycle)}}}, which is bound to the {{{key(TAB)}}} key.
 
 ** Headlines
    :PROPERTIES:
    :DESCRIPTION: How to typeset Org tree headlines
    :END:
 {{{cindex(headlines)}}}
-@@info:@cindex @@outline tree
-@@info:@vindex @@org-special-ctrl-a/e
-@@info:@vindex @@org-special-ctrl-k
-@@info:@vindex @@org-ctrl-k-protect-subtree
+{{{cindex(outline tree)}}}
+{{{vindex(org-special-ctrl-a/e)}}}
+{{{vindex(org-special-ctrl-k)}}}
+{{{vindex(org-ctrl-k-protect-subtree)}}}
 
 Headlines define the structure of an outline tree.  The headlines in Org
 start with one or more stars, on the left margin.[fn:8]  For example:
@@ -767,8 +766,8 @@ variable {{{code(org-cycle-separator-lines)}}} to modify this behavior.
 {{{cindex(hide text)}}}
 
 Outlines make it possible to hide parts of the text in the buffer.
-Org uses just two commands, bound to @@info:@kbd{@key{TAB}}@@ and
-@@info:@kbd{S-@key{TAB}}@@ to change the visibility in the buffer.
+Org uses just two commands, bound to {{{kbd(@key{TAB})}}} and
+{{{kbd(S-@key{TAB})}}} to change the visibility in the buffer.
 
 {{{cindex(subtree visibility states)}}}
 {{{cindex(subtree cycling)}}}
@@ -777,7 +776,7 @@ Org uses just two commands, bound to @@info:@kbd{@key{TAB}}@@ and
 {{{cindex(subtree, subtree visibility state)}}}
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-  - @@info:@orgcmd{@key{TAB},org-cycle}@@ :: Subtrees can be cycled
+  - {{{orgcmd(@key{TAB},org-cycle)}}} :: Subtrees can be cycled
        through three states: 
        #+begin_src example
        ,-> FOLDED -> CHILDREN -> SUBTREE --.
@@ -794,7 +793,7 @@ Org uses just two commands, bound to @@info:@kbd{@key{TAB}}@@ and
        {{{cindex(overview, global visibility state)}}}
        {{{cindex(contents, global visibility state)}}}
        {{{cindex(show all, global visibility state)}}}
-  - @@info:@orgcmd{S-@key{TAB},org-global-cycle}@@ @@info:@orgcmd{C-u @key{TAB},org-global-cycle}@@ :: 
+  - {{{orgcmd(S-@key{TAB},org-global-cycle)}}} {{{orgcmd(C-u @key{TAB},org-global-cycle)}}} :: 
     All the subtrees in a buffer can be cycled:
 
     #+begin_src example 
@@ -807,39 +806,38 @@ Org uses just two commands, bound to @@info:@kbd{@key{TAB}}@@ and
     level N will be shown. Note that inside tables,
     @@info:@kbd{S-@key{TAB}}@@ jumps to the previous field.
     {{{cindex(show all, command )}}}
-  - @@info:@orgcmd{C-u C-u C-u @key{TAB},show-all}@@ :: Show all,
+  - {{{orgcmd(C-u C-u C-u @key{TAB},show-all)}}} :: Show all,
        including drawers.
        {{{cindex(revealing context)}}}
-  - @@info:@orgcmd{C-c C-r,org-reveal}@@ :: Reveal context around
+  - {{{orgcmd(C-c C-r,org-reveal)}}} :: Reveal context around
        point, showing the current entry, the following heading and the
        hierarchy above.  Useful for working near a location that has
-       been exposed by a sparse tree command ({{{pxref(Sparse
-       trees)}}}) or an agenda command ({{{pxref(Agenda
-       commands)}}}).  With a prefix argument show, on each level, all
+       been exposed by a sparse tree command ({{{pxref(Sparse trees)}}}) 
+       or an agenda command ({{{pxref(Agenda commands)}}}).  With a prefix argument show, on each level, all
        sibling headings.  With a double prefix argument, also show the
        entire subtree of the parent.
     {{{cindex(show branches, command)}}}
-  - @@info:@orgcmd{C-c C-k,show-branches}@@ :: Expose all the headings
+  - {{{orgcmd(C-c C-k,show-branches)}}} :: Expose all the headings
        of the subtree, CONTENT view for just one subtree.
        {{{cindex(show children, command)}}}
-  - @@info:@orgcmd{C-c @key{TAB},show-children}@@ :: Expose all direct
+  - {{{orgcmd(C-c @key{TAB},show-children)}}} :: Expose all direct
        children of the subtree. With a numeric prefix argument,
        {{{code(N)}}}, expose all children down to level N.
-  - @@info:@orgcmd{C-c C-x b,org-tree-to-indirect-buffer}@@ :: Show
+  - {{{orgcmd(C-c C-x b,org-tree-to-indirect-buffer)}}} :: Show
        the current subtree in an indirect buffer.[fn:10] With a
        numeric prefix argument, {{{code(N)}}}, go up to level N
        and then take that tree. If N is negative then go up that many
        levels. With a @@info:@kbd{C-u}@@ prefix, do not remove the
        previously used indirect buffer.
-  - @@info:@orgcmd{C-c C-x v,org-copy-visible}@@ :: 
+  - {{{orgcmd(C-c C-x v,org-copy-visible)}}} :: 
        Copy the @@info:@i{visible}@@ text in the region into the kill ring.
 
 
 {{{vindex(org-startup-folded)}}}
-@@info:@cindex@@ {{{code(overview)}}}, STARTUP keyword
-@@info:@cindex@@ {{{code(content)}}}, STARTUP keyword
-@@info:@cindex@@ {{{code(showall)}}}, STARTUP keyword
-@@info:@cindex@@ {{{code(showeverything)}}}, STARTUP keyword
+{{{cindex(@code{overview}, STARTUP keyword)}}}
+{{{cindex(@code{content}, STARTUP keyword)}}}
+{{{cindex(@code{showall}, STARTUP keyword)}}}
+{{{cindex(@code{showeverything}, STARTUP keyword)}}}
 
 When Emacs first visits an Org file, the global state is set to
 OVERVIEW, i.e., only the top level headlines are visible.  This can be
@@ -854,19 +852,20 @@ buffer:
 #+STARTUP: showeverything
 #+end_src
 
-{{{cindex(property, VISIBILITY)}}}
-{{{noindent}}}
-Furthermore, any entries with a @@info:@samp{VISIBILITY}@@ property ({{{pxref(Properties
-and Columns)}}}) will get their visibility adapted accordingly.  Allowed values
-for this property are {{{code(folded)}}}, {{{code(children)}}}, {{{code(content)}}}, and
+{{{cindex(property, VISIBILITY)}}} 
+
+{{{noindent}}} Furthermore, any entries with a {{{samp(VISIBILITY)}}}
+property ({{{pxref(Properties and Columns)}}}) will get their
+visibility adapted accordingly. Allowed values for this property are
+{{{code(folded)}}}, {{{code(children)}}}, {{{code(content)}}}, and
 {{{code(all)}}}.
 
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-  - @@info:@orgcmd{C-u C-u @key{TAB},org-set-startup-visibility}@@ ::
+  - {{{orgcmd(C-u C-u @key{TAB},org-set-startup-visibility)}}} ::
        Switch back to the startup visibility of the buffer, i.e.:
        whatever is requested by startup options and
-       @@info:@samp{VISIBILITY}@@ properties in individual entries.
+       {{{samp(VISIBILITY)}}} properties in individual entries.
 
 ** Motion
    :PROPERTIES:
@@ -878,12 +877,12 @@ for this property are {{{code(folded)}}}, {{{code(children)}}}, {{{code(content)
 The following commands jump to other headlines in the buffer.
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-  - @@info:@orgcmd{C-c C-n,outline-next-visible-heading}@@ :: Next heading.
-  - @@info:@orgcmd{C-c C-p,outline-previous-visible-heading}@@ :: Previous heading.
-  - @@info:@orgcmd{C-c C-f,org-forward-same-level}@@ :: Next heading same level.
-  - @@info:@orgcmd{C-c C-b,org-backward-same-level}@@ :: Previous heading same level.
-  - @@info:@orgcmd{C-c C-u,outline-up-heading}@@ :: Backward to higher level heading.
-  - @@info:@orgcmd{C-c C-j,org-goto}@@ :: Jump to a different place
+  - {{{orgcmd(C-c C-n,outline-next-visible-heading)}}} :: Next heading.
+  - {{{orgcmd(C-c C-p,outline-previous-visible-heading)}}} :: Previous heading.
+  - {{{orgcmd(C-c C-f,org-forward-same-level)}}} :: Next heading same level.
+  - {{{orgcmd(C-c C-b,org-backward-same-level)}}} :: Previous heading same level.
+  - {{{orgcmd(C-c C-u,outline-up-heading)}}} :: Backward to higher level heading.
+  - {{{orgcmd(C-c C-j,org-goto)}}} :: Jump to a different place
        without changing the current outline visibility.  Shows the
        document structure in a temporary buffer, where you can use the following keys to find your destination:
        {{{vindex(org-goto-auto-isearch)}}}
@@ -920,7 +919,7 @@ The following commands jump to other headlines in the buffer.
 {{{cindex(subtrees, cut and paste)}}}
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-  - @@info:@orgcmd{M-@key{RET},org-insert-heading}@@ ::
+  - {{{orgcmd(M-@key{RET},org-insert-heading)}}} ::
      {{{vindex(org-M-RET-may-split-line )}}}
        Insert new heading with
        same level as current. If the cursor is in a plain list item, a
@@ -935,65 +934,65 @@ The following commands jump to other headlines in the buffer.
        subtree (i.e.@: behind the ellipses at the end of a headline),
        then a headline like the current one will be inserted after the
        end of the subtree.
-  - @@info:@orgcmd{C-@key{RET},org-insert-heading-respect-content}@@ ::
+  - {{{orgcmd(C-@key{RET},org-insert-heading-respect-content)}}} ::
      Just like @@info:@kbd{M-@key{RET}}@@, except when adding a new heading
        below the current heading, the new heading is placed after the
        body instead of before it. This command works from anywhere in
        the entry.
-  - @@info:@orgcmd{M-S-@key{RET},org-insert-todo-heading}@@ ::
+  - {{{orgcmd(M-S-@key{RET},org-insert-todo-heading)}}} ::
      {{{vindex(org-treat-insert-todo-heading-as-state-change)}}}
      Insert new TODO entry with same level as current heading.  See
        also the variable {{{code(org-treat-insert-todo-heading-as-state-change)}}}.
-  - @@info:@orgcmd{C-S-@key{RET},org-insert-todo-heading-respect-content}@@ ::
+  - {{{orgcmd(C-S-@key{RET},org-insert-todo-heading-respect-content)}}} ::
       Insert new TODO entry with same level as current heading. Like
-       @@info:@kbd{C-@key{RET}}@@, the new headline will be inserted
+       {{{kbd(C-@key{RET})}}}, the new headline will be inserted
        after the current subtree.
-  - @@info:@orgcmd{@key{TAB},org-cycle}@@ :: In a new entry with no
-       text yet, the first @@info:@key{TAB}@@ demotes the entry to
-       become a child of the previous one. The next @@info:@key{TAB}@@
+  - {{{orgcmd(@key{TAB},org-cycle)}}} :: In a new entry with no
+       text yet, the first {{{key(TAB)}}} demotes the entry to
+       become a child of the previous one. The next {{{key(TAB)}}}
        makes it a parent, and so on, all the way to top level. Yet
-       another @@info:@key{TAB}@@, and you are back to the initial
+       another {{{key(TAB)}}}, and you are back to the initial
        level.
-  - @@info:@orgcmd{M-@key{left},org-do-promote}@@ :: Promote current
+  - {{{orgcmd(M-@key{left},org-do-promote)}}} :: Promote current
        heading by one level.
-  - @@info:@orgcmd{M-@key{right},org-do-demote}@@ :: Demote current
+  - {{{orgcmd(M-@key{right},org-do-demote)}}} :: Demote current
        heading by one level.
-  - @@info:@orgcmd{M-S-@key{left},org-promote-subtree}@@ :: Promote
+  - {{{orgcmd(M-S-@key{left},org-promote-subtree)}}} :: Promote
        the current subtree by one level.
-  - @@info:@orgcmd{M-S-@key{right},org-demote-subtree}@@ ::
+  - {{{orgcmd(M-S-@key{right},org-demote-subtree)}}} ::
        Demote the current subtree by one level.
-  - @@info:@orgcmd{M-S-@key{up},org-move-subtree-up}@@ :: Move subtree
+  - {{{orgcmd(M-S-@key{up},org-move-subtree-up)}}} :: Move subtree
        up (swap with previous subtree of same level).
-  - @@info:@orgcmd{M-S-@key{down},org-move-subtree-down}@@ :: Move
+  - {{{orgcmd(M-S-@key{down},org-move-subtree-down)}}} :: Move
        subtree down (swap with next subtree of same level).
-  - @@info:@orgcmd{C-c C-x C-w,org-cut-subtree}@@ :: Kill subtree,
+  - {{{orgcmd(C-c C-x C-w,org-cut-subtree)}}} :: Kill subtree,
        i.e.: remove it from buffer but save in kill ring. With a
        numeric prefix argument N, kill N sequential subtrees.
-  - @@info:@orgcmd{C-c C-x M-w,org-copy-subtree}@@ :: Copy subtree to
+  - {{{orgcmd(C-c C-x M-w,org-copy-subtree)}}} :: Copy subtree to
        kill ring.  With a numeric prefix argument N, copy the N sequential subtrees.
-  - @@info:@orgcmd{C-c C-x C-y,org-paste-subtree}@@ :: Yank subtree
+  - {{{orgcmd(C-c C-x C-y,org-paste-subtree)}}} :: Yank subtree
        from kill ring. This does modify the level of the subtree to
        make sure the tree fits in nicely at the yank position. The
        yank level can also be specified with a numeric prefix
        argument, or by yanking after a headline marker like
-       @@info:@samp{****}@@.
-  - @@info:@orgcmd{C-y,org-yank}@@ ::
+       {{{samp(****)}}}.
+  - {{{orgcmd(C-y,org-yank)}}} ::
      {{{vindex(org-yank-adjusted-subtrees)}}}
      {{{vindex(org-yank-folded-subtrees)}}}
      Depending on the variables
      {{{code(org-yank-adjusted-subtrees)}}} and
      {{{code(org-yank-folded-subtrees)}}}, Org's internal
      {{{code(yank)}}} command will paste subtrees folded and in
-     a clever way, using the same command as @@info:@kbd{C-c C-x C-y}@@.  
+     a clever way, using the same command as {{{kbd(C-c C-x C-y)}}}.  
      With the default settings, no level adjustment will
      take place, but the yanked tree will be folded unless doing so
      would swallow text previously visible.  Any prefix argument to
      this command will force a normal {{{code(yank)}}} to be
      executed, with the prefix passed along.  A good way to force a
-     normal yank is @@info:@kbd{C-u C-y}@@.  If you use
+     normal yank is {{{kbd(C-u C-y)}}}.  If you use
      {{{code(yank-pop)}}} after a yank, it will yank previous
      kill items plainly, without adjustment and folding.
-  - @@info:@orgcmd{C-c C-x c,org-clone-subtree-with-time-shift}@@ ::
+  - {{{orgcmd(C-c C-x c,org-clone-subtree-with-time-shift)}}} ::
        Clone a subtree by making a number of sibling copies of it. You
        will be prompted for the number of copies to make, and you can
        also specify if any timestamps in the entry should be shifted.
@@ -1001,9 +1000,9 @@ The following commands jump to other headlines in the buffer.
        related to a series of lectures to prepare. For more details,
        see the docstring of the command
        {{{code(org-clone-subtree-with-time-shift)}}}.
-  - @@info:@orgcmd{C-c C-w,org-refile}@@ :: Refile entry or region to
-       a different location. @@info:@xref{Refile and copy}@@.
-  - @@info:@orgcmd{C-c ^,org-sort}@@ :: Sort same-level entries.  When
+  - {{{orgcmd(C-c C-w,org-refile)}}} :: Refile entry or region to
+       a different location. {{{xref(Refile and copy)}}}.
+  - {{{orgcmd(C-c ^,org-sort)}}} :: Sort same-level entries.  When
        there is an active region, all entries in the region will be
        sorted.  Otherwise the children of the current headline are
        sorted.  The command prompts for the sorting method, which can
@@ -1013,11 +1012,11 @@ The following commands jump to other headlines in the buffer.
        keywords have been defined in the setup) or by the value of a
        property.  Reverse sorting is possible as well.  You can also
        supply your own function to extract the sorting key.  With a
-       @@info:@kbd{C-u}@@ prefix, sorting will be case-sensitive.
-  - @@info:@orgcmd{C-x n s,org-narrow-to-subtree}@@ :: Narrow buffer to current subtree.
-  - @@info:@orgcmd{C-x n b,org-narrow-to-block}@@ :: Narrow buffer to current block.
-  - @@info:@orgcmd{C-x n w,widen}@@ :: Widen buffer to remove narrowing.
-  - @@info:@orgcmd{C-c *,org-toggle-heading}@@ :: Turn a normal line
+       {{{kbd(C-u)}}} prefix, sorting will be case-sensitive.
+  - {{{orgcmd(C-x n s,org-narrow-to-subtree)}}} :: Narrow buffer to current subtree.
+  - {{{orgcmd(C-x n b,org-narrow-to-block)}}} :: Narrow buffer to current block.
+  - {{{orgcmd(C-x n w,widen)}}} :: Widen buffer to remove narrowing.
+  - {{{orgcmd(C-c *,org-toggle-heading)}}} :: Turn a normal line
        or plain list item into a headline (so that it becomes a
        subheading at its location). Also turn a headline into a normal
        line by removing the stars. If there is an active region, turn
@@ -1062,10 +1061,10 @@ Org mode contains several commands creating such trees, all these
 commands can be accessed through a dispatcher:
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-  - @@info:@orgcmd{C-c /,org-sparse-tree}@@ ::
+  - {{{orgcmd(C-c /,org-sparse-tree)}}} ::
      This prompts for an extra key to select a sparse-tree creating command.
-  - @@info:@orgcmd{C-c / r,org-occur}@@ ::
-     {{{vindex(org-remove-highlights-with-change )}}}
+  - {{{orgcmd(C-c / r,org-occur)}}} ::
+     {{{vindex(org-remove-highlights-with-change)}}}
      
      Prompts for a regexp and shows a sparse tree with all matches. If
      the match is in a headline, the headline is made visible. If
@@ -1075,28 +1074,30 @@ commands can be accessed through a dispatcher:
      as the headline following the match. Each match is also
      highlighted; the highlights disappear when the buffer is
      changed by an editing command,[fn:13] or by pressing
-     @@info:@kbd{C-c C-c}@@. When called with a @@info:@kbd{C-u}@@
+     {{{kbd(C-c C-c)}}}. When called with a {{{kbd(C-u)}}}
      prefix argument, previous highlights are kept, so several calls
      to this command can be stacked.
 
-  - @@info:@orgcmdkkc{M-g n,M-g M-n,next-error}@@ :: Jump to the next sparse tree match in this buffer.
-  - @@info:@orgcmdkkc{M-g p,M-g M-p,previous-error}@@ Jump to the previous sparse tree match in this buffer.
+  - {{{orgcmdkkc(M-g n,M-g M-n,next-error)}}} :: Jump to the next sparse tree match in this buffer.
+  - {{{orgcmdkkc(M-g p,M-g M-p,previous-error)}}} Jump to the previous sparse tree match in this buffer.
 
-{{{vindex(org-agenda-custom-commands)}}}
-{{{noindent}}}
-For frequently used sparse trees of specific search strings, you can
-use the variable {{{code(org-agenda-custom-commands)}}} to define fast
-keyboard access to specific sparse trees. These commands will then be
-accessible through the agenda dispatcher ({{{pxref(Agenda dispatcher)}}}). For example:
+{{{vindex(org-agenda-custom-commands)}}} 
+
+{{{noindent}}} For frequently used sparse trees of specific search
+strings, you can use the variable
+{{{code(org-agenda-custom-commands)}}} to define fast keyboard access
+to specific sparse trees. These commands will then be accessible
+through the agenda dispatcher ({{{pxref(Agenda dispatcher)}}}). For
+example:
 
 #+begin_src lisp
 (setq org-agenda-custom-commands
       '(("f" occur-tree "FIXME")))
 #+end_src
 
-{{{noindent}}} will define the key @@info:@kbd{C-c a f}@@ as a
+{{{noindent}}} will define the key {{{kbd(C-c a f)}}} as a
 shortcut for creating a sparse tree matching the string
-@@info:@samp{FIXME}@@.
+{{{samp(FIXME)}}}.
 
 The other sparse tree commands select headings based on TODO keywords,
 tags, or properties and will be discussed later in this manual.
@@ -1108,7 +1109,7 @@ tags, or properties and will be discussed later in this manual.
 To print a sparse tree, you can use the Emacs command
 {{{code(ps-print-buffer-with-faces)}}} which does not print
 invisible parts of the document.[fn:12] Or you can use the command
-@@info:@kbd{C-c C-e v}@@ to export only the visible part of the
+{{{kbd(C-c C-e v)}}} to export only the visible part of the
 document and print the resulting file.
 
 ** Plain lists
@@ -1216,10 +1217,11 @@ to disable them individually.
   - {{{orgcmd(M-@key{RET},org-insert-heading)}}} :: Insert new item at
        current level. With a prefix argument, force a new heading
        ({{{pxref(Structure editing)}}}). If this command is used in
-       the middle of an item, that item is @emph{split} in two, and
+       the middle of an item, that item is /split/ in two, and
        the second part becomes the new item.[fn:20] If this command is
        executed /before item's body/, the new item is created /before/
-       the current one. {{{vindex(org-M-RET-may-split-line)}}}
+       the current one. 
+       {{{vindex(org-M-RET-may-split-line)}}}
        {{{vindex(org-list-automatic-rules)}}}
 
 #+attr_texinfo: :table-type "table" :indic "@kbd"
@@ -1350,8 +1352,7 @@ drawer, in a similar way to state changes, use
  - C-c C-z :: Add a time-stamped note to the LOGBOOK drawer.
    {{{kindex(C-c C-z)}}}
 
-
-** Blocks 
+** Blocks
    :PROPERTIES:
    :DESCRIPTION: Folding blocks
    :END:
@@ -1371,7 +1372,7 @@ or on a per-file basis by using
 ,#+STARTUP: nohideblocks
 #+end_example
 
-** Footnotes                                                       :noexport:
+** Footnotes
    :PROPERTIES:
    :DESCRIPTION: Define footnotes in Org syntax
    :END:
@@ -1384,7 +1385,7 @@ The basic syntax is similar to the one used by
 {{{file(footnote.el)}}}, i.e.: a footnote is defined in a paragraph
 that is started by a footnote marker in square brackets in column 0,
 no indentation allowed. If you need a paragraph break inside a
-footnote, use the @@info:@LaTeX{}@@ idiom {{{samp(\par)}}}. The
+footnote, use the @@info:@LaTeX{}@@ idiom {{{samp(\\par)}}}. The
 footnote reference is simply the marker in square brackets, inside
 text. For example:
 
@@ -1398,22 +1399,22 @@ Org mode extends the number-based syntax to /named/ footnotes and
 optional inline definition. Using plain numbers as markers (as
 {{{file(footnote.el)}}} does) is supported for backward compatibility,
 but not encouraged because of possible conflicts with
-@@info:@LaTeX{}@@ snippets ({{{pxref(Embedded @LaTeX{)}}}}). Here are
+@@info:@LaTeX{}@@ snippets ({{{pxref(Embedded @LaTeX{})}}}). Here are
 the valid references:
 
-@table @code
-  - [1] :: A plain numeric footnote marker. Compatible with
+#+attr_texinfo: :table-type "table" :indic "@asis"
+  - {{{code([1])}}} :: A plain numeric footnote marker. Compatible with
            {{{file(footnote.el)}}}, but not recommended because
            something like {{{samp([1])}}} could easily be part of a
            code snippet.
 
-  - [fn:name] :: A named footnote reference, where {{{code(name)}}} is
+  - {{{code([fn:name])}}} :: A named footnote reference, where {{{code(name)}}} is
                  a unique label word, or, for simplicity of automatic
                  creation, a number.
-  - [fn:: This is the inline definition of this footnote] :: A
+  - {{{code([fn:: This is the inline definition of this footnote])}}} :: A
        @@info:@LaTeX{}@@-like anonymous footnote where the definition
        is given directly at the reference point.
-  - [fn:name: a definition] :: An inline definition of a footnote,
+  - {{{code([fn:name: a definition])}}} :: An inline definition of a footnote,
        which also specifies a name for the note. Since Org allows
        multiple references to the same note, you can then use
        {{{code([fn:name])}}} to create additional references.
@@ -1439,53 +1440,50 @@ details.
     {{{vindex(org-footnote-section)}}}
     {{{vindex(org-footnote-auto-adjust)}}}
     Otherwise, create a new footnote.  Depending on the variable 
-    {{{code(org-footnote-define-inline)}}}@footnote{The corresponding in-buffer
-    setting is: {{{code(#+STARTUP: fninline)}}} or {{{code(#+STARTUP: nofninline)}}}}, the
+    {{{code(org-footnote-define-inline)}}},[fn:26] the
     definition will be placed right into the text as part of the reference, or
     separately into the location determined by the variable
     {{{code(org-footnote-section)}}}.
 
     When this command is called with a prefix argument, a menu of additional
     options is offered:
-@example
-s   @r{Sort the footnote definitions by reference sequence.  During editing,}
-    @r{Org makes no effort to sort footnote definitions into a particular}
-    @r{sequence.  If you want them sorted, use this command, which will}
-    @r{also move entries according to @code{org-footnote-section}.  Automatic}
-    @r{sorting after each insertion/deletion can be configured using the}
-    @r{variable @code{org-footnote-auto-adjust}.}
-r   @r{Renumber the simple @code{fn:N} footnotes.  Automatic renumbering}
-    @r{after each insertion/deletion can be configured using the variable}
-    @r{@code{org-footnote-auto-adjust}.}
-S   @r{Short for first @code{r}, then @code{s} action.}
-n   @r{Normalize the footnotes by collecting all definitions (including}
-    @r{inline definitions) into a special section, and then numbering them}
-    @r{in sequence.  The references will then also be numbers.  This is}
-    @r{meant to be the final step before finishing a document (e.g.@: sending}
-    @r{off an email).  The exporters do this automatically, and so could}
-    @r{something like @code{message-send-hook}.}
-d   @r{Delete the footnote at point, and all definitions of and references}
-    @r{to it.}
-@end example
-Depending on the variable @code{org-footnote-auto-adjust}@footnote{the
-corresponding in-buffer options are @code{fnadjust} and @code{nofnadjust}.},
-renumbering and sorting footnotes can be automatic after each insertion or
-deletion.
 
-{{{kindex(C-c C-c)}}}
-@item C-c C-c
-If the cursor is on a footnote reference, jump to the definition.  If it is a
-the definition, jump back to the reference.  When called at a footnote
-location with a prefix argument, offer the same menu as {{{kbd(C-c C-x f)}}}.
-{{{kindex(C-c C-o)}}}
-{{{kindex(mouse-1)}}}
-{{{kindex(mouse-2)}}}
-@item C-c C-o  @r{or} mouse-1/2
-Footnote labels are also links to the corresponding definition/reference, and
-you can use the usual commands to follow these links.
-@end table
+    - s ::  Sort the footnote definitions by reference sequence.  During editing,
+      Org makes no effort to sort footnote definitions into a particular
+      sequence.  If you want them sorted, use this command, which will
+      also move entries according to {{{code(org-footnote-section)}}}.  Automatic
+      sorting after each insertion/deletion can be configured using the
+      variable {{{code(org-footnote-auto-adjust)}}}.
+    - r ::  Renumber the simple {{{code(fn:N)}}} footnotes.  Automatic renumbering
+      after each insertion/deletion can be configured using the variable
+      {{{code(org-footnote-auto-adjust)}}}.
+    - S ::  Short for first {{{code(r)}}}, then {{{code(s)}}} action.
+    - n ::  Normalize the footnotes by collecting all definitions (including
+      inline definitions) into a special section, and then numbering them
+      in sequence.  The references will then also be numbers.  This is
+      meant to be the final step before finishing a document (e.g.: sending
+      off an email).  The exporters do this automatically, and so could
+      something like {{{code(message-send-hook)}}}.
+    - d ::  Delete the footnote at point, and all definitions of and references
+      to it.
 
-** Orgstruct mode                                                  :noexport:
+    Depending on the variable {{{code(org-footnote-auto-adjust)}}},[fn:25]
+    renumbering and sorting footnotes can be automatic after each insertion or
+    deletion.
+
+    {{{kindex(C-c C-c)}}}
+  - C-c C-c ::
+    If the cursor is on a footnote reference, jump to the definition.  If it is a
+    the definition, jump back to the reference.  When called at a footnote
+    location with a prefix argument, offer the same menu as {{{kbd(C-c C-x f)}}}.
+    {{{kindex(C-c C-o)}}}
+    {{{kindex(mouse-1)}}}
+    {{{kindex(mouse-2)}}}
+  - C-c C-o  @@info:@r{or}@@ mouse-1/2 ::
+    Footnote labels are also links to the corresponding definition/reference, and
+    you can use the usual commands to follow these links.
+
+** Orgstruct mode 
    :PROPERTIES:
    :DESCRIPTION: Structure editing outside Org
    :TEXINFO_MENU_TITLE: Orgstruct mode
@@ -1495,21 +1493,21 @@ you can use the usual commands to follow these links.
 
 If you like the intuitive way the Org mode structure editing and list
 formatting works, you might want to use these commands in other modes like
-Text mode or Mail mode as well.  The minor mode @code{orgstruct-mode} makes
-this possible.   Toggle the mode with @kbd{M-x orgstruct-mode}, or
+Text mode or Mail mode as well.  The minor mode {{{code(orgstruct-mode)}}} makes
+this possible.   Toggle the mode with {{{kbd(M-x orgstruct-mode)}}}, or
 turn it on by default, for example in Message mode, with one of:
 
-@lisp
+#+begin_src lisp
 (add-hook 'message-mode-hook 'turn-on-orgstruct)
 (add-hook 'message-mode-hook 'turn-on-orgstruct++)
-@end lisp
+#+end_src
 
 When this mode is active and the cursor is on a line that looks to Org like a
 headline or the first line of a list item, most structure editing commands
 will work, even if the same keys normally have different functionality in the
 major mode you are using.  If the cursor is not in one of those special
 lines, Orgstruct mode lurks silently in the shadows.  When you use
-@code{orgstruct++-mode}, Org will also export indentation and autofill
+{{{code(orgstruct++-mode)}}}, Org will also export indentation and autofill
 settings into that mode, and detect item context after the first line of an
 item.
 
@@ -3324,6 +3322,12 @@ cycle around items that way, you may customize
 [fn:24] You can define additional drawers on a
 per-file basis with a line like {{{code(#+DRAWERS: HIDDEN STATE)}}}.
 
+[fn:25] The corresponding in-buffer options are {{{code(fnadjust)}}}
+and {{{code(nofnadjust)}}}. 
+
+[fn:26] The corresponding in-buffer setting is: {{{code(#+STARTUP:
+fninline)}}} or {{{code(#+STARTUP: nofninline)}}}.
+
 * About orgmanual.org                                              :noexport:
 This document intends to be Org mode source for the Org mode manual
 and the Org mode guide. It is intended to be a major revision of the
@@ -3620,37 +3624,6 @@ Perhaps shorten to "All the rest"
   (query-replace-regexp "@\\([x]*orgcmd[nki]*\\){\\([^,]*\\),\\(.*\\)}
 " "{{{\\1(\\2,\\3)}}}" nil))
 (define-key org-mode-map (kbd "C-c o") 'tsd-two-arg-orgcmd-macros)
-#+end_src
-
-*** Old helpers, now deprecated
-#+name: pxref-macros
-#+header: :results silent
-#+begin_src emacs-lisp
-(defun tsd-pxref-macros ()
-  "Make macros out of @pxref commands"
-  (interactive)
-  (query-replace-regexp "@pxref{\\([^}]*\\)}" "{{{pxref(\\1)}}}" nil))
-(define-key org-mode-map (kbd "C-c p") 'tsd-pxref-macros)
-#+end_src
-
-#+name: at-funs-params
-#+header: :results silent
-#+begin_src emacs-lisp
-(defun tsd-texi2org-at-funs ()
-  "Wrap forms like @fun{} in @@info:...@@"
-  (interactive)
-  (query-replace-regexp "\\(@[^@}]*}\\)" "@@info:\\1@@" nil))
-(define-key org-mode-map (kbd "C-c f") 'tsd-texi2org-at-funs)
-#+end_src
-
-#+name: at-funs-bol
-#+header: :results silent
-#+begin_src emacs-lisp
-(defun tsd-texi2org-at-bol ()
-  "Wrap forms like @fun at bol in @@info:...@@"
-  (interactive)
-  (query-replace-regexp "\\(^@[a-z,-]*\\)[ $]" "@@info:\\1@@ " nil))
-(define-key org-mode-map (kbd "C-c b") 'tsd-texi2org-at-bol)
 #+end_src
 
 
