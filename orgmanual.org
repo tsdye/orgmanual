@@ -277,8 +277,8 @@
 #+MACRO: kindex @@info:@kindex $1@@
 
 #+MACRO: noindent @@info:@noindent@@
+#+MACRO: latex @@info:@LaTeX{}@@
 
-#+MACRO: code @@info:@code{$1}@@
 #+MACRO: command @@info:@command{$1}@@
 #+MACRO: pxref @@info:@pxref{$1}@@
 #+MACRO: xref @@info:@xref{$1}@@
@@ -332,7 +332,7 @@ also serve as a publishing tool for a set of linked web pages.
 
 As a project planning environment, Org works by adding metadata to outline
 nodes.  Based on this data, specific entries can be extracted in queries and
-create dynamic @@info:@i{agenda views}@@.
+create dynamic /agenda views/.
 
 Org mode contains the Org Babel environment which allows you to work with
 embedded source code blocks in a file, to facilitate code evaluation,
@@ -341,7 +341,7 @@ documentation, and literate programming techniques.
 Org's automatic, context-sensitive table editor with spreadsheet
 capabilities can be integrated into any major mode by activating the
 minor Orgtbl mode.  Using a translation step, it can be used to maintain
-tables in arbitrary file types, for example in @@info:@LaTeX{}@@.  The structure
+tables in arbitrary file types, for example in {{{latex}}}.  The structure
 editing and list creation capabilities can be used outside Org with
 the minor Orgstruct mode.
 
@@ -355,9 +355,9 @@ ends, for example:
   - an ASCII system and table editor for taking structured notes
   - a TODO list editor
   - a full agenda and planner with deadlines and work scheduling
-    @@info:@pindex GTD, Getting Things Done@@
+    {{{pindex(GTD, Getting Things Done)}}}
   - an environment in which to implement David Allen's GTD system
-  - a simple hypertext system, with HTML and @@info:@LaTeX{}@@ export
+  - a simple hypertext system, with HTML and {{{latex}}} export
   - a publishing tool to create a set of interlinked web pages
   - an environment for literate programming
 
@@ -384,49 +384,48 @@ as a [[http://www.network-theory.co.uk/org/manual/][paperback book from Network 
 as a XEmacs package, please skip this section and go directly to
 [[Activation]]. If you downloaded Org as an ELPA package, please read the
 instructions on the [[http://orgmode.org/elpa.html][Org ELPA page]]. To see what version of Org (if any)
-is part of your Emacs distribution, type @@info:@kbd{M-x
-org-version}@@.[fn:2]
+is part of your Emacs distribution, type {{{kbd(M-xorg-version)}}}.[fn:2]
 
 Installation of Org mode uses a build system, which is described in more
 detail on [[http://orgmode.org/worg/dev/org-build-system.html][Worg]].
 
-If you have downloaded Org from the Web as a distribution @@info:@file{.zip}@@ or
-@@info:@file{.tar.gz}@@ archive, take the following steps to install it:
+If you have downloaded Org from the Web as a distribution {{{file(.zip)}}} or
+{{{file(.tar.gz)}}} archive, take the following steps to install it:
 
   - Unpack the distribution archive.
-  - Change into ({{{code(cd)}}}) the Org directory.
-  - Run {{{code(make help config)}}} and then check and edit the
-    file @@info:@file{local.mk}@@ if the default configuration does
+  - Change into (~cd~) the Org directory.
+  - Run ~make help config~ and then check and edit the
+    file {{{file(local.mk)}}} if the default configuration does
     not match your system. Set the name of the Emacs binary (likely
-    either @@info:@file{emacs}@@ or @@info:@file{xemacs}@@), and the
+    either {{{file(emacs)}}} or {{{file(xemacs)}}}), and the
     paths to the directories where local Lisp and Info files will be
     installed. If the Emacs binary is not in your path, give the full
     path to the executable. Avoid spaces in any path names.
-  - Run {{{code(make config)}}} again to check the configuration.
-  - Run {{{code(make install)}}} or {{{code(sudo make install)}}} 
+  - Run ~make config~ again to check the configuration.
+  - Run ~make install~ or ~sudo make install~ 
     to build and install Org mode on your system.
 
 If you use a cloned Git repository, then the procedure is slightly
 different. The following description assumes that you are using the
-{{{code(master)}}} branch.[fn:3] You could also use the
-{{{code(maint)}}} branch instead, where the release versions are
-published, just replace {{{code(master)}}} with
-{{{code(maint)}}} in the description below.
+~master~ branch.[fn:3] You could also use the
+~maint~ branch instead, where the release versions are
+published, just replace ~master~ with
+~maint~ in the description below.
 
 
-  - Change into ({{{code(cd)}}}) the Org repository.
-  - Run {{{code(git checkout master)}}} to switch to the {{{code(master)}}} branch of the Org repository.
-  - Run {{{code(make help)}}} and then check and edit the file
-    @@info:@file{local.mk}@@. You must set the name of the Emacs
-    binary (likely either @@info:@file{emacs}@@ or
-    @@info:@file{xemacs}@@), and the paths to the directories where
+  - Change into (~cd~) the Org repository.
+  - Run ~git checkout master~ to switch to the ~master~ branch of the Org repository.
+  - Run ~make help~ and then check and edit the file
+    {{{file(local.mk)}}}. You must set the name of the Emacs
+    binary (likely either {{{file(emacs)}}} or
+    {{{file(xemacs)}}}, and the paths to the directories where
     local Lisp and Info files will be installed. If the Emacs binary
     is not in your path, you must give the full path to the
     executable. Avoid spaces in any path names.
-  - Run {{{code(make config)}}} to check the configuration.
-  - Optionally run {{{code(make test)}}} to build Org mode and
+  - Run ~make config~ to check the configuration.
+  - Optionally run ~make test~ to build Org mode and
     then run the full test suite.
-  - Run {{{code(make update2)}}} or {{{code(make up2)}}} to
+  - Run ~make update2~ or ~make up2~ to
     update the Git repository and build and install Org mode. The
     latter invocation runs the complete test suite before installation
     and installs only if the build passes all tests.
@@ -438,24 +437,24 @@ directly from the distribution directory or Org repository by
 compiling Org mode in place:
 
 
-  - Change into ({{{code(cd)}}}) the Org repository.
-  - Run {{{code(git checkout master)}}} to switch to the
-    {{{code(master)}}} branch of the Org repository.
-  - Run {{{code(make compile)}}}
+  - Change into (~cd~) the Org repository.
+  - Run ~git checkout master~ to switch to the
+    ~master~ branch of the Org repository.
+  - Run ~make compile~
 
 
 Last but not least you can also run Org mode directly from an Org repository
 without any compilation.  Simply replace the last step in the recipe above
-with {{{code(make uncompiled)}}}.
+with ~make uncompiled~.
 
-Then add the following line to @@info:@file{.emacs}@@:
+Then add the following line to {{{file(.emacs)}}}:
 
 #+begin_src example
 (add-to-list 'load-path "~/path/to/orgdir/lisp")
 #+end_src
 
 {{{noindent}}}
-If you plan to use code from the @@info:@file{contrib}@@ subdirectory without
+If you plan to use code from the {{{file(contrib)}}} subdirectory without
 compiling them, do a similar step for this directory:
 
 #+begin_src example
@@ -463,12 +462,12 @@ compiling them, do a similar step for this directory:
 #+end_src
 
 If you want to include those files with the build and install, please
-customize the variable {{{code(ORG_ADD_CONTRIB)}}} instead in your
-{{{code(local.mk)}}} file, for more details please see this
+customize the variable ~ORG_ADD_CONTRIB~ instead in your
+~local.mk~ file, for more details please see this
 [[http://orgmode.org/worg/dev/org-build-system.html#sec-4-1-2][description on Worg]].
 
 Installing Info files is system dependent, because of differences in
-the @@info:@file{install-info}@@ program. The Info documentation is
+the {{{file(install-info)}}} program. The Info documentation is
 installed together with the rest of Org mode. If you don't install Org
 mode, it is possible to install the Info documentation separately if you
 have install-info on your system.[fn:1]  The command to do this is:
@@ -494,9 +493,9 @@ Do not forget to activate Org as described in the following section.
 {{{findex(org-store-link)}}}
 {{{findex(org-iswitchb)}}}
 
-Since Emacs 22.2, files with the @@info:@file{.org}@@ extension use Org mode by
+Since Emacs 22.2, files with the {{{file(.org)}}} extension use Org mode by
 default.  If you are using an earlier version of Emacs, add this line to your
-@@info:@file{.emacs}@@ file:
+{{{file(.emacs)}}} file:
 
 #+begin_src example
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
@@ -535,20 +534,19 @@ MY PROJECTS    -*- mode: org; -*-
 {{{noindent}}}
 which will select Org mode for this buffer no matter what the file's
 name is. See also the variable
-{{{code(org-insert-mode-line-in-empty-file)}}}.
+~org-insert-mode-line-in-empty-file~.
 
-Many commands in Org work on the region if the region is
-@@info:@i{active}@@. To make use of this, you need to have
-{{{code(transient-mark-mode)}}} ({{{code(zmacs-regions)}}} in
-XEmacs) turned on. In Emacs 23 this is the default, in Emacs 22 you
-need to do this yourself with
+Many commands in Org work on the region if the region is /active/. To
+make use of this, you need to have ~transient-mark-mode~
+(~zmacs-regions~ in XEmacs) turned on. In Emacs 23 this is the
+default, in Emacs 22 you need to do this yourself with
 
 #+begin_src example
 (transient-mark-mode 1)
 #+end_src
 
 {{{noindent}}} If you do not like
-{{{code(transient-mark-mode)}}}, you can create an active region
+~transient-mark-mode~, you can create an active region
 by using the mouse to select a region, or pressing
 {{{kbd(C-@key{SPC})}}} twice before moving the cursor.
 
@@ -573,7 +571,7 @@ quite possible that the bug has been fixed already.  If the bug persists,
 prepare a report and provide as much information as possible, including the
 version information of Emacs (@@info:@kbd{M-x emacs-version @key{RET}}@@) and Org
 (@@info:@kbd{M-x org-version @key{RET}}@@), as well as the Org related setup in
-@@info:@file{.emacs}@@.  The easiest way to do this is to use the command
+{{{file(.emacs)}}}.  The easiest way to do this is to use the command
 
 #+begin_src example
 @kbd{M-x org-submit-bug-report}
@@ -596,8 +594,8 @@ $ emacs -Q -l /path/to/minimal-org.el
 
 However if you are using Org mode distributed with Emacs, a minimal
 setup is not necessary. In that case it is sufficient to start Emacs
-as {{{code(emacs -Q)}}}. The {{{code(minimal-org.el)}}} setup
-file can have contents as shown below.
+as ~emacs -Q~. The ~minimal-org.el~ setup file can have contents as
+shown below.
 
 #+begin_src example
 ;;; Minimal setup to load latest `org-mode'
@@ -627,25 +625,26 @@ about:
 
 If working with Org produces an error with a message you don't
 understand, you may have hit a bug.  The best way to report this is by
-providing, in addition to what was mentioned above, a @@info:@emph{backtrace}@@.
+providing, in addition to what was mentioned above, a /backtrace/.
 This is information from the built-in debugger about where and how the
 error occurred.  Here is how to produce a useful backtrace:
 
   1. Reload uncompiled versions of all Org mode Lisp files.  The
      backtrace contains much more information if it is produced with
-     uncompiled code. To do this, use @@info:@key{C-u M-x org-reload
-     RET}@@ or select {{{code(Org -> Refresh/Reload -> Reload Org uncompiled)}}} from the menu.
+     uncompiled code. To do this, use {{{kbd(C-u M-x org-reload
+     @key{RET})}}}
+     or select ~Org -> Refresh/Reload -> Reload Org uncompiled~ from the menu.
 
-  2. Go to the {{{code(Options)}}} menu and select
-     {{{code(Enter Debugger on Error)}}} (XEmacs has this option
-     in the {{{code(Troubleshooting)}}} sub-menu).
+  2. Go to the ~Options~ menu and select
+     ~Enter Debugger on Error~ (XEmacs has this option
+     in the ~Troubleshooting~ sub-menu).
 
   3. Do whatever you have to do to hit the error. Don't forget to
      document the steps you take.
 
-  4. When you hit the error, a @@info:@file{*Backtrace*}@@ buffer will
+  4. When you hit the error, a {{{file(*Backtrace*)}}} buffer will
      appear on the screen.  Save this buffer to a file (for example
-     using @@info:@kbd{C-x C-w}@@) and attach it to your bug report.
+     using {{{kbd(C-x C-w)}}}) and attach it to your bug report.
 
 
 ** Conventions
@@ -653,7 +652,7 @@ error occurred.  Here is how to produce a useful backtrace:
    :DESCRIPTION: Typesetting conventions in the manual
    :END:
 
-@@info:@subsubheading @@TODO keywords, tags, properties, etc.
+*** XXX TODO keywords, tags, properties, etc.
 
 Org mainly uses three types of keywords: TODO keywords, tags and property
 names.  In this manual we use the following conventions:
@@ -666,35 +665,33 @@ names.  In this manual we use the following conventions:
   - Release, PRIORITY :: User-defined properties are capitalized; built-in
                 properties with special meaning are written with all capitals.
 
-Moreover, Org uses @@info:@i{option keywords}@@ (like
-{{{code(#+TITLE)}}} to set the title) and @@info:@i{environment
-keywords}@@ (like {{{code(#+BEGIN_HTML)}}} to start a
-{{{code(HTML)}}} environment). They are written in uppercase in
-the manual to enhance its readability, but you can use lowercase in
-your Org files.[fn:7]
+Moreover, Org uses /option keywords/ (like ~#+TITLE~ to set the title)
+and /environment keywords/ (like ~#+BEGIN_HTML~ to start a ~HTML~
+environment). They are written in uppercase in the manual to enhance
+its readability, but you can use lowercase in your Org files.[fn:7]
 
-@@info:@subsubheading@@ Keybindings and commands
+*** Keybindings and commands
 {{{kindex(C-c a)}}}
 {{{findex(org-agenda)}}}
 {{{kindex(C-c c)}}}
 {{{findex(org-capture)}}}
 
 The manual suggests two global keybindings: {{{kbd(C-c a)}}} for
-{{{code(org-agenda)}}} and {{{kbd(C-c c)}}} for
-{{{code(org-capture)}}}. These are only suggestions, but the rest
-of the manual assumes that you are using these keybindings.
+~org-agenda~ and {{{kbd(C-c c)}}} for
+~org-capture~. These are only suggestions, but the rest
+of the manual assumes that you are using these key bindings.
 
 Also, the manual lists both the keys and the corresponding commands
 for accessing a functionality. Org mode often uses the same key for
 different functions, depending on context. The command that is bound
-to such keys has a generic name, like {{{code(org-metaright)}}}.
+to such keys has a generic name, like ~org-metaright~.
 In the manual we will, wherever possible, give the function that is
 internally called by the generic command. For example, in the chapter
 on document structure, {{{kbd(M-@key{right})}}} will be listed to call
-{{{code(org-do-demote)}}}, while in the chapter on tables, it will
-be listed to call {{{code(org-table-move-column-right)}}}. If you
+~org-do-demote~, while in the chapter on tables, it will
+be listed to call ~org-table-move-column-right~. If you
 prefer, you can compile the manual without the command names by
-unsetting the flag {{{code(cmdnames)}}} in {{{file(org.texi)}}}.
+unsetting the flag ~cmdnames~ in {{{file(org.texi)}}}.
 
 * Document structure
   :PROPERTIES:
@@ -754,7 +751,7 @@ An empty line after the end of a subtree is considered part of it and
 will be hidden when the subtree is folded.  However, if you leave at
 least two empty lines, one empty line will remain visible after folding
 the subtree, in order to structure the collapsed view.  See the
-variable {{{code(org-cycle-separator-lines)}}} to modify this behavior.
+variable ~org-cycle-separator-lines~ to modify this behavior.
 
 ** Visibility cycling
    :PROPERTIES:
@@ -787,15 +784,21 @@ Org uses just two commands, bound to {{{kbd(@key{TAB})}}} and
        {{{vindex(org-cycle-emulate-tab )}}}
        {{{vindex(org-cycle-global-at-bob )}}}
     
-      By default, the cursor must be on a headline for this to work, but this behavior can be modified with the {{{code(org-cycle-emulate-tab)}}} option. When the cursor is at the beginning of the buffer and the first line is not a headline, then @@info:@key{TAB}@@ actually runs [[Global
-            cycling][global cycling]].[fn:9] Also, when called with a prefix argument (@@info:@kbd{C-u @key{TAB}}@@), global cycling is invoked.
+      By default, the cursor must be on a headline for this to work,
+      but this behavior can be modified with the
+      ~org-cycle-emulate-tab~ option. When the cursor is at
+      the beginning of the buffer and the first line is not a
+      headline, then {{{key(TAB)}}} actually runs
+      ~org-global-cycle~.[fn:9] Also, when called with a
+      prefix argument ({{{kbd{C-u @key{TAB})}}}), global cycling
+      is invoked.
 
-       {{{cindex(global visibility states )}}}
-       {{{cindex(global cycling )}}}
-       {{{cindex(overview, global visibility state)}}}
-       {{{cindex(contents, global visibility state)}}}
-       {{{cindex(show all, global visibility state)}}}
   - {{{orgcmd(S-@key{TAB},org-global-cycle)}}} {{{orgcmd(C-u @key{TAB},org-global-cycle)}}} :: 
+    {{{cindex(global visibility states )}}}
+    {{{cindex(global cycling )}}}
+    {{{cindex(overview, global visibility state)}}
+    {{{cindex(contents, global visibility state)}}}
+    {{{cindex(show all, global visibility state)}}}
     All the subtrees in a buffer can be cycled:
 
     #+begin_src example 
@@ -803,10 +806,10 @@ Org uses just two commands, bound to {{{kbd(@key{TAB})}}} and
       '--------------------------------------' 
     #+end_src
 
-    When @@info:@kbd{S-@key{TAB}}@@ is called with a numeric prefix
-    argument, {{{code(N)}}}, the CONTENTS view up to headlines of
+    When {{{kbd(S-@key{TAB})}}} is called with a numeric prefix
+    argument, ~N~, the CONTENTS view up to headlines of
     level N will be shown. Note that inside tables,
-    @@info:@kbd{S-@key{TAB}}@@ jumps to the previous field.
+    {{{kbd(S-@key{TAB})}}} jumps to the previous field.
     {{{cindex(show all, command )}}}
   - {{{orgcmd(C-u C-u C-u @key{TAB},show-all)}}} :: Show all,
        including drawers.
@@ -824,15 +827,15 @@ Org uses just two commands, bound to {{{kbd(@key{TAB})}}} and
        {{{cindex(show children, command)}}}
   - {{{orgcmd(C-c @key{TAB},show-children)}}} :: Expose all direct
        children of the subtree. With a numeric prefix argument,
-       {{{code(N)}}}, expose all children down to level N.
+       ~N~, expose all children down to level N.
   - {{{orgcmd(C-c C-x b,org-tree-to-indirect-buffer)}}} :: Show
        the current subtree in an indirect buffer.[fn:10] With a
-       numeric prefix argument, {{{code(N)}}}, go up to level N
+       numeric prefix argument, ~N~, go up to level N
        and then take that tree. If N is negative then go up that many
-       levels. With a @@info:@kbd{C-u}@@ prefix, do not remove the
+       levels. With a {{{kbd(C-u)}}} prefix, do not remove the
        previously used indirect buffer.
   - {{{orgcmd(C-c C-x v,org-copy-visible)}}} :: 
-       Copy the @@info:@i{visible}@@ text in the region into the kill ring.
+       Copy the /visible/ text in the region into the kill ring.
 
 
 {{{vindex(org-startup-folded)}}}
@@ -843,7 +846,7 @@ Org uses just two commands, bound to {{{kbd(@key{TAB})}}} and
 
 When Emacs first visits an Org file, the global state is set to
 OVERVIEW, i.e., only the top level headlines are visible.  This can be
-configured through the variable {{{code(org-startup-folded)}}}, or on a
+configured through the variable ~org-startup-folded~, or on a
 per-file basis by adding one of the following lines anywhere in the
 buffer:
 
@@ -859,8 +862,7 @@ buffer:
 {{{noindent}}} Furthermore, any entries with a {{{samp(VISIBILITY)}}}
 property ({{{pxref(Properties and Columns)}}}) will get their
 visibility adapted accordingly. Allowed values for this property are
-{{{code(folded)}}}, {{{code(children)}}}, {{{code(content)}}}, and
-{{{code(all)}}}.
+~folded~, ~children~, ~content~, and ~all~.
 
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
@@ -888,20 +890,19 @@ The following commands jump to other headlines in the buffer.
        without changing the current outline visibility.  Shows the
        document structure in a temporary buffer, where you can use the following keys to find your destination:
        {{{vindex(org-goto-auto-isearch)}}}
-    #+begin_src example
-      @key{TAB}         @r{Cycle visibility.}
-      @key{down} / @key{up}   @r{Next/previous visible headline.}
-      @key{RET}      @r{Select this location.}
-      @kbd{/}           @r{Do a Sparse-tree search}
-      @r{The following keys work if you turn off @code{org-goto-auto-isearch}}
-      n / p        @r{Next/previous visible headline.}
-      f / b        @r{Next/previous headline same level.}
-      u            @r{One level up.}
-      0-9          @r{Digit argument.}
-      q            @r{Quit}
-    #+end_src
-    {{{vindex(org-goto-interface)}}}
-    {{{noindent}}} See also the variable {{{code(org-goto-interface)}}}.
+    - {{{key(TAB)}}} ::  Cycle visibility.
+    - {{{key(down)}}} / {{{key(up)}}} ::   Next/previous visible headline.
+    - {{{key(RET)}}} :: Select this location.
+    - {{{kbd(/)}}} :: Do a Sparse-tree search
+    - Note: The following keys work if you turn off ~org-goto-auto-isearch~
+    - n / p ::  Next/previous visible headline.
+    - f / b ::   Next/previous headline same level.
+    - u  ::  One level up.
+    - 0--9 ::  Digit argument.
+    - q :: Quit.
+
+{{{vindex(org-goto-interface)}}}
+{{{noindent}}} See also the variable ~org-goto-interface~.
 
 
 ** Structure editing
@@ -933,7 +934,7 @@ The following commands jump to other headlines in the buffer.
        headline is created before the current line. If at the
        beginning of any other line, the content of that line is made
        the new heading. If the command is used at the end of a folded
-       subtree (i.e.@: behind the ellipses at the end of a headline),
+       subtree (i.e.: behind the ellipses at the end of a headline),
        then a headline like the current one will be inserted after the
        end of the subtree.
   - {{{orgcmd(C-@key{RET},org-insert-heading-respect-content)}}} ::
@@ -944,7 +945,7 @@ The following commands jump to other headlines in the buffer.
   - {{{orgcmd(M-S-@key{RET},org-insert-todo-heading)}}} ::
      {{{vindex(org-treat-insert-todo-heading-as-state-change)}}}
      Insert new TODO entry with same level as current heading.  See
-       also the variable {{{code(org-treat-insert-todo-heading-as-state-change)}}}.
+       also the variable ~org-treat-insert-todo-heading-as-state-change~.
   - {{{orgcmd(C-S-@key{RET},org-insert-todo-heading-respect-content)}}} ::
       Insert new TODO entry with same level as current heading. Like
        {{{kbd(C-@key{RET})}}}, the new headline will be inserted
@@ -982,17 +983,17 @@ The following commands jump to other headlines in the buffer.
      {{{vindex(org-yank-adjusted-subtrees)}}}
      {{{vindex(org-yank-folded-subtrees)}}}
      Depending on the variables
-     {{{code(org-yank-adjusted-subtrees)}}} and
-     {{{code(org-yank-folded-subtrees)}}}, Org's internal
-     {{{code(yank)}}} command will paste subtrees folded and in
+     ~org-yank-adjusted-subtrees~ and
+     ~org-yank-folded-subtrees~, Org's internal
+     ~yank~ command will paste subtrees folded and in
      a clever way, using the same command as {{{kbd(C-c C-x C-y)}}}.  
      With the default settings, no level adjustment will
      take place, but the yanked tree will be folded unless doing so
      would swallow text previously visible.  Any prefix argument to
-     this command will force a normal {{{code(yank)}}} to be
+     this command will force a normal ~yank~ to be
      executed, with the prefix passed along.  A good way to force a
      normal yank is {{{kbd(C-u C-y)}}}.  If you use
-     {{{code(yank-pop)}}} after a yank, it will yank previous
+     ~yank-pop~ after a yank, it will yank previous
      kill items plainly, without adjustment and folding.
   - {{{orgcmd(C-c C-x c,org-clone-subtree-with-time-shift)}}} ::
        Clone a subtree by making a number of sibling copies of it. You
@@ -1001,7 +1002,7 @@ The following commands jump to other headlines in the buffer.
        This can be useful, for example, to create a number of tasks
        related to a series of lectures to prepare. For more details,
        see the docstring of the command
-       {{{code(org-clone-subtree-with-time-shift)}}}.
+       ~org-clone-subtree-with-time-shift~.
   - {{{orgcmd(C-c C-w,org-refile)}}} :: Refile entry or region to
        a different location. {{{xref(Refile and copy)}}}.
   - {{{orgcmd(C-c ^,org-sort)}}} :: Sort same-level entries.  When
@@ -1087,7 +1088,7 @@ commands can be accessed through a dispatcher:
 
 {{{noindent}}} For frequently used sparse trees of specific search
 strings, you can use the variable
-{{{code(org-agenda-custom-commands)}}} to define fast keyboard access
+~org-agenda-custom-commands~ to define fast keyboard access
 to specific sparse trees. These commands will then be accessible
 through the agenda dispatcher ({{{pxref(Agenda dispatcher)}}}). For
 example:
@@ -1109,7 +1110,7 @@ tags, or properties and will be discussed later in this manual.
 {{{cindex(visible text, printing )}}}
 
 To print a sparse tree, you can use the Emacs command
-{{{code(ps-print-buffer-with-faces)}}} which does not print
+~ps-print-buffer-with-faces~ which does not print
 invisible parts of the document.[fn:12] Or you can use the command
 {{{kbd(C-c C-e v)}}} to export only the visible part of the
 document and print the resulting file.
@@ -1132,14 +1133,13 @@ additional structure.  They also provide a way to create lists of checkboxes
 Org knows ordered lists, unordered lists, and description lists.
 
 #+attr_texinfo: :table-type "table" :indic "@bullet"
-  - /Unordered/ list items start with {{{samp(-)}}}, {{{samp(+)}}}, or
-    {{{samp(*)}}}[fn:15] as bullets.
+  - /Unordered/ list items start with ~-~, ~+~, or ~*~ [fn:15] as bullets.
 
   - /Ordered/ list items start with a numeral followed by either a
     period or a right parenthesis,[fn:23] such as
-    {{{samp(1.)}}} or {{{samp(1))}}}.[fn:16] If you want a list to
+    ~1.~ or ~1~.[fn:16] If you want a list to
     start with a different value (e.g.: 20), start the text of the
-    item with @@info:@code{[@@20]}@@.[fn:17] Those constructs can be used
+    item with ~[@20]~.[fn:17] Those constructs can be used
     in any item of the list in order to enforce a particular
     numbering.
     {{{vindex(org-plain-list-ordered-item-terminator)}}}
@@ -1180,24 +1180,24 @@ lines.[fn:18]  In that case, all items are closed.  Here is an example:
 
 Org supports these lists by tuning filling and wrapping commands to deal with
 them correctly.[fn:19]  To turn this on,
-put into {{{file(.emacs)}}}: {{{code((require 'filladapt))}}}}, and by exporting them
+put into {{{file(.emacs)}}}: ~(require 'filladapt)~}, and by exporting them
 properly ({{{pxref(Exporting)}}}).  Since indentation is what governs the
-structure of these lists, many structural constructs like {{{code(#+BEGIN_...)}}}
+structure of these lists, many structural constructs like ~#+BEGIN_...~
 blocks can be indented to signal that they belong to a particular item.
 
 {{{vindex(org-list-demote-modify-bullet)}}}
 {{{vindex(org-list-indent-offset)}}}
 If you find that using a different bullet for a sub-list (than that used for
 the current list-level) improves readability, customize the variable
-{{{code(org-list-demote-modify-bullet)}}}.  To get a greater difference of
+~org-list-demote-modify-bullet~.  To get a greater difference of
 indentation between items and theirs sub-items, customize
-{{{code(org-list-indent-offset)}}}.
+~org-list-indent-offset~.
 
 {{{vindex(org-list-automatic-rules)}}}
 The following commands act on items when the cursor is in the first line of
 an item (the line with the bullet or number).  Some of them imply the
 application of automatic rules to keep list structure intact.  If some of
-these actions get in your way, configure {{{code(org-list-automatic-rules)}}}
+these actions get in your way, configure ~org-list-automatic-rules~
 to disable them individually.
 
 
@@ -1205,8 +1205,8 @@ to disable them individually.
   - {{{orgcmd(@key{TAB},org-cycle)}}} :: Items can be folded just like
        headline levels. Normally this works only if the cursor is on a
        plain list item. For more details, see the variable
-       {{{code(org-cycle-include-plain-lists)}}}. If this variable is
-       set to {{{code(integrate)}}}, plain list items will be treated
+       ~org-cycle-include-plain-lists~. If this variable is
+       set to ~integrate~, plain list items will be treated
        like low-level headlines. The level of an item is then given by
        the indentation of the bullet/number. Items are always
        subordinate to real headlines, however; the hierarchies remain
@@ -1236,7 +1236,7 @@ to disable them individually.
     {{{vindex(org-support-shift-select)}}}
     {{{vindex(org-list-use-circular-motion)}}}
     Jump to the previous/next item in the current list,[fn:21] but only if
-    {{{code(org-support-shift-select)}}} is off.  If not, you can still use paragraph
+    ~org-support-shift-select~ is off.  If not, you can still use paragraph
     jumping commands like {{{kbd(C-@key{up})}}} and {{{kbd(C-@key{down})}}} to quite
     similar effect.
   - M-up :: XXX
@@ -1264,7 +1264,7 @@ to disable them individually.
 
     As a special case, using this command on the very first item of a list will
     move the whole list.  This behavior can be disabled by configuring
-    {{{code(org-list-automatic-rules)}}}.  The global indentation of a list has no
+    ~org-list-automatic-rules~.  The global indentation of a list has no
     influence on the text /after/ the list.
   - C-c C-c ::
     If there is a checkbox ({{{pxref(Checkboxes)}}}) in the item line, toggle the
@@ -1274,7 +1274,7 @@ to disable them individually.
   - C-c - ::
     Cycle the entire list level through the different itemize/enumerate bullets
     ({{{samp(-)}}}, {{{samp(+)}}}, {{{samp(*)}}}, {{{samp(1.)}}}, {{{samp(1))}}}) or a subset of them,
-    depending on {{{code(org-plain-list-ordered-item-terminator)}}}, the type of list,
+    depending on ~org-plain-list-ordered-item-terminator~, the type of list,
     and its indentation.  With a numeric prefix argument N, select the Nth bullet
     from this list.  If there is an active region when calling this, selected
     text will be changed into an item.  With a prefix argument, all lines will be
@@ -1296,7 +1296,7 @@ to disable them individually.
     {{{vindex(org-support-shift-select)}}}
     This command also cycles bullet styles when the cursor in on the bullet or
     anywhere in an item line, details depending on
-    {{{code(org-support-shift-select)}}}. 
+    ~org-support-shift-select~. 
     {{{kindex(S-@key{left})}}}
     {{{kindex(S-@key{right})}}}
   - C-c ^ ::
@@ -1318,7 +1318,7 @@ to disable them individually.
 Sometimes you want to keep information associated with an entry, but you
 normally don't want to see it.  For this, Org mode has /drawers/.
 Drawers need to be configured with the variable
-{{{code(org-drawers)}}}.[fn:24]  Drawers
+~org-drawers~.[fn:24]  Drawers
 look like this:
 
 #+begin_example
@@ -1332,10 +1332,10 @@ look like this:
 
 
 You can interactively insert drawers at point by calling
-{{{code(org-insert-drawer)}}}, which is bound to {{{key(C-c C-x d)}}}.
+~org-insert-drawer~, which is bound to {{{key(C-c C-x d)}}}.
 With an active region, this command will put the region inside the
 drawer. With a prefix argument, this command calls
-{{{code(org-insert-property-drawer)}}} and add a property drawer right
+~org-insert-property-drawer~ and add a property drawer right
 below the current headline. Completion over drawer keywords is also
 possible using {{{key(M-TAB)}}}.
 
@@ -1343,11 +1343,11 @@ Visibility cycling ({{{pxref(Visibility cycling)}}}) on the headline
 will hide and show the entry, but keep the drawer collapsed to a
 single line. In order to look inside the drawer, you need to move the
 cursor to the drawer line and press {{{key(TAB)}}} there. Org mode
-uses the {{{code(PROPERTIES)}}} drawer for storing properties
+uses the ~PROPERTIES~ drawer for storing properties
 ({{{pxref(Properties and Columns)}}}), and you can also arrange for
 state change notes ({{{pxref(Tracking TODO state changes)}}}) and
 clock times ({{{pxref(Clocking work time)}}}) to be stored in a drawer
-{{{code(LOGBOOK)}}}. If you want to store a quick note in the LOGBOOK
+~LOGBOOK~. If you want to store a quick note in the LOGBOOK
 drawer, in a similar way to state changes, use
 
 #+attr_texinfo: :table-type "table" :indic "@kbd"
@@ -1364,7 +1364,7 @@ Org mode uses begin...end blocks for various purposes from including source
 code examples ({{{pxref(Literal examples)}}}) to capturing time logging
 information ({{{pxref(Clocking work time)}}}).  These blocks can be folded and
 unfolded by pressing TAB in the begin line.  You can also get all blocks
-folded at startup by configuring the variable {{{code(org-hide-block-startup)}}}
+folded at startup by configuring the variable ~org-hide-block-startup~
 or on a per-file basis by using
 
 {{{cindex(@code{hideblocks}, STARTUP keyword)}}}
@@ -1387,7 +1387,7 @@ The basic syntax is similar to the one used by
 {{{file(footnote.el)}}}, i.e.: a footnote is defined in a paragraph
 that is started by a footnote marker in square brackets in column 0,
 no indentation allowed. If you need a paragraph break inside a
-footnote, use the @@info:@LaTeX{}@@ idiom {{{samp(\\par)}}}. The
+footnote, use the {{{latex}}} idiom {{{samp(\\par)}}}. The
 footnote reference is simply the marker in square brackets, inside
 text. For example:
 
@@ -1401,32 +1401,32 @@ Org mode extends the number-based syntax to /named/ footnotes and
 optional inline definition. Using plain numbers as markers (as
 {{{file(footnote.el)}}} does) is supported for backward compatibility,
 but not encouraged because of possible conflicts with
-@@info:@LaTeX{}@@ snippets ({{{pxref(Embedded @LaTeX{})}}}). Here are
+{{{latex}}} snippets ({{{pxref(Embedded @LaTeX{})}}}). Here are
 the valid references:
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-  - {{{code([1])}}} :: A plain numeric footnote marker. Compatible with
+  - ~[1]~ :: A plain numeric footnote marker. Compatible with
            {{{file(footnote.el)}}}, but not recommended because
            something like {{{samp([1])}}} could easily be part of a
            code snippet.
 
-  - {{{code([fn:name])}}} :: A named footnote reference, where {{{code(name)}}} is
+  - ~[fn:name]~ :: A named footnote reference, where ~name~ is
                  a unique label word, or, for simplicity of automatic
                  creation, a number.
-  - {{{code([fn:: This is the inline definition of this footnote])}}} :: A
-       @@info:@LaTeX{}@@-like anonymous footnote where the definition
+  - ~[fn:: This is the inline definition of this footnote]~ :: A
+       {{{latex}}}-like anonymous footnote where the definition
        is given directly at the reference point.
-  - {{{code([fn:name: a definition])}}} :: An inline definition of a footnote,
+  - ~[fn:name: a definition]~ :: An inline definition of a footnote,
        which also specifies a name for the note. Since Org allows
        multiple references to the same note, you can then use
-       {{{code([fn:name])}}} to create additional references.
+       ~[fn:name]~ to create additional references.
 
 
 {{{vindex(org-footnote-auto-label)}}}
 Footnote labels can be created automatically, or you can create names
 yourself. This is handled by the variable
-{{{code(org-footnote-auto-label)}}} and its corresponding
-{{{code(#+STARTUP)}}} keywords. See the docstring of that variable for
+~org-footnote-auto-label~ and its corresponding
+~#+STARTUP~ keywords. See the docstring of that variable for
 details.
 
 {{{noindent}}} The following command handles footnotes:
@@ -1442,10 +1442,10 @@ details.
     {{{vindex(org-footnote-section)}}}
     {{{vindex(org-footnote-auto-adjust)}}}
     Otherwise, create a new footnote.  Depending on the variable 
-    {{{code(org-footnote-define-inline)}}},[fn:26] the
+    ~org-footnote-define-inline~,[fn:26] the
     definition will be placed right into the text as part of the reference, or
     separately into the location determined by the variable
-    {{{code(org-footnote-section)}}}.
+    ~org-footnote-section~.
 
     When this command is called with a prefix argument, a menu of additional
     options is offered:
@@ -1453,23 +1453,23 @@ details.
     - s ::  Sort the footnote definitions by reference sequence.  During editing,
       Org makes no effort to sort footnote definitions into a particular
       sequence.  If you want them sorted, use this command, which will
-      also move entries according to {{{code(org-footnote-section)}}}.  Automatic
+      also move entries according to ~org-footnote-section~.  Automatic
       sorting after each insertion/deletion can be configured using the
-      variable {{{code(org-footnote-auto-adjust)}}}.
-    - r ::  Renumber the simple {{{code(fn:N)}}} footnotes.  Automatic renumbering
+      variable ~org-footnote-auto-adjust~.
+    - r ::  Renumber the simple ~fn:N~ footnotes.  Automatic renumbering
       after each insertion/deletion can be configured using the variable
-      {{{code(org-footnote-auto-adjust)}}}.
-    - S ::  Short for first {{{code(r)}}}, then {{{code(s)}}} action.
+      ~org-footnote-auto-adjust~.
+    - S ::  Short for first ~r~, then ~s~ action.
     - n ::  Normalize the footnotes by collecting all definitions (including
       inline definitions) into a special section, and then numbering them
       in sequence.  The references will then also be numbers.  This is
       meant to be the final step before finishing a document (e.g.: sending
       off an email).  The exporters do this automatically, and so could
-      something like {{{code(message-send-hook)}}}.
+      something like ~message-send-hook~.
     - d ::  Delete the footnote at point, and all definitions of and references
       to it.
 
-    Depending on the variable {{{code(org-footnote-auto-adjust)}}},[fn:25]
+    Depending on the variable ~org-footnote-auto-adjust~,[fn:25]
     renumbering and sorting footnotes can be automatic after each insertion or
     deletion.
 
@@ -1495,7 +1495,7 @@ details.
 
 If you like the intuitive way the Org mode structure editing and list
 formatting works, you might want to use these commands in other modes like
-Text mode or Mail mode as well.  The minor mode {{{code(orgstruct-mode)}}} makes
+Text mode or Mail mode as well.  The minor mode ~orgstruct-mode~ makes
 this possible.   Toggle the mode with {{{kbd(M-x orgstruct-mode)}}}, or
 turn it on by default, for example in Message mode, with one of:
 
@@ -1509,7 +1509,7 @@ headline or the first line of a list item, most structure editing commands
 will work, even if the same keys normally have different functionality in the
 major mode you are using.  If the cursor is not in one of those special
 lines, Orgstruct mode lurks silently in the shadows.  When you use
-{{{code(orgstruct++-mode)}}}, Org will also export indentation and autofill
+~orgstruct++-mode~, Org will also export indentation and autofill
 settings into that mode, and detect item context after the first line of an
 item.
 
@@ -1561,7 +1561,7 @@ only type
 
 {{{noindent}}} and then press {{{key(TAB)}}} to align the table and start
 filling in fields. Even faster would be to type
-{{{code(|Name|Phone|Age)}}} followed by {{{kbd(C-c @key{RET)}}}.
+~|Name|Phone|Age~ followed by {{{kbd(C-c @key{RET})}}}.
 
 {{{vindex(org-enable-table-editor)}}}
 {{{vindex(org-table-auto-blank-field)}}}
@@ -1571,7 +1571,7 @@ inserting and deleting avoids shifting other fields.  Also, when
 typing /immediately after the cursor was moved into a new field with {{{kbd(@key{TAB)}}}, {{{kbd(S-@key{TAB)}}} or {{{kbd(@key{RET)}}}/, the
 field is automatically made blank.  If this behavior is too
 unpredictable for you, configure the variables
-{{{code(org-enable-table-editor)}}} and {{{code(org-table-auto-blank-field)}}}.
+~org-enable-table-editor~ and ~code(org-table-auto-blank-field~.
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
   {{{tsubheading(Creation and conversion)}}}
@@ -1670,9 +1670,9 @@ unpredictable for you, configure the variables
     {{{vindex(org-table-copy-increment)}}}
     When current field is empty, copy from first non-empty field above.  When not
     empty, copy current field down to next row and move cursor along with it.
-    Depending on the variable {{{code(org-table-copy-increment)}}}, integer field
+    Depending on the variable ~org-table-copy-increment~, integer field
     values will be incremented during copy.  Integers that are too large will not
-    be incremented.  Also, a {{{code(0)}}} prefix argument temporarily disables the
+    be incremented.  Also, a ~0~ prefix argument temporarily disables the
     increment.  This key is also used by shift-selection and related modes
     ({{{pxref(Conflicts)}}}).
 
@@ -1703,8 +1703,8 @@ unpredictable for you, configure the variables
     Export the table, by default as a TAB-separated file.  Use for data
     exchange with, for example, spreadsheet or database programs.  The format
     used to export the file can be configured in the variable
-    {{{code(org-table-export-default-format)}}}.  You may also use properties
-    {{{code(TABLE_EXPORT_FILE)}}} and {{{code(TABLE_EXPORT_FORMAT)}}} to specify the file
+    ~org-table-export-default-format~.  You may also use properties
+    ~TABLE_EXPORT_FILE~ and ~TABLE_EXPORT_FORMAT~ to specify the file
     name and the format for table export in a subtree.  Org supports quite
     general formats for exported tables.  The exporter format is the same as the
     format used by Orgtbl radio tables, see [[Translator functions]], for a
@@ -1763,7 +1763,7 @@ C-c)}}}.
 When visiting a file containing a table with narrowed columns, the
 necessary character hiding has not yet happened, and the table needs to
 be aligned before it looks nice.  Setting the option
-{{{code(org-startup-align-all-tables)}}} will realign all tables in a file
+~org-startup-align-all-tables~ will realign all tables in a file
 upon visiting, but also slow down startup.  You can also set this option
 on a per-file basis with:
 
@@ -1839,7 +1839,7 @@ example in Message mode, use
 
 Furthermore, with some special setup, it is possible to maintain tables
 in arbitrary syntax with Orgtbl mode.  For example, it is possible to
-construct @@info:@LaTeX{}@@ tables with the underlying ease and power of
+construct {{{latex}}} tables with the underlying ease and power of
 Orgtbl mode, including spreadsheet capabilities.  For details, see
 [[Tables in arbitrary syntax]].
 
@@ -1871,7 +1871,7 @@ To compute fields in the table from other fields, formulas must
 reference other fields or ranges.  In Org, fields can be referenced
 by name, by absolute coordinates, and by relative coordinates.  To find
 out what the coordinates of a field are, press {{{kbd(C-c ?)}}} in that
-field, or press {{{kbd(C-c @)}}}} to toggle the display of a grid.
+field, or press {{{kbd(C-c @})}}} to toggle the display of a grid.
 
 **** Field references
 {{{cindex(field references)}}}
@@ -1879,44 +1879,40 @@ field, or press {{{kbd(C-c @)}}}} to toggle the display of a grid.
 
 Formulas can reference the value of another field in two ways.  Like in
 any other spreadsheet, you may reference fields with a letter/number
-combination like {{{code(B3)}}}, meaning the 2nd field in the 3rd row.
+combination like ~B3~, meaning the 2nd field in the 3rd row.
 {{{vindex(org-table-use-standard-references)}}}
 However, Org prefers[fn:31] to use another, more general
 representation that looks like this:
 
 #+begin_example
-@@@var{row}$@var{column}
+ @ROW$COLUMN
 #+end_example
 
-Column specifications can be absolute like {{{code($1)}}},
-{{{code($2)}}},...{{{code($@var{N)}}}}, or relative to the current
+Column specifications can be absolute like ~$1~,
+~$2~ ,... ~$N~, or relative to the current
 column (i.e.: the column of the field which is being computed) like
-{{{code($+1)}}} or {{{code($-2)}}}. {{{code($<)}}} and {{{code($>)}}}
+~$+1~ or ~$-2~. ~$<~ and ~$>~
 are immutable references to the first and last column, respectively,
-and you can use {{{code($>>>)}}} to indicate the third column from the
+and you can use ~$>>>~ to indicate the third column from the
 right.
 
 The row specification only counts data lines and ignores horizontal
 separator lines (hlines). Like with columns, you can use absolute row
-numbers {{{code(@@1)}}}, {{{code(@@2)}}},...{{{code(@@@var{N)}}}}, and
-row numbers relative to the current row like {{{code(@@+3)}}} or
-{{{code(@@-1)}}}. {{{code(@@<)}}} and {{{code(@@>)}}} are immutable
-references the first and last@footnote{For backward compatibility you
-can also use special names like @code{$LR5} and {{{code($LR12)}}} to
-refer in a stable way to the fifth and twelfth field in the last row of the
-table. However, this syntax is deprecated, it should not be used for
-new documents. Use {{{code(@@>$)}}} instead.} row in the table,
-respectively. You may also specify the row relative to one of the
-hlines: {{{code(@@I)}}} refers to the first hline, {{{code(@@II)}}} to
-the second, etc@. {{{code(@@-I)}}} refers to the first such line above
-the current line, {{{code(@@+I)}}} to the first such line below the
-current line. You can also write {{{code(@@III+2)}}} which is the
+numbers ~@1~, ~@2~ ,... ~@N~, and
+row numbers relative to the current row like ~@+3~ or
+~@-1~. ~@<~ and ~@>~ are immutable
+references the first and last row in the table,
+respectively.[fn:34] You may also specify the row relative to one of the
+hlines: ~@I~ refers to the first hline, ~@II~ to
+the second, etc@. ~@-I~ refers to the first such line above
+the current line, ~@+I~ to the first such line below the
+current line. You can also write ~@III+2~ which is the
 second data line after the third hline in the table.
 
-{{{code(@@0)}}} and {{{code($0)}}} refer to the current row and
-column, respectively, i.e., to the row/column for the field being
-computed. Also, if you omit either the column or the row part of the
-reference, the current row/column is implied.
+~@0~ and ~$0~ refer to the current row and column, respectively, i.e.,
+to the row/column for the field being computed. Also, if you omit
+either the column or the row part of the reference, the current
+row/column is implied.
 
 Org's references with /unsigned/ numbers are fixed references
 in the sense that if you use the same reference in the formula for two
@@ -1928,38 +1924,37 @@ fields depending on the field being calculated by the formula.
 Here are a few examples:
 
 #+attr_texinfo: :table-type "table" :indic "@code"
-  - @@2$3 :: 2nd row, 3rd column (same as {{{code(C2)}}})
-  - $5 :: column 5 in the current row (same as {{{code(E&)}}})
-  - @@2 :: current column, row 2
-  - @@-1$-3 :: the field one row up, three columns to the left
-  - @@-I$2 :: field just under hline above current row, column 2
-  - @@>$5 :: field in the last row, in column 5
-
+  - @2$3 :: 2nd row, 3rd column (same as ~C2~)
+  - $5 :: column 5 in the current row (same as ~E&~)
+  - @2 :: current column, row 2
+  - @-1$-3 :: the field one row up, three columns to the left
+  - @-I$2 :: field just under hline above current row, column 2
+  - @>$5 :: field in the last row, in column 5
 
 **** Range references
 {{{cindex(range references)}}}
 {{{cindex(references, to ranges)}}}
 
 You may reference a rectangular range of fields by specifying two field
-references connected by two dots {{{samp(..)}}}.  If both fields are in the
-current row, you may simply use {{{samp($2..$7)}}}, but if at least one field
-is in a different row, you need to use the general {{{code(@@row$column)}}}
+references connected by two dots ~..~.  If both fields are in the
+current row, you may simply use ~$2..$7~, but if at least one field
+is in a different row, you need to use the general ~@row$column~
 format at least for the first field (i.e., the reference must start with
-{{{samp(@@)}}} in order to be interpreted correctly).  Examples:
+~@~ in order to be interpreted correctly).  Examples:
 
 #+attr_texinfo: :table-type "table" :indic "@code"
   - $1..$3 :: first three fields in the current row
   - $P..$Q :: range, using column names (see under Advanced)
   - $<<<..$>> :: start in third column, continue to the one but last
-  - @@2$1..@@4$3 ::  six fields between these two fields (same as {{{code(A2..C4)}}})
-  - @@-1$-2..@@-1 :: three numbers from the column to the left, 2 up to current row
-  - @@I..II ::  between first and second hline, short for {{{code(@@I..@@II)}}}
+  - @2$1..@4$3 ::  six fields between these two fields (same as ~A2..C4~)
+  - @-1$-2..@-1 :: three numbers from the column to the left, 2 up to current row
+  - @I..II ::  between first and second hline, short for ~@I..@II~
 
 
 {{{noindent}}} Range references return a vector of values that can be fed
 into Calc vector functions.  Empty fields in ranges are normally
 suppressed, so that the vector contains only the non-empty fields (but
-see the {{{samp(E)}}} mode switch below).  If there are no non-empty fields,
+see the ~E~ mode switch below).  If there are no non-empty fields,
 {{{samp([0])}}} is returned to avoid syntax errors in formulas.
 
 **** Field coordinates in formulas
@@ -1968,14 +1963,14 @@ see the {{{samp(E)}}} mode switch below).  If there are no non-empty fields,
 {{{cindex(row, of field coordinates)}}}
 {{{cindex(column, of field coordinates)}}}
 
-For Calc formulas and Lisp formulas {{{code(@@#)}}} and {{{code($#)}}} can be used to
+For Calc formulas and Lisp formulas ~@#~ and ~$#~ can be used to
 get the row or column number of the field where the formula result goes.
-The traditional Lisp formula equivalents are {{{code(org-table-current-dline)}}}
-and {{{code(org-table-current-column)}}}.  Examples:
+The traditional Lisp formula equivalents are ~org-table-current-dline~
+and ~org-table-current-column~.  Examples:
 
 #+attr_texinfo: :table-type "table" :indic "@code"
-  - if(@@# % 2, $#, string("")) :: column number on odd lines only
-  - $3 = remote(FOO, @@@@#$2) ::  copy column 2 from table FOO into column 3 of the current table
+  - if(@# % 2, $#, string("")) :: column number on odd lines only
+  - $3 = remote(FOO, @@#$2) ::  copy column 2 from table FOO into column 3 of the current table
 
 {{{noindent}}} For the second example, table FOO must have at least as
 many rows as the current table. Note that this is inefficient for
@@ -1990,29 +1985,26 @@ large number of rows.[fn:30]
 {{{vindex(org-table-formula-constants)}}}
 {{{samp($name)}}} is interpreted as the name of a column, parameter or
 constant.  Constants are defined globally through the variable
-{{{code(org-table-formula-constants)}}}, and locally (for the file) through a
+~org-table-formula-constants~, and locally (for the file) through a
 line like
 #+begin_example
 ,#+CONSTANTS: c=299792458. pi=3.14 eps=2.4e-6
 #+end_example
 
-{{{noindent}}}
+{{{noindent}}} 
 {{{vindex(constants-unit-system)}}}
-{{{pindex(constants.el)}}}
-Also properties ({{{pxref(Properties and Columns)}}}) can be used as
-constants in table formulas: for a property {{{samp(:Xyz:)}}} use the name
-{{{samp($PROP_Xyz)}}}, and the property will be searched in the current
-outline entry and in the hierarchy above it.  If you have the
-{{{file(constants.el)}}} package, it will also be used to resolve constants,
-including natural constants like {{{samp($h)}}} for Planck's constant, and
-units like {{{samp($km)}}} for kilometers@footnote{@file{constants.el} can
-supply the values of constants in two different unit systems, {{{code(SI)}}}
-and {{{code(cgs)}}}.  Which one is used depends on the value of the variable
-{{{code(constants-unit-system)}}}.  You can use the {{{code(#+STARTUP)}}} options
-{{{code(constSI)}}} and {{{code(constcgs)}}} to set this value for the current
-buffer.}.  Column names and parameters can be specified in special table
-lines.  These are described below, see [[Advanced features]].  All
-names must start with a letter, and further consist of letters and
+{{{pindex(constants.el)}}} 
+
+Also properties ({{{pxref(Properties and
+Columns)}}}) can be used as constants in table formulas: for a
+property {{{samp(:Xyz:)}}} use the name {{{samp($PROP_Xyz)}}}, and the
+property will be searched in the current outline entry and in the
+hierarchy above it. If you have the {{{file(constants.el)}}} package,
+it will also be used to resolve constants, including natural constants
+like ~$h~ for Planck's constant, and units like ~$km~ for
+kilometers. [fn:35] Column names and parameters can be specified in
+special table lines. These are described below, see [[Advanced features]].
+All names must start with a letter, and further consist of letters and
 numbers.
 
 **** Remote references
@@ -2031,11 +2023,11 @@ remote(NAME-OR-ID,REF)
 #+end_example
 
 {{{noindent}}} where NAME can be the name of a table in the current
-file as set by a {{{code(#+TBLNAME: NAME)}}} line before the table. It
+file as set by a ~#+TBLNAME: NAME~ line before the table. It
 can also be the ID of an entry, even in a different file, and the
 reference then refers to the first table in that entry. REF is an
 absolute field or range reference as described above for example
-{{{code(@@3$3)}}} or {{{code($somename)}}}, valid in the referenced
+~@3$3~ or ~$somename~, valid in the referenced
 table.
 
 *** Formula syntax for Calc
@@ -2047,15 +2039,15 @@ table.
 
 A formula can be any algebraic expression understood by the Emacs
 {{{file(Calc)}}} package.  *Note*: {{{file(calc)}}} has the
-non-standard convention that {{{samp(/)}}} has lower precedence than
-{{{samp(*)}}}, so that {{{samp(a/b*c)}}} is interpreted as {{{samp(a/(b*c))}}}.  Before
-evaluation by {{{code(calc-eval)}}} ({{{pxref(Calling Calc from
+non-standard convention that ~/~ has lower precedence than
+~*~, so that ~a/b*c~ is interpreted as ~a/(b*c)~.  Before
+evaluation by ~calc-eval~ ({{{pxref(Calling Calc from
 Your Programs, calc-eval, Calling Calc from Your Lisp Programs, calc, GNU
 Emacs Calc Manual)}}}),
 variable substitution takes place according to the rules described above.
 {{{cindex(vectors, in table calculations)}}}
 The range vectors can be directly fed into the Calc vector functions
-like {{{samp(vmean)}}} and {{{samp(vsum)}}}.
+like ~vmean~ and ~vsum~.
 
 {{{cindex(format specifier)}}}
 {{{cindex(mode, for @file{calc})}}}
@@ -2064,13 +2056,13 @@ A formula can contain an optional mode string after a semicolon.  This
 string consists of flags to influence Calc and other modes during
 execution.  By default, Org uses the standard Calc modes (precision
 12, angular units degrees, fraction and symbolic modes off).  The display
-format, however, has been changed to {{{code((float 8))}}} to keep tables
+format, however, has been changed to ~(float 8)~ to keep tables
 compact.  The default settings can be configured using the variable
-{{{code(org-calc-default-modes)}}}.
+~org-calc-default-modes~.
 
-#+attr_texinfo: :table-type "table" :indic "code"
+#+attr_texinfo: :table-type "table" :indic "@code"
   - p20 :: set the internal Calc calculation precision to 20 digits
-  - n3 s3 e2 f4 :: Normal, scientific, engineering, or
+  - n3 s3 e2 f4 :: normal, scientific, engineering, or
        fixed format of the result of Calc passed back to Org. Calc
        formatting is unlimited in precision as long as the Calc
        calculation precision is greater.
@@ -2082,7 +2074,7 @@ compact.  The default settings can be configured using the variable
 
 {{{noindent}}} Unless you use large integer numbers or
 high-precision-calculation and -display for floating point numbers you
-may alternatively provide a {{{code(printf)}}} format specifier to
+may alternatively provide a ~printf~ format specifier to
 reformat the Calc result after it has been passed back to Org instead
 of letting Calc already do the formatting.[fn:32] A
 few examples:
@@ -2095,7 +2087,7 @@ few examples:
   - ($3-32)*5/9 :: Degrees F -> C conversion
   - $c/$1/$cm :: Hz -> cm conversion, using {{{file(constants.el)}}}
   - tan($1);Dp3s1 :: Compute in degrees, precision 3, display SCI 1
-  - sin($1);Dp3%.1e ::  Same, but use {{{code(printf)}}}
+  - sin($1);Dp3%.1e ::  Same, but use ~printf~
        specifier for display
   - vmean($2..$7) :: Compute column range mean, using vector function
   - vmean($2..$7);EN :: Same, but treat empty fields as 0
@@ -2107,11 +2099,11 @@ Calc also contains a complete set of logical operations.  For example
   - if($1<20,teen,string("")) ::  "teen" if age $1 less than 20, else empty
 
 
-Note that you can also use two org-specific flags {{{code(T)}}} and
-{{{code(t)}}} for durations computations [[Durations and timevalues]].
+Note that you can also use two org-specific flags ~T~ and
+~t~ for durations computations [[Duration and time values]].
 
 You can add your own Calc functions defined in Emacs Lisp with
-{{{code(defmath)}}} and use them in formula syntax for Calc.
+~defmath~ and use them in formula syntax for Calc.
 
 *** Emacs Lisp forms as formulas
     :PROPERTIES:
@@ -2139,7 +2131,7 @@ and interpolated as Lisp numbers, without quotes. If you provide the
 {{{samp(L)}}} flag, all fields will be interpolated literally, without
 quotes. I.e., if you want a reference to be interpreted as a string by
 the Lisp form, enclose the reference operator itself in double-quotes,
-like {{{code("$3")}}}. Ranges are inserted as space-separated fields,
+like ~"$3"~. Ranges are inserted as space-separated fields,
 so you can embed them in list or vector syntax.
 
 Here are a few examples---note how the {{{samp(N)}}} mode is used when we do
@@ -2150,12 +2142,12 @@ Swap the first two characters of the content of column 1:
   '(concat (substring $1 1 2) (substring $1 0 1) (substring $1 2))
 #+end_src
 
-Add columns 1 and 2, equivalent to Calc's {{{code($1+$2)}}}:
+Add columns 1 and 2, equivalent to Calc's ~$1+$2~:
 #+begin_src lisp
   '(+ $1 $2);N
 #+end_src
 
-Compute the sum of columns 1-4, like Calc's {{{code(vsum($1..$4))}}}}:
+Compute the sum of columns 1-4, like Calc's ~vsum($1..$4)~}:
 #+begin_src lisp
   '(apply '+ '($1..$4));N
 #+end_src
@@ -2169,7 +2161,7 @@ Compute the sum of columns 1-4, like Calc's {{{code(vsum($1..$4))}}}}:
 {{{cindex(Time, computing)}}}
 {{{vindex(org-table-duration-custom-format)}}}
 
-If you want to compute time values use the {{{code(T)}}} flag, either in Calc
+If you want to compute time values use the ~T~ flag, either in Calc
 formulas or Elisp formulas:
 
 #+begin_example
@@ -2180,13 +2172,13 @@ formulas or Elisp formulas:
   #+TBLFM: @@2$3=$1+$2;T::@@3$3=$1+$2;t
 #+end_example
 
-Input duration values must be of the form {{{code([HH:MM[:SS])}}},
-where seconds are optional. With the {{{code(T)}}} flag, computed
-durations will be displayed as {{{code(HH:MM:SS)}}} (see the first
-formula above). With the {{{code(t)}}} flag, computed durations will
+Input duration values must be of the form ~[HH:MM[:SS]~,
+where seconds are optional. With the ~T~ flag, computed
+durations will be displayed as ~HH:MM:SS~ (see the first
+formula above). With the ~t~ flag, computed durations will
 be displayed according to the value of the variable
-{{{code(org-table-duration-custom-format)}}}, which defaults to
-{{{code('hours)}}} and will display the result as a fraction of hours
+~org-table-duration-custom-format~, which defaults to
+~'hours~ and will display the result as a fraction of hours
 (see the second formula in the example above).
 
 Negative duration values can be manipulated as well, and integers will be
@@ -2202,26 +2194,26 @@ considered as seconds in addition and subtraction.
 {{{cindex(formula, for range of fields)}}}
 
 To assign a formula to a particular field, type it directly into the
-field, preceded by {{{samp(:=)}}}, for example
-{{{samp(:=vsum(@@II..III))}}}. When you press {{{key(TAB)}}} or
-{{{key(RET)}}} or {{{kbd(C-c C-c)}}} with the cursor still in the
-field, the formula will be stored as the formula for this field,
-evaluated, and the current field will be replaced with the result.
+field, preceded by ~:=~, for example ~vsum(@II..III)~. When you press
+{{{key(TAB)}}} or {{{key(RET)}}} or {{{kbd(C-c C-c)}}} with the cursor
+still in the field, the formula will be stored as the formula for this
+field, evaluated, and the current field will be replaced with the
+result.
 
 {{{cindex(#+TBLFM)}}} 
-Formulas are stored in a special line starting with
-{{{samp(#+TBLFM:)}}} directly below the table. If you type the
-equation in the fourth field of the third data line in the table, the
-formula will look like {{{samp(@@3$4=$1+$2)}}}. When
-inserting/deleting/swapping column and rows with the appropriate
-commands, /absolute references/ (but not relative ones) in stored
-formulas are modified in order to still reference the same field. To
-avoid this from happening, in particular in range references, anchor
-ranges at the table borders (using {{{code(@@<)}}}, {{{code(@@>)}}},
-{{{code($<)}}}, {{{code($>)}}}), or at hlines using the
-{{{code(@@I)}}} notation. Automatic adaptation of field references
-does of course not happen if you edit the table structure with normal
-editing commands---then you must fix the equations yourself.
+
+Formulas are stored in a special line starting with ~#+TBLFM:~
+directly below the table. If you type the equation in the fourth field
+of the third data line in the table, the formula will look like
+~@3$4=$1+$2~. When inserting/deleting/swapping column and rows with
+the appropriate commands, /absolute references/ (but not relative
+ones) in stored formulas are modified in order to still reference the
+same field. To avoid this from happening, in particular in range
+references, anchor ranges at the table borders (using ~@<~, ~@>~,
+~$<~, ~$>~), or at hlines using the ~@I~ notation. Automatic
+adaptation of field references does of course not happen if you edit
+the table structure with normal editing commands---then you must fix
+the equations yourself.
 
 Instead of typing an equation into the field, you may also use the following
 command
@@ -2235,14 +2227,14 @@ The left-hand side of a formula can also be a special expression in
 order to assign the formula to a number of different fields. There is
 no keyboard shortcut to enter such range formulas. To add them, use
 the formula editor ({{{pxref(Editing and debugging formulas)}}}) or
-edit the {{{code(#+TBLFM:)}}} line directly.
+edit the ~#+TBLFM:~ line directly.
 
 #+attr_texinfo: :table-type "table" :indic "@code"
   - $2= ::
     Column formula, valid for the entire column.  This is so common that Org
     treats these formulas in a special way, see {{{ref(Column formulas)}}}.
   - @@3= ::
-    Row formula, applies to all fields in the specified row.  {{{code(@@>=)}}} means
+    Row formula, applies to all fields in the specified row.  ~@@>=~ means
     the last row.
   - @@1$2..@@4$3= ::
     Range formula, applies to all fields in the given rectangular range.  This
@@ -2257,7 +2249,7 @@ edit the {{{code(#+TBLFM:)}}} line directly.
 {{{cindex(column formula)}}}
 {{{cindex(formula, for table column)}}}
 
-When you assign a formula to a simple column reference like {{{code($3=)}}}, the
+When you assign a formula to a simple column reference like ~$3=~, the
 same formula will be used in all fields of that column, with the following
 very convenient exceptions: 
 
@@ -2283,7 +2275,7 @@ column, Org will only remember the most recently used formula. In the
 {{{samp(#+TBLFM:)}}} line, column formulas will look like
 {{{samp($4=$1+$2)}}}. The left-hand side of a column formula can not
 be the name of column, it must be the numeric column reference or
-{{{code($>)}}}.
+~$>~.
 
 Instead of typing an equation into the field, you may also use the
 following command:
@@ -2303,38 +2295,39 @@ following command:
 {{{cindex(table lookup functions)}}}
 
 Org has three predefined Emacs Lisp functions for lookups in tables.
+
 #+attr_texinfo: :table-type "table" :indic "@code"
   - (org-lookup-first VAL S-LIST R-LIST &optional PREDICATE) ::
     {{{findex(org-lookup-first)}}}
-    Searches for the first element {{{code(S)}}} in list {{{code(S-LIST)}}} for which
+    Searches for the first element ~S~ in list ~S-LIST~ for which
     #+begin_src lisp
     (PREDICATE VAL S)
     #+end_src
-    is {{{code(t)}}}; returns the value from the corresponding position in list
-    {{{code(R-LIST)}}}.  The default {{{code(PREDICATE)}}} is {{{code(equal)}}}.  Note that the
-    parameters {{{code(VAL)}}} and {{{code(S)}}} are passed to {{{code(PREDICATE)}}} in the same
+    is ~t~; returns the value from the corresponding position in list
+    ~R-LIST~.  The default ~PREDICATE~ is ~equal~.  Note that the
+    parameters ~VAL~ and ~S~ are passed to ~PREDICATE~ in the same
     order as the correspoding parameters are in the call to
-    {{{code(org-lookup-first)}}}, where {{{code(VAL)}}} precedes {{{code(S-LIST)}}}.  If
-    {{{code(R-LIST)}}} is {{{code(nil)}}}, the matching element {{{code(S)}}} of {{{code(S-LIST)}}}
+    ~org-lookup-first~, where ~VAL~ precedes ~S-LIST~.  If
+    ~R-LIST~ is ~nil~, the matching element ~S~ of ~S-LIST~
     is returned.
   - (org-lookup-last VAL S-LIST R-LIST &optional PREDICATE) ::
     {{{findex(org-lookup-last)}}}
-    Similar to {{{code(org-lookup-first)}}} above, but searches for the @i{last}
-    element for which {{{code(PREDICATE)}}} is {{{code(t)}}}.
+    Similar to ~org-lookup-first~ above, but searches for the /last/
+    element for which ~PREDICATE~ is ~t~.
   - (org-lookup-all VAL S-LIST R-LIST &optional PREDICATE) ::
     {{{findex(org-lookup-all)}}}
-    Similar to {{{code(org-lookup-first)}}}, but searches for @i{all} elements for
-    which {{{code(PREDICATE)}}} is {{{code(t)}}}, and returns @i{all} corresponding
+    Similar to ~org-lookup-first~, but searches for /all/ elements for
+    which ~PREDICATE~ is ~t~, and returns /all/ corresponding
     values.  This function can not be used by itself in a formula, because it
     returns a list of values.  However, powerful lookups can be built when this
     function is combined with other Emacs Lisp functions.
 
 If the ranges used in these functions contain empty fields, the
-{{{code(E)}}} mode for the formula should usually be specified:
-otherwise empty fields will not be included in {{{code(S-LIST)}}}
-and/or {{{code(R-LIST)}}} which can, for example, result in an
-incorrect mapping from an element of {{{code(S-LIST)}}} to the
-corresponding element of {{{code(R-LIST)}}}.
+~E~ mode for the formula should usually be specified:
+otherwise empty fields will not be included in ~S-LIST~
+and/or ~R-LIST~ which can, for example, result in an
+incorrect mapping from an element of ~S-LIST~ to the
+corresponding element of ~R-LIST~.
 
 These three functions can be used to implement associative arrays, count
 matching cells, rank results, group data, etc.  For practical examples
@@ -2351,10 +2344,10 @@ see [[http://orgmode.org/worg/org-tutorials/org-lookups.html][this tutorial on W
 You can edit individual formulas in the minibuffer or directly in the
 field.  Org can also prepare a special buffer with all active
 formulas of a table.  When offering a formula for editing, Org
-converts references to the standard format (like {{{code(B3)}}} or {{{code(D&)}}})
+converts references to the standard format (like ~B3~ or ~D&~)
 if possible.  If you prefer to only work with the internal format (like
-{{{code(@@3$2)}}} or {{{code($4)}}}), configure the variable
-{{{code(org-table-use-standard-references)}}}.
+~@3$2~ or ~$4~), configure the variable
+~org-table-use-standard-references~.
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
   - {{{orgcmdkkc(C-c =,C-u C-c =,org-table-eval-formula)}}} ::
@@ -2376,7 +2369,7 @@ if possible.  If you prefer to only work with the internal format (like
     {{{findex(org-table-toggle-formula-debugger)}}}
   - {{{kbd(C-c @{)}}} ::
     Toggle the formula debugger on and off
-    ({{{code(org-table-toggle-formula-debugger)}}}).  See below.
+    (~org-table-toggle-formula-debugger~).  See below.
   - {{{orgcmd(C-c ',org-table-edit-formulas)}}} :: Edit all formulas
     for the current table in a special buffer, where the
     formulas will be displayed one per line.  If the current field has an
@@ -2391,7 +2384,7 @@ if possible.  If you prefer to only work with the internal format (like
     prefix, also apply the new formulas to the entire table.
   - {{{orgcmd(C-c C-q,org-table-fedit-abort)}}} :: Exit the formula editor without installing changes.
   - {{{orgcmd(C-c C-r,org-table-fedit-toggle-ref-type)}}} :: Toggle all references in the formula editor between standard (like
-    {{{code(B3)}}}) and internal (like {{{code(@@3$2)}}}).
+    ~B3~) and internal (like ~@3$2~).
   - {{{orgcmd(@key{TAB},org-table-fedit-lisp-indent)}}} :: Pretty-print or indent Lisp formula at point.  When in a line containing
     a Lisp formula, format the formula according to Emacs Lisp rules.
     Another {{{key(TAB)}}} collapses the formula back again.  In the open
@@ -2407,7 +2400,7 @@ if possible.  If you prefer to only work with the internal format (like
     {{{findex(org-table-fedit-ref-left)}}}
     {{{findex(org-table-fedit-ref-right)}}}
     Shift the reference at point.  For example, if the reference is
-    {{{code(B3)}}} and you press {{{kbd(S-@key{right)}}}, it will become {{{code(C3)}}}.
+    ~B3~ and you press {{{kbd(S-@key{right})}}}, it will become ~C3~.
     This also works for relative references and for hline references.
   - {{{orgcmdkkcc(M-S-@key{up},M-S-@key{down},org-table-fedit-line-up,org-table-fedit-line-down)}}} ::
     Move the test line for column formulas in the Org buffer up and
@@ -2434,12 +2427,13 @@ recalculation commands in the table.
 
 {{{cindex(formula debugging)}}}
 {{{cindex(debugging, of table formulas)}}}
+
 When the evaluation of a formula leads to an error, the field content
-becomes the string {{{samp(#ERROR)}}}.  If you would like see what is going
-on during variable substitution and calculation in order to find a bug,
-turn on formula debugging in the {{{code(Tbl)}}} menu and repeat the
-calculation, for example by pressing {{{kbd(C-u C-u C-c = @key{RET)}}}} in a
-field.  Detailed information will be displayed.
+becomes the string {{{samp(#ERROR)}}}. If you would like see what is
+going on during variable substitution and calculation in order to find
+a bug, turn on formula debugging in the ~Tbl~ menu and repeat the
+calculation, for example by pressing {{{kbd(C-u C-u C-c =
+@key{RET})}}} in a field. Detailed information will be displayed.
 
 *** Updating the table    
     :PROPERTIES:
@@ -2537,7 +2531,7 @@ The marking characters have the following meaning:
     Parameters work exactly like constants, only that they can be defined on
    a per-table basis.
   - # :: Fields in this row are automatically recalculated when pressing
-    {{{key(TAB)}}} or {{{key(RET)}}} or {{{kbd(S-@key{TAB)}}}} in this row.  Also, this row
+    {{{key(TAB)}}} or {{{key(RET)}}} or {{{kbd(S-@key{TAB})}}} in this row.  Also, this row
     is selected for a global recalculation with {{{kbd(C-u C-c *)}}}.  Unmarked
     lines will be left alone by this command.
   - * :: Selects this line for global recalculation with {{{kbd(C-u C-c *)}}}, but
@@ -2552,7 +2546,7 @@ The marking characters have the following meaning:
 
 Finally, just to whet your appetite for what can be done with the
 fantastic {{{file(calc.el)}}} package, here is a table that computes the Taylor
-series of degree {{{code(n)}}} at location {{{code(x)}}} for a couple of
+series of degree ~n~ at location ~x~ for a couple of
 functions.
 
 #+begin_example
@@ -2580,7 +2574,7 @@ functions.
 Org-Plot can produce 2D and 3D graphs of information stored in org
 tables using [[http://www.gnuplot.info/][Gnuplot]] and [[http://cars9.uchicago.edu/~ravel/software/gnuplot-mode.html][gnuplot-mode]]. To see this in action, ensure
 that you have both Gnuplot and Gnuplot-mode installed on your system,
-then call {{{code(org-plot/gnuplot)}}} on the following table.
+then call ~org-plot/gnuplot~ on the following table.
 
 #+begin_example
 ,#+PLOT: title:"Citas" ind:1 deps:(3) type:2d with:histograms set:"yrange [0:]"
@@ -2595,7 +2589,7 @@ then call {{{code(org-plot/gnuplot)}}} on the following table.
 
 Notice that Org Plot is smart enough to apply the table's headers as
 labels. Further control over the labels, type, content, and appearance
-of plots can be exercised through the {{{code(#+PLOT:)}}} lines preceding a
+of plots can be exercised through the ~#+PLOT:~ lines preceding a
 table. See below for a complete list of Org-plot options. For more
 information and examples see the [[http://orgmode.org/worg/org-tutorials/org-plot.html][Org-plot tutorial]].
 
@@ -2604,26 +2598,26 @@ information and examples see the [[http://orgmode.org/worg/org-tutorials/org-plo
 #+attr_texinfo: :table-type "table" :indic "@code"
   - set :: Specify any {{{command(gnuplot)}}} option to be set when graphing.
   - title :: Specify the title of the plot.
-  - ind :: Specify which column of the table to use as the {{{code(x)}}} axis.
+  - ind :: Specify which column of the table to use as the ~x~ axis.
   - deps :: Specify the columns to graph as a Lisp style list, surrounded by parentheses
-    and separated by spaces for example {{{code(dep:(3 4))}}} to graph the third and
-    fourth columns (defaults to graphing all other columns aside from the {{{code(ind)}}}
+    and separated by spaces for example ~dep:(3 4)~ to graph the third and
+    fourth columns (defaults to graphing all other columns aside from the ~ind~
     column).
-  - type :: Specify whether the plot will be {{{code(2d)}}}, {{{code(3d)}}}, or {{{code(grid)}}}.
-  - with :: Specify a {{{code(with)}}} option to be inserted for every col being plotted
-    (e.g.: {{{code(lines)}}}, {{{code(points)}}}, {{{code(boxes)}}}, {{{code(impulses)}}}, etc...).
-    Defaults to {{{code(lines)}}}.
-  - file :: If you want to plot to a file, specify {{{code("@var{path/to/desired/output-file}")}}}.
-  - labels :: List of labels to be used for the {{{code(deps)}}} (defaults to the column headers
+  - type :: Specify whether the plot will be ~2d~, ~3d~, or ~grid~.
+  - with :: Specify a ~with~ option to be inserted for every col being plotted
+    (e.g.: ~lines~, ~points~, ~boxes~, ~impulses~, etc...).
+    Defaults to ~lines~.
+  - file :: If you want to plot to a file, specify ~"@var{path/to/desired/output-file}"~.
+  - labels :: List of labels to be used for the ~deps~ (defaults to the column headers
     if they exist).
   - line :: Specify an entire line to be inserted in the Gnuplot script.
-  - map :: When plotting {{{code(3d)}}} or {{{code(grid)}}} types, set this to {{{code(t)}}} to graph a
-    flat mapping rather than a {{{code(3d)}}} slope.
+  - map :: When plotting ~3d~ or ~grid~ types, set this to ~t~ to graph a
+    flat mapping rather than a ~3d~ slope.
   - timefmt ::  Specify format of Org mode timestamps as they will be parsed by Gnuplot.
     Defaults to {{{samp(%Y-%m-%d-%H:%M:%S)}}}.
   - script :: If you want total control, you can specify a script file (place the file name
     between double-quotes) which will be used to plot.  Before plotting, every
-    instance of {{{code($datafile)}}} in the specified script will be replaced with
+    instance of ~$datafile~ in the specified script will be replaced with
     the path to the generated data file.  Note: even if you set this option, you
     may still want to specify the plot type, as that can impact the content of
     the data file.
@@ -3163,29 +3157,28 @@ See the man page for ginstall-info for command line arguments
 [fn:2]  If your Emacs distribution does not come with Org,
 the function =org-version= will not be defined.
 
-[fn:3]  The {{{code(master)}}} branch is where development takes place.
+[fn:3]  The ~master~ branch is where development takes place.
 
 [fn:4] Export to iCalendar supports TODO and agenda items only.
 
 [fn:5] If you don't use font-lock globally, turn it on in an Org
-buffer with {{{code((add-hook 'org-mode-hook 'turn-on-font-lock))}}}.
+buffer with ~(add-hook 'org-mode-hook 'turn-on-font-lock)~.
 
 [fn:6] Please consider subscribing to the
 mailing list in order to minimize the work the mailing list
 moderators have to do.
 
 [fn:7] Easy templates insert lowercase keywords and
-Babel dynamically inserts {{{code(#+results)}}}.
+Babel dynamically inserts ~#+results~.
 
-[fn:8] See the variables {{{code(org-special-ctrl-a/e)}}},
-{{{code(org-special-ctrl-k)}}}, and
-{{{code(org-ctrl-k-protect-subtree)}}} to configure special
+[fn:8] See the variables ~org-special-ctrl-a/e~,
+~org-special-ctrl-k~, and
+~org-ctrl-k-protect-subtree~ to configure special
 behavior of @@info:@kbd{C-a}@@, @@info:@kbd{C-e}@@, and
 @@info:@kbd{C-k}@@ in headlines. Note that clocking only works with
 headings indented less than 30 stars.
 
-[fn:9]  See the option
-{{{code(org-cycle-global-at-bob)}}}.
+[fn:9]  See the option ~org-cycle-global-at-bob~.
 
 [fn:10] The indirect buffer
 @@info:@ifinfo@@
@@ -3199,64 +3192,64 @@ tree.  Editing the indirect buffer will also change the original buffer,
 but without affecting visibility in that buffer.
 
 [fn:11] If you do not want the line to be split, customize the
-variable {{{code(org-M-RET-may-split-line)}}}.
+variable ~org-M-RET-may-split-line~.
 
 [fn:12] This does not work under XEmacs, because
 XEmacs uses selective display for outlining, not text properties.
 
 [fn:13] This depends on the option
-{{{code(org-remove-highlights-with-change)}}}. 
+~org-remove-highlights-with-change~. 
 
 [fn:14] See also the variables
-{{{code(org-show-hierarchy-above)}}},
-{{{code(org-show-following-heading)}}},
-{{{code(org-show-siblings)}}}, and
-{{{code(org-show-entry-below)}}} for detailed control on how much
+~org-show-hierarchy-above~,
+~org-show-following-heading~,
+~org-show-siblings~, and
+~org-show-entry-below~ for detailed control on how much
 context is shown around each match.
 
-[fn:15] When using {{{samp(*)}}} as a bullet, lines must be indented or
+[fn:15] When using ~*~ as a bullet, lines must be indented or
 they will be seen as top-level headlines.  Also, when you are hiding leading
 stars to get a clean outline view, plain list items starting with a star may
-be hard to distinguish from true headlines.  In short: even though {{{samp(*)}}}
+be hard to distinguish from true headlines.  In short: even though ~*~
 is supported, it may be better to not use it for plain list items.
 
 [fn:16] You can also get {{{samp(a.)}}}, {{{samp(A.)}}}, {{{samp(a))}}} and
-{{{samp(A))}}} by configuring {{{code(org-alphabetical-lists)}}}.  To minimize
+{{{samp(A))}}} by configuring ~org-alphabetical-lists~.  To minimize
 confusion with normal text, those are limited to one character only.  Beyond
 that limit, bullets will automatically fallback to numbers.
 
 [fn:17] If there's a checkbox in the item, the cookie
 must be put /before/ the checkbox.  If you have activated alphabetical
-lists, you can also use counters like {{{code([@@b])}}}.
+lists, you can also use counters like ~[@@b]~.
 
-[fn:18] See also {{{code(org-empty-line-terminates-plain-lists)}}}.
+[fn:18] See also ~org-empty-line-terminates-plain-lists~.
 
 [fn:19] Org only changes the filling settings for Emacs.  For
 XEmacs, you should use Kyle E. Jones' {{{file(filladapt.el)}}}.
 
 [fn:20] If you do not want the item to be split, customize the
-variable {{{code(org-M-RET-may-split-line)}}}.
+variable ~org-M-RET-may-split-line~.
 
 [fn:21] If you want to
 cycle around items that way, you may customize
-{{{code(org-list-use-circular-motion)}}}.
+~org-list-use-circular-motion~.
 
-[fn:22] See {{{code(org-list-use-circular-motion)}}} for a cyclic behavior.
+[fn:22] See ~org-list-use-circular-motion~ for a cyclic behavior.
 
 [fn:23] You can filter out any of them by configuring
-    {{{code(org-plain-list-ordered-item-terminator)}}}.
+    ~org-plain-list-ordered-item-terminator~.
 
 [fn:24] You can define additional drawers on a
-per-file basis with a line like {{{code(#+DRAWERS: HIDDEN STATE)}}}.
+per-file basis with a line like ~#+DRAWERS: HIDDEN STATE~.
 
-[fn:25] The corresponding in-buffer options are {{{code(fnadjust)}}}
-and {{{code(nofnadjust)}}}. 
+[fn:25] The corresponding in-buffer options are ~fnadjust~
+and ~nofnadjust~. 
 
-[fn:26] The corresponding in-buffer setting is: {{{code(#+STARTUP:
-fninline)}}} or {{{code(#+STARTUP: nofninline)}}}.
+[fn:26] The corresponding in-buffer setting is: ~#+STARTUP:
+fninline~ or ~#+STARTUP: nofninline~.
 
 [fn:27] To insert a vertical bar into a table
-field, use {{{code(\\vert)}} or, inside a word {{{code(abc\\vert@{@}def)}}}.
+field, use ~\\vert~ or, inside a word ~abc\\vert@{@}def~.
 
 [fn:28] This feature does not work on XEmacs.
 
@@ -3268,17 +3261,30 @@ effect when exporting to HTML.
 [fn:31] Org will understand references typed by the
 user as {{{samp(B4)}}}, but it will not use this syntax when offering a formula
 for editing.  You can customize this behavior using the variable
-{{{code(org-table-use-standard-references)}}}.
+~org-table-use-standard-references~.
 
-[fn:32] The {{{code(printf)}}}
+[fn:32] The ~printf~
 reformatting is limited in precision because the value passed to it is
-converted into an {{{code(integer)}}} or {{{code(double)}}}. The
-{{{code(integer)}}} is limited in size by truncating the signed value
-to 32 bits. The {{{code(double)}}} is limited in precision to 64 bits
+converted into an ~integer~ or ~double~. The
+~integer~ is limited in size by truncating the signed value
+to 32 bits. The ~double~ is limited in precision to 64 bits
 overall which leaves approximately 16 significant decimal digits.
 
 [fn:33] Such names must start with an
 alphabetic character and use only alphanumeric/underscore characters.
+
+[fn:34] For backward compatibility you
+can also use special names like ~$LR5~ and ~$LR12~ to
+refer in a stable way to the fifth and twelfth field in the last row of the
+table. However, this syntax is deprecated, it should not be used for
+new documents. Use ~@>$~ instead.
+
+[fn:35] {{{file(constants.el)}}} can
+supply the values of constants in two different unit systems, ~SI~
+and ~cgs~.  Which one is used depends on the value of the variable
+~constants-unit-system~.  You can use the ~#+STARTUP~ options
+~constSI~ and ~constcgs~ to set this value for the current
+buffer.
 
 * About orgmanual.org                                              :noexport:
 This document intends to be Org mode source for the Org mode manual
@@ -3562,7 +3568,7 @@ Perhaps shorten to "All the rest"
 (defun tsd-simple-command-macros ()
   "Make macros out of simple @ commands"
   (interactive)
-  (query-replace-regexp "@\\([command|tsubheading|pxref|samp|code|file|key|kbd]+\\){\\([^}]*\\)}" "{{{\\1(\\2)}}}" nil))
+  (query-replace-regexp "@\\([command|tsubheading|pxref|samp|file|key|kbd]+\\){\\([^}]*\\)}" "{{{\\1(\\2)}}}" nil))
 (define-key org-mode-map (kbd "C-c s") 'tsd-simple-command-macros)
 #+end_src
 
