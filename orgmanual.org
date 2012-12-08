@@ -285,6 +285,7 @@
 #+MACRO: file @@info:@file{$1}@@
 #+MACRO: key @@info:@key{$1}@@
 #+MACRO: kbd @@info:@kbd{$1}@@
+#+MACRO: tsubheading @@info:@tsubheading{$1}@@
 
 #+MACRO: orgcmd @@info:@orgcmd{$1,$2}@@
 #+MACRO: xorgcmd @@info:@xorgcmd{$1,$2}@@
@@ -1511,7 +1512,7 @@ lines, Orgstruct mode lurks silently in the shadows.  When you use
 settings into that mode, and detect item context after the first line of an
 item.
 
-* Tables                                                           :noexport:
+* Tables
   :PROPERTIES:
   :DESCRIPTION: Pure magic for quick formatting
   :END:
@@ -1519,226 +1520,206 @@ item.
 {{{cindex(editing tables)}}}
 
 Org comes with a fast and intuitive table editor.  Spreadsheet-like
-calculations are supported using the Emacs @file{calc} package
+calculations are supported using the Emacs {{{file(calc)}}} package
 ({{{pxref(Top, Calc, , calc, Gnu Emacs Calculator Manual)}}}).
 
-** Built-in table editor
+** Built-in table editor 
    :PROPERTIES:
    :DESCRIPTION: Simple tables
    :END:
 {{{cindex(table editor, built-in)}}}
 
-Org makes it easy to format tables in plain ASCII.  Any line with @samp{|} as
-the first non-whitespace character is considered part of a table.  @samp{|}
-is also the column separator@footnote{To insert a vertical bar into a table
-field, use @code{\vert} or, inside a word @code{abc\vert@{@}def}.}.  A table
+Org makes it easy to format tables in plain ASCII. Any line with
+{{{samp(|)}}} as the first non-whitespace character is considered part
+of a table. {{{samp(|)}}} is also the column separator.[fn:27] A table
 might look like this:
 
-@example
+#+begin_example
 | Name  | Phone | Age |
 |-------+-------+-----|
 | Peter |  1234 |  17 |
 | Anna  |  4321 |  25 |
-@end example
+#+end_example
 
-A table is re-aligned automatically each time you press @key{TAB} or
-@key{RET} or @kbd{C-c C-c} inside the table.  @key{TAB} also moves to
-the next field (@key{RET} to the next row) and creates new table rows
-at the end of the table or before horizontal lines.  The indentation
-of the table is set by the first line.  Any line starting with
-@samp{|-} is considered as a horizontal separator line and will be
-expanded on the next re-align to span the whole table width.  So, to
-create the above table, you would only type
 
-@example
+A table is re-aligned automatically each time you press {{{key(TAB)}}}
+or {{{key(RET)}}} or {{{kbd(C-c C-c)}}} inside the table.
+{{{key(TAB)}}} also moves to the next field ({{{key(RET)}}} to the
+next row) and creates new table rows at the end of the table or before
+horizontal lines. The indentation of the table is set by the first
+line. Any line starting with {{{samp(|-)}}} is considered as a
+horizontal separator line and will be expanded on the next re-align to
+span the whole table width. So, to create the above table, you would
+only type
+
+#+begin_example
 |Name|Phone|Age|
 |-
-@end example
+#+end_example
 
-@noindent and then press @key{TAB} to align the table and start filling in
-fields.  Even faster would be to type @code{|Name|Phone|Age} followed by
-@kbd{C-c @key{RET}}.
+
+{{{noindent}}} and then press {{{key(TAB)}}} to align the table and start
+filling in fields. Even faster would be to type
+{{{code(|Name|Phone|Age)}}} followed by {{{kbd(C-c @key{RET)}}}.
 
 {{{vindex(org-enable-table-editor)}}}
 {{{vindex(org-table-auto-blank-field)}}}
-When typing text into a field, Org treats @key{DEL},
-@key{Backspace}, and all character keys in a special way, so that
+When typing text into a field, Org treats {{{key(DEL)}}},
+{{{key(Backspace)}}}, and all character keys in a special way, so that
 inserting and deleting avoids shifting other fields.  Also, when
-typing @emph{immediately after the cursor was moved into a new field
-with @kbd{@key{TAB}}, @kbd{S-@key{TAB}} or @kbd{@key{RET}}}, the
+typing /immediately after the cursor was moved into a new field with {{{kbd(@key{TAB)}}}, {{{kbd(S-@key{TAB)}}} or {{{kbd(@key{RET)}}}/, the
 field is automatically made blank.  If this behavior is too
 unpredictable for you, configure the variables
-@code{org-enable-table-editor} and @code{org-table-auto-blank-field}.
+{{{code(org-enable-table-editor)}}} and {{{code(org-table-auto-blank-field)}}}.
 
-@table @kbd
-@tsubheading{Creation and conversion}
-@orgcmd{C-c |,org-table-create-or-convert-from-region}
-Convert the active region to table.  If every line contains at least one
-TAB character, the function assumes that the material is tab separated.
-If every line contains a comma, comma-separated values (CSV) are assumed.
-If not, lines are split at whitespace into fields.  You can use a prefix
-argument to force a specific separator: @kbd{C-u} forces CSV, @kbd{C-u
-C-u} forces TAB, and a numeric argument N indicates that at least N
-consecutive spaces, or alternatively a TAB will be the separator.
-@*
-If there is no active region, this command creates an empty Org
-table.  But it is easier just to start typing, like
-@kbd{|Name|Phone|Age @key{RET} |- @key{TAB}}.
+#+attr_texinfo: :table-type "table" :indic "@asis"
+  {{{tsubheading(Creation and conversion)}}}
+  - {{{orgcmd(C-c |,org-table-create-or-convert-from-region)}}} :: Convert the active region to table.  If every line contains at least one
+    TAB character, the function assumes that the material is tab separated.
+    If every line contains a comma, comma-separated values (CSV) are assumed.
+    If not, lines are split at whitespace into fields.  You can use a prefix
+    argument to force a specific separator: {{{kbd(C-u)}}} forces CSV,
+    {{{kbd(C-u C-u)}}} 
+    forces TAB, and a numeric argument N indicates that at least N
+    consecutive spaces, or alternatively a TAB will be the separator.
+    @@info:@*@@
+    If there is no active region, this command creates an empty Org
+    table.  But it is easier just to start typing, like
+    {{{kbd(|Name|Phone|Age @key{RET} |- @key{TAB})}}}.
 
-@tsubheading{Re-aligning and field motion}
-@orgcmd{C-c C-c,org-table-align}
-Re-align the table without moving the cursor.
-@c
-@orgcmd{<TAB>,org-table-next-field}
-Re-align the table, move to the next field.  Creates a new row if
-necessary.
-@c
-@orgcmd{S-@key{TAB},org-table-previous-field}
-Re-align, move to previous field.
-@c
-@orgcmd{@key{RET},org-table-next-row}
-Re-align the table and move down to next row.  Creates a new row if
-necessary.  At the beginning or end of a line, @key{RET} still does
-NEWLINE, so it can be used to split a table.
-@c
-@orgcmd{M-a,org-table-beginning-of-field}
-Move to beginning of the current table field, or on to the previous field.
-@orgcmd{M-e,org-table-end-of-field}
-Move to end of the current table field, or on to the next field.
+    {{{tsubheading(Re-aligning and field motion)}}}
+  - {{{orgcmd(C-c C-c,org-table-align)}}} :: Re-align the table without moving the cursor.
 
-@tsubheading{Column and row editing}
-@orgcmdkkcc{M-@key{left},M-@key{right},org-table-move-column-left,org-table-move-column-right}
-Move the current column left/right.
-@c
-@orgcmd{M-S-@key{left},org-table-delete-column}
-Kill the current column.
-@c
-@orgcmd{M-S-@key{right},org-table-insert-column}
-Insert a new column to the left of the cursor position.
-@c
-@orgcmdkkcc{M-@key{up},M-@key{down},org-table-move-row-up,org-table-move-row-down}
-Move the current row up/down.
-@c
-@orgcmd{M-S-@key{up},org-table-kill-row}
-Kill the current row or horizontal line.
-@c
-@orgcmd{M-S-@key{down},org-table-insert-row}
-Insert a new row above the current row.  With a prefix argument, the line is
-created below the current one.
-@c
-@orgcmd{C-c -,org-table-insert-hline}
-Insert a horizontal line below current row.  With a prefix argument, the line
-is created above the current line.
-@c
-@orgcmd{C-c @key{RET},org-table-hline-and-move}
-Insert a horizontal line below current row, and move the cursor into the row
-below that line.
-@c
-@orgcmd{C-c ^,org-table-sort-lines}
-Sort the table lines in the region.  The position of point indicates the
-column to be used for sorting, and the range of lines is the range
-between the nearest horizontal separator lines, or the entire table.  If
-point is before the first column, you will be prompted for the sorting
-column.  If there is an active region, the mark specifies the first line
-and the sorting column, while point should be in the last line to be
-included into the sorting.  The command prompts for the sorting type
-(alphabetically, numerically, or by time).  When called with a prefix
-argument, alphabetic sorting will be case-sensitive.
+  - {{{orgcmd(<TAB>,org-table-next-field)}}} ::
+    Re-align the table, move to the next field.  Creates a new row if
+    necessary.
 
-@tsubheading{Regions}
-@orgcmd{C-c C-x M-w,org-table-copy-region}
-Copy a rectangular region from a table to a special clipboard.  Point and
-mark determine edge fields of the rectangle.  If there is no active region,
-copy just the current field.  The process ignores horizontal separator lines.
-@c
-@orgcmd{C-c C-x C-w,org-table-cut-region}
-Copy a rectangular region from a table to a special clipboard, and
-blank all fields in the rectangle.  So this is the ``cut'' operation.
-@c
-@orgcmd{C-c C-x C-y,org-table-paste-rectangle}
-Paste a rectangular region into a table.
-The upper left corner ends up in the current field.  All involved fields
-will be overwritten.  If the rectangle does not fit into the present table,
-the table is enlarged as needed.  The process ignores horizontal separator
-lines.
-@c
-@orgcmd{M-@key{RET},org-table-wrap-region}
-Split the current field at the cursor position and move the rest to the line
-below.  If there is an active region, and both point and mark are in the same
-column, the text in the column is wrapped to minimum width for the given
-number of lines.  A numeric prefix argument may be used to change the number
-of desired lines.  If there is no region, but you specify a prefix argument,
-the current field is made blank, and the content is appended to the field
-above.
+  - {{{orgcmd(S-@key{TAB},org-table-previous-field)}}} :: Re-align, move to previous field.
 
-@tsubheading{Calculations}
-{{{cindex(formula, in tables)}}}
-{{{cindex(calculations, in tables)}}}
-{{{cindex(region, active)}}}
-{{{cindex(active region)}}}
-{{{cindex(transient mark mode)}}}
-@orgcmd{C-c +,org-table-sum}
-Sum the numbers in the current column, or in the rectangle defined by
-the active region.  The result is shown in the echo area and can
-be inserted with @kbd{C-y}.
-@c
-@orgcmd{S-@key{RET},org-table-copy-down}
-{{{vindex(org-table-copy-increment)}}}
-When current field is empty, copy from first non-empty field above.  When not
-empty, copy current field down to next row and move cursor along with it.
-Depending on the variable @code{org-table-copy-increment}, integer field
-values will be incremented during copy.  Integers that are too large will not
-be incremented.  Also, a @code{0} prefix argument temporarily disables the
-increment.  This key is also used by shift-selection and related modes
-({{{pxref(Conflicts)}}}).
+  - {{{orgcmd(@key{RET},org-table-next-row)}}} :: Re-align the table and move down to next row.  Creates a new row if
+    necessary.  At the beginning or end of a line, {{{key(RET)}}} still does
+    NEWLINE, so it can be used to split a table.
+  - {{{orgcmd(M-a,org-table-beginning-of-field)}}} :: Move to beginning of the current table field, or on to the previous field.
+  - {{{orgcmd(M-e,org-table-end-of-field)}}} :: Move to end of the current table field, or on to the next field.
 
-@tsubheading{Miscellaneous}
-@orgcmd{C-c `,org-table-edit-field}
-Edit the current field in a separate window.  This is useful for fields that
-are not fully visible ({{{pxref(Column width and alignment)}}}).  When called with
-a @kbd{C-u} prefix, just make the full field visible, so that it can be
-edited in place.  When called with two @kbd{C-u} prefixes, make the editor
-window follow the cursor through the table and always show the current
-field.  The follow mode exits automatically when the cursor leaves the table,
-or when you repeat this command with @kbd{C-u C-u C-c `}.
-@c
-@item M-x org-table-import
-Import a file as a table.  The table should be TAB or whitespace
-separated.  Use, for example, to import a spreadsheet table or data
-from a database, because these programs generally can write
-TAB-separated text files.  This command works by inserting the file into
-the buffer and then converting the region to a table.  Any prefix
-argument is passed on to the converter, which uses it to determine the
-separator.
-@orgcmd{C-c |,org-table-create-or-convert-from-region}
-Tables can also be imported by pasting tabular text into the Org
-buffer, selecting the pasted text with @kbd{C-x C-x} and then using the
-@kbd{C-c |} command (see above under @i{Creation and conversion}).
-@c
-@item M-x org-table-export
-@findex org-table-export
-{{{vindex(org-table-export-default-format)}}}
-Export the table, by default as a TAB-separated file.  Use for data
-exchange with, for example, spreadsheet or database programs.  The format
-used to export the file can be configured in the variable
-@code{org-table-export-default-format}.  You may also use properties
-@code{TABLE_EXPORT_FILE} and @code{TABLE_EXPORT_FORMAT} to specify the file
-name and the format for table export in a subtree.  Org supports quite
-general formats for exported tables.  The exporter format is the same as the
-format used by Orgtbl radio tables, see @ref{Translator functions}, for a
-detailed description.
-@end table
+    {{{tsubheading(Column and row editing)}}}
+  - {{{orgcmdkkcc(M-@key{left},M-@key{right},org-table-move-column-left,org-table-move-column-right)}}} ::
+    Move the current column left/right.
+
+  - {{{orgcmd(M-S-@key{left},org-table-delete-column)}}} :: Kill the current column.
+
+  - {{{orgcmd(M-S-@key{right},org-table-insert-column)}}} :: Insert a new column to the left of the cursor position.
+
+  - {{{{orgcmdkkcc{M-@key{up},M-@key{down},org-table-move-row-up,org-table-move-row-down)}}} ::
+    Move the current row up/down.
+
+  - {{{orgcmd(M-S-@key{up},org-table-kill-row)}}} :: Kill the current row or horizontal line.
+
+  - {{{orgcmd(M-S-@key{down},org-table-insert-row)}}} :: Insert a new row above the current row.  With a prefix argument, the line is
+    created below the current one.
+
+  - {{{orgcmd(C-c -,org-table-insert-hline)}}} :: Insert a horizontal line below current row.  With a prefix argument, the line
+    is created above the current line.
+  - {{{orgcmd(C-c @key{RET},org-table-hline-and-move)}}} :: Insert a horizontal line below current row, and move the cursor into the row
+    below that line.
+
+  - {{{orgcmd(C-c ^,org-table-sort-lines)}}} :: Sort the table lines in the region.  The position of point indicates the
+    column to be used for sorting, and the range of lines is the range
+    between the nearest horizontal separator lines, or the entire table.  If
+    point is before the first column, you will be prompted for the sorting
+    column.  If there is an active region, the mark specifies the first line
+    and the sorting column, while point should be in the last line to be
+    included into the sorting.  The command prompts for the sorting type
+    (alphabetically, numerically, or by time).  When called with a prefix
+    argument, alphabetic sorting will be case-sensitive.
+
+    {{{tsubheading(Regions)}}}
+  - {{{orgcmd(C-c C-x M-w,org-table-copy-region)}}} :: Copy a rectangular region from a table to a special clipboard.  Point and
+    mark determine edge fields of the rectangle.  If there is no active region,
+    copy just the current field.  The process ignores horizontal separator lines.
+
+  - {{{orgcmd(C-c C-x C-w,org-table-cut-region)}}} :: Copy a rectangular region from a table to a special clipboard, and
+    blank all fields in the rectangle.  So this is the ``cut'' operation.
+
+  - {{{orgcmd(C-c C-x C-y,org-table-paste-rectangle)}}} :: Paste a rectangular region into a table.
+    The upper left corner ends up in the current field.  All involved fields
+    will be overwritten.  If the rectangle does not fit into the present table,
+    the table is enlarged as needed.  The process ignores horizontal separator
+    lines.
+
+  - {{{orgcmd(M-@key{RET},org-table-wrap-region)}}} :: Split the current field at the cursor position and move the rest to the line
+    below.  If there is an active region, and both point and mark are in the same
+    column, the text in the column is wrapped to minimum width for the given
+    number of lines.  A numeric prefix argument may be used to change the number
+    of desired lines.  If there is no region, but you specify a prefix argument,
+    the current field is made blank, and the content is appended to the field
+    above.
+
+    {{{tsubheading(Calculations)}}}
+    {{{cindex(formula, in tables)}}}
+    {{{cindex(calculations, in tables)}}}
+    {{{cindex(region, active)}}}
+    {{{cindex(active region)}}}
+    {{{cindex(transient mark mode)}}}
+    {{{orgcmd(C-c +,org-table-sum)}}}Sum the numbers in the current column, or in the rectangle defined by
+    the active region.  The result is shown in the echo area and can
+    be inserted with {{{kbd(C-y)}}}.
+
+  - {{{orgcmd(S-@key{RET},org-table-copy-down)}}} ::
+    {{{vindex(org-table-copy-increment)}}}
+    When current field is empty, copy from first non-empty field above.  When not
+    empty, copy current field down to next row and move cursor along with it.
+    Depending on the variable {{{code(org-table-copy-increment)}}}, integer field
+    values will be incremented during copy.  Integers that are too large will not
+    be incremented.  Also, a {{{code(0)}}} prefix argument temporarily disables the
+    increment.  This key is also used by shift-selection and related modes
+    ({{{pxref(Conflicts)}}}).
+
+    {{{tsubheading(Miscellaneous)}}}
+  - {{{orgcmd(C-c `,org-table-edit-field)}}} :: Edit the current field in a separate window.  This is useful for fields that
+    are not fully visible ({{{pxref(Column width and alignment)}}}).  When called with
+    a {{{kbd(C-u)}}} prefix, just make the full field visible, so that it can be
+    edited in place.  When called with two {{{kbd(C-u)}}} prefixes, make the editor
+    window follow the cursor through the table and always show the current
+    field.  The follow mode exits automatically when the cursor leaves the table,
+   or when you repeat this command with {{{kbd(C-u C-u C-c `)}}}.
+
+  - {{{kbd(M-x org-table-import)}}} ::
+    Import a file as a table.  The table should be TAB or whitespace
+    separated.  Use, for example, to import a spreadsheet table or data
+    from a database, because these programs generally can write
+    TAB-separated text files.  This command works by inserting the file into
+    the buffer and then converting the region to a table.  Any prefix
+    argument is passed on to the converter, which uses it to determine the
+    separator.
+  - {{{orgcmd(C-c |,org-table-create-or-convert-from-region)}}} :: Tables can also be imported by pasting tabular text into the Org
+    buffer, selecting the pasted text with {{{kbd(C-x C-x)}}} and then using the
+    {{{kbd(C-c |)}}} command (see above under @i{Creation and conversion}).
+
+  - {{{kbd(M-x org-table-export)}}} ::
+    {{{findex(org-table-export)}}}
+    {{{vindex(org-table-export-default-format)}}}
+    Export the table, by default as a TAB-separated file.  Use for data
+    exchange with, for example, spreadsheet or database programs.  The format
+    used to export the file can be configured in the variable
+    {{{code(org-table-export-default-format)}}}.  You may also use properties
+    {{{code(TABLE_EXPORT_FILE)}}} and {{{code(TABLE_EXPORT_FORMAT)}}} to specify the file
+    name and the format for table export in a subtree.  Org supports quite
+    general formats for exported tables.  The exporter format is the same as the
+    format used by Orgtbl radio tables, see [[Translator functions]], for a
+    detailed description.
 
 If you don't like the automatic table editor because it gets in your
-way on lines which you would like to start with @samp{|}, you can turn
+way on lines which you would like to start with {{{samp(|)}}}, you can turn
 it off with
 
-@lisp
+#+begin_src lisp
 (setq org-enable-table-editor nil)
-@end lisp
+#+end_src
 
-@noindent Then the only table command that still works is
-@kbd{C-c C-c} to do a manual re-align.
+
+{{{noindent}}} Then the only table command that still works is
+{{{kbd(C-c C-c)}}} to do a manual re-align.
 
 ** Column width and alignment
    :PROPERTIES:
@@ -1753,14 +1734,12 @@ of number-like versus non-number fields in the column.
 
 Sometimes a single field or a few fields need to carry more text, leading to
 inconveniently wide columns.  Or maybe you want to make a table with several
-columns having a fixed width, regardless of content.  To set@footnote{This
-feature does not work on XEmacs.} the width of a column, one field anywhere
-in the column may contain just the string @samp{<N>} where @samp{N} is an
-integer specifying the width of the column in characters.  The next re-align
+columns having a fixed width, regardless of content.  To set the width of a column, one field anywhere
+in the column may contain just the string {{{samp(<N>)}}} where {{{samp(N)}}} is an
+integer specifying the width of the column in characters.[fn:28]  The next re-align
 will then set the width of this column to this value.
 
-@example
-@group
+#+begin_example
 |---+------------------------------|               |---+--------|
 |   |                              |               |   | <6>    |
 | 1 | one                          |               | 1 | one    |
@@ -1768,42 +1747,40 @@ will then set the width of this column to this value.
 | 3 | This is a long chunk of text |     ----/     | 3 | This=> |
 | 4 | four                         |               | 4 | four   |
 |---+------------------------------|               |---+--------|
-@end group
-@end example
+#+end_example
 
-@noindent
-Fields that are wider become clipped and end in the string @samp{=>}.
+{{{noindent}}}
+Fields that are wider become clipped and end in the string {{{samp(=>)}}}.
 Note that the full text is still in the buffer but is hidden.
 To see the full text, hold the mouse over the field---a tool-tip window
 will show the full content.  To edit such a field, use the command
-@kbd{C-c `} (that is @kbd{C-c} followed by the backquote).  This will
-open a new window with the full field.  Edit it and finish with @kbd{C-c
-C-c}.
+{{{kbd(C-c `)}}} (that is {{{kbd(C-c)}}} followed by the backquote).  This will
+open a new window with the full field.  Edit it and finish with {{{kbd(C-c
+C-c)}}}.
 
 {{{vindex(org-startup-align-all-tables)}}}
 When visiting a file containing a table with narrowed columns, the
 necessary character hiding has not yet happened, and the table needs to
 be aligned before it looks nice.  Setting the option
-@code{org-startup-align-all-tables} will realign all tables in a file
+{{{code(org-startup-align-all-tables)}}} will realign all tables in a file
 upon visiting, but also slow down startup.  You can also set this option
 on a per-file basis with:
 
-@example
-#+STARTUP: align
-#+STARTUP: noalign
-@end example
+#+begin_example
+,#+STARTUP: align
+,#+STARTUP: noalign
+#+end_example
+
 
 If you would like to overrule the automatic alignment of number-rich columns
-to the right and of string-rich column to the left, you can use @samp{<r>},
-@samp{<c>}@footnote{Centering does not work inside Emacs, but it does have an
-effect when exporting to HTML.} or @samp{<l>} in a similar fashion.  You may
-also combine alignment and field width like this: @samp{<l10>}.
+to the right and of string-rich columns to the left, you can use {{{samp(<r>)}}},
+{{{samp(<c>)}}}[fn:29] or {{{samp(<l>)}}} in a similar fashion.  You may
+also combine alignment and field width like this: {{{samp(<l10>)}}}.
 
-Lines which only contain these formatting cookies will be removed
+A line that only contains these formatting cookies will be removed
 automatically when exporting the document.
 
-
-** Column groups
+** Column groups                
    :PROPERTIES:
    :DESCRIPTION: Grouping to trigger vertical lines
    :END:
@@ -1814,14 +1791,14 @@ lines because that is visually more satisfying in general.  Occasionally
 however, vertical lines can be useful to structure a table into groups
 of columns, much like horizontal lines can do for groups of rows.  In
 order to specify column groups, you can use a special row where the
-first field contains only @samp{/}.  The further fields can either
-contain @samp{<} to indicate that this column should start a group,
-@samp{>} to indicate the end of a column, or @samp{<>} (no space between @samp{<}
-and @samp{>}) to make a column
+first field contains only {{{samp(/)}}}.  The further fields can either
+contain {{{samp(<)}}} to indicate that this column should start a group,
+{{{samp(>)}}} to indicate the end of a column, or {{{samp(<>)}}} (no space between {{{samp(<)}}}
+and {{{samp(>)}}}) to make a column
 a group of its own.  Boundaries between column groups will upon export be
 marked with vertical lines.  Here is an example:
 
-@example
+#+begin_example
 | N | N^2 | N^3 | N^4 | sqrt(n) | sqrt[4](N) |
 |---+-----+-----+-----+---------+------------|
 | / |   < |     |   > |       < |          > |
@@ -1830,42 +1807,40 @@ marked with vertical lines.  Here is an example:
 | 3 |   9 |  27 |  81 |  1.7321 |     1.3161 |
 |---+-----+-----+-----+---------+------------|
 #+TBLFM: $2=$1^2::$3=$1^3::$4=$1^4::$5=sqrt($1)::$6=sqrt(sqrt(($1)))
-@end example
+#+end_example
 
 It is also sufficient to just insert the column group starters after
 every vertical line you would like to have:
 
-@example
+#+begin_example
 |  N | N^2 | N^3 | N^4 | sqrt(n) | sqrt[4](N) |
 |----+-----+-----+-----+---------+------------|
 | /  | <   |     |     | <       |            |
-@end example
-
+#+end_example
 
 ** The Orgtbl mode minor mode
    :PROPERTIES:
    :DESCRIPTION: The table editor as minor mode
    :TEXINFO_MENU_TITLE: Ogtbl mode
    :END:
-
 {{{cindex(Orgtbl mode)}}}
 {{{cindex(minor mode for tables)}}}
 
 If you like the intuitive way the Org table editor works, you
 might also want to use it in other modes like Text mode or Mail mode.
 The minor mode Orgtbl mode makes this possible.  You can always toggle
-the mode with @kbd{M-x orgtbl-mode}.  To turn it on by default, for
+the mode with {{{kbd(M-x orgtbl-mode)}}}.  To turn it on by default, for
 example in Message mode, use
 
-@lisp
+#+begin_src lisp
 (add-hook 'message-mode-hook 'turn-on-orgtbl)
-@end lisp
+#+end_src
 
 Furthermore, with some special setup, it is possible to maintain tables
 in arbitrary syntax with Orgtbl mode.  For example, it is possible to
-construct @LaTeX{} tables with the underlying ease and power of
+construct @@info:@LaTeX{}@@ tables with the underlying ease and power of
 Orgtbl mode, including spreadsheet capabilities.  For details, see
-@ref{Tables in arbitrary syntax}.
+[[Tables in arbitrary syntax]].
 
 ** The spreadsheet
    :PROPERTIES:
@@ -1875,11 +1850,11 @@ Orgtbl mode, including spreadsheet capabilities.  For details, see
 {{{cindex(spreadsheet capabilities)}}}
 {{{cindex(@file{calc} package)}}}
 
-The table editor makes use of the Emacs @file{calc} package to implement
+The table editor makes use of the Emacs {{{file(calc)}}} package to implement
 spreadsheet-like capabilities.  It can also evaluate Emacs Lisp forms to
 derive fields from other fields.  While fully featured, Org's implementation
 is not identical to other spreadsheets.  For example, Org knows the concept
-of a @emph{column formula} that will be applied to all non-header fields in a
+of a /column formula/ that will be applied to all non-header fields in a
 column without having to copy the formula to each relevant field.  There is
 also a formula debugger, and a formula editor with features for highlighting
 fields in the table corresponding to the references at the point in the
@@ -1894,156 +1869,152 @@ formula, moving these references by arrow keys
 To compute fields in the table from other fields, formulas must
 reference other fields or ranges.  In Org, fields can be referenced
 by name, by absolute coordinates, and by relative coordinates.  To find
-out what the coordinates of a field are, press @kbd{C-c ?} in that
-field, or press @kbd{C-c @}} to toggle the display of a grid.
+out what the coordinates of a field are, press {{{kbd(C-c ?)}}} in that
+field, or press {{{kbd(C-c @)}}}} to toggle the display of a grid.
 
-@subsubheading Field references
+**** Field references
 {{{cindex(field references)}}}
 {{{cindex(references, to fields)}}}
 
 Formulas can reference the value of another field in two ways.  Like in
 any other spreadsheet, you may reference fields with a letter/number
-combination like @code{B3}, meaning the 2nd field in the 3rd row.
+combination like {{{code(B3)}}}, meaning the 2nd field in the 3rd row.
 {{{vindex(org-table-use-standard-references)}}}
-However, Org prefers@footnote{Org will understand references typed by the
-user as @samp{B4}, but it will not use this syntax when offering a formula
-for editing.  You can customize this behavior using the variable
-@code{org-table-use-standard-references}.}  to use another, more general
+However, Org prefers[fn:31] to use another, more general
 representation that looks like this:
-@example
+
+#+begin_example
 @@@var{row}$@var{column}
-@end example
+#+end_example
 
-Column specifications can be absolute like @code{$1},
-@code{$2},...@code{$@var{N}}, or relative to the current column (i.e.@: the
-column of the field which is being computed) like @code{$+1} or @code{$-2}.
-@code{$<} and @code{$>} are immutable references to the first and last
-column, respectively, and you can use @code{$>>>} to indicate the third
-column from the right.
+Column specifications can be absolute like {{{code($1)}}},
+{{{code($2)}}},...{{{code($@var{N)}}}}, or relative to the current
+column (i.e.: the column of the field which is being computed) like
+{{{code($+1)}}} or {{{code($-2)}}}. {{{code($<)}}} and {{{code($>)}}}
+are immutable references to the first and last column, respectively,
+and you can use {{{code($>>>)}}} to indicate the third column from the
+right.
 
-The row specification only counts data lines and ignores horizontal separator
-lines (hlines).  Like with columns, you can use absolute row numbers
-@code{@@1}, @code{@@2},...@code{@@@var{N}}, and row numbers relative to the
-current row like @code{@@+3} or @code{@@-1}.  @code{@@<} and @code{@@>} are
-immutable references the first and last@footnote{For backward compatibility
-you can also use special names like @code{$LR5} and @code{$LR12} to refer in
-a stable way to the 5th and 12th field in the last row of the table.
-However, this syntax is deprecated, it should not be used for new documents.
-Use @code{@@>$} instead.} row in the table, respectively.  You may also
-specify the row relative to one of the hlines: @code{@@I} refers to the first
-hline, @code{@@II} to the second, etc@.  @code{@@-I} refers to the first such
-line above the current line, @code{@@+I} to the first such line below the
-current line.  You can also write @code{@@III+2} which is the second data line
-after the third hline in the table.
+The row specification only counts data lines and ignores horizontal
+separator lines (hlines). Like with columns, you can use absolute row
+numbers {{{code(@@1)}}}, {{{code(@@2)}}},...{{{code(@@@var{N)}}}}, and
+row numbers relative to the current row like {{{code(@@+3)}}} or
+{{{code(@@-1)}}}. {{{code(@@<)}}} and {{{code(@@>)}}} are immutable
+references the first and last@footnote{For backward compatibility you
+can also use special names like @code{$LR5} and {{{code($LR12)}}} to
+refer in a stable way to the fifth and twelfth field in the last row of the
+table. However, this syntax is deprecated, it should not be used for
+new documents. Use {{{code(@@>$)}}} instead.} row in the table,
+respectively. You may also specify the row relative to one of the
+hlines: {{{code(@@I)}}} refers to the first hline, {{{code(@@II)}}} to
+the second, etc@. {{{code(@@-I)}}} refers to the first such line above
+the current line, {{{code(@@+I)}}} to the first such line below the
+current line. You can also write {{{code(@@III+2)}}} which is the
+second data line after the third hline in the table.
 
-@code{@@0} and @code{$0} refer to the current row and column, respectively,
-i.e. to the row/column for the field being computed.  Also, if you omit
-either the column or the row part of the reference, the current row/column is
-implied.
+{{{code(@@0)}}} and {{{code($0)}}} refer to the current row and
+column, respectively, i.e., to the row/column for the field being
+computed. Also, if you omit either the column or the row part of the
+reference, the current row/column is implied.
 
-Org's references with @emph{unsigned} numbers are fixed references
+Org's references with /unsigned/ numbers are fixed references
 in the sense that if you use the same reference in the formula for two
 different fields, the same field will be referenced each time.
-Org's references with @emph{signed} numbers are floating
+Org's references with /signed/ numbers are floating
 references because the same reference operator can reference different
 fields depending on the field being calculated by the formula.
 
 Here are a few examples:
 
-@example
-@@2$3      @r{2nd row, 3rd column (same as @code{C2})}
-$5        @r{column 5 in the current row (same as @code{E&})}
-@@2        @r{current column, row 2}
-@@-1$-3    @r{the field one row up, three columns to the left}
-@@-I$2     @r{field just under hline above current row, column 2}
-@@>$5      @r{field in the last row, in column 5}
-@end example
+#+attr_texinfo: :table-type "table" :indic "@asis"
+  - {{{code(@@2$3)}}} :: 2nd row, 3rd column (same as {{{code(C2)}}})
+  - {{{code($5)}}} :: column 5 in the current row (same as {{{code(E&)}}})
+  - {{{code(@@2)}}} :: current column, row 2
+  - {{{code(@@-1$-3)}}} :: the field one row up, three columns to the left
+  - {{{code(@@-I$2)}}} :: field just under hline above current row, column 2
+  - {{{code(@@>$5)}}} :: field in the last row, in column 5
 
-@subsubheading Range references
+
+**** Range references
 {{{cindex(range references)}}}
 {{{cindex(references, to ranges)}}}
 
 You may reference a rectangular range of fields by specifying two field
-references connected by two dots @samp{..}.  If both fields are in the
-current row, you may simply use @samp{$2..$7}, but if at least one field
-is in a different row, you need to use the general @code{@@row$column}
-format at least for the first field (i.e the reference must start with
-@samp{@@} in order to be interpreted correctly).  Examples:
+references connected by two dots {{{samp(..)}}}.  If both fields are in the
+current row, you may simply use {{{samp($2..$7)}}}, but if at least one field
+is in a different row, you need to use the general {{{code(@@row$column)}}}
+format at least for the first field (i.e., the reference must start with
+{{{samp(@@)}}} in order to be interpreted correctly).  Examples:
 
-@example
-$1..$3        @r{first three fields in the current row}
-$P..$Q        @r{range, using column names (see under Advanced)}
-$<<<..$>>     @r{start in third column, continue to the one but last}
-@@2$1..@@4$3    @r{6 fields between these two fields (same as @code{A2..C4})}
-@@-1$-2..@@-1   @r{3 numbers from the column to the left, 2 up to current row}
-@@I..II        @r{between first and second hline, short for @code{@@I..@@II}}
-@end example
+#+attr_texinfo: :table-type "table" :indic "@asis"
+  - {{{code($1..$3)}}} :: first three fields in the current row
+  - {{{code($P..$Q)}}} :: range, using column names (see under Advanced)
+  - {{{code($<<<..$>>)}}} :: start in third column, continue to the one but last
+  - {{{code(@@2$1..@@4$3)}}} ::  six fields between these two fields (same as {{{code(A2..C4)}}})
+  - {{{code(@@-1$-2..@@-1)}}} :: three numbers from the column to the left, 2 up to current row
+  - {{{code(@@I..II)}}} ::  between first and second hline, short for {{{code(@@I..@@II)}}}
 
-@noindent Range references return a vector of values that can be fed
+
+{{{noindent}}} Range references return a vector of values that can be fed
 into Calc vector functions.  Empty fields in ranges are normally
 suppressed, so that the vector contains only the non-empty fields (but
-see the @samp{E} mode switch below).  If there are no non-empty fields,
-@samp{[0]} is returned to avoid syntax errors in formulas.
+see the {{{samp(E)}}} mode switch below).  If there are no non-empty fields,
+{{{samp([0])}}} is returned to avoid syntax errors in formulas.
 
-@subsubheading Field coordinates in formulas
+**** Field coordinates in formulas
 {{{cindex(field coordinates)}}}
 {{{cindex(coordinates, of field)}}}
 {{{cindex(row, of field coordinates)}}}
 {{{cindex(column, of field coordinates)}}}
 
-For Calc formulas and Lisp formulas @code{@@#} and @code{$#} can be used to
+For Calc formulas and Lisp formulas {{{code(@@#)}}} and {{{code($#)}}} can be used to
 get the row or column number of the field where the formula result goes.
-The traditional Lisp formula equivalents are @code{org-table-current-dline}
-and @code{org-table-current-column}.  Examples:
+The traditional Lisp formula equivalents are {{{code(org-table-current-dline)}}}
+and {{{code(org-table-current-column)}}}.  Examples:
 
-@example
-if(@@# % 2, $#, string(""))   @r{column number on odd lines only}
-$3 = remote(FOO, @@@@#$2)      @r{copy column 2 from table FOO into}
-                             @r{column 3 of the current table}
-@end example
+#+attr_texinfo: :table-type "table" :indic "@asis"
+  - {{{code(if(@@# % 2, $#, string("")))}}} :: column number on odd lines only
+  - {{{code($3 = remote(FOO, @@@@#$2))}}} ::  copy column 2 from table FOO into column 3 of the current table
 
-@noindent For the second example, table FOO must have at least as many rows
-as the current table.  Note that this is inefficient@footnote{The computation time scales as
-O(N^2) because table FOO is parsed for each field to be copied.} for large
-number of rows.
+{{{noindent}}} For the second example, table FOO must have at least as
+many rows as the current table. Note that this is inefficient for
+large number of rows.[fn:30]
 
-@subsubheading Named references
+**** Named references
 {{{cindex(named references)}}}
 {{{cindex(references, named)}}}
 {{{cindex(name, of column or field)}}}
 {{{cindex(constants, in calculations)}}}
 {{{cindex(#+CONSTANTS)}}}
-
 {{{vindex(org-table-formula-constants)}}}
-@samp{$name} is interpreted as the name of a column, parameter or
+{{{samp($name)}}} is interpreted as the name of a column, parameter or
 constant.  Constants are defined globally through the variable
-@code{org-table-formula-constants}, and locally (for the file) through a
+{{{code(org-table-formula-constants)}}}, and locally (for the file) through a
 line like
+#+begin_example
+,#+CONSTANTS: c=299792458. pi=3.14 eps=2.4e-6
+#+end_example
 
-@example
-#+CONSTANTS: c=299792458. pi=3.14 eps=2.4e-6
-@end example
-
-@noindent
+{{{noindent}}}
 {{{vindex(constants-unit-system)}}}
 {{{pindex(constants.el)}}}
 Also properties ({{{pxref(Properties and Columns)}}}) can be used as
-constants in table formulas: for a property @samp{:Xyz:} use the name
-@samp{$PROP_Xyz}, and the property will be searched in the current
+constants in table formulas: for a property {{{samp(:Xyz:)}}} use the name
+{{{samp($PROP_Xyz)}}}, and the property will be searched in the current
 outline entry and in the hierarchy above it.  If you have the
-@file{constants.el} package, it will also be used to resolve constants,
-including natural constants like @samp{$h} for Planck's constant, and
-units like @samp{$km} for kilometers@footnote{@file{constants.el} can
-supply the values of constants in two different unit systems, @code{SI}
-and @code{cgs}.  Which one is used depends on the value of the variable
-@code{constants-unit-system}.  You can use the @code{#+STARTUP} options
-@code{constSI} and @code{constcgs} to set this value for the current
+{{{file(constants.el)}}} package, it will also be used to resolve constants,
+including natural constants like {{{samp($h)}}} for Planck's constant, and
+units like {{{samp($km)}}} for kilometers@footnote{@file{constants.el} can
+supply the values of constants in two different unit systems, {{{code(SI)}}}
+and {{{code(cgs)}}}.  Which one is used depends on the value of the variable
+{{{code(constants-unit-system)}}}.  You can use the {{{code(#+STARTUP)}}} options
+{{{code(constSI)}}} and {{{code(constcgs)}}} to set this value for the current
 buffer.}.  Column names and parameters can be specified in special table
-lines.  These are described below, see @ref{Advanced features}.  All
+lines.  These are described below, see [[Advanced features]].  All
 names must start with a letter, and further consist of letters and
 numbers.
 
-@subsubheading Remote references
+**** Remote references
 {{{cindex(remote references)}}}
 {{{cindex(references, remote)}}}
 {{{cindex(references, to a different table)}}}
@@ -2054,17 +2025,17 @@ numbers.
 You may also reference constants, fields and ranges from a different table,
 either in the current file or even in a different file.  The syntax is
 
-@example
+#+begin_example
 remote(NAME-OR-ID,REF)
-@end example
+#+end_example
 
-@noindent
-where NAME can be the name of a table in the current file as set by a
-@code{#+TBLNAME: NAME} line before the table.  It can also be the ID of an
-entry, even in a different file, and the reference then refers to the first
-table in that entry.  REF is an absolute field or range reference as
-described above for example @code{@@3$3} or @code{$somename}, valid in the
-referenced table.
+{{{noindent}}} where NAME can be the name of a table in the current
+file as set by a {{{code(#+TBLNAME: NAME)}}} line before the table. It
+can also be the ID of an entry, even in a different file, and the
+reference then refers to the first table in that entry. REF is an
+absolute field or range reference as described above for example
+{{{code(@@3$3)}}} or {{{code($somename)}}}, valid in the referenced
+table.
 
 *** Formula syntax for Calc
     :PROPERTIES:
@@ -2074,16 +2045,16 @@ referenced table.
 {{{cindex(syntax, of formulas)}}}
 
 A formula can be any algebraic expression understood by the Emacs
-@file{Calc} package.  @b{Note that @file{calc} has the
-non-standard convention that @samp{/} has lower precedence than
-@samp{*}, so that @samp{a/b*c} is interpreted as @samp{a/(b*c)}.}  Before
-evaluation by @code{calc-eval} ({{{pxref(Calling Calc from
+{{{file(Calc)}}} package.  *Note*: {{{file(calc)}}} has the
+non-standard convention that {{{samp(/)}}} has lower precedence than
+{{{samp(*)}}}, so that {{{samp(a/b*c)}}} is interpreted as {{{samp(a/(b*c))}}}.  Before
+evaluation by {{{code(calc-eval)}}} ({{{pxref(Calling Calc from
 Your Programs, calc-eval, Calling Calc from Your Lisp Programs, calc, GNU
 Emacs Calc Manual)}}}),
 variable substitution takes place according to the rules described above.
 {{{cindex(vectors, in table calculations)}}}
 The range vectors can be directly fed into the Calc vector functions
-like @samp{vmean} and @samp{vsum}.
+like {{{samp(vmean)}}} and {{{samp(vsum)}}}.
 
 {{{cindex(format specifier)}}}
 {{{cindex(mode, for @file{calc})}}}
@@ -2092,60 +2063,54 @@ A formula can contain an optional mode string after a semicolon.  This
 string consists of flags to influence Calc and other modes during
 execution.  By default, Org uses the standard Calc modes (precision
 12, angular units degrees, fraction and symbolic modes off).  The display
-format, however, has been changed to @code{(float 8)} to keep tables
+format, however, has been changed to {{{code((float 8))}}} to keep tables
 compact.  The default settings can be configured using the variable
-@code{org-calc-default-modes}.
+{{{code(org-calc-default-modes)}}}.
 
-@example
-p20           @r{set the internal Calc calculation precision to 20 digits}
-n3 s3 e2 f4   @r{Normal, scientific, engineering, or fixed}
-              @r{format of the result of Calc passed back to Org.}
-              @r{Calc formatting is unlimited in precision as}
-              @r{long as the Calc calculation precision is greater.}
-D R           @r{angle modes: degrees, radians}
-F S           @r{fraction and symbolic modes}
-N             @r{interpret all fields as numbers, use 0 for non-numbers}
-E             @r{keep empty fields in ranges}
-L             @r{literal}
-@end example
+#+attr_texinfo: :table-type "table" :indic "@asis"
+  - {{{code(p20)}}} :: set the internal Calc calculation precision to 20 digits
+  - {{{code(n3 s3 e2 f4)}}} :: Normal, scientific, engineering, or
+       fixed format of the result of Calc passed back to Org. Calc
+       formatting is unlimited in precision as long as the Calc
+       calculation precision is greater.
+  - {{{code(D R)}}} :: angle modes: degrees, radians
+  - {{{code(F S)}}} :: fraction and symbolic modes
+  - {{{code(N)}}} :: interpret all fields as numbers, use 0 for non-numbers
+  - {{{code(E)}}} :: keep empty fields in ranges
+  - {{{code(L)}}} :: literal
 
-@noindent
-Unless you use large integer numbers or high-precision-calculation
-and -display for floating point numbers you may alternatively provide a
-@code{printf} format specifier to reformat the Calc result after it has been
-passed back to Org instead of letting Calc already do the
-formatting@footnote{The @code{printf} reformatting is limited in precision
-because the value passed to it is converted into an @code{integer} or
-@code{double}.  The @code{integer} is limited in size by truncating the
-signed value to 32 bits.  The @code{double} is limited in precision to 64
-bits overall which leaves approximately 16 significant decimal digits.}.
-A few examples:
+{{{noindent}}} Unless you use large integer numbers or
+high-precision-calculation and -display for floating point numbers you
+may alternatively provide a {{{code(printf)}}} format specifier to
+reformat the Calc result after it has been passed back to Org instead
+of letting Calc already do the formatting.[fn:32] A
+few examples:
 
-@example
-$1+$2                @r{Sum of first and second field}
-$1+$2;%.2f           @r{Same, format result to two decimals}
-exp($2)+exp($1)      @r{Math functions can be used}
-$0;%.1f              @r{Reformat current cell to 1 decimal}
-($3-32)*5/9          @r{Degrees F -> C conversion}
-$c/$1/$cm            @r{Hz -> cm conversion, using @file{constants.el}}
-tan($1);Dp3s1        @r{Compute in degrees, precision 3, display SCI 1}
-sin($1);Dp3%.1e      @r{Same, but use printf specifier for display}
-vmean($2..$7)        @r{Compute column range mean, using vector function}
-vmean($2..$7);EN     @r{Same, but treat empty fields as 0}
-taylor($3,x=7,2)     @r{Taylor series of $3, at x=7, second degree}
-@end example
+#+attr_texinfo: :table-type "table" :indic "@asis"
+  - {{{code($1+$2)}}} :: Sum of first and second field
+  - {{{code($1+$2;%.2f)}}} :: Same, format result to two decimals
+  - {{{code(exp($2)+exp($1))}}} :: Math functions can be used
+  - {{{code($0;%.1f)}}} :: Reformat current cell to 1 decimal
+  - {{{code(($3-32)*5/9)}}} :: Degrees F -> C conversion
+  - {{{code($c/$1/$cm)}}} :: Hz -> cm conversion, using {{{file(constants.el)}}}
+  - {{{code(tan($1);Dp3s1)}}} :: Compute in degrees, precision 3, display SCI 1
+  - {{{code(sin($1);Dp3%.1e)}}} ::  Same, but use {{{code(printf)}}}
+       specifier for display
+  - {{{code(vmean($2..$7))}}} :: Compute column range mean, using vector function
+  - {{{code(vmean($2..$7);EN)}}} :: Same, but treat empty fields as 0
+  - {{{code(taylor($3,x=7,2))}}} :: Taylor series of $3, at x=7, second degree
 
 Calc also contains a complete set of logical operations.  For example
 
-@example
-if($1<20,teen,string(""))  @r{"teen" if age $1 less than 20, else empty}
-@end example
+#+attr_texinfo: :table-type "table" :indic "@asis"
+  - {{{code(if($1<20,teen,string("")))}}} ::  "teen" if age $1 less than 20, else empty
 
-Note that you can also use two org-specific flags @code{T} and @code{t} for
-durations computations @ref{Durations and time values}.
 
-You can add your own Calc functions defined in Emacs Lisp with @code{defmath}
-and use them in formula syntax for Calc.
+Note that you can also use two org-specific flags {{{code(T)}}} and
+{{{code(t)}}} for durations computations [[Durations and timevalues]].
+
+You can add your own Calc functions defined in Emacs Lisp with
+{{{code(defmath)}}} and use them in formula syntax for Calc.
 
 *** Emacs Lisp forms as formulas
     :PROPERTIES:
@@ -2158,33 +2123,42 @@ It is also possible to write a formula in Emacs Lisp.  This can be useful
 for string manipulation and control structures, if Calc's functionality is
 not enough.
 
-If a formula starts with a single-quote followed by an opening parenthesis,
-then it is evaluated as a Lisp form.  The evaluation should return either a
-string or a number.  Just as with @file{calc} formulas, you can specify modes
-and a printf format after a semicolon.
+If a formula starts with a single-quote followed by an opening
+parenthesis, then it is evaluated as a Lisp form. The evaluation
+should return either a string or a number. Just as with
+{{{file(calc)}}} formulas, you can specify modes and a printf format
+after a semicolon.
 
 With Emacs Lisp forms, you need to be conscious about the way field
-references are interpolated into the form.  By default, a reference will be
-interpolated as a Lisp string (in double-quotes) containing the field.  If
-you provide the @samp{N} mode switch, all referenced elements will be numbers
-(non-number fields will be zero) and interpolated as Lisp numbers, without
-quotes.  If you provide the @samp{L} flag, all fields will be interpolated
-literally, without quotes.  I.e., if you want a reference to be interpreted
-as a string by the Lisp form, enclose the reference operator itself in
-double-quotes, like @code{"$3"}.  Ranges are inserted as space-separated
-fields, so you can embed them in list or vector syntax.
+references are interpolated into the form. By default, a reference
+will be interpolated as a Lisp string (in double-quotes) containing
+the field. If you provide the {{{samp(N)}}} mode switch, all
+referenced elements will be numbers (non-number fields will be zero)
+and interpolated as Lisp numbers, without quotes. If you provide the
+{{{samp(L)}}} flag, all fields will be interpolated literally, without
+quotes. I.e., if you want a reference to be interpreted as a string by
+the Lisp form, enclose the reference operator itself in double-quotes,
+like {{{code("$3")}}}. Ranges are inserted as space-separated fields,
+so you can embed them in list or vector syntax.
 
-Here are a few examples---note how the @samp{N} mode is used when we do
-computations in Lisp:
+Here are a few examples---note how the {{{samp(N)}}} mode is used when we do
+computations in Lisp.
 
-@example
-@r{Swap the first two characters of the content of column 1}
+Swap the first two characters of the content of column 1:
+#+begin_src lisp
   '(concat (substring $1 1 2) (substring $1 0 1) (substring $1 2))
-@r{Add columns 1 and 2, equivalent to Calc's @code{$1+$2}}
+#+end_src
+
+Add columns 1 and 2, equivalent to Calc's {{{code($1+$2)}}}:
+#+begin_src lisp
   '(+ $1 $2);N
-@r{Compute the sum of columns 1-4, like Calc's @code{vsum($1..$4)}}
+#+end_src
+
+Compute the sum of columns 1-4, like Calc's {{{code(vsum($1..$4))}}}}:
+#+begin_src lisp
   '(apply '+ '($1..$4));N
-@end example
+#+end_src
+
 
 *** Duration and time values
     :PROPERTIES:
@@ -2194,31 +2168,30 @@ computations in Lisp:
 {{{cindex(Time, computing)}}}
 {{{vindex(org-table-duration-custom-format)}}}
 
-If you want to compute time values use the @code{T} flag, either in Calc
+If you want to compute time values use the {{{code(T)}}} flag, either in Calc
 formulas or Elisp formulas:
 
-@example
-@group
+#+begin_example
   |  Task 1 |   Task 2 |    Total |
   |---------+----------+----------|
   |    2:12 |     1:47 | 03:59:00 |
   | 3:02:20 | -2:07:00 |     0.92 |
   #+TBLFM: @@2$3=$1+$2;T::@@3$3=$1+$2;t
-@end group
-@end example
+#+end_example
 
-Input duration values must be of the form @code{[HH:MM[:SS]}, where seconds
-are optional.  With the @code{T} flag, computed durations will be displayed
-as @code{HH:MM:SS} (see the first formula above).  With the @code{t} flag,
-computed durations will be displayed according to the value of the variable
-@code{org-table-duration-custom-format}, which defaults to @code{'hours} and
-will display the result as a fraction of hours (see the second formula in the
-example above).
+Input duration values must be of the form {{{code([HH:MM[:SS])}}},
+where seconds are optional. With the {{{code(T)}}} flag, computed
+durations will be displayed as {{{code(HH:MM:SS)}}} (see the first
+formula above). With the {{{code(t)}}} flag, computed durations will
+be displayed according to the value of the variable
+{{{code(org-table-duration-custom-format)}}}, which defaults to
+{{{code('hours)}}} and will display the result as a fraction of hours
+(see the second formula in the example above).
 
 Negative duration values can be manipulated as well, and integers will be
 considered as seconds in addition and subtraction.
 
-*** Field and range formulas
+*** Field and range formulas                                       :noexport:
     :PROPERTIES:
     :DESCRIPTION: Formulas for specific (ranges of) fields
     :END:
@@ -2228,21 +2201,21 @@ considered as seconds in addition and subtraction.
 {{{cindex(formula, for range of fields)}}}
 
 To assign a formula to a particular field, type it directly into the field,
-preceded by @samp{:=}, for example @samp{:=vsum(@@II..III)}.  When you press
-@key{TAB} or @key{RET} or @kbd{C-c C-c} with the cursor still in the field,
+preceded by {{{samp(:=)}}}, for example {{{samp(:=vsum(@@II..III))}}}.  When you press
+{{{key(TAB)}}} or {{{key(RET)}}} or {{{kbd(C-c C-c)}}} with the cursor still in the field,
 the formula will be stored as the formula for this field, evaluated, and the
 current field will be replaced with the result.
 
 {{{cindex(#+TBLFM)}}}
-Formulas are stored in a special line starting with @samp{#+TBLFM:} directly
+Formulas are stored in a special line starting with {{{samp(#+TBLFM:)}}} directly
 below the table.  If you type the equation in the 4th field of the 3rd data
-line in the table, the formula will look like @samp{@@3$4=$1+$2}.  When
+line in the table, the formula will look like {{{samp(@@3$4=$1+$2)}}}.  When
 inserting/deleting/swapping column and rows with the appropriate commands,
 @i{absolute references} (but not relative ones) in stored formulas are
 modified in order to still reference the same field.  To avoid this from
 happening, in particular in range references, anchor ranges at the table
-borders (using @code{@@<}, @code{@@>}, @code{$<}, @code{$>}), or at hlines
-using the @code{@@I} notation.  Automatic adaptation of field references does
+borders (using {{{code(@@<)}}}, {{{code(@@>)}}}, {{{code($<)}}}, {{{code($>)}}}), or at hlines
+using the {{{code(@@I)}}} notation.  Automatic adaptation of field references does
 of course not happen if you edit the table structure with normal editing
 commands---then you must fix the equations yourself.
 
@@ -2250,40 +2223,39 @@ Instead of typing an equation into the field, you may also use the following
 command
 
 @table @kbd
-@orgcmd{C-u C-c =,org-table-eval-formula}
-Install a new formula for the current field.  The command prompts for a
-formula with default taken from the @samp{#+TBLFM:} line, applies
+{{{orgcmd(C-u C-c =,org-table-eval-formula)}}}Install a new formula for the current field.  The command prompts for a
+formula with default taken from the {{{samp(#+TBLFM:)}}} line, applies
 it to the current field, and stores it.
 @end table
 
 The left-hand side of a formula can also be a special expression in order to
 assign the formula to a number of different fields.  There is no keyboard
 shortcut to enter such range formulas.  To add them, use the formula editor
-({{{pxref(Editing and debugging formulas)}}}) or edit the @code{#+TBLFM:} line
+({{{pxref(Editing and debugging formulas)}}}) or edit the {{{code(#+TBLFM:)}}} line
 directly.
 
 @table @code
 @item $2=
 Column formula, valid for the entire column.  This is so common that Org
-treats these formulas in a special way, see @ref{Column formulas}.
+treats these formulas in a special way, see {{{ref(Column formulas)}}}.
 @item @@3=
-Row formula, applies to all fields in the specified row.  @code{@@>=} means
+Row formula, applies to all fields in the specified row.  {{{code(@@>=)}}} means
 the last row.
 @item @@1$2..@@4$3=
 Range formula, applies to all fields in the given rectangular range.  This
 can also be used to assign a formula to some but not all fields in a row.
 @item $name=
-Named field, see @ref{Advanced features}.
+Named field, see {{{ref(Advanced features)}}}.
 @end table
 
-*** Column formulas
+*** Column formulas                                                :noexport:
     :PROPERTIES:
     :DESCRIPTION: Formulas valid for an entire column
     :END:
 {{{cindex(column formula)}}}
 {{{cindex(formula, for table column)}}}
 
-When you assign a formula to a simple column reference like @code{$3=}, the
+When you assign a formula to a simple column reference like {{{code($3=)}}}, the
 same formula will be used in all fields of that column, with the following
 very convenient exceptions: (i) If the table contains horizontal separator
 hlines with rows above and below, everything before the first such hline is
@@ -2295,29 +2267,28 @@ from a field/range formula will be left alone by column formulas.  These
 conditions make column formulas very easy to use.
 
 To assign a formula to a column, type it directly into any field in the
-column, preceded by an equal sign, like @samp{=$1+$2}.  When you press
-@key{TAB} or @key{RET} or @kbd{C-c C-c} with the cursor still in the field,
+column, preceded by an equal sign, like {{{samp(=$1+$2)}}}.  When you press
+{{{key(TAB)}}} or {{{key(RET)}}} or {{{kbd(C-c C-c)}}} with the cursor still in the field,
 the formula will be stored as the formula for the current column, evaluated
 and the current field replaced with the result.  If the field contains only
-@samp{=}, the previously stored formula for this column is used.  For each
+{{{samp(=)}}}, the previously stored formula for this column is used.  For each
 column, Org will only remember the most recently used formula.  In the
-@samp{#+TBLFM:} line, column formulas will look like @samp{$4=$1+$2}.  The
+{{{samp(#+TBLFM:)}}} line, column formulas will look like {{{samp($4=$1+$2)}}}.  The
 left-hand side of a column formula can not be the name of column, it must be
-the numeric column reference or @code{$>}.
+the numeric column reference or {{{code($>)}}}.
 
 Instead of typing an equation into the field, you may also use the
 following command:
 
 @table @kbd
-@orgcmd{C-c =,org-table-eval-formula}
-Install a new formula for the current column and replace current field with
+{{{orgcmd(C-c =,org-table-eval-formula)}}}Install a new formula for the current column and replace current field with
 the result of the formula.  The command prompts for a formula, with default
-taken from the @samp{#+TBLFM} line, applies it to the current field and
-stores it.  With a numeric prefix argument(e.g.@: @kbd{C-5 C-c =}) the command
+taken from the {{{samp(#+TBLFM)}}} line, applies it to the current field and
+stores it.  With a numeric prefix argument(e.g.@: {{{kbd(C-5 C-c =)}}}) the command
 will apply it to that many consecutive fields in the current column.
 @end table
 
-*** Lookup functions
+*** Lookup functions                                               :noexport:
     :PROPERTIES:
     :DESCRIPTION: Lookup functions for searching tables
     :END:
@@ -2328,42 +2299,41 @@ Org has three predefined Emacs Lisp functions for lookups in tables.
 @table @code
 @item (org-lookup-first VAL S-LIST R-LIST &optional PREDICATE)
 @findex org-lookup-first
-Searches for the first element @code{S} in list @code{S-LIST} for which
+Searches for the first element {{{code(S)}}} in list {{{code(S-LIST)}}} for which
 @lisp
 (PREDICATE VAL S)
 @end lisp
-is @code{t}; returns the value from the corresponding position in list
-@code{R-LIST}.  The default @code{PREDICATE} is @code{equal}.  Note that the
-parameters @code{VAL} and @code{S} are passed to @code{PREDICATE} in the same
+is {{{code(t)}}}; returns the value from the corresponding position in list
+{{{code(R-LIST)}}}.  The default {{{code(PREDICATE)}}} is {{{code(equal)}}}.  Note that the
+parameters {{{code(VAL)}}} and {{{code(S)}}} are passed to {{{code(PREDICATE)}}} in the same
 order as the correspoding parameters are in the call to
-@code{org-lookup-first}, where @code{VAL} precedes @code{S-LIST}.  If
-@code{R-LIST} is @code{nil}, the matching element @code{S} of @code{S-LIST}
+{{{code(org-lookup-first)}}}, where {{{code(VAL)}}} precedes {{{code(S-LIST)}}}.  If
+{{{code(R-LIST)}}} is {{{code(nil)}}}, the matching element {{{code(S)}}} of {{{code(S-LIST)}}}
 is returned.
 @item (org-lookup-last VAL S-LIST R-LIST &optional PREDICATE)
 @findex org-lookup-last
-Similar to @code{org-lookup-first} above, but searches for the @i{last}
-element for which @code{PREDICATE} is @code{t}.
+Similar to {{{code(org-lookup-first)}}} above, but searches for the @i{last}
+element for which {{{code(PREDICATE)}}} is {{{code(t)}}}.
 @item (org-lookup-all VAL S-LIST R-LIST &optional PREDICATE)
 @findex org-lookup-all
-Similar to @code{org-lookup-first}, but searches for @i{all} elements for
-which @code{PREDICATE} is @code{t}, and returns @i{all} corresponding
+Similar to {{{code(org-lookup-first)}}}, but searches for @i{all} elements for
+which {{{code(PREDICATE)}}} is {{{code(t)}}}, and returns @i{all} corresponding
 values.  This function can not be used by itself in a formula, because it
 returns a list of values.  However, powerful lookups can be built when this
 function is combined with other Emacs Lisp functions.
 @end table
 
-If the ranges used in these functions contain empty fields, the @code{E} mode
+If the ranges used in these functions contain empty fields, the {{{code(E)}}} mode
 for the formula should usually be specified: otherwise empty fields will not be
-included in @code{S-LIST} and/or @code{R-LIST} which can, for example, result
-in an incorrect mapping from an element of @code{S-LIST} to the corresponding
-element of @code{R-LIST}.
+included in {{{code(S-LIST)}}} and/or {{{code(R-LIST)}}} which can, for example, result
+in an incorrect mapping from an element of {{{code(S-LIST)}}} to the corresponding
+element of {{{code(R-LIST)}}}.
 
 These three functions can be used to implement associative arrays, count
 matching cells, rank results, group data etc.  For practical examples
-see @uref{http://orgmode.org/worg/org-tutorials/org-lookups.html, this
-tutorial on Worg}.
+see [[http://orgmode.org/worg/org-tutorials/org-lookups.html][this tutorial on Worg]].
 
-*** Editing and debugging formulas
+*** Editing and debugging formulas                                 :noexport:
     :PROPERTIES:
     :DESCRIPTION: Fixing formulas
     :END:
@@ -2374,22 +2344,20 @@ tutorial on Worg}.
 You can edit individual formulas in the minibuffer or directly in the
 field.  Org can also prepare a special buffer with all active
 formulas of a table.  When offering a formula for editing, Org
-converts references to the standard format (like @code{B3} or @code{D&})
+converts references to the standard format (like {{{code(B3)}}} or {{{code(D&)}}})
 if possible.  If you prefer to only work with the internal format (like
-@code{@@3$2} or @code{$4}), configure the variable
-@code{org-table-use-standard-references}.
+{{{code(@@3$2)}}} or {{{code($4)}}}), configure the variable
+{{{code(org-table-use-standard-references)}}}.
 
 @table @kbd
-@orgcmdkkc{C-c =,C-u C-c =,org-table-eval-formula}
+  - {{{orgcmdkkc(C-c =,C-u C-c =,org-table-eval-formula) ::
 Edit the formula associated with the current column/field in the
 minibuffer.  See @ref{Column formulas}, and @ref{Field and range formulas}.
-@orgcmd{C-u C-u C-c =,org-table-eval-formula}
-Re-insert the active formula (either a
+{{{orgcmd(C-u C-u C-c =,org-table-eval-formula)}}}Re-insert the active formula (either a
 field formula, or a column formula) into the current field, so that you
 can edit it directly in the field.  The advantage over editing in the
 minibuffer is that you can use the command @kbd{C-c ?}.
-@orgcmd{C-c ?,org-table-field-info}
-While editing a formula in a table field, highlight the field(s)
+{{{orgcmd(C-c ?,org-table-field-info)}}}While editing a formula in a table field, highlight the field(s)
 referenced by the reference at the cursor position in the formula.
 {{{kindex(C-c @})}}}
 @findex org-table-toggle-coordinate-overlays
@@ -2402,8 +2370,7 @@ time the table is aligned; you can force it with @kbd{C-c C-c}.
 @item C-c @{
 Toggle the formula debugger on and off
 (@command{org-table-toggle-formula-debugger}).  See below.
-@orgcmd{C-c ',org-table-edit-formulas}
-Edit all formulas for the current table in a special buffer, where the
+{{{orgcmd(C-c ',org-table-edit-formulas)}}}Edit all formulas for the current table in a special buffer, where the
 formulas will be displayed one per line.  If the current field has an
 active formula, the cursor in the formula editor will mark it.
 While inside the special buffer, Org will automatically highlight
@@ -2413,18 +2380,14 @@ remove and add formulas, and use the following commands:
 @orgcmdkkc{C-c C-c,C-x C-s,org-table-fedit-finish}
 Exit the formula editor and store the modified formulas.  With @kbd{C-u}
 prefix, also apply the new formulas to the entire table.
-@orgcmd{C-c C-q,org-table-fedit-abort}
-Exit the formula editor without installing changes.
-@orgcmd{C-c C-r,org-table-fedit-toggle-ref-type}
-Toggle all references in the formula editor between standard (like
+{{{orgcmd(C-c C-q,org-table-fedit-abort)}}}Exit the formula editor without installing changes.
+{{{orgcmd(C-c C-r,org-table-fedit-toggle-ref-type)}}}Toggle all references in the formula editor between standard (like
 @code{B3}) and internal (like @code{@@3$2}).
-@orgcmd{@key{TAB},org-table-fedit-lisp-indent}
-Pretty-print or indent Lisp formula at point.  When in a line containing
+{{{orgcmd(@key{TAB},org-table-fedit-lisp-indent)}}}Pretty-print or indent Lisp formula at point.  When in a line containing
 a Lisp formula, format the formula according to Emacs Lisp rules.
 Another @key{TAB} collapses the formula back again.  In the open
 formula, @key{TAB} re-indents just like in Emacs Lisp mode.
-@orgcmd{M-@key{TAB},lisp-complete-symbol}
-Complete Lisp symbols, just like in Emacs Lisp mode.
+{{{orgcmd(M-@key{TAB},lisp-complete-symbol)}}}Complete Lisp symbols, just like in Emacs Lisp mode.
 {{{kindex(S-@key{up})}}}
 {{{kindex(S-@key{down})}}}
 {{{kindex(S-@key{left})}}}
@@ -2470,7 +2433,7 @@ turn on formula debugging in the @code{Tbl} menu and repeat the
 calculation, for example by pressing @kbd{C-u C-u C-c = @key{RET}} in a
 field.  Detailed information will be displayed.
 
-*** Updating the table
+*** Updating the table                                             :noexport:
     :PROPERTIES:
     :DESCRIPTION: Recomputing all dependent fields
     :END:
@@ -2485,8 +2448,7 @@ In order to recalculate a line of a table or the entire table, use the
 following commands:
 
 @table @kbd
-@orgcmd{C-c *,org-table-recalculate}
-Recalculate the current row by first applying the stored column formulas
+{{{orgcmd(C-c *,org-table-recalculate)}}}Recalculate the current row by first applying the stored column formulas
 from left to right, and all field/range formulas in the current row.
 @c
 {{{kindex(C-u C-c *)}}}
@@ -2509,7 +2471,7 @@ Iterate all tables in the current buffer, in order to converge table-to-table
 dependencies.
 @end table
 
-*** Advanced features
+*** Advanced features                                              :noexport:
     :PROPERTIES:
     :DESCRIPTION: Field and column names, parameters, and automatic recalc
     :END:
@@ -2520,8 +2482,7 @@ fields and columns, you need to reserve the first column of the table for
 special marking characters.
 
 @table @kbd
-@orgcmd{C-#,org-table-rotate-recalc-marks}
-Rotate the calculation mark in first column through the states @samp{ },
+{{{orgcmd(C-#,org-table-rotate-recalc-marks)}}}Rotate the calculation mark in first column through the states @samp{ },
 @samp{#}, @samp{*}, @samp{!}, @samp{$}.  When there is an active region,
 change all marks in the region.
 @end table
@@ -2614,7 +2575,7 @@ functions.
 @end group
 @end example
 
-** Org-Plot
+** Org-Plot                                                        :noexport:
    :PROPERTIES:
    :DESCRIPTION: Plotting from Org tables
    :END:
@@ -2733,16 +2694,16 @@ the data file.
    :PROPERTIES:
    :DESCRIPTION: When the default search is not enough
    :END:
-* =TODO= items
+* XXX TODO items
   :PROPERTIES:
   :DESCRIPTION: Every tree branch can be a TODO item
   :TEXINFO_MENU_TITLE: TODO Items
   :END:
-** =TODO= basics
+** XXX TODO basics
    :PROPERTIES:
    :DESCRIPTION: Marking and displaying TODO entries
    :END:
-** =TODO= extensions
+** XXX TODO extensions
    :PROPERTIES:
    :DESCRIPTION: Work flow and assignments
    :END:
@@ -3328,6 +3289,28 @@ and {{{code(nofnadjust)}}}.
 [fn:26] The corresponding in-buffer setting is: {{{code(#+STARTUP:
 fninline)}}} or {{{code(#+STARTUP: nofninline)}}}.
 
+[fn:27] To insert a vertical bar into a table
+field, use {{{code(\\vert)}} or, inside a word {{{code(abc\\vert@{@}def)}}}.
+
+[fn:28] This feature does not work on XEmacs.
+
+[fn:29] Centering does not work inside Emacs, but it does have an
+effect when exporting to HTML.
+
+[fn:30] The computation time scales as O(N^2) because table FOO is parsed for each field to be copied.
+
+[fn:31] Org will understand references typed by the
+user as {{{samp(B4)}}}, but it will not use this syntax when offering a formula
+for editing.  You can customize this behavior using the variable
+{{{code(org-table-use-standard-references)}}}.
+
+[fn:32] The {{{code(printf)}}}
+reformatting is limited in precision because the value passed to it is
+converted into an {{{code(integer)}}} or {{{code(double)}}}. The
+{{{code(integer)}}} is limited in size by truncating the signed value
+to 32 bits. The {{{code(double)}}} is limited in precision to 64 bits
+overall which leaves approximately 16 significant decimal digits.
+
 * About orgmanual.org                                              :noexport:
 This document intends to be Org mode source for the Org mode manual
 and the Org mode guide. It is intended to be a major revision of the
@@ -3610,7 +3593,7 @@ Perhaps shorten to "All the rest"
 (defun tsd-simple-command-macros ()
   "Make macros out of simple @ commands"
   (interactive)
-  (query-replace-regexp "@\\([pxref|samp|code|file|key|kbd]+\\){\\([^}]*\\)}" "{{{\\1(\\2)}}}" nil))
+  (query-replace-regexp "@\\([tsubheading|pxref|samp|code|file|key|kbd]+\\){\\([^}]*\\)}" "{{{\\1(\\2)}}}" nil))
 (define-key org-mode-map (kbd "C-c s") 'tsd-simple-command-macros)
 #+end_src
 
