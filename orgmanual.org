@@ -278,6 +278,7 @@
 
 #+MACRO: noindent @@info:@noindent@@
 #+MACRO: latex @@info:@LaTeX{}@@
+#+MACRO: bibtex @@info:Bib@TeX{}@@
 
 #+MACRO: command @@info:@command{$1}@@
 #+MACRO: pxref @@info:@pxref{$1}@@
@@ -497,7 +498,7 @@ Since Emacs 22.2, files with the {{{file(.org)}}} extension use Org mode by
 default.  If you are using an earlier version of Emacs, add this line to your
 {{{file(.emacs)}}} file:
 
-#+begin_src example
+#+begin_src lisp
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 #+end_src
 
@@ -507,13 +508,13 @@ Emacs.[fn:5]
 There are compatibility issues between Org mode and some other Elisp
 packages, please take the time to check the list ({{{pxref(Conflicts)}}}).
 
-The four Org commands @@info:@command{org-store-link}@@, @@info:@command{org-capture}@@,
-@@info:@command{org-agenda}@@, and @@info:@command{org-iswitchb}@@ should be accessible through
-global keys (i.e., anywhere in Emacs, not just in Org buffers).  Here are
-suggested bindings for these keys, please modify the keys to your own
-liking.
+The four Org commands {{{command(org-store-link)}}},
+{{{command(org-capture)}}}, {{{command(org-agenda)}}}, and
+{{{command(org-iswitchb)}}} should be accessible through global keys
+(i.e., anywhere in Emacs, not just in Org buffers). Here are suggested
+bindings for these keys, please modify the keys to your own liking.
 
-#+begin_src example
+#+begin_src lisp
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-ca" 'org-agenda)
@@ -525,10 +526,9 @@ With this setup, all files with extension @@info:@samp{.org}@@ will be put
 into Org mode.  As an alternative, make the first line of a file look
 like this:
 
-#+begin_src example
+#+begin_example
 MY PROJECTS    -*- mode: org; -*-
-#+end_src
-
+#+end_example
 
 {{{vindex(org-insert-mode-line-in-empty-file)}}} 
 {{{noindent}}}
@@ -541,7 +541,7 @@ make use of this, you need to have ~transient-mark-mode~
 (~zmacs-regions~ in XEmacs) turned on. In Emacs 23 this is the
 default, in Emacs 22 you need to do this yourself with
 
-#+begin_src example
+#+begin_src lisp
 (transient-mark-mode 1)
 #+end_src
 
@@ -569,8 +569,8 @@ For bug reports, please first try to reproduce the bug with the latest
 version of Org available---if you are running an outdated version, it is
 quite possible that the bug has been fixed already.  If the bug persists,
 prepare a report and provide as much information as possible, including the
-version information of Emacs (@@info:@kbd{M-x emacs-version @key{RET}}@@) and Org
-(@@info:@kbd{M-x org-version @key{RET}}@@), as well as the Org related setup in
+version information of Emacs ({{{kbd(M-x emacs-version @key{RET})}}}) and Org
+({{{kbd(M-x org-version @key{RET})}}}), as well as the Org related setup in
 {{{file(.emacs)}}}.  The easiest way to do this is to use the command
 
 #+begin_src example
@@ -2625,35 +2625,578 @@ information and examples see the [[http://orgmode.org/worg/org-tutorials/org-plo
 * Hyperlinks
   :PROPERTIES:
   :DESCRIPTION: Notes in context
+  :ORDERED:  t
   :END:
+{{{cindex(hyperlinks)}}}
+
+Like HTML, Org provides links inside a file, external links to
+other files, Usenet articles, emails, and much more.
+
 ** Link format
    :PROPERTIES:
    :DESCRIPTION: How links in Org are formatted
    :END:
+{{{cindex(link format)}}}
+{{{cindex(format, of links)}}}
+
+Org will recognize plain URL-like links and activate them as
+clickable links.  The general link format, however, looks like this:
+
+#+begin_example
+[[link][description]] or  [[link]]
+#+end_example
+
+
+{{{noindent}}}
+Once a link in the buffer is complete (all brackets present), Org
+will change the display so that {{{samp(description)}}} is displayed instead
+of {{{samp([[link][description]])}}} and {{{samp(link)}}} is displayed instead of
+{{{samp([[link]])}}}.  Links will be highlighted in the face ~org-link~,
+which by default is an underlined face.  You can directly edit the
+visible part of a link.  Note that this can be either the {{{samp(link)}}}
+part (if there is no description) or the {{{samp(description)}}} part.  To
+edit also the invisible {{{samp(link)}}} part, use {{{kbd(C-c C-l)}}} with the
+cursor on the link.
+
+If you place the cursor at the beginning or just behind the end of the
+displayed text and press {{{key(BACKSPACE)}}}, you will remove the
+(invisible) bracket at that location.  This makes the link incomplete
+and the internals are again displayed as plain text.  Inserting the
+missing bracket hides the link internals again.  To show the
+internal structure of all links, use the menu entry
+~Org->Hyperlinks->Literal links~.
+
 ** Internal links
    :PROPERTIES:
    :DESCRIPTION: Links to other places in the current file
    :END:
+{{{cindex(internal links)}}}
+{{{cindex(links, internal)}}}
+{{{cindex(targets, for links)}}}
+
+{{{cindex(property, CUSTOM_ID)}}}
+If the link does not look like a URL, it is considered to be internal in the
+current file.  The most important case is a link like
+{{{samp([[#my-custom-id]])}}} which will link to the entry with the
+~CUSTOM_ID~ property {{{samp(my-custom-id)}}}.  Such custom IDs are very good
+for HTML export ({{{pxref(HTML export)}}}) where they produce pretty section
+links.  You are responsible yourself to make sure these custom IDs are unique
+in a file.
+
+Links such as {{{samp([[My Target]])}}} or {{{samp([[My Target][Find my target]])}}}
+lead to a text search in the current file.
+
+The link can be followed with {{{kbd(C-c C-o)}}} when the cursor is on the link,
+or with a mouse click ({{{pxref(Handling links)}}}).  Links to custom IDs will
+point to the corresponding headline.  The preferred match for a text link is
+a /dedicated target/: the same string in double angular brackets.  Targets
+may be located anywhere; sometimes it is convenient to put them into a
+comment line.  For example
+
+#+begin_example
+# <<My Target>>
+#+end_example
+
+{{{noindent}}} In HTML export ({{{pxref(HTML export)}}}), such targets will become
+named anchors for direct access through {{{samp(http)}}} links.[fn:36]
+
+If no dedicated target exists, Org will search for a headline that is
+exactly the link text but may also include a TODO keyword and
+tags.[fn:37] In non-Org files, the search will look for the words in
+the link text. In the above example the search would be for {{{samp(my
+target)}}}.
+
+Following a link pushes a mark onto Org's own mark ring.  You can
+return to the previous position with {{{kbd(C-c &)}}}.  Using this command
+several times in direct succession goes back to positions recorded
+earlier.
+
+*** Radio targets
+{{{cindex(radio targets)}}}
+{{{cindex(targets, radio)}}}
+{{{cindex(links, radio targets)}}}
+
+Org can automatically turn any occurrences of certain target names
+in normal text into a link.  So without explicitly creating a link, the
+text connects to the target radioing its position.  Radio targets are
+enclosed by triple angular brackets.  For example, a target {{{samp(<<<My
+Target>>>)}}} causes each occurrence of {{{samp(my target)}}} in normal text to
+become activated as a link.  The Org file is scanned automatically
+for radio targets only when the file is first loaded into Emacs.  To
+update the target list during editing, press {{{kbd(C-c C-c)}}} with the
+cursor on or at a target.
+
+** External links                                                  :noexport:
+   :PROPERTIES:
+   :DESCRIPTION: URL-like links to the world
+   :END:
+{{{cindex(links, external)}}}
+{{{cindex(external links)}}}
+{{{cindex(links, external)}}}
+{{{cindex(Gnus links)}}}
+{{{cindex(BBDB links)}}}
+{{{cindex(IRC links)}}}
+{{{cindex(URL links)}}}
+{{{cindex(file links)}}}
+{{{cindex(VM links)}}}
+{{{cindex(RMAIL links)}}}
+{{{cindex(WANDERLUST links)}}}
+{{{cindex(MH-E links)}}}
+{{{cindex(USENET links)}}}
+{{{cindex(SHELL links)}}}
+{{{cindex(Info links)}}}
+{{{cindex(Elisp links)}}}
+
+Org supports links to files, websites, Usenet and email messages,
+BBDB database entries and links to both IRC conversations and their
+logs.  External links are URL-like locators.  They start with a short
+identifying string followed by a colon.  There can be no space after
+the colon.  The following list shows examples for each link type.
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+ - http://www.astro.uva.nl/~dominik ::         on the web
+ - doi:10.1000/182 ::                          DOI for an electronic resource
+ - file:/home/dominik/images/jupiter.jpg ::    file, absolute path
+ - /home/dominik/images/jupiter.jpg ::         same as above
+ - file:papers/last.pdf ::                     file, relative path
+ - ./papers/last.pdf ::                        same as above
+ - file:/myself@@some.where:papers/last.pdf ::  file, path on remote machine
+ - /myself@@some.where:papers/last.pdf ::       same as above
+ - file:sometextfile::NNN ::                   file, jump to line number
+ - file:projects.org ::                        another Org file
+ - file:projects.org::some words ::            text search in Org file[fn:38]
+ - file:projects.org::*task title ::           heading search in Org file
+ - file+sys:/path/to/file ::                   open via OS, like double-click
+ - file+emacs:/path/to/file ::                 force opening by Emacs
+ - docview:papers/last.pdf::NNN ::             open in doc-view mode at page
+ - id:B7423F4D-2E8A-471B-8810-C40F074717E9 ::   Link to heading by ID
+ - news:comp.emacs ::                          Usenet link
+ - mailto:adent@@galaxy.net ::                  Mail link
+ - vm:folder ::                                VM folder link
+ - vm:folder#id ::                             VM message link
+ - vm://myself@@some.where.org/folder#id ::     VM on remote machine
+ - vm-imap:account:folder ::                   VM IMAP folder link
+ - vm-imap:account:folder#id ::                VM IMAP message link
+ - wl:folder ::                                WANDERLUST folder link
+ - wl:folder#id ::                             WANDERLUST message link
+ - mhe:folder ::                               MH-E folder link
+ - mhe:folder#id ::                            MH-E message link
+ - rmail:folder ::                             RMAIL folder link
+ - rmail:folder#id ::                          RMAIL message link
+ - gnus:group ::                               Gnus group link
+ - gnus:group#id ::                            Gnus article link
+ - bbdb:R.*Stallman ::                         BBDB link (with regexp)
+ - irc:/irc.com/#emacs/bob ::                  IRC link
+ - info:org#External links ::                  Info node link
+ - shell:ls *.org ::                           A shell command
+ - elisp:org-agenda ::                         Interactive Elisp command
+ - elisp:(find-file-other-frame "Elisp.org") :: Elisp form to evaluate
+
+
+For customizing Org to add new link types {{{ref(Adding hyperlink types)}}}.
+
+A link should be enclosed in double brackets and may contain a
+descriptive text to be displayed instead of the URL ({{{pxref(Link
+format)}}}), for example:
+
+#+begin_example
+[[http://www.gnu.org/software/emacs/][GNU Emacs]]
+#+end_example
+
+{{{noindent}}}
+If the description is a file name or URL that points to an image, HTML
+export ({{{pxref(HTML export)}}}) will inline the image as a clickable
+button.  If there is no description at all and the link points to an
+image,
+that image will be inlined into the exported HTML file.
+
+{{{cindex(square brackets, around links)}}}
+{{{cindex(plain text external links)}}}
+Org also finds external links in the normal text and activates them
+as links.  If spaces must be part of the link (for example in
+{{{samp(bbdb:Richard Stallman)}}}), or if you need to remove ambiguities
+about the end of the link, enclose them in square brackets.
+
 ** Handling links
    :PROPERTIES:
    :DESCRIPTION: URL-like links to the world
    :END:
-** Using links outside Org
+{{{cindex(links, handling)}}}
+
+Org provides methods to create a link in the correct syntax, to
+insert it into an Org file, and to follow the link.
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+  - {{{orgcmd(C-c l,org-store-link)}}} ::
+    {{{cindex(storing links)}}}
+    Store a link to the current location.  This is a /global/ command (you
+    must create the key binding yourself) which can be used in any buffer to
+    create a link.  The link will be stored for later insertion into an Org
+    buffer (see below).  What kind of link will be created depends on the current
+    buffer:
+
+    - Org mode buffers ::
+      For Org files, if there is a {{{samp(<<target>>)}}} at the cursor, the link points
+      to the target.  Otherwise it points to the current headline, which will also
+      be the description.[fn:39]
+
+      {{{vindex(org-link-to-org-use-id)}}}
+      {{{cindex(property, CUSTOM_ID)}}}
+      {{{cindex(property, ID)}}}
+      If the headline has a ~CUSTOM_ID~ property, a link to this custom ID
+      will be stored.  In addition or alternatively (depending on the value of
+      ~org-link-to-org-use-id~), a globally unique ~ID~ property will be
+      created and/or used to construct a link.  So using this command in Org
+      buffers will potentially create two links: a human-readable from the custom
+      ID, and one that is globally unique and works even if the entry is moved from
+      file to file.  Later, when inserting the link, you need to decide which one
+      to use.
+
+    - Email/News clients: VM, Rmail, Wanderlust, MH-E, Gnus ::
+
+      Pretty much all Emacs mail clients are supported.  The link will point to the
+      current article, or, in some GNUS buffers, to the group.  The
+      description is constructed from the author and the subject.
+
+    - Web browsers: W3 and W3M ::
+      Here the link will be the current URL, with the page title as description.
+
+    - Contacts: BBDB ::
+      Links created in a BBDB buffer will point to the current entry.
+
+    - Chat: IRC ::
+      {{{vindex(org-irc-link-to-logs)}}}
+      For IRC links, if you set the variable ~org-irc-link-to-logs~ to
+      ~t~, a {{{samp(file:/)}}} style link to the relevant point in
+      the logs for the current conversation is created. Otherwise an
+      {{{samp(irc:/)}}} style link to the user/channel/server under
+      the point will be stored.
+
+    - Other files ::
+
+      For any other files, the link will point to the file, with a search
+      string ({{{pxref(Search options)}}}) pointing to the contents of the
+      current line. If there is an active region, the selected words will
+      form the basis of the search string. If the automatically created link
+      is not working correctly or accurately enough, you can write custom
+      functions to select the search string and to do the search for
+      particular file types---see {{{ref(Custom searches)}}}. The key
+      binding {{{kbd(C-c l)}}} is only a suggestion---see
+      {{{ref(Installation)}}}.
+
+    - Agenda view ::
+      When the cursor is in an agenda view, the created link points to the
+      entry referenced by the current line.
+
+  - {{{orgcmd(C-c C-l,org-insert-link)}}} ::
+    {{{cindex(link completion)}}} 
+    {{{cindex(completion, of links)}}}
+    {{{cindex(inserting links)}}}
+    {{{vindex(org-keep-stored-link-after-insertion)}}}
+
+      Insert a link.[fn:40] This prompts for a link to be inserted
+       into the buffer. You can just type a link, using text for an
+       internal link, or one of the link type prefixes mentioned in
+       the examples above. The link will be inserted into the
+       buffer,[fn:41] along with a descriptive text. If some text was
+       selected when this command is called, the selected text becomes
+       the default description.
+
+    - Inserting stored links ::
+
+      All links stored during the current session are part of the history
+      for this prompt, so you can access them with {{{key(up)}}} and
+      {{{key(down)}}} (or {{{kbd(M-p/n)}}}).
+
+    - Completion support ::
+
+      Completion with {{{key(TAB)}}} will help you to insert valid link
+      prefixes like {{{samp(http:)}}} or {{{samp(ftp:)}}}, including the
+      prefixes defined through link abbreviations ({{{pxref(Link
+      abbreviations)}}}). If you press {{{key(RET)}}} after inserting only the
+      @@info:@var{prefix}@@, Org will offer specific completion support for some link
+      types.[fn:42] For example, if you type {{{kbd(file @key{RET})}}}, file
+      name completion (alternative access: {{{kbd(C-u C-c C-l)}}}, see
+      below) will be offered, and after {{{kbd(bbdb @key{RET})}}} you can
+      complete contact names.
+
+  - @@info:@orgkey@@ C-u C-c C-l ::
+    {{{cindex(file name completion)}}} 
+    {{{cindex(completion, of file names)}}} 
+
+    When {{{kbd(C-c C-l)}}} is called with a {{{kbd(C-u)}}} prefix
+    argument, a link to a file will be inserted and you may use file name
+    completion to select the name of the file. The path to the file is
+    inserted relative to the directory of the current Org file, if the
+    linked file is in the current directory or in a sub-directory of it,
+    or if the path is written relative to the current directory using
+    {{{samp(../)}}}. Otherwise an absolute path is used, if possible with
+    {{{samp(~/)}}} for your home directory. You can force an absolute path
+    with two {{{kbd(C-u)}}} prefixes. 
+
+  - {{{kbd(C-c C-l)}}} (with cursor on existing link) :: 
+
+    When the cursor is on an existing link, {{{kbd(C-c C-l)}}} allows you
+    to edit the link and description parts of the link.
+
+    {{{cindex(following links)}}} 
+
+  - {{{orgcmd(C-c C-o,org-open-at-point)}}} ::
+    {{{vindex(org-file-apps)}}}
+    {{{vindex(org-link-frame-setup)}}} 
+
+    Open link at point. This will launch a web browser for URLs (using
+    {{{command(browse-url-at-point)}}}), run VM/MH-E/Wanderlust/Rmail/Gnus/BBDB
+    for the corresponding links, and execute the command in a shell link.
+    When the cursor is on an internal link, this command runs the
+    corresponding search. When the cursor is on a TAG list in a headline,
+    it creates the corresponding TAGS view. If the cursor is on a
+    timestamp, it compiles the agenda for that date. Furthermore, it will
+    visit text and remote files in {{{samp(file:)}}} links with Emacs and
+    select a suitable application for local non-text files. Classification
+    of files is based on file extension only. See option ~org-file-apps~.
+    If you want to override the default application and visit the file
+    with Emacs, use a {{{kbd(C-u)}}} prefix. If you want to avoid opening
+    in Emacs, use a {{{kbd(C-u C-u)}}} prefix. If the cursor is on a
+    headline, but not on a link, offer all links in the headline and entry
+    text. If you want to setup the frame configuration for following
+    links, customize ~org-link-frame-setup~.
+
+  - {{{key(RET)}}} ::
+
+    {{{vindex(org-return-follows-link)}}}
+
+    When ~org-return-follows-link~ is set, {{{key(RET)}}} will
+    also follow the link at point.
+
+    {{{kindex(mouse-2)}}}
+    {{{kindex(mouse-1)}}}
+
+  - {{{key(mouse-2)}}} or {{{key(mouse-1)}}} ::
+
+    On links, {{{kbd(mouse-2)}}} will open the link just as {{{kbd(C-c
+    C-o)}}} would. Under Emacs 22 and later, {{{kbd(mouse-1)}}} will also
+    follow a link.
+
+    {{{kindex(mouse-3)}}}
+  - {{{key(mouse-3)}}} ::
+    {{{vindex(org-display-internal-link-with-indirect-buffer)}}}
+
+    Like {{{kbd(mouse-2)}}}, but force file links to be opened with Emacs,
+    and internal links to be displayed in another window.[fn:43]
+
+  - {{{orgcmd(C-c C-x C-v,org-toggle-inline-images)}}} ::
+    {{{cindex(inlining images)}}}
+    {{{cindex(images, inlining)}}}
+    {{{vindex(org-startup-with-inline-images)}}}
+    {{{cindex(~inlineimages~, STARTUP keyword)}}}
+    {{{cindex(~noinlineimages~, STARTUP keyword)}}}
+
+    Toggle the inline display of linked images.  Normally this will only inline
+    images that have no description part in the link, i.e.: images that will also
+    be inlined during export.  When called with a prefix argument, also display
+    images that do have a link description.  You can ask for inline images to be
+    displayed at startup by configuring the variable
+    ~org-startup-with-inline-images~.[fn:44]
+
+  - {{{orgcmd(C-c %,org-mark-ring-push)}}} ::
+
+    {{{cindex(mark ring)}}}
+
+    Push the current position onto the mark ring, to be able to return
+    easily. Commands following an internal link do this automatically.
+
+  - {{{orgcmd(C-c &,org-mark-ring-goto)}}} ::
+
+    {{{cindex(links, returning to)}}}
+
+    Jump back to a recorded position. A position is recorded by the
+    commands following internal links, and by {{{kbd(C-c %)}}}. Using this
+    command several times in direct succession moves through a ring of
+    previously recorded positions.
+
+
+  - {{{orgcmdkkcc(C-c C-x C-n,C-c C-x C-p,org-next-link,org-previous-link)}}} ::
+
+    {{{cindex(links, finding next/previous)}}}
+
+    Move forward/backward to the next link in the buffer. At the limit of
+    the buffer, the search fails once, and then wraps around. The key
+    bindings for this are really too long; you might want to bind this
+    also to {{{kbd(C-n)}}} and {{{kbd(C-p)}}}
+
+    #+begin_src lisp
+    (add-hook 'org-load-hook
+      (lambda ()
+        (define-key org-mode-map "\C-n" 'org-next-link)
+        (define-key org-mode-map "\C-p" 'org-previous-link)))
+    #+end_src
+
+** Using links outside Org                                         :noexport:
    :PROPERTIES:
    :DESCRIPTION: Linking from my C source code?
    :END:
-** Link abbreviations
+
+You can insert and follow links that have Org syntax not only in
+Org, but in any Emacs buffer.  For this, you should create two
+global commands, like this (please select suitable global keys
+yourself):
+
+@lisp
+(global-set-key "\C-c L" 'org-insert-link-global)
+(global-set-key "\C-c o" 'org-open-at-point-global)
+@end lisp
+
+** Link abbreviations                                              :noexport:
    :PROPERTIES:
    :DESCRIPTION: Shortcuts for writing complex links
    :END:
-** Search options
+{{{cindex(link abbreviations)}}}
+{{{cindex(abbreviation, links)}}}
+
+Long URLs can be cumbersome to type, and often many similar links are
+needed in a document.  For this you can use link abbreviations.  An
+abbreviated link looks like this
+
+@example
+[[linkword:tag][description]]
+@end example
+
+{{{noindent}}}
+{{{vindex(org-link-abbrev-alist)}}}
+where the tag is optional.
+The /linkword/ must be a word, starting with a letter, followed by
+letters, numbers, {{{samp(-)}}}, and {{{samp(_)}}}.  Abbreviations are resolved
+according to the information in the variable ~org-link-abbrev-alist~
+that relates the linkwords to replacement text.  Here is an example:
+
+@smalllisp
+@group
+(setq org-link-abbrev-alist
+  '(("bugzilla"  . "http://10.1.2.9/bugzilla/show_bug.cgi?id=")
+    ("url-to-ja" . "http://translate.google.fr/translate?sl=en&tl=ja&u=%h")
+    ("google"    . "http://www.google.com/search?q=")
+    ("gmap"      . "http://maps.google.com/maps?q=%s")
+    ("omap"      . "http://nominatim.openstreetmap.org/search?q=%s&polygon=1")
+    ("ads"       . "http://adsabs.harvard.edu/cgi-bin/nph-abs_connect?author=%s&db_key=AST")))
+@end group
+@end smalllisp
+
+If the replacement text contains the string {{{samp(%s)}}}, it will be
+replaced with the tag.  Using {{{samp(%h)}}} instead of {{{samp(%s)}}} will
+url-encode the tag (see the example above, where we need to encode
+the URL parameter.)  Using {{{samp(%(my-function))}}} will pass the tag
+to a custom function, and replace it by the resulting string.
+
+If the replacement text don't contain any specifier, it will simply
+be appended to the string in order to create the link.
+
+Instead of a string, you may also specify a function that will be
+called with the tag as the only argument to create the link.
+
+With the above setting, you could link to a specific bug with
+~[[bugzilla:129]]~, search the web for {{{samp(OrgMode)}}} with
+~[[google:OrgMode]]~, show the map location of the Free Software
+Foundation ~[[gmap:51 Franklin Street, Boston]]~ or of Carsten office
+~[[omap:Science Park 904, Amsterdam, The Netherlands]]~ and find out
+what the Org author is doing besides Emacs hacking with
+~[[ads:Dominik,C]]~.
+
+If you need special abbreviations just for a single Org buffer, you
+can define them in the file with
+
+{{{cindex(#+LINK)}}}
+@example
+#+LINK: bugzilla  http://10.1.2.9/bugzilla/show_bug.cgi?id=
+#+LINK: google    http://www.google.com/search?q=%s
+@end example
+
+{{{noindent}}}
+In-buffer completion ({{{pxref(Completion)}}}) can be used after {{{samp([)}}} to
+complete link abbreviations.  You may also define a function
+~org-PREFIX-complete-link~ that implements special (e.g.@: completion)
+support for inserting such a link with {{{kbd(C-c C-l)}}}.  Such a function should
+not accept any arguments, and return the full link with prefix.
+
+** Search options                                                  :noexport:
    :PROPERTIES:
    :DESCRIPTION: Linking to a specific location
    :END:
-** Custom searches
+{{{cindex(search option in file links)}}}
+{{{cindex(file links, searching)}}}
+
+File links can contain additional information to make Emacs jump to a
+particular location in the file when following a link.  This can be a
+line number or a search option after a double@footnote{For backward
+compatibility, line numbers can also follow a single colon.} colon.  For
+example, when the command {{{kbd(C-c l)}}} creates a link ({{{pxref(Handling
+links)}}}) to a file, it encodes the words in the current line as a search
+string that can be used to find this line back later when following the
+link with {{{kbd(C-c C-o)}}}.
+
+Here is the syntax of the different ways to attach a search to a file
+link, together with an explanation:
+
+@example
+[[file:~/code/main.c::255]]
+[[file:~/xx.org::My Target]]
+[[file:~/xx.org::*My Target]]
+[[file:~/xx.org::#my-custom-id]]
+[[file:~/xx.org::/regexp/]]
+@end example
+
+@table @code
+@item 255
+Jump to line 255.
+@item My Target
+Search for a link target {{{samp(<<My Target>>)}}}, or do a text search for
+{{{samp(my target)}}}, similar to the search in internal links, see
+{{{ref(Internal links)}}}.  In HTML export ({{{pxref(HTML export)}}}), such a file
+link will become a HTML reference to the corresponding named anchor in
+the linked file.
+@item *My Target
+In an Org file, restrict search to headlines.
+@item #my-custom-id
+Link to a heading with a ~CUSTOM_ID~ property
+@item /regexp/
+Do a regular expression search for ~regexp~.  This uses the Emacs
+command ~occur~ to list all matches in a separate window.  If the
+target file is in Org mode, ~org-occur~ is used to create a
+sparse tree with the matches.
+@c If the target file is a directory,
+@c ~grep~ will be used to search all files in the directory.
+@end table
+
+As a degenerate case, a file link with an empty file name can be used
+to search the current file.  For example, ~[[file:::find me]]~ does
+a search for {{{samp(find me)}}} in the current file, just as
+{{{samp([[find me]])}}} would.
+
+** Custom searches                                                 :noexport:
    :PROPERTIES:
    :DESCRIPTION: When the default search is not enough
    :END:
+{{{cindex(custom search strings)}}}
+{{{cindex(search strings, custom)}}}
+
+The default mechanism for creating search strings and for doing the
+actual search related to a file link may not work correctly in all
+cases.  For example, {{{bibtex}}} database files have many entries like
+{{{samp(year="1993")}}} which would not result in good search strings,
+because the only unique identification for a {{{bibtex}}} entry is the
+citation key.
+
+{{{vindex(org-create-file-search-functions)}}}
+{{{vindex(org-execute-file-search-functions)}}}If you come across such a problem, you can write custom functions to set
+the right search string for a particular file type, and to do the search
+for the string in the file.  Using ~add-hook~, these functions need
+to be added to the hook variables
+~org-create-file-search-functions~ and
+~org-execute-file-search-functions~.  See the docstring for these
+variables for more information.  Org actually uses this mechanism
+for {{{bibtex}}} database files, and you can use the corresponding code as
+an implementation example.  See the file {{{file(org-bibtex.el)}}}.
+
 * XXX TODO items
   :PROPERTIES:
   :DESCRIPTION: Every tree branch can be a TODO item
@@ -3286,6 +3829,47 @@ and ~cgs~.  Which one is used depends on the value of the variable
 ~constSI~ and ~constcgs~ to set this value for the current
 buffer.
 
+[fn:36] Note that
+text before the first headline is usually not exported, so the first such
+target should be after the first headline, or in the line directly before the
+first headline.
+
+[fn:37] To insert
+a link targeting a headline, in-buffer completion can be used.  Just type a
+star followed by a few optional letters into the buffer and press
+{{{kbd(M-@key{TAB})}}}.  All headlines in the current buffer will be offered as
+completions.
+
+[fn:38] The actual behavior of the search will depend on the value of
+the variable ~org-link-search-must-match-exact-headline~.  If its value
+is ~nil~, then a fuzzy text search will be done.  If it is ~t~, then only the
+exact headline will be matched.  If the value is {{{samp('query-to-create)}}},
+then an exact headline will be searched; if it is not found, then the user
+will be queried to create it.
+
+[fn:39] If the headline contains a timestamp, it will be
+removed from the link and result in a wrong link -- you should avoid putting
+a timestamp in the headline.
+
+[fn:40] Note that you don't have to use this command to insert a link.
+      Links in Org are plain text, and you can type or paste them
+      straight into the buffer. By using this command, the links are
+      automatically enclosed in double brackets, and you will be asked
+      for the optional descriptive text.
+
+[fn:41] After insertion of a stored link, the link will be removed
+      from the list of stored links. To keep it in the list later use,
+      use a triple {{{kbd(C-u)}}} prefix argument to {{{kbd(C-c C-l)}}}, or
+      configure the option ~org-keep-stored-link-after-insertion~.
+
+[fn:42] This works by calling a special function
+~org-PREFIX-complete-link~.
+
+[fn:43] See the variable ~org-display-internal-link-with-indirect-buffer~
+
+[fn:44] with corresponding
+~#+STARTUP~ keywords ~inlineimages~ and ~inlineimages~.
+
 * About orgmanual.org                                              :noexport:
 This document intends to be Org mode source for the Org mode manual
 and the Org mode guide. It is intended to be a major revision of the
@@ -3545,10 +4129,35 @@ Perhaps shorten to "All the rest"
 <<index-macros>>
 <<simple-command-macros>>
 <<two-arg-org-command-macros>>
+<<emphasis-replace>>
+<<roman-replace>>
+#+end_src
+
+*** Texi -> Org helpers
+#+name: roman-replace
+#+header: :results silent
+#+header: :eval no-export
+#+begin_src emacs-lisp
+(defun tsd-roman-replace ()
+  "Replace roman commands"
+  (interactive)
+  (query-replace-regexp "@r{\([^}]*\)}" "\\1" nil))
+(define-key org-mode-map (kbd "C-c r") 'tsd-roman-replace)
 #+end_src
 
 
-*** Texi -> Org helpers
+#+name: emphasis-replace
+#+header: :results silent
+#+header: :eval no-export
+#+begin_src emacs-lisp
+(defun tsd-emphasis-replace ()
+  "Replace various emphasis commands with //"
+  (interactive)
+  (progn 
+  (query-replace-regexp "@i{\([^}]*\)}" "/\\1/" nil)
+  (query-replace-regexp "@emph{\([^}]*\)}" "/\\1/" nil)))
+(define-key org-mode-map (kbd "C-c E") 'tsd-emphasis-replace)
+#+end_src
 
 #+name: index-macros
 #+header: :results silent
@@ -3579,8 +4188,7 @@ Perhaps shorten to "All the rest"
 (defun tsd-two-arg-orgcmd-macros ()
   "Make macros out of two argument org* commands"
   (interactive)
-  (query-replace-regexp "@\\([x]*orgcmd[nki]*\\){\\([^,]*\\),\\(.*\\)}
-" "{{{\\1(\\2,\\3)}}}" nil))
+  (query-replace-regexp "@\\([x]*orgcmd[nki]*\\){\\([^,]*\\),\\(.*\\)}" "{{{\\1(\\2,\\3)}}}" nil))
 (define-key org-mode-map (kbd "C-c o") 'tsd-two-arg-orgcmd-macros)
 #+end_src
 
