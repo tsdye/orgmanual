@@ -74,15 +74,15 @@
 #+TEXINFO_POST_HEADER: @kindex \key\
 #+TEXINFO_POST_HEADER: @findex \command\
 #+TEXINFO_POST_HEADER: @iftex
-#+TEXINFO_POST_HEADER: @item @kbd{\key\} @hskip 0pt plus 1filll @code{\command\}
+#+TEXINFO_POST_HEADER: @kbd{\key\} @hskip 0pt plus 1filll @code{\command\}
 #+TEXINFO_POST_HEADER: @end iftex
 #+TEXINFO_POST_HEADER: @ifnottex
-#+TEXINFO_POST_HEADER: @item @kbd{\key\} @tie{}@tie{}@tie{}@tie{}(@code{\command\})
+#+TEXINFO_POST_HEADER: @kbd{\key\} @tie{}@tie{}@tie{}@tie{}(@code{\command\})
 #+TEXINFO_POST_HEADER: @end ifnottex
 #+TEXINFO_POST_HEADER: @end ifset
 #+TEXINFO_POST_HEADER: @ifclear cmdnames
 #+TEXINFO_POST_HEADER: @kindex \key\
-#+TEXINFO_POST_HEADER: @item @kbd{\key\}
+#+TEXINFO_POST_HEADER: @kbd{\key\}
 #+TEXINFO_POST_HEADER: @end ifclear
 #+TEXINFO_POST_HEADER: @end macro
 #+TEXINFO_POST_HEADER: 
@@ -111,14 +111,14 @@
 #+TEXINFO_POST_HEADER: @ifset cmdnames
 #+TEXINFO_POST_HEADER: @findex \command\
 #+TEXINFO_POST_HEADER: @iftex
-#+TEXINFO_POST_HEADER: @item @kbd{\key\} @hskip 0pt plus 1filll @code{\command\}
+#+TEXINFO_POST_HEADER: @kbd{\key\} @hskip 0pt plus 1filll @code{\command\}
 #+TEXINFO_POST_HEADER: @end iftex
 #+TEXINFO_POST_HEADER: @ifnottex
-#+TEXINFO_POST_HEADER: @item @kbd{\key\} @tie{}@tie{}@tie{}@tie{}(@code{\command\})
+#+TEXINFO_POST_HEADER: @kbd{\key\} @tie{}@tie{}@tie{}@tie{}(@code{\command\})
 #+TEXINFO_POST_HEADER: @end ifnottex
 #+TEXINFO_POST_HEADER: @end ifset
 #+TEXINFO_POST_HEADER: @ifclear cmdnames
-#+TEXINFO_POST_HEADER: @item @kbd{\key\}
+#+TEXINFO_POST_HEADER: @kbd{\key\}
 #+TEXINFO_POST_HEADER: @end ifclear
 #+TEXINFO_POST_HEADER: @end macro
 #+TEXINFO_POST_HEADER: 
@@ -129,15 +129,15 @@
 #+TEXINFO_POST_HEADER: @kindex \key\
 #+TEXINFO_POST_HEADER: @findex \command\
 #+TEXINFO_POST_HEADER: @iftex
-#+TEXINFO_POST_HEADER: @item @kbd{\text\} @hskip 0pt plus 1filll @code{\command\}
+#+TEXINFO_POST_HEADER: @kbd{\text\} @hskip 0pt plus 1filll @code{\command\}
 #+TEXINFO_POST_HEADER: @end iftex
 #+TEXINFO_POST_HEADER: @ifnottex
-#+TEXINFO_POST_HEADER: @item @kbd{\text\} @tie{}@tie{}@tie{}@tie{}(@code{\command\})
+#+TEXINFO_POST_HEADER: @kbd{\text\} @tie{}@tie{}@tie{}@tie{}(@code{\command\})
 #+TEXINFO_POST_HEADER: @end ifnottex
 #+TEXINFO_POST_HEADER: @end ifset
 #+TEXINFO_POST_HEADER: @ifclear cmdnames
 #+TEXINFO_POST_HEADER: @kindex \key\
-#+TEXINFO_POST_HEADER: @item @kbd{\text\}
+#+TEXINFO_POST_HEADER: @kbd{\text\}
 #+TEXINFO_POST_HEADER: @end ifclear
 #+TEXINFO_POST_HEADER: @end macro
 #+TEXINFO_POST_HEADER: 
@@ -149,16 +149,16 @@
 #+TEXINFO_POST_HEADER: @kindex \key2\
 #+TEXINFO_POST_HEADER: @findex \command\
 #+TEXINFO_POST_HEADER: @iftex
-#+TEXINFO_POST_HEADER: @item @kbd{\key1\} @ @r{or} @ @kbd{\key2\} @hskip 0pt plus 1filll @code{\command\}
+#+TEXINFO_POST_HEADER: @kbd{\key1\} @ @r{or} @ @kbd{\key2\} @hskip 0pt plus 1filll @code{\command\}
 #+TEXINFO_POST_HEADER: @end iftex
 #+TEXINFO_POST_HEADER: @ifnottex
-#+TEXINFO_POST_HEADER: @item @kbd{\key1\} @ @r{or} @ @kbd{\key2\} @tie{}@tie{}@tie{}@tie{}(@code{\command\})
+#+TEXINFO_POST_HEADER: @kbd{\key1\} @ @r{or} @ @kbd{\key2\} @tie{}@tie{}@tie{}@tie{}(@code{\command\})
 #+TEXINFO_POST_HEADER: @end ifnottex
 #+TEXINFO_POST_HEADER: @end ifset
 #+TEXINFO_POST_HEADER: @ifclear cmdnames
 #+TEXINFO_POST_HEADER: @kindex \key1\
 #+TEXINFO_POST_HEADER: @kindex \key2\
-#+TEXINFO_POST_HEADER: @item @kbd{\key1\} @ @r{or} @ @kbd{\key2\}
+#+TEXINFO_POST_HEADER: @kbd{\key1\} @ @r{or} @ @kbd{\key2\}
 #+TEXINFO_POST_HEADER: @end ifclear
 #+TEXINFO_POST_HEADER: @end macro
 #+TEXINFO_POST_HEADER: 
@@ -172,18 +172,18 @@
 #+TEXINFO_POST_HEADER: @kindex \key2\
 #+TEXINFO_POST_HEADER: @findex \command\
 #+TEXINFO_POST_HEADER: @iftex
-#+TEXINFO_POST_HEADER: @item @kbd{\key1\}
+#+TEXINFO_POST_HEADER: @kbd{\key1\}
 #+TEXINFO_POST_HEADER: @itemx @kbd{\key2\} @hskip 0pt plus 1filll @code{\command\}
 #+TEXINFO_POST_HEADER: @end iftex
 #+TEXINFO_POST_HEADER: @ifnottex
-#+TEXINFO_POST_HEADER: @item @kbd{\key1\}
+#+TEXINFO_POST_HEADER: @kbd{\key1\}
 #+TEXINFO_POST_HEADER: @itemx @kbd{\key2\} @tie{}@tie{}@tie{}@tie{}(@code{\command\})
 #+TEXINFO_POST_HEADER: @end ifnottex
 #+TEXINFO_POST_HEADER: @end ifset
 #+TEXINFO_POST_HEADER: @ifclear cmdnames
 #+TEXINFO_POST_HEADER: @kindex \key1\
 #+TEXINFO_POST_HEADER: @kindex \key2\
-#+TEXINFO_POST_HEADER: @item @kbd{\key1\}
+#+TEXINFO_POST_HEADER: @kbd{\key1\}
 #+TEXINFO_POST_HEADER: @itemx @kbd{\key2\}
 #+TEXINFO_POST_HEADER: @end ifclear
 #+TEXINFO_POST_HEADER: @end macro
@@ -196,16 +196,16 @@
 #+TEXINFO_POST_HEADER: @kindex \key2\
 #+TEXINFO_POST_HEADER: @findex \command\
 #+TEXINFO_POST_HEADER: @iftex
-#+TEXINFO_POST_HEADER: @item @kbd{\key1\} @ @r{or short} @ @kbd{\key2\} @hskip 0pt plus 1filll @code{\command\}
+#+TEXINFO_POST_HEADER: @kbd{\key1\} @ @r{or short} @ @kbd{\key2\} @hskip 0pt plus 1filll @code{\command\}
 #+TEXINFO_POST_HEADER: @end iftex
 #+TEXINFO_POST_HEADER: @ifnottex
-#+TEXINFO_POST_HEADER: @item @kbd{\key1\} @ @r{or short} @ @kbd{\key2\} @tie{}@tie{}@tie{}@tie{}(@code{\command\})
+#+TEXINFO_POST_HEADER: @kbd{\key1\} @ @r{or short} @ @kbd{\key2\} @tie{}@tie{}@tie{}@tie{}(@code{\command\})
 #+TEXINFO_POST_HEADER: @end ifnottex
 #+TEXINFO_POST_HEADER: @end ifset
 #+TEXINFO_POST_HEADER: @ifclear cmdnames
 #+TEXINFO_POST_HEADER: @kindex \key1\
 #+TEXINFO_POST_HEADER: @kindex \key2\
-#+TEXINFO_POST_HEADER: @item @kbd{\key1\} @ @r{or short} @ @kbd{\key2\}
+#+TEXINFO_POST_HEADER: @kbd{\key1\} @ @r{or short} @ @kbd{\key2\}
 #+TEXINFO_POST_HEADER: @end ifclear
 #+TEXINFO_POST_HEADER: @end macro
 #+TEXINFO_POST_HEADER: 
@@ -240,18 +240,18 @@
 #+TEXINFO_POST_HEADER: @findex \command1\
 #+TEXINFO_POST_HEADER: @findex \command2\
 #+TEXINFO_POST_HEADER: @iftex
-#+TEXINFO_POST_HEADER: @item @kbd{\key1\} @hskip 0pt plus 1filll @code{\command1\}
+#+TEXINFO_POST_HEADER: @kbd{\key1\} @hskip 0pt plus 1filll @code{\command1\}
 #+TEXINFO_POST_HEADER: @itemx @kbd{\key2\} @hskip 0pt plus 1filll @code{\command2\}
 #+TEXINFO_POST_HEADER: @end iftex
 #+TEXINFO_POST_HEADER: @ifnottex
-#+TEXINFO_POST_HEADER: @item @kbd{\key1\} @tie{}@tie{}@tie{}@tie{}(@code{\command1\})
+#+TEXINFO_POST_HEADER: @kbd{\key1\} @tie{}@tie{}@tie{}@tie{}(@code{\command1\})
 #+TEXINFO_POST_HEADER: @itemx @kbd{\key2\} @tie{}@tie{}@tie{}@tie{}(@code{\command2\})
 #+TEXINFO_POST_HEADER: @end ifnottex
 #+TEXINFO_POST_HEADER: @end ifset
 #+TEXINFO_POST_HEADER: @ifclear cmdnames
 #+TEXINFO_POST_HEADER: @kindex \key1\
 #+TEXINFO_POST_HEADER: @kindex \key2\
-#+TEXINFO_POST_HEADER: @item @kbd{\key1\}
+#+TEXINFO_POST_HEADER: @kbd{\key1\}
 #+TEXINFO_POST_HEADER: @itemx @kbd{\key2\}
 #+TEXINFO_POST_HEADER: @end ifclear
 #+TEXINFO_POST_HEADER: @end macro
@@ -276,8 +276,6 @@
 #+MACRO: bibtex @@info:Bib@TeX{}@@
 
 #+MACRO: command @@info:@command{$1}@@
-#+MACRO: pxref @@info:@pxref{$1}@@
-#+MACRO: xref @@info:@xref{$1}@@
 #+MACRO: samp @@info:@samp{$1}@@
 #+MACRO: file @@info:@file{$1}@@
 #+MACRO: key @@info:@key{$1}@@
@@ -503,7 +501,7 @@ Org mode buffers need font-lock to be turned on --- this is the default in
 Emacs.[fn:5]
 
 There are compatibility issues between Org mode and some other Elisp
-packages, please take the time to check the list ({{{pxref(Conflicts)}}}).
+packages, please take the time to check the list (call_ref(type="paren",node="Conflicts")).
 
 The four Org commands {{{command(org-store-link)}}},
 {{{command(org-capture)}}}, {{{command(org-agenda)}}}, and
@@ -813,14 +811,16 @@ call_index(type="concept",entry="subtree, subtree visibility state")
   - {{{orgcmd(C-u C-u C-u @key{TAB},show-all)}}} :: Show all,
        including drawers.
        call_index(type="concept",entry="revealing context")
-  - {{{orgcmd(C-c C-r,org-reveal)}}} :: Reveal context around
-       point, showing the current entry, the following heading and the
-       hierarchy above.  Useful for working near a location that has
-       been exposed by a sparse tree command ({{{pxref(Sparse trees)}}}) 
-       or an agenda command ({{{pxref(Agenda commands)}}}).  With a prefix argument show, on each level, all
-       sibling headings.  With a double prefix argument, also show the
-       entire subtree of the parent.
-    call_index(type="concept",entry="show branches, command")
+  - {{{orgcmd(C-c C-r,org-reveal)}}} :: Reveal context around point,
+       showing the current entry, the following heading and the
+       hierarchy above. Useful for working near a location that has
+       been exposed by a sparse tree command
+       (call_ref(type="paren",node="Sparse trees")) or an agenda command
+       (call_ref(type="paren",node="Agenda commands")). With a prefix
+       argument show, on each level, all sibling headings. With a
+       double prefix argument, also show the entire subtree of the
+       parent. 
+       call_index(type="concept",entry="show branches, command")
   - {{{orgcmd(C-c C-k,show-branches)}}} :: Expose all the headings
        of the subtree, CONTENT view for just one subtree.
        call_index(type="concept",entry="show children, command")
@@ -859,14 +859,14 @@ buffer:
 call_index(type="concept",entry="property, VISIBILITY") 
 
 {{{noindent}}} Furthermore, any entries with a {{{samp(VISIBILITY)}}}
-property ({{{pxref(Properties and Columns)}}}) will get their
+property (call_ref(type="paren",node="Properties and Columns")) will get their
 visibility adapted accordingly. Allowed values for this property are
 ~folded~, ~children~, ~content~, and ~all~.
 
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
   - {{{orgcmd(C-u C-u @key{TAB},org-set-startup-visibility)}}} ::
-       Switch back to the startup visibility of the buffer, i.e.:
+       Switch back to the startup visibility of the buffer, i.e.,
        whatever is requested by startup options and
        {{{samp(VISIBILITY)}}} properties in individual entries.
 
@@ -924,7 +924,7 @@ call_index(type="concept",entry="subtrees, cut and paste")
      call_index(type="variable",entry="org-M-RET-may-split-line ")
        Insert new heading with
        same level as current. If the cursor is in a plain list item, a
-       new item is created ({{{pxref(Plain lists)}}}). To force
+       new item is created (call_ref(type="paren",node="Plain lists")). To force
        creation of a new headline, use a prefix argument. When this
        command is used in the middle of a line, the line is split and
        the rest of the line becomes the new headline.[fn:11] If the
@@ -932,7 +932,7 @@ call_index(type="concept",entry="subtrees, cut and paste")
        headline is created before the current line. If at the
        beginning of any other line, the content of that line is made
        the new heading. If the command is used at the end of a folded
-       subtree (i.e.: behind the ellipses at the end of a headline),
+       subtree (i.e., behind the ellipses at the end of a headline),
        then a headline like the current one will be inserted after the
        end of the subtree.
   - {{{orgcmd(C-@key{RET},org-insert-heading-respect-content)}}} ::
@@ -967,7 +967,7 @@ call_index(type="concept",entry="subtrees, cut and paste")
   - {{{orgcmd(M-S-@key{down},org-move-subtree-down)}}} :: Move
        subtree down (swap with next subtree of same level).
   - {{{orgcmd(C-c C-x C-w,org-cut-subtree)}}} :: Kill subtree,
-       i.e.: remove it from buffer but save in kill ring. With a
+       i.e., remove it from buffer but save in kill ring. With a
        numeric prefix argument N, kill N sequential subtrees.
   - {{{orgcmd(C-c C-x M-w,org-copy-subtree)}}} :: Copy subtree to
        kill ring.  With a numeric prefix argument N, copy the N sequential subtrees.
@@ -1002,7 +1002,7 @@ call_index(type="concept",entry="subtrees, cut and paste")
        see the docstring of the command
        ~org-clone-subtree-with-time-shift~.
   - {{{orgcmd(C-c C-w,org-refile)}}} :: Refile entry or region to
-       a different location. {{{xref(Refile and copy)}}}.
+       a different location call_ref(type="end",node="Refile and copy").
   - {{{orgcmd(C-c ^,org-sort)}}} :: Sort same-level entries.  When
        there is an active region, all entries in the region will be
        sorted.  Otherwise the children of the current headline are
@@ -1035,7 +1035,7 @@ demotion work on all headlines in the region.  To select a region of
 headlines, it is best to place both point and mark at the beginning of a
 line, mark at the beginning of the first headline, and point at the line
 just after the last headline to change.  Note that when the cursor is
-inside a table ({{{pxref(Tables)}}}), the Meta-Cursor keys have different
+inside a table (call_ref(type="paren",node="Tables")), the Meta-Cursor keys have different
 functionality.
 
 ** Sparse trees
@@ -1085,11 +1085,10 @@ commands can be accessed through a dispatcher:
 call_index(type="variable",entry="org-agenda-custom-commands") 
 
 {{{noindent}}} For frequently used sparse trees of specific search
-strings, you can use the variable
-~org-agenda-custom-commands~ to define fast keyboard access
-to specific sparse trees. These commands will then be accessible
-through the agenda dispatcher ({{{pxref(Agenda dispatcher)}}}). For
-example:
+strings, you can use the variable ~org-agenda-custom-commands~ to
+define fast keyboard access to specific sparse trees. These commands
+will then be accessible through the agenda dispatcher
+(call_ref(type="paren",node="Agenda dispatcher")). For example:
 
 #+header: :exports code
 #+begin_src emacs-lisp
@@ -1125,9 +1124,10 @@ call_index(type="concept",entry="lists, ordered")
 call_index(type="concept",entry="ordered lists")
 
 Within an entry of the outline tree, hand-formatted lists can provide
-additional structure.  They also provide a way to create lists of checkboxes
-({{{pxref(Checkboxes)}}}).  Org supports editing such lists, and every exporter
-({{{pxref(Exporting)}}}) can parse and format them.
+additional structure. They also provide a way to create lists of
+checkboxes (call_ref(type="paren",node="Checkboxes")). Org supports editing
+such lists, and every exporter (call_ref(type="paren",node="Exporting"))
+can parse and format them.
 
 Org knows ordered lists, unordered lists, and description lists.
 
@@ -1177,12 +1177,13 @@ lines.[fn:18]  In that case, all items are closed.  Here is an example:
      him very well from his role as Mikey Walsh in @@info:@i{The Goonies}@@.
 #+end_src
 
-Org supports these lists by tuning filling and wrapping commands to deal with
-them correctly.[fn:19]  To turn this on,
-put into {{{file(.emacs)}}}: ~(require 'filladapt)~}, and by exporting them
-properly ({{{pxref(Exporting)}}}).  Since indentation is what governs the
-structure of these lists, many structural constructs like ~#+BEGIN_...~
-blocks can be indented to signal that they belong to a particular item.
+Org supports these lists by tuning filling and wrapping commands to
+deal with them correctly.[fn:19] To turn this on, put into
+{{{file(.emacs)}}}: ~(require 'filladapt)~}, and by exporting them
+properly (call_ref(type="paren",node="Exporting")). Since indentation is
+what governs the structure of these lists, many structural constructs
+like ~#+BEGIN_...~ blocks can be indented to signal that they belong
+to a particular item.
 
 call_index(type="variable",entry="org-list-demote-modify-bullet")
 call_index(type="variable",entry="org-list-indent-offset")
@@ -1204,24 +1205,28 @@ to disable them individually.
   - {{{orgcmd(@key{TAB},org-cycle)}}} :: Items can be folded just like
        headline levels. Normally this works only if the cursor is on a
        plain list item. For more details, see the variable
-       ~org-cycle-include-plain-lists~. If this variable is
-       set to ~integrate~, plain list items will be treated
-       like low-level headlines. The level of an item is then given by
-       the indentation of the bullet/number. Items are always
-       subordinate to real headlines, however; the hierarchies remain
-       completely separated. In a new item with no text yet, the first
+       ~org-cycle-include-plain-lists~. If this variable is set to
+       ~integrate~, plain list items will be treated like low-level
+       headlines. The level of an item is then given by the
+       indentation of the bullet/number. Items are always subordinate
+       to real headlines, however; the hierarchies remain completely
+       separated. In a new item with no text yet, the first
        {{{key(TAB)}}} demotes the item to become a child of the
        previous one. Subsequent {{{key(TAB)}}}s move the item to
        meaningful levels in the list and eventually get it back to its
-       initial position. call_index(type="concept",entry="cycling, in plain lists")
+       initial position. call_index(type="concept",entry="cycling, in
+       plain lists")
+
        call_index(type="variable",entry="org-cycle-include-plain-lists")
+
   - {{{orgcmd(M-@key{RET},org-insert-heading)}}} :: Insert new item at
        current level. With a prefix argument, force a new heading
-       ({{{pxref(Structure editing)}}}). If this command is used in
-       the middle of an item, that item is /split/ in two, and
-       the second part becomes the new item.[fn:20] If this command is
-       executed /before item's body/, the new item is created /before/
-       the current one. 
+       (call_ref(type="paren",node="Structure editing")). If this command
+       is used in the middle of an item, that item is /split/ in two,
+       and the second part becomes the new item.[fn:20] If this
+       command is executed /before item's body/, the new item is
+       created /before/ the current one.
+
        call_index(type="variable",entry="org-M-RET-may-split-line")
        call_index(type="variable",entry="org-list-automatic-rules")
 
@@ -1266,9 +1271,10 @@ to disable them individually.
     ~org-list-automatic-rules~.  The global indentation of a list has no
     influence on the text /after/ the list.
   - C-c C-c ::
-    If there is a checkbox ({{{pxref(Checkboxes)}}}) in the item line, toggle the
+    If there is a checkbox (call_ref(type="paren",node="Checkboxes")) in the item line, toggle the
     state of the checkbox.  In any case, verify bullets and indentation
     consistency in the whole list.
+
     call_index(type="keystroke",entry="C-c C-c")
   - C-c - ::
     Cycle the entire list level through the different itemize/enumerate bullets
@@ -1284,11 +1290,11 @@ to disable them individually.
     call_index(type="variable",entry="org-plain-list-ordered-item-terminator")
   - C-c * ::
     Turn a plain list item into a headline (so that it becomes a subheading at
-    its location).  {{{xref(Structure editing)}}}, for a detailed explanation.
+    its location). call_ref(type="start",node="Structure editing"), for a detailed explanation.
     call_index(type="keystroke",entry="C-c *")
   - C-c C-* ::
     Turn the whole plain list into a subtree of the current heading.  Checkboxes
-    ({{{pxref(Checkboxes)}}}) will become TODO (resp. DONE) keywords when unchecked
+    (call_ref(type="paren",node="Checkboxes")) will become TODO (resp. DONE) keywords when unchecked
     (resp. checked).
     call_index(type="keystroke",entry="C-c C-*")
   - S-left/right ::
@@ -1338,14 +1344,14 @@ drawer. With a prefix argument, this command calls
 below the current headline. Completion over drawer keywords is also
 possible using {{{key(M-TAB)}}}.
 
-Visibility cycling ({{{pxref(Visibility cycling)}}}) on the headline
+Visibility cycling (call_ref(type="paren",node="Visibility cycling")) on the headline
 will hide and show the entry, but keep the drawer collapsed to a
 single line. In order to look inside the drawer, you need to move the
 cursor to the drawer line and press {{{key(TAB)}}} there. Org mode
 uses the ~PROPERTIES~ drawer for storing properties
-({{{pxref(Properties and Columns)}}}), and you can also arrange for
-state change notes ({{{pxref(Tracking TODO state changes)}}}) and
-clock times ({{{pxref(Clocking work time)}}}) to be stored in a drawer
+(call_ref(type="paren",node="Properties and Columns")), and you can also arrange for
+state change notes (call_ref(type="paren",node="Tracking TODO state changes")) and
+clock times (call_ref(type="paren",node="Clocking work time")) to be stored in a drawer
 ~LOGBOOK~. If you want to store a quick note in the LOGBOOK
 drawer, in a similar way to state changes, use
 
@@ -1360,8 +1366,8 @@ drawer, in a similar way to state changes, use
 call_index(type="variable",entry="org-hide-block-startup")
 call_index(type="concept",entry="blocks, folding")
 Org mode uses begin...end blocks for various purposes from including source
-code examples ({{{pxref(Literal examples)}}}) to capturing time logging
-information ({{{pxref(Clocking work time)}}}).  These blocks can be folded and
+code examples (call_ref(type="paren",node="Literal examples")) to capturing time logging
+information (call_ref(type="paren",node="Clocking work time")).  These blocks can be folded and
 unfolded by pressing TAB in the begin line.  You can also get all blocks
 folded at startup by configuring the variable ~org-hide-block-startup~
 or on a per-file basis by using
@@ -1383,7 +1389,7 @@ Org mode supports the creation of footnotes. In contrast to the
 {{{file(footnote.el)}}} package, Org mode's footnotes are designed for
 work on a larger document, not only for one-off documents like emails.
 The basic syntax is similar to the one used by
-{{{file(footnote.el)}}}, i.e.: a footnote is defined in a paragraph
+{{{file(footnote.el)}}}, i.e., a footnote is defined in a paragraph
 that is started by a footnote marker in square brackets in column 0,
 no indentation allowed. If you need a paragraph break inside a
 footnote, use the {{{latex}}} idiom {{{samp(\\par)}}}. The
@@ -1399,8 +1405,8 @@ The Org homepage[fn:1] now looks a lot better than it used to.
 Org mode extends the number-based syntax to /named/ footnotes and
 optional inline definition. Using plain numbers as markers (as
 {{{file(footnote.el)}}} does) is supported for backward compatibility,
-but not encouraged because of possible conflicts with
-{{{latex}}} snippets ({{{pxref(Embedded @LaTeX{})}}}). Here are
+but not encouraged because of possible conflicts with {{{latex}}}
+snippets (call_ref(type="paren",node="Embedded @LaTeX{}")). Here are
 the valid references:
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
@@ -1522,7 +1528,7 @@ call_index(type="concept",entry="editing tables")
 
 Org comes with a fast and intuitive table editor.  Spreadsheet-like
 calculations are supported using the Emacs {{{file(calc)}}} package
-({{{pxref(Top, Calc, , calc, Gnu Emacs Calculator Manual)}}}).
+call_ref(type="end",node="Top",xref="Calc",topic="calc",manual="Gnu Emacs Calculator Manual").
 
 ** Built-in table editor 
    :PROPERTIES:
@@ -1674,11 +1680,11 @@ unpredictable for you, configure the variables
     values will be incremented during copy.  Integers that are too large will not
     be incremented.  Also, a ~0~ prefix argument temporarily disables the
     increment.  This key is also used by shift-selection and related modes
-    ({{{pxref(Conflicts)}}}).
+    (call_ref(type="paren",node="Conflicts")).
 
     {{{tsubheading(Miscellaneous)}}}
   - {{{orgcmd(C-c `,org-table-edit-field)}}} :: Edit the current field in a separate window.  This is useful for fields that
-    are not fully visible ({{{pxref(Column width and alignment)}}}).  When called with
+    are not fully visible (call_ref(type="paren",node="Column width and alignment")).  When called with
     a {{{kbd(C-u)}}} prefix, just make the full field visible, so that it can be
     edited in place.  When called with two {{{kbd(C-u)}}} prefixes, make the editor
     window follow the cursor through the table and always show the current
@@ -1892,7 +1898,7 @@ representation that looks like this:
 
 Column specifications can be absolute like ~$1~,
 ~$2~ ,... ~$N~, or relative to the current
-column (i.e.: the column of the field which is being computed) like
+column (i.e., the column of the field which is being computed) like
 ~$+1~ or ~$-2~. ~$<~ and ~$>~
 are immutable references to the first and last column, respectively,
 and you can use ~$>>>~ to indicate the third column from the
@@ -1997,13 +2003,13 @@ line like
 call_index(type="variable",entry="constants-unit-system")
 call_index(type="program",entry="constants.el") 
 
-Also properties ({{{pxref(Properties and
-Columns)}}}) can be used as constants in table formulas: for a
-property {{{samp(:Xyz:)}}} use the name {{{samp($PROP_Xyz)}}}, and the
-property will be searched in the current outline entry and in the
-hierarchy above it. If you have the {{{file(constants.el)}}} package,
-it will also be used to resolve constants, including natural constants
-like ~$h~ for Planck's constant, and units like ~$km~ for
+Also properties (call_ref(type="paren",node="Properties and Columns"))
+can be used as constants in table formulas: for a property
+{{{samp(:Xyz:)}}} use the name {{{samp($PROP_Xyz)}}}, and the property
+will be searched in the current outline entry and in the hierarchy
+above it. If you have the {{{file(constants.el)}}} package, it will
+also be used to resolve constants, including natural constants like
+~$h~ for Planck's constant, and units like ~$km~ for
 kilometers. [fn:35] Column names and parameters can be specified in
 special table lines. These are described below, see [[Advanced features]].
 All names must start with a letter, and further consist of letters and
@@ -2043,9 +2049,9 @@ A formula can be any algebraic expression understood by the Emacs
 {{{file(Calc)}}} package.  *Note*: {{{file(calc)}}} has the
 non-standard convention that ~/~ has lower precedence than
 ~*~, so that ~a/b*c~ is interpreted as ~a/(b*c)~.  Before
-evaluation by ~calc-eval~ ({{{pxref(Calling Calc from
-Your Programs, calc-eval, Calling Calc from Your Lisp Programs, calc, GNU
-Emacs Calc Manual)}}}),
+evaluation by ~calc-eval~ (call_ref(type="paren",node="Calling Calc from
+Your Programs",xref="calc-eval",topic="Calling Calc from Your Lisp Programs",file-name="calc",manual="GNU
+Emacs Calc Manual")),
 variable substitution takes place according to the rules described above.
 call_index(type="concept",entry="vectors, in table calculations")
 The range vectors can be directly fed into the Calc vector functions
@@ -2231,20 +2237,20 @@ command
 The left-hand side of a formula can also be a special expression in
 order to assign the formula to a number of different fields. There is
 no keyboard shortcut to enter such range formulas. To add them, use
-the formula editor ({{{pxref(Editing and debugging formulas)}}}) or
-edit the ~#+TBLFM:~ line directly.
+the formula editor (call_ref(type="paren",node="Editing and debugging
+formulas")) or edit the ~#+TBLFM:~ line directly.
 
 #+attr_texinfo: :table-type "table" :indic "@code"
   - $2= ::
     Column formula, valid for the entire column.  This is so common that Org
-    treats these formulas in a special way, see {{{ref(Column formulas)}}}.
+    treats these formulas in a special way, see call_ref(type="end",node="Column formulas").
   - @@3= ::
     Row formula, applies to all fields in the specified row.  ~@@>=~ means
     the last row.
   - @@1$2..@@4$3= ::
     Range formula, applies to all fields in the given rectangular range.  This
     can also be used to assign a formula to some but not all fields in a row.
-  - $name= :: Named field, see {{{ref(Advanced features)}}}.
+  - $name= :: Named field, see call_ref(type="end",node="Advanced features").
 
 
 *** Column formulas
@@ -2449,7 +2455,7 @@ call_index(type="concept",entry="recomputing table fields")
 call_index(type="concept",entry="updating, table")
 
 Recalculation of a table is normally not automatic, but needs to be
-triggered by a command.  See @ref{Advanced features}, for a way to make
+triggered by a command.  call_ref{type="start",node="Advanced features"), for a way to make
 recalculation at least semi-automatic.
 
 In order to recalculate a line of a table or the entire table, use the
@@ -2685,7 +2691,7 @@ If the link does not look like a URL, it is considered to be internal in the
 current file.  The most important case is a link like
 {{{samp([[#my-custom-id]])}}} which will link to the entry with the
 ~CUSTOM_ID~ property {{{samp(my-custom-id)}}}.  Such custom IDs are very good
-for HTML export ({{{pxref(HTML export)}}}) where they produce pretty section
+for HTML export (call_ref(type="paren",node="HTML export")) where they produce pretty section
 links.  You are responsible yourself to make sure these custom IDs are unique
 in a file.
 
@@ -2693,7 +2699,7 @@ Links such as {{{samp([[My Target]])}}} or {{{samp([[My Target][Find my target]]
 lead to a text search in the current file.
 
 The link can be followed with {{{kbd(C-c C-o)}}} when the cursor is on the link,
-or with a mouse click ({{{pxref(Handling links)}}}).  Links to custom IDs will
+or with a mouse click (call_ref(type="paren",node="Handling links")).  Links to custom IDs will
 point to the corresponding headline.  The preferred match for a text link is
 a /dedicated target/: the same string in double angular brackets.  Targets
 may be located anywhere; sometimes it is convenient to put them into a
@@ -2703,7 +2709,7 @@ comment line.  For example
 # <<My Target>>
 #+end_src
 
-{{{noindent}}} In HTML export ({{{pxref(HTML export)}}}), such targets will become
+{{{noindent}}} In HTML export (call_ref(type="paren",node="HTML export")), such targets will become
 named anchors for direct access through {{{samp(http)}}} links.[fn:36]
 
 If no dedicated target exists, Org will search for a headline that is
@@ -2799,11 +2805,12 @@ the colon.  The following list shows examples for each link type.
  - elisp:(find-file-other-frame "Elisp.org") :: Elisp form to evaluate
 
 
-For customizing Org to add new link types {{{ref(Adding hyperlink types)}}}.
+For customizing Org to add new link types
+call_ref(type="end",node="Adding hyperlink types").
 
 A link should be enclosed in double brackets and may contain a
-descriptive text to be displayed instead of the URL ({{{pxref(Link
-format)}}}), for example:
+descriptive text to be displayed instead of the URL
+(call_ref(type="paren",node="Link format")), for example:
 
 #+begin_src example
 [[http://www.gnu.org/software/emacs/][GNU Emacs]]
@@ -2811,7 +2818,7 @@ format)}}}), for example:
 
 {{{noindent}}}
 If the description is a file name or URL that points to an image, HTML
-export ({{{pxref(HTML export)}}}) will inline the image as a clickable
+export (call_ref(type="paren",node="HTML export")) will inline the image as a clickable
 button.  If there is no description at all and the link points to an
 image,
 that image will be inlined into the exported HTML file.
@@ -2881,12 +2888,12 @@ insert it into an Org file, and to follow the link.
     - Other files ::
 
       For any other files, the link will point to the file, with a search
-      string ({{{pxref(Search options)}}}) pointing to the contents of the
+      string (call_ref(type="paren",node="Search options")) pointing to the contents of the
       current line. If there is an active region, the selected words will
       form the basis of the search string. If the automatically created link
       is not working correctly or accurately enough, you can write custom
       functions to select the search string and to do the search for
-      particular file types---see {{{ref(Custom searches)}}}. The key
+      particular file types---see call_ref(type="end",node="Custom searches"). The key
       binding {{{kbd(C-c l)}}} is only a suggestion---see
       {{{ref(Installation)}}}.
 
@@ -2918,8 +2925,8 @@ insert it into an Org file, and to follow the link.
 
       Completion with {{{key(TAB)}}} will help you to insert valid link
       prefixes like {{{samp(http:)}}} or {{{samp(ftp:)}}}, including the
-      prefixes defined through link abbreviations ({{{pxref(Link
-      abbreviations)}}}). If you press {{{key(RET)}}} after inserting only the
+      prefixes defined through link abbreviations (call_ref(type="paren",node="Link
+      abbreviations")). If you press {{{key(RET)}}} after inserting only the
       @@info:@var{prefix}@@, Org will offer specific completion support for some link
       types.[fn:42] For example, if you type {{{kbd(file @key{RET})}}}, file
       name completion (alternative access: {{{kbd(C-u C-c C-l)}}}, see
@@ -2999,7 +3006,7 @@ insert it into an Org file, and to follow the link.
     call_index(type="concept",entry="~noinlineimages~, STARTUP keyword")
 
     Toggle the inline display of linked images.  Normally this will only inline
-    images that have no description part in the link, i.e.: images that will also
+    images that have no description part in the link, i.e., images that will also
     be inlined during export.  When called with a prefix argument, also display
     images that do have a link description.  You can ask for inline images to be
     displayed at startup by configuring the variable
@@ -3119,9 +3126,9 @@ call_index(type="concept",entry="#+LINK")
 @end example
 
 {{{noindent}}}
-In-buffer completion ({{{pxref(Completion)}}}) can be used after {{{samp([)}}} to
+In-buffer completion (call_ref(type="paren",node="Completion")) can be used after {{{samp([)}}} to
 complete link abbreviations.  You may also define a function
-~org-PREFIX-complete-link~ that implements special (e.g.@: completion)
+~org-PREFIX-complete-link~ that implements special (e.g.: completion)
 support for inserting such a link with {{{kbd(C-c C-l)}}}.  Such a function should
 not accept any arguments, and return the full link with prefix.
 
@@ -3136,8 +3143,8 @@ File links can contain additional information to make Emacs jump to a
 particular location in the file when following a link.  This can be a
 line number or a search option after a double@footnote{For backward
 compatibility, line numbers can also follow a single colon.} colon.  For
-example, when the command {{{kbd(C-c l)}}} creates a link ({{{pxref(Handling
-links)}}}) to a file, it encodes the words in the current line as a search
+example, when the command {{{kbd(C-c l)}}} creates a link
+(call_ref(type="paren",node="Handling links")) to a file, it encodes the words in the current line as a search
 string that can be used to find this line back later when following the
 link with {{{kbd(C-c C-o)}}}.
 
@@ -3158,7 +3165,7 @@ Jump to line 255.
 @item My Target
 Search for a link target {{{samp(<<My Target>>)}}}, or do a text search for
 {{{samp(my target)}}}, similar to the search in internal links, see
-{{{ref(Internal links)}}}.  In HTML export ({{{pxref(HTML export)}}}), such a file
+call_ref(type="end",node="Internal links").  In HTML export (call_ref(type="paren",node="HTML export")), such a file
 link will become a HTML reference to the corresponding named anchor in
 the linked file.
 @item *My Target
@@ -3727,16 +3734,12 @@ that clocking only works with headings indented less than 30 stars.
 
 [fn:9]  See the option ~org-cycle-global-at-bob~.
 
-[fn:10] The indirect buffer
-@@info:@ifinfo@@
-({{{pxref(Indirect Buffers,,,emacs,GNU Emacs Manual)}}})
-@@info:@end ifinfo@@
-@@info:@ifnotinfo@@
-(see the Emacs manual for more information about indirect buffers)
-@@info:@end ifnotinfo@@
-will contain the entire buffer, but will be narrowed to the current
-tree.  Editing the indirect buffer will also change the original buffer,
-but without affecting visibility in that buffer.
+[fn:10] The indirect buffer will contain the entire buffer, but will
+be narrowed to the current tree. Editing the indirect buffer will also
+change the original buffer, but without affecting visibility in that
+buffer. For more information about indirect buffers,
+call_ref(type="end",node="Indirect Buffers",file-name="emacs",manual="GNU Emacs Manual").
+
 
 [fn:11] If you do not want the line to be split, customize the
 variable ~org-M-RET-may-split-line~.
@@ -3971,7 +3974,7 @@ allow someone to tweak a back-end.
 **** TODO Write derived back-end section
 
 *** Export Snippets
-A section can be added about export snippets, i.e.
+A section can be added about export snippets, i.e.,
 
   @@ob-latex:\something{...}@@
 
@@ -4104,6 +4107,9 @@ Perhaps shorten to "All the rest"
 [[gnus:nnfolder%2Barchive:sent-mail#m1lie0ow7k.fsf@tsdye.com][Email from Thomas S. Dye: Re: {org-e-texinfo} generate m]]
 
 > EXPORT_TITLE property is meant to provide a title for a subtree export.
+** TODO Take ifinfo out of footnote 
+[2012-12-10 Mon]
+[[file:~/org/orgmanual/orgmanual.org::*Visibility%20cycling][Visibility cycling]]
 * Org-mode setup                                                   :noexport:
 ** Editing setup
 #+name: setup-editing
@@ -4134,7 +4140,6 @@ Perhaps shorten to "All the rest"
 #+name: index
 #+header: :var type="concept"
 #+header: :var entry="entry, test"
-#+header: :results raw
 #+begin_src emacs-lisp
 (format "@@info:@%s@@ %s" (cond 
           ((equal type "concept") "cindex")
@@ -4149,7 +4154,24 @@ Perhaps shorten to "All the rest"
 #+results: make-index
 @@info:@cindex@@ entry, test
 
-
+The variable type: "start", "end", "parenthetical", "info"
+The variable to: 
+#+name: ref
+#+header: :var type="end"
+#+header: :var node="Top"
+#+header: :var xref=""
+#+header: :var topic=""
+#+header: :var file-name=""
+#+header: :var manual=""
+#+begin_src emacs-lisp
+(format "@@info:@%s{%s,%s,%s,%s,%s}@@"
+        (cond
+         ((member type '("start" "start sentence")) "xref")
+         ((member type '("end" "mid" "end sentence" "mid sentence")) "ref")
+         ((member type '("paren" "parens" "parenthetical")) "pxref")
+         ((equal type "info") "inforef")
+         (t type)) node xref topic file-name manual)
+#+end_src
 
 #+name: roman-replace
 #+header: :results silent
