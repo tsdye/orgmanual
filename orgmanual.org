@@ -37,11 +37,10 @@
 #+MACRO: vindex @@info:@vindex $1@@
 #+MACRO: kindex @@info:@kindex $1@@
 #+MACRO: kbd @@info:@kbd{@@$1@@info:}@@
+#+MACRO: kbdkey {{{kbd($1{{{key($2)}}})}}}
 #+MACRO: key @@info:@key{@@$1@@info:}@@
 #+MACRO: command @@info:@command{@@$1@@info:}@@
 #+MACRO: file @@info:@file{@@$1@@info:}@@
-
-#+MACRO: orgcmd {{{kbd($1)}}} ~$2~
 
 * Introduction
   :PROPERTIES:
@@ -294,7 +293,7 @@ need to do this yourself with
 @@info:@noindent@@ If you do not like
 ~transient-mark-mode~, you can create an active region
 by using the mouse to select a region, or pressing
-{{{kbd(C-@key{SPC})}}} twice before moving the cursor.
+{{{kbdkey(C-,SPC)}}} twice before moving the cursor.
 
 ** Feedback
    :PROPERTIES:
@@ -315,8 +314,8 @@ For bug reports, please first try to reproduce the bug with the latest
 version of Org available---if you are running an outdated version, it is
 quite possible that the bug has been fixed already.  If the bug persists,
 prepare a report and provide as much information as possible, including the
-version information of Emacs ({{{kbd(M-x emacs-version @key{RET})}}}) and Org
-({{{kbd(M-x org-version @key{RET})}}}), as well as the Org related setup in
+version information of Emacs ({{{kbdkey(M-x emacs-version ,RET)}}}) and Org
+({{{kbdkey(M-x org-version ,RET)}}}), as well as the Org related setup in
 {{{file(.emacs)}}}.  The easiest way to do this is to use the command
 
 #+begin_src example
@@ -433,7 +432,7 @@ different functions, depending on context. The command that is bound
 to such keys has a generic name, like ~org-metaright~.
 In the manual we will, wherever possible, give the function that is
 internally called by the generic command. For example, in the chapter
-on document structure, {{{kbd(M-@key{right})}}} will be listed to call
+on document structure, {{{kbdkey(M-,right)}}} will be listed to call
 ~org-do-demote~, while in the chapter on tables, it will
 be listed to call ~org-table-move-column-right~. If you
 prefer, you can compile the manual without the command names by
@@ -513,7 +512,7 @@ variable ~org-cycle-separator-lines~ to modify this behavior.
 
 Outlines make it possible to hide parts of the text in the buffer.
 Org uses just two commands, bound to {{{key(TAB)}}} and
-{{{kbd(S-@key{TAB})}}} to change the visibility in the buffer.
+{{{kbdkey(S-,TAB)}}} to change the visibility in the buffer.
 
 {{{cindex(subtree visibility states)}}}
 {{{cindex(subtree cycling)}}}
@@ -522,7 +521,7 @@ Org uses just two commands, bound to {{{key(TAB)}}} and
 {{{cindex(subtree\, subtree visibility state)}}}
 
 #+attr_texinfo: :indic "@asis"
-- {{{orgcmd({{{key(TAB)}}},org-cycle)}}} :: /Subtree Cycling/: Rotate
+- {{{key(TAB)}}} ~org-cycle~ :: /Subtree Cycling/: Rotate
      current subtree among the states 
      {{{kindex(TAB)}}}
      {{{findex(org-cycle)}}}
@@ -540,7 +539,7 @@ Org uses just two commands, bound to {{{key(TAB)}}} and
      ~org-cycle-emulate-tab~ option. When the cursor is at the
      beginning of the buffer and the first line is not a headline,
      then {{{key(TAB)}}} actually runs global cycling (see below)[fn:9]. Also,
-     when called with a prefix argument ({{{kbd(C-u @key{TAB})}}}),
+     when called with a prefix argument ({{{kbdkey(C-u ,TAB)}}}),
      global cycling is invoked.
 
      {{{cindex(global visibility states)}}}
@@ -549,8 +548,8 @@ Org uses just two commands, bound to {{{key(TAB)}}} and
      {{{cindex(contents\, global visibility state)}}}
      {{{cindex(show all\, global visibility state)}}}
 
-- {{{orgcmd(S-@key{TAB},org-global-cycle)}}} :: 
-     @@info:@itemx@@ {{{key(C-u @key{TAB})}}}
+- {{{kbdkey(S-,TAB)}}} ~org-global-cycle~ :: 
+     @@info:@itemx@@ C-u {{{key(TAB)}}}
      /Global Cycling/: Rotate the entire buffer among the states
 
      {{{kindex(S-TAB)}}}
@@ -561,18 +560,18 @@ Org uses just two commands, bound to {{{key(TAB)}}} and
        '--------------------------------------'
      #+end_src
 
-     When {{{kbd(S-@key{TAB})}}} is called with a numeric prefix
+     When {{{kbdkey(S-,TAB)}}} is called with a numeric prefix
      argument, ~N~, the CONTENTS view up to headlines of level N will
-     be shown. Note that inside tables, {{{kbd(S-@key{TAB})}}} jumps
+     be shown. Note that inside tables, {{{kbdkey(S-,TAB)}}} jumps
      to the previous field.
 
      {{{cindex(show all\, command)}}}
-- {{{orgcmd(C-u C-u C-u @key{TAB},show-all)}}} :: Show all, including drawers.
+- {{{kbdkey(C-u C-u C-u ,TAB)}}} ~show-all~ :: Show all, including drawers.
      {{{kindex(C-u C-u C-u TAB)}}}
      {{{findex(show-all)}}}
 
      {{{cindex(revealing context)}}}
-- {{{orgcmd(C-c C-r,org-reveal)}}} :: Reveal context around point,
+- {{{kbd(C-c C-r)}}} ~org-reveal~ :: Reveal context around point,
      showing the current entry, the following heading and the
      hierarchy above.  Useful for working near a location that has
      been exposed by a sparse tree command (@@info:@pxref{Sparse
@@ -585,18 +584,18 @@ Org uses just two commands, bound to {{{key(TAB)}}} and
      {{{findex(org-reveal)}}}
 
      {{{cindex(show branches\, command)}}}
-- {{{orgcmd(C-c C-k,show-branches)}}} :: Expose all the headings of
+- {{{kbd(C-c C-k)}}} ~show-branches~ :: Expose all the headings of
      the subtree, CONTENT view for just one subtree.
      {{{kindex(C-c C-k)}}}
      {{{findex(show-branches)}}}
 
      {{{cindex(show children\, command)}}}
-- {{{orgcmd(C-c @key{TAB},show-children)}}} :: Expose all direct
+- {{{kbdkey(C-c ,TAB)}}} ~show-children~ :: Expose all direct
      children of the subtree.  With a numeric prefix argument, ~N~,
      expose all children down to level N.
      {{{kindex(C-c TAB)}}}
      {{{findex(show-children)}}}
-- {{{orgcmd(C-c C-x b,org-tree-to-indirect-buffer)}}} :: Show the
+- {{{kbd(C-c C-x b)}}} ~org-tree-to-indirect-buffer~ :: Show the
      current subtree in an indirect buffer.[fn:10] With a numeric
      prefix argument, ~N~, go up to level N and then take that tree.
      If N is negative then go up that many levels.  With a
@@ -604,8 +603,7 @@ Org uses just two commands, bound to {{{key(TAB)}}} and
      buffer.
      {{{kindex(C-c C-x b)}}}
      {{{findex(org-tree-to-indirect-buffer)}}}
-
-- {{{orgcmd(C-c C-x v,org-copy-visible)}}} :: Copy the /visible/ text
+- {{{kbd(C-c C-x v)}}} ~org-copy-visible~ :: Copy the /visible/ text
      in the region into the kill ring.
 
 {{{vindex(org-startup-folded)}}}
@@ -634,7 +632,7 @@ and Columns}@@) will get their visibility adapted accordingly.  Allowed values
 for this property are ~folded~, ~children~, ~content~, and
 ~all~.
 #+attr_texinfo: :indic "@asis"
-- {{{kbd(C-u C-u @key{TAB})}}} ~org-set-startup-visibility~ :: Switch
+- {{{kbdkey(C-u C-u ,TAB)}}} ~org-set-startup-visibility~ :: Switch
      back to the startup visibility of the buffer, i.e.@: whatever is
      requested by startup options and @@info:@samp{VISIBILITY}@@
      properties in individual entries.
