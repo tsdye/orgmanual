@@ -412,12 +412,12 @@ published, just replace ~master~ with
   - Run ~make help~ and then check and edit the file
     {{{file(local.mk)}}}. You must set the name of the Emacs
     binary (likely either {{{file(emacs)}}} or
-    {{{file(xemacs)}}}, and the paths to the directories where
+    {{{file(xemacs)}}}), and the paths to the directories where
     local Lisp and Info files will be installed. If the Emacs binary
     is not in your path, you must give the full path to the
-    executable. Avoid spaces in any path names.
+    executable. Avoid spaces in path names.
   - Run ~make config~ to check the configuration.
-  - Optionally run ~make test~ to build Org mode and
+  - Optionally, run ~make test~ to build Org mode and
     then run the full test suite.
   - Run ~make update2~ or ~make up2~ to
     update the Git repository and build and install Org mode. The
@@ -464,12 +464,9 @@ customize the variable ~ORG_ADD_CONTRIB~ instead in your
 Installing Info files is system dependent, because of differences in
 the {{{file(install-info)}}} program. The Info documentation is
 installed together with the rest of Org mode. If you don't install Org
-mode, it is possible to install the Info documentation separately if you
-have install-info on your system.[fn:1]  The command to do this is:
-
-#+begin_src example
-make install-info
-#+end_src
+mode, it is possible to install the Info documentation separately if
+you have {{{file(install-info)}}} on your system.[fn:1] The command to
+do this is {{{command(make install-info)}}}.
 
 Do not forget to activate Org as described in the following section.
 @@info:@page@@
@@ -522,9 +519,9 @@ With this setup, all files with extension {{{samp(.org)}}} will be put
 into Org mode.  As an alternative, make the first line of a file look
 like this:
 
-#+begin_src example
-MY PROJECTS    -*- mode: org; -*-
-#+end_src
+#+begin_example
+   MY PROJECTS    -*- mode: org; -*-
+#+end_example
 
 call_index(type="variable",entry="org-insert-mode-line-in-empty-file") 
 {{{noindent}}}
@@ -568,10 +565,8 @@ prepare a report and provide as much information as possible, including the
 version information of Emacs ({{{kbd(M-x emacs-version @key{RET})}}}) and Org
 ({{{kbd(M-x org-version @key{RET})}}}), as well as the Org related setup in
 {{{file(.emacs)}}}.  The easiest way to do this is to use the command
+{{{kbd(M-x org-submit-bug-report)}}}.
 
-#+begin_src example
-@kbd{M-x org-submit-bug-report}
-#+end_src
 
 {{{noindent}}} which will put all this information into an Emacs
 mail buffer so that you only need to add your description. If you are
@@ -584,7 +579,7 @@ customizations and reproduce the problem.  Doing so often helps you determine
 if the problem is with your customization or with Org mode itself.  You can
 start a typical minimal session with a command like the example below.
 
-#+begin_src example
+#+begin_src sh :exports code
 $ emacs -Q -l /path/to/minimal-org.el
 #+end_src
 
@@ -593,7 +588,7 @@ setup is not necessary. In that case it is sufficient to start Emacs
 as ~emacs -Q~. The ~minimal-org.el~ setup file can have contents as
 shown below.
 
-#+begin_src example
+#+begin_src emacs-lisp
 ;;; Minimal setup to load latest `org-mode'
 
 ;; activate debugging
@@ -726,7 +721,8 @@ call_index(type="variable",entry="org-ctrl-k-protect-subtree")
 
 Headlines define the structure of an outline tree.  The headlines in Org
 start with one or more stars, on the left margin.[fn:8]  For example:
-#+begin_src example
+
+#+begin_src org :exports code
 ,* Top level headline
 ,** Second level
 ,*** Third level
@@ -773,10 +769,10 @@ call_index(type="concept",entry="subtree, subtree visibility state")
   - {{{orgcmd(@key{TAB},org-cycle)}}} :: Subtrees can be cycled
        through three states: 
 
-       #+begin_src example
+       #+begin_example
        ,-> FOLDED -> CHILDREN -> SUBTREE --.
        '-----------------------------------'
-       #+end_src
+       #+end_example
        call_index(type="variable",entry="org-cycle-emulate-tab ")
        call_index(type="variable",entry="org-cycle-global-at-bob ")
     
@@ -798,10 +794,10 @@ call_index(type="concept",entry="subtree, subtree visibility state")
     call_index(type="concept",entry="show all, global visibility state")
     All the subtrees in a buffer can be cycled:
 
-    #+begin_src example 
+    #+begin_example 
       ,-> OVERVIEW -> CONTENTS -> SHOW ALL --.
       '--------------------------------------' 
-    #+end_src
+    #+end_example
 
     When {{{kbd(S-@key{TAB})}}} is called with a numeric prefix
     argument, ~N~, the CONTENTS view up to headlines of
@@ -849,7 +845,7 @@ configured through the variable ~org-startup-folded~, or on a
 per-file basis by adding one of the following lines anywhere in the
 buffer:
 
-#+begin_src example
+#+begin_src org :exports code
 #+STARTUP: overview
 #+STARTUP: content
 #+STARTUP: showall
@@ -1080,7 +1076,8 @@ commands can be accessed through a dispatcher:
      to this command can be stacked.
 
   - {{{orgcmdkkc(M-g n,M-g M-n,next-error)}}} :: Jump to the next sparse tree match in this buffer.
-  - {{{orgcmdkkc(M-g p,M-g M-p,previous-error)}}} Jump to the previous sparse tree match in this buffer.
+
+  - {{{orgcmdkkc(M-g p,M-g M-p,previous-error)}}} :: Jump to the previous sparse tree match in this buffer.
 
 call_index(type="variable",entry="org-agenda-custom-commands") 
 
@@ -1141,6 +1138,7 @@ Org knows ordered lists, unordered lists, and description lists.
     item with ~[@20]~.[fn:17] Those constructs can be used
     in any item of the list in order to enforce a particular
     numbering.
+
     call_index(type="variable",entry="org-plain-list-ordered-item-terminator")
     call_index(type="variable",entry="org-alphabetical-lists")
 
@@ -1156,11 +1154,12 @@ left-aligned with the other numbers in the list. An item ends before
 the next line that is less or equally indented than its bullet/number.
 
 call_index(type="variable",entry="org-empty-line-terminates-plain-lists")
+
 A list ends whenever every item has ended, which means before any line less
 or equally indented than items at top level.  It also ends before two blank
 lines.[fn:18]  In that case, all items are closed.  Here is an example:
 
-#+begin_src example
+#+begin_src org :exports code
 ,** Lord of the Rings                                
    My favorite scenes are (in this order)
    1. The attack of the Rohirrim
@@ -1187,18 +1186,20 @@ to a particular item.
 
 call_index(type="variable",entry="org-list-demote-modify-bullet")
 call_index(type="variable",entry="org-list-indent-offset")
-If you find that using a different bullet for a sub-list (than that used for
-the current list-level) improves readability, customize the variable
-~org-list-demote-modify-bullet~.  To get a greater difference of
-indentation between items and theirs sub-items, customize
+
+If you find that using a different bullet for a sub-list (than that
+used for the current list-level) improves readability, customize the
+variable ~org-list-demote-modify-bullet~. To get a greater difference
+of indentation between items and theirs sub-items, customize
 ~org-list-indent-offset~.
 
 call_index(type="variable",entry="org-list-automatic-rules")
-The following commands act on items when the cursor is in the first line of
-an item (the line with the bullet or number).  Some of them imply the
-application of automatic rules to keep list structure intact.  If some of
-these actions get in your way, configure ~org-list-automatic-rules~
-to disable them individually.
+
+The following commands act on items when the cursor is in the first
+line of an item (the line with the bullet or number). Some of them
+imply the application of automatic rules to keep list structure
+intact. If some of these actions get in your way, configure
+~org-list-automatic-rules~ to disable them individually.
 
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
@@ -1214,9 +1215,9 @@ to disable them individually.
        {{{key(TAB)}}} demotes the item to become a child of the
        previous one. Subsequent {{{key(TAB)}}}s move the item to
        meaningful levels in the list and eventually get it back to its
-       initial position. call_index(type="concept",entry="cycling, in
-       plain lists")
+       initial position. 
 
+       call_index(type="concept",entry="cycling, in plain lists")
        call_index(type="variable",entry="org-cycle-include-plain-lists")
 
   - {{{orgcmd(M-@key{RET},org-insert-heading)}}} :: Insert new item at
@@ -1231,7 +1232,7 @@ to disable them individually.
        call_index(type="variable",entry="org-list-automatic-rules")
 
 #+attr_texinfo: :table-type "table" :indic "@kbd"
-  - M-S-RET :: Insert a new item with a checkbox ({{{pxref(Checkboxes)}}}).
+  - M-S-RET :: Insert a new item with a checkbox (call_ref(type="paren",node="Checkboxes")).
     call_index(type="keystroke",entry="M-S-@key{RET}")
   - S-up :: XXX
     call_index(type="keystroke",entry="S-@key{down}")
@@ -1239,14 +1240,14 @@ to disable them individually.
     call_index(type="concept",entry="shift-selection-mode")
     call_index(type="variable",entry="org-support-shift-select")
     call_index(type="variable",entry="org-list-use-circular-motion")
-    Jump to the previous/next item in the current list,[fn:21] but only if
-    ~org-support-shift-select~ is off.  If not, you can still use paragraph
+    Jump to the previous/next item in the current list, but only if
+    ~org-support-shift-select~ is off.[fn:21]  If not, you can still use paragraph
     jumping commands like {{{kbd(C-@key{up})}}} and {{{kbd(C-@key{down})}}} to quite
     similar effect.
   - M-up :: XXX
   - M-down ::
-    Move the item including subitems up/down[fn:22] (swap with
-    previous/next item of same indentation).  If the list is ordered, renumbering
+    Move the item including subitems up/down (swap with
+    previous/next item of same indentation).[fn:22]  If the list is ordered, renumbering
     is automatic.
     call_index(type="keystroke",entry="M-@key{up}")
     call_index(type="keystroke",entry="M-@key{down}")
@@ -1323,10 +1324,9 @@ call_index(type="keystroke",entry="C-c C-x d")
 Sometimes you want to keep information associated with an entry, but you
 normally don't want to see it.  For this, Org mode has /drawers/.
 Drawers need to be configured with the variable
-~org-drawers~.[fn:24]  Drawers
-look like this:
+~org-drawers~.[fn:24]  Drawers look like this:
 
-#+begin_src example
+#+begin_src org :exports code
 ,** This is a headline
    Still outside the drawer
    :DRAWERNAME:
@@ -1344,16 +1344,17 @@ drawer. With a prefix argument, this command calls
 below the current headline. Completion over drawer keywords is also
 possible using {{{key(M-TAB)}}}.
 
-Visibility cycling (call_ref(type="paren",node="Visibility cycling")) on the headline
-will hide and show the entry, but keep the drawer collapsed to a
-single line. In order to look inside the drawer, you need to move the
-cursor to the drawer line and press {{{key(TAB)}}} there. Org mode
-uses the ~PROPERTIES~ drawer for storing properties
-(call_ref(type="paren",node="Properties and Columns")), and you can also arrange for
-state change notes (call_ref(type="paren",node="Tracking TODO state changes")) and
-clock times (call_ref(type="paren",node="Clocking work time")) to be stored in a drawer
-~LOGBOOK~. If you want to store a quick note in the LOGBOOK
-drawer, in a similar way to state changes, use
+Visibility cycling (call_ref(type="paren",node="Visibility cycling"))
+on the headline will hide and show the entry, but keep the drawer
+collapsed to a single line. In order to look inside the drawer, you
+need to move the cursor to the drawer line and press {{{key(TAB)}}}
+there. Org mode uses the ~PROPERTIES~ drawer for storing properties
+(call_ref(type="paren",node="Properties and Columns")), 
+and you can also arrange for state change notes
+(call_ref(type="paren",node="Tracking TODO state changes")) and clock
+times (call_ref(type="paren",node="Clocking work time")) to be stored
+in a drawer ~LOGBOOK~. If you want to store a quick note in the
+LOGBOOK drawer, in a similar way to state changes, use {{{kbd(C-c C-z)}}}.
 
 #+attr_texinfo: :table-type "table" :indic "@kbd"
  - C-c C-z :: Add a time-stamped note to the LOGBOOK drawer.
@@ -1365,6 +1366,7 @@ drawer, in a similar way to state changes, use
    :END:
 call_index(type="variable",entry="org-hide-block-startup")
 call_index(type="concept",entry="blocks, folding")
+
 Org mode uses begin...end blocks for various purposes from including source
 code examples (call_ref(type="paren",node="Literal examples")) to capturing time logging
 information (call_ref(type="paren",node="Clocking work time")).  These blocks can be folded and
@@ -1374,9 +1376,10 @@ or on a per-file basis by using
 
 call_index(type="concept",entry="@code{hideblocks}, STARTUP keyword")
 call_index(type="concept",entry="@code{nohideblocks}, STARTUP keyword")
-#+begin_src example
-,#+STARTUP: hideblocks
-,#+STARTUP: nohideblocks
+
+#+begin_src org :exports code
+#+STARTUP: hideblocks
+#+STARTUP: nohideblocks
 #+end_src
 
 ** Footnotes
@@ -1397,9 +1400,9 @@ footnote reference is simply the marker in square brackets, inside
 text. For example:
 
 #+begin_example
-The Org homepage[fn:1] now looks a lot better than it used to.
-...
-[fn:1] The link is: http://orgmode.org
+   The Org homepage[fn:1] now looks a lot better than it used to.
+   ...
+   [fn:1] The link is: http://orgmode.org
 #+end_example
 
 Org mode extends the number-based syntax to /named/ footnotes and
@@ -1428,11 +1431,11 @@ the valid references:
 
 
 call_index(type="variable",entry="org-footnote-auto-label")
+
 Footnote labels can be created automatically, or you can create names
-yourself. This is handled by the variable
-~org-footnote-auto-label~ and its corresponding
-~#+STARTUP~ keywords. See the docstring of that variable for
-details.
+yourself. This is handled by the variable ~org-footnote-auto-label~
+and its corresponding ~#+STARTUP~ keywords. See the docstring of that
+variable for details.
 
 {{{noindent}}} The following command handles footnotes:
 
@@ -1486,6 +1489,7 @@ details.
     call_index(type="keystroke",entry="C-c C-o")
     call_index(type="keystroke",entry="mouse-1")
     call_index(type="keystroke",entry="mouse-2")
+
   - C-c C-o  @@info:@r{or}@@ mouse-1/2 ::
     Footnote labels are also links to the corresponding definition/reference, and
     you can use the usual commands to follow these links.
@@ -1995,22 +1999,22 @@ call_index(type="variable",entry="org-table-formula-constants")
 constant.  Constants are defined globally through the variable
 ~org-table-formula-constants~, and locally (for the file) through a
 line like
+
 #+begin_example
-,#+CONSTANTS: c=299792458. pi=3.14 eps=2.4e-6
+   #+CONSTANTS: c=299792458. pi=3.14 eps=2.4e-6
 #+end_example
 
-{{{noindent}}} 
 call_index(type="variable",entry="constants-unit-system")
 call_index(type="program",entry="constants.el") 
-
-Also properties (call_ref(type="paren",node="Properties and Columns"))
-can be used as constants in table formulas: for a property
-{{{samp(:Xyz:)}}} use the name {{{samp($PROP_Xyz)}}}, and the property
+{{{noindent}}} 
+Properties (call_ref(type="paren",node="Properties and Columns"))
+can also be used as constants in table formulas: for a property
+{{{samp(:Xyz:)}}}, use the name {{{samp($PROP_Xyz)}}} and the property
 will be searched in the current outline entry and in the hierarchy
 above it. If you have the {{{file(constants.el)}}} package, it will
 also be used to resolve constants, including natural constants like
 ~$h~ for Planck's constant, and units like ~$km~ for
-kilometers. [fn:35] Column names and parameters can be specified in
+kilometers.[fn:35] Column names and parameters can be specified in
 special table lines. These are described below, see [[Advanced features]].
 All names must start with a letter, and further consist of letters and
 numbers.
@@ -2049,9 +2053,7 @@ A formula can be any algebraic expression understood by the Emacs
 {{{file(Calc)}}} package.  *Note*: {{{file(calc)}}} has the
 non-standard convention that ~/~ has lower precedence than
 ~*~, so that ~a/b*c~ is interpreted as ~a/(b*c)~.  Before
-evaluation by ~calc-eval~ (call_ref(type="paren",node="Calling Calc from
-Your Programs",xref="calc-eval",topic="Calling Calc from Your Lisp Programs",file-name="calc",manual="GNU
-Emacs Calc Manual")),
+evaluation by ~calc-eval~ (call_ref(type="paren",node="Calling Calc from Your Programs",xref="calc-eval",topic="Calling Calc from Your Lisp Programs",file-name="calc",manual="GNU Emacs Calc Manual")),
 variable substitution takes place according to the rules described above.
 call_index(type="concept",entry="vectors, in table calculations")
 The range vectors can be directly fed into the Calc vector functions
@@ -2654,8 +2656,8 @@ call_index(type="concept",entry="format, of links")
 Org will recognize plain URL-like links and activate them as
 clickable links.  The general link format, however, looks like this:
 
-#+begin_src example
-[[link][description]] or  [[link]]
+#+begin_src org :exports code
+[[link][description]] or [[link]]
 #+end_src
 
 
@@ -2705,9 +2707,9 @@ a /dedicated target/: the same string in double angular brackets.  Targets
 may be located anywhere; sometimes it is convenient to put them into a
 comment line.  For example
 
-#+begin_src example
-# <<My Target>>
-#+end_src
+#+begin_example
+   # <<My Target>>
+#+end_example
 
 {{{noindent}}} In HTML export (call_ref(type="paren",node="HTML export")), such targets will become
 named anchors for direct access through {{{samp(http)}}} links.[fn:36]
@@ -2765,7 +2767,7 @@ logs.  External links are URL-like locators.  They start with a short
 identifying string followed by a colon.  There can be no space after
 the colon.  The following list shows examples for each link type.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type "table" :indic "@code"
  - http://www.astro.uva.nl/~dominik ::         on the web
  - doi:10.1000/182 ::                          DOI for an electronic resource
  - file:/home/dominik/images/jupiter.jpg ::    file, absolute path
@@ -2812,7 +2814,7 @@ A link should be enclosed in double brackets and may contain a
 descriptive text to be displayed instead of the URL
 (call_ref(type="paren",node="Link format")), for example:
 
-#+begin_src example
+#+begin_src org :exports code
 [[http://www.gnu.org/software/emacs/][GNU Emacs]]
 #+end_src
 
@@ -3705,10 +3707,12 @@ license to the document, as described in section 6 of the license.
 [fn:1] The output from install-info (if any) is system dependent. In
 particular, Debian and its derivatives use two different versions of
 install-info. You may see the message:
-#+begin_src example
-This is not dpkg install-info anymore, but GNU install-info
-See the man page for ginstall-info for command line arguments
-#+end_src
+
+#+begin_example
+   This is not dpkg install-info anymore, but GNU install-info
+   See the man page for ginstall-info for command line arguments
+#+end_example
+
 {{{noindent}}} which can be safely ignored.
 
 [fn:2]  If your Emacs distribution does not come with Org,
