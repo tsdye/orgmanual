@@ -30,17 +30,32 @@
 #+TEXINFO_DIR_TITLE: Org Mode: (org)
 #+TEXINFO_DIR_DESC: Outline-based notes management and organizer
 
+#+TODO: FIXME | FIXED
+
 # # Macros for simplifying export
-#+MACRO: cindex @@info:@cindex $1@@
-#+MACRO: pindex @@info:@pindex $1@@
-#+MACRO: findex @@info:@findex $1@@
-#+MACRO: vindex @@info:@vindex $1@@
-#+MACRO: kindex @@info:@kindex $1@@
-#+MACRO: kbd @@info:@kbd{@@$1@@info:}@@
+
+# Indexing macros.  index is generic, the rest are for the specific
+# default indexes.
+#+MACRO: index @@info:@$1index $2@@
+#+MACRO: cindex {{{index(c,$1)}}}
+#+MACRO: pindex {{{index(p,$1)}}}
+#+MACRO: findex {{{index(f,$1)}}}
+#+MACRO: vindex {{{index(v,$1)}}}
+#+MACRO: kindex {{{index(k,$1)}}}
+
+# Markup macros.  In texinfo export they will be marked up, otherwise
+# they will be inserted verbatim.  markup is the generic form that can
+# be used to insert any @-command with the second variable being the
+# text to mark up.
+#+MACRO: markup @@info:@$1{@@$2@@info:}@@
+#+MACRO: kbd {{{markup(kbd,$1)}}}
+#+MACRO: key {{{markup(key,$1)}}}
 #+MACRO: kbdkey {{{kbd($1{{{key($2)}}})}}}
-#+MACRO: key @@info:@key{@@$1@@info:}@@
-#+MACRO: command @@info:@command{@@$1@@info:}@@
-#+MACRO: file @@info:@file{@@$1@@info:}@@
+#+MACRO: samp {{{markup(samp,$1)}}}
+#+MACRO: command {{{markup(command,$1)}}}
+#+MACRO: file {{{markup(file,$1)}}}
+
+#+MACRO: noindent @@info:@noindent@@
 
 * Introduction
   :PROPERTIES:
@@ -103,8 +118,6 @@ ends, for example:
   - a publishing tool to create a set of interlinked web pages
   - an environment for literate programming
 
-
-
 {{{cindex(FAQ)}}}
 There is a [[http://orgmode.org][website for Org]] that provides links to the newest
 version of Org, as well as additional information, frequently asked
@@ -139,41 +152,40 @@ If you have downloaded Org from the Web as a distribution {{{file(.zip)}}} or
 
   - Unpack the distribution archive.
   - Change into (~cd~) the Org directory.
-  - Run ~make help config~ and then check and edit the
-    file {{{file(local.mk)}}} if the default configuration does
-    not match your system. Set the name of the Emacs binary (likely
-    either {{{file(emacs)}}} or {{{file(xemacs)}}}), and the
-    paths to the directories where local Lisp and Info files will be
-    installed. If the Emacs binary is not in your path, give the full
-    path to the executable. Avoid spaces in any path names.
+  - Run ~make help config~ and then check and edit the file
+    {{{file(local.mk)}}} if the default configuration does not match
+    your system. Set the name of the Emacs binary (likely either
+    {{{file(emacs)}}} or {{{file(xemacs)}}}), and the paths to the
+    directories where local Lisp and Info files will be installed. If
+    the Emacs binary is not in your path, give the full path to the
+    executable. Avoid spaces in any path names.
   - Run ~make config~ again to check the configuration.
   - Run ~make install~ or ~sudo make install~ to build and install Org
     mode on your system.
 
 If you use a cloned Git repository, then the procedure is slightly
 different. The following description assumes that you are using the
-~master~ branch.[fn:3] You could also use the
-~maint~ branch instead, where the release versions are
-published, just replace ~master~ with
+~master~ branch.[fn:3] You could also use the ~maint~ branch instead,
+where the release versions are published, just replace ~master~ with
 ~maint~ in the description below.
 
 
   - Change into (~cd~) the Org repository.
-  - Run ~git checkout master~ to switch to the ~master~ branch of the Org repository.
+  - Run ~git checkout master~ to switch to the ~master~ branch of the
+    Org repository.
   - Run ~make help~ and then check and edit the file
-    {{{file(local.mk)}}}. You must set the name of the Emacs
-    binary (likely either {{{file(emacs)}}} or
-    {{{file(xemacs)}}}), and the paths to the directories where
-    local Lisp and Info files will be installed. If the Emacs binary
-    is not in your path, you must give the full path to the
-    executable. Avoid spaces in any path names.
+    {{{file(local.mk)}}}. You must set the name of the Emacs binary
+    (likely either {{{file(emacs)}}} or {{{file(xemacs)}}}), and the
+    paths to the directories where local Lisp and Info files will be
+    installed. If the Emacs binary is not in your path, you must give
+    the full path to the executable. Avoid spaces in any path names.
   - Run ~make config~ to check the configuration.
-  - Optionally run ~make test~ to build Org mode and
-    then run the full test suite.
-  - Run ~make update2~ or ~make up2~ to
-    update the Git repository and build and install Org mode. The
-    latter invocation runs the complete test suite before installation
-    and installs only if the build passes all tests.
+  - Optionally run ~make test~ to build Org mode and then run the full
+    test suite.
+  - Run ~make update2~ or ~make up2~ to update the Git repository and
+    build and install Org mode. The latter invocation runs the
+    complete test suite before installation and installs only if the
+    build passes all tests.
 
 
 If you don't have access to the system-wide directories and you don't
@@ -183,8 +195,8 @@ compiling Org mode in place:
 
 
   - Change into (~cd~) the Org repository.
-  - Run ~git checkout master~ to switch to the
-    ~master~ branch of the Org repository.
+  - Run ~git checkout master~ to switch to the ~master~ branch of the
+    Org repository.
   - Run ~make compile~
 
 
@@ -194,15 +206,17 @@ with ~make uncompiled~.
 
 Then add the following line to {{{file(.emacs)}}}:
 
-#+begin_src example
+#+header: :exports code
+#+begin_src emacs-lisp
 (add-to-list 'load-path "~/path/to/orgdir/lisp")
 #+end_src
 
-@@info:@noindent@@
+{{{noindent}}}
 If you plan to use code from the {{{file(contrib)}}} subdirectory without
 compiling them, do a similar step for this directory:
 
-#+begin_src example
+#+header: :exports code
+#+begin_src emacs-lisp
 (add-to-list 'load-path "~/path/to/orgdir/contrib/lisp" t)
 #+end_src
 
@@ -242,7 +256,8 @@ Since Emacs 22.2, files with the {{{file(.org)}}} extension use Org mode by
 default.  If you are using an earlier version of Emacs, add this line to your
 {{{file(.emacs)}}} file:
 
-#+begin_src example
+#+header: :exports code
+#+begin_src emacs-lisp
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 #+end_src
 
@@ -250,23 +265,25 @@ Org mode buffers need font-lock to be turned on - this is the default in
 Emacs.[fn:5]
 
 There are compatibility issues between Org mode and some other Elisp
-packages, please take the time to check the list (@@info:@pxref{Conflicts}@@).
+packages, please take the time to check the list (see [[Conflicts]]).
 
-The four Org commands {{{command(org-store-link)}}}, {{{command(org-capture)}}},
-{{{command(org-agenda)}}}, and {{{command(org-iswitchb)}}} should be accessible through
-global keys (i.e., anywhere in Emacs, not just in Org buffers).  Here are
+The four Org commands {{{command(org-store-link)}}},
+{{{command(org-capture)}}}, {{{command(org-agenda)}}}, and
+{{{command(org-iswitchb)}}} should be accessible through global keys
+(i.e., anywhere in Emacs, not just in Org buffers).  Here are
 suggested bindings for these keys, please modify the keys to your own
 liking.
 
-#+begin_src example
+#+header: :exports code
+#+begin_src emacs-lisp
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 #+end_src
 
-{{{cindex(Org mode\, turning on)}}}
-With this setup, all files with extension @@info:@samp{.org}@@ will be put
+{{{cindex(Org mode\, turning on)}}} 
+With this setup, all files with extension {{samp(.org)}}} will be put
 into Org mode.  As an alternative, make the first line of a file look
 like this:
 
@@ -274,26 +291,25 @@ like this:
 MY PROJECTS    -*- mode: org; -*-
 #+end_src
 
-
-{{{vindex(org-insert-mode-line-in-empty-file)}}} @@info:@noindent@@
+{{{vindex(org-insert-mode-line-in-empty-file)}}} 
+{{{noindent}}}
 which will select Org mode for this buffer no matter what the file's
 name is. See also the variable
 ~org-insert-mode-line-in-empty-file~.
 
-Many commands in Org work on the region if the region is
-/active/. To make use of this, you need to have
-~transient-mark-mode~ (~zmacs-regions~ in
-XEmacs) turned on. In Emacs 23 this is the default, in Emacs 22 you
-need to do this yourself with
+Many commands in Org work on the region if the region is /active/. To
+make use of this, you need to have ~transient-mark-mode~
+(~zmacs-regions~ in XEmacs) turned on. In Emacs 23 this is the
+default, in Emacs 22 you need to do this yourself with
 
-#+begin_src example
+#+header: :exports code
+#+begin_src emacs-lisp
 (transient-mark-mode 1)
 #+end_src
 
-@@info:@noindent@@ If you do not like
-~transient-mark-mode~, you can create an active region
-by using the mouse to select a region, or pressing
-{{{kbdkey(C-,SPC)}}} twice before moving the cursor.
+{{{noindent}}} If you do not like ~transient-mark-mode~, you can
+create an active region by using the mouse to select a region, or
+pressing {{{kbdkey(C-,SPC)}}} twice before moving the cursor.
 
 ** Feedback
    :PROPERTIES:
@@ -322,7 +338,7 @@ version information of Emacs ({{{kbdkey(M-x emacs-version ,RET)}}}) and Org
 @kbd{M-x org-submit-bug-report}
 #+end_src
 
-@@info:@noindent@@ which will put all this information into an Emacs
+{{{noindent}}} which will put all this information into an Emacs
 mail buffer so that you only need to add your description. If you are
 not sending the Email from within Emacs, please copy and paste the
 content into your Email program.
@@ -342,7 +358,8 @@ setup is not necessary. In that case it is sufficient to start Emacs
 as ~emacs -Q~. The ~minimal-org.el~ setup
 file can have contents as shown below.
 
-#+begin_src example
+#+header: :exports code
+#+begin_src emacs-lisp
 ;;; Minimal setup to load latest `org-mode'
 
 ;; activate debugging
@@ -363,7 +380,7 @@ about:
   2. What did you expect to happen?
   3. What happened instead?
 
-@@info:@noindent@@ Thank you for helping to improve this program.
+{{{noindent}}} Thank you for helping to improve this program.
 
 *** How to create a useful backtrace
 {{{cindex(backtrace of an error)}}}
@@ -376,13 +393,12 @@ error occurred.  Here is how to produce a useful backtrace:
 
   1. Reload uncompiled versions of all Org mode Lisp files.  The
      backtrace contains much more information if it is produced with
-     uncompiled code. To do this, use {{{key(C-u M-x org-reload
-     RET)}}} or select ~Org -> Refresh/Reload -> Reload Org uncompiled~
-     from the menu.
+     uncompiled code. To do this, use {{{kbdkey(C-u M-x org-reload ,
+     RET)}}} or select ~Org -> Refresh/Reload -> Reload Org
+     uncompiled~ from the menu.
 
-  2. Go to the ~Options~ menu and select
-     ~Enter Debugger on Error~ (XEmacs has this option
-     in the ~Troubleshooting~ sub-menu).
+  2. Go to the ~Options~ menu and select ~Enter Debugger on Error~
+     (XEmacs has this option in the ~Troubleshooting~ sub-menu).
 
   3. Do whatever you have to do to hit the error. Don't forget to
      document the steps you take.
@@ -391,13 +407,12 @@ error occurred.  Here is how to produce a useful backtrace:
      appear on the screen.  Save this buffer to a file (for example
      using {{{kbd(C-x C-w)}}}) and attach it to your bug report.
 
-
 ** Conventions
    :PROPERTIES:
    :DESCRIPTION: Typesetting conventions in the manual
    :END:
 
-@@info:@subsubheading @@TODO keywords, tags, properties, etc.
+*** TODO keywords, tags, properties, etc.
 
 Org mainly uses three types of keywords: TODO keywords, tags and property
 names.  In this manual we use the following conventions:
@@ -415,29 +430,29 @@ and /environment keywords/ (like ~#+BEGIN_HTML~ to start a ~HTML~
 environment). They are written in uppercase in the manual to enhance
 its readability, but you can use lowercase in your Org files.[fn:7]
 
-@@info:@subsubheading@@ Keybindings and commands
+*** Keybindings and commands
 {{{kindex(C-c a)}}}
 {{{findex(org-agenda)}}}
 {{{kindex(C-c c)}}}
 {{{findex(org-capture)}}}
 
 The manual suggests two global keybindings: {{{kbd(C-c a)}}} for
-~org-agenda~ and {{{kbd(C-c c)}}} for
-~org-capture~. These are only suggestions, but the rest
-of the manual assumes that you are using these keybindings.
+~org-agenda~ and {{{kbd(C-c c)}}} for ~org-capture~. These are only
+suggestions, but the rest of the manual assumes that you are using
+these keybindings.
 
 Also, the manual lists both the keys and the corresponding commands
 for accessing a functionality. Org mode often uses the same key for
 different functions, depending on context. The command that is bound
-to such keys has a generic name, like ~org-metaright~.
-In the manual we will, wherever possible, give the function that is
-internally called by the generic command. For example, in the chapter
-on document structure, {{{kbdkey(M-,right)}}} will be listed to call
-~org-do-demote~, while in the chapter on tables, it will
-be listed to call ~org-table-move-column-right~. If you
-prefer, you can compile the manual without the command names by
-unsetting the flag ~cmdnames~ in
+to such keys has a generic name, like ~org-metaright~.  In the manual
+we will, wherever possible, give the function that is internally
+called by the generic command. For example, in the chapter on document
+structure, {{{kbdkey(M-,right)}}} will be listed to call
+~org-do-demote~, while in the chapter on tables, it will be listed to
+call ~org-table-move-column-right~. If you prefer, you can compile the
+manual without the command names by unsetting the flag ~cmdnames~ in
 {{{file(org.texi)}}}.
+
 * Document structure
   :PROPERTIES:
   :DESCRIPTION: A tree works like your brain
@@ -463,8 +478,7 @@ structure is achieved by folding (hiding) large parts of the document
 to show only the general document structure and the parts currently
 being worked on. Org greatly simplifies the use of outlines by
 compressing the entire show/hide functionality into a single command,
-{{{command(org-cycle)}}}, which is bound to the {{{key(TAB)}}}
-key.
+{{{command(org-cycle)}}}, which is bound to the {{{key(TAB)}}} key.
 
 ** Headlines
    :PROPERTIES:
@@ -478,17 +492,17 @@ key.
 
 Headlines define the structure of an outline tree.  The headlines in Org
 start with one or more stars, on the left margin.[fn:8]  For example:
-#+begin_src example
-,* Top level headline
-,** Second level
-,*** Third level
-    some text
-,*** Third level
-    more text
-,* Another top level headline
+#+begin_src org
+  ,* Top level headline
+  ,** Second level
+  ,*** Third level
+      some text
+  ,*** Third level
+      more text
+  ,* Another top level headline
 #+end_src
 
-@@info:@noindent@@ Some people find the many stars too noisy and would
+{{{noindent}}} Some people find the many stars too noisy and would
 prefer an outline that has whitespace followed by a single star as
 headline starters. [[Clean view]], describes a setup to realize this.
 
@@ -521,8 +535,9 @@ Org uses just two commands, bound to {{{key(TAB)}}} and
 {{{cindex(subtree\, subtree visibility state)}}}
 
 #+attr_texinfo: :indic "@asis"
-- {{{key(TAB)}}} ~org-cycle~ :: /Subtree Cycling/: Rotate
-     current subtree among the states 
+- {{{key(TAB)}}} ~org-cycle~ :: Subtrees can be cycled through three
+     states:
+ 
      {{{kindex(TAB)}}}
      {{{findex(org-cycle)}}}
      
@@ -542,16 +557,16 @@ Org uses just two commands, bound to {{{key(TAB)}}} and
      when called with a prefix argument ({{{kbdkey(C-u ,TAB)}}}),
      global cycling is invoked.
 
+- {{{kbdkey(S-,TAB)}}} ~org-global-cycle~ :: 
+     @@info:@itemx@@ {{{kbdkey(C-u ,(TAB)}}}
+     /Global Cycling/: Rotate the entire buffer among the states
+
      {{{cindex(global visibility states)}}}
      {{{cindex(global cycling)}}}
      {{{cindex(overview\, global visibility state)}}}
      {{{cindex(contents\, global visibility state)}}}
      {{{cindex(show all\, global visibility state)}}}
-
-- {{{kbdkey(S-,TAB)}}} ~org-global-cycle~ :: 
-     @@info:@itemx@@ C-u {{{key(TAB)}}}
-     /Global Cycling/: Rotate the entire buffer among the states
-
+     {{{kindex(C-u TAB)}}}
      {{{kindex(S-TAB)}}}
      {{{findex(org-global-cycle)}}}
 
@@ -565,42 +580,43 @@ Org uses just two commands, bound to {{{key(TAB)}}} and
      be shown. Note that inside tables, {{{kbdkey(S-,TAB)}}} jumps
      to the previous field.
 
-     {{{cindex(show all\, command)}}}
-- {{{kbdkey(C-u C-u C-u ,TAB)}}} ~show-all~ :: Show all, including drawers.
+- {{{kbdkey(C-u C-u C-u ,TAB)}}} ~show-all~ :: Show all, including
+     drawers.
+
      {{{kindex(C-u C-u C-u TAB)}}}
      {{{findex(show-all)}}}
-
-     {{{cindex(revealing context)}}}
+     {{{cindex(show all\, command)}}}
 - {{{kbd(C-c C-r)}}} ~org-reveal~ :: Reveal context around point,
      showing the current entry, the following heading and the
      hierarchy above.  Useful for working near a location that has
-     been exposed by a sparse tree command (@@info:@pxref{Sparse
-     trees}@@) or an agenda command (@@info:@pxref{Agenda
-     commands}@@).  With a prefix argument show, on each level, all
-     sibling headings.  With a double prefix argument, also show the
-     entire subtree of the parent.
+     been exposed by a sparse tree command (see [[Sparse trees]]) or an
+     agenda command ([[see Agenda commands]]).  With a prefix argument
+     show, on each level, all sibling headings.  With a double prefix
+     argument, also show the entire subtree of the parent.
 
+     {{{cindex(revealing context)}}}
      {{{kindex(C-c C-r)}}}
      {{{findex(org-reveal)}}}
-
-     {{{cindex(show branches\, command)}}}
 - {{{kbd(C-c C-k)}}} ~show-branches~ :: Expose all the headings of
      the subtree, CONTENT view for just one subtree.
+
      {{{kindex(C-c C-k)}}}
      {{{findex(show-branches)}}}
-
-     {{{cindex(show children\, command)}}}
+     {{{cindex(show branches\, command)}}}
 - {{{kbdkey(C-c ,TAB)}}} ~show-children~ :: Expose all direct
      children of the subtree.  With a numeric prefix argument, ~N~,
      expose all children down to level N.
+
      {{{kindex(C-c TAB)}}}
      {{{findex(show-children)}}}
+     {{{cindex(show children\, command)}}}
 - {{{kbd(C-c C-x b)}}} ~org-tree-to-indirect-buffer~ :: Show the
      current subtree in an indirect buffer.[fn:10] With a numeric
      prefix argument, ~N~, go up to level N and then take that tree.
      If N is negative then go up that many levels.  With a
      {{{kbd(C-u)}}} prefix, do not remove the previously used indirect
      buffer.
+
      {{{kindex(C-c C-x b)}}}
      {{{findex(org-tree-to-indirect-buffer)}}}
 - {{{kbd(C-c C-x v)}}} ~org-copy-visible~ :: Copy the /visible/ text
@@ -618,42 +634,360 @@ configured through the variable ~org-startup-folded~, or on a
 per-file basis by adding one of the following lines anywhere in the
 buffer:
 
-#+begin_src example
-#+STARTUP: overview
-#+STARTUP: content
-#+STARTUP: showall
-#+STARTUP: showeverything
+#+begin_src org 
+  ,#+STARTUP: overview
+  ,#+STARTUP: content
+  ,#+STARTUP: showall
+  ,#+STARTUP: showeverything
 #+end_src
 
 {{{cindex(property\, VISIBILITY)}}}
-@@info:@noindent@@
-Furthermore, any entries with a @@info:@samp{VISIBILITY}@@ property (@@info:@pxref{Properties
-and Columns}@@) will get their visibility adapted accordingly.  Allowed values
-for this property are ~folded~, ~children~, ~content~, and
-~all~.
+
+{{{noindent}}} Furthermore, any entries with a {{{samp(VISIBILITY)}}}
+property (see [[Properties and Columns]]) will get their visibility
+adapted accordingly.  Allowed values for this property are ~folded~,
+~children~, ~content~, and ~all~.
+
 #+attr_texinfo: :indic "@asis"
 - {{{kbdkey(C-u C-u ,TAB)}}} ~org-set-startup-visibility~ :: Switch
      back to the startup visibility of the buffer, i.e.@: whatever is
-     requested by startup options and @@info:@samp{VISIBILITY}@@
+     requested by startup options and {{{samp(VISIBILITY)}}}
      properties in individual entries.
-
 
 ** Motion
    :PROPERTIES:
    :DESCRIPTION: Jumping to other headlines
    :END:
+{{{cindex(motion\, between headlines)}}}
+{{{cindex(jumping\, to headlines)}}}
+{{{cindex(headline navigation)}}}
+The following commands jump to other headlines in the buffer.
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+  - {{{kbd(C-c C-n)}}} ~outline-next-visible-heading~ :: Next heading.
+       {{{kindex(C-c C-n)}}}
+       {{{findex(outline-next-visible-heading)}}}
+  - {{{kbd(C-c C-p)}}} ~outline-previous-visible-heading~ :: Previous heading.
+       {{{kindex(C-c C-p)}}}
+       {{{findex(outline-previous-visible-heading)}}}
+  - {{{kbd(C-c C-f)}}} ~org-forward-same-level~ :: Next heading same level.
+       {{{kindex(C-c C-f)}}}
+       {{{findex(org-forward-same-level)}}}
+  - {{{kbd(C-c C-b)}}} ~org-backward-same-level~ :: Previous heading same level.
+       {{{kindex(C-c C-b)}}}
+       {{{findex(org-backward-same-level)}}}
+  - {{{kbd(C-c C-u)}}} ~outline-up-heading~ :: Backward to higher level heading.
+       {{{kindex(C-c C-u)}}}
+       {{{findex(outline-up-heading)}}}
+  - {{{kbd(C-c C-j)}}} ~org-goto~ :: Jump to a different place
+       without changing the current outline visibility.  Shows the
+       document structure in a temporary buffer, where you can use the following keys to find your destination:
+       {{{kindex(C-c C-j)}}}
+       {{{findex(org-goto)}}}
+       {{{vindex(org-goto-auto-isearch)}}}
+    - {{{key(TAB)}}} ::  Cycle visibility.
+    - {{{key(down)}}} / {{{key(up)}}} ::   Next/previous visible headline.
+    - {{{key(RET)}}} :: Select this location.
+    - {{{kbd(/)}}} :: Do a Sparse-tree search
+    - Note: The following keys work if you turn off ~org-goto-auto-isearch~
+    - n / p ::  Next/previous visible headline.
+    - f / b ::   Next/previous headline same level.
+    - u  ::  One level up.
+    - 0--9 ::  Digit argument.
+    - q :: Quit.
+
+{{{vindex(org-goto-interface)}}}
+{{{noindent}}} See also the variable ~org-goto-interface~.
 
 ** Structure editing
    :PROPERTIES:
    :DESCRIPTION: Changing sequence and level of headlines
    :TEXINFO_MENU_TITLE: Structure editing
    :END:
+{{{cindex(structure editing)}}}
+{{{cindex(headline\, promotion and demotion)}}}
+{{{cindex(promotion\, of subtrees)}}}
+{{{cindex(demotion\, of subtrees)}}}
+{{{cindex(subtree\, cut and paste)}}}
+{{{cindex(pasting\, of subtrees)}}}
+{{{cindex(cutting\, of subtrees)}}}
+{{{cindex(copying\, of subtrees)}}}
+{{{cindex(sorting\, of subtrees)}}}
+{{{cindex(subtrees\, cut and paste)}}}
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+  - {{{kbdkey(M-,RET)}}} ~org-insert-heading~ :: Insert new heading
+       with same level as current. If the cursor is in a plain list
+       item, a new item is created (see [[Plain lists]]). To force
+       creation of a new headline, use a prefix argument. When this
+       command is used in the middle of a line, the line is split and
+       the rest of the line becomes the new headline.[fn:11] If the
+       command is used at the beginning of a headline, the new
+       headline is created before the current line. If at the
+       beginning of any other line, the content of that line is made
+       the new heading. If the command is used at the end of a folded
+       subtree (i.e., behind the ellipses at the end of a headline),
+       then a headline like the current one will be inserted after the
+       end of the subtree.
+
+       {{{kindex(M-RET)}}}
+       {{{findex(org-insert-heading)}}}
+       {{{vindex(org-M-RET-may-split-line )}}}
+  - {{{kbdkey(C-,RET)}}} ~org-insert-heading-respect-content~ :: Just
+       like {{{kbdkey(M-,RET)}}}, except when adding a new heading
+       below the current heading, the new heading is placed after the
+       body instead of before it. This command works from anywhere in
+       the entry.
+
+       {{{kindex(C-RET)}}}
+       {{{findex(org-insert-heading-respect-content)}}}
+  - {{{kbdkey(M-S-,RET)}}} ~org-insert-todo-heading~ :: Insert new
+       TODO entry with same level as current heading.  See also the
+       variable ~org-treat-insert-todo-heading-as-state-change~.
+
+       {{{kindex(M-S-RET)}}}
+       {{{findex(org-insert-todo-heading)}}}
+       {{{vindex(org-treat-insert-todo-heading-as-state-change)}}}
+  - {{{kbdkey(C-S-,RET)}}} ~org-insert-todo-heading-respect-content~ :: Insert
+       new TODO entry with same level as current heading. Like
+       {{{kbdkey(C-,RET)}}}, the new headline will be inserted after
+       the current subtree.
+
+       {{{kindex(C-S-RET)}}}
+       {{{findex(org-insert-todo-heading-respect-content)}}}
+  - {{{kbd(@key{TAB})}}} ~org-cycle~ :: In a new entry with no text
+       yet, the first {{{key(TAB)}}} demotes the entry to become a
+       child of the previous one. The next {{{key(TAB)}}} makes it a
+       parent, and so on, all the way to top level. Yet another
+       {{{key(TAB)}}}, and you are back to the initial level.
+
+       {{{kindex(@key{TAB})}}}
+       {{{findex(org-cycle)}}}
+  - {{{kbdkey(M-,left)}}} ~org-do-promote~ :: Promote current heading
+       by one level.
+
+       {{{kindex(M-,left)}}}
+       {{{findex(org-do-promote)}}}
+  - {{{kbdkey(M-,right)}}} ~org-do-demote~ :: Demote current heading
+       by one level.
+
+       {{{kindex(M-,right)}}}
+       {{{findex(org-do-demote)}}}
+  - {{{kbdkey(M-S-,left)}}} ~org-promote-subtree~ :: Promote the
+       current subtree by one level.
+
+       {{{kindex(M-S-,left)}}}
+       {{{findex(org-promote-subtree)}}}
+  - {{{kbdkey(M-S-,right)}}} ~org-demote-subtree~ :: Demote the
+       current subtree by one level.
+
+       {{{kindex(M-S-,right)}}}
+       {{{findex(org-demote-subtree)}}}
+  - {{{kbdkey(M-S-,up)}}} ~org-move-subtree-up~ :: Move subtree up
+       (swap with previous subtree of same level).
+
+       {{{kindex(M-S-,up)}}}
+       {{{findex(org-move-subtree-up)}}}
+  - {{{kbdkey(M-S-,down)}}} ~org-move-subtree-down~ :: Move subtree
+       down (swap with next subtree of same level).
+
+       {{{kindex(M-S-,down)}}}
+       {{{findex(org-move-subtree-down)}}}
+  - {{{kbd(C-c C-x C-w)}}} ~org-cut-subtree~ :: Kill subtree, i.e.,
+       remove it from buffer but save in kill ring. With a numeric
+       prefix argument N, kill N sequential subtrees.
+
+       {{{kindex(C-c C-x C-w)}}}
+       {{{findex(org-cut-subtree)}}}
+  - {{{kbd(C-c C-x M-w)}}} ~org-copy-subtree~ :: Copy subtree to kill
+       ring.  With a numeric prefix argument N, copy the N sequential
+       subtrees.
+
+       {{{kindex(C-c C-x M-w)}}}
+       {{{findex(org-copy-subtree)}}}
+  - {{{kbd(C-c C-x C-y)}}} ~org-paste-subtree~ :: Yank subtree from
+       kill ring. This does modify the level of the subtree to make
+       sure the tree fits in nicely at the yank position. The yank
+       level can also be specified with a numeric prefix argument, or
+       by yanking after a headline marker like {{{samp(****)}}}.
+
+       {{{kindex(C-c C-x C-y)}}}
+       {{{findex(org-paste-subtree)}}}
+  - {{{kbd(C-y)}}} ~org-yank~ :: Depending on the variables
+       ~org-yank-adjusted-subtrees~ and ~org-yank-folded-subtrees~,
+       Org's internal ~yank~ command will paste subtrees folded and in
+       a clever way, using the same command as {{{kbd(C-c C-x C-y)}}}.
+       With the default settings, no level adjustment will take place,
+       but the yanked tree will be folded unless doing so would
+       swallow text previously visible.  Any prefix argument to this
+       command will force a normal ~yank~ to be executed, with the
+       prefix passed along.  A good way to force a normal yank is
+       {{{kbd(C-u C-y)}}}.  If you use ~yank-pop~ after a yank, it
+       will yank previous kill items plainly, without adjustment and
+       folding.
+
+       {{{kindex(C-y)}}}
+       {{{findex(org-yank)}}}
+       {{{vindex(org-yank-adjusted-subtrees)}}}
+       {{{vindex(org-yank-folded-subtrees)}}} 
+  - {{{kbd(C-c C-x c)}}} ~org-clone-subtree-with-time-shift~ :: Clone
+       a subtree by making a number of sibling copies of it. You will
+       be prompted for the number of copies to make, and you can also
+       specify if any timestamps in the entry should be shifted.  This
+       can be useful, for example, to create a number of tasks related
+       to a series of lectures to prepare. For more details, see the
+       docstring of the command ~org-clone-subtree-with-time-shift~.
+
+       {{{kindex(C-c C-x c)}}}
+       {{{findex(org-clone-subtree-with-time-shift)}}}
+  - {{{kbd(C-c C-w)}}} ~org-refile~ :: Refile entry or region to a
+       different location [[Refile and copy]].
+
+       {{{kindex(C-c C-w)}}}
+       {{{findex(org-refile)}}}
+  - {{{kbd(C-c ^)}}} ~org-sort~ :: Sort same-level entries.  When
+       there is an active region, all entries in the region will be
+       sorted.  Otherwise the children of the current headline are
+       sorted.  The command prompts for the sorting method, which can
+       be alphabetically, numerically, by time (first timestamp with
+       active preferred, creation time, scheduled time, deadline
+       time), by priority, by TODO keyword (in the sequence the
+       keywords have been defined in the setup) or by the value of a
+       property.  Reverse sorting is possible as well.  You can also
+       supply your own function to extract the sorting key.  With a
+       {{{kbd(C-u)}}} prefix, sorting will be case-sensitive.
+
+       {{{kindex(C-c ^)}}}
+       {{{findex(org-sort)}}}
+  - {{{kbd(C-x n s)}}} ~org-narrow-to-subtree~ :: Narrow buffer to
+       current subtree.
+
+       {{{kindex(C-x n s)}}}
+       {{{findex(org-narrow-to-subtree)}}}
+  - {{{kbd(C-x n b)}}} ~org-narrow-to-block~ :: Narrow buffer to
+       current block.
+
+       {{{kindex(C-x n b)}}}
+       {{{findex(org-narrow-to-block)}}}
+  - {{{kbd(C-x n w)}}} ~widen~ :: Widen buffer to remove narrowing.
+
+       {{{kindex(C-x n w)}}}
+       {{{findex(widen)}}}
+  - {{{kbd(C-c *)}}} ~org-toggle-heading~ :: Turn a normal line or
+       plain list item into a headline (so that it becomes a
+       subheading at its location). Also turn a headline into a normal
+       line by removing the stars. If there is an active region, turn
+       all lines in the region into headlines. If the first line in
+       the region was an item, turn only the item lines into
+       headlines. Finally, if the first line is a headline, remove the
+       stars from all headlines in the region.
+
+       {{{kindex(C-c *)}}}
+       {{{findex(org-toggle-heading)}}}
+
+{{{cindex(region\, active)}}} 
+{{{cindex(active region)}}}
+{{{cindex(transient mark mode)}}} 
+
+When there is an active region (Transient Mark mode), promotion and
+demotion work on all headlines in the region.  To select a region of
+headlines, it is best to place both point and mark at the beginning of
+a line, mark at the beginning of the first headline, and point at the
+line just after the last headline to change.  Note that when the
+cursor is inside a table (see [[Tables]]), the Meta-Cursor keys have
+different functionality.
+
 
 ** Sparse trees
    :PROPERTIES:
    :DESCRIPTION: Matches embedded in context
    :TEXINFO_MENU_TITLE: Sparse trees
    :END:
+{{{cindex(sparse trees)}}}
+{{{cindex(trees\, sparse)}}}
+{{{cindex(folding\, sparse trees)}}}
+{{{cindex(occur\, command)}}}
+
+{{{vindex(org-show-hierarchy-above)}}}
+{{{vindex(org-show-following-heading)}}}
+{{{vindex(org-show-siblings)}}}
+{{{vindex(org-show-entry-below)}}}
+An important feature of Org mode is the ability to construct /sparse
+trees/ for selected information in an outline tree, so that the entire
+document is folded as much as possible, but the selected information is made
+visible along with the headline structure above it.[fn:14]  Just try it out
+and you will see immediately how it works.
+
+Org mode contains several commands creating such trees, all these
+commands can be accessed through a dispatcher:
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+  - {{{kbd(C-c /)}}} ~org-sparse-tree~ :: This prompts for an extra
+       key to select a sparse-tree creating command.
+
+       {{{kindex(C-c /)}}}
+       {{{findex(org-sparse-tree)}}}
+  - {{{kbd(C-c / r)}}} ~org-occur~ :: Prompts for a regexp and shows a
+       sparse tree with all matches. If the match is in a headline,
+       the headline is made visible. If the match is in the body of an
+       entry, headline and body are made visible. In order to provide
+       minimal context, also the full hierarchy of headlines above the
+       match is shown, as well as the headline following the
+       match. Each match is also highlighted; the highlights disappear
+       when the buffer is changed by an editing command,[fn:13] or by
+       pressing {{{kbd(C-c C-c)}}}. When called with a {{{kbd(C-u)}}}
+       prefix argument, previous highlights are kept, so several calls
+       to this command can be stacked.
+
+       {{{kindex(C-c / r)}}}
+       {{{findex(org-occur)}}}
+       {{{vindex(org-remove-highlights-with-change)}}}
+  - {{{kbd(M-g n)}}} ~next-error~ :: 
+       @@info:@itemx@@ {{{kbd(M-g M-n)}}}
+       
+       Jump to the next sparse tree match in this buffer.
+
+       {{{kindex(M-g n)}}}
+       {{{kindex(M-g M-n)}}}
+       {{{findex(next-error)}}}
+  - {{{kbd(M-g p)}}} ~previous-error~ ::
+       @@info:@itemx@@ {{{kbd(M-g M-p)}}}
+
+       Jump to the previous sparse tree match in this buffer.
+
+       {{{kindex(M-g p)}}}
+       {{{kindex(M-g M-p)}}}
+       {{{findex(previous-error)}}}
+{{{vindex(org-agenda-custom-commands)}}} 
+
+{{{noindent}}} For frequently used sparse trees of specific search
+strings, you can use the variable ~org-agenda-custom-commands~ to
+define fast keyboard access to specific sparse trees. These commands
+will then be accessible through the agenda dispatcher
+(see [[Agenda Dispatcher]]). For example:
+
+#+header: :exports code
+#+begin_src emacs-lisp
+  (setq org-agenda-custom-commands
+        '(("f" occur-tree "FIXME")))
+#+end_src
+
+{{{noindent}}} will define the key {{{kbd(C-c a f)}}} as a
+shortcut for creating a sparse tree matching the string
+{{{samp(FIXME)}}}.
+
+The other sparse tree commands select headings based on TODO keywords,
+tags, or properties and will be discussed later in this manual.
+
+{{{kindex(C-c C-e v)}}}
+{{{cindex(printing sparse trees)}}}
+{{{cindex(visible text\, printing )}}}
+
+To print a sparse tree, you can use the Emacs command
+~ps-print-buffer-with-faces~ which does not print
+invisible parts of the document.[fn:12] Or you can use the command
+{{{kbd(C-c C-e v)}}} to export only the visible part of the
+document and print the resulting file.
 
 ** Plain lists
    :PROPERTIES:
@@ -1280,12 +1614,7 @@ headings indented less than 30 stars.
 ~org-cycle-global-at-bob~.
 
 [fn:10] The indirect buffer
-@@info:@ifinfo@@
-(@@info:@pxref{Indirect Buffers,,,emacs,GNU Emacs Manual}@@)
-@@info:@end ifinfo@@
-@@info:@ifnotinfo@@
-(see the Emacs manual for more information about indirect buffers)
-@@info:@end ifnotinfo@@
+([[info:emacs:Indirect Buffers][Emacs manual on indirect buffers]])
 will contain the entire buffer, but will be narrowed to the current
 tree.  Editing the indirect buffer will also change the original buffer,
 but without affecting visibility in that buffer.
