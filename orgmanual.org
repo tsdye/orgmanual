@@ -755,7 +755,7 @@ The following commands jump to other headlines in the buffer.
 
        {{{kindex(C-S-RET)}}}
        {{{findex(org-insert-todo-heading-respect-content)}}}
-  - {{{kbd(@key{TAB})}}} ~org-cycle~ :: In a new entry with no text
+  - {{{key(TAB)}}} ~org-cycle~ :: In a new entry with no text
        yet, the first {{{key(TAB)}}} demotes the entry to become a
        child of the previous one. The next {{{key(TAB)}}} makes it a
        parent, and so on, all the way to top level. Yet another
@@ -897,7 +897,6 @@ line just after the last headline to change.  Note that when the
 cursor is inside a table (see [[Tables]]), the Meta-Cursor keys have
 different functionality.
 
-
 ** Sparse trees
    :PROPERTIES:
    :DESCRIPTION: Matches embedded in context
@@ -994,98 +993,2327 @@ document and print the resulting file.
    :DESCRIPTION: Additional structure within an entry
    :TEXINFO_MENU_TITLE: Plain lists
    :END:
+{{{cindex(plain lists)}}}
+{{{cindex(lists\, plain)}}}
+{{{cindex(lists\, ordered)}}}
+{{{cindex(ordered lists)}}}
+
+Within an entry of the outline tree, hand-formatted lists can provide
+additional structure. They also provide a way to create lists of
+checkboxes (see [[Checkboxes]]). Org supports editing
+such lists, and every exporter (see [[Exporting]])
+can parse and format them.
+
+Org knows ordered lists, unordered lists, and description lists.
+
+#+attr_texinfo: :table-type "table" :indic "@bullet"
+  - /Unordered/ list items start with ~-~, ~+~, or ~*~ [fn:15] as bullets.
+
+  - /Ordered/ list items start with a numeral followed by either a
+    period or a right parenthesis,[fn:23] such as
+    ~1.~ or ~1~.[fn:16] If you want a list to
+    start with a different value (e.g.: 20), start the text of the
+    item with ~[@20]~.[fn:17] Those constructs can be used
+    in any item of the list in order to enforce a particular
+    numbering.
+    {{{vindex(org-plain-list-ordered-item-terminator)}}}
+    {{{vindex(org-alphabetical-lists)}}}
+
+  - /Description/ list items are unordered list items, and contain the
+    separator {{{samp( :: )}}} to distinguish the description
+    /term/ from the description.
+
+
+Items belonging to the same list must have the same indentation on the
+first line. In particular, if an ordered list reaches number
+{{{samp(10.)}}}, then the 2--digit numbers must be written
+left-aligned with the other numbers in the list. An item ends before
+the next line that is less or equally indented than its bullet/number.
+
+{{{vindex(org-empty-line-terminates-plain-lists)}}}
+A list ends whenever every item has ended, which means before any line less
+or equally indented than items at top level.  It also ends before two blank
+lines.[fn:18]  In that case, all items are closed.  Here is an example:
+
+#+begin_src texinfo
+  ,** Lord of the Rings                                
+     My favorite scenes are (in this order)
+     1. The attack of the Rohirrim
+     2. Eowyn's fight with the witch king
+        + this was already my favorite scene in the book
+        + I really like Miranda Otto.
+     3. Peter Jackson being shot by Legolas
+        - on DVD only
+        He makes a really funny face when it happens.
+     But in the end, no individual scenes matter but the film as a whole.
+     Important actors in this film are:
+     - @b{Elijah Wood} :: He plays Frodo
+     - @b{Sean Austin} :: He plays Sam, Frodo's friend.  I still remember
+       him very well from his role as Mikey Walsh in @i{The Goonies}.
+#+end_src
+
+Org supports these lists by tuning filling and wrapping commands to
+deal with them correctly.[fn:19] To turn this on, put into
+{{{file(.emacs)}}}: ~(require 'filladapt)~}, and by exporting them
+properly (see [[Exporting]]). Since indentation is
+what governs the structure of these lists, many structural constructs
+like ~#+BEGIN_...~ blocks can be indented to signal that they belong
+to a particular item.
+
+{{{vindex(org-list-demote-modify-bullet)}}}
+{{{vindex(org-list-indent-offset)}}}
+If you find that using a different bullet for a sub-list (than that used for
+the current list-level) improves readability, customize the variable
+~org-list-demote-modify-bullet~.  To get a greater difference of
+indentation between items and theirs sub-items, customize
+~org-list-indent-offset~.
+
+{{{vindex(org-list-automatic-rules)}}}
+The following commands act on items when the cursor is in the first line of
+an item (the line with the bullet or number).  Some of them imply the
+application of automatic rules to keep list structure intact.  If some of
+these actions get in your way, configure ~org-list-automatic-rules~
+to disable them individually.
+
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+  - {{{key(TAB)}}} ~org-cycle~ :: Items can be folded just like
+       headline levels. Normally this works only if the cursor is on a
+       plain list item. For more details, see the variable
+       ~org-cycle-include-plain-lists~. If this variable is set to
+       ~integrate~, plain list items will be treated like low-level
+       headlines. The level of an item is then given by the
+       indentation of the bullet/number. Items are always subordinate
+       to real headlines, however; the hierarchies remain completely
+       separated. In a new item with no text yet, the first
+       {{{key(TAB)}}} demotes the item to become a child of the
+       previous one. Subsequent {{{key(TAB)}}}s move the item to
+       meaningful levels in the list and eventually get it back to its
+       initial position. call_index(type="concept",entry="cycling, in
+       plain lists")
+
+       {{{kindex(TAB)}}}
+       {{{findex(org-cycle)}}}
+       {{{vindex(org-cycle-include-plain-lists)}}}       
+  - {{{kbdkey(M-,RET)}}} ~org-insert-heading~ :: Insert new item at
+       current level. With a prefix argument, force a new heading
+       (see [[Structure editing]]). If this command
+       is used in the middle of an item, that item is /split/ in two,
+       and the second part becomes the new item.[fn:20] If this
+       command is executed /before item's body/, the new item is
+       created /before/ the current one.
+
+       {{{kindex(M-RET)}}}
+       {{{findex(org-insert-heading)}}}
+       {{{vindex(org-M-RET-may-split-line)}}}
+       {{{vindex(org-list-automatic-rules)}}}
+  - {{{kbdkey(M-S-,RET)}}} :: Insert a new item with a checkbox (see
+       Checkboxes).
+  
+     {{{kindex(M-S-RET)}}}
+  - {{{kbdkey(S-,up)}}} :: 
+       @@info:@itemx@@ {{{kbdkey(S-,down)}}}
+
+       Jump to the previous/next item in the current list,[fn:21] but
+       only if ~org-support-shift-select~ is off.  If not, you can
+       still use paragraph jumping commands like {{{kbdkey(C-,up)}}}
+       and {{{kbdkey(C-,down)}}} to quite similar effect.
+       
+       {{{kindex(S-up)}}}
+       {{{kindex(S-down)}}}
+       {{{cindex(shift-selection-mode)}}}
+       {{{vindex(org-support-shift-select)}}}
+       {{{vindex(org-list-use-circular-motion)}}}
+  - {{{kbdkey(M-,up)}}} ::
+       @@info:@itemx@@ {{{kbdkey(M-,down)}}}
+
+       Move the item including subitems up/down[fn:22] (swap with
+       previous/next item of same indentation).  If the list is
+       ordered, renumbering is automatic.
+
+       {{{kindex(M-up)}}}
+       {{{kindex(M-down)}}}
+  - {{{kbdkey(M-,left)}}} :: 
+       @@info:@itemx@@ {{{kbdkey(M-,right)}}}
+
+       Decrease/increase the indentation of an item, leaving children
+       alone.
+
+       {{{kindex(M-left)}}}
+       {{{kindex(M-right)}}}
+  - {{{kbdkey(M-S-,left)}}} :: 
+       @@info:@itemx@@ {{{kbdkey(M-S-,right)}}}
+
+       Decrease/increase the indentation of the item, including
+       subitems.  Initially, the item tree is selected based on
+       current indentation.  When these commands are executed several
+       times in direct succession, the initially selected region is
+       used, even if the new indentation would imply a different
+       hierarchy.  To use the new hierarchy, break the command chain
+       with a cursor motion or so.  
+
+       {{{kindex(M-S-left)}}}
+       {{{kindex(M-S-right)}}}
+
+       As a special case, using this command on the very first item of
+       a list will move the whole list.  This behavior can be disabled
+       by configuring ~org-list-automatic-rules~.  The global
+       indentation of a list has no influence on the text /after/ the
+       list.
+  - {{{kbd(C-c C-c)}}} :: If there is a checkbox (see [[Checkboxes]]) in
+       the item line, toggle the state of the checkbox.  In any case,
+       verify bullets and indentation consistency in the whole list.
+
+       {{{kindex(C-c C-c)}}}
+  - {{{kbd(C-c -)}}} :: Cycle the entire list level through the
+       different itemize/enumerate bullets ({{{samp(-)}}},
+       {{{samp(+)}}}, {{{samp(*)}}}, {{{samp(1.)}}}, {{{samp(1))}}})
+       or a subset of them, depending on
+       ~org-plain-list-ordered-item-terminator~, the type of list, and
+       its indentation.  With a numeric prefix argument N, select the
+       Nth bullet from this list.  If there is an active region when
+       calling this, selected text will be changed into an item.  With
+       a prefix argument, all lines will be converted to list items.
+       If the first line already was a list item, any item marker will
+       be removed from the list.  Finally, even without an active
+       region, a normal line will be converted into a list item.
+
+       {{{kindex(C-c -)}}}
+       {{{vindex(org-plain-list-ordered-item-terminator)}}}
+  - {{{kbd(C-c *)}}} :: Turn a plain list item into a headline (so
+       that it becomes a subheading at its location). See [[Structure
+       editing]], for a detailed explanation.
+
+       {{{kindex(C-c *)}}}
+  - {{{kbd(C-c C-*)}}} :: Turn the whole plain list into a subtree of
+       the current heading.  Checkboxes (see [[Checkboxes]]) will become
+       TODO (resp. DONE) keywords when unchecked (resp. checked).
+
+       {{{kindex(C-c C-*)}}}
+  - {{{kbd(S-left/right)}}} :: This command also cycles bullet styles
+       when the cursor in on the bullet or anywhere in an item line,
+       details depending on ~org-support-shift-select~.
+
+       {{{vindex(org-support-shift-select)}}}
+       {{{kindex(S-left)}}}
+       {{{kindex(S-right)}}}
+  - {{{kbd(C-c ^)}}} :: Sort the plain list.  You will be prompted for
+       the sorting method: numerically, alphabetically, by time, or by
+       custom function.
+
+       {{{kindex(C-c ^)}}}
 
 ** Drawers
    :PROPERTIES:
    :DESCRIPTION: Tucking stuff away
    :END:
+{{{cindex(drawers)}}}
+{{{cindex(#+DRAWERS)}}}
+{{{cindex(visibility cycling\, drawers)}}}
+
+{{{vindex(org-drawers)}}}
+{{{cindex(org-insert-drawer)}}}
+{{{kindex(C-c C-x d)}}}
+Sometimes you want to keep information associated with an entry, but you
+normally don't want to see it.  For this, Org mode has /drawers/.
+Drawers need to be configured with the variable
+~org-drawers~.[fn:24]  Drawers
+look like this:
+
+#+begin_src org
+  ,** This is a headline
+     Still outside the drawer
+     :DRAWERNAME:
+     This is inside the drawer.
+     :END:
+     After the drawer.
+#+end_src
+
+
+You can interactively insert drawers at point by calling
+~org-insert-drawer~, which is bound to {{{kbd(C-c C-x d)}}}.
+With an active region, this command will put the region inside the
+drawer. With a prefix argument, this command calls
+~org-insert-property-drawer~ and add a property drawer right
+below the current headline. Completion over drawer keywords is also
+possible using {{{key(M-TAB)}}}.
+
+Visibility cycling (see [[Visibility cycling]]) on the headline
+will hide and show the entry, but keep the drawer collapsed to a
+single line. In order to look inside the drawer, you need to move the
+cursor to the drawer line and press {{{key(TAB)}}} there. Org mode
+uses the ~PROPERTIES~ drawer for storing properties
+(see [[Properties and Columns]]), and you can also arrange for
+state change notes (see [[Tracking TODO state changes]]) and
+clock times (see [[Clocking work time]]) to be stored in a drawer
+~LOGBOOK~. If you want to store a quick note in the LOGBOOK
+drawer, in a similar way to state changes, use
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+ - {{{kbd(C-c C-z)}}} :: Add a time-stamped note to the LOGBOOK
+      drawer.
+
+      {{{kindex(C-c C-z)}}}
 
 ** Blocks
    :PROPERTIES:
    :DESCRIPTION: Folding blocks
    :END:
+{{{vindex(org-hide-block-startup)}}}
+{{{cindex(blocks\, folding)}}}
+Org mode uses begin...end blocks for various purposes from including source
+code examples (see [[Literal examples]]) to capturing time logging
+information (see [[Clocking work time]]).  These blocks can be folded and
+unfolded by pressing TAB in the begin line.  You can also get all blocks
+folded at startup by configuring the variable ~org-hide-block-startup~
+or on a per-file basis by using
+
+{{{cindex(@code{hideblocks}\, STARTUP keyword)}}}
+{{{cindex(@code{nohideblocks}\, STARTUP keyword)}}}
+#+begin_src org
+  ,#+STARTUP: hideblocks
+  ,#+STARTUP: nohideblocks
+#+end_src
 
 ** Footnotes
    :PROPERTIES:
    :DESCRIPTION: Define footnotes in Org syntax
    :END:
+{{{cindex(footnotes)}}}
 
-** Orgstruct mode
+Org mode supports the creation of footnotes. In contrast to the
+{{{file(footnote.el)}}} package, Org mode's footnotes are designed for
+work on a larger document, not only for one-off documents like emails.
+The basic syntax is similar to the one used by
+{{{file(footnote.el)}}}, i.e., a footnote is defined in a paragraph
+that is started by a footnote marker in square brackets in column 0,
+no indentation allowed. If you need a paragraph break inside a
+footnote, use the {{{latex}}} idiom {{{samp(\\par)}}}. The
+footnote reference is simply the marker in square brackets, inside
+text. For example:
+
+#+begin_example
+The Org homepage[fn:1] now looks a lot better than it used to.
+...
+[fn:1] The link is: http://orgmode.org
+#+end_example
+
+Org mode extends the number-based syntax to /named/ footnotes and
+optional inline definition. Using plain numbers as markers (as
+{{{file(footnote.el)}}} does) is supported for backward compatibility,
+but not encouraged because of possible conflicts with {{{latex}}}
+snippets (see [[Embedded @LaTeX{}]]). Here are
+the valid references:
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+  - ~[1]~ :: A plain numeric footnote marker. Compatible with
+           {{{file(footnote.el)}}}, but not recommended because
+           something like {{{samp([1])}}} could easily be part of a
+           code snippet.
+
+  - ~[fn:name]~ :: A named footnote reference, where ~name~ is
+                 a unique label word, or, for simplicity of automatic
+                 creation, a number.
+  - ~[fn:: This is the inline definition of this footnote]~ :: A
+       {{{latex}}}-like anonymous footnote where the definition
+       is given directly at the reference point.
+  - ~[fn:name: a definition]~ :: An inline definition of a footnote,
+       which also specifies a name for the note. Since Org allows
+       multiple references to the same note, you can then use
+       ~[fn:name]~ to create additional references.
+
+
+{{{vindex(org-footnote-auto-label)}}}
+Footnote labels can be created automatically, or you can create names
+yourself. This is handled by the variable
+~org-footnote-auto-label~ and its corresponding
+~#+STARTUP~ keywords. See the docstring of that variable for
+details.
+
+{{{noindent}}} The following command handles footnotes:
+
+#+attr_texinfo: :table-type "table" :indic "@kbd"
+  - C-c C-x f :: The footnote action command.
+    {{{kindex(C-c C-x f)}}}
+
+    When the cursor is on a footnote reference, jump to the
+    definition.  When it is at a definition, jump to the (first) reference.
+
+    {{{vindex(org-footnote-define-inline)}}}
+    {{{vindex(org-footnote-section)}}}
+    {{{vindex(org-footnote-auto-adjust)}}}
+    Otherwise, create a new footnote.  Depending on the variable 
+    ~org-footnote-define-inline~,[fn:26] the
+    definition will be placed right into the text as part of the reference, or
+    separately into the location determined by the variable
+    ~org-footnote-section~.
+
+    When this command is called with a prefix argument, a menu of additional
+    options is offered:
+
+    - s ::  Sort the footnote definitions by reference sequence.  During editing,
+      Org makes no effort to sort footnote definitions into a particular
+      sequence.  If you want them sorted, use this command, which will
+      also move entries according to ~org-footnote-section~.  Automatic
+      sorting after each insertion/deletion can be configured using the
+      variable ~org-footnote-auto-adjust~.
+    - r ::  Renumber the simple ~fn:N~ footnotes.  Automatic renumbering
+      after each insertion/deletion can be configured using the variable
+      ~org-footnote-auto-adjust~.
+    - S ::  Short for first ~r~, then ~s~ action.
+    - n ::  Normalize the footnotes by collecting all definitions (including
+      inline definitions) into a special section, and then numbering them
+      in sequence.  The references will then also be numbers.  This is
+      meant to be the final step before finishing a document (e.g.: sending
+      off an email).  The exporters do this automatically, and so could
+      something like ~message-send-hook~.
+    - d ::  Delete the footnote at point, and all definitions of and references
+      to it.
+
+    Depending on the variable ~org-footnote-auto-adjust~,[fn:25]
+    renumbering and sorting footnotes can be automatic after each insertion or
+    deletion.
+
+  - C-c C-c ::
+    If the cursor is on a footnote reference, jump to the definition.  If it is a
+    the definition, jump back to the reference.  When called at a footnote
+    location with a prefix argument, offer the same menu as {{{kbd(C-c C-x f)}}}.
+
+    {{{kindex(C-c C-c)}}}
+
+  - C-c C-o  @@info:@r{or}@@ mouse-1/2 ::
+    Footnote labels are also links to the corresponding definition/reference, and
+    you can use the usual commands to follow these links.
+
+    {{{kindex(C-c C-o)}}}
+    {{{kindex(mouse-1)}}}
+    {{{kindex(mouse-2)}}}
+
+** Orgstruct mode 
    :PROPERTIES:
    :DESCRIPTION: Structure editing outside Org
    :TEXINFO_MENU_TITLE: Orgstruct mode
    :END:
+{{{cindex(Orgstruct mode)}}}
+{{{cindex(minor mode for structure editing)}}}
+
+If you like the intuitive way the Org mode structure editing and list
+formatting works, you might want to use these commands in other modes like
+Text mode or Mail mode as well.  The minor mode ~orgstruct-mode~ makes
+this possible.   Toggle the mode with {{{kbd(M-x orgstruct-mode)}}}, or
+turn it on by default, for example in Message mode, with one of:
+
+#+header: :exports code
+#+begin_src emacs-lisp
+  (add-hook 'message-mode-hook 'turn-on-orgstruct)
+  (add-hook 'message-mode-hook 'turn-on-orgstruct++)
+#+end_src
+
+When this mode is active and the cursor is on a line that looks to Org like a
+headline or the first line of a list item, most structure editing commands
+will work, even if the same keys normally have different functionality in the
+major mode you are using.  If the cursor is not in one of those special
+lines, Orgstruct mode lurks silently in the shadows.  When you use
+~orgstruct++-mode~, Org will also export indentation and autofill
+settings into that mode, and detect item context after the first line of an
+item.
+
 * Tables
   :PROPERTIES:
   :DESCRIPTION: Pure magic for quick formatting
   :END:
-** Built-in table editor
+{{{cindex(tables)}}}
+{{{cindex(editing tables)}}}
+
+Org comes with a fast and intuitive table editor.  Spreadsheet-like
+calculations are supported using the Emacs {{{file(calc)}}} package
+[[info:calc][Calc]].
+
+** Built-in table editor 
    :PROPERTIES:
    :DESCRIPTION: Simple tables
    :END:
+{{{cindex(table editor\, built-in)}}}
+
+Org makes it easy to format tables in plain ASCII. Any line with
+{{{samp(|)}}} as the first non-whitespace character is considered part
+of a table. {{{samp(|)}}} is also the column separator.[fn:27] A table
+might look like this:
+
+#+begin_src org
+  | Name  | Phone | Age |
+  |-------+-------+-----|
+  | Peter |  1234 |  17 |
+  | Anna  |  4321 |  25 |
+#+end_src
+
+
+A table is re-aligned automatically each time you press {{{key(TAB)}}}
+or {{{key(RET)}}} or {{{kbd(C-c C-c)}}} inside the table.
+{{{key(TAB)}}} also moves to the next field ({{{key(RET)}}} to the
+next row) and creates new table rows at the end of the table or before
+horizontal lines. The indentation of the table is set by the first
+line. Any line starting with {{{samp(|-)}}} is considered as a
+horizontal separator line and will be expanded on the next re-align to
+span the whole table width. So, to create the above table, you would
+only type
+
+#+begin_src org
+  |Name|Phone|Age|
+  |-
+#+end_src
+
+
+{{{noindent}}} and then press {{{key(TAB)}}} to align the table and start
+filling in fields. Even faster would be to type
+~|Name|Phone|Age~ followed by {{{kbdkey(C-c ,RET)}}}.
+
+{{{vindex(org-enable-table-editor)}}}
+{{{vindex(org-table-auto-blank-field)}}} When
+typing text into a field, Org treats {{{key(DEL)}}},
+{{{key(Backspace)}}}, and all character keys in a special way, so that
+inserting and deleting avoids shifting other fields.  Also, when
+typing /immediately after the cursor was moved into a new field with
+{{{key(TAB)}}}, {{{kbdkey(S-,TAB)}}} or {{{key(RET)}}}/,
+the field is automatically made blank.  If this behavior is too
+unpredictable for you, configure the variables
+~org-enable-table-editor~ and ~code(org-table-auto-blank-field~.
+**** Creation and Conversion
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- {{{kbd(C-c |)}}} ~org-table-create-or-convert-from-region~ :: Convert
+     the active region to table.  If every line contains at least one
+     TAB character, the function assumes that the material is tab
+     separated.  If every line contains a comma, comma-separated
+     values (CSV) are assumed.  If not, lines are split at whitespace
+     into fields.  You can use a prefix argument to force a specific
+     separator: {{{kbd(C-u)}}} forces CSV, {{{kbd(C-u C-u)}}} forces
+     TAB, and a numeric argument N indicates that at least N
+     consecutive spaces, or alternatively a TAB will be the separator.
+     @@info:@*@@ If there is no active region, this command creates an
+     empty Org table.  But it is easier just to start typing, like
+     {{{kbdkey(|Name|Phone|Age ,RET)}}} {{{kbdkey(|- ,TAB)}}}.
+
+     {{{kindex(C-c |)}}}
+     {{{findex(org-table-create-or-convert-from-region)}}}
+**** Re-aligning and field motion
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- {{{kbd(C-c C-c)}}} ~org-table-align~ :: Re-align the table without
+     moving the cursor.
+
+     {{{kindex(C-c C-c)}}}
+     {{{findex(org-table-align)}}}
+- {{{kbd(<TAB>)}}} ~org-table-next-field~ :: Re-align the table, move
+     to the next field.  Creates a new row if necessary.
+
+     {{{kindex(<TAB>)}}}
+     {{{findex(org-table-next-field)}}}
+- {{{kbdkey(S-,TAB)}}} ~org-table-previous-field~ :: Re-align, move to
+     previous field.
+
+     {{{kindex(S-TAB)}}}
+     {{{findex(org-table-previous-field)}}}
+- {{{key(RET)}}} ~org-table-next-row~ :: Re-align the table and move
+     down to next row.  Creates a new row if necessary.  At the
+     beginning or end of a line, {{{key(RET)}}} still does NEWLINE, so
+     it can be used to split a table.
+
+     {{{kindex(RET)}}}
+     {{{findex(org-table-next-row)}}}
+- {{{kbd(M-a)}}} ~org-table-beginning-of-field~ :: Move to beginning
+     of the current table field, or on to the previous field.
+
+     {{{kindex(M-a)}}}
+     {{{findex(org-table-beginning-of-field)}}}
+- {{{kbd(M-e)}}} ~org-table-end-of-field~ :: Move to end of the
+     current table field, or on to the next field.
+
+     {{{kindex(M-e)}}}
+     {{{findex(org-table-end-of-field)}}}
+**** Column and row editing
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- {{{kbdkey(M-,left)}}} ~org-table-move-column-left~ ::
+     @@info:@itemx@@ {{{kbdkey(M-,right)}}} ~org-table-move-column-right~ 
+     
+     Move the current column left/right.
+
+     {{{kindex(M-left)}}}
+     {{{kindex(M-right)}}}
+     {{{findex(org-table-move-column-left)}}}
+     {{{findex(org-table-move-column-right)}}}
+- {{{kbdkey(M-S-,left)}}} ~org-table-delete-column~ :: Kill the
+     current column.
+
+     {{{kindex(M-S-left)}}}
+     {{{findex(org-table-delete-column)}}}
+- {{{kbdkey(M-S-,right)}}} ~org-table-insert-column~ :: Insert a new
+     column to the left of the cursor position.
+
+     {{{kindex(M-S-right)}}}
+     {{{findex(org-table-insert-column)}}}
+- {{{kbdkey(M-,up)}}} ~org-table-move-row-up~ ::
+     @@info:@itemx@ {{{kbdkey(M-down)}}} ~org-table-move-row-down~
+     
+     Move the current row up/down.
+
+     {{{kindex(M-up)}}}
+     {{{kindex(M-down)}}}
+     {{{findex(org-table-move-row-up)}}}
+     {{{findex(org-table-move-row-down)}}}
+- {{{kbdkey(M-S-,up)}}} ~org-table-kill-row~ :: Kill the current row
+     or horizontal line.
+
+     {{{kindex(M-S-up)}}}
+     {{{findex(org-table-kill-row)}}}
+- {{{kbdkey(M-S-,down)}}} ~org-table-insert-row~ :: Insert a new row
+     above the current row.  With a prefix argument, the line is
+     created below the current one.
+
+     {{{kindex(M-S-down)}}}
+     {{{findex(org-table-insert-row)}}}
+- {{{kbd(C-c -)}}} ~org-table-insert-hline~ :: Insert a horizontal
+     line below current row.  With a prefix argument, the line is
+     created above the current line.
+
+     {{{kindex(C-c -)}}}
+     {{{findex(org-table-insert-hline)}}}
+- {{{kbdkey(C-c ,RET)}}} ~org-table-hline-and-move~ :: Insert a
+     horizontal line below current row, and move the cursor into the
+     row below that line.
+
+     {{{kindex(C-c RET)}}}
+     {{{findex(org-table-hline-and-move)}}}
+- {{{kbd(C-c ^)}}} ~org-table-sort-lines~ :: Sort the table lines in
+     the region.  The position of point indicates the column to be
+     used for sorting, and the range of lines is the range between the
+     nearest horizontal separator lines, or the entire table.  If
+     point is before the first column, you will be prompted for the
+     sorting column.  If there is an active region, the mark specifies
+     the first line and the sorting column, while point should be in
+     the last line to be included into the sorting.  The command
+     prompts for the sorting type (alphabetically, numerically, or by
+     time).  When called with a prefix argument, alphabetic sorting
+     will be case-sensitive.
+
+     {{{kindex(C-c ^)}}}
+     {{{findex(org-table-sort-lines)}}}
+**** Regions
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- {{{kbd(C-c C-x M-w)}}} ~org-table-copy-region~ :: Copy a rectangular
+     region from a table to a special clipboard.  Point and mark
+     determine edge fields of the rectangle.  If there is no active
+     region, copy just the current field.  The process ignores
+     horizontal separator lines.
+
+     {{{kindex(C-c C-x M-w)}}}
+     {{{findex(org-table-copy-region)}}}
+- {{{kbd(C-c C-x C-w)}}} ~org-table-cut-region~ :: Copy a rectangular
+     region from a table to a special clipboard, and blank all fields
+     in the rectangle.  So this is the ``cut'' operation.
+
+     {{{kindex(C-c C-x C-w)}}}
+     {{{findex(org-table-cut-region)}}}
+- {{{kbd(C-c C-x C-y)}}} ~org-table-paste-rectangle~ :: Paste a
+     rectangular region into a table.  The upper left corner ends up
+     in the current field.  All involved fields will be overwritten.
+     If the rectangle does not fit into the present table, the table
+     is enlarged as needed.  The process ignores horizontal separator
+     lines.
+
+     {{{kindex(C-c C-x C-y)}}}
+     {{{findex(org-table-paste-rectangle)}}}
+- {{{kbdkey(M-,RET)}}} ~org-table-wrap-region~ :: Split the current
+     field at the cursor position and move the rest to the line below.
+     If there is an active region, and both point and mark are in the
+     same column, the text in the column is wrapped to minimum width
+     for the given number of lines.  A numeric prefix argument may be
+     used to change the number of desired lines.  If there is no
+     region, but you specify a prefix argument, the current field is
+     made blank, and the content is appended to the field above.
+
+     {{{kindex(M-RET)}}}
+     {{{findex(org-table-wrap-region)}}}
+**** Calculations
+#+attr_texinfo: :table-type "table" :indic "@asis"
+{{{cindex(formula\, in tables)}}}
+{{{cindex(calculations\, in tables)}}}
+{{{cindex(region\, active)}}}
+{{{cindex(active region)}}}
+{{{cindex(transient mark mode)}}}
+- {{{kbd(C-c +)}}} ~org-table-sum~ :: Sum the numbers in the current
+     column, or in the rectangle defined by the active region.  The
+     result is shown in the echo area and can be inserted with
+     {{{kbd(C-y)}}}.
+
+  {{{kindex(C-c +)}}}
+  {{{findex(org-table-sum)}}}
+- {{{kbdkey(S-,RET)}}} ~org-table-copy-down~ :: When current field is
+     empty, copy from first non-empty field above.  When not empty,
+     copy current field down to next row and move cursor along with
+     it.  Depending on the variable ~org-table-copy-increment~,
+     integer field values will be incremented during copy.  Integers
+     that are too large will not be incremented.  Also, a ~0~ prefix
+     argument temporarily disables the increment.  This key is also
+     used by shift-selection and related modes (see [[Conflicts]]).
+
+     {{{kindex(S-RET)}}}
+     {{{findex(org-table-copy-down)}}}
+     {{{vindex(org-table-copy-increment)}}}
+
+**** Miscellaneous
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- {{{kbd(C-c `)}}} ~org-table-edit-field~ :: Edit the current field in
+     a separate window.  This is useful for fields that are not fully
+     visible (call_ref(type="paren",node="Column width and
+     alignment")).  When called with a {{{kbd(C-u)}}} prefix, just
+     make the full field visible, so that it can be edited in place.
+     When called with two {{{kbd(C-u)}}} prefixes, make the editor
+     window follow the cursor through the table and always show the
+     current field.  The follow mode exits automatically when the
+     cursor leaves the table, or when you repeat this command with
+     {{{kbd(C-u C-u C-c `)}}}.
+
+     {{{kindex(C-c `)}}}
+     {{{findex(org-table-edit-field)}}}
+- {{{kbd(M-x org-table-import)}}} :: Import a file as a table.  The
+     table should be TAB or whitespace separated.  Use, for example,
+     to import a spreadsheet table or data from a database, because
+     these programs generally can write TAB-separated text files.
+     This command works by inserting the file into the buffer and then
+     converting the region to a table.  Any prefix argument is passed
+     on to the converter, which uses it to determine the separator.
+
+- {{{kbd(C-c |)}}} ~org-table-create-or-convert-from-region~ :: Tables
+     can also be imported by pasting tabular text into the Org buffer,
+     selecting the pasted text with {{{kbd(C-x C-x)}}} and then using
+     the {{{kbd(C-c |)}}} command (see above under /Creation and
+     conversion/).
+
+     {{{kindex(C-c |)}}}
+     {{{findex(org-table-create-or-convert-from-region)}}}
+- {{{kbd(M-x org-table-export)}}} :: Export the table, by default as a
+     TAB-separated file.  Use for data exchange with, for example,
+     spreadsheet or database programs.  The format used to export the
+     file can be configured in the variable
+     ~org-table-export-default-format~.  You may also use properties
+     ~TABLE_EXPORT_FILE~ and ~TABLE_EXPORT_FORMAT~ to specify the file
+     name and the format for table export in a subtree.  Org supports
+     quite general formats for exported tables.  The exporter format
+     is the same as the format used by Orgtbl radio tables, see
+     [[Translator functions]], for a detailed description.
+
+     {{{findex(org-table-export)}}}
+     {{{vindex(org-table-export-default-format)}}}
+
+If you don't like the automatic table editor because it gets in your
+way on lines which you would like to start with {{{samp(|)}}}, you can
+turn it off with
+
+#+header: :exports code
+#+begin_src emacs-lisp
+(setq org-enable-table-editor nil)
+#+end_src
+
+
+{{{noindent}}} Then the only table command that still works is
+{{{kbd(C-c C-c)}}} to do a manual re-align.
+
 ** Column width and alignment
    :PROPERTIES:
    :DESCRIPTION: Overrule the automatic settings
    :END:
-** Column groups
+{{{cindex(narrow columns in tables)}}}
+{{{cindex(alignment in tables)}}}
+
+The width of columns is automatically determined by the table editor.  And
+also the alignment of a column is determined automatically from the fraction
+of number-like versus non-number fields in the column.
+
+Sometimes a single field or a few fields need to carry more text, leading to
+inconveniently wide columns.  Or maybe you want to make a table with several
+columns having a fixed width, regardless of content.  To set the width of a column, one field anywhere
+in the column may contain just the string {{{samp(<N>)}}} where {{{samp(N)}}} is an
+integer specifying the width of the column in characters.[fn:28]  The next re-align
+will then set the width of this column to this value.
+
+#+begin_example
+  |---+------------------------------|               |---+--------|
+  |   |                              |               |   | <6>    |
+  | 1 | one                          |               | 1 | one    |
+  | 2 | two                          |     ----\     | 2 | two    |
+  | 3 | This is a long chunk of text |     ----/     | 3 | This=> |
+  | 4 | four                         |               | 4 | four   |
+  |---+------------------------------|               |---+--------|
+#+end_example
+
+{{{noindent}}}
+Fields that are wider become clipped and end in the string {{{samp(=>)}}}.
+Note that the full text is still in the buffer but is hidden.
+To see the full text, hold the mouse over the field---a tool-tip window
+will show the full content.  To edit such a field, use the command
+{{{kbd(C-c `)}}} (that is {{{kbd(C-c)}}} followed by the backquote).  This will
+open a new window with the full field.  Edit it and finish with {{{kbd(C-c
+C-c)}}}.
+
+{{{vindex(org-startup-align-all-tables)}}}
+When visiting a file containing a table with narrowed columns, the
+necessary character hiding has not yet happened, and the table needs to
+be aligned before it looks nice.  Setting the option
+~org-startup-align-all-tables~ will realign all tables in a file
+upon visiting, but also slow down startup.  You can also set this option
+on a per-file basis with:
+
+#+begin_src org
+  ,#+STARTUP: align
+  ,#+STARTUP: noalign
+#+end_src
+
+If you would like to overrule the automatic alignment of number-rich columns
+to the right and of string-rich columns to the left, you can use {{{samp(<r>)}}},
+{{{samp(<c>)}}}[fn:29] or {{{samp(<l>)}}} in a similar fashion.  You may
+also combine alignment and field width like this: {{{samp(<l10>)}}}.
+
+A line that only contains these formatting cookies will be removed
+automatically when exporting the document.
+
+** Column groups                
    :PROPERTIES:
    :DESCRIPTION: Grouping to trigger vertical lines
    :END:
-** Orgtbl mode
+{{{cindex(grouping columns in tables)}}}
+
+When Org exports tables, it does so by default without vertical
+lines because that is visually more satisfying in general.  Occasionally
+however, vertical lines can be useful to structure a table into groups
+of columns, much like horizontal lines can do for groups of rows.  In
+order to specify column groups, you can use a special row where the
+first field contains only {{{samp(/)}}}.  The further fields can either
+contain {{{samp(<)}}} to indicate that this column should start a group,
+{{{samp(>)}}} to indicate the end of a column, or {{{samp(<>)}}} (no space between {{{samp(<)}}}
+and {{{samp(>)}}}) to make a column
+a group of its own.  Boundaries between column groups will upon export be
+marked with vertical lines.  Here is an example:
+
+#+begin_src org
+  | N | N^2 | N^3 | N^4 | sqrt(n) | sqrt[4](N) |
+  |---+-----+-----+-----+---------+------------|
+  | / |   < |     |   > |       < |          > |
+  | 1 |   1 |   1 |   1 |       1 |          1 |
+  | 2 |   4 |   8 |  16 |  1.4142 |     1.1892 |
+  | 3 |   9 |  27 |  81 |  1.7321 |     1.3161 |
+  |---+-----+-----+-----+---------+------------|
+  ,#+TBLFM: $2=$1^2::$3=$1^3::$4=$1^4::$5=sqrt($1)::$6=sqrt(sqrt(($1)))
+#+end_src
+
+It is also sufficient to just insert the column group starters after
+every vertical line you would like to have:
+
+#+begin_src org
+  |  N | N^2 | N^3 | N^4 | sqrt(n) | sqrt[4](N) |
+  |----+-----+-----+-----+---------+------------|
+  | /  | <   |     |     | <       |            |
+#+end_src
+
+** The Orgtbl mode minor mode
    :PROPERTIES:
    :DESCRIPTION: The table editor as minor mode
+   :TEXINFO_MENU_TITLE: Ogtbl mode
    :END:
+{{{cindex(Orgtbl mode)}}}
+{{{cindex(minor mode for tables)}}}
+
+If you like the intuitive way the Org table editor works, you
+might also want to use it in other modes like Text mode or Mail mode.
+The minor mode Orgtbl mode makes this possible.  You can always toggle
+the mode with {{{kbd(M-x orgtbl-mode)}}}.  To turn it on by default, for
+example in Message mode, use
+
+#+header: :exports code
+#+begin_src emacs-lisp
+(add-hook 'message-mode-hook 'turn-on-orgtbl)
+#+end_src
+
+Furthermore, with some special setup, it is possible to maintain tables
+in arbitrary syntax with Orgtbl mode.  For example, it is possible to
+construct {{{latex}}} tables with the underlying ease and power of
+Orgtbl mode, including spreadsheet capabilities.  For details, see
+[[Tables in arbitrary syntax]].
+
 ** The spreadsheet
    :PROPERTIES:
    :DESCRIPTION: The table editor has spreadsheet capabilities
    :END:
+{{{cindex(calculations\, in tables)}}}
+{{{cindex(spreadsheet capabilities)}}}
+{{{cindex(@file{calc} package)}}}
+
+The table editor makes use of the Emacs {{{file(calc)}}} package to implement
+spreadsheet-like capabilities.  It can also evaluate Emacs Lisp forms to
+derive fields from other fields.  While fully featured, Org's implementation
+is not identical to other spreadsheets.  For example, Org knows the concept
+of a /column formula/ that will be applied to all non-header fields in a
+column without having to copy the formula to each relevant field.  There is
+also a formula debugger, and a formula editor with features for highlighting
+fields in the table corresponding to the references at the point in the
+formula, moving these references by arrow keys
+
+*** References
+    :PROPERTIES:
+    :DESCRIPTION: How to refer to another field or range
+    :END:
+{{{cindex(references)}}}
+
+To compute fields in the table from other fields, formulas must
+reference other fields or ranges.  In Org, fields can be referenced by
+name, by absolute coordinates, and by relative coordinates.  To find
+out what the coordinates of a field are, press {{{kbd(C-c ?)}}} in
+that field, or press {{{kbd(C-c @})}}} to toggle the display of a
+grid.
+
+**** Field references
+{{{cindex(field references)}}}
+{{{cindex(references\, to fields)}}}
+
+Formulas can reference the value of another field in two ways.  Like
+in any other spreadsheet, you may reference fields with a
+letter/number combination like ~B3~, meaning the 2nd field in the 3rd
+row.  {{{vindex(org-table-use-standard-references)}}} However, Org
+prefers[fn:31] to use another, more general representation that looks
+like this:
+
+#+begin_example
+ @ROW$COLUMN
+#+end_example
+
+Column specifications can be absolute like ~$1~, ~$2~ ,... ~$N~, or
+relative to the current column (i.e., the column of the field which is
+being computed) like ~$+1~ or ~$-2~. ~$<~ and ~$>~ are immutable
+references to the first and last column, respectively, and you can use
+~$>>>~ to indicate the third column from the right.
+
+The row specification only counts data lines and ignores horizontal
+separator lines (hlines). Like with columns, you can use absolute row
+numbers ~@1~, ~@2~ ,... ~@N~, and row numbers relative to the current
+row like ~@+3~ or ~@-1~. ~@<~ and ~@>~ are immutable references the
+first and last row in the table, respectively.[fn:34] You may also
+specify the row relative to one of the hlines: ~@I~ refers to the
+first hline, ~@II~ to the second, etc@. ~@-I~ refers to the first such
+line above the current line, ~@+I~ to the first such line below the
+current line. You can also write ~@III+2~ which is the second data
+line after the third hline in the table.
+
+~@0~ and ~$0~ refer to the current row and column, respectively, i.e.,
+to the row/column for the field being computed. Also, if you omit
+either the column or the row part of the reference, the current
+row/column is implied.
+
+Org's references with /unsigned/ numbers are fixed references in the
+sense that if you use the same reference in the formula for two
+different fields, the same field will be referenced each time.  Org's
+references with /signed/ numbers are floating references because the
+same reference operator can reference different fields depending on
+the field being calculated by the formula.
+
+Here are a few examples:
+
+#+attr_texinfo: :table-type "table" :indic "@code"
+  - @2$3 :: 2nd row, 3rd column (same as ~C2~)
+  - $5 :: column 5 in the current row (same as ~E&~)
+  - @2 :: current column, row 2
+  - @-1$-3 :: the field one row up, three columns to the left
+  - @-I$2 :: field just under hline above current row, column 2
+  - @>$5 :: field in the last row, in column 5
+
+**** Range references
+{{{cindex(range references)}}}
+{{{cindex(references\, to ranges)}}}
+
+You may reference a rectangular range of fields by specifying two
+field references connected by two dots ~..~.  If both fields are in
+the current row, you may simply use ~$2..$7~, but if at least one
+field is in a different row, you need to use the general ~@row$column~
+format at least for the first field (i.e., the reference must start
+with ~@~ in order to be interpreted correctly).  Examples:
+
+#+attr_texinfo: :table-type "table" :indic "@code"
+  - $1..$3 :: first three fields in the current row
+  - $P..$Q :: range, using column names (see under Advanced)
+  - $<<<..$>> :: start in third column, continue to the one but last
+  - @2$1..@4$3 ::  six fields between these two fields (same as ~A2..C4~)
+  - @-1$-2..@-1 :: three numbers from the column to the left, 2 up to current row
+  - @I..II ::  between first and second hline, short for ~@I..@II~
+
+
+{{{noindent}}} Range references return a vector of values that can be
+fed into Calc vector functions.  Empty fields in ranges are normally
+suppressed, so that the vector contains only the non-empty fields (but
+see the ~E~ mode switch below).  If there are no non-empty fields,
+{{{samp([0])}}} is returned to avoid syntax errors in formulas.
+
+**** Field coordinates in formulas
+{{{cindex(field coordinates)}}}
+{{{cindex(coordinates\, of field)}}}
+{{{cindex(row\, of field coordinates)}}}
+{{{cindex(column\, of field coordinates)}}}
+
+For Calc formulas and Lisp formulas ~@#~ and ~$#~ can be used to get
+the row or column number of the field where the formula result goes.
+The traditional Lisp formula equivalents are ~org-table-current-dline~
+and ~org-table-current-column~.  Examples:
+
+#+attr_texinfo: :table-type "table" :indic "@code"
+  - if(@# % 2, $#, string("")) :: column number on odd lines only
+  - $3 = remote(FOO, @@#$2) ::  copy column 2 from table FOO into column 3 of the current table
+
+{{{noindent}}} For the second example, table FOO must have at least as
+many rows as the current table. Note that this is inefficient for
+large number of rows.[fn:30]
+
+**** Named references
+{{{cindex(named references)}}}
+{{{cindex(references\, named)}}}
+{{{cindex(name\, of column or field)}}}
+{{{cindex(constants\, in calculations)}}}
+{{{cindex(#+CONSTANTS)}}}
+{{{vindex(org-table-formula-constants)}}}
+
+{{{samp($name)}}} is interpreted as the name of a column, parameter or
+constant.  Constants are defined globally through the variable
+~org-table-formula-constants~, and locally (for the file) through a
+line like
+
+#+begin_src org
+  ,#+CONSTANTS: c=299792458. pi=3.14 eps=2.4e-6
+#+end_src
+
+{{{noindent}}} 
+{{{vindex(constants-unit-system)}}}
+{{{pindex(constants.el)}}} 
+
+Also properties (see [[Properties and Columns]]) can be used as constants
+in table formulas: for a property {{{samp(:Xyz:)}}} use the name
+{{{samp($PROP_Xyz)}}}, and the property will be searched in the
+current outline entry and in the hierarchy above it. If you have the
+{{{file(constants.el)}}} package, it will also be used to resolve
+constants, including natural constants like ~$h~ for Planck's
+constant, and units like ~$km~ for kilometers. [fn:35] Column names
+and parameters can be specified in special table lines. These are
+described below, see [[Advanced features]].  All names must start with a
+letter, and further consist of letters and numbers.
+
+**** Remote references
+{{{cindex(remote references)}}}
+{{{cindex(references\, remote)}}}
+{{{cindex(references\, to a different table)}}}
+{{{cindex(name\, of column or field)}}}
+{{{cindex(constants\, in calculations)}}}
+{{{cindex(#+TBLNAME)}}}
+
+You may also reference constants, fields and ranges from a different
+table, either in the current file or even in a different file.  The
+syntax is
+
+#+begin_example
+remote(NAME-OR-ID,REF)
+#+end_example
+
+{{{noindent}}} where NAME can be the name of a table in the current
+file as set by a ~#+TBLNAME: NAME~ line before the table. It can also
+be the ID of an entry, even in a different file, and the reference
+then refers to the first table in that entry. REF is an absolute field
+or range reference as described above for example ~@3$3~ or
+~$somename~, valid in the referenced table.
+
+*** Formula syntax for Calc
+    :PROPERTIES:
+    :DESCRIPTION: Using Calc to compute stuff
+    :END:
+{{{cindex(formula syntax\, Calc)}}}
+{{{cindex(syntax\, of formulas)}}}
+
+A formula can be any algebraic expression understood by the Emacs
+{{{file(Calc)}}} package.  *Note*: {{{file(calc)}}} has the
+non-standard convention that ~/~ has lower precedence than ~*~, so
+that ~a/b*c~ is interpreted as ~a/(b*c)~.  Before evaluation by
+~calc-eval~ (call_ref(type="paren",node="Calling Calc from Your
+Programs",xref="calc-eval",topic="Calling Calc from Your Lisp
+Programs",file-name="calc",manual="GNU Emacs Calc Manual")), variable
+substitution takes place according to the rules described above.
+{{{cindex(vectors\, in table calculations)}}} The range vectors can be
+directly fed into the Calc vector functions like ~vmean~ and ~vsum~.
+
+{{{cindex(format specifier)}}}
+{{{cindex(mode\, for @file{calc})}}}
+{{{vindex(org-calc-default-modes)}}}
+
+A formula can contain an optional mode string after a semicolon.  This
+string consists of flags to influence Calc and other modes during
+execution.  By default, Org uses the standard Calc modes (precision
+12, angular units degrees, fraction and symbolic modes off).  The
+display format, however, has been changed to ~(float 8)~ to keep
+tables compact.  The default settings can be configured using the
+variable ~org-calc-default-modes~.
+
+#+attr_texinfo: :table-type "table" :indic "@code"
+  - p20 :: set the internal Calc calculation precision to 20 digits
+  - n3 s3 e2 f4 :: normal, scientific, engineering, or
+       fixed format of the result of Calc passed back to Org. Calc
+       formatting is unlimited in precision as long as the Calc
+       calculation precision is greater.
+  - D R :: angle modes: degrees, radians
+  - F S :: fraction and symbolic modes
+  - N :: interpret all fields as numbers, use 0 for non-numbers
+  - E :: keep empty fields in ranges
+  - L :: literal
+
+{{{noindent}}} Unless you use large integer numbers or
+high-precision-calculation and -display for floating point numbers you
+may alternatively provide a ~printf~ format specifier to reformat the
+Calc result after it has been passed back to Org instead of letting
+Calc already do the formatting.[fn:32] A few examples:
+
+#+attr_texinfo: :table-type "table" :indic "@code"
+  - $1+$2 :: Sum of first and second field
+  - $1+$2;%.2f :: Same, format result to two decimals
+  - exp($2)+exp($1) :: Math functions can be used
+  - $0;%.1f :: Reformat current cell to 1 decimal
+  - ($3-32)*5/9 :: Degrees F -> C conversion
+  - $c/$1/$cm :: Hz -> cm conversion, using {{{file(constants.el)}}}
+  - tan($1);Dp3s1 :: Compute in degrees, precision 3, display SCI 1
+  - sin($1);Dp3%.1e ::  Same, but use ~printf~
+       specifier for display
+  - vmean($2..$7) :: Compute column range mean, using vector function
+  - vmean($2..$7);EN :: Same, but treat empty fields as 0
+  - taylor($3,x=7,2) :: Taylor series of $3, at x=7, second degree
+
+Calc also contains a complete set of logical operations.  For example
+
+#+attr_texinfo: :table-type "table" :indic "@code"
+  - if($1<20,teen,string("")) ::  "teen" if age $1 less than 20, else empty
+
+
+Note that you can also use two org-specific flags ~T~ and ~t~ for
+durations computations [[Duration and time values]].
+
+You can add your own Calc functions defined in Emacs Lisp with
+~defmath~ and use them in formula syntax for Calc.
+
+*** Emacs Lisp forms as formulas
+    :PROPERTIES:
+    :DESCRIPTION: Writing formulas in Emacs Lisp
+    :TEXINFO_MENU_TITLE: Formula syntax for Lisp
+    :END:
+{{{cindex(Lisp forms\, as table formulas)}}}
+
+It is also possible to write a formula in Emacs Lisp.  This can be
+useful for string manipulation and control structures, if Calc's
+functionality is not enough.
+
+If a formula starts with a single-quote followed by an opening
+parenthesis, then it is evaluated as a Lisp form. The evaluation
+should return either a string or a number. Just as with
+{{{file(calc)}}} formulas, you can specify modes and a printf format
+after a semicolon.
+
+With Emacs Lisp forms, you need to be conscious about the way field
+references are interpolated into the form. By default, a reference
+will be interpolated as a Lisp string (in double-quotes) containing
+the field. If you provide the {{{samp(N)}}} mode switch, all
+referenced elements will be numbers (non-number fields will be zero)
+and interpolated as Lisp numbers, without quotes. If you provide the
+{{{samp(L)}}} flag, all fields will be interpolated literally, without
+quotes. I.e., if you want a reference to be interpreted as a string by
+the Lisp form, enclose the reference operator itself in double-quotes,
+like ~"$3"~. Ranges are inserted as space-separated fields, so you can
+embed them in list or vector syntax.
+
+Here are a few examples---note how the {{{samp(N)}}} mode is used when
+we do computations in Lisp.
+
+Swap the first two characters of the content of column 1:
+#+header: :exports code
+#+begin_src emacs-lisp
+  '(concat (substring $1 1 2) (substring $1 0 1) (substring $1 2))
+#+end_src
+
+Add columns 1 and 2, equivalent to Calc's ~$1+$2~:
+#+header: :exports code
+#+begin_src emacs-lisp
+  '(+ $1 $2);N
+#+end_src
+
+Compute the sum of columns 1-4, like Calc's ~vsum($1..$4)~}:
+#+header: :exports code
+#+begin_src emacs-lisp
+  '(apply '+ '($1..$4));N
+#+end_src
+
+
+*** Duration and time values
+    :PROPERTIES:
+    :DESCRIPTION: How to compute duration and time values
+    :END:
+{{{cindex(Duration\, computing)}}}
+{{{cindex(Time\, computing)}}}
+{{{vindex(org-table-duration-custom-format)}}}
+
+If you want to compute time values use the ~T~ flag, either in Calc
+formulas or Elisp formulas:
+
+#+begin_example
+  |  Task 1 |   Task 2 |    Total |
+  |---------+----------+----------|
+  |    2:12 |     1:47 | 03:59:00 |
+  | 3:02:20 | -2:07:00 |     0.92 |
+  #+TBLFM: @@2$3=$1+$2;T::@@3$3=$1+$2;t
+#+end_example
+
+Input duration values must be of the form ~[HH:MM[:SS]~, where seconds
+are optional. With the ~T~ flag, computed durations will be displayed
+as ~HH:MM:SS~ (see the first formula above). With the ~t~ flag,
+computed durations will be displayed according to the value of the
+variable ~org-table-duration-custom-format~, which defaults to
+~'hours~ and will display the result as a fraction of hours (see the
+second formula in the example above).
+
+Negative duration values can be manipulated as well, and integers will
+be considered as seconds in addition and subtraction.
+
+*** Field and range formulas
+    :PROPERTIES:
+    :DESCRIPTION: Formulas for specific (ranges of) fields
+    :END:
+{{{cindex(field formula)}}}
+{{{cindex(range formula)}}}
+{{{cindex(formula\, for individual table field)}}}
+{{{cindex(formula\, for range of fields)}}}
+
+To assign a formula to a particular field, type it directly into the
+field, preceded by ~:=~, for example ~vsum(@II..III)~. When you press
+{{{key(TAB)}}} or {{{key(RET)}}} or {{{kbd(C-c C-c)}}} with the cursor
+still in the field, the formula will be stored as the formula for this
+field, evaluated, and the current field will be replaced with the
+result.
+
+{{{cindex(#+TBLFM)}}} 
+
+Formulas are stored in a special line starting with ~#+TBLFM:~
+directly below the table. If you type the equation in the fourth field
+of the third data line in the table, the formula will look like
+~@3$4=$1+$2~. When inserting/deleting/swapping column and rows with
+the appropriate commands, /absolute references/ (but not relative
+ones) in stored formulas are modified in order to still reference the
+same field. To avoid this from happening, in particular in range
+references, anchor ranges at the table borders (using ~@<~, ~@>~,
+~$<~, ~$>~), or at hlines using the ~@I~ notation. Automatic
+adaptation of field references does of course not happen if you edit
+the table structure with normal editing commands---then you must fix
+the equations yourself.
+
+Instead of typing an equation into the field, you may also use the
+following command
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+  - {{{kbd(C-u C-c =)}}} ~org-table-eval-formula~ :: Install a new
+       formula for the current field.  The command prompts for a
+       formula with default taken from the {{{samp(#+TBLFM:)}}} line,
+       applies it to the current field, and stores it.
+
+       {{{kindex(C-u C-c =)}}}
+       {{{findex(org-table-eval-formula)}}}
+The left-hand side of a formula can also be a special expression in
+order to assign the formula to a number of different fields. There is
+no keyboard shortcut to enter such range formulas. To add them, use
+the formula editor (call_ref(type="paren",node="Editing and debugging
+formulas")) or edit the ~#+TBLFM:~ line directly.
+
+#+attr_texinfo: :table-type "table" :indic "@code"
+  - $2= :: Column formula, valid for the entire column.  This is so
+           common that Org treats these formulas in a special way, see
+           [[Column formulas]].
+  - @@3= :: Row formula, applies to all fields in the specified row.
+            ~@@>=~ means the last row.
+  - @@1$2..@@4$3= :: Range formula, applies to all fields in the given
+                     rectangular range.  This can also be used to
+                     assign a formula to some but not all fields in a
+                     row.
+  - $name= :: Named field, see [[Advanced features]].
+
+
+*** Column formulas
+    :PROPERTIES:
+    :DESCRIPTION: Formulas valid for an entire column
+    :END:
+{{{cindex(column formula)}}}
+{{{cindex(formula\, for table column)}}}
+
+When you assign a formula to a simple column reference like ~$3=~, the
+same formula will be used in all fields of that column, with the
+following very convenient exceptions:
+
+  -  If the table contains horizontal separator hlines with rows above
+     and below, everything before the first such hline is considered
+     part of the table /header/ and will not be modified by column
+     formulas. Therefore a header is mandatory when you use column
+     formulas and want to add hlines to group rows, like for example
+     to separate a total row at the bottom from the summand rows
+     above.
+  -  Fields that already get a value from a field/range formula will
+     be left alone by column formulas. These conditions make column
+     formulas very easy to use.
+
+To assign a formula to a column, type it directly into any field in
+the column, preceded by an equal sign, like {{{samp(=$1+$2)}}}. When
+you press {{{key(TAB)}}} or {{{key(RET)}}} or {{{kbd(C-c C-c)}}} with
+the cursor still in the field, the formula will be stored as the
+formula for the current column, evaluated and the current field
+replaced with the result. If the field contains only {{{samp(=)}}},
+the previously stored formula for this column is used. For each
+column, Org will only remember the most recently used formula. In the
+{{{samp(#+TBLFM:)}}} line, column formulas will look like
+{{{samp($4=$1+$2)}}}. The left-hand side of a column formula can not
+be the name of column, it must be the numeric column reference or
+~$>~.
+
+Instead of typing an equation into the field, you may also use the
+following command:
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+  - {{{kbd(C-c =)}}} ~org-table-eval-formula~ :: Install a new formula
+       for the current column and replace current field with the
+       result of the formula.  The command prompts for a formula, with
+       default taken from the {{{samp(#+TBLFM)}}} line, applies it to
+       the current field and stores it.  With a numeric prefix
+       argument(e.g.: {{{kbd(C-5 C-c =)}}}) the command will apply it
+       to that many consecutive fields in the current column.
+
+       {{{kindex(C-c =)}}}
+       {{{findex(org-table-eval-formula)}}}
+*** Lookup functions
+    :PROPERTIES:
+    :DESCRIPTION: Lookup functions for searching tables
+    :END:
+{{{cindex(lookup functions in tables)}}}
+{{{cindex(table lookup functions)}}}
+
+Org has three predefined Emacs Lisp functions for lookups in tables.
+
+#+attr_texinfo: :table-type "table" :indic "@code"
+  - (org-lookup-first VAL S-LIST R-LIST &optional PREDICATE) :: Searches
+       for the first element ~S~ in list ~S-LIST~ for which
+
+       {{{findex(org-lookup-first)}}}
+
+       #+header: :exports code
+       #+begin_src emacs-lisp
+         (PREDICATE VAL S)
+       #+end_src
+       is ~t~; returns the value from the corresponding position in
+       list ~R-LIST~.  The default ~PREDICATE~ is ~equal~.  Note that
+       the parameters ~VAL~ and ~S~ are passed to ~PREDICATE~ in the
+       same order as the correspoding parameters are in the call to
+       ~org-lookup-first~, where ~VAL~ precedes ~S-LIST~.  If ~R-LIST~
+       is ~nil~, the matching element ~S~ of ~S-LIST~ is returned.
+  - (org-lookup-last VAL S-LIST R-LIST &optional PREDICATE) :: Similar
+       to ~org-lookup-first~ above, but searches for the /last/
+       element for which ~PREDICATE~ is ~t~.
+
+       {{{findex(org-lookup-last)}}}
+  - (org-lookup-all VAL S-LIST R-LIST &optional PREDICATE) :: Similar
+       to ~org-lookup-first~, but searches for /all/ elements for
+       which ~PREDICATE~ is ~t~, and returns /all/ corresponding
+       values.  This function can not be used by itself in a formula,
+       because it returns a list of values.  However, powerful lookups
+       can be built when this function is combined with other Emacs
+       Lisp functions.
+
+       {{{findex(org-lookup-all)}}}
+
+If the ranges used in these functions contain empty fields, the ~E~
+mode for the formula should usually be specified: otherwise empty
+fields will not be included in ~S-LIST~ and/or ~R-LIST~ which can, for
+example, result in an incorrect mapping from an element of ~S-LIST~ to
+the corresponding element of ~R-LIST~.
+
+These three functions can be used to implement associative arrays,
+count matching cells, rank results, group data, etc.  For practical
+examples see [[http://orgmode.org/worg/org-tutorials/org-lookups.html][this tutorial on Worg]].
+
+*** Editing and debugging formulas
+    :PROPERTIES:
+    :DESCRIPTION: Fixing formulas
+    :END:
+{{{cindex(formula editing)}}}
+{{{cindex(editing\, of table formulas)}}}
+
+{{{vindex(org-table-use-standard-references)}}} You can edit
+individual formulas in the minibuffer or directly in the field.  Org
+can also prepare a special buffer with all active formulas of a table.
+When offering a formula for editing, Org converts references to the
+standard format (like ~B3~ or ~D&~) if possible.  If you prefer to
+only work with the internal format (like ~@3$2~ or ~$4~), configure
+the variable ~org-table-use-standard-references~.
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+  - {{{kbd(C-c =)}}} ~org-table-eval-formula~ ::
+       @@info:@itemx@@ {{{kbd(C-u C-c =)}}}
+
+       Edit the formula associated with the current column/field in the
+       minibuffer.  See [[Column formulas]], and [[Field and range formulas]].
+
+       {{{kindex(C-c =)}}}
+       {{{kindex(C-u C-c =)}}}
+       {{{findex(org-table-eval-formula)}}}
+  - {{{kbd(C-u C-u C-c =)}}} ~org-table-eval-formula~ :: Re-insert the
+       active formula (either a field formula, or a column formula)
+       into the current field, so that you can edit it directly in the
+       field.  The advantage over editing in the minibuffer is that
+       you can use the command {{{kbd(C-c ?)}}}.
+
+       {{{kindex(C-u C-u C-c =)}}}
+       {{{findex(org-table-eval-formula)}}}
+
+  - {{{kbd(C-c ?)}}} ~org-table-field-info~ :: While editing a formula
+       in a table field, highlight the field(s) referenced by the
+       reference at the cursor position in the formula.
+
+       {{{kindex(C-c ?)}}}
+       {{{findex(org-table-field-info)}}}
+
+  - {{{kbd(C-c @})}}} ~org-table-toggle-coordinate-overlays~ :: Toggle
+       the display of row and column numbers for a table, using
+       overlays ({{{command(org-table-toggle-coordinate-overlays)}}}).
+       These are updated each time the table is aligned; you can force
+       it with {{{kbd(C-c C-c)}}}.
+
+       {{{kindex(C-c @})}}}
+       {{{findex(org-table-toggle-coordinate-overlays)}}}
+
+  - {{{kbd(C-c @{)}}} ~org-table-toggle-formula-debugger~ :: Toggle
+       the formula debugger on and off.  See below.
+
+       {{{kindex(C-c @{)}}}
+       {{{findex(org-table-toggle-formula-debugger)}}}
+
+  - {{{kbd(C-c ')}}} ~org-table-edit-formulas~ :: Edit all formulas
+       for the current table in a special buffer, where the formulas
+       will be displayed one per line.  If the current field has an
+       active formula, the cursor in the formula editor will mark it.
+       While inside the special buffer, Org will automatically
+       highlight any field or range reference at the cursor position.
+       You may edit, remove and add formulas, and use the following
+       commands:
+
+       {{{kindex(C-c ')}}}
+       {{{findex(org-table-edit-formulas)}}}
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+  - {{{kbd(C-c C-c)}}} ~org-table-fedit-finish~ :: 
+       @@info:@itemx@ {{{kbd(C-x C-s)}}}
+
+       Exit the formula editor and store the modified formulas.  With
+       {{{kbd(C-u)}}} prefix, also apply the new formulas to the
+       entire table.
+
+       {{{kindex(C-x C-s)}}}
+       {{{kindex(C-c C-c)}}}
+       {{{findex(org-table-fedit-finish)}}}
+  - {{{kbd(C-c C-q)}}} ~org-table-fedit-abort~ :: Exit the formula
+       editor without installing changes.
+
+       {{{kindex(C-c C-q)}}}
+       {{{findex(org-table-fedit-abort)}}}
+  - {{{kbd(C-c C-r)}}} ~org-table-fedit-toggle-ref-type~ :: Toggle all
+       references in the formula editor between standard (like ~B3~)
+       and internal (like ~@3$2~).
+
+       {{{kindex(C-c C-r)}}}
+       {{{findex(org-table-fedit-toggle-ref-type)}}}
+  - {{{key(TAB)}}} ~org-table-fedit-lisp-indent~ :: Pretty-print or
+       indent Lisp formula at point.  When in a line containing a Lisp
+       formula, format the formula according to Emacs Lisp rules.
+       Another {{{key(TAB)}}} collapses the formula back again.  In
+       the open formula, {{{key(TAB)}}} re-indents just like in Emacs
+       Lisp mode.
+
+       {{{kindex(TAB)}}}
+       {{{findex(org-table-fedit-lisp-indent)}}}
+  - {{{kbdkey(M-,TAB)}}} ~lisp-complete-symbol~ :: Complete Lisp
+       symbols, just like in Emacs Lisp mode.
+
+       {{{kindex(M-TAB)}}}
+       {{{findex(lisp-complete-symbol)}}}
+  - {{{kbdkey(S-,up)}}}/{{{key(down)}}}/{{{key(left)}}}/{{{key(right)}}} :: Shift
+       the reference at point.  For example, if the reference is ~B3~
+       and you press {{{kbdkey(S-,right)}}}, it will become ~C3~.
+       This also works for relative references and for hline
+       references.
+
+       {{{kindex(S-up)}}}
+       {{{kindex(S-down)}}}
+       {{{kindex(S-left)}}}
+       {{{kindex(S-right)}}}
+       {{{findex(org-table-fedit-ref-up)}}}
+       {{{findex(org-table-fedit-ref-down)}}}
+       {{{findex(org-table-fedit-ref-left)}}}
+       {{{findex(org-table-fedit-ref-right)}}}
+  - {{{kbdkey(M-S-,up)}}} ~org-table-fedit-line-up~ ::
+       @@info:@itemx@@ {{{kbdkey(M-S-,down)}}} ~org-table-fedit-line-down~
+
+       Move the test line for column formulas in the Org buffer up and
+       down.
+
+       {{{kindex(M-S-down)}}}
+       {{{findex(org-table-fedit-line-down)}}}
+       {{{kindex(M-S-up)}}}
+       {{{findex(org-table-fedit-line-up)}}}
+
+  - {{{kbdkey(M-,up)}}} ~org-table-fedit-scroll-up~ ::
+       @@info:@itemx@@ {{{kbdkey(M-,down)}}} ~org-table-fedit-scroll-down~
+
+       Scroll the window displaying the table.
+
+       {{{kindex(M-up)}}}
+       {{{findex(org-table-fedit-scroll-up)}}}
+       {{{kindex(M-down)}}}
+       {{{findex(org-table-fedit-scroll-down)}}}
+  - {{{kbd(C-c @})}}} :: Turn the coordinate grid in the table on and
+       off.
+
+       {{{kindex(C-c @})}}}
+       {{{findex(org-table-toggle-coordinate-overlays)}}}
+
+Making a table field blank does not remove the formula associated with
+the field, because that is stored in a different line (the {{{samp(#+TBLFM)}}}
+line)---during the next recalculation the field will be filled again.
+To remove a formula from a field, you have to give an empty reply when
+prompted for the formula, or to edit the {{{samp(#+TBLFM)}}} line.
+
+{{{kindex(C-c C-c)}}}
+You may edit the {{{samp(#+TBLFM)}}} directly and re-apply the changed
+equations with {{{kbd(C-c C-c)}}} in that line or with the normal
+recalculation commands in the table.
+
+**** Debugging formulas
+
+{{{cindex(formula debugging)}}}
+{{{cindex(debugging\, of table formulas)}}}
+
+When the evaluation of a formula leads to an error, the field content
+becomes the string {{{samp(#ERROR)}}}. If you would like see what is
+going on during variable substitution and calculation in order to find
+a bug, turn on formula debugging in the ~Tbl~ menu and repeat the
+calculation, for example by pressing {{{kbdkey(C-u C-u C-c = ,RET)}}}
+in a field. Detailed information will be displayed.
+
+*** Updating the table    
+    :PROPERTIES:
+    :DESCRIPTION: Recomputing all dependent fields
+    :END:
+{{{cindex(recomputing table fields)}}}
+{{{cindex(updating\, table)}}}
+
+Recalculation of a table is normally not automatic, but needs to be
+triggered by a command.  call_ref{type="start",node="Advanced features"), for a way to make
+recalculation at least semi-automatic.
+
+In order to recalculate a line of a table or the entire table, use the
+following commands:
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+  - {{{kbd(C-c *)}}} ~org-table-recalculate~ :: Recalculate the
+       current row by first applying the stored column formulas from
+       left to right, and all field/range formulas in the current row.
+
+       {{{kindex(C-c *)}}}
+       {{{findex(org-table-recalculate)}}}
+  - {{{kbd(C-u C-c *)}}} or {{{kbd(C-u C-c C-c)}}} :: Recompute the
+       entire table, line by line.  Any lines before the first hline
+       are left alone, assuming that these are part of the table
+       header.
+
+       {{{kindex(C-u C-c *)}}}
+       {{{kindex(C-u C-c C-c)}}}
+  - {{{kbd(C-u C-u C-c *)}}} ~org-table-iterate~ ::
+       @@info:@itemx@@ {{{kbd(C-u C-u C-c C-c)}}}
+       
+       Iterate the table by recomputing it until no further changes
+       occur.  This may be necessary if some computed fields use the
+       value of other fields that are computed /later/ in the
+       calculation sequence.
+
+       {{{kindex(C-u C-u C-c *)}}}
+       {{{kindex(C-u C-u C-c C-c)}}}
+       {{{findex(org-table-iterate)}}}
+  - {{{kbd(M-x org-table-recalculate-buffer-tables)}}} :: Recompute
+       all tables in the current buffer.
+
+       {{{findex(org-table-recalculate-buffer-tables)}}}
+  - {{{kbd(M-x org-table-iterate-buffer-tables)}}} :: Iterate all
+       tables in the current buffer, in order to converge
+       table-to-table dependencies.
+
+       {{{findex(org-table-iterate-buffer-tables)}}}
+*** COMMENT Advanced features
+    :PROPERTIES:
+    :DESCRIPTION: Field and column names, parameters, and automatic recalc
+    :END:
+If you want the recalculation of fields to happen automatically, or if
+you want to be able to assign /names/ [fn:33] to fields and columns,
+you need to reserve the first column of the table for special marking
+characters.
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+  - {{{kbd(C-#)}}} ~org-table-rotate-recalc-marks~ :: Rotate the
+       calculation mark in first column through the states {{{samp(
+       )}}}, {{{samp(#)}}}, {{{samp(*)}}}, {{{samp(!)}}},
+       {{{samp($)}}}.  When there is an active region, change all
+       marks in the region.
+
+       {{{kindex(C-#)}}}
+       {{{findex(org-table-rotate-recalc-marks)}}}
+Here is an example of a table that collects exam results of students and
+makes use of these features:
+
+#+begin_src org
+  |---+---------+--------+--------+--------+-------+------|
+  |   | Student | Prob 1 | Prob 2 | Prob 3 | Total | Note |
+  |---+---------+--------+--------+--------+-------+------|
+  | ! |         |     P1 |     P2 |     P3 |   Tot |      |
+  | # | Maximum |     10 |     15 |     25 |    50 | 10.0 |
+  | ^ |         |     m1 |     m2 |     m3 |    mt |      |
+  |---+---------+--------+--------+--------+-------+------|
+  | # | Peter   |     10 |      8 |     23 |    41 |  8.2 |
+  | # | Sam     |      2 |      4 |      3 |     9 |  1.8 |
+  |---+---------+--------+--------+--------+-------+------|
+  |   | Average |        |        |        |  25.0 |      |
+  | ^ |         |        |        |        |    at |      |
+  | $ | max=50  |        |        |        |       |      |
+  |---+---------+--------+--------+--------+-------+------|
+  ,#+TBLFM: $6=vsum($P1..$P3)::$7=10*$Tot/$max;%.1f::$at=vmean(@@-II..@@-I);%.1f
+#+end_src
+
+{{{noindent}}} *Important*: please note that for these special tables,
+recalculating the table with {{{kbd(C-u C-c *)}}} will only affect
+rows that are marked {{{samp(#)}}} or {{{samp(*)}}}, and fields that
+have a formula assigned to the field itself.  The column formulas are
+not applied in rows with empty first field.
+
+{{{cindex(marking characters\, tables)}}}
+The marking characters have the following meaning:
+#+attr_texinfo: :table-type "table" :indic "@samp"
+  - ! :: The fields in this line define names for the columns, so that
+         you may refer to a column as {{{samp($Tot)}}} instead of
+         {{{samp($6)}}}.
+  - ^ :: This row defines names for the fields @emph{above} the row.
+         With such a definition, any formula in the table may use
+         {{{samp($m1)}}} to refer to the value {{{samp(10)}}}.  Also,
+         if you assign a formula to a names field, it will be stored
+         as {{{samp($name=...)}}}.
+  - _ :: Similar to {{{samp(^)}}}, but defines names for the fields in
+         the row /below/.
+  - $ :: Fields in this row can define /parameters/ for formulas.  For
+         example, if a field in a {{{samp($)}}} row contains
+         {{{samp(max=50)}}}, then formulas in this table can refer to
+         the value 50 using {{{samp($max)}}}.  Parameters work exactly
+         like constants, only that they can be defined on a per-table
+         basis.
+  - # :: Fields in this row are automatically recalculated when
+         pressing {{{key(TAB)}}} or {{{key(RET)}}} or
+         {{{kbdkey(S-,TAB)}}} in this row.  Also, this row is selected
+         for a global recalculation with {{{kbd(C-u C-c *)}}}.
+         Unmarked lines will be left alone by this command.
+  - * :: Selects this line for global recalculation with {{{kbd(C-u
+         C-c *)}}}, but not for automatic recalculation.  Use this
+         when automatic recalculation slows down editing too much.
+  - :: Unmarked lines are exempt from recalculation with {{{kbd(C-u
+       C-c *)}}}.  All lines that should be recalculated should be
+       marked with {{{samp(#)}}} or {{{samp(*)}}}.
+  - / :: Do not export this line.  Useful for lines that contain the
+         narrowing {{{samp(<N>)}}} markers or column group markers.
+
+
+Finally, just to whet your appetite for what can be done with the
+fantastic {{{file(calc.el)}}} package, here is a table that computes
+the Taylor series of degree ~n~ at location ~x~ for a couple of
+functions.
+
+#+begin_src org
+  |---+-------------+---+-----+--------------------------------------|
+  |   | Func        | n | x   | Result                               |
+  |---+-------------+---+-----+--------------------------------------|
+  | # | exp(x)      | 1 | x   | 1 + x                                |
+  | # | exp(x)      | 2 | x   | 1 + x + x^2 / 2                      |
+  | # | exp(x)      | 3 | x   | 1 + x + x^2 / 2 + x^3 / 6            |
+  | # | x^2+sqrt(x) | 2 | x=0 | x*(0.5 / 0) + x^2 (2 - 0.25 / 0) / 2 |
+  | # | x^2+sqrt(x) | 2 | x=1 | 2 + 2.5 x - 2.5 + 0.875 (x - 1)^2    |
+  | * | tan(x)      | 3 | x   | 0.0175 x + 1.77e-6 x^3               |
+  |---+-------------+---+-----+--------------------------------------|
+  ,#+TBLFM: $5=taylor($2,$4,$3);n3
+#+end_src
+
 ** Org-Plot
    :PROPERTIES:
    :DESCRIPTION: Plotting from Org tables
    :END:
+{{{cindex(graph\, in tables)}}}
+{{{cindex(plot tables using Gnuplot)}}}
+{{{cindex(#+PLOT)}}}
+
+Org-Plot can produce 2D and 3D graphs of information stored in org
+tables using [[http://www.gnuplot.info/][Gnuplot]] and [[http://cars9.uchicago.edu/~ravel/software/gnuplot-mode.html][gnuplot-mode]]. To see this in action, ensure
+that you have both Gnuplot and Gnuplot-mode installed on your system,
+then call ~org-plot/gnuplot~ on the following table.
+
+#+begin_src org
+  ,#+PLOT: title:"Citas" ind:1 deps:(3) type:2d with:histograms set:"yrange [0:]"
+  | Sede      | Max cites | H-index |
+  |-----------+-----------+---------|
+  | Chile     |    257.72 |   21.39 |
+  | Leeds     |    165.77 |   19.68 |
+  | Sao Paolo |     71.00 |   11.50 |
+  | Stockholm |    134.19 |   14.33 |
+  | Morels   |    257.56 |   17.67 |
+#+end_src
+
+Notice that Org Plot is smart enough to apply the table's headers as
+labels. Further control over the labels, type, content, and appearance
+of plots can be exercised through the ~#+PLOT:~ lines preceding a
+table. See below for a complete list of Org-plot options. For more
+information and examples see the [[http://orgmode.org/worg/org-tutorials/org-plot.html][Org-plot tutorial]].
+
+*** Plot Options
+
+#+attr_texinfo: :table-type "table" :indic "@code"
+  - set :: Specify any {{{command(gnuplot)}}} option to be set when
+           graphing.
+  - title :: Specify the title of the plot.
+  - ind :: Specify which column of the table to use as the ~x~ axis.
+  - deps :: Specify the columns to graph as a Lisp style list,
+            surrounded by parentheses and separated by spaces for
+            example ~dep:(3 4)~ to graph the third and fourth columns
+            (defaults to graphing all other columns aside from the
+            ~ind~ column).
+  - type :: Specify whether the plot will be ~2d~, ~3d~, or ~grid~.
+  - with :: Specify a ~with~ option to be inserted for every col being
+            plotted (e.g.: ~lines~, ~points~, ~boxes~, ~impulses~,
+            etc...).  Defaults to ~lines~.
+  - file :: If you want to plot to a file, specify
+            ~"@var{path/to/desired/output-file}"~.
+  - labels :: List of labels to be used for the ~deps~ (defaults to
+              the column headers if they exist).
+  - line :: Specify an entire line to be inserted in the Gnuplot
+            script.
+  - map :: When plotting ~3d~ or ~grid~ types, set this to ~t~ to
+           graph a flat mapping rather than a ~3d~ slope.
+  - timefmt ::  Specify format of Org mode timestamps as they will be
+                parsed by Gnuplot.  Defaults to
+                {{{samp(%Y-%m-%d-%H:%M:%S)}}}.
+  - script :: If you want total control, you can specify a script file
+              (place the file name between double-quotes) which will
+              be used to plot.  Before plotting, every instance of
+              ~$datafile~ in the specified script will be replaced
+              with the path to the generated data file.  Note: even if
+              you set this option, you may still want to specify the
+              plot type, as that can impact the content of the data
+              file.
+
 * Hyperlinks
   :PROPERTIES:
   :DESCRIPTION: Notes in context
+  :ORDERED:  t
   :END:
+{{{cindex(hyperlinks)}}}
+
+Like HTML, Org provides links inside a file, external links to
+other files, Usenet articles, emails, and much more.
+
 ** Link format
    :PROPERTIES:
    :DESCRIPTION: How links in Org are formatted
    :END:
+{{{cindex(link format)}}}
+{{{cindex(format\, of links)}}}
+
+Org will recognize plain URL-like links and activate them as clickable
+links.  The general link format, however, looks like this:
+
+#+begin_src org
+  [[link][description]] or  [[link]]
+#+end_src
+
+
+{{{noindent}}} Once a link in the buffer is complete (all brackets
+present), Org will change the display so that {{{samp(description)}}}
+is displayed instead of {{{samp([[link][description]])}}} and {{{samp(link)}}}
+is displayed instead of {{{samp([[link]])}}}.  Links will be highlighted
+in the face ~org-link~, which by default is an underlined face.  You
+can directly edit the visible part of a link.  Note that this can be
+either the {{{samp(link)}}} part (if there is no description) or the
+{{{samp(description)}}} part.  To edit also the invisible
+{{{samp(link)}}} part, use {{{kbd(C-c C-l)}}} with the cursor on the
+link.
+
+If you place the cursor at the beginning or just behind the end of the
+displayed text and press {{{key(BACKSPACE)}}}, you will remove the
+(invisible) bracket at that location.  This makes the link incomplete
+and the internals are again displayed as plain text.  Inserting the
+missing bracket hides the link internals again.  To show the internal
+structure of all links, use the menu entry ~Org->Hyperlinks->Literal
+links~.
+
 ** Internal links
    :PROPERTIES:
    :DESCRIPTION: Links to other places in the current file
    :END:
+{{{cindex(internal links)}}}
+{{{cindex(links\, internal)}}}
+{{{cindex(targets\, for links)}}}
+{{{cindex(property\, CUSTOM_ID)}}}
+
+If the link does not look like a URL, it is considered to be internal
+in the current file.  The most important case is a link like
+{{{samp([[#my-custom-id]])}}} which will link to the entry with the
+~CUSTOM_ID~ property {{{samp(my-custom-id)}}}.  Such custom IDs are
+very good for HTML export (see [[HTML export]]) where they produce pretty
+section links.  You are responsible yourself to make sure these custom
+IDs are unique in a file.
+
+Links such as {{{samp([[My Target]])}}} or {{{samp([[My Target][Find my target]])}}} lead
+to a text search in the current file.
+
+The link can be followed with {{{kbd(C-c C-o)}}} when the cursor is on
+the link, or with a mouse click (see [[Handling links]]).  Links to custom
+IDs will point to the corresponding headline.  The preferred match for
+a text link is a /dedicated target/: the same string in double angular
+brackets.  Targets may be located anywhere; sometimes it is convenient
+to put them into a comment line.  For example
+
+#+begin_src org
+  # <<My Target>>
+#+end_src
+
+{{{noindent}}} In HTML export (see [[HTML export]]), such targets will
+become named anchors for direct access through {{{samp(http)}}}
+links.[fn:36]
+
+If no dedicated target exists, Org will search for a headline that is
+exactly the link text but may also include a TODO keyword and
+tags.[fn:37] In non-Org files, the search will look for the words in
+the link text. In the above example the search would be for {{{samp(my
+target)}}}.
+
+Following a link pushes a mark onto Org's own mark ring.  You can
+return to the previous position with {{{kbd(C-c &)}}}.  Using this
+command several times in direct succession goes back to positions
+recorded earlier.
+
+*** Radio targets
+{{{cindex(radio targets)}}}
+{{{cindex(targets\, radio)}}}
+{{{cindex(links\, radio targets)}}}
+
+Org can automatically turn any occurrences of certain target names in
+normal text into a link.  So without explicitly creating a link, the
+text connects to the target radioing its position.  Radio targets are
+enclosed by triple angular brackets.  For example, a target
+{{{samp(<<<My Target>>>)}}} causes each occurrence of {{{samp(my
+target)}}} in normal text to become activated as a link.  The Org file
+is scanned automatically for radio targets only when the file is first
+loaded into Emacs.  To update the target list during editing, press
+{{{kbd(C-c C-c)}}} with the cursor on or at a target.
+
+** External links
+   :PROPERTIES:
+   :DESCRIPTION: URL-like links to the world
+   :END:
+{{{cindex(links\, external)}}}
+{{{cindex(external links)}}}
+{{{cindex(links\, external)}}}
+{{{cindex(Gnus links)}}}
+{{{cindex(BBDB links)}}}
+{{{cindex(IRC links)}}}
+{{{cindex(URL links)}}}
+{{{cindex(file links)}}}
+{{{cindex(VM links)}}}
+{{{cindex(RMAIL links)}}}
+{{{cindex(WANDERLUST links)}}}
+{{{cindex(MH-E links)}}}
+{{{cindex(USENET links)}}}
+{{{cindex(SHELL links)}}}
+{{{cindex(Info links)}}}
+{{{cindex(Elisp links)}}}
+
+Org supports links to files, websites, Usenet and email messages, BBDB
+database entries and links to both IRC conversations and their logs.
+External links are URL-like locators.  They start with a short
+identifying string followed by a colon.  There can be no space after
+the colon.  The following list shows examples for each link type.
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+ - http://www.astro.uva.nl/~dominik          :: on the web
+ - doi:10.1000/182                           :: DOI for an electronic resource
+ - file:/home/dominik/images/jupiter.jpg     :: file, absolute path
+ - /home/dominik/images/jupiter.jpg          :: same as above
+ - file:papers/last.pdf                      :: file, relative path
+ - ./papers/last.pdf                         :: same as above
+ - file:/myself@@some.where:papers/last.pdf  :: file, path on remote machine
+ - /myself@@some.where:papers/last.pdf       :: same as above
+ - file:sometextfile::NNN                    :: file, jump to line number
+ - file:projects.org                         :: another Org file
+ - file:projects.org::some words             :: text search in Org file[fn:38]
+ - file:projects.org::*task title            :: heading search in Org file
+ - file+sys:/path/to/file                    :: open via OS, like double-click
+ - file+emacs:/path/to/file                  :: force opening by Emacs
+ - docview:papers/last.pdf::NNN              :: open in doc-view mode at page
+ - id:B7423F4D-2E8A-471B-8810-C40F074717E9   :: Link to heading by ID
+ - news:comp.emacs                           :: Usenet link
+ - mailto:adent@@galaxy.net                  :: Mail link
+ - vm:folder                                 :: VM folder link
+ - vm:folder#id                              :: VM message link
+ - vm://myself@@some.where.org/folder#id     :: VM on remote machine
+ - vm-imap:account:folder                    :: VM IMAP folder link
+ - vm-imap:account:folder#id                 :: VM IMAP message link
+ - wl:folder                                 :: WANDERLUST folder link
+ - wl:folder#id                              :: WANDERLUST message link
+ - mhe:folder                                :: MH-E folder link
+ - mhe:folder#id                             :: MH-E message link
+ - rmail:folder                              :: RMAIL folder link
+ - rmail:folder#id                           :: RMAIL message link
+ - gnus:group                                :: Gnus group link
+ - gnus:group#id                             :: Gnus article link
+ - bbdb:R.*Stallman                          :: BBDB link (with regexp)
+ - irc:/irc.com/#emacs/bob                   :: IRC link
+ - info:org#External links                   :: Info node link
+ - shell:ls *.org                            :: A shell command
+ - elisp:org-agenda                          :: Interactive Elisp command
+ - elisp:(find-file-other-frame "Elisp.org") :: Elisp form to evaluate
+
+
+For customizing Org to add new link types [[Adding hyperlink types]].
+
+A link should be enclosed in double brackets and may contain a
+descriptive text to be displayed instead of the URL (see [[Link format]]),
+for example:
+
+#+begin_src org
+  [[http://www.gnu.org/software/emacs/][GNU Emacs]]
+#+end_src
+
+{{{noindent}}} If the description is a file name or URL that points to
+an image, HTML export (see [[HTML export]]) will inline the image as a
+clickable button.  If there is no description at all and the link
+points to an image, that image will be inlined into the exported HTML
+file.
+
+{{{cindex(square brackets\, around links)}}}
+{{{cindex(plain text external links)}}}
+
+Org also finds external links in the normal text and activates them as
+links.  If spaces must be part of the link (for example in
+{{{samp(bbdb:Richard Stallman)}}}), or if you need to remove
+ambiguities about the end of the link, enclose them in square
+brackets.
+
 ** Handling links
    :PROPERTIES:
    :DESCRIPTION: URL-like links to the world
    :END:
+{{{cindex(links\, handling)}}}
+
+Org provides methods to create a link in the correct syntax, to
+insert it into an Org file, and to follow the link.
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+  - {{{kbd(C-c l)}}} ~org-store-link~ :: Store a link to the current
+       location.  This is a /global/ command (you must create the key
+       binding yourself) which can be used in any buffer to create a
+       link.  The link will be stored for later insertion into an Org
+       buffer (see below).  What kind of link will be created depends
+       on the current buffer:
+
+       {{{cindex(storing links)}}}
+       {{{kindex(C-c l)}}}
+       {{{findex(org-store-link)}}}
+    - Org mode buffers :: For Org files, if there is a
+         {{{samp(<<target>>)}}} at the cursor, the link points to the
+         target.  Otherwise it points to the current headline, which
+         will also be the description.[fn:39]
+
+         {{{vindex(org-link-to-org-use-id)}}}
+         {{{cindex(property\, CUSTOM_ID)}}}
+         {{{cindex(property\, ID)}}}
+
+         If the headline has a ~CUSTOM_ID~ property, a link to this
+         custom ID will be stored.  In addition or alternatively
+         (depending on the value of ~org-link-to-org-use-id~), a
+         globally unique ~ID~ property will be created and/or used to
+         construct a link.  So using this command in Org buffers will
+         potentially create two links: a human-readable from the
+         custom ID, and one that is globally unique and works even if
+         the entry is moved from file to file.  Later, when inserting
+         the link, you need to decide which one to use.
+
+    - Email/News clients: VM, Rmail, Wanderlust, MH-E, Gnus :: Pretty
+         much all Emacs mail clients are supported.  The link will
+         point to the current article, or, in some GNUS buffers, to
+         the group.  The description is constructed from the author
+         and the subject.
+
+    - Web browsers: W3 and W3M :: Here the link will be the current
+         URL, with the page title as description.
+
+    - Contacts: BBDB :: Links created in a BBDB buffer will point to
+                        the current entry.
+    - Chat: IRC :: For IRC links, if you set the variable
+                   ~org-irc-link-to-logs~ to ~t~, a {{{samp(file:/)}}}
+                   style link to the relevant point in the logs for
+                   the current conversation is created. Otherwise an
+                   {{{samp(irc:/)}}} style link to the
+                   user/channel/server under the point will be stored.
+
+                   {{{vindex(org-irc-link-to-logs)}}}
+                   
+    - Other files :: For any other files, the link will point to the
+                     file, with a search string (see [[Search options]])
+                     pointing to the contents of the current line. If
+                     there is an active region, the selected words
+                     will form the basis of the search string. If the
+                     automatically created link is not working
+                     correctly or accurately enough, you can write
+                     custom functions to select the search string and
+                     to do the search for particular file types---see
+                     [[Custom searches]]. The key binding {{{kbd(C-c l)}}}
+                     is only a suggestion---see
+                     {{{ref(Installation)}}}.
+
+    - Agenda view :: When the cursor is in an agenda view, the created
+                     link points to the entry referenced by the
+                     current line.
+
+  - {{{kbd(C-c C-l)}}} ~org-insert-link~ :: Insert a link.[fn:40] This
+       prompts for a link to be inserted into the buffer. You can just
+       type a link, using text for an internal link, or one of the
+       link type prefixes mentioned in the examples above. The link
+       will be inserted into the buffer,[fn:41] along with a
+       descriptive text. If some text was selected when this command
+       is called, the selected text becomes the default description.
+
+       {{{cindex(link completion)}}} 
+       {{{cindex(completion\, of links)}}}
+       {{{cindex(inserting links)}}}
+       {{{vindex(org-keep-stored-link-after-insertion)}}}
+       {{{kindex(C-c C-l)}}}
+       {{{findex(org-insert-link)}}}
+    - Inserting stored links :: All links stored during the current
+         session are part of the history for this prompt, so you can
+         access them with {{{key(up)}}} and {{{key(down)}}} (or
+         {{{kbd(M-p/n)}}}).
+
+    - Completion support :: Completion with {{{key(TAB)}}} will help
+         you to insert valid link prefixes like {{{samp(http:)}}} or
+         {{{samp(ftp:)}}}, including the prefixes defined through link
+         abbreviations (see [[Link abbreviations]]). If you press
+         {{{key(RET)}}} after inserting only the
+         @@info:@var{prefix}@@, Org will offer specific completion
+         support for some link types.[fn:42] For example, if you type
+         {{{kbdkey(file ,RET)}}}, file name completion (alternative
+         access: {{{kbd(C-u C-c C-l)}}}, see below) will be offered,
+         and after {{{kbdkey(bbdb ,RET)}}} you can complete contact
+         names.
+
+  - {{{kbd(C-u C-c C-l)}}} :: When {{{kbd(C-c C-l)}}} is called with a
+       {{{kbd(C-u)}}} prefix argument, a link to a file will be
+       inserted and you may use file name completion to select the
+       name of the file. The path to the file is inserted relative to
+       the directory of the current Org file, if the linked file is in
+       the current directory or in a sub-directory of it, or if the
+       path is written relative to the current directory using
+       {{{samp(../)}}}. Otherwise an absolute path is used, if
+       possible with {{{samp(~/)}}} for your home directory. You can
+       force an absolute path with two {{{kbd(C-u)}}} prefixes.
+
+       {{{cindex(file name completion)}}} 
+       {{{cindex(completion\, of file names)}}} 
+       {{{kindex(C-u C-c C-l)}}}
+
+  - {{{kbd(C-c C-l)}}} (with cursor on existing link) :: When the
+       cursor is on an existing link, {{{kbd(C-c C-l)}}} allows you to
+       edit the link and description parts of the link.
+
+       {{{cindex(following links)}}} 
+
+    - {{{kbd(C-c C-o)}}} ~org-open-at-point~ :: Open link at
+         point. This will launch a web browser for URLs (using
+         {{{command(browse-url-at-point)}}}), run
+         VM/MH-E/Wanderlust/Rmail/Gnus/BBDB for the corresponding
+         links, and execute the command in a shell link.  When the
+         cursor is on an internal link, this command runs the
+         corresponding search. When the cursor is on a TAG list in a
+         headline, it creates the corresponding TAGS view. If the
+         cursor is on a timestamp, it compiles the agenda for that
+         date. Furthermore, it will visit text and remote files in
+         {{{samp(file:)}}} links with Emacs and select a suitable
+         application for local non-text files. Classification of files
+         is based on file extension only. See option ~org-file-apps~.
+         If you want to override the default application and visit the
+         file with Emacs, use a {{{kbd(C-u)}}} prefix. If you want to
+         avoid opening in Emacs, use a {{{kbd(C-u C-u)}}} prefix. If
+         the cursor is on a headline, but not on a link, offer all
+         links in the headline and entry text. If you want to setup
+         the frame configuration for following links, customize
+         ~org-link-frame-setup~.
+
+         {{{vindex(org-file-apps)}}}
+         {{{vindex(org-link-frame-setup)}}} 
+         {{{kindex(C-c C-o)}}}
+         {{{findex(org-open-at-point)}}}
+    - {{{key(RET)}}} :: When ~org-return-follows-link~ is set,
+                        {{{key(RET)}}} will also follow the link at
+                        point.
+
+                        {{{vindex(org-return-follows-link)}}}
+                        {{{kindex(RET)}}}
+    - {{{key(mouse-2)}}} or {{{key(mouse-1)}}} :: On links,
+         {{{kbd(mouse-2)}}} will open the link just as {{{kbd(C-c
+         C-o)}}} would. Under Emacs 22 and later, {{{kbd(mouse-1)}}}
+         will also follow a link.
+
+         {{{kindex(mouse-2)}}}
+         {{{kindex(mouse-1)}}}
+    - {{{key(mouse-3)}}} :: Like {{{kbd(mouse-2)}}}, but force file
+         links to be opened with Emacs, and internal links to be
+         displayed in another window.[fn:43]
+
+         {{{vindex(org-display-internal-link-with-indirect-buffer)}}}
+         {{{kindex(mouse-3)}}}
+    - {{{kbd(C-c C-x C-v)}}} ~org-toggle-inline-images~ ::
+         {{{cindex(inlining images)}}}
+         {{{cindex(images\, inlining)}}}
+         {{{vindex(org-startup-with-inline-images)}}}
+         {{{cindex(~inlineimages~\, STARTUP keyword)}}}
+         {{{cindex(~noinlineimages~\, STARTUP keyword)}}}
+         {{{kindex(C-c C-x C-v)}}}
+         {{{findex(org-toggle-inline-images)}}}
+
+         Toggle the inline display of linked images.  Normally this
+         will only inline images that have no description part in the
+         link, i.e., images that will also be inlined during export.
+         When called with a prefix argument, also display images that
+         do have a link description.  You can ask for inline images to
+         be displayed at startup by configuring the variable
+         ~org-startup-with-inline-images~.[fn:44]
+
+    - {{{kbd(C-c %)}}} ~org-mark-ring-push~ ::
+         {{{kindex(C-c %)}}}
+         {{{findex(org-mark-ring-push)}}}
+         {{{cindex(mark ring)}}}
+
+         Push the current position onto the mark ring, to be able to
+         return easily. Commands following an internal link do this
+         automatically.
+
+    - {{{kbd(C-c &)}}} ~org-mark-ring-goto~ ::
+         {{{kindex(C-c &)}}}
+         {{{findex(org-mark-ring-goto)}}}
+         {{{cindex(links\, returning to)}}}
+
+         Jump back to a recorded position. A position is recorded by
+         the commands following internal links, and by {{{kbd(C-c
+         %)}}}. Using this command several times in direct succession
+         moves through a ring of previously recorded positions.
+
+  - {{{kbd(C-c C-x C-n)}}} ~org-next-link~ ::
+       @@info:@itemx@@ {{{kbd(C-c C-x C-p)}}} ~org-previous-link~
+       {{{cindex(links\, finding next/previous)}}}
+       
+       {{{kindex(C-c C-x C-p)}}}
+       {{{findex(org-previous-link)}}}
+       {{{kindex(C-c C-x C-n)}}}
+       {{{findex(org-next-link)}}}
+
+       Move forward/backward to the next link in the buffer. At the
+       limit of the buffer, the search fails once, and then wraps
+       around. The key bindings for this are really too long; you
+       might want to bind this also to {{{kbd(C-n)}}} and
+       {{{kbd(C-p)}}}
+
+       #+header: :exports code
+       #+begin_src emacs-lisp
+         (add-hook 'org-load-hook
+                   (lambda ()
+                     (define-key org-mode-map "\C-n" 'org-next-link)
+                     (define-key org-mode-map "\C-p" 'org-previous-link)))
+       #+end_src
+
 ** Using links outside Org
    :PROPERTIES:
    :DESCRIPTION: Linking from my C source code?
    :END:
+
+You can insert and follow links that have Org syntax not only in Org,
+but in any Emacs buffer.  For this, you should create two global
+commands, like this (please select suitable global keys yourself):
+
+#+begin_src emacs-lisp
+  (global-set-key "\C-c L" 'org-insert-link-global)
+  (global-set-key "\C-c o" 'org-open-at-point-global)
+#+end_src
+
 ** Link abbreviations
    :PROPERTIES:
    :DESCRIPTION: Shortcuts for writing complex links
    :END:
+{{{cindex(link abbreviations)}}}
+{{{cindex(abbreviation\, links)}}}
+
+Long URLs can be cumbersome to type, and often many similar links are
+needed in a document.  For this you can use link abbreviations.  An
+abbreviated link looks like this
+
+#+begin_src org
+[[linkword:tag][description]]
+#+end_src
+
+{{{vindex(org-link-abbrev-alist)}}}
+
+{{{noindent}}} where the tag is optional.  The /linkword/ must be a
+word, starting with a letter, followed by letters, numbers,
+{{{samp(-)}}}, and {{{samp(_)}}}.  Abbreviations are resolved
+according to the information in the variable ~org-link-abbrev-alist~
+that relates the linkwords to replacement text.  Here is an example:
+
+#+begin_src emacs-lisp
+  (setq org-link-abbrev-alist
+    '(("bugzilla"  . "http://10.1.2.9/bugzilla/show_bug.cgi?id=")
+      ("url-to-ja" . "http://translate.google.fr/translate?sl=en&tl=ja&u=%h")
+      ("google"    . "http://www.google.com/search?q=")
+      ("gmap"      . "http://maps.google.com/maps?q=%s")
+      ("omap"      . "http://nominatim.openstreetmap.org/search?q=%s&polygon=1")
+      ("ads"       . "http://adsabs.harvard.edu/cgi-bin/nph-abs_connect?author=%s&db_key=AST")))
+#+end_src
+
+If the replacement text contains the string {{{samp(%s)}}}, it will be
+replaced with the tag.  Using {{{samp(%h)}}} instead of {{{samp(%s)}}}
+will url-encode the tag (see the example above, where we need to
+encode the URL parameter.)  Using {{{samp(%(my-function))}}} will pass
+the tag to a custom function, and replace it by the resulting string.
+
+If the replacement text don't contain any specifier, it will simply be
+appended to the string in order to create the link.
+
+Instead of a string, you may also specify a function that will be
+called with the tag as the only argument to create the link.
+
+With the above setting, you could link to a specific bug with
+~[[bugzilla:129]]~, search the web for {{{samp(OrgMode)}}} with
+~[[google:OrgMode]]~, show the map location of the Free Software
+Foundation ~[[gmap:51 Franklin Street, Boston]]~ or of Carsten office
+~[[omap:Science Park 904, Amsterdam, The Netherlands]]~ and find out what
+the Org author is doing besides Emacs hacking with ~[[ads:Dominik,C]]~.
+
+If you need special abbreviations just for a single Org buffer, you
+can define them in the file with
+
+{{{cindex(#+LINK)}}}
+#+begin_src org
+  ,#+LINK: bugzilla  http://10.1.2.9/bugzilla/show_bug.cgi?id=
+  ,#+LINK: google    http://www.google.com/search?q=%s
+#+end_src
+
+{{{noindent}}} In-buffer completion (see [[Completion]]) can be used after
+{{{samp([)}}} to complete link abbreviations.  You may also define a
+function ~org-PREFIX-complete-link~ that implements special (e.g.:
+completion) support for inserting such a link with {{{kbd(C-c C-l)}}}.
+Such a function should not accept any arguments, and return the full
+link with prefix.
+
 ** Search options
    :PROPERTIES:
    :DESCRIPTION: Linking to a specific location
    :END:
+{{{cindex(search option in file links)}}}
+{{{cindex(file links\, searching)}}}
+
+File links can contain additional information to make Emacs jump to a
+particular location in the file when following a link.  This can be a
+line number or a search option after a double@footnote{For backward
+compatibility, line numbers can also follow a single colon.} colon.
+For example, when the command {{{kbd(C-c l)}}} creates a link (see
+[[Handling links]]) to a file, it encodes the words in the current line as
+a search string that can be used to find this line back later when
+following the link with {{{kbd(C-c C-o)}}}.
+
+Here is the syntax of the different ways to attach a search to a file
+link, together with an explanation:
+
+#+begin_src org
+  [[file:~/code/main.c::255]]
+  [[file:~/xx.org::My Target]]
+  [[file:~/xx.org::*My Target]]
+  [[file:~/xx.org::#my-custom-id]]
+  [[file:~/xx.org::/regexp/]]
+#+end_src
+
+#+attr_texinfo: :indic "@code"
+- @item 255 :: Jump to line 255.
+- @item My Target :: Search for a link target {{{samp(<<My
+     Target>>)}}}, or do a text search for {{{samp(my target)}}},
+     similar to the search in internal links, see [[Internal links]].
+     In HTML export (see [[HTML export]]), such a file link will
+     become a HTML reference to the corresponding named anchor in the
+     linked file.
+- @item *My Target :: In an Org file, restrict search to headlines.
+- @item #my-custom-id :: Link to a heading with a ~CUSTOM_ID~ property
+- @item /regexp/ :: Do a regular expression search for ~regexp~.  This
+                    uses the Emacs command ~occur~ to list all matches
+                    in a separate window.  If the target file is in
+                    Org mode, ~org-occur~ is used to create a sparse
+                    tree with the matches. @c If the target file is a
+                    directory, @c ~grep~ will be used to search all
+                    files in the directory.
+
+As a degenerate case, a file link with an empty file name can be used
+to search the current file.  For example, ~[[file:::find me]]~ does a
+search for {{{samp(find me)}}} in the current file, just as
+{{{samp([[find me]])}}} would.
+
 ** Custom searches
    :PROPERTIES:
    :DESCRIPTION: When the default search is not enough
    :END:
+{{{cindex(custom search strings)}}}
+{{{cindex(search strings\, custom)}}}
+
+The default mechanism for creating search strings and for doing the
+actual search related to a file link may not work correctly in all
+cases.  For example, {{{bibtex}}} database files have many entries
+like {{{samp(year="1993")}}} which would not result in good search
+strings, because the only unique identification for a {{{bibtex}}}
+entry is the citation key.
+
+{{{vindex(org-create-file-search-functions)}}}
+{{{vindex(org-execute-file-search-functions)}}}
+
+If you come across such a problem, you can write custom functions to
+set the right search string for a particular file type, and to do the
+search for the string in the file.  Using ~add-hook~, these functions
+need to be added to the hook variables
+~org-create-file-search-functions~ and
+~org-execute-file-search-functions~.  See the docstring for these
+variables for more information.  Org actually uses this mechanism for
+{{{bibtex}}} database files, and you can use the corresponding code as
+an implementation example.  See the file {{{file(org-bibtex.el)}}}.
+
 * TODO items
   :PROPERTIES:
   :DESCRIPTION: Every tree branch can be a TODO item
   :TEXINFO_MENU_TITLE: TODO Items
   :END:
-Test
 ** TODO basics
    :PROPERTIES:
    :DESCRIPTION: Marking and displaying TODO entries
    :END:
-** =TODO= extensions
+** TODO extensions
    :PROPERTIES:
    :DESCRIPTION: Work flow and assignments
    :END:
