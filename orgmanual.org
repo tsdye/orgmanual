@@ -4269,72 +4269,7 @@ Perhaps shorten to "All the rest"
    (sh . t)))
 (add-to-list 'org-export-snippet-translation-alist
              '("info" . "e-texinfo"))
-<<index-macros>>
-<<simple-command-macros>>
-<<two-arg-org-command-macros>>
-<<emphasis-replace>>
-<<roman-replace>>
 #+end_src
-
-*** Texi -> Org helpers
-#+name: roman-replace
-#+header: :results silent
-#+header: :eval no-export
-#+begin_src emacs-lisp
-(defun tsd-roman-replace ()
-  "Replace roman commands"
-  (interactive)
-  (query-replace-regexp "@r{\([^}]*\)}" "\\1" nil))
-(define-key org-mode-map (kbd "C-c r") 'tsd-roman-replace)
-#+end_src
-
-
-#+name: emphasis-replace
-#+header: :results silent
-#+header: :eval no-export
-#+begin_src emacs-lisp
-(defun tsd-emphasis-replace ()
-  "Replace various emphasis commands with //"
-  (interactive)
-  (progn 
-  (query-replace-regexp "@i{\([^}]*\)}" "/\\1/" nil)
-  (query-replace-regexp "@emph{\([^}]*\)}" "/\\1/" nil)))
-(define-key org-mode-map (kbd "C-c E") 'tsd-emphasis-replace)
-#+end_src
-
-#+name: index-macros
-#+header: :results silent
-#+header: :eval no-export
-#+begin_src emacs-lisp
-(defun tsd-index-macros ()
-  "Make macros out of the various texinfo index commands"
-  (interactive)
-  (query-replace-regexp "@\\([c|v|k|p|f]\\)index \\(.*\\)$" "{{{\\1index(\\2)}}}" nil))
-(define-key org-mode-map (kbd "C-c i") 'tsd-index-macros)
-#+end_src
-
-#+name: simple-command-macros
-#+header: :results silent
-#+header: :eval no-export
-#+begin_src emacs-lisp
-(defun tsd-simple-command-macros ()
-  "Make macros out of simple @ commands"
-  (interactive)
-  (query-replace-regexp "@\\([command|tsubheading|pxref|samp|code|file|key|kbd]+\\){\\([^}]*\\)}" "{{{\\1(\\2)}}}" nil))
-(define-key org-mode-map (kbd "C-c s") 'tsd-simple-command-macros)
-#+end_src
-
-#+name: two-arg-org-command-macros
-#+header: :results silent
-#+header: :eval no-export
-#+begin_src emacs-lisp
-(defun tsd-two-arg-orgcmd-macros ()
-  "Make macros out of two argument org* commands"
-  (interactive)
-  (query-replace-regexp "@\\([x]*orgcmd[nki]*\\){\\([^,]*\\),\\(.*\\)}" "{{{\\1(\\2,\\3)}}}" nil))
-(define-key org-mode-map (kbd "C-c o") 'tsd-two-arg-orgcmd-macros)
-#+end_src
-
 
 ** init.el file
 This source code block requires paths to your Org mode installation.
