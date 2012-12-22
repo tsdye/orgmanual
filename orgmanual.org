@@ -88,26 +88,26 @@ printing and sharing of notes, an Org file can be exported as a
 structured ASCII file, as HTML, or as an iCalendar file.[fn:4] It can
 also serve as a publishing tool for a set of linked web pages.
 
-As a project planning environment, Org works by adding metadata to outline
-nodes.  Based on this data, specific entries can be extracted in queries and
-create dynamic /agenda views/.
+As a project planning environment, Org works by adding metadata to
+outline nodes. Based on this data, specific entries can be extracted
+in queries and create dynamic /agenda views/.
 
-Org mode contains the Org Babel environment which allows you to work with
-embedded source code blocks in a file, to facilitate code evaluation,
-documentation, and literate programming techniques.
+Org mode contains the Org Babel environment which allows you to work
+with embedded source code blocks in a file, to facilitate code
+evaluation, documentation, and literate programming techniques.
 
 Org's automatic, context-sensitive table editor with spreadsheet
 capabilities can be integrated into any major mode by activating the
-minor Orgtbl mode.  Using a translation step, it can be used to maintain
-tables in arbitrary file types, for example in LaTeX.  The structure
-editing and list creation capabilities can be used outside Org with
-the minor Orgstruct mode.
+minor Orgtbl mode. Using a translation step, it can be used to
+maintain tables in arbitrary file types, for example in LaTeX. The
+structure editing and list creation capabilities can be used outside
+Org with the minor Orgstruct mode.
 
-Org keeps simple things simple.  When first fired up, it should
-feel like a straightforward, easy to use outliner.  Complexity is not
-imposed, but a large amount of functionality is available when you need
-it.  Org is a toolbox and can be used in different ways and for different
-ends, for example:
+Org keeps simple things simple. When first fired up, it should feel
+like a straightforward, easy to use outliner. Complexity is not
+imposed, but a large amount of functionality is available when you
+need it. Org is a toolbox and can be used in different ways and for
+different ends, for example:
 
   - an outline extension with visibility cycling and structure editing
   - an ASCII system and table editor for taking structured notes
@@ -119,14 +119,16 @@ ends, for example:
   - a publishing tool to create a set of interlinked web pages
   - an environment for literate programming
 
-{{{cindex(FAQ)}}}
-There is a [[http://orgmode.org][website for Org]] that provides links to the newest
-version of Org, as well as additional information, frequently asked
-questions (FAQ), links to tutorials, etc.
+{{{cindex(FAQ)}}} 
+
+There is a [[http://orgmode.org][website for Org]] that provides links to the newest version
+of Org, as well as additional information, frequently asked questions
+(FAQ), links to tutorials, etc.
 
 {{{cindex(print edition)}}} 
-Version 7.3 of this manual is available
-as a [[http://www.network-theory.co.uk/org/manual/][paperback book from Network Theory Ltd.]].
+
+Version 7.3 of this manual is available as a [[http://www.network-theory.co.uk/org/manual/][paperback book from
+Network Theory Ltd.]]
 
 @@info:@page@@
 
@@ -142,8 +144,7 @@ as a [[http://www.network-theory.co.uk/org/manual/][paperback book from Network 
 as a XEmacs package, please skip this section and go directly to
 [[Activation]]. If you downloaded Org as an ELPA package, please read the
 instructions on the [[http://orgmode.org/elpa.html][Org ELPA page]]. To see what version of Org (if any)
-is part of your Emacs distribution, type {{{kbd(M-x
-org-version)}}}.[fn:2]
+is part of your Emacs distribution, type {{{kbd(M-x org-version)}}}.[fn:2]
 
 Installation of Org mode uses a build system, which is described in more
 detail on [[http://orgmode.org/worg/dev/org-build-system.html][Worg]].
@@ -151,18 +152,22 @@ detail on [[http://orgmode.org/worg/dev/org-build-system.html][Worg]].
 If you have downloaded Org from the Web as a distribution {{{file(.zip)}}} or
 {{{file(.tar.gz)}}} archive, take the following steps to install it:
 
-  - Unpack the distribution archive.
-  - Change into (~cd~) the Org directory.
+  - Unpack the distribution archive
+  - Change into (~cd~) the Org directory
   - Run ~make help config~ and then check and edit the file
     {{{file(local.mk)}}} if the default configuration does not match
-    your system. Set the name of the Emacs binary (likely either
-    {{{file(emacs)}}} or {{{file(xemacs)}}}), and the paths to the
-    directories where local Lisp and Info files will be installed. If
-    the Emacs binary is not in your path, give the full path to the
-    executable. Avoid spaces in any path names.
-  - Run ~make config~ again to check the configuration.
+    your system
+
+    - Set the name of the Emacs binary (likely either
+      {{{file(emacs)}}} or {{{file(xemacs)}}}), and the paths to the
+      directories where local Lisp and Info files will be installed
+    - If the Emacs binary is not in your path, give the full path to
+      the executable
+    - Avoid spaces in any path names
+
+  - Run ~make config~ again to check the configuration
   - Run ~make install~ or ~sudo make install~ to build and install Org
-    mode on your system.
+    mode on your system
 
 If you use a cloned Git repository, then the procedure is slightly
 different. The following description assumes that you are using the
@@ -170,36 +175,36 @@ different. The following description assumes that you are using the
 where the release versions are published, just replace ~master~ with
 ~maint~ in the description below.
 
-
-  - Change into (~cd~) the Org repository.
+  - Change into (~cd~) the Org repository
   - Run ~git checkout master~ to switch to the ~master~ branch of the
-    Org repository.
-  - Run ~make help~ and then check and edit the file
-    {{{file(local.mk)}}}. You must set the name of the Emacs binary
-    (likely either {{{file(emacs)}}} or {{{file(xemacs)}}}), and the
-    paths to the directories where local Lisp and Info files will be
-    installed. If the Emacs binary is not in your path, you must give
-    the full path to the executable. Avoid spaces in any path names.
-  - Run ~make config~ to check the configuration.
+    Org repository
+  - Run ~make help~ and then check and edit the file {{{file(local.mk)}}}
+
+    - You must set the name of the Emacs binary
+      (likely either {{{file(emacs)}}} or {{{file(xemacs)}}}), and the
+      paths to the directories where local Lisp and Info files will be
+      installed
+    - If the Emacs binary is not in your path, you must give
+      the full path to the executable
+    - Avoid spaces in any path names
+
+  - Run ~make config~ to check the configuration
   - Optionally run ~make test~ to build Org mode and then run the full
-    test suite.
+    test suite
   - Run ~make update2~ or ~make up2~ to update the Git repository and
     build and install Org mode. The latter invocation runs the
     complete test suite before installation and installs only if the
-    build passes all tests.
-
+    build passes all tests
 
 If you don't have access to the system-wide directories and you don't
 want to install somewhere into your home directory, you can run Org
 directly from the distribution directory or Org repository by
 compiling Org mode in place:
 
-
-  - Change into (~cd~) the Org repository.
+  - Change into (~cd~) the Org repository
   - Run ~git checkout master~ to switch to the ~master~ branch of the
-    Org repository.
+    Org repository
   - Run ~make compile~
-
 
 Last but not least you can also run Org mode directly from an Org repository
 without any compilation.  Simply replace the last step in the recipe above
@@ -213,7 +218,7 @@ Then add the following line to {{{file(.emacs)}}}:
 #+end_src
 
 {{{noindent}}}
-If you plan to use code from the {{{file(contrib)}}} subdirectory without
+If you plan to use code files from the {{{file(contrib)}}} subdirectory without
 compiling them, do a similar step for this directory:
 
 #+header: :exports code
@@ -223,7 +228,7 @@ compiling them, do a similar step for this directory:
 
 If you want to include those files with the build and install, please
 customize the variable ~ORG_ADD_CONTRIB~ instead in your
-~local.mk~ file, for more details please see this
+~local.mk~ file. For more details please see this
 [[http://orgmode.org/worg/dev/org-build-system.html#sec-4-1-2][description on Worg]].
 
 Installing Info files is system dependent, because of differences in
@@ -284,7 +289,7 @@ liking.
 #+end_src
 
 {{{cindex(Org mode\\\, turning on)}}} 
-With this setup, all files with extension {{samp(.org)}}} will be put
+With this setup, all files with extension {{{samp(.org)}}} will be put
 into Org mode.  As an alternative, make the first line of a file look
 like this:
 
@@ -3844,12 +3849,12 @@ license to the document, as described in section 6 of the license.
 
 [fn:1] The output from install-info (if any) is system dependent. In
 particular, Debian and its derivatives use two different versions of
-install-info. You may see the message:
-#+begin_example
+install-info. You may safely ignore the message:
+#+begin_src example
   This is not dpkg install-info anymore, but GNU install-info
   See the man page for ginstall-info for command line arguments
-#+end_example
-{{{noindent}}} which can be safely ignored.
+#+end_src
+
 
 [fn:2]  If your Emacs distribution does not come with Org,
 the function ~org-version~ will not be defined.
@@ -4261,7 +4266,6 @@ Perhaps shorten to "All the rest"
 (setq org-pretty-entities nil)
 (setq org-src-preserve-indentation t)
 (setq org-confirm-babel-evaluate nil)
-(setq org-footnote-section "Footnotes to export")
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
