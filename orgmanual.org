@@ -4260,9 +4260,9 @@ support for tags.
 
 {{{vindex(org-tag-faces)}}}
 Every headline can contain a list of tags; they occur at the end of the
-headline.  Tags are normal words containing letters, numbers, @samp{_}, and
-@samp{@@}.  Tags must be preceded and followed by a single colon, e.g.,
-@samp{:work:}.  Several tags can be specified, as in @samp{:work:urgent:}.
+headline.  Tags are normal words containing letters, numbers, {{{samp(_)}}}, and
+{{{samp(@@)}}}.  Tags must be preceded and followed by a single colon, e.g.,
+{{{samp(:work:)}}}.  Several tags can be specified, as in {{{samp(:work:urgent:)}}}.
 Tags will by default be in bold face with the same color as the headline.
 You may specify special faces for specific tags using the variable
 @code{org-tag-faces}, in much the same way as you can for TODO keywords
@@ -4287,8 +4287,8 @@ well.  For example, in the list
 @end example
 
 @noindent
-the final heading will have the tags @samp{:work:}, @samp{:boss:},
-@samp{:notes:}, and @samp{:action:} even though the final heading is not
+the final heading will have the tags {{{samp(:work:)}}}, {{{samp(:boss:)}}},
+{{{samp(:notes:)}}}, and {{{samp(:action:)}}} even though the final heading is not
 explicitly marked with those tags.  You can also set tags that all entries in
 a file should inherit just as if these tags were defined in a hypothetical
 level zero that surrounds the entire file.  Use a line like this@footnote{As
@@ -4382,7 +4382,7 @@ deselect tags with just a single key press.  For this to work well you should
 assign unique letters to most of your commonly used tags.  You can do this
 globally by configuring the variable @code{org-tag-alist} in your
 @file{.emacs} file.  For example, you may find the need to tag many items in
-different files with @samp{:@@home:}.  In this case you can set something
+different files with {{{samp(:@@home:)}}}.  In this case you can set something
 like:
 
 @lisp
@@ -4398,7 +4398,7 @@ can instead set the TAGS option line as:
 
 @noindent The tags interface will show the available tags in a splash
 window.  If you want to start a new line after a specific tag, insert
-@samp{\n} into the tag list
+{{{samp(\n)}}} into the tag list
 
 @example
 #+TAGS: @@work(w)  @@home(h)  @@tennisclub(t) \n laptop(l)  pc(p)
@@ -4419,8 +4419,8 @@ braces, as in:
 #+TAGS: @{ @@work(w)  @@home(h)  @@tennisclub(t) @}  laptop(l)  pc(p)
 @end example
 
-@noindent you indicate that at most one of @samp{@@work}, @samp{@@home},
-and @samp{@@tennisclub} should be selected.  Multiple such groups are allowed.
+@noindent you indicate that at most one of {{{samp(@@work)}}}, {{{samp(@@home)}}},
+and {{{samp(@@tennisclub)}}} should be selected.  Multiple such groups are allowed.
 
 @noindent Don't forget to press @kbd{C-c C-c} with the cursor in one of
 these lines to activate any changes.
@@ -4479,12 +4479,12 @@ selection window.
 
 @noindent
 This method lets you assign tags to a headline with very few keys.  With
-the above setup, you could clear the current tags and set @samp{@@home},
-@samp{laptop} and @samp{pc} tags with just the following keys: @kbd{C-c
-C-c @key{SPC} h l p @key{RET}}.  Switching from @samp{@@home} to
-@samp{@@work} would be done with @kbd{C-c C-c w @key{RET}} or
+the above setup, you could clear the current tags and set {{{samp(@@home)}}},
+{{{samp(laptop)}}} and {{{samp(pc)}}} tags with just the following keys: @kbd{C-c
+C-c @key{SPC} h l p @key{RET}}.  Switching from {{{samp(@@home)}}} to
+{{{samp(@@work)}}} would be done with @kbd{C-c C-c w @key{RET}} or
 alternatively with @kbd{C-c C-c C-c w}.  Adding the non-predefined tag
-@samp{Sarah} could be done with @kbd{C-c C-c @key{TAB} S a r a h
+{{{samp(Sarah)}}} could be done with @kbd{C-c C-c @key{TAB} S a r a h
 @key{RET} @key{RET}}.
 
 {{{vindex(org-fast-tag-selection-single-key)}}}
@@ -4524,9 +4524,9 @@ only TODO items and force checking subitems (see variable
 @end table
 
 These commands all prompt for a match string which allows basic Boolean logic
-like @samp{+boss+urgent-project1}, to find entries with tags @samp{boss} and
-@samp{urgent}, but not @samp{project1}, or @samp{Kathy|Sally} to find entries
-which are tagged, like @samp{Kathy} or @samp{Sally}.  The full syntax of the search
+like {{{samp(+boss+urgent-project1)}}}, to find entries with tags {{{samp(boss)}}} and
+{{{samp(urgent)}}}, but not {{{samp(project1)}}}, or {{{samp(Kathy|Sally)}}} to find entries
+which are tagged, like {{{samp(Kathy)}}} or {{{samp(Sally)}}}.  The full syntax of the search
 string is rich and allows also matching against TODO keywords, entry levels
 and properties.  For a complete description with many examples, see
 @ref{Matching tags and properties}.
@@ -4585,8 +4585,8 @@ Depending on the value of @code{org-use-property-inheritance}, a property set
 this way will either be associated with a single entry, or the sub-tree
 defined by the entry, see @ref{Property inheritance}.
 
-You may define the allowed values for a particular property @samp{:Xyz:}
-by setting a property @samp{:Xyz_ALL:}.  This special property is
+You may define the allowed values for a particular property {{{samp(:Xyz:)}}}
+by setting a property {{{samp(:Xyz_ALL:)}}}.  This special property is
 @emph{inherited}, so if you set it in a level 1 entry, it will apply to
 the entire tree.  When allowed values are defined, setting the
 corresponding property becomes easier and is less prone to typing
@@ -4784,7 +4784,7 @@ useful, you can turn it on by setting the variable
 @code{org-use-property-inheritance}.  It may be set to @code{t} to make
 all properties inherited from the parent, to a list of properties
 that should be inherited, or to a regular expression that matches
-inherited properties.  If a property has the value @samp{nil}, this is
+inherited properties.  If a property has the value {{{samp(nil)}}}, this is
 interpreted as an explicit undefine of the property, so that inheritance
 search will stop at this value and return @code{nil}.
 
@@ -4898,12 +4898,12 @@ optional.  The individual parts have the following meaning:
                 @r{parent nodes are computed from the children.}
                 @r{Supported summary types are:}
                 @{+@}       @r{Sum numbers in this column.}
-                @{+;%.1f@}  @r{Like @samp{+}, but format result with @samp{%.1f}.}
-                @{$@}       @r{Currency, short for @samp{+;%.2f}.}
+                @{+;%.1f@}  @r{Like {{{samp(+)}}}, but format result with {{{samp(%.1f)}}}.}
+                @{$@}       @r{Currency, short for {{{samp(+;%.2f)}}}.}
                 @{:@}       @r{Sum times, HH:MM, plain numbers are hours.}
-                @{X@}       @r{Checkbox status, @samp{[X]} if all children are @samp{[X]}.}
-                @{X/@}      @r{Checkbox status, @samp{[n/m]}.}
-                @{X%@}      @r{Checkbox status, @samp{[n%]}.}
+                @{X@}       @r{Checkbox status, {{{samp([X])}}} if all children are {{{samp([X])}}}.}
+                @{X/@}      @r{Checkbox status, {{{samp([n/m])}}}.}
+                @{X%@}      @r{Checkbox status, {{{samp([n%])}}}.}
                 @{min@}     @r{Smallest number in column.}
                 @{max@}     @r{Largest number.}
                 @{mean@}    @r{Arithmetic mean of numbers.}
@@ -4949,19 +4949,19 @@ values.
 @end example
 
 @noindent
-The first column, @samp{%25ITEM}, means the first 25 characters of the
+The first column, {{{samp(%25ITEM)}}}, means the first 25 characters of the
 item itself, i.e.@: of the headline.  You probably always should start the
-column definition with the @samp{ITEM} specifier.  The other specifiers
-create columns @samp{Owner} with a list of names as allowed values, for
-@samp{Status} with four different possible values, and for a checkbox
-field @samp{Approved}.  When no width is given after the @samp{%}
+column definition with the {{{samp(ITEM)}}} specifier.  The other specifiers
+create columns {{{samp(Owner)}}} with a list of names as allowed values, for
+{{{samp(Status)}}} with four different possible values, and for a checkbox
+field {{{samp(Approved)}}}.  When no width is given after the {{{samp(%)}}}
 character, the column will be exactly as wide as it needs to be in order
-to fully display all values.  The @samp{Approved} column does have a
-modified title (@samp{Approved?}, with a question mark).  Summaries will
-be created for the @samp{Time_Estimate} column by adding time duration
-expressions like HH:MM, and for the @samp{Approved} column, by providing
-an @samp{[X]} status if all children have been checked.  The
-@samp{CLOCKSUM} and @samp{CLOCKSUM_T} columns are special, they lists the
+to fully display all values.  The {{{samp(Approved)}}} column does have a
+modified title ({{{samp(Approved?)}}}, with a question mark).  Summaries will
+be created for the {{{samp(Time_Estimate)}}} column by adding time duration
+expressions like HH:MM, and for the {{{samp(Approved)}}} column, by providing
+an {{{samp([X])}}} status if all children have been checked.  The
+{{{samp(CLOCKSUM)}}} and {{{samp(CLOCKSUM_T)}}} columns are special, they lists the
 sums of CLOCK intervals in the subtree, either for all clocks or just for
 today.
 
@@ -5147,11 +5147,11 @@ is used in a much wider sense.
 {{{cindex(scheduling)}}}
 
 A timestamp is a specification of a date (possibly with a time or a range of
-times) in a special format, either @samp{<2003-09-16 Tue>}@footnote{In this
+times) in a special format, either {{{samp(<2003-09-16 Tue>)}}}@footnote{In this
 simplest form, the day name is optional when you type the date yourself.
 However, any dates inserted or modified by Org will add that day name, for
-reading convenience.} or @samp{<2003-09-16 Tue 09:39>} or @samp{<2003-09-16
-Tue 12:00-12:30>}@footnote{This is inspired by the standard ISO 8601
+reading convenience.} or {{{samp(<2003-09-16 Tue 09:39>)}}} or {{{samp(<2003-09-16
+Tue 12:00-12:30>)}}}@footnote{This is inspired by the standard ISO 8601
 date/time format.  To use an alternative format, see @ref{Custom time
 format}.}.  A timestamp can appear anywhere in the headline or body of an Org
 tree entry.  Its presence causes entries to be shown on specific dates in the
@@ -5209,7 +5209,7 @@ example with optional time
 @item Time/Date range
 {{{cindex(timerange)}}}
 {{{cindex(date range)}}}
-Two timestamps connected by @samp{--} denote a range.  The headline
+Two timestamps connected by {{{samp(--)}}} denote a range.  The headline
 will be shown on the first and last day of the range, and on any dates
 that are displayed and fall in the range.  Here is an example:
 
@@ -5282,7 +5282,7 @@ shift-selection and related modes (@pxref{Conflicts}).
 @orgcmdkkcc{S-@key{up},S-@key{down},org-timestamp-up,org-timestamp-down-down}
 Change the item under the cursor in a timestamp.  The cursor can be on a
 year, month, day, hour or minute.  When the timestamp contains a time range
-like @samp{15:30-16:30}, modifying the first time will also shift the second,
+like {{{samp(15:30-16:30)}}}, modifying the first time will also shift the second,
 shifting the time block with constant length.  To change the length, modify
 the second time.  Note that if the cursor is in a headline and not at a
 timestamp, these same keys modify the priority of an item.
@@ -5319,7 +5319,7 @@ date in the future: if you omit the month/year and the given day/month is
 variable @code{org-read-date-prefer-future}.  You may set that variable to
 the symbol @code{time} to even make a time before now shift the date to
 tomorrow.}.  If the date has been automatically shifted into the future, the
-time prompt will show this with @samp{(=>F).}
+time prompt will show this with {{{samp((=>F).)}}}
 
 For example, let's assume that today is @b{June 13, 2006}.  Here is how
 various inputs will be interpreted, the items filled in by Org mode are
@@ -5551,15 +5551,15 @@ sexp entry matches.
     :TITLE:    Inserting deadlines or schedules
     :END:
 
-The following commands allow you to quickly insert@footnote{The @samp{SCHEDULED} and
-@samp{DEADLINE} dates are inserted on the line right below the headline.  Don't put
+The following commands allow you to quickly insert@footnote{The {{{samp(SCHEDULED)}}} and
+{{{samp(DEADLINE)}}} dates are inserted on the line right below the headline.  Don't put
 any text between this line and the headline.} a deadline or to schedule
 an item:
 
 @table @kbd
 @c
 @orgcmd{C-c C-d,org-deadline}
-Insert @samp{DEADLINE} keyword along with a stamp.  The insertion will happen
+Insert {{{samp(DEADLINE)}}} keyword along with a stamp.  The insertion will happen
 in the line directly following the headline.  Any CLOSED timestamp will be
 removed.  When called with a prefix arg, an existing deadline will be removed
 from the entry.  Depending on the variable @code{org-log-redeadline}@footnote{with corresponding
@@ -5568,7 +5568,7 @@ and @code{nologredeadline}}, a note will be taken when changing an existing
 deadline.
 
 @orgcmd{C-c C-s,org-schedule}
-Insert @samp{SCHEDULED} keyword along with a stamp.  The insertion will
+Insert {{{samp(SCHEDULED)}}} keyword along with a stamp.  The insertion will
 happen in the line directly following the headline.  Any CLOSED timestamp
 will be removed.  When called with a prefix argument, remove the scheduling
 date from the entry.  Depending on the variable
@@ -5660,7 +5660,7 @@ As a consequence of shifting the base date, this entry will no longer be
 visible in the agenda when checking past dates, but all future instances
 will be visible.
 
-With the @samp{+1m} cookie, the date shift will always be exactly one
+With the {{{samp(+1m)}}} cookie, the date shift will always be exactly one
 month.  So if you have not paid the rent for three months, marking this
 entry DONE will still keep it as an overdue deadline.  Depending on the
 task, this may not be the best way to handle it.  For example, if you
@@ -5668,7 +5668,7 @@ forgot to call your father for 3 weeks, it does not make sense to call
 him 3 times in a single day to make up for it.  Finally, there are tasks
 like changing batteries which should always repeat a certain time
 /after/ the last time you did it.  For these tasks, Org mode has
-special repeaters  @samp{++} and @samp{.+}.  For example:
+special repeaters  {{{samp(++)}}} and {{{samp(.+)}}}.  For example:
 
 @example
 ** TODO Call Father
@@ -5765,8 +5765,8 @@ mode line entry will pop up a menu with clocking options.
 {{{vindex(org-log-note-clock-out)}}}
 Stop the clock (clock-out).  This inserts another timestamp at the same
 location where the clock was last started.  It also directly computes
-the resulting time in inserts it after the time range as @samp{=>
-HH:MM}.  See the variable @code{org-log-note-clock-out} for the
+the resulting time in inserts it after the time range as {{{samp(=>
+HH:MM)}}}.  See the variable @code{org-log-note-clock-out} for the
 possibility to record an additional note together with the clock-out
 timestamp@footnote{The corresponding in-buffer setting is:
 @code{#+STARTUP: lognoteclock-out}}.
@@ -5862,7 +5862,7 @@ buffer with the @kbd{C-c C-x C-r} command:
 @end example
 @noindent
 {{{vindex(org-clocktable-defaults)}}}
-The @samp{BEGIN} line and specify a number of options to define the scope,
+The {{{samp(BEGIN)}}} line and specify a number of options to define the scope,
 structure, and formatting of the report.  Defaults for all these options can
 be configured in the variable @code{org-clocktable-defaults}.
 
@@ -5912,7 +5912,7 @@ but you can specify your own function using the @code{:formatter} parameter.
 :lang        @r{Language@footnote{Language terms can be set through the variable @code{org-clock-clocktable-language-setup}.} to use for descriptive cells like "Task".}
 :link        @r{Link the item headlines in the table to their origins.}
 :narrow      @r{An integer to limit the width of the headline column in}
-             @r{the org table.  If you write it like @samp{50!}, then the}
+             @r{the org table.  If you write it like {{{samp(50!)}}}, then the}
              @r{headline will also be shortened in export.}
 :indent      @r{Indent each headline field according to its level.}
 :tcolumns    @r{Number of columns to be used for times.  If this is smaller}
@@ -5926,7 +5926,7 @@ but you can specify your own function using the @code{:formatter} parameter.
              @r{property will get its own column.}
 :inherit-props @r{When this flag is @code{t}, the values for @code{:properties} will be inherited.}
 :formula     @r{Content of a @code{#+TBLFM} line to be added and evaluated.}
-             @r{As a special case, @samp{:formula %} adds a column with % time.}
+             @r{As a special case, {{{samp(:formula %)}}} adds a column with % time.}
              @r{If you do not specify a formula here, any existing formula}
              @r{below the clock table will survive updates and be evaluated.}
 :formatter   @r{A function to format clock data and insert it into the buffer.}
@@ -6056,7 +6056,7 @@ produce offers with quotations of the estimated work effort, you may want to
 assign effort estimates to entries.  If you are also clocking your work, you
 may later want to compare the planned effort with the actual working time, a
 great way to improve planning estimates.  Effort estimates are stored in a
-special property @samp{Effort}@footnote{You may change the property being
+special property {{{samp(Effort)}}}@footnote{You may change the property being
 used with the variable @code{org-effort-property}.}.  You can set the effort
 for an entry with the following commands:
 
@@ -6298,7 +6298,7 @@ Customize the variable @code{org-capture-templates}.
 
 Before we give the formal description of template definitions, let's look at
 an example.  Say you would like to use one template to create general TODO
-entries, and you want to put these entries under the heading @samp{Tasks} in
+entries, and you want to put these entries under the heading {{{samp(Tasks)}}} in
 your file @file{~/org/gtd.org}.  Also, a date tree in the file
 @file{journal.org} should capture journal entries.  A possible configuration
 would look like:
@@ -6699,7 +6699,7 @@ information.  Here is just an example:
 @noindent
 will configure that new items from the feed provided by
 @code{rss.slashdot.org} will result in new entries in the file
-@file{~/org/feeds.org} under the heading @samp{Slashdot Entries}, whenever
+@file{~/org/feeds.org} under the heading {{{samp(Slashdot Entries)}}}, whenever
 the following command is used:
 
 @table @kbd
@@ -6711,9 +6711,9 @@ them.
 Prompt for a feed name and go to the inbox configured for this feed.
 @end table
 
-Under the same headline, Org will create a drawer @samp{FEEDSTATUS} in which
+Under the same headline, Org will create a drawer {{{samp(FEEDSTATUS)}}} in which
 it will store information about the status of items in the feed, to avoid
-adding the same item several times.  You should add @samp{FEEDSTATUS} to the
+adding the same item several times.  You should add {{{samp(FEEDSTATUS)}}} to the
 list of drawers in that file:
 
 @example
@@ -6931,7 +6931,7 @@ level 1 trees will be checked.
 Cycle a tree even if it is tagged with ARCHIVE.
 @orgcmd{C-c C-x A,org-archive-to-archive-sibling}
 Move the current entry to the @emph{Archive Sibling}.  This is a sibling of
-the entry with the heading @samp{Archive} and the tag @samp{ARCHIVE}.  The
+the entry with the heading {{{samp(Archive)}}} and the tag {{{samp(ARCHIVE)}}}.  The
 entry becomes a child of that sibling and in this way retains a lot of its
 original context, including inherited tags and approximate position in the
 outline.
@@ -7244,9 +7244,9 @@ following to one of your agenda files:
 You can then go ahead and define anniversaries for a BBDB record.  Basically,
 you need to press @kbd{C-o anniversary @key{RET}} with the cursor in a BBDB
 record and then add the date in the format @code{YYYY-MM-DD} or @code{MM-DD},
-followed by a space and the class of the anniversary (@samp{birthday} or
-@samp{wedding}, or a format string).  If you omit the class, it will default to
-@samp{birthday}.  Here are a few examples, the header for the file
+followed by a space and the class of the anniversary ({{{samp(birthday)}}} or
+{{{samp(wedding)}}}, or a format string).  If you omit the class, it will default to
+{{{samp(birthday)}}}.  Here are a few examples, the header for the file
 @file{org-bbdb.el} contains more detailed information.
 
 @example
@@ -7259,7 +7259,7 @@ followed by a space and the class of the anniversary (@samp{birthday} or
 After a change to BBDB, or for the first agenda display during an Emacs
 session, the agenda display will suffer a short delay as Org updates its
 hash with anniversaries.  However, from then on things will be very fast---much
-faster in fact than a long list of @samp{%%(diary-anniversary)} entries
+faster in fact than a long list of {{{samp(%%(diary-anniversary))}}} entries
 in an Org or Diary file.
 
 @subsubheading Appointment reminders
@@ -7300,7 +7300,7 @@ entries directly from that buffer (@pxref{Agenda commands}).
 Like the above, but allows selection of a specific TODO keyword.  You can
 also do this by specifying a prefix argument to @kbd{C-c a t}.  You are
 prompted for a keyword, and you may also specify several keywords by
-separating them with @samp{|} as the boolean OR operator.  With a numeric
+separating them with {{{samp(|)}}} as the boolean OR operator.  With a numeric
 prefix, the Nth keyword in @code{org-todo-keywords} is selected.
 {{{kindex(r)}}}
 The @kbd{r} key in the agenda buffer regenerates it, and you can give
@@ -7360,8 +7360,8 @@ m}.
 @orgcmd{C-c a m,org-tags-view}
 Produce a list of all headlines that match a given set of tags.  The
 command prompts for a selection criterion, which is a boolean logic
-expression with tags, like @samp{+work+urgent-withboss} or
-@samp{work|home} (@pxref{Tags}).  If you often need a specific search,
+expression with tags, like {{{samp(+work+urgent-withboss)}}} or
+{{{samp(work|home)}}} (@pxref{Tags}).  If you often need a specific search,
 define a custom command for it (@pxref{Agenda dispatcher}).
 @orgcmd{C-c a M,org-tags-view}
 {{{vindex(org-tags-match-list-sublevels)}}}
@@ -7381,31 +7381,31 @@ commands}.
 @subsubheading Match syntax
 
 {{{cindex(Boolean logic\\\, for tag/property searches)}}}
-A search string can use Boolean operators @samp{&} for AND and @samp{|} for
-OR.  @samp{&} binds more strongly than @samp{|}.  Parentheses are currently
+A search string can use Boolean operators {{{samp(&)}}} for AND and {{{samp(|)}}} for
+OR.  {{{samp(&)}}} binds more strongly than {{{samp(|)}}}.  Parentheses are currently
 not implemented.  Each element in the search is either a tag, a regular
 expression matching tags, or an expression like @code{PROPERTY OPERATOR
 VALUE} with a comparison operator, accessing a property value.  Each element
-may be preceded by @samp{-}, to select against it, and @samp{+} is syntactic
-sugar for positive selection.  The AND operator @samp{&} is optional when
-@samp{+} or @samp{-} is present.  Here are some examples, using only tags.
+may be preceded by {{{samp(-)}}}, to select against it, and {{{samp(+)}}} is syntactic
+sugar for positive selection.  The AND operator {{{samp(&)}}} is optional when
+{{{samp(+)}}} or {{{samp(-)}}} is present.  Here are some examples, using only tags.
 
 @table @samp
 @item +work-boss
-Select headlines tagged @samp{:work:}, but discard those also tagged
-@samp{:boss:}.
+Select headlines tagged {{{samp(:work:)}}}, but discard those also tagged
+{{{samp(:boss:)}}}.
 @item work|laptop
-Selects lines tagged @samp{:work:} or @samp{:laptop:}.
+Selects lines tagged {{{samp(:work:)}}} or {{{samp(:laptop:)}}}.
 @item work|laptop+night
-Like before, but require the @samp{:laptop:} lines to be tagged also
-@samp{:night:}.
+Like before, but require the {{{samp(:laptop:)}}} lines to be tagged also
+{{{samp(:night:)}}}.
 @end table
 
 {{{cindex(regular expressions\\\, with tags search)}}}
 Instead of a tag, you may also specify a regular expression enclosed in curly
 braces.  For example,
-@samp{work+@{^boss.*@}} matches headlines that contain the tag
-@samp{:work:} and any tag /starting/ with @samp{boss}.
+{{{samp(work+@{^boss.*@)}}}} matches headlines that contain the tag
+{{{samp(:work:)}}} and any tag /starting/ with {{{samp(boss)}}}.
 
 {{{cindex(TODO keyword matching\\\, with tags search)}}}
 {{{cindex(level\\\, require for tags/property match)}}}
@@ -7416,10 +7416,10 @@ time as matching tags.  The properties may be real properties, or special
 properties that represent other metadata (@pxref{Special properties}).  For
 example, the ``property'' @code{TODO} represents the TODO keyword of the
 entry.  Or, the ``property'' @code{LEVEL} represents the level of an entry.
-So a search @samp{+LEVEL=3+boss-TODO="DONE"} lists all level three headlines
-that have the tag @samp{boss} and are @emph{not} marked with the TODO keyword
-DONE.  In buffers with @code{org-odd-levels-only} set, @samp{LEVEL} does not
-count the number of stars, but @samp{LEVEL=2} will correspond to 3 stars etc.
+So a search {{{samp(+LEVEL=3+boss-TODO="DONE")}}} lists all level three headlines
+that have the tag {{{samp(boss)}}} and are @emph{not} marked with the TODO keyword
+DONE.  In buffers with @code{org-odd-levels-only} set, {{{samp(LEVEL)}}} does not
+count the number of stars, but {{{samp(LEVEL=2)}}} will correspond to 3 stars etc.
 The ITEM special property cannot currently be used in tags/property
 searches@footnote{But @pxref{x-agenda-skip-entry-regexp,
 ,skipping entries based on regexp}.}.
@@ -7427,8 +7427,8 @@ searches@footnote{But @pxref{x-agenda-skip-entry-regexp,
 Here are more examples:
 @table @samp
 @item work+TODO="WAITING"
-Select @samp{:work:}-tagged TODO lines with the specific TODO
-keyword @samp{WAITING}.
+Select {{{samp(:work:)}}}-tagged TODO lines with the specific TODO
+keyword {{{samp(WAITING)}}}.
 @item work+TODO="WAITING"|home+TODO="WAITING"
 Waiting tasks both at work and at home.
 @end table
@@ -7446,14 +7446,14 @@ The type of comparison will depend on how the comparison value is written:
 @itemize @minus
 @item
 If the comparison value is a plain number, a numerical comparison is done,
-and the allowed operators are @samp{<}, @samp{=}, @samp{>}, @samp{<=},
-@samp{>=}, and @samp{<>}.
+and the allowed operators are {{{samp(<)}}}, {{{samp(=)}}}, {{{samp(>)}}}, {{{samp(<=)}}},
+{{{samp(>=)}}}, and {{{samp(<>)}}}.
 @item
 If the comparison value is enclosed in double-quotes,
 a string comparison is done, and the same operators are allowed.
 @item
 If the comparison value is enclosed in double-quotes @emph{and} angular
-brackets (like @samp{DEADLINE<="<2008-12-24 18:30>"}), both values are
+brackets (like {{{samp(DEADLINE<="<2008-12-24 18:30>")}}}), both values are
 assumed to be date/time specifications in the standard Org way, and the
 comparison will be done accordingly.  Special values that will be recognized
 are @code{"<now>"} for now (including time), and @code{"<today>"}, and
@@ -7463,16 +7463,16 @@ specification.  Also strings like @code{"<+5d>"} or @code{"<-2m>"} with units
 respectively, can be used.
 @item
 If the comparison value is enclosed
-in curly braces, a regexp match is performed, with @samp{=} meaning that the
-regexp matches the property value, and @samp{<>} meaning that it does not
+in curly braces, a regexp match is performed, with {{{samp(=)}}} meaning that the
+regexp matches the property value, and {{{samp(<>)}}} meaning that it does not
 match.
 @end itemize
 
-So the search string in the example finds entries tagged @samp{:work:} but
-not @samp{:boss:}, which also have a priority value @samp{A}, a
-@samp{:Coffee:} property with the value @samp{unlimited}, an @samp{Effort}
-property that is numerically smaller than 2, a @samp{:With:} property that is
-matched by the regular expression @samp{Sarah\|Denny}, and that are scheduled
+So the search string in the example finds entries tagged {{{samp(:work:)}}} but
+not {{{samp(:boss:)}}}, which also have a priority value {{{samp(A)}}}, a
+{{{samp(:Coffee:)}}} property with the value {{{samp(unlimited)}}}, an {{{samp(Effort)}}}
+property that is numerically smaller than 2, a {{{samp(:With:)}}} property that is
+matched by the regular expression {{{samp(Sarah\|Denny)}}}, and that are scheduled
 on or after October 11, 2008.
 
 Accessing TODO, LEVEL, and CATEGORY during a search is fast.  Accessing any
@@ -7487,25 +7487,25 @@ inheritance}, for details.
 For backward compatibility, and also for typing speed, there is also a
 different way to test TODO states in a search.  For this, terminate the
 tags/property part of the search string (which may include several terms
-connected with @samp{|}) with a @samp{/} and then specify a Boolean
+connected with {{{samp(|)}}}) with a {{{samp(/)}}} and then specify a Boolean
 expression just for TODO keywords.  The syntax is then similar to that for
 tags, but should be applied with care: for example, a positive selection on
 several TODO keywords cannot meaningfully be combined with boolean AND.
 However, @emph{negative selection} combined with AND can be meaningful.  To
 make sure that only lines are checked that actually have any TODO keyword
 (resulting in a speed-up), use @kbd{C-c a M}, or equivalently start the TODO
-part after the slash with @samp{!}.  Using @kbd{C-c a M} or @samp{/!} will
+part after the slash with {{{samp(!)}}}.  Using @kbd{C-c a M} or {{{samp(/!)}}} will
 not match TODO keywords in a DONE state.  Examples:
 
 @table @samp
 @item work/WAITING
-Same as @samp{work+TODO="WAITING"}
+Same as {{{samp(work+TODO="WAITING")}}}
 @item work/!-WAITING-NEXT
-Select @samp{:work:}-tagged TODO lines that are neither @samp{WAITING}
-nor @samp{NEXT}
+Select {{{samp(:work:)}}}-tagged TODO lines that are neither {{{samp(WAITING)}}}
+nor {{{samp(NEXT)}}}
 @item work/!+WAITING|+NEXT
-Select @samp{:work:}-tagged TODO lines that are either @samp{WAITING} or
-@samp{NEXT}.
+Select {{{samp(:work:)}}}-tagged TODO lines that are either {{{samp(WAITING)}}} or
+{{{samp(NEXT)}}}.
 @end table
 
 *** Timeline
@@ -7548,16 +7548,16 @@ It is particularly useful to find notes.
 This is a special search that lets you select entries by matching a substring
 or specific words using a boolean logic.
 @end table
-For example, the search string @samp{computer equipment} will find entries
-that contain @samp{computer equipment} as a substring.  If the two words are
+For example, the search string {{{samp(computer equipment)}}} will find entries
+that contain {{{samp(computer equipment)}}} as a substring.  If the two words are
 separated by more space or a line break, the search will still match.
 Search view can also search for specific keywords in the entry, using Boolean
-logic.  The search string @samp{+computer +wifi -ethernet -@{8\.11[bg]@}}
+logic.  The search string {{{samp(+computer +wifi -ethernet -@{8\.11[bg]@)}}}}
 will search for note entries that contain the keywords @code{computer}
 and @code{wifi}, but not the keyword @code{ethernet}, and which are also
 not matched by the regular expression @code{8\.11[bg]}, meaning to
-exclude both 8.11b and 8.11g.  The first @samp{+} is necessary to turn on
-word search, other @samp{+} characters are optional.  For more details, see
+exclude both 8.11b and 8.11g.  The first {{{samp(+)}}} is necessary to turn on
+word search, other {{{samp(+)}}} characters are optional.  For more details, see
 the docstring of the command @code{org-search-view}.
 
 {{{vindex(org-agenda-text-search-extra-files)}}}
@@ -7601,7 +7601,7 @@ is a next action even without the NEXT tag.  Finally, if the project
 contains the special word IGNORE anywhere, it should not be listed
 either.  In this case you would start by identifying eligible projects
 with a tags/todo match@footnote{@xref{Tag searches}.}
-@samp{+PROJECT/-MAYBE-DONE}, and then check for TODO, NEXT, @@SHOP, and
+{{{samp(+PROJECT/-MAYBE-DONE)}}}, and then check for TODO, NEXT, @@SHOP, and
 IGNORE in the subtree to identify projects that are not stuck.  The
 correct customization for this is
 
@@ -7676,13 +7676,13 @@ You can set up icons for category by customizing the
 
 Org mode checks each agenda item for a time-of-day specification.  The
 time can be part of the timestamp that triggered inclusion into the
-agenda, for example as in @w{@samp{<2005-05-10 Tue 19:00>}}.  Time
+agenda, for example as in @w{{{{samp(<2005-05-10 Tue 19:00>)}}}}.  Time
 ranges can be specified with two timestamps, like
 @c
-@w{@samp{<2005-05-10 Tue 20:30>--<2005-05-10 Tue 22:15>}}.
+@w{{{{samp(<2005-05-10 Tue 20:30>--<2005-05-10 Tue 22:15>)}}}}.
 
 In the headline of the entry itself, a time(range) may also appear as
-plain text (like @samp{12:45} or a @samp{8:30-1pm}).  If the agenda
+plain text (like {{{samp(12:45)}}} or a {{{samp(8:30-1pm)}}}).  If the agenda
 integrates the Emacs diary (@pxref{Weekly/daily agenda}), time
 specifications in diary entries are recognized as well.
 
@@ -7738,8 +7738,8 @@ time-of-day specification.  These entries will be shown at the beginning
 of the list, as a @emph{schedule} for the day.  After that, items remain
 grouped in categories, in the sequence given by @code{org-agenda-files}.
 Within each category, items are sorted by priority (@pxref{Priorities}),
-which is composed of the base priority (2000 for priority @samp{A}, 1000
-for @samp{B}, and 0 for @samp{C}), plus additional increments for
+which is composed of the base priority (2000 for priority {{{samp(A)}}}, 1000
+for {{{samp(B)}}}, and 0 for {{{samp(C)}}}), plus additional increments for
 overdue scheduled or deadline items.
 @item
 For the TODO list, items remain in the order of categories, but within
@@ -8048,7 +8048,7 @@ the effort criterion.  You can achieve the same effect by pressing @kbd{+} or
 @item @r{in} search view
 add new search words (@kbd{[} and @kbd{]}) or new regular expressions
 (@kbd{@{} and @kbd{@}}) to the query string.  The opening bracket/brace will
-add a positive search term prefixed by @samp{+}, indicating that this search
+add a positive search term prefixed by {{{samp(+)}}}, indicating that this search
 term /must/ occur/match in the entry.  The closing bracket/brace will add a
 negative search term which /must not/ occur/match in the entry for it to be
 selected.
@@ -8221,7 +8221,7 @@ t  @r{Change TODO state.  This prompts for a single TODO keyword and}
 -  @r{Remove a tag from all selected entries.}
 s  @r{Schedule all items to a new date.  To shift existing schedule dates}
    @r{by a fixed number of days, use something starting with double plus}
-   @r{at the prompt, for example @samp{++8d} or @samp{++2w}.}
+   @r{at the prompt, for example {{{samp(++8d)}}} or {{{samp(++2w)}}}.}
 d  @r{Set deadline to a specific date.}
 r  @r{Prompt for a single refile target and move all entries.  The entries}
    @r{will no longer be in the agenda; refresh (@kbd{g}) to bring them back.}
@@ -8379,14 +8379,14 @@ therefore define:
 
 @table @kbd
 @item C-c a w
-as a global search for TODO entries with @samp{WAITING} as the TODO
+as a global search for TODO entries with {{{samp(WAITING)}}} as the TODO
 keyword
 @item C-c a W
 as the same search, but only in the current buffer and displaying the
 results as a sparse tree
 @item C-c a u
-as a global tags search for headlines marked @samp{:boss:} but not
-@samp{:urgent:}
+as a global tags search for headlines marked {{{samp(:boss:)}}} but not
+{{{samp(:urgent:)}}}
 @item C-c a v
 as the same search as @kbd{C-c a u}, but limiting the search to
 headlines that are also TODO items
@@ -8395,7 +8395,7 @@ as the same search as @kbd{C-c a u}, but only in the current buffer and
 displaying the result as a sparse tree
 @item C-c a f
 to create a sparse tree (again: current buffer only) with all entries
-containing the word @samp{FIXME}
+containing the word {{{samp(FIXME)}}}
 @item C-c a h
 as a prefix command for a HOME tags search where you have to press an
 additional key (@kbd{l}, @kbd{p} or @kbd{k}) to select a name (Lisa,
@@ -8435,7 +8435,7 @@ matching commands discussed above: @code{todo}, @code{tags}, and
 This will define @kbd{C-c a h} to create a multi-block view for stuff
 you need to attend to at home.  The resulting agenda buffer will contain
 your agenda for the current week, all TODO items that carry the tag
-@samp{home}, and also all lines tagged with @samp{garden}.  Finally the
+{{{samp(home)}}}, and also all lines tagged with {{{samp(garden)}}}.  Finally the
 command @kbd{C-c a o} provides a similar view for office tasks.
 
 *** Setting options
@@ -8469,7 +8469,7 @@ right spot in @code{org-agenda-custom-commands}.  For example:
 
 @noindent
 Now the @kbd{C-c a w} command will sort the collected entries only by
-priority, and the prefix format is modified to just say @samp{  Mixed: }
+priority, and the prefix format is modified to just say {{{samp(  Mixed: )}}}
 instead of giving the category of the entry.  The sparse tags tree of
 @kbd{C-c a U} will now turn out ultra-compact, because neither the
 headline hierarchy above the match, nor the headline following the match
@@ -8838,7 +8838,7 @@ Some people like to use the space before the first headline for setup and
 internal links and therefore would like to control the exported text before
 the first headline in a different way.  You can do so by setting the variable
 @code{org-export-skip-text-before-1st-heading} to @code{t}.  On a per-file
-basis, you can get the same effect with @samp{#+OPTIONS: skip:t}.
+basis, you can get the same effect with {{{samp(#+OPTIONS: skip:t)}}}.
 
 @noindent
 If you still want to have some text before the first headline, use the
@@ -8868,7 +8868,7 @@ description lists.
 {{{cindex(paragraphs\\\, markup rules)}}}
 
 Paragraphs are separated by at least one empty line.  If you need to enforce
-a line break within a paragraph, use @samp{\\} at the end of a line.
+a line break within a paragraph, use {{{samp(\\)}}} at the end of a line.
 
 To keep the line breaks in a region, but otherwise use normal formatting, you
 can use this construct, which can also be used to format poetry.
@@ -8928,7 +8928,7 @@ multiple footnotes side by side.
 {{{cindex(code text\\\, markup rules)}}}
 {{{cindex(strike-through text\\\, markup rules)}}}
 You can make words @b{*bold*}, //italic//, _underlined_, @code{=code=}
-and @code{~verbatim~}, and, if you must, @samp{+strike-through+}.  Text
+and @code{~verbatim~}, and, if you must, {{{samp(+strike-through+)}}}.  Text
 in the code and verbatim string is not processed for Org mode specific
 syntax; it is exported verbatim.
 
@@ -8938,7 +8938,7 @@ syntax; it is exported verbatim.
     :END:
 {{{cindex(horizontal rules\\\, markup rules)}}}
 A line consisting of only dashes, and at least 5 of them, will be exported as
-a horizontal line (@samp{<hr/>} in HTML and @code{\hrule} in @LaTeX{}).
+a horizontal line ({{{samp(<hr/>)}}} in HTML and @code{\hrule} in @LaTeX{}).
 
 *** Comment lines
     :PROPERTIES:
@@ -8949,10 +8949,10 @@ a horizontal line (@samp{<hr/>} in HTML and @code{\hrule} in @LaTeX{}).
 {{{cindex(#+BEGIN_COMMENT)}}}
 
 Lines starting with zero or more whitespace characters followed by one
-@samp{#} and a whitespace are treated as comments and will never be exported.
-Also entire subtrees starting with the word @samp{COMMENT} will never be
-exported.  Finally, regions surrounded by @samp{#+BEGIN_COMMENT}
-... @samp{#+END_COMMENT} will not be exported.
+{{{samp(#)}}} and a whitespace are treated as comments and will never be exported.
+Also entire subtrees starting with the word {{{samp(COMMENT)}}} will never be
+exported.  Finally, regions surrounded by {{{samp(#+BEGIN_COMMENT)}}}
+... {{{samp(#+END_COMMENT)}}} will not be exported.
 
 @table @kbd
 {{{kindex(C-c ;)}}}
@@ -9045,9 +9045,9 @@ which is distributed with Org).  Fontified code chunks in @LaTeX{} can be
 achieved using either the listings or the
 @url{http://code.google.com/p/minted, minted,} package.  Refer to
 @code{org-export-latex-listings} documentation for details.}.  This is done
-with the @samp{src} block, where you also need to specify the name of the
+with the {{{samp(src)}}} block, where you also need to specify the name of the
 major mode that should be used to fontify the example@footnote{Code in
-@samp{src} blocks may also be evaluated either interactively or on export.
+{{{samp(src)}}} blocks may also be evaluated either interactively or on export.
 See @pxref{Working With Source Code} for more information on evaluating code
 blocks.}, see @ref{Easy Templates} for shortcuts to easily insert code
 blocks.
@@ -9065,7 +9065,7 @@ Both in @code{example} and in @code{src} snippets, you can add a @code{-n}
 switch to the end of the @code{BEGIN} line, to get the lines of the example
 numbered.  If you use a @code{+n} switch, the numbering from the previous
 numbered snippet will be continued in the current one.  In literal examples,
-Org will interpret strings like @samp{(ref:name)} as labels, and use them as
+Org will interpret strings like {{{samp((ref:name))}}} as labels, and use them as
 targets for special hyperlinks like @code{[[(name)]]} (i.e.@: the reference name
 enclosed in single parenthesis).  In HTML, hovering the mouse over such a
 link will remote-highlight the corresponding code line, which is kind of
@@ -9090,8 +9090,8 @@ jumps to point-min.
 
 {{{vindex(org-coderef-label-format)}}}
 If the syntax for the label format conflicts with the language syntax, use a
-@code{-l} switch to change the format, for example @samp{#+BEGIN_SRC pascal
--n -r -l "((%s))"}.  See also the variable @code{org-coderef-label-format}.
+@code{-l} switch to change the format, for example {{{samp(#+BEGIN_SRC pascal
+-n -r -l "((%s))")}}}.  See also the variable @code{org-coderef-label-format}.
 
 HTML export also allows examples to be published as text areas (@pxref{Text
 areas in HTML export}).
@@ -9105,8 +9105,8 @@ so often, shortcuts are provided using the Easy Templates facility
 @item C-c '
 Edit the source code example at point in its native mode.  This works by
 switching to a temporary buffer with the source code.  You need to exit by
-pressing @kbd{C-c '} again@footnote{Upon exit, lines starting with @samp{*},
-@samp{,*}, @samp{#+} and @samp{,#+} will get a comma prepended, to keep them
+pressing @kbd{C-c '} again@footnote{Upon exit, lines starting with {{{samp(*)}}},
+{{{samp(,*)}}}, {{{samp(#+)}}} and {{{samp(,#+)}}} will get a comma prepended, to keep them
 from being interpreted by Org as outline nodes or special syntax.  These
 commas will be stripped for editing with @kbd{C-c '}, and also for export.}.
 The edited version will then replace the old version in the Org buffer.
@@ -9120,8 +9120,8 @@ will create a new fixed-width region.
 Calling @code{org-store-link} while editing a source code example in a
 temporary buffer created with @kbd{C-c '} will prompt for a label.  Make sure
 that it is unique in the current buffer, and insert it with the proper
-formatting like @samp{(ref:label)} at the end of the current line.  Then the
-label is stored as a link @samp{(label)}, for retrieval with @kbd{C-c C-l}.
+formatting like {{{samp((ref:label))}}} at the end of the current line.  Then the
+label is stored as a link {{{samp((label))}}}, for retrieval with @kbd{C-c C-l}.
 @end table
 
 
@@ -9139,8 +9139,8 @@ include your @file{.emacs} file, you could use:
 #+INCLUDE: "~/.emacs" src emacs-lisp
 @end example
 @noindent
-The optional second and third parameter are the markup (e.g.@: @samp{quote},
-@samp{example}, or @samp{src}), and, if the markup is @samp{src}, the
+The optional second and third parameter are the markup (e.g.@: {{{samp(quote)}}},
+{{{samp(example)}}}, or {{{samp(src)}}}), and, if the markup is {{{samp(src)}}}, the
 language for formatting the contents.  The markup is optional; if it is not
 given, the text will be assumed to be in Org mode format and will be
 processed normally.  The include line will also allow additional keyword
@@ -9244,9 +9244,9 @@ readily processed to produce pretty output for a number of export backends.
 {{{cindex(HTML entities)}}}
 {{{cindex(@LaTeX{} entities)}}}
 
-You can use @LaTeX{} macros to insert special symbols like @samp{\alpha} to
-indicate the Greek letter, or @samp{\to} to indicate an arrow.  Completion
-for these macros is available, just type @samp{\} and maybe a few letters,
+You can use @LaTeX{} macros to insert special symbols like {{{samp(\alpha)}}} to
+indicate the Greek letter, or {{{samp(\to)}}} to indicate an arrow.  Completion
+for these macros is available, just type {{{samp(\)}}} and maybe a few letters,
 and press @kbd{M-@key{TAB}} to see possible completions.  Unlike @LaTeX{}
 code, Org mode allows these macros to be present without surrounding math
 delimiters, for example:
@@ -9261,12 +9261,12 @@ the exporter backend.  Strings like @code{\alpha} will be exported as
 @code{&alpha;} in the HTML output, and as @code{$\alpha$} in the @LaTeX{}
 output.  Similarly, @code{\nbsp} will become @code{&nbsp;} in HTML and
 @code{~} in @LaTeX{}.  If you need such a symbol inside a word, terminate it
-like this: @samp{\Aacute@{@}stor}.
+like this: {{{samp(\Aacute@{@)}}}stor}.
 
 A large number of entities is provided, with names taken from both HTML and
 @LaTeX{}; see the variable @code{org-entities} for the complete list.
-@samp{\-} is treated as a shy hyphen, and @samp{--}, @samp{---}, and
-@samp{...} are all converted into special commands creating hyphens of
+{{{samp(\-)}}} is treated as a shy hyphen, and {{{samp(--)}}}, {{{samp(---)}}}, and
+{{{samp(...)}}} are all converted into special commands creating hyphens of
 different lengths or a compact set of dots.
 
 If you would like to see entities displayed as UTF8 characters, use the
@@ -9289,7 +9289,7 @@ for display purposes only.
 {{{cindex(subscript)}}}
 {{{cindex(superscript)}}}
 
-Just like in @LaTeX{}, @samp{^} and @samp{_} are used to indicate super-
+Just like in @LaTeX{}, {{{samp(^)}}} and {{{samp(_)}}} are used to indicate super-
 and subscripts.  Again, these can be used without embedding them in
 math-mode delimiters.  To increase the readability of ASCII text, it is
 not necessary (but OK) to surround multi-character sub- and superscripts
@@ -9301,8 +9301,8 @@ the sun is R_@{sun@} = 6.96 x 10^8 m.
 @end example
 
 {{{vindex(org-export-with-sub-superscripts)}}}
-To avoid interpretation as raised or lowered text, you can quote @samp{^} and
-@samp{_} with a backslash: @samp{\^} and @samp{\_}.  If you write a text
+To avoid interpretation as raised or lowered text, you can quote {{{samp(^)}}} and
+{{{samp(_)}}} with a backslash: {{{samp(\^)}}} and {{{samp(\_)}}}.  If you write a text
 where the underscore is often used in a different context, Org's convention
 to always interpret these as subscripts can get in your way.  Configure the
 variable @code{org-export-with-sub-superscripts} to globally change this
@@ -9312,8 +9312,8 @@ convention, or use, on a per-file basis:
 #+OPTIONS: ^:@{@}
 @end example
 
-@noindent With this setting, @samp{a_b} will not be interpreted as a
-subscript, but @samp{a_@{b@}} will.
+@noindent With this setting, {{{samp(a_b)}}} will not be interpreted as a
+subscript, but {{{samp(a_@{b@)}}}} will.
 
 @table @kbd
 {{{kindex(C-c C-x \)}}}
@@ -9358,12 +9358,12 @@ handled.}.  The only requirement is that the @code{\begin} statement appears
 on a new line, preceded by only whitespace.
 @item
 Text within the usual @LaTeX{} math delimiters.  To avoid conflicts with
-currency specifications, single @samp{$} characters are only recognized as
+currency specifications, single {{{samp($)}}} characters are only recognized as
 math delimiters if the enclosed text contains at most two line breaks, is
-directly attached to the @samp{$} characters with no whitespace in between,
-and if the closing @samp{$} is followed by whitespace, punctuation or a dash.
+directly attached to the {{{samp($)}}} characters with no whitespace in between,
+and if the closing {{{samp($)}}} is followed by whitespace, punctuation or a dash.
 For the other delimiters, there is no such restriction, so when in doubt, use
-@samp{\(...\)} as inline math delimiters.
+{{{samp(\(...\))}}} as inline math delimiters.
 @end itemize
 
 @noindent For example:
@@ -9464,7 +9464,7 @@ expand @code{fr} to @code{\frac@{@}@{@}} and position the cursor
 correctly inside the first brace.  Another @key{TAB} will get you into
 the second brace.  Even outside fragments, @key{TAB} will expand
 environment abbreviations at the beginning of a line.  For example, if
-you write @samp{equ} at the beginning of a line and press @key{TAB},
+you write {{{samp(equ)}}} at the beginning of a line and press @key{TAB},
 this abbreviation will be expanded to an @code{equation} environment.
 To get a list of all abbreviations, type @kbd{M-x cdlatex-command-help}.
 @item
@@ -9559,7 +9559,7 @@ The exporter recognizes special lines in the buffer which provide
 additional information.  These lines may be put anywhere in the file.
 The whole set of lines can be inserted into the buffer with @kbd{C-c
 C-e t}.  For individual lines, a good way to make sure the keyword is
-correct is to type @samp{#+} and then use @kbd{M-@key{TAB}} completion
+correct is to type {{{samp(#+)}}} and then use @kbd{M-@key{TAB}} completion
 (@pxref{Completion}).   For a summary of other in-buffer settings not
 specifically related to export, see @ref{In-buffer settings}.
 In particular, note that you can place commonly-used (export) options in
@@ -9597,7 +9597,7 @@ Insert template with export options, see example below.
 #+EMAIL:       his/her email address (default from @code{user-mail-address})
 #+DESCRIPTION: the page description, e.g.@: for the XHTML meta tag
 #+KEYWORDS:    the page keywords, e.g.@: for the XHTML meta tag
-#+LANGUAGE:    language for HTML, e.g.@: @samp{en} (@code{org-export-default-language})
+#+LANGUAGE:    language for HTML, e.g.@: {{{samp(en)}}} (@code{org-export-default-language})
 #+TEXT:        Some descriptive text to be inserted at the beginning.
 #+TEXT:        Several lines may be given.
 #+OPTIONS:     H:2 num:t toc:t \n:nil @@:t ::t |:t ^:t f:t TeX:t ...
@@ -9876,10 +9876,10 @@ insert any postamble.
     :PROPERTIES:
     :DESCRIPTION: Using direct HTML in Org mode
     :END:
-Plain @samp{<} and @samp{>} are always transformed to @samp{&lt;} and
-@samp{&gt;} in HTML export.  If you want to include simple HTML tags
-which should be interpreted as such, mark them with @samp{@@} as in
-@samp{@@<b>bold text@@</b>}.  Note that this really works only for
+Plain {{{samp(<)}}} and {{{samp(>)}}} are always transformed to {{{samp(&lt;)}}} and
+{{{samp(&gt;)}}} in HTML export.  If you want to include simple HTML tags
+which should be interpreted as such, mark them with {{{samp(@@)}}} as in
+{{{samp(@@<b>bold text@@</b>)}}}.  Note that this really works only for
 simple tags.  For more extensive HTML that should be copied verbatim to
 the exported file use either
 
@@ -9911,7 +9911,7 @@ targets}).  Links to external files will still work if the target file is on
 the same /relative/ path as the published Org file.  Links to other
 @file{.org} files will be translated into HTML links under the assumption
 that a HTML version also exists of the linked file, at the same relative
-path.  @samp{id:} links can then be used to jump to specific entries across
+path.  {{{samp(id:)}}} links can then be used to jump to specific entries across
 files.  For information related to linking files while publishing them to a
 publishing directory see @ref{Publishing links}.
 
@@ -9956,9 +9956,9 @@ HTML export can inline images given as links in the Org file, and
 it can make an image the clickable part of a link.  By
 default@footnote{But see the variable
 @code{org-export-html-inline-images}.}, images are inlined if a link does
-not have a description.  So @samp{[[file:myimg.jpg]]} will be inlined,
-while @samp{[[file:myimg.jpg][the image]]} will just produce a link
-@samp{the image} that points to the image.  If the description part
+not have a description.  So {{{samp([[file:myimg.jpg]])}}} will be inlined,
+while {{{samp([[file:myimg.jpg][the image]])}}} will just produce a link
+{{{samp(the image)}}} that points to the image.  If the description part
 itself is a @code{file:} link or a @code{http:} URL pointing to an
 image, this image will be inlined and activated so that clicking on the
 image will activate the link.  For example, to include a thumbnail that
@@ -10158,7 +10158,7 @@ viewing options:
 @example
 path:    @r{The path to the script.  The default is to grab the script from}
          @r{@url{http://orgmode.org/org-info.js}, but you might want to have}
-         @r{a local copy and use a path like @samp{../scripts/org-info.js}.}
+         @r{a local copy and use a path like {{{samp(../scripts/org-info.js)}}}.}
 view:    @r{Initial view when the website is first shown.  Possible values are:}
          info      @r{Info-like interface with one section per page.}
          overview  @r{Folding interface, initially showing only top-level.}
@@ -10178,7 +10178,7 @@ ftoc:    @r{Does the CSS of the page specify a fixed position for the "toc"?}
 ltoc:    @r{Should there be short contents (children) in each section?}
          @r{Make this @code{above} if the section should be above initial text.}
 mouse:   @r{Headings are highlighted when the mouse is over them.  Should be}
-         @r{@samp{underline} (default) or a background color like @samp{#cccccc}.}
+         @r{{{{samp(underline)}}} (default) or a background color like {{{samp(#cccccc)}}}.}
 buttons: @r{Should view-toggle buttons be everywhere?  When @code{nil} (the}
          @r{default), only one such button will be present.}
 @end example
@@ -10316,7 +10316,7 @@ below.
     :END:
 Embedded @LaTeX{} as described in @ref{Embedded @LaTeX{}}, will be correctly
 inserted into the @LaTeX{} file.  This includes simple macros like
-@samp{\ref@{LABEL@}} to create a cross reference to a figure.  Furthermore,
+{{{samp(\ref@{LABEL@)}}}} to create a cross reference to a figure.  Furthermore,
 you can add special code that should only be present in @LaTeX{} export with
 the following constructs:
 
@@ -10382,7 +10382,7 @@ or to specify a multicolumn table with @code{tabulary}
 {{{cindex(inlining images in @LaTeX{})}}}
 
 Images that are linked to without a description part in the link, like
-@samp{[[file:img.jpg]]} or @samp{[[./img.jpg]]} will be inserted into the PDF
+{{{samp([[file:img.jpg]])}}} or {{{samp([[./img.jpg]])}}} will be inserted into the PDF
 output file resulting from @LaTeX{} processing.  Org will use an
 @code{\includegraphics} macro to insert the image.  If you have specified a
 caption and/or a label as described in @ref{Images and tables}, the figure
@@ -10392,13 +10392,13 @@ options.  You can ask org to export an image as a float without specifying
 a label or a caption by using the keyword @code{float} in this line.  Various
 optional arguments to the @code{\includegraphics} macro can also be specified
 in this fashion.  To modify the placement option of the floating environment,
-add something like @samp{placement=[h!]} to the attributes.  It is to be noted
+add something like {{{samp(placement=[h!])}}} to the attributes.  It is to be noted
 this option can be used with tables as well@footnote{One can also take
 advantage of this option to pass other, unrelated options into the figure or
 table environment.  For an example see the section ``Exporting org files'' in
 @url{http://orgmode.org/worg/org-hacks.html}}.
 
-If you would like to let text flow around the image, add the word @samp{wrap}
+If you would like to let text flow around the image, add the word {{{samp(wrap)}}}
 to the @code{#+ATTR_LaTeX:} line, which will make the figure occupy the left
 half of the page.  To fine-tune, the @code{placement} field will be the set
 of additional arguments needed by the @code{wrapfigure} environment.  Note
@@ -10423,7 +10423,7 @@ can use the keyword @code{multicolumn} in the @code{#+ATTR_LaTeX} line.  This
 will export the image wrapped in a @code{figure*} environment.
 
 If you need references to a label created in this way, write
-@samp{\ref@{fig:SED-HR4049@}} just like in @LaTeX{}.
+{{{samp(\ref@{fig:SED-HR4049@)}}}} just like in @LaTeX{}.
 
 *** Beamer class export
     :PROPERTIES:
@@ -10471,7 +10471,7 @@ The width of a column that should start with this entry.  If this property is
 set, the entry will also get a @code{:BMCOL:} property to make this visible.
 Also this tag is only a visual aid.  When this is a plain number, it will be
 interpreted as a fraction of @code{\textwidth}.  Otherwise it will be assumed
-that you have specified the units, like @samp{3cm}.  The first such property
+that you have specified the units, like {{{samp(3cm)}}}.  The first such property
 in a frame will start a @code{columns} environment to surround the columns.
 This environment is closed when an entry has a @code{BEAMER_col} property
 with value 0 or 1, or automatically at the end of the frame.
@@ -10488,8 +10488,8 @@ specific code can be inserted using @code{#+BEAMER:} and
 backends, but with the difference that @code{#+LaTeX:} stuff will be included
 in the presentation as well.
 
-Outline nodes with @code{BEAMER_env} property value @samp{note} or
-@samp{noteNH} will be formatted as beamer notes, i,e, they will be wrapped
+Outline nodes with @code{BEAMER_env} property value {{{samp(note)}}} or
+{{{samp(noteNH)}}} will be formatted as beamer notes, i,e, they will be wrapped
 into @code{\note@{...@}}.  The former will include the heading as part of the
 note text, the latter will ignore the heading of that node.  To simplify note
 generation, it is actually enough to mark the note with a @emph{tag} (either
@@ -10682,7 +10682,7 @@ using the @code{table} element.
 {{{cindex(inlining images in DocBook)}}}
 
 Images that are linked to without a description part in the link, like
-@samp{[[file:img.jpg]]} or @samp{[[./img.jpg]]}, will be exported to DocBook
+{{{samp([[file:img.jpg]])}}} or {{{samp([[./img.jpg]])}}}, will be exported to DocBook
 using @code{mediaobject} elements.  Each @code{mediaobject} element contains
 an @code{imageobject} that wraps an @code{imagedata} element.  If you have
 specified a caption for an image as described in @ref{Images and tables}, a
@@ -10821,12 +10821,12 @@ exporting to other formats}.
 
 *** Extending ODT export
     :PROPERTIES:
-    :DESCRIPTION: How to produce @samp{doc}, @samp{pdf} files
+    :DESCRIPTION: How to produce {{{samp(doc)}}}, {{{samp(pdf)}}} files
     :END:
 The ODT exporter can interface with a variety of document
 converters and supports popular converters out of the box.  As a result, you
-can use it to export to formats like @samp{doc} or convert a document from
-one format (say @samp{csv}) to another format (say @samp{ods} or @samp{xls}).
+can use it to export to formats like {{{samp(doc)}}} or convert a document from
+one format (say {{{samp(csv)}}}) to another format (say {{{samp(ods)}}} or {{{samp(xls)}}}).
 
 {{{cindex(@file{unoconv})}}}
 {{{cindex(LibreOffice)}}}
@@ -10835,7 +10835,7 @@ pre-configured for you and you can use it right away.  If you would like to
 use @file{unoconv} as your preferred converter, customize the variable
 @code{org-export-odt-convert-process} to point to @code{unoconv}.  You can
 also use your own favorite converter or tweak the default settings of the
-@file{LibreOffice} and @samp{unoconv} converters.  @xref{Configuring a
+@file{LibreOffice} and {{{samp(unoconv)}}} converters.  @xref{Configuring a
 document converter}.
 
 @subsubsection Automatically exporting to other formats
@@ -10843,8 +10843,8 @@ document converter}.
 
 {{{vindex(org-export-odt-preferred-output-format)}}}
 Very often, you will find yourself exporting to ODT format, only to
-immediately save the exported document to other formats like @samp{doc},
-@samp{docx}, @samp{rtf}, @samp{pdf} etc.  In such cases, you can specify your
+immediately save the exported document to other formats like {{{samp(doc)}}},
+{{{samp(docx)}}}, {{{samp(rtf)}}}, {{{samp(pdf)}}} etc.  In such cases, you can specify your
 preferred output format by customizing the variable
 @code{org-export-odt-preferred-output-format}.  This way, the export commands
 (@pxref{x-export-to-odt,,Exporting to ODT}) can be extended to export to a
@@ -10895,7 +10895,7 @@ to ODT format.
 
 @item
 Open the above @file{example.odt} using LibreOffice.  Use the @file{Stylist}
-to locate the target styles - these typically have the @samp{Org} prefix -
+to locate the target styles - these typically have the {{{samp(Org)}}} prefix -
 and modify those to your taste.  Save the modified file either as an
 OpenDocument Text (@file{.odt}) or OpenDocument Template (@file{.ott}) file.
 
@@ -10925,7 +10925,7 @@ or
 
 You can use third-party styles and templates for customizing your output.
 This will produce the desired output only if the template provides all
-style names that the @samp{ODT} exporter relies on.  Unless this condition is
+style names that the {{{samp(ODT)}}} exporter relies on.  Unless this condition is
 met, the output is going to be less than satisfactory.  So it is highly
 recommended that you only work with templates that are directly derived from
 the factory settings.
@@ -10942,7 +10942,7 @@ Internet-style links for all other links.
 A link with no description and destined to a regular (un-itemized) outline
 heading is replaced with a cross-reference and section number of the heading.
 
-A @samp{\ref@{label@}}-style reference to an image, table etc. is replaced
+A {{{samp(\ref@{label@)}}}}-style reference to an image, table etc. is replaced
 with a cross-reference and sequence number of the labeled entity.
 @xref{Labels and captions in ODT export}.
 
@@ -11006,7 +11006,7 @@ custom table styles and associate them with a table using the
 @subsubheading Embedding images
 You can embed images within the exported document by providing a link to the
 desired image file with no link description.  For example, to embed
-@samp{img.png} do either of the following:
+{{{samp(img.png)}}} do either of the following:
 
 @example
 [[file:img.png]]
@@ -11091,7 +11091,7 @@ height:width ratio, do the following
 You can control the manner in which an image is anchored by setting the
 @code{:anchor} property of it's @code{#+ATTR_ODT} line.  You can specify one
 of the the following three values for the @code{:anchor} property -
-@samp{"as-char"}, @samp{"paragraph"} and @samp{"page"}.
+{{{samp("as-char")}}}, {{{samp("paragraph")}}} and {{{samp("page")}}}.
 
 To create an image that is anchored to a page, do the following:
 @example
@@ -11223,8 +11223,8 @@ Figure 2: Bell curve
 {{{vindex(org-export-odt-category-strings)}}}
 You can modify the category component of the caption by customizing the
 variable @code{org-export-odt-category-strings}.  For example, to tag all
-embedded images with the string @samp{Illustration} (instead of the default
-@samp{Figure}) use the following setting.
+embedded images with the string {{{samp(Illustration)}}} (instead of the default
+{{{samp(Figure)}}}) use the following setting.
 
 @lisp
 (setq org-export-odt-category-strings
@@ -11247,7 +11247,7 @@ Export of literal examples (@pxref{Literal examples}) with full fontification
 is supported.  Internally, the exporter relies on @file{htmlfontify.el} to
 generate all style definitions needed for a fancy listing.@footnote{Your
 @file{htmlfontify.el} library must at least be at Emacs 24.1 levels for
-fontification to be turned on.}  The auto-generated styles have @samp{OrgSrc}
+fontification to be turned on.}  The auto-generated styles have {{{samp(OrgSrc)}}}
 as prefix and inherit their color from the faces used by Emacs
 @code{font-lock} library for the source language.
 
@@ -11332,7 +11332,7 @@ by the variable @code{org-odt-styles-dir}.  The two files are:
 @item
 @file{OrgOdtStyles.xml}
 
-This file contributes to the @file{styles.xml} file of the final @samp{ODT}
+This file contributes to the @file{styles.xml} file of the final {{{samp(ODT)}}}
 document.  This file gets modified for the following purposes:
 @enumerate
 
@@ -11348,9 +11348,9 @@ blocks.
 @item
 @file{OrgOdtContentTemplate.xml}
 
-This file contributes to the @file{content.xml} file of the final @samp{ODT}
+This file contributes to the @file{content.xml} file of the final {{{samp(ODT)}}}
 document.  The contents of the Org outline are inserted between the
-@samp{<office:text>}@dots{}@samp{</office:text>} elements of this file.
+{{{samp(<office:text>)}}}@dots{}{{{samp(</office:text>)}}} elements of this file.
 
 Apart from serving as a template file for the final @file{content.xml}, the
 file serves the following purposes:
@@ -11361,7 +11361,7 @@ It contains automatic styles for formatting of tables which are referenced by
 the exporter.
 
 @item
-It contains @samp{<text:sequence-decl>}@dots{}@samp{</text:sequence-decl>}
+It contains {{{samp(<text:sequence-decl>)}}}@dots{}{{{samp(</text:sequence-decl>)}}}
 elements that control how various entities - tables, images, equations etc -
 are numbered.
 @end enumerate
@@ -11396,7 +11396,7 @@ Template file
 
 Use the @file{styles.xml} contained in the specified OpenDocument Text or
 Template file.  Additionally extract the specified member files and embed
-those within the final @samp{ODT} document.
+those within the final {{{samp(ODT)}}} document.
 
 Use this option if the @file{styles.xml} file references additional files
 like header and footer images.
@@ -11426,7 +11426,7 @@ file.  The use of this feature is better illustrated with couple of examples.
 @item Embedding ODT tags as part of regular text
 
 You can include simple OpenDocument tags by prefixing them with
-@samp{@@}.  For example, to highlight a region of text do the following:
+{{{samp(@@)}}}.  For example, to highlight a region of text do the following:
 
 @example
 @@<text:span text:style-name="Highlight">This is a
@@ -11436,7 +11436,7 @@ regular text.
 
 @strong{Hint:} To see the above example in action, edit your
 @file{styles.xml} (@pxref{x-orgodtstyles-xml,,Factory styles}) and add a
-custom @samp{Highlight} style as shown below.
+custom {{{samp(Highlight)}}} style as shown below.
 
 @example
 <style:style style:name="Highlight" style:family="text">
@@ -11455,7 +11455,7 @@ directive.  For example, to force a page break do the following:
 
 @strong{Hint:} To see the above example in action, edit your
 @file{styles.xml} (@pxref{x-orgodtstyles-xml,,Factory styles}) and add a
-custom @samp{PageBreak} style as shown below.
+custom {{{samp(PageBreak)}}} style as shown below.
 
 @example
 <style:style style:name="PageBreak" style:family="paragraph"
@@ -11523,12 +11523,12 @@ the table that follows.
 | Anna  |  4321 |  25 |
 @end example
 
-In the above example, you used a template named @samp{Custom} and installed
-two table styles with the names @samp{TableWithHeaderRowAndColumn} and
-@samp{TableWithFirstRowandLastRow}.  (@strong{Important:} The OpenDocument
+In the above example, you used a template named {{{samp(Custom)}}} and installed
+two table styles with the names {{{samp(TableWithHeaderRowAndColumn)}}} and
+{{{samp(TableWithFirstRowandLastRow)}}}.  (@strong{Important:} The OpenDocument
 styles needed for producing the above template have been pre-defined for you.
-These styles are available under the section marked @samp{Custom Table
-Template} in @file{OrgOdtContentTemplate.xml}
+These styles are available under the section marked {{{samp(Custom Table
+Template)}}} in @file{OrgOdtContentTemplate.xml}
 (@pxref{x-orgodtcontenttemplate-xml,,Factory styles}).  If you need
 additional templates you have to define these styles yourselves.
 
@@ -11540,8 +11540,8 @@ To use this feature proceed as follows:
 Create a table template@footnote{See the @code{<table:table-template>}
 element of the OpenDocument-v1.2 specification}
 
-A table template is nothing but a set of @samp{table-cell} and
-@samp{paragraph} styles for each of the following table cell categories:
+A table template is nothing but a set of {{{samp(table-cell)}}} and
+{{{samp(paragraph)}}} styles for each of the following table cell categories:
 
 @itemize @minus
 @item Body
@@ -11559,7 +11559,7 @@ The names for the above styles must be chosen based on the name of the table
 template using a well-defined convention.
 
 The naming convention is better illustrated with an example.  For a table
-template with the name @samp{Custom}, the needed style names are listed in
+template with the name {{{samp(Custom)}}}, the needed style names are listed in
 the following table.
 
 @multitable  {Table cell type} {CustomEvenColumnTableCell} {CustomEvenColumnTableParagraph}
@@ -11570,35 +11570,35 @@ the following table.
 @tab
 @tab
 @item Body
-@tab @samp{CustomTableCell}
-@tab @samp{CustomTableParagraph}
+@tab {{{samp(CustomTableCell)}}}
+@tab {{{samp(CustomTableParagraph)}}}
 @item First column
-@tab @samp{CustomFirstColumnTableCell}
-@tab @samp{CustomFirstColumnTableParagraph}
+@tab {{{samp(CustomFirstColumnTableCell)}}}
+@tab {{{samp(CustomFirstColumnTableParagraph)}}}
 @item Last column
-@tab @samp{CustomLastColumnTableCell}
-@tab @samp{CustomLastColumnTableParagraph}
+@tab {{{samp(CustomLastColumnTableCell)}}}
+@tab {{{samp(CustomLastColumnTableParagraph)}}}
 @item First row
-@tab @samp{CustomFirstRowTableCell}
-@tab @samp{CustomFirstRowTableParagraph}
+@tab {{{samp(CustomFirstRowTableCell)}}}
+@tab {{{samp(CustomFirstRowTableParagraph)}}}
 @item Last row
-@tab @samp{CustomLastRowTableCell}
-@tab @samp{CustomLastRowTableParagraph}
+@tab {{{samp(CustomLastRowTableCell)}}}
+@tab {{{samp(CustomLastRowTableParagraph)}}}
 @item Even row
-@tab @samp{CustomEvenRowTableCell}
-@tab @samp{CustomEvenRowTableParagraph}
+@tab {{{samp(CustomEvenRowTableCell)}}}
+@tab {{{samp(CustomEvenRowTableParagraph)}}}
 @item Odd row
-@tab @samp{CustomOddRowTableCell}
-@tab @samp{CustomOddRowTableParagraph}
+@tab {{{samp(CustomOddRowTableCell)}}}
+@tab {{{samp(CustomOddRowTableParagraph)}}}
 @item Even column
-@tab @samp{CustomEvenColumnTableCell}
-@tab @samp{CustomEvenColumnTableParagraph}
+@tab {{{samp(CustomEvenColumnTableCell)}}}
+@tab {{{samp(CustomEvenColumnTableParagraph)}}}
 @item Odd column
-@tab @samp{CustomOddColumnTableCell}
-@tab @samp{CustomOddColumnTableParagraph}
+@tab {{{samp(CustomOddColumnTableCell)}}}
+@tab {{{samp(CustomOddColumnTableParagraph)}}}
 @end multitable
 
-To create a table template with the name @samp{Custom}, define the above
+To create a table template with the name {{{samp(Custom)}}}, define the above
 styles in the
 @code{<office:automatic-styles>}...@code{</office:automatic-styles>} element
 of the content template file (@pxref{x-orgodtcontenttemplate-xml,,Factory
@@ -11622,8 +11622,8 @@ To define a table style, create an entry for the style in the variable
 @end itemize
 
 For example, the entry below defines two different table styles
-@samp{TableWithHeaderRowAndColumn} and @samp{TableWithFirstRowandLastRow}
-based on the same template @samp{Custom}.  The styles achieve their intended
+{{{samp(TableWithHeaderRowAndColumn)}}} and {{{samp(TableWithFirstRowandLastRow)}}}
+based on the same template {{{samp(Custom)}}}.  The styles achieve their intended
 effect by selectively activating the individual cell styles in that template.
 
 @lisp
@@ -11663,7 +11663,7 @@ cases, you may want to validate the document against the OpenDocument RELAX
 NG Compact Syntax (RNC) schema.
 
 For de-compressing the @file{.odt} file@footnote{@file{.odt} files are
-nothing but @samp{zip} archives}: @inforef{File Archives,,emacs}.  For
+nothing but {{{samp(zip)}}} archives}: @inforef{File Archives,,emacs}.  For
 general help with validation (and schema-sensitive editing) of XML files:
 @inforef{Introduction,,nxml-mode}.
 
@@ -11728,12 +11728,12 @@ Next you can define resources and assign those to work on specific tasks.  You
 can group your resources hierarchically.  Tag the top node of the resources
 with @code{:taskjuggler_resource:} (or whatever you customized
 @code{org-export-taskjuggler-resource-tag} to).  You can optionally assign an
-identifier (named @samp{resource_id}) to the resources (using the standard
+identifier (named {{{samp(resource_id)}}}) to the resources (using the standard
 Org properties commands, @pxref{Property syntax}) or you can let the exporter
 generate identifiers automatically (the exporter picks the first word of the
 headline as the identifier as long as it is unique---see the documentation of
 @code{org-taskjuggler-get-unique-id}).  Using that identifier you can then
-allocate resources to tasks.  This is again done with the @samp{allocate}
+allocate resources to tasks.  This is again done with the {{{samp(allocate)}}}
 property on the tasks.  Do this in column view or when on the task type
 @kbd{C-c C-x p allocate @key{RET} <resource_id> @key{RET}}.
 
@@ -11745,25 +11745,25 @@ time.
 
 The exporter also takes TODO state information into consideration, i.e.@: if
 a task is marked as done it will have the corresponding attribute in
-TaskJuggler (@samp{complete 100}).  Scheduling information is also taken into
+TaskJuggler ({{{samp(complete 100)}}}).  Scheduling information is also taken into
 account to set start/end dates for tasks.
 
 The exporter will also export any property on a task resource or resource
-node which is known to TaskJuggler, such as @samp{limits}, @samp{vacation},
-@samp{shift}, @samp{booking}, @samp{efficiency}, @samp{journalentry},
-@samp{rate} for resources or @samp{account}, @samp{start}, @samp{note},
-@samp{duration}, @samp{end}, @samp{journalentry}, @samp{milestone},
-@samp{reference}, @samp{responsible}, @samp{scheduling}, etc for tasks.
+node which is known to TaskJuggler, such as {{{samp(limits)}}}, {{{samp(vacation)}}},
+{{{samp(shift)}}}, {{{samp(booking)}}}, {{{samp(efficiency)}}}, {{{samp(journalentry)}}},
+{{{samp(rate)}}} for resources or {{{samp(account)}}}, {{{samp(start)}}}, {{{samp(note)}}},
+{{{samp(duration)}}}, {{{samp(end)}}}, {{{samp(journalentry)}}}, {{{samp(milestone)}}},
+{{{samp(reference)}}}, {{{samp(responsible)}}}, {{{samp(scheduling)}}}, etc for tasks.
 
 @subsection Dependencies
 
 The exporter will handle dependencies that are defined in the tasks either
-with the @samp{ORDERED} attribute (@pxref{TODO dependencies}), with the
-@samp{BLOCKER} attribute (see @file{org-depend.el}) or alternatively with a
-@samp{depends} attribute.  Both the @samp{BLOCKER} and the @samp{depends}
-attribute can be either @samp{previous-sibling} or a reference to an
-identifier (named @samp{task_id}) which is defined for another task in the
-project.  @samp{BLOCKER} and the @samp{depends} attribute can define multiple
+with the {{{samp(ORDERED)}}} attribute (@pxref{TODO dependencies}), with the
+{{{samp(BLOCKER)}}} attribute (see @file{org-depend.el}) or alternatively with a
+{{{samp(depends)}}} attribute.  Both the {{{samp(BLOCKER)}}} and the {{{samp(depends)}}}
+attribute can be either {{{samp(previous-sibling)}}} or a reference to an
+identifier (named {{{samp(task_id)}}}) which is defined for another task in the
+project.  {{{samp(BLOCKER)}}} and the {{{samp(depends)}}} attribute can define multiple
 dependencies separated by either space or comma.  You can also specify
 optional attributes on the dependency by simply appending it.  The following
 examples should illustrate this:
@@ -11811,8 +11811,8 @@ Alternately, the user can tag a tree with
 similarly to what is done with tasks or resources.  The properties used for
 report generation are defined in
 @code{org-export-taskjuggler-valid-report-attributes}. In addition, a special
-property named @samp{report-kind} is used to define the kind of report one
-wants to generate (by default, a @samp{taskreport}).
+property named {{{samp(report-kind)}}} is used to define the kind of report one
+wants to generate (by default, a {{{samp(taskreport)}}}).
 
 For more information and examples see the Org-taskjuggler tutorial at
 @uref{http://orgmode.org/worg/org-tutorials/org-taskjuggler.html}.
@@ -12210,8 +12210,8 @@ options}), however, override everything.
 {{{cindex(links\\\, publishing)}}}
 
 To create a link from one Org file to another, you would use
-something like @samp{[[file:foo.org][The foo]]} or simply
-@samp{file:foo.org.} (@pxref{Hyperlinks}).  When published, this link
+something like {{{samp([[file:foo.org][The foo]])}}} or simply
+{{{samp(file:foo.org.)}}} (@pxref{Hyperlinks}).  When published, this link
 becomes a link to @file{foo.html}.  In this way, you can interlink the
 pages of your "org web" project and the links will work as expected when
 you publish them to HTML.  If you also publish the Org source file and want
@@ -12473,7 +12473,7 @@ This may be necessary in particular if files include other files via
 {{{cindex(Davison\\\, Dan)}}}
 {{{cindex(source code\\\, working with)}}}
 
-Source code can be included in Org mode documents using a @samp{src} block,
+Source code can be included in Org mode documents using a {{{samp(src)}}} block,
 e.g.@:
 
 @example
@@ -12502,9 +12502,9 @@ The following sections describe Org mode's code block handling facilities.
 {{{cindex(#+NAME)}}}
 {{{cindex(#+BEGIN_SRC)}}}
 
-Live code blocks can be specified with a @samp{src} block or
-inline.@footnote{Note that @samp{src} blocks may be inserted using Org mode's
-@ref{Easy Templates} system}  The structure of a @samp{src} block is
+Live code blocks can be specified with a {{{samp(src)}}} block or
+inline.@footnote{Note that {{{samp(src)}}} blocks may be inserted using Org mode's
+@ref{Easy Templates} system}  The structure of a {{{samp(src)}}} block is
 
 @example
 #+NAME: <name>
@@ -12655,10 +12655,10 @@ using @code{org-babel-expand-src-block} which can expand both variable and
 The default.  The code block is not included in the tangled output.
 @item :tangle yes
 Include the code block in the tangled output.  The output file name is the
-name of the org file with the extension @samp{.org} replaced by the extension
+name of the org file with the extension {{{samp(.org)}}} replaced by the extension
 for the block language.
 @item :tangle filename
-Include the code block in the tangled output to file @samp{filename}.
+Include the code block in the tangled output to file {{{samp(filename)}}}.
 @end table
 
 {{{kindex( C-c C-v t)}}}
@@ -12775,7 +12775,7 @@ code blocks} for information on the syntax of remote code block evaluation).
 
 
 The central repository of code blocks in the ``Library of Babel'' is housed
-in an Org mode file located in the @samp{contrib} directory of Org mode.
+in an Org mode file located in the {{{samp(contrib)}}} directory of Org mode.
 
 Users can add code blocks they believe to be generally useful to their
 ``Library of Babel.''  The code blocks can be stored in any Org mode file and
@@ -13087,7 +13087,7 @@ The following syntax is used to pass arguments to code blocks using the
 @end example
 
 The argument, @code{assign}, can either be a literal value, such as a string
-@samp{"string"} or a number @samp{9}, or a reference to a table, a list, a
+{{{samp("string")}}} or a number {{{samp(9)}}}, or a reference to a table, a list, a
 literal example, another code block (with or without arguments), or the
 results of evaluating another code block.
 
@@ -14051,7 +14051,7 @@ in a function definition in the external language, and evaluating that
 function.  Therefore, code should be written as if it were the body of such a
 function.  In particular, note that Python does not automatically return a
 value from a function unless a @code{return} statement is present, and so a
-@samp{return} statement will usually be required in Python.
+{{{samp(return)}}} statement will usually be required in Python.
 
 This is the only one of the four evaluation contexts in which the code is
 automatically wrapped in a function definition.
@@ -14344,28 +14344,28 @@ Complete word at point
 @item
 At the beginning of a headline, complete TODO keywords.
 @item
-After @samp{\}, complete @TeX{} symbols supported by the exporter.
+After {{{samp(\)}}}, complete @TeX{} symbols supported by the exporter.
 @item
-After @samp{*}, complete headlines in the current buffer so that they
-can be used in search links like @samp{[[*find this headline]]}.
+After {{{samp(*)}}}, complete headlines in the current buffer so that they
+can be used in search links like {{{samp([[*find this headline]])}}}.
 @item
-After @samp{:} in a headline, complete tags.  The list of tags is taken
+After {{{samp(:)}}} in a headline, complete tags.  The list of tags is taken
 from the variable @code{org-tag-alist} (possibly set through the
-@samp{#+TAGS} in-buffer option, @pxref{Setting tags}), or it is created
+{{{samp(#+TAGS)}}} in-buffer option, @pxref{Setting tags}), or it is created
 dynamically from all tags used in the current buffer.
 @item
-After @samp{:} and not in a headline, complete property keys.  The list
+After {{{samp(:)}}} and not in a headline, complete property keys.  The list
 of keys is constructed dynamically from all keys used in the current
 buffer.
 @item
-After @samp{[}, complete link abbreviations (@pxref{Link abbreviations}).
+After {{{samp([)}}}, complete link abbreviations (@pxref{Link abbreviations}).
 @item
-After @samp{#+}, complete the special keywords like @samp{TYP_TODO} or
-@samp{OPTIONS} which set file-specific options for Org mode.  When the
+After {{{samp(#+)}}}, complete the special keywords like {{{samp(TYP_TODO)}}} or
+{{{samp(OPTIONS)}}} which set file-specific options for Org mode.  When the
 option keyword is already complete, pressing @kbd{M-@key{TAB}} again
 will insert example settings for this keyword.
 @item
-In the line after @samp{#+STARTUP: }, complete startup keywords,
+In the line after {{{samp(#+STARTUP: )}}}, complete startup keywords,
 i.e.@: valid keys for this line.
 @item
 Elsewhere, complete dictionary words using Ispell.
@@ -14385,7 +14385,7 @@ strokes.  This is achieved through a native template expansion mechanism.
 Note that Emacs has several other template mechanisms which could be used in
 a similar way, for example @file{yasnippet}.
 
-To insert a structural element, type a @samp{<}, followed by a template
+To insert a structural element, type a {{{samp(<)}}}, followed by a template
 selector and @kbd{@key{TAB}}.  Completion takes effect only when the above
 keystrokes are typed on a line by itself.
 
@@ -14521,7 +14521,7 @@ lines into the buffer (@pxref{In-buffer settings}).
 {{{cindex(special keywords)}}}
 
 Org mode uses special lines in the buffer to define settings on a
-per-file basis.  These lines start with a @samp{#+} followed by a
+per-file basis.  These lines start with a {{{samp(#+)}}} followed by a
 keyword, a colon, and then individual words defining a setting.  Several
 setting words can be in the same line, but you can also have multiple
 lines for the keyword.  While these settings are described throughout
@@ -14534,12 +14534,12 @@ when the file is visited again in a new Emacs session.
 @table @kbd
 @item #+ARCHIVE: %s_done::
 This line sets the archive location for the agenda file.  It applies for
-all subsequent lines until the next @samp{#+ARCHIVE} line, or the end
+all subsequent lines until the next {{{samp(#+ARCHIVE)}}} line, or the end
 of the file.  The first such line also applies to any entries before it.
 The corresponding variable is @code{org-archive-location}.
 @item #+CATEGORY:
 This line sets the category for the agenda file.  The category applies
-for all subsequent lines until the next @samp{#+CATEGORY} line, or the
+for all subsequent lines until the next {{{samp(#+CATEGORY)}}} line, or the
 end of the file.  The first such line also applies to any entries before it.
 @item #+COLUMNS: %25ITEM .....
 {{{cindex(property\\\, COLUMNS)}}}
@@ -14880,7 +14880,7 @@ indentation shifts by two@footnote{See the variable
 stars but the last one are made invisible using the @code{org-hide}
 face@footnote{Turning on @code{org-indent-mode} sets
 @code{org-hide-leading-stars} to @code{t} and @code{org-adapt-indentation} to
-@code{nil}.} - see below under @samp{2.} for more information on how this
+@code{nil}.} - see below under {{{samp(2.)}}} for more information on how this
 works.  You can turn on @code{org-indent-mode} for all files by customizing
 the variable @code{org-startup-indented}, or you can turn it on for
 individual files using
@@ -14947,7 +14947,7 @@ example using the color @code{grey90} on a white background.
 Things become cleaner still if you skip all the even levels and use only odd
 levels 1, 3, 5..., effectively adding two stars to go from one outline level
 to the next@footnote{When you need to specify a level for a property search
-or refile targets, @samp{LEVEL=2} will correspond to 3 stars, etc@.}.  In this
+or refile targets, {{{samp(LEVEL=2)}}} will correspond to 3 stars, etc@.}.  In this
 way we get the outline view shown at the beginning of this section.  In order
 to make the structure editing and export commands handle this convention
 correctly, configure the variable @code{org-odd-levels-only}, or set this on
@@ -15039,8 +15039,8 @@ In a table formula (@pxref{The spreadsheet}), it is possible to use
 names for natural constants or units.  Instead of defining your own
 constants in the variable @code{org-table-formula-constants}, install
 the @file{constants} package which defines a large number of constants
-and units, and lets you use unit prefixes like @samp{M} for
-@samp{Mega}, etc@.  You will need version 2.0 of this package, available
+and units, and lets you use unit prefixes like {{{samp(M)}}} for
+{{{samp(Mega)}}}, etc@.  You will need version 2.0 of this package, available
 at @url{http://www.astro.uva.nl/~dominik/Tools}.  Org checks for
 the function @code{constants-get}, which has to be autoloaded in your
 setup.  See the installation instructions in the file
@@ -15240,7 +15240,7 @@ Org-crypt will encrypt the text of an entry, but not the headline, or
 properties.  Org-crypt uses the Emacs EasyPG library to encrypt and decrypt
 files.
 
-Any text below a headline that has a @samp{:crypt:} tag will be automatically
+Any text below a headline that has a {{{samp(:crypt:)}}} tag will be automatically
 be encrypted when the file is saved.  If you want to use a different tag just
 customize the @code{org-crypt-tag-matcher} setting.
 
@@ -15314,7 +15314,7 @@ Org has a large number of hyperlink types built-in
 (@pxref{Hyperlinks}).  If you would like to add new link types, Org
 provides an interface for doing so.  Let's look at an example file,
 @file{org-man.el}, that will add support for creating links like
-@samp{[[man:printf][The printf manpage]]} to show Unix manual pages inside
+{{{samp([[man:printf][The printf manpage]])}}} to show Unix manual pages inside
 Emacs:
 
 @lisp
@@ -15374,7 +15374,7 @@ It does @code{(require 'org)} to make sure that @file{org.el} has been
 loaded.
 @item
 The next line calls @code{org-add-link-type} to define a new link type
-with prefix @samp{man}.  The call also contains the name of a function
+with prefix {{{samp(man)}}}.  The call also contains the name of a function
 that will be called to follow such a link.
 @item
 {{{vindex(org-store-link-functions)}}}
@@ -15398,7 +15398,7 @@ create the link for this buffer type; we do this by checking the value
 of the variable @code{major-mode}.  If not, the function must exit and
 return the value @code{nil}.  If yes, the link is created by getting the
 manual topic from the buffer name and prefixing it with the string
-@samp{man:}.  Then it must call the command @code{org-store-link-props}
+{{{samp(man:)}}}.  Then it must call the command @code{org-store-link-props}
 and set the @code{:type} and @code{:link} properties.  Optionally you
 can also set the @code{:description} property to provide a default for
 the link description when the link is later inserted into an Org
@@ -15537,10 +15537,10 @@ number of different solutions:
 @item
 The table could be placed in a block comment if that is supported by the
 language.  For example, in C mode you could wrap the table between
-@samp{/*} and @samp{*/} lines.
+{{{samp(/*)}}} and {{{samp(*/)}}} lines.
 @item
 Sometimes it is possible to put the table after some kind of /END/
-statement, for example @samp{\bye} in @TeX{} and @samp{\end@{document@}}
+statement, for example {{{samp(\bye)}}} in @TeX{} and {{{samp(\end@{document@)}}}}
 in @LaTeX{}.
 @item
 You can just comment the table line-by-line whenever you want to process
@@ -15564,7 +15564,7 @@ header.  Orgtbl mode can insert a radio table skeleton@footnote{By
 default this works only for @LaTeX{}, HTML, and Texinfo.  Configure the
 variable @code{orgtbl-radio-tables} to install templates for other
 modes.}  with the command @kbd{M-x orgtbl-insert-radio-table}.  You will
-be prompted for a table name, let's say we use @samp{salesfigures}.  You
+be prompted for a table name, let's say we use {{{samp(salesfigures)}}}.  You
 will then get the following template:
 
 {{{cindex(#+ORGTBL\\\, SEND)}}}
@@ -15583,7 +15583,7 @@ The @code{#+ORGTBL: SEND} line tells Orgtbl mode to use the function
 @code{orgtbl-to-latex} to convert the table into @LaTeX{} and to put it
 into the receiver location with name @code{salesfigures}.  You may now
 fill in the table---feel free to use the spreadsheet features@footnote{If
-the @samp{#+TBLFM} line contains an odd number of dollar characters,
+the {{{samp(#+TBLFM)}}} line contains an odd number of dollar characters,
 this may cause problems with font-lock in @LaTeX{} mode.  As shown in the
 example you can fix this by adding an extra line inside the
 @code{comment} environment that is used to balance the dollar
@@ -15699,9 +15699,9 @@ hands processing over to the generic translator.  Here is the entire code:
 As you can see, the properties passed into the function (variable
 @var{PARAMS}) are combined with the ones newly defined in the function
 (variable @var{PARAMS2}).  The ones passed into the function (i.e.@: the
-ones set by the @samp{ORGTBL SEND} line) take precedence.  So if you
+ones set by the {{{samp(ORGTBL SEND)}}} line) take precedence.  So if you
 would like to use the @LaTeX{} translator, but wanted the line endings to
-be @samp{\\[2mm]} instead of the default @samp{\\}, you could just
+be {{{samp(\\[2mm])}}} instead of the default {{{samp(\\)}}}, you could just
 overrule the default with
 
 @example
@@ -15711,8 +15711,8 @@ overrule the default with
 For a new language, you can either write your own converter function in
 analogy with the @LaTeX{} translator, or you can use the generic function
 directly.  For example, if you have a language where a table is started
-with @samp{!BTBL!}, ended with @samp{!ETBL!}, and where table lines are
-started with @samp{!BL!}, ended with @samp{!EL!}, and where the field
+with {{{samp(!BTBL!)}}}, ended with {{{samp(!ETBL!)}}}, and where table lines are
+started with {{{samp(!BL!)}}}, ended with {{{samp(!EL!)}}}, and where the field
 separator is a TAB, you could call the generic translator like this (on
 a single line!):
 
@@ -15733,7 +15733,7 @@ things the generic translator cannot do.  A translator function takes
 two arguments.  The first argument is the table, a list of lines, each
 line either the symbol @code{hline} or a list of fields.  The second
 argument is the property list containing all parameters specified in the
-@samp{#+ORGTBL: SEND} line.  The function must return a single string
+{{{samp(#+ORGTBL: SEND)}}} line.  The function must return a single string
 containing the formatted table.  If you write a generally useful
 translator, please post it on @email{emacs-orgmode@@gnu.org} so that
 others can benefit from your work.
@@ -15911,7 +15911,7 @@ meaningful header in the agenda view.
 A general way to create custom searches is to base them on a search for
 entries with a certain level limit.  If you want to study all entries with
 your custom search function, simply do a search for
-@samp{LEVEL>0}@footnote{Note that, when using @code{org-odd-levels-only}, a
+{{{samp(LEVEL>0)}}}@footnote{Note that, when using @code{org-odd-levels-only}, a
 level number corresponds to order in the hierarchy, not to the number of
 stars.}, and then use @code{org-agenda-skip-function} to select the entries
 you really want to have.
@@ -15980,8 +15980,8 @@ emacs -batch -l ~/.emacs -eval '(org-batch-agenda "t")' | lpr
 
 If the parameter is a string with 2 or more characters, it is used as a
 tags/TODO match string.  For example, to print your local shopping list
-(all items with the tag @samp{shop}, but excluding the tag
-@samp{NewYork}), you could use
+(all items with the tag {{{samp(shop)}}}, but excluding the tag
+{{{samp(NewYork)}}}), you could use
 
 @example
 emacs -batch -l ~/.emacs                                      \
@@ -16135,7 +16135,7 @@ values and check if VALUE is in this list.
 @defopt org-property-allowed-value-functions
 Hook for functions supplying allowed values for a specific property.
 The functions must take a single argument, the name of the property, and
-return a flat list of allowed values.  If @samp{:ETC} is one of
+return a flat list of allowed values.  If {{{samp(:ETC)}}} is one of
 the values, use the values as completion help, but allow also other values
 to be entered.  The functions must return @code{nil} if they are not
 responsible for this property.
@@ -16718,7 +16718,7 @@ in HTML output.
 @item
 /Samuel Wales/ has provided important feedback and bug reports.
 @item
-/Chris Wallace/ provided a patch implementing the @samp{QUOTE}
+/Chris Wallace/ provided a patch implementing the {{{samp(QUOTE)}}}
 keyword.
 @item
 /David Wainberg/ suggested archiving, and improvements to the linking
