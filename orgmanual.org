@@ -4277,9 +4277,9 @@ the same way as you can for TODO keywords (see [[Faces for TODO keywords]]).
 {{{cindex(inheritance\\\, of tags)}}}
 {{{cindex(sublevels\\\, inclusion into tags match)}}}
 
-/Tags/ make use of the hierarchical structure of outline trees.  If a
+/Tags/ make use of the hierarchical structure of outline trees. If a
 heading has a certain tag, all subheadings will inherit the tag as
-well.  For example, in the list
+well. For example, in the list
 
 #+begin_example
 ,* Meeting with the French group      :work:
@@ -4287,7 +4287,7 @@ well.  For example, in the list
 ,*** TODO Prepare slides for him      :action:
 #+end_example
 
-@noindent
+{{{noindent}}}
 the final heading will have the tags {{{samp(:work:)}}}, {{{samp(:boss:)}}},
 {{{samp(:notes:)}}}, and {{{samp(:action:)}}} even though the final heading is not
 explicitly marked with those tags.  You can also set tags that all entries in
@@ -4301,7 +4301,7 @@ changes in the line.}:
 ,#+FILETAGS: :Peter:Boss:Secret:
 #+end_example
 
-@noindent
+{{{noindent}}}
 {{{vindex(org-use-tag-inheritance)}}}
 {{{vindex(org-tags-exclude-from-inheritance)}}}
 To limit tag inheritance to specific tags, or to turn it off entirely, use
@@ -4390,14 +4390,14 @@ like:
 (setq org-tag-alist '(("@@work" . ?w) ("@@home" . ?h) ("laptop" . ?l)))
 @end lisp
 
-@noindent If the tag is only relevant to the file you are working on, then you
+{{{noindent}}} If the tag is only relevant to the file you are working on, then you
 can instead set the TAGS option line as:
 
 #+begin_example
 ,#+TAGS: @@work(w)  @@home(h)  @@tennisclub(t)  laptop(l)  pc(p)
 #+end_example
 
-@noindent The tags interface will show the available tags in a splash
+{{{noindent}}} The tags interface will show the available tags in a splash
 window.  If you want to start a new line after a specific tag, insert
 {{{samp(\n)}}} into the tag list
 
@@ -4405,14 +4405,14 @@ window.  If you want to start a new line after a specific tag, insert
 ,#+TAGS: @@work(w)  @@home(h)  @@tennisclub(t) \n laptop(l)  pc(p)
 #+end_example
 
-@noindent or write them in two lines:
+{{{noindent}}} or write them in two lines:
 
 #+begin_example
 ,#+TAGS: @@work(w)  @@home(h)  @@tennisclub(t)
 ,#+TAGS: laptop(l)  pc(p)
 #+end_example
 
-@noindent
+{{{noindent}}}
 You can also group together tags that are mutually exclusive by using
 braces, as in:
 
@@ -4420,13 +4420,13 @@ braces, as in:
 ,#+TAGS: @{ @@work(w)  @@home(h)  @@tennisclub(t) @}  laptop(l)  pc(p)
 #+end_example
 
-@noindent you indicate that at most one of {{{samp(@@work)}}}, {{{samp(@@home)}}},
+{{{noindent}}} you indicate that at most one of {{{samp(@@work)}}}, {{{samp(@@home)}}},
 and {{{samp(@@tennisclub)}}} should be selected.  Multiple such groups are allowed.
 
-@noindent Don't forget to press @kbd{C-c C-c} with the cursor in one of
+{{{noindent}}} Don't forget to press @kbd{C-c C-c} with the cursor in one of
 these lines to activate any changes.
 
-@noindent
+{{{noindent}}}
 To set these mutually exclusive groups in the variable ~org-tags-alist~,
 you must use the dummy tags ~:startgroup~ and ~:endgroup~ instead
 of the braces.  Similarly, you can use ~:newline~ to indicate a line
@@ -4478,7 +4478,7 @@ If you are using expert mode, the first @kbd{C-c} will display the
 selection window.
 @end table
 
-@noindent
+{{{noindent}}}
 This method lets you assign tags to a headline with very few keys.  With
 the above setup, you could clear the current tags and set {{{samp(@@home)}}},
 {{{samp(laptop)}}} and {{{samp(pc)}}} tags with just the following keys: @kbd{C-c
@@ -4646,7 +4646,7 @@ Property values set with the global variable
 ~org-global-properties~ can be inherited by all entries in all
 Org files.
 
-@noindent
+{{{noindent}}}
 The following commands help to work with properties:
 
 @table @kbd
@@ -4883,7 +4883,7 @@ definition looks like this:
  %[@var{width}]@var{property}[(@var{title})][@{@var{summary-type}@}]
 #+end_example
 
-@noindent
+{{{noindent}}}
 Except for the percent sign and the property name, all items are
 optional.  The individual parts have the following meaning:
 
@@ -4917,7 +4917,7 @@ optional.  The individual parts have the following meaning:
                 @{est+@}    @r{Add low-high estimates.}
 #+end_example
 
-@noindent
+{{{noindent}}}
 Be aware that you can only have one summary type for any property you
 include.  Subsequent columns referencing the same property will all display the
 same summary information.
@@ -4949,7 +4949,7 @@ values.
 :Approved_ALL: "[ ]" "[X]"
 #+end_example
 
-@noindent
+{{{noindent}}}
 The first column, {{{samp(%25ITEM)}}}, means the first 25 characters of the
 item itself, i.e.@: of the headline.  You probably always should start the
 column definition with the {{{samp(ITEM)}}} specifier.  The other specifiers
@@ -5046,7 +5046,7 @@ of this block looks like this:
 ,#+END:
 #+end_example
 
-@noindent This dynamic block has the following parameters:
+{{{noindent}}} This dynamic block has the following parameters:
 
 @table @code
 @item :id
@@ -5078,7 +5078,7 @@ column view is ~ITEM~.
 
 @end table
 
-@noindent
+{{{noindent}}}
 The following commands insert or update the dynamic block:
 
 @table @kbd
@@ -5446,7 +5446,7 @@ customizing the variables ~org-display-custom-times~ and
 Toggle the display of custom formats for dates and times.
 @end table
 
-@noindent
+{{{noindent}}}
 Org mode needs the default format for scanning, so the custom date/time
 format does not @emph{replace} the default format---instead it is put
 @emph{over} the default format using text properties.  This has the
@@ -5524,7 +5524,7 @@ the task will automatically be forwarded until completed.
     SCHEDULED: <2004-12-25 Sat>
 #+end_example
 
-@noindent
+{{{noindent}}}
 @b{Important:} Scheduling an item in Org mode should /not/ be
 understood in the same way that we understand /scheduling a meeting/.
 Setting a date for a meeting is just a simple appointment, you should
@@ -5621,7 +5621,7 @@ or plain timestamp.  In the following example
 ,** TODO Pay the rent
    DEADLINE: <2005-10-01 Sat +1m>
 #+end_example
-@noindent
+{{{noindent}}}
 the ~+1m~ is a repeater; the intended interpretation is that the task
 has a deadline on <2005-10-01> and repeats itself every (one) month starting
 from that time.  You can use yearly, monthly, weekly, daily and hourly repeat
@@ -5861,13 +5861,13 @@ buffer with the @kbd{C-c C-x C-r} command:
 ,#+BEGIN: clocktable :maxlevel 2 :emphasize nil :scope file
 ,#+END: clocktable
 #+end_example
-@noindent
+{{{noindent}}}
 {{{vindex(org-clocktable-defaults)}}}
 The {{{samp(BEGIN)}}} line and specify a number of options to define the scope,
 structure, and formatting of the report.  Defaults for all these options can
 be configured in the variable ~org-clocktable-defaults~.
 
-@noindent First there are options that determine which clock entries are to
+{{{noindent}}} First there are options that determine which clock entries are to
 be selected:
 #+begin_example
 :maxlevel    @r{Maximum level depth to which times are listed in the table.}
@@ -5938,7 +5938,7 @@ day, you could write
 ,#+BEGIN: clocktable :maxlevel 2 :block today :scope tree1 :link t
 ,#+END: clocktable
 #+end_example
-@noindent
+{{{noindent}}}
 and to use a specific time range you could write@footnote{Note that all
 parameters must be specified in a single line---the line is broken here
 only to fit it into the manual.}
@@ -6081,7 +6081,7 @@ buffer you can use
 ,#+COLUMNS: %40ITEM(Task) %17Effort(Estimated Effort)@{:@} %CLOCKSUM
 #+end_example
 
-@noindent
+{{{noindent}}}
 {{{vindex(org-global-properties)}}}
 {{{vindex(org-columns-default-format)}}}
 or, even better, you can set up these values globally by customizing the
@@ -6199,7 +6199,7 @@ users.  To convert your ~org-remember-templates~, run the command
 #+begin_example
 @kbd{M-x org-capture-import-remember-templates @key{RET}}
 #+end_example
-@noindent and then customize the new variable with @kbd{M-x
+{{{noindent}}} and then customize the new variable with @kbd{M-x
 customize-variable org-capture-templates}, check the result, and save the
 customization.  You can then use both remember and capture until
 you are familiar with the new mechanism.
@@ -6316,14 +6316,14 @@ would look like:
         "* %?\nEntered on %U\n  %i\n  %a")))
 #+end_src
 
-@noindent If you then press @kbd{C-c c t}, Org will prepare the template
+{{{noindent}}} If you then press @kbd{C-c c t}, Org will prepare the template
 for you like this:
 #+begin_example
 ,* TODO
   [[file:@var{link to where you initiated capture}]]
 #+end_example
 
-@noindent
+{{{noindent}}}
 During expansion of the template, ~%a~ has been replaced by a link to
 the location from where you called the capture command.  This can be
 extremely useful for deriving tasks from emails, for example.  You fill in
@@ -6359,7 +6359,7 @@ prefix key, for example
 #+begin_example
          ("b" "Templates for marking stuff to buy")
 #+end_example
-@noindent If you do not define a template for the @kbd{C} key, this key will
+{{{noindent}}} If you do not define a template for the @kbd{C} key, this key will
 be used to open the customize buffer for this complex variable.
 
 @item description
@@ -6530,7 +6530,7 @@ dynamic insertion of content.  The templates are expanded in the order given her
 %?          @r{After completing the template, position cursor here.}
 @end smallexample
 
-@noindent
+{{{noindent}}}
 For specific link types, the following keywords will be
 defined@footnote{If you define your own link types (see [[Adding hyperlink types]]), any property you store with
 ~org-store-link-props~ can be accessed in capture templates in a
@@ -6555,7 +6555,7 @@ info                             |  %:file %:node
 calendar                         |  %:date
 @end smallexample
 
-@noindent
+{{{noindent}}}
 To place the cursor after template expansion use:
 
 @smallexample
@@ -6618,7 +6618,7 @@ choice to an entry.  You can also make children inherit the attachment
 directory from a parent, so that an entire subtree uses the same attached
 directory.
 
-@noindent The following commands deal with attachments:
+{{{noindent}}} The following commands deal with attachments:
 
 @table @kbd
 
@@ -6706,7 +6706,7 @@ information.  Here is just an example:
          "~/txt/org/feeds.org" "Slashdot Entries")))
 #+end_src
 
-@noindent
+{{{noindent}}}
 will configure that new items from the feed provided by
 ~rss.slashdot.org~ will result in new entries in the file
 @file{~/org/feeds.org} under the heading {{{samp(Slashdot Entries)}}}, whenever
@@ -6871,7 +6871,7 @@ archive locations in a buffer is using properties.}:
 #+end_example
 
 {{{cindex(property\\\, ARCHIVE)}}}
-@noindent
+{{{noindent}}}
 If you would like to have a special ARCHIVE location for a single entry
 or a (sub)tree, give the entry an ~:ARCHIVE:~ property with the
 location as the value (see [[Properties and Columns]]).
@@ -6985,7 +6985,7 @@ along, and
 views.
 @end itemize
 
-@noindent
+{{{noindent}}}
 The extracted information is displayed in a special @emph{agenda
 buffer}.  This buffer is read-only, but provides commands to visit the
 corresponding locations in the original Org files, and even to
@@ -7041,7 +7041,7 @@ Command to use an ~iswitchb~-like interface to switch to and between Org
 buffers.
 @end table
 
-@noindent
+{{{noindent}}}
 The Org menu contains the current list of files and can be used
 to visit any of them.
 
@@ -7064,7 +7064,7 @@ agenda view, the new restriction takes effect immediately.
 Remove the permanent restriction created by @kbd{C-c C-x <}.
 @end table
 
-@noindent
+{{{noindent}}}
 When working with @file{speedbar.el}, you can use the following commands in
 the Speedbar frame:
 @table @kbd
@@ -7203,7 +7203,7 @@ agenda, you only need to customize the variable
 (setq org-agenda-include-diary t)
 @end lisp
 
-@noindent After that, everything will happen automatically.  All diary
+{{{noindent}}} After that, everything will happen automatically.  All diary
 entries including holidays, anniversaries, etc., will be included in the
 agenda buffer created by Org mode.  @key{SPC}, @key{TAB}, and
 @key{RET} can be used from the agenda buffer to jump to the diary
@@ -7450,7 +7450,7 @@ the value of a property.  Here is a complex example:
          +With=@{Sarah\|Denny@}+SCHEDULED>="<2008-10-11>"
 #+end_example
 
-@noindent
+{{{noindent}}}
 The type of comparison will depend on how the comparison value is written:
 @itemize @minus
 @item
@@ -7537,7 +7537,7 @@ When called with a @kbd{C-u} prefix, all unfinished TODO entries
 (scheduled or not) are also listed under the current date.
 @end table
 
-@noindent
+{{{noindent}}}
 The commands available in the timeline buffer are listed in
 @ref{Agenda commands}.
 
@@ -7662,17 +7662,17 @@ property.}:
 ,#+CATEGORY: Thesis
 #+end_example
 
-@noindent
+{{{noindent}}}
 {{{cindex(property\\\, CATEGORY)}}}
 If you would like to have a special CATEGORY for a single entry or a
 (sub)tree, give the entry a ~:CATEGORY:~ property with the
 special category you want to apply as the value.
 
-@noindent
+{{{noindent}}}
 The display in the agenda buffer looks best if the category is not
 longer than 10 characters.
 
-@noindent
+{{{noindent}}}
 You can set up icons for category by customizing the
 ~org-agenda-category-icon-alist~ variable.
 
@@ -8374,7 +8374,7 @@ types:
 @end group
 @end lisp
 
-@noindent
+{{{noindent}}}
 The initial string in each entry defines the keys you have to press
 after the dispatcher command @kbd{C-c a} in order to access the command.
 Usually this will be just a single character, but if you have many
@@ -8440,7 +8440,7 @@ matching commands discussed above: ~todo~, ~tags~, and
 @end group
 @end lisp
 
-@noindent
+{{{noindent}}}
 This will define @kbd{C-c a h} to create a multi-block view for stuff
 you need to attend to at home.  The resulting agenda buffer will contain
 your agenda for the current week, all TODO items that carry the tag
@@ -8476,7 +8476,7 @@ right spot in ~org-agenda-custom-commands~.  For example:
 @end group
 @end lisp
 
-@noindent
+{{{noindent}}}
 Now the @kbd{C-c a w} command will sort the collected entries only by
 priority, and the prefix format is modified to just say {{{samp(  Mixed: )}}}
 instead of giving the category of the entry.  The sparse tags tree of
@@ -8650,7 +8650,7 @@ set options for the export commands.  For example:
          ("theagenda.ps"))))
 @end lisp
 
-@noindent
+{{{noindent}}}
 This command sets two options for the Postscript exporter, to make it
 print in two columns in landscape format---the resulting page can be cut
 in two and then used in a paper agenda.  The remaining settings modify
@@ -8661,14 +8661,14 @@ black-and-white printer.  Settings specified in
 ~org-agenda-exporter-settings~ will also apply, but the settings
 in ~org-agenda-custom-commands~ take precedence.
 
-@noindent
+{{{noindent}}}
 From the command line you may also use
 #+header: :eval no
 #+header: :exports code
 #+begin_src sh
 emacs -eval (org-batch-store-agenda-views) -kill
 #+end_src
-@noindent
+{{{noindent}}}
 or, if you need to modify some parameters@footnote{Quoting depends on the
 system you use, please check the FAQ for examples.}
 #+header: :eval no
@@ -8681,7 +8681,7 @@ emacs -eval '(org-batch-store-agenda-views                      \
               org-agenda-files (quote ("~/org/project.org")))'  \
       -kill
 #+end_src
-@noindent
+{{{noindent}}}
 which will create the agenda views restricted to the file
 @file{~/org/project.org}, without diary entries and with a 30-day
 extent.
@@ -8778,7 +8778,7 @@ summarizes the markup rules used in an Org mode buffer.
     :END:
 {{{cindex(document title\\\, markup rules)}}}
 
-@noindent
+{{{noindent}}}
 The title of the exported document is taken from the special line
 
 {{{cindex(#+TITLE)}}}
@@ -8786,7 +8786,7 @@ The title of the exported document is taken from the special line
 ,#+TITLE: This is the title of the document
 #+end_example
 
-@noindent
+{{{noindent}}}
 If this line does not exist, the title is derived from the first non-empty,
 non-comment line in the buffer.  If no such line exists, or if you have
 turned off exporting of the text before the first headline (see below), the
@@ -8857,7 +8857,7 @@ the first headline in a different way.  You can do so by setting the variable
 ~org-export-skip-text-before-1st-heading~ to ~t~.  On a per-file
 basis, you can get the same effect with {{{samp(#+OPTIONS: skip:t)}}}.
 
-@noindent
+{{{noindent}}}
 If you still want to have some text before the first headline, use the
 ~#+TEXT~ construct:
 
@@ -9155,7 +9155,7 @@ include your @file{.emacs} file, you could use:
 #+begin_example
 ,#+INCLUDE: "~/.emacs" src emacs-lisp
 #+end_example
-@noindent
+{{{noindent}}}
 The optional second and third parameter are the markup (e.g.@: {{{samp(quote)}}},
 {{{samp(example)}}}, or {{{samp(src)}}}), and, if the markup is {{{samp(src)}}}, the
 language for formatting the contents.  The markup is optional; if it is not
@@ -9218,7 +9218,7 @@ You can define text snippets with
 ,#+MACRO: name   replacement text $1, $2 are arguments
 #+end_example
 
-@noindent which can be referenced anywhere in the document (even in
+{{{noindent}}} which can be referenced anywhere in the document (even in
 code examples) with ~@{@{@{name(arg1,arg2)@~@}@}}.  In addition to
 defined macros, ~@{@{@{title@~@}@}}, ~@{@{@{author@~@}@}}, etc.,
 will reference information set by the ~#+TITLE:~, ~#+AUTHOR:~, and
@@ -9329,7 +9329,7 @@ convention, or use, on a per-file basis:
 ,#+OPTIONS: ^:@{@}
 #+end_example
 
-@noindent With this setting, {{{samp(a_b)}}} will not be interpreted as a
+{{{noindent}}} With this setting, {{{samp(a_b)}}} will not be interpreted as a
 subscript, but {{{samp(a_@{b@)}}}} will.
 
 @table @kbd
@@ -9383,7 +9383,7 @@ For the other delimiters, there is no such restriction, so when in doubt, use
 {{{samp(\(...\))}}} as inline math delimiters.
 @end itemize
 
-@noindent For example:
+{{{noindent}}} For example:
 
 #+begin_example
 \begin@{equation@}                          % arbitrary environments,
@@ -9394,7 +9394,7 @@ If $a^2=b$ and \( b=2 \), then the solution must be
 either $$ a=+\sqrt@{2@} $$ or \[ a=-\sqrt@{2@} \].
 #+end_example
 
-@noindent
+{{{noindent}}}
 {{{vindex(org-format-latex-options)}}}
 If you need any of the delimiter ASCII sequences for other purposes, you
 can configure the option ~org-format-latex-options~ to deselect the
@@ -9628,7 +9628,7 @@ Insert template with export options, see example below.
 ,#+XSLT:        the XSLT stylesheet used by DocBook exporter to generate FO file
 #+end_example
 
-@noindent
+{{{noindent}}}
 The ~#+OPTIONS~ line is a compact@footnote{If you want to configure many options
 this way, you can use several ~#+OPTIONS~ lines.} form to specify export
 settings.  Here you can:
@@ -9681,7 +9681,7 @@ creator:   @r{turn on/off inclusion of creator info into exported file}
 timestamp: @r{turn on/off inclusion creation time into exported file}
 d:         @r{turn on/off inclusion of drawers, or list drawers to include}
 #+end_example
-@noindent
+{{{noindent}}}
 These options take effect in both the HTML and @LaTeX{} export, except for
 ~TeX~ and ~LaTeX~ options, which are respectively ~t~ and
 ~nil~ for the @LaTeX{} export.
@@ -9777,7 +9777,7 @@ at a different level, specify it with a prefix argument.  For example,
 @kbd{C-1 C-c C-e a}
 #+end_example
 
-@noindent
+{{{noindent}}}
 creates only top level headlines and exports the rest as items.  When
 headlines are converted to items, the indentation of the text following
 the headline is changed to fit nicely under the item.  This is done with
@@ -9848,7 +9848,7 @@ specify it with a numeric prefix argument.  For example,
 @kbd{C-2 C-c C-e b}
 #+end_example
 
-@noindent
+{{{noindent}}}
 creates two levels of headings and does the rest as items.
 
 
@@ -9906,7 +9906,7 @@ the exported file use either
 ,#+HTML: Literal HTML code for export
 #+end_example
 
-@noindent or
+{{{noindent}}} or
 {{{cindex(#+BEGIN_HTML)}}}
 
 #+begin_example
@@ -9997,7 +9997,7 @@ support text viewers and accessibility, and align it to the right.
 [[./img/a.jpg]]
 #+end_example
 
-@noindent
+{{{noindent}}}
 You could use ~http~ addresses just as well.
 
 *** Math formatting in HTML export
@@ -10024,7 +10024,7 @@ insert something like the following into the buffer:
 #+MATHJAX: align:"left" mathml:t path:"/MathJax/MathJax.js"
 #+end_example
 
-@noindent See the docstring of the variable
+{{{noindent}}} See the docstring of the variable
 ~org-export-html-mathjax-options~ for the meaning of the parameters in
 this line.
 
@@ -10125,7 +10125,7 @@ individually for each file, you can use
 ,#+STYLE: <link rel="stylesheet" type="text/css" href="stylesheet.css" />
 #+end_example
 
-@noindent
+{{{noindent}}}
 For longer style definitions, you can use several such lines.  You could also
 directly write a ~<style>~ ~</style>~ section in this way, without
 referring to an external file.
@@ -10167,7 +10167,7 @@ adding a single line to the Org file:
 ,#+INFOJS_OPT: view:info toc:nil
 #+end_example
 
-@noindent
+{{{noindent}}}
 If this line is found, the HTML header will automatically contain the code
 needed to invoke the script.  Using the line above, you can set the following
 viewing options:
@@ -10199,7 +10199,7 @@ mouse:   @r{Headings are highlighted when the mouse is over them.  Should be}
 buttons: @r{Should view-toggle buttons be everywhere?  When ~nil~ (the}
          @r{default), only one such button will be present.}
 #+end_example
-@noindent
+{{{noindent}}}
 {{{vindex(org-infojs-options)}}}
 {{{vindex(org-export-html-use-infojs)}}}
 You can choose default values for these options by customizing the variable
@@ -10276,7 +10276,7 @@ with a numeric prefix argument.  For example,
 @kbd{C-2 C-c C-e l}
 #+end_example
 
-@noindent
+{{{noindent}}}
 creates two levels of headings and does the rest as items.
 
 *** Header and sectioning
@@ -10343,7 +10343,7 @@ the following constructs:
 #+LaTeX: Literal @LaTeX{} code for export
 #+end_example
 
-@noindent or
+{{{noindent}}} or
 {{{cindex(#+BEGIN_LaTeX)}}}
 
 #+begin_example
@@ -10637,7 +10637,7 @@ DocBook file with the following constructs:
 #+DOCBOOK: Literal DocBook code for export
 #+end_example
 
-@noindent or
+{{{noindent}}} or
 {{{cindex(#+BEGIN_DOCBOOK)}}}
 
 #+begin_example
@@ -12022,7 +12022,7 @@ process, for example, to change permissions of the resulting files.  The
 project property list is scoped into this call as the variable
 ~project-plist~.
 @end multitable
-@noindent
+{{{noindent}}}
 
 *** Selecting files
     :PROPERTIES:
@@ -12250,7 +12250,7 @@ location.  In this case, use the property
 @tab Function to validate links
 @end multitable
 
-@noindent
+{{{noindent}}}
 to define a function for checking link validity.  This function must
 accept two arguments, the file name and a directory relative to which
 the file name is interpreted in the production environment.  If this
@@ -14884,7 +14884,7 @@ more text                        |          more text
 @end group
 #+end_example
 
-@noindent
+{{{noindent}}}
 
 If you are using at least Emacs 23.2@footnote{Emacs 23.1 can actually crash
 with ~org-indent-mode~} and version 6.29 of Org, this kind of view can
@@ -14952,7 +14952,7 @@ With hidden stars, the tree becomes:
 @end group
 #+end_example
 
-@noindent
+{{{noindent}}}
 {{{vindex(org-hide @r{(face)})}}}
 The leading stars are not truly replaced by whitespace, they are only
 fontified with the face ~org-hide~ that uses the background color as
@@ -15380,14 +15380,14 @@ PATH should be a topic that can be thrown at the man command."
 ;;; org-man.el ends here
 @end lisp
 
-@noindent
+{{{noindent}}}
 You would activate this new link type in @file{.emacs} with
 
 @lisp
 (require 'org-man)
 @end lisp
 
-@noindent
+{{{noindent}}}
 Let's go through the file and see what it does.
 @enumerate
 @item
@@ -15513,7 +15513,7 @@ between these lines, replacing whatever was there before.  For example:
 /* END RECEIVE ORGTBL table_name */
 #+end_example
 
-@noindent
+{{{noindent}}}
 Just above the source table, we put a special line that tells
 Orgtbl mode how to translate this table and where to install it.  For
 example:
@@ -15522,7 +15522,7 @@ example:
 #+ORGTBL: SEND table_name translation_function arguments....
 #+end_example
 
-@noindent
+{{{noindent}}}
 ~table_name~ is the reference name for the table that is also used
 in the receiver lines.  ~translation_function~ is the Lisp function
 that does the translation.  Furthermore, the line can contain a list of
@@ -15548,7 +15548,7 @@ When non-nil, do not escape special characters ~&%#_^~ when exporting
 the table.  The default value is nil.
 @end table
 
-@noindent
+{{{noindent}}}
 The one problem remaining is how to keep the source table in the buffer
 without disturbing the normal workings of the file, for example during
 compilation of a C file or processing of a @LaTeX{} file.  There are a
@@ -15598,7 +15598,7 @@ will then get the following template:
 \end@{comment@}
 #+end_example
 
-@noindent
+{{{noindent}}}
 {{{vindex(@LaTeX{}-verbatim-environments)}}}
 The ~#+ORGTBL: SEND~ line tells Orgtbl mode to use the function
 ~orgtbl-to-latex~ to convert the table into @LaTeX{} and to put it
@@ -15627,7 +15627,7 @@ variable ~LaTeX-verbatim-environments~.}:
 \end@{comment@}
 #+end_example
 
-@noindent
+{{{noindent}}}
 When you are done, press @kbd{C-c C-c} in the table to get the converted
 table inserted between the two marker lines.
 
@@ -15742,7 +15742,7 @@ a single line!):
                               :lstart "!BL! " :lend " !EL!" :sep "\t"
 #+end_example
 
-@noindent
+{{{noindent}}}
 Please check the documentation string of the function
 ~orgtbl-to-generic~ for a full list of parameters understood by
 that function, and remember that you can pass each of them into
@@ -15854,7 +15854,7 @@ run:
 #+END:
 #+end_example
 
-@noindent
+{{{noindent}}}
 The corresponding block writer function could look like this:
 
 @lisp
@@ -16013,7 +16013,7 @@ emacs -batch -l ~/.emacs                                      \
       -eval '(org-batch-agenda "+shop-NewYork")' | lpr
 #+end_src
 
-@noindent
+{{{noindent}}}
 You may also modify parameters on the fly like this:
 
 #+header: :eval no
@@ -16027,7 +16027,7 @@ emacs -batch -l ~/.emacs                                      \
    | lpr
 #+end_src
 
-@noindent
+{{{noindent}}}
 which will produce a 30-day agenda, fully restricted to the Org file
 @file{~/org/projects.org}, not even including the diary.
 
@@ -16060,7 +16060,7 @@ priority-l   @r{The priority letter if any was given}
 priority-n   @r{The computed numerical priority}
 #+end_example
 
-@noindent
+{{{noindent}}}
 Time and date will only be given if a timestamp (or deadline/scheduled)
 led to the selection of the item.
 
@@ -16222,7 +16222,7 @@ agenda-with-archives
 (file1 file2 ...)
         @r{if this is a list, all files in the list will be scanned}
 #+end_example
-@noindent
+{{{noindent}}}
 The remaining args are treated as settings for the skipping facilities of
 the scanner.  The following items can be given here:
 
@@ -16483,7 +16483,7 @@ webpages derived from Org using an Info-like or a folding interface with
 single-key navigation.
 @end table
 
-@noindent See below for the full list of contributions!  Again, please
+{{{noindent}}} See below for the full list of contributions!  Again, please
 let me know what I am missing here!
 
 @section From Bastien
