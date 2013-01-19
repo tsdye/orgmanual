@@ -4349,11 +4349,12 @@ also a special command for inserting tags:
 
 
 {{{vindex(org-tag-alist)}}}
-Org supports tag insertion based on a /list of tags/.  By
-default this list is constructed dynamically, containing all tags
-currently used in the buffer.  You may also globally specify a hard list
-of tags with the variable ~org-tag-alist~.  Finally you can set
-the default tags for a given file with lines like
+
+Org supports tag insertion based on a /list of tags/. By default this
+list is constructed dynamically, containing all tags currently used in
+the buffer. You may also globally specify a hard list of tags with the
+variable ~org-tag-alist~. Finally you can set the default tags for a
+given file with lines like
 
 {{{cindex(#+TAGS)}}}
 #+begin_example
@@ -4370,10 +4371,11 @@ in a specific file, add an empty TAGS option line to that file:
 #+end_example
 
 {{{vindex(org-tag-persistent-alist)}}}
-If you have a preferred set of tags that you would like to use in every file,
-in addition to those defined on a per-file basis by TAGS option lines, then
-you may specify a list of tags with the variable
-~org-tag-persistent-alist~.  You may turn this off on a per-file basis
+
+If you have a preferred set of tags that you would like to use in
+every file, in addition to those defined on a per-file basis by TAGS
+option lines, then you may specify a list of tags with the variable
+~org-tag-persistent-alist~. You may turn this off on a per-file basis
 by adding a STARTUP option line to that file:
 
 #+begin_example
@@ -4386,7 +4388,7 @@ method called /fast tag selection/.  This allows you to select and
 deselect tags with just a single key press.  For this to work well you should
 assign unique letters to most of your commonly used tags.  You can do this
 globally by configuring the variable ~org-tag-alist~ in your
-@file{.emacs} file.  For example, you may find the need to tag many items in
+{{{file(.emacs)}}} file.  For example, you may find the need to tag many items in
 different files with {{{samp(:@@home:)}}}.  In this case you can set something
 like:
 
@@ -5104,7 +5106,7 @@ block.  If there is a ~#+TBLFM:~ after the table, the table will
 actually be recalculated automatically after an update.
 
 An alternative way to capture and process property values into a table is
-provided by Eric Schulte's @file{org-collector.el} which is a contributed
+provided by Eric Schulte's {{{file(org-collector.el)}}} which is a contributed
 package@footnote{Contributed packages are not part of Emacs, but are
 distributed with the main distribution of Org (visit
 @uref{http://orgmode.org}).}.  It provides a general API to collect
@@ -5983,7 +5985,7 @@ By customizing the variable ~org-clock-idle-time~ to some integer, such
 as 10 or 15, Emacs can alert you when you get back to your computer after
 being idle for that many minutes@footnote{On computers using Mac OS X,
 idleness is based on actual user idleness, not just Emacs' idle time.  For
-X11, you can install a utility program @file{x11idle.c}, available in the
+X11, you can install a utility program {{{file(x11idle.c)}}}, available in the
 ~contrib/scripts~ directory of the Org git distribution, to get the same
 general treatment of idleness.  On other systems, idle time refers to Emacs
 idle time only.}, and ask what you want to do with the idle time.  There will
@@ -6194,7 +6196,7 @@ trees to an archive file keeps the system compact and fast.
 
 Org's method for capturing new items is heavily inspired by John Wiegley
 excellent remember package.  Up to version 6.36 Org used a special setup
-for @file{remember.el}.  @file{org-remember.el} is still part of Org mode for
+for {{{file(remember.el)}}}.  {{{file(org-remember.el)}}} is still part of Org mode for
 backward compatibility with existing setups.  You can find the documentation
 for org-remember at @url{http://orgmode.org/org-remember.pdf}.
 
@@ -6306,8 +6308,8 @@ Customize the variable ~org-capture-templates~.
 Before we give the formal description of template definitions, let's look at
 an example.  Say you would like to use one template to create general TODO
 entries, and you want to put these entries under the heading {{{samp(Tasks)}}} in
-your file @file{~/org/gtd.org}.  Also, a date tree in the file
-@file{journal.org} should capture journal entries.  A possible configuration
+your file {{{file(~/org/gtd.org)}}}.  Also, a date tree in the file
+{{{file(journal.org)}}} should capture journal entries.  A possible configuration
 would look like:
 
 #+header: :eval no
@@ -6610,7 +6612,7 @@ files that live elsewhere on your computer or in the cloud, like emails or
 source code files belonging to a project.  Another method is /attachments/,
 which are files located in a directory belonging to an outline node.  Org
 uses directories named by the unique ID of each entry.  These directories are
-located in the @file{data} directory which lives in the same directory where
+located in the {{{file(data)}}} directory which lives in the same directory where
 your Org file lives@footnote{If you move entries or Org files from one
 directory to another, you may want to configure ~org-attach-directory~
 to contain an absolute path.}.  If you initialize this directory with
@@ -6713,7 +6715,7 @@ information.  Here is just an example:
 {{{noindent}}}
 will configure that new items from the feed provided by
 ~rss.slashdot.org~ will result in new entries in the file
-@file{~/org/feeds.org} under the heading {{{samp(Slashdot Entries)}}}, whenever
+{{{file(~/org/feeds.org)}}} under the heading {{{samp(Slashdot Entries)}}}, whenever
 the following command is used:
 
 #+attr_texinfo: :table-type "table" :indic "@kbd"
@@ -6735,7 +6737,7 @@ list of drawers in that file:
 #+end_example
 
 For more information, including how to read atom feeds, see
-@file{org-feed.el} and the docstring of ~org-feed-alist~.
+{{{file(org-feed.el)}}} and the docstring of ~org-feed-alist~.
 
 ** Protocols
    :PROPERTIES:
@@ -6747,7 +6749,7 @@ For more information, including how to read atom feeds, see
 {{{cindex(emacsserver)}}}
 
 You can set up Org for handling protocol calls from outside applications that
-are passed to Emacs through the @file{emacsserver}.  For example, you can
+are passed to Emacs through the {{{file(emacsserver)}}}.  For example, you can
 configure bookmarks in your web browser to send a link to the current page to
 Org and create a note from it using capture (see [[Capture]]).  Or you
 could create a bookmark that will tell Emacs to open the local source file of
@@ -6853,7 +6855,7 @@ is invoked, the level 1 trees will be checked.
 
 {{{cindex(archive locations)}}}
 The default archive location is a file in the same directory as the
-current file, with the name derived by appending @file{_archive} to the
+current file, with the name derived by appending {{{file(_archive)}}} to the
 current file name.  You can also choose what heading to file archived
 items under, with the possibility to add them to a datetree in a file.
 For information and examples on how to specify the file and the heading,
@@ -7016,7 +7018,7 @@ files/, the files listed in the variable
 ~org-agenda-files~@footnote{If the value of that variable is not a
 list, but a single file name, then the list of agenda files will be
 maintained in that external file.}.  If a directory is part of this list,
-all files with the extension @file{.org} in this directory will be part
+all files with the extension {{{file(.org)}}} in this directory will be part
 of the list.
 
 Thus, even if you only work with a single Org file, that file should
@@ -7069,7 +7071,7 @@ Remove the permanent restriction created by {{{kbd(C-c C-x <)}}}.
 
 
 {{{noindent}}}
-When working with @file{speedbar.el}, you can use the following commands in
+When working with {{{file(speedbar.el)}}}, you can use the following commands in
 the Speedbar frame:
 #+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmdtkc{< @r{in the speedbar frame},<,org-speedbar-set-agenda-restriction}
@@ -7260,7 +7262,7 @@ record and then add the date in the format ~YYYY-MM-DD~ or ~MM-DD~,
 followed by a space and the class of the anniversary ({{{samp(birthday)}}} or
 {{{samp(wedding)}}}, or a format string).  If you omit the class, it will default to
 {{{samp(birthday)}}}.  Here are a few examples, the header for the file
-@file{org-bbdb.el} contains more detailed information.
+{{{file(org-bbdb.el)}}} contains more detailed information.
 
 #+begin_example
 1973-06-22
@@ -8313,12 +8315,12 @@ This is a globally available command, and also available in the agenda menu.
 {{{cindex(agenda views\\\, exporting)}}}
 {{{vindex(org-agenda-exporter-settings)}}}
 Write the agenda view to a file.  Depending on the extension of the selected
-file name, the view will be exported as HTML (extension @file{.html} or
-@file{.htm}), Postscript (extension @file{.ps}), PDF (extension @file{.pdf}),
+file name, the view will be exported as HTML (extension {{{file(.html)}}} or
+{{{file(.htm)}}}), Postscript (extension {{{file(.ps)}}}), PDF (extension {{{file(.pdf)}}}),
 and plain text (any other extension).  When called with a {{{kbd(C-u)}}} prefix
 argument, immediately open the newly created file.  Use the variable
-~org-agenda-exporter-settings~ to set options for @file{ps-print} and
-for @file{htmlize} to be used during export.
+~org-agenda-exporter-settings~ to set options for {{{file(ps-print)}}} and
+for {{{file(htmlize)}}} to be used during export.
 
 @tsubheading{Quit and Exit}
 - {{{kbd(q)}}} ~org-agenda-quit~ ::
@@ -8359,7 +8361,7 @@ buffer).
 Custom commands are configured in the variable
 ~org-agenda-custom-commands~.  You can customize this variable, for
 example by pressing {{{kbd(C-c a C)}}}.  You can also directly set it with Emacs
-Lisp in @file{.emacs}.  The following example contains all valid search
+Lisp in {{{file(.emacs)}}}.  The following example contains all valid search
 types:
 
 @lisp
@@ -8559,8 +8561,8 @@ See the docstring of the variable for more information.
 If you are away from your computer, it can be very useful to have a printed
 version of some agenda views to carry around.  Org mode can export custom
 agenda views as plain text, HTML@footnote{You need to install Hrvoje Niksic's
-@file{htmlize.el}.}, Postscript, PDF@footnote{To create PDF output, the
-ghostscript @file{ps2pdf} utility must be installed on the system.  Selecting
+{{{file(htmlize.el)}}}.}, Postscript, PDF@footnote{To create PDF output, the
+ghostscript {{{file(ps2pdf)}}} utility must be installed on the system.  Selecting
 a PDF file will also create the postscript file.}, and iCalendar files.  If
 you want to do this only occasionally, use the command
 
@@ -8570,11 +8572,11 @@ you want to do this only occasionally, use the command
 {{{cindex(agenda views\\\, exporting)}}}
 {{{vindex(org-agenda-exporter-settings)}}}
 Write the agenda view to a file.  Depending on the extension of the selected
-file name, the view will be exported as HTML (extension @file{.html} or
-@file{.htm}), Postscript (extension @file{.ps}), iCalendar (extension
-@file{.ics}), or plain text (any other extension).  Use the variable
-~org-agenda-exporter-settings~ to set options for @file{ps-print} and
-for @file{htmlize} to be used during export, for example
+file name, the view will be exported as HTML (extension {{{file(.html)}}} or
+{{{file(.htm)}}}), Postscript (extension {{{file(.ps)}}}), iCalendar (extension
+{{{file(.ics)}}}), or plain text (any other extension).  Use the variable
+~org-agenda-exporter-settings~ to set options for {{{file(ps-print)}}} and
+for {{{file(htmlize)}}} to be used during export, for example
 
 {{{vindex(org-agenda-add-entry-text-maxlines)}}}
 {{{vindex(htmlize-output-type)}}}
@@ -8621,10 +8623,10 @@ or absolute.
 @end lisp
 
 The extension of the file name determines the type of export.  If it is
-@file{.html}, Org mode will use the @file{htmlize.el} package to convert
+{{{file(.html)}}}, Org mode will use the {{{file(htmlize.el)}}} package to convert
 the buffer to HTML and save it to this file name.  If the extension is
-@file{.ps}, ~ps-print-buffer-with-faces~ is used to produce
-Postscript output.  If the extension is @file{.ics}, iCalendar export is
+{{{file(.ps)}}}, ~ps-print-buffer-with-faces~ is used to produce
+Postscript output.  If the extension is {{{file(.ics)}}}, iCalendar export is
 run export over all files that were used to construct the agenda, and
 limit the export to entries listed in the agenda.  Any other
 extension produces a plain ASCII file.
@@ -8687,7 +8689,7 @@ emacs -eval '(org-batch-store-agenda-views                      \
 #+end_src
 {{{noindent}}}
 which will create the agenda views restricted to the file
-@file{~/org/project.org}, without diary entries and with a 30-day
+{{{file(~/org/project.org)}}}, without diary entries and with a 30-day
 extent.
 
 You can also extract agenda information in a way that allows further
@@ -8990,7 +8992,7 @@ Toggle the COMMENT keyword at the beginning of an entry.
 {{{cindex(#+CAPTION)}}}
 {{{cindex(#+LABEL)}}}
 Both the native Org mode tables (see [[Tables]]) and tables formatted with
-the @file{table.el} package will be exported properly.  For Org mode tables,
+the {{{file(table.el)}}} package will be exported properly.  For Org mode tables,
 the lines before the first horizontal separator line will become table header
 lines.  You can use the following lines somewhere before the table to assign
 a caption and a label for cross references, and in the text you can refer to
@@ -9061,7 +9063,7 @@ Here is an example
 If the example is source code from a programming language, or any other text
 that can be marked up by font-lock in Emacs, you can ask for the example to
 look like the fontified Emacs buffer@footnote{This works automatically for
-the HTML backend (it requires version 1.34 of the @file{htmlize.el} package,
+the HTML backend (it requires version 1.34 of the {{{file(htmlize.el)}}} package,
 which is distributed with Org).  Fontified code chunks in @LaTeX{} can be
 achieved using either the listings or the
 @url{http://code.google.com/p/minted, minted,} package.  Refer to
@@ -9153,7 +9155,7 @@ label is stored as a link {{{samp((label))}}}, for retrieval with {{{kbd(C-c C-l
 {{{cindex(include files\\\, markup rules)}}}
 
 During export, you can include the content of another file.  For example, to
-include your @file{.emacs} file, you could use:
+include your {{{file(.emacs)}}} file, you could use:
 {{{cindex(#+INCLUDE)}}}
 
 #+begin_example
@@ -9357,13 +9359,13 @@ the code is obviously left as it is.  When exporting to HTML, Org invokes the
 @uref{http://www.mathjax.org, MathJax library} (see [[Math formatting
 in HTML export]]) to process and display the math@footnote{If you plan to use
 this regularly or on pages with significant page views, you should install
-@file{MathJax} on your own
+{{{file(MathJax)}}} on your own
 server in order to limit the load of our server.}.  Finally, it can also
 process the mathematical expressions into images@footnote{For this to work
 you need to be on a system with a working @LaTeX{} installation.  You also
-need the @file{dvipng} program or the @file{convert}, respectively available
+need the {{{file(dvipng)}}} program or the {{{file(convert)}}}, respectively available
 at @url{http://sourceforge.net/projects/dvipng/} and from the
-@file{imagemagick} suite.  The @LaTeX{} header that will be used when
+{{{file(imagemagick)}}} suite.  The @LaTeX{} header that will be used when
 processing a fragment can be configured with the variable
 ~org-format-latex-header~.} that can be displayed in a browser or in
 DocBook documents.
@@ -9372,9 +9374,9 @@ DocBook documents.
 snippets will be identified as @LaTeX{} source code:
 @itemize @bullet
 @item
-Environments of any kind@footnote{When @file{MathJax} is used, only the
-environment recognized by @file{MathJax} will be processed.  When
-@file{dvipng} is used to create images, any @LaTeX{} environments will be
+Environments of any kind@footnote{When {{{file(MathJax)}}} is used, only the
+environment recognized by {{{file(MathJax)}}} will be processed.  When
+{{{file(dvipng)}}} is used to create images, any @LaTeX{} environments will be
 handled.}.  The only requirement is that the ~\begin~ statement appears
 on a new line, preceded by only whitespace.
 @item
@@ -9407,7 +9409,7 @@ ones you do not wish to have interpreted by the @LaTeX{} converter.
 {{{vindex(org-export-with-LaTeX-fragments)}}}
 @LaTeX{} processing can be configured with the variable
 ~org-export-with-LaTeX-fragments~.  The default setting is ~t~
-which means @file{MathJax} for HTML, and no processing for DocBook, ASCII and
+which means {{{file(MathJax)}}} for HTML, and no processing for DocBook, ASCII and
 @LaTeX{} backends.  You can also set this variable on a per-file basis using one
 of these lines:
 
@@ -9424,7 +9426,7 @@ of these lines:
     :END:
 {{{cindex(@LaTeX{} fragments, preview)}}}
 
-If you have @file{dvipng} installed, @LaTeX{} fragments can be processed to
+If you have {{{file(dvipng)}}} installed, @LaTeX{} fragments can be processed to
 produce preview images of the typeset expressions:
 
 #+attr_texinfo: :table-type "table" :indic "@kbd"
@@ -9458,7 +9460,7 @@ CD@LaTeX{} mode is a minor mode that is normally used in combination with a
 major @LaTeX{} mode like AUC@TeX{} in order to speed-up insertion of
 environments and math templates.  Inside Org mode, you can make use of
 some of the features of CD@LaTeX{} mode.  You need to install
-@file{cdlatex.el} and @file{texmathp.el} (the latter comes also with
+{{{file(cdlatex.el)}}} and {{{file(texmathp.el)}}} (the latter comes also with
 AUC@TeX{}) from @url{http://www.astro.uva.nl/~dominik/Tools/cdlatex}.
 Don't use CD@LaTeX{} mode itself under Org mode, but use the light
 version ~org-cdlatex-mode~ that comes as part of Org mode.  Turn it
@@ -9750,8 +9752,8 @@ with special characters and symbols available in these encodings.
 #+attr_texinfo: :table-type "table" :indic "@kbd"
 - {{{kbd(C-c C-e a)}}} ~org-export-as-ascii~ ::
 {{{cindex(property\\\, EXPORT_FILE_NAME)}}}
-Export as an ASCII file.  For an Org file, @file{myfile.org}, the ASCII file
-will be @file{myfile.txt}.  The file will be overwritten without
+Export as an ASCII file.  For an Org file, {{{file(myfile.org)}}}, the ASCII file
+will be {{{file(myfile.txt)}}}.  The file will be overwritten without
 warning.  If there is an active region@footnote{This requires
 ~transient-mark-mode~ be turned on.}, only the region will be
 exported.  If the selected region is a single tree@footnote{To select the
@@ -9815,8 +9817,8 @@ language, but with additional support for tables.
 #+attr_texinfo: :table-type "table" :indic "@kbd"
 - {{{kbd(C-c C-e h)}}} ~org-export-as-html~ ::
 {{{cindex(property\\\, EXPORT_FILE_NAME)}}}
-Export as a HTML file.  For an Org file @file{myfile.org},
-the HTML file will be @file{myfile.html}.  The file will be overwritten
+Export as a HTML file.  For an Org file {{{file(myfile.org)}}},
+the HTML file will be {{{file(myfile.html)}}}.  The file will be overwritten
 without warning.  If there is an active region@footnote{This requires
 ~transient-mark-mode~ be turned on.}, only the region will be
 exported.  If the selected region is a single tree@footnote{To select the
@@ -9930,7 +9932,7 @@ Internal links (see [[Internal links]]) will continue to work in HTML.  This
 includes automatic links created by radio targets (see [[Radio
 targets]]).  Links to external files will still work if the target file is on
 the same /relative/ path as the published Org file.  Links to other
-@file{.org} files will be translated into HTML links under the assumption
+{{{file(.org)}}} files will be translated into HTML links under the assumption
 that a HTML version also exists of the linked file, at the same relative
 path.  {{{samp(id:)}}} links can then be used to jump to specific entries across
 files.  For information related to linking files while publishing them to a
@@ -10015,13 +10017,13 @@ You could use ~http~ addresses just as well.
 different ways on HTML pages.  The default is to use the
 @uref{http://www.mathjax.org, MathJax system} which should work out of the
 box with Org mode installation because ~http://orgmode.org~ serves
-@file{MathJax} for Org mode users for small applications and for testing
+{{{file(MathJax)}}} for Org mode users for small applications and for testing
 purposes.  @b{If you plan to use this regularly or on pages with significant
 page views, you should install@footnote{Installation instructions can be
 found on the MathJax website, see
 @uref{http://www.mathjax.org/resources/docs/?installation.html}.} MathJax on
 your own server in order to limit the load of our server.}  To configure
-@file{MathJax}, use the variable ~org-export-html-mathjax-options~ or
+{{{file(MathJax)}}}, use the variable ~org-export-html-mathjax-options~ or
 insert something like the following into the buffer:
 
 #+begin_example
@@ -10035,7 +10037,7 @@ this line.
 If you prefer, you can also request that @LaTeX{} fragments are processed
 into small images that will be inserted into the browser page.  Before the
 availability of MathJax, this was the default method for Org files.  This
-method requires that the @file{dvipng} program is available on your system.
+method requires that the {{{file(dvipng)}}} program is available on your system.
 You can still get this processing with
 
 #+begin_example
@@ -10160,7 +10162,7 @@ We host the script at our site, but if you use it a lot, you might
 not want to be dependent on @url{orgmode.org} and prefer to install a local
 copy on your own web server.
 
-To use the script, you need to make sure that the @file{org-jsinfo.el} module
+To use the script, you need to make sure that the {{{file(org-jsinfo.el)}}} module
 gets loaded.  It should be loaded by default, but you can try @kbd{M-x
 customize-variable @key{RET} org-modules @key{RET}} to convince yourself that
 this is indeed the case.  All it then takes to make use of the program is
@@ -10224,7 +10226,7 @@ processing with ~pdftex~ or @LaTeX{}.  It includes packages that are not
 compatible with ~xetex~ and possibly ~luatex~.  See the variables
 ~org-export-latex-default-packages-alist~ and
 ~org-export-latex-packages-alist~.}, this backend is also used to
-produce PDF output.  Since the @LaTeX{} output uses @file{hyperref} to
+produce PDF output.  Since the @LaTeX{} output uses {{{file(hyperref)}}} to
 implement links and cross references, the PDF output file will be fully
 linked.  Beware of the fact that your ~org~ file has to be properly
 structured in order to be correctly exported: respect the hierarchy of
@@ -10241,7 +10243,7 @@ sections.
 - {{{kbd(C-c C-e l)}}} ~org-export-as-latex~ ::
 {{{cindex(property EXPORT_FILE_NAME)}}}
 Export as a @LaTeX{} file.  For an Org file
-@file{myfile.org}, the @LaTeX{} file will be @file{myfile.tex}.  The file will
+{{{file(myfile.org)}}}, the @LaTeX{} file will be {{{file(myfile.tex)}}}.  The file will
 be overwritten without warning.  If there is an active region@footnote{This
 requires ~transient-mark-mode~ be turned on.}, only the region will be
 exported.  If the selected region is a single tree@footnote{To select the
@@ -10450,9 +10452,9 @@ If you need references to a label created in this way, write
     :PROPERTIES:
     :DESCRIPTION: Turning the file into a presentation
     :END:
-The @LaTeX{} class @file{beamer} allows production of high quality presentations
+The @LaTeX{} class {{{file(beamer)}}} allows production of high quality presentations
 using @LaTeX{} and pdf processing.  Org mode has special support for turning an
-Org mode file or tree into a @file{beamer} presentation.
+Org mode file or tree into a {{{file(beamer)}}} presentation.
 
 When the @LaTeX{} class for the current buffer (as set with ~#+LaTeX_CLASS:
 beamer~) or subtree (set with a ~LaTeX_CLASS~ property) is
@@ -10503,7 +10505,7 @@ transitions.
 
 
 Frames will automatically receive a ~fragile~ option if they contain
-source code that uses the verbatim environment.  Special @file{beamer}
+source code that uses the verbatim environment.  Special {{{file(beamer)}}}
 specific code can be inserted using ~#+BEAMER:~ and
 ~#+BEGIN_BEAMER...#+END_BEAMER~ constructs, similar to other export
 backends, but with the difference that ~#+LaTeX:~ stuff will be included
@@ -10599,8 +10601,8 @@ Currently DocBook exporter only supports DocBook V5.0.
 #+attr_texinfo: :table-type "table" :indic "@kbd"
 - {{{kbd(C-c C-e D)}}} ~org-export-as-docbook~ ::
 {{{cindex(property EXPORT_FILE_NAME)}}}
-Export as a DocBook file.  For an Org file, @file{myfile.org}, the DocBook XML
-file will be @file{myfile.xml}.  The file will be overwritten without
+Export as a DocBook file.  For an Org file, {{{file(myfile.org)}}}, the DocBook XML
+file will be {{{file(myfile.xml)}}}.  The file will be overwritten without
 warning.  If there is an active region@footnote{This requires
 ~transient-mark-mode~ to be turned on}, only the region will be
 exported.  If the selected region is a single tree@footnote{To select the
@@ -10739,7 +10741,7 @@ set:
 
 {{{vindex(org-export-docbook-inline-image-extensions)}}}
 By default, DocBook exporter recognizes the following image file types:
-@file{jpeg}, @file{jpg}, @file{png}, @file{gif}, and @file{svg}.  You can
+{{{file(jpeg)}}}, {{{file(jpg)}}}, {{{file(png)}}}, {{{file(gif)}}}, and {{{file(svg)}}}.  You can
 customize variable ~org-export-docbook-inline-image-extensions~ to add
 more types to this list as long as DocBook supports them.
 
@@ -10787,7 +10789,7 @@ special characters included in XHTML entities:
 {{{cindex(org-modules)}}}
 
 Org Mode@footnote{Versions 7.8 or later} supports export to OpenDocument Text
-(ODT) format using the @file{org-odt.el} module.  Documents created
+(ODT) format using the {{{file(org-odt.el)}}} module.  Documents created
 by this exporter use the @cite{OpenDocument-v1.2
 specification}@footnote{@url{http://docs.oasis-open.org/office/v1.2/OpenDocument-v1.2.html,
 Open Document Format for Office Applications (OpenDocument) Version 1.2}} and
@@ -10798,7 +10800,7 @@ are compatible with LibreOffice 3.4.
     :DESCRIPTION: What packages ODT exporter relies on
     :END:
 {{{cindex(zip)}}}
-The ODT exporter relies on the @file{zip} program to create the final
+The ODT exporter relies on the {{{file(zip)}}} program to create the final
 output.  Check the availability of this program before proceeding further.
 
 *** ODT export commands
@@ -10822,8 +10824,8 @@ If ~org-export-odt-preferred-output-format~ is specified, automatically
 convert the exported file to that format.  @xref{x-export-to-other-formats, ,
 Automatically exporting to other formats}.
 
-For an Org file @file{myfile.org}, the ODT file will be
-@file{myfile.odt}.  The file will be overwritten without warning.  If there
+For an Org file {{{file(myfile.org)}}}, the ODT file will be
+{{{file(myfile.odt)}}}.  The file will be overwritten without warning.  If there
 is an active region,@footnote{This requires ~transient-mark-mode~ to be
 turned on} only the region will be exported.  If the selected region is a
 single tree,@footnote{To select the current subtree, use {{{kbd(C-c @@)}}}} the
@@ -10853,10 +10855,10 @@ one format (say {{{samp(csv)}}}) to another format (say {{{samp(ods)}}} or {{{sa
 {{{cindex(LibreOffice)}}}
 If you have a working installation of LibreOffice, a document converter is
 pre-configured for you and you can use it right away.  If you would like to
-use @file{unoconv} as your preferred converter, customize the variable
+use {{{file(unoconv)}}} as your preferred converter, customize the variable
 ~org-export-odt-convert-process~ to point to ~unoconv~.  You can
 also use your own favorite converter or tweak the default settings of the
-@file{LibreOffice} and {{{samp(unoconv)}}} converters.  @xref{Configuring a
+{{{file(LibreOffice)}}} and {{{samp(unoconv)}}} converters.  @xref{Configuring a
 document converter}.
 
 @subsubsection Automatically exporting to other formats
@@ -10907,7 +10909,7 @@ users alike, and is described here.
 
 @enumerate
 @item
-Create a sample @file{example.org} file with the below settings and export it
+Create a sample {{{file(example.org)}}} file with the below settings and export it
 to ODT format.
 
 #+begin_example
@@ -10915,10 +10917,10 @@ to ODT format.
 #+end_example
 
 @item
-Open the above @file{example.odt} using LibreOffice.  Use the @file{Stylist}
+Open the above {{{file(example.odt)}}} using LibreOffice.  Use the {{{file(Stylist)}}}
 to locate the target styles - these typically have the {{{samp(Org)}}} prefix -
 and modify those to your taste.  Save the modified file either as an
-OpenDocument Text (@file{.odt}) or OpenDocument Template (@file{.ott}) file.
+OpenDocument Text ({{{file(.odt)}}}) or OpenDocument Template ({{{file(.ott)}}}) file.
 
 @item
 {{{cindex(#+ODT_STYLES_FILE)}}}
@@ -10975,8 +10977,8 @@ with a cross-reference and sequence number of the labeled entity.
 
 {{{cindex(tables\\\, in DocBook export)}}}
 
-Export of native Org mode tables (see [[Tables]]) and simple @file{table.el}
-tables is supported.  However, export of complex @file{table.el} tables -
+Export of native Org mode tables (see [[Tables]]) and simple {{{file(table.el)}}}
+tables is supported.  However, export of complex {{{file(table.el)}}} tables -
 tables that have column or row spans - is not supported.  Such tables are
 stripped from the exported document.
 
@@ -11040,7 +11042,7 @@ desired image file with no link description.  For example, to embed
 @subsubheading Embedding clickable images
 You can create clickable images by providing a link whose description is a
 link to an image file.  For example, to embed a image
-@file{org-mode-unicorn.png} which when clicked jumps to
+{{{file(org-mode-unicorn.png)}}} which when clicked jumps to
 @uref{http://Orgmode.org} website, do the following
 
 #+begin_example
@@ -11058,11 +11060,11 @@ You can control the size and scale of the embedded images using the
 The exporter specifies the desired size of the image in the final document in
 units of centimeters.  In order to scale the embedded images, the exporter
 queries for pixel dimensions of the images using one of a) ImageMagick's
-@file{identify} program or b) Emacs `create-image' and `image-size'
-APIs.@footnote{Use of @file{ImageMagick} is only desirable.  However, if you
+{{{file(identify)}}} program or b) Emacs `create-image' and `image-size'
+APIs.@footnote{Use of {{{file(ImageMagick)}}} is only desirable.  However, if you
 routinely produce documents that have large images or you export your Org
 files that has images using a Emacs batch script, then the use of
-@file{ImageMagick} is mandatory.} The pixel dimensions are subsequently
+{{{file(ImageMagick)}}} is mandatory.} The pixel dimensions are subsequently
 converted in to units of centimeters using
 ~org-export-odt-pixels-per-inch~.  The default value of this variable is
 set to ~display-pixels-per-inch~.  You can tweak this variable to
@@ -11072,7 +11074,7 @@ The examples below illustrate the various possibilities.
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
 @item Explicitly size the image
-To embed @file{img.png} as a 10 cm x 10 cm image, do the following:
+To embed {{{file(img.png)}}} as a 10 cm x 10 cm image, do the following:
 
 #+begin_example
 #+ATTR_ODT: :width 10 :height 10
@@ -11080,7 +11082,7 @@ To embed @file{img.png} as a 10 cm x 10 cm image, do the following:
 #+end_example
 
 @item Scale the image
-To embed @file{img.png} at half its size, do the following:
+To embed {{{file(img.png)}}} at half its size, do the following:
 
 #+begin_example
 #+ATTR_ODT: :scale 0.5
@@ -11088,7 +11090,7 @@ To embed @file{img.png} at half its size, do the following:
 #+end_example
 
 @item Scale the image to a specific width
-To embed @file{img.png} with a width of 10 cm while retaining the original
+To embed {{{file(img.png)}}} with a width of 10 cm while retaining the original
 height:width ratio, do the following:
 
 #+begin_example
@@ -11097,7 +11099,7 @@ height:width ratio, do the following:
 #+end_example
 
 @item Scale the image to a specific height
-To embed @file{img.png} with a height of 10 cm while retaining the original
+To embed {{{file(img.png)}}} with a height of 10 cm while retaining the original
 height:width ratio, do the following
 
 #+begin_example
@@ -11157,7 +11159,7 @@ You can specify the @LaTeX{}-to-MathML converter by customizing the variables
 ~org-latex-to-mathml-convert-command~ and
 ~org-latex-to-mathml-jar-file~.
 
-If you prefer to use @file{MathToWeb}@footnote{See
+If you prefer to use {{{file(MathToWeb)}}}@footnote{See
 @uref{http://www.mathtoweb.com/cgi-bin/mathtoweb_home.pl, MathToWeb}} as your
 converter, you can configure the above variables as shown below.
 
@@ -11174,10 +11176,10 @@ the @LaTeX{}-to-MathML converter.
 #+attr_texinfo: :table-type "table" :indic "@kbd"
 
 @item M-x org-export-as-odf
-Convert a @LaTeX{} math snippet to an OpenDocument formula (@file{.odf}) file.
+Convert a @LaTeX{} math snippet to an OpenDocument formula ({{{file(.odf)}}}) file.
 
 @item M-x org-export-as-odf-and-open
-Convert a @LaTeX{} math snippet to an OpenDocument formula (@file{.odf}) file
+Convert a @LaTeX{} math snippet to an OpenDocument formula ({{{file(.odf)}}}) file
 and open the formula file with the system-registered application.
 
 
@@ -11192,7 +11194,7 @@ This option is activated on a per-file basis with
 
 With this option, @LaTeX{} fragments are processed into PNG images and the
 resulting images are embedded in the exported document.  This method requires
-that the @file{dvipng} program be available on your system.
+that the {{{file(dvipng)}}} program be available on your system.
 @end enumerate
 
 **** Working with MathML or OpenDocument formula files
@@ -11201,8 +11203,8 @@ that the @file{dvipng} program be available on your system.
      :END:
 For various reasons, you may find embedding @LaTeX{} math snippets in an
 ODT document less than reliable.  In that case, you can embed a
-math equation by linking to its MathML (@file{.mml}) source or its
-OpenDocument formula (@file{.odf}) file as shown below:
+math equation by linking to its MathML ({{{file(.mml)}}}) source or its
+OpenDocument formula ({{{file(.odf)}}}) file as shown below:
 
 #+begin_example
 [[./equation.mml]]
@@ -11265,9 +11267,9 @@ Illustration 2: Bell curve
     :END:
 
 Export of literal examples (see [[Literal examples]]) with full fontification
-is supported.  Internally, the exporter relies on @file{htmlfontify.el} to
+is supported.  Internally, the exporter relies on {{{file(htmlfontify.el)}}} to
 generate all style definitions needed for a fancy listing.@footnote{Your
-@file{htmlfontify.el} library must at least be at Emacs 24.1 levels for
+{{{file(htmlfontify.el)}}} library must at least be at Emacs 24.1 levels for
 fontification to be turned on.}  The auto-generated styles have {{{samp(OrgSrc)}}}
 as prefix and inherit their color from the faces used by Emacs
 ~font-lock~ library for the source language.
@@ -11351,9 +11353,9 @@ by the variable ~org-odt-styles-dir~.  The two files are:
 @itemize
 @anchor{x-orgodtstyles-xml}
 @item
-@file{OrgOdtStyles.xml}
+{{{file(OrgOdtStyles.xml)}}}
 
-This file contributes to the @file{styles.xml} file of the final {{{samp(ODT)}}}
+This file contributes to the {{{file(styles.xml)}}} file of the final {{{samp(ODT)}}}
 document.  This file gets modified for the following purposes:
 @enumerate
 
@@ -11361,19 +11363,19 @@ document.  This file gets modified for the following purposes:
 To control outline numbering based on user settings.
 
 @item
-To add styles generated by @file{htmlfontify.el} for fontification of code
+To add styles generated by {{{file(htmlfontify.el)}}} for fontification of code
 blocks.
 @end enumerate
 
 @anchor{x-orgodtcontenttemplate-xml}
 @item
-@file{OrgOdtContentTemplate.xml}
+{{{file(OrgOdtContentTemplate.xml)}}}
 
-This file contributes to the @file{content.xml} file of the final {{{samp(ODT)}}}
+This file contributes to the {{{file(content.xml)}}} file of the final {{{samp(ODT)}}}
 document.  The contents of the Org outline are inserted between the
 {{{samp(<office:text>)}}}@dots{}{{{samp(</office:text>)}}} elements of this file.
 
-Apart from serving as a template file for the final @file{content.xml}, the
+Apart from serving as a template file for the final {{{file(content.xml)}}}, the
 file serves the following purposes:
 @enumerate
 
@@ -11400,38 +11402,38 @@ exporter.
 @item
 ~org-export-odt-styles-file~
 
-Use this variable to specify the @file{styles.xml} that will be used in the
+Use this variable to specify the {{{file(styles.xml)}}} that will be used in the
 final output.  You can specify one of the following values:
 
 @enumerate
-@item A @file{styles.xml} file
+@item A {{{file(styles.xml)}}} file
 
-Use this file instead of the default @file{styles.xml}
+Use this file instead of the default {{{file(styles.xml)}}}
 
-@item A @file{.odt} or @file{.ott} file
+@item A {{{file(.odt)}}} or {{{file(.ott)}}} file
 
-Use the @file{styles.xml} contained in the specified OpenDocument Text or
+Use the {{{file(styles.xml)}}} contained in the specified OpenDocument Text or
 Template file
 
-@item A @file{.odt} or @file{.ott} file and a subset of files contained within them
+@item A {{{file(.odt)}}} or {{{file(.ott)}}} file and a subset of files contained within them
 
-Use the @file{styles.xml} contained in the specified OpenDocument Text or
+Use the {{{file(styles.xml)}}} contained in the specified OpenDocument Text or
 Template file.  Additionally extract the specified member files and embed
 those within the final {{{samp(ODT)}}} document.
 
-Use this option if the @file{styles.xml} file references additional files
+Use this option if the {{{file(styles.xml)}}} file references additional files
 like header and footer images.
 
 @item ~nil~
 
-Use the default @file{styles.xml}
+Use the default {{{file(styles.xml)}}}
 @end enumerate
 
 @anchor{x-org-export-odt-content-template-file}
 @item
 ~org-export-odt-content-template-file~
 
-Use this variable to specify the blank @file{content.xml} that will be used
+Use this variable to specify the blank {{{file(content.xml)}}} that will be used
 in the final output.
 @end itemize
 
@@ -11456,7 +11458,7 @@ regular text.
 #+end_example
 
 @strong{Hint:} To see the above example in action, edit your
-@file{styles.xml} (see [[x-orgodtstyles-xml,,Factory styles]]) and add a
+{{{file(styles.xml)}}} (see [[x-orgodtstyles-xml,,Factory styles]]) and add a
 custom {{{samp(Highlight)}}} style as shown below.
 
 #+begin_example
@@ -11475,7 +11477,7 @@ directive.  For example, to force a page break do the following:
 #+end_example
 
 @strong{Hint:} To see the above example in action, edit your
-@file{styles.xml} (see [[x-orgodtstyles-xml,,Factory styles]]) and add a
+{{{file(styles.xml)}}} (see [[x-orgodtstyles-xml,,Factory styles]]) and add a
 custom {{{samp(PageBreak)}}} style as shown below.
 
 #+begin_example
@@ -11549,7 +11551,7 @@ two table styles with the names {{{samp(TableWithHeaderRowAndColumn)}}} and
 {{{samp(TableWithFirstRowandLastRow)}}}.  (@strong{Important:} The OpenDocument
 styles needed for producing the above template have been pre-defined for you.
 These styles are available under the section marked {{{samp(Custom Table
-Template)}}} in @file{OrgOdtContentTemplate.xml}
+Template)}}} in {{{file(OrgOdtContentTemplate.xml)}}}
 (see [[x-orgodtcontenttemplate-xml,,Factory styles]]).  If you need
 additional templates you have to define these styles yourselves.
 
@@ -11679,17 +11681,17 @@ the ~ATTR_ODT~ line as shown below.
 
 Occasionally, you will discover that the document created by the
 ODT exporter cannot be opened by your favorite application.  One of
-the common reasons for this is that the @file{.odt} file is corrupt.  In such
+the common reasons for this is that the {{{file(.odt)}}} file is corrupt.  In such
 cases, you may want to validate the document against the OpenDocument RELAX
 NG Compact Syntax (RNC) schema.
 
-For de-compressing the @file{.odt} file@footnote{@file{.odt} files are
+For de-compressing the {{{file(.odt)}}} file@footnote{{{{file(.odt)}}} files are
 nothing but {{{samp(zip)}}} archives}: @inforef{File Archives,,emacs}.  For
 general help with validation (and schema-sensitive editing) of XML files:
 @inforef{Introduction,,nxml-mode}.
 
 {{{vindex(org-export-odt-schema-dir)}}}
-If you have ready access to OpenDocument @file{.rnc} files and the needed
+If you have ready access to OpenDocument {{{file(.rnc)}}} files and the needed
 schema-locating rules in a single folder, you can customize the variable
 ~org-export-odt-schema-dir~ to point to that directory.  The
 ODT exporter will take care of updating the
@@ -11780,7 +11782,7 @@ node which is known to TaskJuggler, such as {{{samp(limits)}}}, {{{samp(vacation
 
 The exporter will handle dependencies that are defined in the tasks either
 with the {{{samp(ORDERED)}}} attribute (see [[TODO dependencies]]), with the
-{{{samp(BLOCKER)}}} attribute (see @file{org-depend.el}) or alternatively with a
+{{{samp(BLOCKER)}}} attribute (see {{{file(org-depend.el)}}}) or alternatively with a
 {{{samp(depends)}}} attribute.  Both the {{{samp(BLOCKER)}}} and the {{{samp(depends)}}}
 attribute can be either {{{samp(previous-sibling)}}} or a reference to an
 identifier (named {{{samp(task_id)}}}) which is defined for another task in the
@@ -11849,8 +11851,8 @@ The Freemind exporter was written by Lennart Borgman.
 
 #+attr_texinfo: :table-type "table" :indic "@kbd"
 - {{{kbd(C-c C-e m)}}} ~org-export-as-freemind~ ::
-Export as a Freemind mind map.  For an Org file @file{myfile.org}, the Freemind
-file will be @file{myfile.mm}.
+Export as a Freemind mind map.  For an Org file {{{file(myfile.org)}}}, the Freemind
+file will be {{{file(myfile.mm)}}}.
 
 
 ** XOXO export
@@ -11865,8 +11867,8 @@ does not interpret any additional Org mode features.
 
 #+attr_texinfo: :table-type "table" :indic "@kbd"
 - {{{kbd(C-c C-e x)}}} ~org-export-as-xoxo~ ::
-Export as an XOXO file.  For an Org file @file{myfile.org}, the XOXO file will be
-@file{myfile.html}.
+Export as an XOXO file.  For an Org file {{{file(myfile.org)}}}, the XOXO file will be
+{{{file(myfile.html)}}}.
 @orgkey{C-c C-e v x}
 Export only the visible part of the document.
 
@@ -11914,7 +11916,7 @@ figure out from which entry all the different instances originate.
 #+attr_texinfo: :table-type "table" :indic "@kbd"
 - {{{kbd(C-c C-e i)}}} ~org-export-icalendar-this-file~ ::
 Create iCalendar entries for the current file and store them in the same
-directory, using a file extension @file{.ics}.
+directory, using a file extension {{{file(.ics)}}}.
 - {{{kbd(C-c C-e I)}}} ~ org-export-icalendar-all-agenda-files~ ::
 {{{vindex(org-agenda-files)}}}
 Like {{{kbd(C-c C-e i)}}}, but do this for all files in
@@ -12013,7 +12015,7 @@ and where to put published files.
 @item ~:publishing-directory~
 @tab Directory where output files will be published.  You can directly
 publish to a webserver using a file name syntax appropriate for
-the Emacs @file{tramp} package.  Or you can publish to a local directory and
+the Emacs {{{file(tramp)}}} package.  Or you can publish to a local directory and
 use external tools to upload your website (see [[Uploading files]]).
 @item ~:preparation-function~
 @tab Function or list of functions to be called before starting the
@@ -12034,7 +12036,7 @@ project property list is scoped into this call as the variable
     :END:
 {{{cindex(files\\\, selecting for publishing)}}}
 
-By default, all files with extension @file{.org} in the base directory
+By default, all files with extension {{{file(.org)}}} in the base directory
 are considered part of the project.  This can be modified by setting the
 properties
 @multitable @columnfractions 0.25 0.75
@@ -12072,8 +12074,8 @@ export]]).  But you also can publish your content as PDF files using
 publish the Org file itself, but with /archived/, /commented/, and
 /tag-excluded/ trees removed, use ~org-publish-org-to-org~ and set the
 parameters ~:plain-source~ and/or ~:htmlized-source~.  This will
-produce @file{file.org} and @file{file.org.html} in the publishing
-directory@footnote{@file{file-source.org} and @file{file-source.org.html} if
+produce {{{file(file.org)}}} and {{{file(file.org.html)}}} in the publishing
+directory@footnote{{{{file(file-source.org)}}} and {{{file(file-source.org.html)}}} if
 source and publishing directories are equal.  Note that with this kind of
 setup, you need to add ~:exclude "-source\\.org"~ to the project
 definition in ~org-publish-project-alist~ to prevent the published
@@ -12233,12 +12235,12 @@ options]]), however, override everything.
 To create a link from one Org file to another, you would use
 something like {{{samp([[file:foo.org][The foo]])}}} or simply
 {{{samp(file:foo.org.)}}} (see [[Hyperlinks]]).  When published, this link
-becomes a link to @file{foo.html}.  In this way, you can interlink the
+becomes a link to {{{file(foo.html)}}}.  In this way, you can interlink the
 pages of your "org web" project and the links will work as expected when
 you publish them to HTML.  If you also publish the Org source file and want
 to link to that, use an ~http:~ link instead of a ~file:~ link,
 because ~file:~ links are converted to link to the corresponding
-@file{html} file.
+{{{file(html)}}} file.
 
 You may also link to related files, such as images.  Provided you are careful
 with relative file names, and provided you have also configured Org to upload
@@ -12279,8 +12281,8 @@ a map of files for a given project.
 or ~org-publish-all~.
 
 @item ~:sitemap-filename~
-@tab Filename for output of sitemap.  Defaults to @file{sitemap.org} (which
-becomes @file{sitemap.html}).
+@tab Filename for output of sitemap.  Defaults to {{{file(sitemap.org)}}} (which
+becomes {{{file(sitemap.html)}}}).
 
 @item ~:sitemap-title~
 @tab Title of sitemap page.  Defaults to name of file.
@@ -12336,8 +12338,8 @@ Org mode can generate an index across the files of a publishing project.
 
 @multitable @columnfractions 0.25 0.75
 @item ~:makeindex~
-@tab When non-nil, generate in index in the file @file{theindex.org} and
-publish it as @file{theindex.html}.
+@tab When non-nil, generate in index in the file {{{file(theindex.org)}}} and
+publish it as {{{file(theindex.html)}}}.
 @end multitable
 
 The file will be created when first publishing a project with the
@@ -12363,14 +12365,14 @@ Specialized synchronization utilities offer several advantages.  In addition
 to timestamp comparison, they also do content and permissions/attribute
 checks.  For this reason you might prefer to publish your web to a local
 directory (possibly even /in place/ with your Org files) and then use
-@file{unison} or @file{rsync} to do the synchronization with the remote host.
+{{{file(unison)}}} or {{{file(rsync)}}} to do the synchronization with the remote host.
 
 Since Unison (for example) can be configured as to which files to transfer to
 a certain remote destination, it can greatly simplify the project publishing
 definition.  Simply keep all files in the correct location, process your Org
 files with ~org-publish~ and let the synchronization tool do the rest.
-You do not need, in this scenario, to include attachments such as @file{jpg},
-@file{css} or @file{gif} files in the project definition since the 3rd party
+You do not need, in this scenario, to include attachments such as {{{file(jpg)}}},
+{{{file(css)}}} or {{{file(gif)}}} files in the project definition since the 3rd party
 tool syncs them.
 
 Publishing to a local directory is also much faster than to a remote one, so
@@ -12393,7 +12395,7 @@ more complex, with a multi-component project.
     :DESCRIPTION: One-component publishing
     :TITLE:    Example: simple publishing configuration
     :END:
-This example publishes a set of Org files to the @file{public_html}
+This example publishes a set of Org files to the {{{file(public_html)}}}
 directory on the local machine.
 
 @lisp
@@ -12420,8 +12422,8 @@ excluded.
 
 To ensure that links are preserved, care should be taken to replicate
 your directory structure on the web server, and to use relative file
-paths.  For example, if your Org files are kept in @file{~/org} and your
-publishable images in @file{~/images}, you would link to an image with
+paths.  For example, if your Org files are kept in {{{file(~/org)}}} and your
+publishable images in {{{file(~/images)}}}, you would link to an image with
 @c
 #+begin_example
 file:../images/myimage.png
@@ -13498,7 +13500,7 @@ When using ~:dir~, you should supply a relative path for file output
 (e.g.@: ~:file myfile.jpg~ or ~:file results/myfile.jpg~) in which
 case that path will be interpreted relative to the default directory.
 
-In other words, if you want your plot to go into a folder called @file{Work}
+In other words, if you want your plot to go into a folder called {{{file(Work)}}}
 in your home directory, you could use
 
 #+begin_example
@@ -14404,7 +14406,7 @@ Org mode supports insertion of empty structural elements (like
 ~#+BEGIN_SRC~ and ~#+END_SRC~ pairs) with just a few key
 strokes.  This is achieved through a native template expansion mechanism.
 Note that Emacs has several other template mechanisms which could be used in
-a similar way, for example @file{yasnippet}.
+a similar way, for example {{{file(yasnippet)}}}.
 
 To insert a structural element, type a {{{samp(<)}}}, followed by a template
 selector and {{{kbdkey(,TAB)}}}.  Completion takes effect only when the above
@@ -14736,8 +14738,8 @@ The following options influence the table spreadsheet (variable
 {{{cindex(@code{constcgs}, STARTUP keyword)}}}
 {{{cindex(@code{constSI}, STARTUP keyword)}}}
 #+begin_example
-constcgs   @r{@file{constants.el} should use the c-g-s unit system}
-constSI    @r{@file{constants.el} should use the SI unit system}
+constcgs   @r{{{{file(constants.el)}}} should use the c-g-s unit system}
+constSI    @r{{{{file(constants.el)}}} should use the SI unit system}
 #+end_example
 {{{vindex(org-footnote-define-inline)}}}
 {{{vindex(org-footnote-auto-label)}}}
@@ -15045,7 +15047,7 @@ with other code out there.
 #+attr_texinfo: :table-type "table" :indic "@asis"
 {{{cindex(@file{calc.el})}}}
 {{{cindex(Gillespie\\\, Dave)}}}
-@item @file{calc.el} by Dave Gillespie
+@item {{{file(calc.el)}}} by Dave Gillespie
 Org uses the Calc package for implementing spreadsheet
 functionality in its tables (see [[The spreadsheet]]).  Org
 checks for the availability of Calc by looking for the function
@@ -15054,26 +15056,26 @@ been installed properly.  As of Emacs 22, Calc is part of the Emacs
 distribution.  Another possibility for interaction between the two
 packages is using Calc for embedded calculations.  @xref{Embedded Mode,
 , Embedded Mode, calc, GNU Emacs Calc Manual}.
-@item @file{constants.el} by Carsten Dominik
+@item {{{file(constants.el)}}} by Carsten Dominik
 {{{cindex(@file{constants.el})}}}
 {{{cindex(Dominik\\\, Carsten)}}}
 {{{vindex(org-table-formula-constants)}}}
 In a table formula (see [[The spreadsheet]]), it is possible to use
 names for natural constants or units.  Instead of defining your own
 constants in the variable ~org-table-formula-constants~, install
-the @file{constants} package which defines a large number of constants
+the {{{file(constants)}}} package which defines a large number of constants
 and units, and lets you use unit prefixes like {{{samp(M)}}} for
 {{{samp(Mega)}}}, etc@.  You will need version 2.0 of this package, available
 at @url{http://www.astro.uva.nl/~dominik/Tools}.  Org checks for
 the function ~constants-get~, which has to be autoloaded in your
 setup.  See the installation instructions in the file
-@file{constants.el}.
-@item @file{cdlatex.el} by Carsten Dominik
+{{{file(constants.el)}}}.
+@item {{{file(cdlatex.el)}}} by Carsten Dominik
 {{{cindex(@file{cdlatex.el})}}}
 {{{cindex(Dominik\\\, Carsten)}}}
 Org mode can make use of the CD@LaTeX{} package to efficiently enter
 @LaTeX{} fragments into Org files.  See @ref{CDLaTeX mode}.
-@item @file{imenu.el} by Ake Stenhoff and Lars Lindberg
+@item {{{file(imenu.el)}}} by Ake Stenhoff and Lars Lindberg
 {{{cindex(@file{imenu.el})}}}
 Imenu allows menu access to an index of items in a file.  Org mode
 supports Imenu---all you need to do to get the index is the following:
@@ -15084,11 +15086,11 @@ supports Imenu---all you need to do to get the index is the following:
 {{{vindex(org-imenu-depth)}}}
 By default the index is two levels deep---you can modify the depth using
 the option ~org-imenu-depth~.
-@item @file{remember.el} by John Wiegley
+@item {{{file(remember.el)}}} by John Wiegley
 {{{cindex(@file{remember.el})}}}
 {{{cindex(Wiegley\\\, John)}}}
 Org used to use this package for capture, but no longer does.
-@item @file{speedbar.el} by Eric M. Ludlam
+@item {{{file(speedbar.el)}}} by Eric M. Ludlam
 {{{cindex(@file{speedbar.el})}}}
 {{{cindex(Ludlam\\\, Eric M.)}}}
 Speedbar is a package that creates a special frame displaying files and
@@ -15097,7 +15099,7 @@ drill into Org files directly from the Speedbar.  It also allows you to
 restrict the scope of agenda commands to a file or a subtree by using
 the command {{{kbd(<)}}} in the Speedbar frame.
 {{{cindex(@file{table.el})}}}
-@item @file{table.el} by Takaaki Ota
+@item {{{file(table.el)}}} by Takaaki Ota
 {{{kindex(C-c C-c)}}}
 {{{cindex(table editor\\\, @file{table.el})}}}
 {{{cindex(@file{table.el})}}}
@@ -15113,22 +15115,22 @@ these tables directly in the buffer.  Instead, you need to use the command
 
 #+attr_texinfo: :table-type "table" :indic "@kbd"
 - {{{kbd(C-c ')}}} ~org-edit-special~ ::
-Edit a @file{table.el} table.  Works when the cursor is in a table.el table.
+Edit a {{{file(table.el)}}} table.  Works when the cursor is in a table.el table.
 @c
 - {{{kbd(C-c ~)}}} ~org-table-create-with-table.el~ ::
-Insert a @file{table.el} table.  If there is already a table at point, this
-command converts it between the @file{table.el} format and the Org mode
+Insert a {{{file(table.el)}}} table.  If there is already a table at point, this
+command converts it between the {{{file(table.el)}}} format and the Org mode
 format.  See the documentation string of the command
 ~org-convert-table~ for the restrictions under which this is
 possible.
 
-@file{table.el} is part of Emacs since Emacs 22.
-@item @file{footnote.el} by Steven L. Baur
+{{{file(table.el)}}} is part of Emacs since Emacs 22.
+@item {{{file(footnote.el)}}} by Steven L. Baur
 {{{cindex(@file{footnote.el})}}}
 {{{cindex(Baur\\\, Steven L.)}}}
 Org mode recognizes numerical footnotes as provided by this package.
 However, Org mode also has its own footnote support (see [[Footnotes]]),
-which makes using @file{footnote.el} unnecessary.
+which makes using {{{file(footnote.el)}}} unnecessary.
 
 
 *** Conflicts
@@ -15152,7 +15154,7 @@ selection by (i) using it outside of the special contexts where special
 commands apply, and by (ii) extending an existing active region even if the
 cursor moves across a special context.
 
-@item @file{CUA.el} by Kim. F. Storm
+@item {{{file(CUA.el)}}} by Kim. F. Storm
 {{{cindex(@file{CUA.el})}}}
 {{{cindex(Storm\\\, Kim. F.)}}}
 {{{vindex(org-replace-disputed-keys)}}}
@@ -15177,19 +15179,19 @@ Yes, these are unfortunately more difficult to remember.  If you want
 to have other replacement keys, look at the variable
 ~org-disputed-keys~.
 
-@item @file{filladapt.el} by Kyle Jones
+@item {{{file(filladapt.el)}}} by Kyle Jones
 {{{cindex(@file{filladapt.el})}}}
 
 Org mode tries to do the right thing when filling paragraphs, list items and
 other elements.  Many users reported they had problems using both
-@file{filladapt.el} and Org mode, so a safe thing to do is to disable it like
+{{{file(filladapt.el)}}} and Org mode, so a safe thing to do is to disable it like
 this:
 
 @lisp
 (add-hook 'org-mode-hook 'turn-off-filladapt-mode)
 @end lisp
 
-@item @file{yasnippet.el}
+@item {{{file(yasnippet.el)}}}
 {{{cindex(@file{yasnippet.el})}}}
 The way Org mode binds the TAB key (binding to ~[tab]~ instead of
 ~"\t"~) overrules YASnippet's access to this key.  The following code
@@ -15222,7 +15224,7 @@ Then, tell Org mode what to do with the new function:
               (define-key yas/keymap [tab] 'yas/next-field)))
 @end lisp
 
-@item @file{windmove.el} by Hovav Shacham
+@item {{{file(windmove.el)}}} by Hovav Shacham
 {{{cindex(@file{windmove.el})}}}
 This package also uses the {{{kbd(S-<cursor>)}}} keys, so everything written
 in the paragraph above about CUA mode also applies here.  If you want make
@@ -15238,7 +15240,7 @@ configuration:
 (add-hook 'org-shiftright-final-hook 'windmove-right)
 @end lisp
 
-@item @file{viper.el} by Michael Kifer
+@item {{{file(viper.el)}}} by Michael Kifer
 {{{cindex(@file{viper.el})}}}
 {{{kindex(C-c /)}}}
 Viper uses {{{kbd(C-c /)}}} and therefore makes this key not access the
@@ -15268,7 +15270,7 @@ be encrypted when the file is saved.  If you want to use a different tag just
 customize the ~org-crypt-tag-matcher~ setting.
 
 To use org-crypt it is suggested that you have the following in your
-@file{.emacs}:
+{{{file(.emacs)}}}:
 
 #+header: :eval no
 #+header: :exports code
@@ -15338,7 +15340,7 @@ documentation about each package, is maintained by the Worg project at
 Org has a large number of hyperlink types built-in
 (see [[Hyperlinks]]).  If you would like to add new link types, Org
 provides an interface for doing so.  Let's look at an example file,
-@file{org-man.el}, that will add support for creating links like
+{{{file(org-man.el)}}}, that will add support for creating links like
 {{{samp([[man:printf][The printf manpage]])}}} to show Unix manual pages inside
 Emacs:
 
@@ -15385,7 +15387,7 @@ PATH should be a topic that can be thrown at the man command."
 @end lisp
 
 {{{noindent}}}
-You would activate this new link type in @file{.emacs} with
+You would activate this new link type in {{{file(.emacs)}}} with
 
 @lisp
 (require 'org-man)
@@ -15395,7 +15397,7 @@ You would activate this new link type in @file{.emacs} with
 Let's go through the file and see what it does.
 @enumerate
 @item
-It does ~(require 'org)~ to make sure that @file{org.el} has been
+It does ~(require 'org)~ to make sure that {{{file(org.el)}}} has been
 loaded.
 @item
 The next line calls ~org-add-link-type~ to define a new link type
@@ -15448,9 +15450,9 @@ Also the {{{kbd(M-cursor)}}} and {{{kbd(M-S-cursor)}}} keys have this property.
 
 Add-ons can tap into this functionality by providing a function that detects
 special context for that add-on and executes functionality appropriate for
-the context.  Here is an example from Dan Davison's @file{org-R.el} which
-allows you to evaluate commands based on the @file{R} programming language
-@footnote{@file{org-R.el} has been replaced by the Org mode functionality
+the context.  Here is an example from Dan Davison's {{{file(org-R.el)}}} which
+allows you to evaluate commands based on the {{{file(R)}}} programming language
+@footnote{{{{file(org-R.el)}}} has been replaced by the Org mode functionality
 described in @ref{Working With Source Code} and is now obsolete.}.  For this
 package, special contexts are lines that start with ~#+R:~ or
 ~#+RR:~.
@@ -15583,7 +15585,7 @@ key.
 {{{cindex(@LaTeX{}, and Orgtbl mode)}}}
 
 The best way to wrap the source table in @LaTeX{} is to use the
-~comment~ environment provided by @file{comment.sty}.  It has to be
+~comment~ environment provided by {{{file(comment.sty)}}}.  It has to be
 activated by placing ~\usepackage@{comment@~} into the document
 header.  Orgtbl mode can insert a radio table skeleton@footnote{By
 default this works only for @LaTeX{}, HTML, and Texinfo.  Configure the
@@ -16033,7 +16035,7 @@ emacs -batch -l ~/.emacs                                      \
 
 {{{noindent}}}
 which will produce a 30-day agenda, fully restricted to the Org file
-@file{~/org/projects.org}, not even including the diary.
+{{{file(~/org/projects.org)}}}, not even including the diary.
 
 If you want to process the agenda data in more sophisticated ways, you
 can use the command ~org-batch-agenda-csv~ to get a comma-separated
@@ -16324,14 +16326,14 @@ in-buffer settings, but it will understand the logistics of TODO state
 MobileOrg needs to interact with Emacs through a directory on a server.  If you
 are using a public server, you should consider to encrypt the files that are
 uploaded to the server.  This can be done with Org mode 7.02 and with
-/MobileOrg 1.5/ (iPhone version), and you need an @file{openssl}
+/MobileOrg 1.5/ (iPhone version), and you need an {{{file(openssl)}}}
 installation on your system.  To turn on encryption, set a password in
 /MobileOrg/ and, on the Emacs side, configure the variable
 ~org-mobile-use-encryption~@footnote{If you can safely store the
 password in your Emacs setup, you might also want to configure
 ~org-mobile-encryption-password~.  Please read the docstring of that
 variable.  Note that encryption will apply only to the contents of the
-@file{.org} files.  The file names themselves will remain visible.}.
+{{{file(.org)}}} files.  The file names themselves will remain visible.}.
 
 The easiest way to create that directory is to use a free
 @uref{http://dropbox.com,Dropbox.com} account@footnote{If you cannot use
@@ -16359,18 +16361,18 @@ all agenda files (as listed in ~org-agenda-files~), but additional files
 can be included by customizing ~org-mobile-files~.  File names will be
 staged with paths relative to ~org-directory~, so all files should be
 inside this directory.  The push operation also creates a special Org file
-@file{agendas.org} with all custom agenda view defined by the
+{{{file(agendas.org)}}} with all custom agenda view defined by the
 user@footnote{While creating the agendas, Org mode will force ID properties
 on all referenced entries, so that these entries can be uniquely identified
 if /MobileOrg/ flags them for further action.  If you do not want to get
 these properties in so many entries, you can set the variable
 ~org-mobile-force-id-on-agenda-items~ to ~nil~.  Org mode will then
 rely on outline paths, in the hope that these will be unique enough.}.
-Finally, Org writes the file @file{index.org}, containing links to all other
+Finally, Org writes the file {{{file(index.org)}}}, containing links to all other
 files.  /MobileOrg/ first reads this file from the server, and then
 downloads all agendas and Org files listed in it.  To speed up the download,
 MobileOrg will only read files whose checksums@footnote{Checksums are stored
-automatically in the file @file{checksums.dat}} have changed.
+automatically in the file {{{file(checksums.dat)}}}} have changed.
 
 ** Pulling from MobileOrg
    :PROPERTIES:
@@ -16378,14 +16380,14 @@ automatically in the file @file{checksums.dat}} have changed.
    :END:
 When /MobileOrg/ synchronizes with the server, it not only pulls the Org
 files for viewing.  It also appends captured entries and pointers to flagged
-and changed entries to the file @file{mobileorg.org} on the server.  Org has
+and changed entries to the file {{{file(mobileorg.org)}}} on the server.  Org has
 a /pull/ operation that integrates this information into an inbox file
 and operates on the pointers to flagged entries.  Here is how it works:
 
 @enumerate
 @item
 Org moves all entries found in
-@file{mobileorg.org}@footnote{@file{mobileorg.org} will be empty after this
+{{{file(mobileorg.org)}}}@footnote{{{{file(mobileorg.org)}}} will be empty after this
 operation.} and appends them to the file pointed to by the variable
 ~org-mobile-inbox-for-pull~.  Each captured entry and each editing event
 will be a top-level entry in the inbox file.
@@ -16441,8 +16443,8 @@ parts of the outline tree, that seemed entirely unacceptable to me.  Also,
 when using outlines to take notes, I constantly wanted to restructure the
 tree, organizing it parallel to my thoughts and plans.  /Visibility
 cycling/ and /structure editing/ were originally implemented in the
-package @file{outline-magic.el}, but quickly moved to the more general
-@file{org.el}.  As this environment became comfortable for project planning,
+package {{{file(outline-magic.el)}}}, but quickly moved to the more general
+{{{file(org.el)}}}.  As this environment became comfortable for project planning,
 the next step was adding /TODO entries/, basic /timestamps/, and
 /table support/.  These areas highlighted the two main goals that Org
 still has today: to be a new, outline-based, plain text mode with innovative
@@ -16474,15 +16476,15 @@ Org into a multi-language environment for evaluating code and doing literate
 programming and reproducible research.
 @item John Wiegley
 John has contributed a number of great ideas and patches directly to Org,
-including the attachment system (@file{org-attach.el}), integration with
-Apple Mail (@file{org-mac-message.el}), hierarchical dependencies of TODO
-items, habit tracking (@file{org-habits.el}), and encryption
-(@file{org-crypt.el}).  Also, the capture system is really an extended copy
-of his great @file{remember.el}.
+including the attachment system ({{{file(org-attach.el)}}}), integration with
+Apple Mail ({{{file(org-mac-message.el)}}}), hierarchical dependencies of TODO
+items, habit tracking ({{{file(org-habits.el)}}}), and encryption
+({{{file(org-crypt.el)}}}).  Also, the capture system is really an extended copy
+of his great {{{file(remember.el)}}}.
 @item Sebastian Rose
 Without Sebastian, the HTML/XHTML publishing of Org would be the pitiful work
 of an ignorant amateur.  Sebastian has pushed this part of Org onto a much
-higher level.  He also wrote @file{org-info.js}, a Java script for displaying
+higher level.  He also wrote {{{file(org-info.js)}}}, a Java script for displaying
 webpages derived from Org using an Info-like or a folding interface with
 single-key navigation.
 
@@ -16513,7 +16515,7 @@ from worrying about possible bugs here and let me focus on other parts.
 
 @item Nicolas Goaziou
 Nicolas is maintaining the consistency of the deepest parts of Org.  His work
-on @file{org-element.el} and @file{org-export.el} has been outstanding, and
+on {{{file(org-element.el)}}} and {{{file(org-export.el)}}} has been outstanding, and
 opened the doors for many new ideas and features.
 
 @item Jambunathan K
@@ -16544,18 +16546,18 @@ complete if the ones above were not mentioned in this manual.
 @item
 /Russel Adams/ came up with the idea for drawers.
 @item
-/Thomas Baumann/ wrote @file{org-bbdb.el} and @file{org-mhe.el}.
+/Thomas Baumann/ wrote {{{file(org-bbdb.el)}}} and {{{file(org-mhe.el)}}}.
 @item
 /Christophe Bataillon/ created the great unicorn logo that we use on the
 Org mode website.
 @item
 /Alex Bochannek/ provided a patch for rounding timestamps.
 @item
-/Jan Böcker/ wrote @file{org-docview.el}.
+/Jan Böcker/ wrote {{{file(org-docview.el)}}}.
 @item
 /Brad Bozarth/ showed how to pull RSS feed data into Org mode files.
 @item
-/Tom Breton/ wrote @file{org-choose.el}.
+/Tom Breton/ wrote {{{file(org-choose.el)}}}.
 @item
 /Charles Cave/'s suggestion sparked the implementation of templates
 for Remember, which are now templates for capture.
@@ -16565,7 +16567,7 @@ specified time.
 @item
 /Gregory Chernov/ patched support for Lisp forms into table
 calculations and improved XEmacs compatibility, in particular by porting
-@file{nouline.el} to XEmacs.
+{{{file(nouline.el)}}} to XEmacs.
 @item
 /Sacha Chua/ suggested copying some linking code from Planner.
 @item
@@ -16586,7 +16588,7 @@ the Org-Babel documentation into the manual.
 @item
 /Christian Egli/ converted the documentation into Texinfo format, inspired
 the agenda, patched CSS formatting into the HTML exporter, and wrote
-@file{org-taskjuggler.el}.
+{{{file(org-taskjuggler.el)}}}.
 @item
 /David Emery/ provided a patch for custom CSS support in exported
 HTML agendas.
@@ -16598,7 +16600,7 @@ HTML agendas.
 /John Foerch/ figured out how to make incremental search show context
 around a match in a hidden outline tree.
 @item
-/Raimar Finken/ wrote @file{org-git-line.el}.
+/Raimar Finken/ wrote {{{file(org-git-line.el)}}}.
 @item
 /Mikael Fornius/ works as a mailing list moderator.
 @item
@@ -16626,14 +16628,14 @@ been critical when we started to adopt the Git version control system.
 /Manuel Hermenegildo/ has contributed various ideas, small fixes and
 patches.
 @item
-/Phil Jackson/ wrote @file{org-irc.el}.
+/Phil Jackson/ wrote {{{file(org-irc.el)}}}.
 @item
 /Scott Jaderholm/ proposed footnotes, control over whitespace between
 folded entries, and column view for properties.
 @item
 /Matt Jones/ wrote /MobileOrg Android/.
 @item
-/Tokuya Kameshima/ wrote @file{org-wl.el} and @file{org-mew.el}.
+/Tokuya Kameshima/ wrote {{{file(org-wl.el)}}} and {{{file(org-mew.el)}}}.
 @item
 /Shidai Liu/ ("Leo") asked for embedded @LaTeX{} and tested it.  He also
 provided frequent feedback and some patches.
@@ -16641,7 +16643,7 @@ provided frequent feedback and some patches.
 /Matt Lundin/ has proposed last-row references for table formulas and named
 invisible anchors.  He has also worked a lot on the FAQ.
 @item
-/David Maus/ wrote @file{org-atom.el}, maintains the issues file for Org,
+/David Maus/ wrote {{{file(org-atom.el)}}}, maintains the issues file for Org,
 and is a prolific contributor on the mailing list with competent replies,
 small fixes and patches.
 @item
@@ -16667,7 +16669,7 @@ and being able to quickly restrict the agenda to a subtree.
 /Tim O'Callaghan/ suggested in-file links, search options for general
 file links, and TAGS.
 @item
-/Osamu Okano/ wrote @file{orgcard2ref.pl}, a Perl program to create a text
+/Osamu Okano/ wrote {{{file(orgcard2ref.pl)}}}, a Perl program to create a text
 version of the reference card.
 @item
 /Takeshi Okano/ translated the manual and David O'Toole's tutorial
@@ -16695,7 +16697,7 @@ also acted as mailing list moderator for some time.
 /Kevin Rogers/ contributed code to access VM files on remote hosts.
 @item
 /Frank Ruell/ solved the mystery of the ~keymapp nil~ bug, a
-conflict with @file{allout.el}.
+conflict with {{{file(allout.el)}}}.
 @item
 /Jason Riedy/ generalized the send-receive mechanism for Orgtbl tables with
 extensive patches.
@@ -16706,16 +16708,16 @@ of feedback, developed and applied standards to the Org documentation.
 /Christian Schlauer/ proposed angular brackets around links, among
 other things.
 @item
-/Paul Sexton/ wrote @file{org-ctags.el}.
+/Paul Sexton/ wrote {{{file(org-ctags.el)}}}.
 @item
 Linking to VM/BBDB/Gnus was first inspired by /Tom Shannon/'s
-@file{organizer-mode.el}.
+{{{file(organizer-mode.el)}}}.
 @item
 /Ilya Shlyakhter/ proposed the Archive Sibling, line numbering in literal
 examples, and remote highlighting for referenced code lines.
 @item
-/Stathis Sideris/ wrote the @file{ditaa.jar} ASCII to PNG converter that is
-now packaged into Org's @file{contrib} directory.
+/Stathis Sideris/ wrote the {{{file(ditaa.jar)}}} ASCII to PNG converter that is
+now packaged into Org's {{{file(contrib)}}} directory.
 @item
 /Daniel Sinder/ came up with the idea of internal archiving by locking
 subtrees.
@@ -16731,10 +16733,10 @@ extension system, added support for mairix, and proposed the mapping API.
 /Ulf Stegemann/ created the table to translate special symbols to HTML,
 @LaTeX{}, UTF-8, Latin-1 and ASCII.
 @item
-/Andy Stewart/ contributed code to @file{org-w3m.el}, to copy HTML content
+/Andy Stewart/ contributed code to {{{file(org-w3m.el)}}}, to copy HTML content
 with links transformation to Org syntax.
 @item
-/David O'Toole/ wrote @file{org-publish.el} and drafted the manual
+/David O'Toole/ wrote {{{file(org-publish.el)}}} and drafted the manual
 chapter about publishing.
 @item
 /Jambunathan K/ contributed the ODT exporter.
@@ -16763,7 +16765,7 @@ linking to Gnus.
 /Roland Winkler/ requested additional key bindings to make Org
 work on a tty.
 @item
-/Piotr Zielinski/ wrote @file{org-mouse.el}, proposed agenda blocks
+/Piotr Zielinski/ wrote {{{file(org-mouse.el)}}}, proposed agenda blocks
 and contributed various ideas and code snippets.
 @end itemize
 
