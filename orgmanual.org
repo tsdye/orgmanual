@@ -4329,7 +4329,7 @@ Tags can simply be typed into the buffer at the end of a headline.
 After a colon, {{{kbdkey(M-,TAB)}}} offers completion on tags.  There is
 also a special command for inserting tags:
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c C-q,org-set-tags-command}
 {{{cindex(completion\\\, of tags)}}}
 {{{vindex(org-tags-column)}}}
@@ -4342,7 +4342,7 @@ things look nice.  TAGS are automatically realigned after promotion,
 demotion, and TODO state changes (see [[TODO basics]]).
 @orgcmd{C-c C-c,org-set-tags-command}
 When the cursor is in a headline, this does the same as @kbd{C-c C-q}.
-@end table
+
 
 {{{vindex(org-tag-alist)}}}
 Org supports tag insertion based on a @emph{list of tags}.  By
@@ -4448,7 +4448,7 @@ corresponding keys@footnote{Keys will automatically be assigned to tags which
 have no configured keys.}.  In this interface, you can use the following
 keys:
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @item a-z...
 Pressing keys assigned to tags will add or remove them from the list of
 tags in the current line.  Selecting a tag in a group of mutually
@@ -4476,7 +4476,7 @@ exception) assign several tags from such a group.
 Toggle auto-exit after the next change (see below).
 If you are using expert mode, the first @kbd{C-c} will display the
 selection window.
-@end table
+
 
 {{{noindent}}}
 This method lets you assign tags to a headline with very few keys.  With
@@ -4510,7 +4510,7 @@ when you press an extra @kbd{C-c}.
 Once a system of tags has been set up, it can be used to collect related
 information into special lists.
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmdkkc{C-c / m,C-c \\,org-match-sparse-tree}
 Create a sparse tree with all headlines matching a tags search.  With a
 @kbd{C-u} prefix argument, ignore headlines that are not a TODO line.
@@ -4522,7 +4522,7 @@ Create a global list of tag matches from all agenda files.
 Create a global list of tag matches from all agenda files, but check
 only TODO items and force checking subitems (see variable
 ~org-tags-match-list-sublevels~).
-@end table
+
 
 These commands all prompt for a match string which allows basic Boolean logic
 like {{{samp(+boss+urgent-project1)}}}, to find entries with tags {{{samp(boss)}}} and
@@ -4649,7 +4649,7 @@ Org files.
 {{{noindent}}}
 The following commands help to work with properties:
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{M-@key{TAB},pcomplete}
 After an initial colon in a line, complete property keys.  All keys used
 in the current file will be offered as possible completions.
@@ -4675,7 +4675,7 @@ Globally remove a property, from all entries in the current file.
 @orgcmd{C-c C-c c,org-compute-property-at-point}
 Compute the property at point, using the operator and scope from the
 nearest column format definition.
-@end table
+
 
 ** Special properties
    :PROPERTIES:
@@ -4739,7 +4739,7 @@ FILE         @r{The filename the entry is located in.}
 
 To create sparse trees and special lists with selection based on properties,
 the same commands are used as for tag searches (see [[Tag searches]]).
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmdkkc{C-c / m,C-c \,org-match-sparse-tree}
 Create a sparse tree with all matching entries.  With a
 @kbd{C-u} prefix argument, ignore headlines that are not a TODO line.
@@ -4751,7 +4751,7 @@ Create a global list of tag/property  matches from all agenda files.
 Create a global list of tag matches from all agenda files, but check
 only TODO items and force checking of subitems (see variable
 ~org-tags-match-list-sublevels~).
-@end table
+
 
 The syntax for the search string is described in @ref{Matching tags and
 properties}.
@@ -4759,14 +4759,14 @@ properties}.
 There is also a special command for creating sparse trees based on a
 single property:
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgkey{C-c / p}
 Create a sparse tree based on the value of a property.  This first
 prompts for the name of a property, and then for a value.  A sparse tree
 is created with all entries that define this property with the given
 value.  If you enclose the value in curly braces, it is interpreted as
 a regular expression and matched against the property values.
-@end table
+
 
 ** Property inheritance
    :PROPERTIES:
@@ -4793,7 +4793,7 @@ Org mode has a few properties for which inheritance is hard-coded, at
 least for the special applications for which they are used:
 
 {{{cindex(property\\\, COLUMNS)}}}
-@table @code
+#+attr_texinfo: :table-type "table" :indic "@code"
 @item COLUMNS
 The ~:COLUMNS:~ property defines the format of column view
 (see [[Column view]]).  It is inherited in the sense that the level
@@ -4812,7 +4812,7 @@ location for the entire subtree (see [[Moving subtrees]]).
 {{{cindex(property\\\, LOGGING)}}}
 The LOGGING property may define logging settings for an entry or a
 subtree (see [[Tracking TODO state changes]]).
-@end table
+
 
 ** Column view
    :PROPERTIES:
@@ -4973,7 +4973,7 @@ today.
     :END:
 
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @tsubheading{Turning column view on and off}
 @orgcmd{C-c C-x C-c,org-columns}
 {{{vindex(org-columns-default-format)}}}
@@ -5026,7 +5026,7 @@ Make the column narrower/wider by one character.
 Insert a new column, to the left of the current column.
 @orgcmd{S-M-@key{left},org-columns-delete}
 Delete the current column.
-@end table
+
 
 *** Capturing column view
     :PROPERTIES:
@@ -5048,7 +5048,7 @@ of this block looks like this:
 
 {{{noindent}}} This dynamic block has the following parameters:
 
-@table @code
+#+attr_texinfo: :table-type "table" :indic "@code"
 @item :id
 This is the most important parameter.  Column view is a feature that is
 often localized to a certain (sub)tree, and the capture block might be
@@ -5076,12 +5076,12 @@ When set to a number, don't capture entries below this level.
 When set to ~t~, skip rows where the only non-empty specifier of the
 column view is ~ITEM~.
 
-@end table
+
 
 {{{noindent}}}
 The following commands insert or update the dynamic block:
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c C-x i,org-insert-columns-dblock}
 Insert a dynamic block capturing a column view.  You will be prompted
 for the scope or ID of the view.
@@ -5092,7 +5092,7 @@ Update dynamic block at point.  The cursor needs to be in the
 Update all dynamic blocks (see [[Dynamic blocks]]).  This is useful if
 you have several clock table blocks, column-capturing blocks or other dynamic
 blocks in a buffer.
-@end table
+
 
 You can add formulas to the column view table and you may add plotting
 instructions in front of the table---these will survive an update of the
@@ -5158,7 +5158,7 @@ format}.}.  A timestamp can appear anywhere in the headline or body of an Org
 tree entry.  Its presence causes entries to be shown on specific dates in the
 agenda (see [[Weekly/daily agenda]]).  We distinguish:
 
-@table @var
+#+attr_texinfo: :table-type "table" :indic "@var"
 @item Plain timestamp; Event; Appointment
 {{{cindex(timestamp)}}}
 {{{cindex(appointment)}}}
@@ -5231,7 +5231,7 @@ angular ones.  These timestamps are inactive in the sense that they do
   [2006-11-01 Wed]
 #+end_example
 
-@end table
+
 
 ** Creating timestamps
    :PROPERTIES:
@@ -5241,7 +5241,7 @@ For Org mode to recognize timestamps, they need to be in the specific
 format.  All commands listed below produce timestamps in the correct
 format.
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c .,org-time-stamp}
 Prompt for a date and insert a corresponding timestamp.  When the cursor is
 at an existing timestamp in the buffer, the command is used to modify this
@@ -5295,7 +5295,7 @@ related modes (see [[Conflicts]]).
 Evaluate a time range by computing the difference between start and end.
 With a prefix argument, insert result after the time range (in a table: into
 the following column).
-@end table
+
 
 *** The date/time prompt
     :PROPERTIES:
@@ -5441,10 +5441,10 @@ representation of date and time to keep you happy, you can get it by
 customizing the variables ~org-display-custom-times~ and
 ~org-time-stamp-custom-formats~.
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c C-x C-t,org-toggle-time-stamp-overlays}
 Toggle the display of custom formats for dates and times.
-@end table
+
 
 {{{noindent}}}
 Org mode needs the default format for scanning, so the custom date/time
@@ -5481,7 +5481,7 @@ format is shorter, things do work as expected.
 
 A timestamp may be preceded by special keywords to facilitate planning:
 
-@table @var
+#+attr_texinfo: :table-type "table" :indic "@var"
 @item DEADLINE
 {{{cindex(DEADLINE keyword)}}}
 
@@ -5532,7 +5532,7 @@ mark this entry with a simple plain timestamp, to get this item shown
 on the date where it applies.  This is a frequent misunderstanding by
 Org users.  In Org mode, /scheduling/ means setting a date when you
 want to start working on an action item.
-@end table
+
 
 You may use timestamps with repeaters in scheduling and deadline
 entries.  Org mode will issue early and late warnings based on the
@@ -5557,7 +5557,7 @@ The following commands allow you to quickly insert@footnote{The {{{samp(SCHEDULE
 any text between this line and the headline.} a deadline or to schedule
 an item:
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @c
 @orgcmd{C-c C-d,org-deadline}
 Insert {{{samp(DEADLINE)}}} keyword along with a stamp.  The insertion will happen
@@ -5600,7 +5600,7 @@ Sparse tree for deadlines and scheduled items before a given date.
 @c
 @orgcmd{C-c / a,org-check-after-date}
 Sparse tree for deadlines and scheduled items after a given date.
-@end table
+
 
 Note that ~org-schedule~ and ~org-deadline~ supports
 setting the date by indicating a relative time: e.g. +1d will set
@@ -5724,7 +5724,7 @@ what to do with it.
     :DESCRIPTION: Starting and stopping a clock
     :END:
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c C-x C-i,org-clock-in}
 {{{vindex(org-clock-into-drawer)}}}
 {{{vindex(org-clock-continuously)}}}
@@ -5811,7 +5811,7 @@ that heading, including the time of any subheadings.  You can use visibility
 cycling to study the tree, but the overlays disappear when you change the
 buffer (see variable ~org-remove-highlights-with-change~) or press
 @kbd{C-c C-c}.
-@end table
+
 
 The @kbd{l} key may be used in the timeline (see [[Timeline]]) and in
 the agenda (see [[Weekly/daily agenda]]) to show which tasks have been
@@ -5832,7 +5832,7 @@ Org mode can produce quite complex reports based on the time clocking
 information.  Such a report is called a @emph{clock table}, because it is
 formatted as one or several Org tables.
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c C-x C-r,org-clock-report}
 Insert a dynamic block (see [[Dynamic blocks]]) containing a clock
 report as an Org mode table into the current file.  When the cursor is
@@ -5850,7 +5850,7 @@ you have several clock table blocks in a buffer.
 Shift the current ~:block~ interval and update the table.  The cursor
 needs to be in the ~#+BEGIN: clocktable~ line for this command.  If
 ~:block~ is ~today~, it will be shifted to ~today-1~ etc.
-@end table
+
 
 
 Here is an example of the frame for a clock table as it is inserted into the
@@ -5987,7 +5987,7 @@ be a question waiting for you when you get back, indicating how much idle
 time has passed (constantly updated with the current amount), as well as a
 set of choices to correct the discrepancy:
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @item k
 To keep some or all of the minutes and stay clocked in, press @kbd{k}.  Org
 will ask how many of the minutes to keep.  Press @key{RET} to keep them all,
@@ -6008,7 +6008,7 @@ To cancel the clock altogether, use @kbd{C}.  Note that if instead of
 canceling you subtract the away time, and the resulting clock amount is less
 than a minute, the clock will still be canceled rather than clutter up the
 log with an empty entry.
-@end table
+
 
 What if you subtracted those away minutes from the current clock, and now
 want to apply them to a new clock?  Simply clock in to any task immediately
@@ -6061,14 +6061,14 @@ special property {{{samp(Effort)}}}@footnote{You may change the property being
 used with the variable ~org-effort-property~.}.  You can set the effort
 for an entry with the following commands:
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c C-x e,org-set-effort}
 Set the effort estimate for the current entry.  With a numeric prefix
 argument, set it to the Nth allowed value (see below).  This command is also
 accessible from the agenda with the @kbd{e} key.
 @orgcmd{C-c C-x C-e,org-clock-modify-effort-estimate}
 Modify the effort estimate of the item currently being clocked.
-@end table
+
 
 Clearly the best way to work with effort estimates is through column view
 (see [[Column view]]).  You should start by setting up discrete values for
@@ -6121,7 +6121,7 @@ When taking notes during, for example, a meeting or a video viewing, it can
 be useful to have access to times relative to a starting time.  Org provides
 such a relative timer and make it easy to create timed notes.
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c C-x .,org-timer}
 Insert a relative time into the buffer.  The first time you use this, the
 timer will be started.  When called with a prefix argument, the timer is
@@ -6151,7 +6151,7 @@ restart taking notes after a break in the process.  When called with a double
 prefix argument @kbd{C-u C-u}, change all timer strings in the active region
 by a certain amount.  This can be used to fix timer strings if the timer was
 not started at exactly the right moment.
-@end table
+
 
 ** Countdown timer
    :PROPERTIES:
@@ -6230,7 +6230,7 @@ suggestion.}  for capturing new material.
     :DESCRIPTION: Commands to invoke and terminate capture
     :END:
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c c,org-capture}
 Call the command ~org-capture~.  Note that this keybinding is global and
 not active by default - you need to install it.  If you have templates
@@ -6257,7 +6257,7 @@ given to this command will be passed on to the ~org-refile~ command.
 @orgcmd{C-c C-k,org-capture-kill}
 Abort the capture process and return to the previous state.
 
-@end table
+
 
 You can also call ~org-capture~ in a special way from the agenda, using
 the @kbd{k c} key combination.  With this access, any timestamps inserted by
@@ -6267,13 +6267,13 @@ rather than to the current date.
 To find the locations of the last stored capture, use ~org-capture~ with
 prefix commands:
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgkey{C-u C-c c}
 Visit the target location of a capture template.  You get to select the
 template in the usual way.
 @orgkey{C-u C-u C-c c}
 Visit the last stored capture item in its buffer.
-@end table
+
 
 {{{vindex(org-capture-bookmark)}}}
 {{{cindex(org-capture-last-stored)}}}
@@ -6294,10 +6294,10 @@ You can use templates for different types of capture items, and
 for different target locations.  The easiest way to create such templates is
 through the customize interface.
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgkey{C-c c C}
 Customize the variable ~org-capture-templates~.
-@end table
+
 
 Before we give the formal description of template definitions, let's look at
 an example.  Say you would like to use one template to create general TODO
@@ -6348,7 +6348,7 @@ like this:
 Now lets look at the elements of a template definition.  Each entry in
 ~org-capture-templates~ is a list with the following items:
 
-@table @var
+#+attr_texinfo: :table-type "table" :indic "@var"
 @item keys
 The keys that will select the template, as a string, characters
 only, for example ~"a"~ for a template to be selected with a
@@ -6368,7 +6368,7 @@ selection.
 
 @item type
 The type of entry, a symbol.  Valid values are:
-@table @code
+#+attr_texinfo: :table-type "table" :indic "@code"
 @item entry
 An Org mode node, with a headline.  Will be filed as the child of the target
 entry or as a top-level entry.  The target file should be an Org mode file.
@@ -6384,7 +6384,7 @@ line will be inserted depends on the properties ~:prepend~ and
 ~:table-line-pos~ (see below).
 @item plain
 Text to be inserted as it is.
-@end table
+
 
 @item target
 {{{vindex(org-default-notes-file)}}}
@@ -6396,7 +6396,7 @@ the empty string, it defaults to ~org-default-notes-file~.  A file can
 also be given as a variable, function, or Emacs Lisp form.
 
 Valid values are:
-@table @code
+#+attr_texinfo: :table-type "table" :indic "@code"
 @item (file "path/to/file")
 Text will be placed at the beginning or end of that file.
 
@@ -6427,7 +6427,7 @@ File to the entry that is currently being clocked.
 @item (function function-finding-location)
 Most general way, write your own function to find both
 file and location.
-@end table
+
 
 @item template
 The template for creating the capture item.  If you leave this empty, an
@@ -6440,7 +6440,7 @@ more details.
 @item properties
 The rest of the entry is a property list of additional options.
 Recognized properties are:
-@table @code
+#+attr_texinfo: :table-type "table" :indic "@code"
 @item :prepend
 Normally new captured information will be appended at
 the target location (last child, last table line, last list item...).
@@ -6480,8 +6480,8 @@ line.
 @item :kill-buffer
 If the target file was not yet visited when capture was invoked, kill the
 buffer again after capture is completed.
-@end table
-@end table
+
+
 
 **** Template expansion
      :PROPERTIES:
@@ -6620,14 +6620,14 @@ directory.
 
 {{{noindent}}} The following commands deal with attachments:
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 
 @orgcmd{C-c C-a,org-attach}
 The dispatcher for commands related to the attachment system.  After these
 keys, a list of commands is displayed and you must press an additional key
 to select a command:
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmdtkc{a,C-c C-a a,org-attach-attach}
 {{{vindex(org-attach-method)}}}
 Select a file and move it into the task's attachment directory.  The file
@@ -6680,8 +6680,8 @@ putting the directory path into the ~ATTACH_DIR~ property.
 {{{cindex(property\\\, ATTACH_DIR_INHERIT)}}}
 Set the ~ATTACH_DIR_INHERIT~ property, so that children will use the
 same directory for attachments as the parent does.
-@end table
-@end table
+
+
 
 ** RSS Feeds
    :PROPERTIES:
@@ -6712,14 +6712,14 @@ will configure that new items from the feed provided by
 @file{~/org/feeds.org} under the heading {{{samp(Slashdot Entries)}}}, whenever
 the following command is used:
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c C-x g,org-feed-update-all}
 @item C-c C-x g
 Collect items from the feeds configured in ~org-feed-alist~ and act upon
 them.
 @orgcmd{C-c C-x G,org-feed-goto-inbox}
 Prompt for a feed name and go to the inbox configured for this feed.
-@end table
+
 
 Under the same headline, Org will create a drawer {{{samp(FEEDSTATUS)}}} in which
 it will store information about the status of items in the feed, to avoid
@@ -6763,7 +6763,7 @@ the entries into a different list, for example into a project.  Cutting,
 finding the right location, and then pasting the note is cumbersome.  To
 simplify this process, you can use the following special command:
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c M-w,org-copy}
 {{{findex(org-copy)}}}
 Copying works like refiling, except that the original note is not deleted.
@@ -6803,7 +6803,7 @@ Refile as the child of the item currently being clocked.
 Clear the target cache.  Caching of refile targets can be turned on by
 setting ~org-refile-use-cache~.  To make the command see new possible
 targets, you have to clear the cache with this command.
-@end table
+
 
 
 ** Archiving
@@ -6817,12 +6817,12 @@ to move the tree out of the way and to stop it from contributing to the
 agenda.  Archiving is important to keep your working files compact and global
 searches like the construction of agenda views fast.
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c C-x C-a,org-archive-subtree-default}
 {{{vindex(org-archive-default-command)}}}
 Archive the current entry using the command specified in the variable
 ~org-archive-default-command~.
-@end table
+
 *** Moving subtrees
     :PROPERTIES:
     :DESCRIPTION: Moving a tree to an archive file
@@ -6834,7 +6834,7 @@ Archive the current entry using the command specified in the variable
 The most common archiving action is to move a project tree to another file,
 the archive file.
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmdkskc{C-c C-x C-s,C-c $,org-archive-subtree}
 {{{vindex(org-archive-location)}}}
 Archive the subtree starting at the cursor position to the location
@@ -6845,7 +6845,7 @@ the archive.  To do this, each subtree is checked for open TODO entries.
 If none are found, the command offers to move it to the archive
 location.  If the cursor is @emph{not} on a headline when this command
 is invoked, the level 1 trees will be checked.
-@end table
+
 
 {{{cindex(archive locations)}}}
 The default archive location is a file in the same directory as the
@@ -6926,7 +6926,7 @@ Archived trees are excluded from column view unless the variable
 
 The following commands help manage the ARCHIVE tag:
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c C-x a,org-toggle-archive-tag}
 Toggle the ARCHIVE tag for the current headline.  When the tag is set,
 the headline changes to a shadowed face, and the subtree below it is
@@ -6945,7 +6945,7 @@ the entry with the heading {{{samp(Archive)}}} and the tag {{{samp(ARCHIVE)}}}. 
 entry becomes a child of that sibling and in this way retains a lot of its
 original context, including inherited tags and approximate position in the
 outline.
-@end table
+
 
 * FIXME Agenda views
   :PROPERTIES:
@@ -7023,7 +7023,7 @@ dispatcher command.}.  You can customize ~org-agenda-files~, but
 the easiest way to maintain it is through the following commands
 
 {{{cindex(files\\\, adding to agenda list)}}}
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c [,org-agenda-file-to-front}
 Add current file to the list of agenda files.  The file is added to
 the front of the list.  If it was already in the list, it is moved to
@@ -7039,7 +7039,7 @@ Cycle through agenda file list, visiting one file after the other.
 @item M-x org-iswitchb
 Command to use an ~iswitchb~-like interface to switch to and between Org
 buffers.
-@end table
+
 
 {{{noindent}}}
 The Org menu contains the current list of files and can be used
@@ -7052,7 +7052,7 @@ you may press @kbd{<} once or several times in the dispatcher
 (see [[Agenda dispatcher]]).  To restrict the agenda scope for an
 extended period, use the following commands:
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c C-x <,org-agenda-set-restriction-lock}
 Permanently restrict the agenda to the current subtree.  When with a
 prefix argument, or with the cursor before the first headline in a file,
@@ -7062,12 +7062,12 @@ or @kbd{>} in the agenda dispatcher.  If there is a window displaying an
 agenda view, the new restriction takes effect immediately.
 @orgcmd{C-c C-x >,org-agenda-remove-restriction-lock}
 Remove the permanent restriction created by @kbd{C-c C-x <}.
-@end table
+
 
 {{{noindent}}}
 When working with @file{speedbar.el}, you can use the following commands in
 the Speedbar frame:
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmdtkc{< @r{in the speedbar frame},<,org-speedbar-set-agenda-restriction}
 Permanently restrict the agenda to the item---either an Org file or a subtree
 in such a file---at the cursor in the Speedbar frame.
@@ -7075,7 +7075,7 @@ If there is a window displaying an agenda view, the new restriction takes
 effect immediately.
 @orgcmdtkc{> @r{in the speedbar frame},>,org-agenda-remove-restriction-lock}
 Lift the restriction.
-@end table
+
 
 ** Agenda dispatcher
    :PROPERTIES:
@@ -7090,7 +7090,7 @@ following we will assume that @kbd{C-c a} is indeed how the dispatcher
 is accessed and list keyboard access to commands accordingly.  After
 pressing @kbd{C-c a}, an additional letter is required to execute a
 command.  The dispatcher offers the following default commands:
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @item a
 Create the calendar-like agenda (see [[Weekly/daily agenda]]).
 @item t @r{/} T
@@ -7133,7 +7133,7 @@ customizing the variable ~org-agenda-sticky~).  With sticky agendas, the
 dispatcher only switches to the selected view, you need to update it by hand
 with @kbd{r} or @kbd{g}.  You can toggle sticky agenda view any time with
 ~org-toggle-sticky-agenda~.
-@end table
+
 
 You can also define custom commands that will be accessible through the
 dispatcher, just like the default commands.  This includes the
@@ -7160,7 +7160,7 @@ In this section we describe the built-in views.
 The purpose of the weekly/daily @emph{agenda} is to act like a page of a
 paper agenda, showing all the tasks for the current week or day.
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 {{{cindex(org-agenda\\\, command)}}}
 @orgcmd{C-c a a,org-agenda-list}
 Compile an agenda for the current week from a list of Org files.  The agenda
@@ -7169,7 +7169,7 @@ compatibility, the universal prefix @kbd{C-u} causes all TODO entries to be
 listed before the agenda.  This feature is deprecated, use the dedicated TODO
 list, or a block agenda instead (see [[Block agenda]]).}  (like @kbd{C-u 2 1
 C-c a a}) you may set the number of days to be displayed.
-@end table
+
 
 {{{vindex(org-agenda-span)}}}
 {{{vindex(org-agenda-ndays)}}}
@@ -7296,7 +7296,7 @@ docstring for details.
 The global TODO list contains all unfinished TODO items formatted and
 collected into a single place.
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c a t,org-todo-list}
 Show the global TODO list.  This collects the TODO items from all agenda
 files (see [[Agenda Views]]) into a single buffer.  By default, this lists
@@ -7318,7 +7318,7 @@ for example @kbd{3 r}.  If you often need a search for a specific
 keyword, define a custom command for it (see [[Agenda dispatcher]]).@*
 Matching specific TODO keywords can also be done as part of a tags
 search (see [[Tag searches]]).
-@end table
+
 
 Remote editing of TODO items means that you can change the state of a
 TODO entry with a single key press.  The commands available in the
@@ -7365,7 +7365,7 @@ based on this metadata and collect them into an agenda buffer.  The match
 syntax described here also applies when creating sparse trees with @kbd{C-c /
 m}.
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c a m,org-tags-view}
 Produce a list of all headlines that match a given set of tags.  The
 command prompts for a selection criterion, which is a boolean logic
@@ -7381,7 +7381,7 @@ not-DONE state and force checking subitems (see variable
 see the variable ~org-agenda-tags-todo-honor-ignore-options~.  Matching
 specific TODO keywords together with a tags match is also possible, see
 @ref{Tag searches}.
-@end table
+
 
 The commands available in the tags list are described in @ref{Agenda
 commands}.
@@ -7399,7 +7399,7 @@ may be preceded by {{{samp(-)}}}, to select against it, and {{{samp(+)}}} is syn
 sugar for positive selection.  The AND operator {{{samp(&)}}} is optional when
 {{{samp(+)}}} or {{{samp(-)}}} is present.  Here are some examples, using only tags.
 
-@table @samp
+#+attr_texinfo: :table-type "table" :indic "@samp"
 @item +work-boss
 Select headlines tagged {{{samp(:work:)}}}, but discard those also tagged
 {{{samp(:boss:)}}}.
@@ -7408,7 +7408,7 @@ Selects lines tagged {{{samp(:work:)}}} or {{{samp(:laptop:)}}}.
 @item work|laptop+night
 Like before, but require the {{{samp(:laptop:)}}} lines to be tagged also
 {{{samp(:night:)}}}.
-@end table
+
 
 {{{cindex(regular expressions\\\, with tags search)}}}
 Instead of a tag, you may also specify a regular expression enclosed in curly
@@ -7434,13 +7434,13 @@ searches@footnote{But see [[x-agenda-skip-entry-regexp,
 ,skipping entries based on regexp]].}.
 
 Here are more examples:
-@table @samp
+#+attr_texinfo: :table-type "table" :indic "@samp"
 @item work+TODO="WAITING"
 Select {{{samp(:work:)}}}-tagged TODO lines with the specific TODO
 keyword {{{samp(WAITING)}}}.
 @item work+TODO="WAITING"|home+TODO="WAITING"
 Waiting tasks both at work and at home.
-@end table
+
 
 When matching properties, a number of different operators can be used to test
 the value of a property.  Here is a complex example:
@@ -7506,7 +7506,7 @@ make sure that only lines are checked that actually have any TODO keyword
 part after the slash with {{{samp(!)}}}.  Using @kbd{C-c a M} or {{{samp(/!)}}} will
 not match TODO keywords in a DONE state.  Examples:
 
-@table @samp
+#+attr_texinfo: :table-type "table" :indic "@samp"
 @item work/WAITING
 Same as {{{samp(work+TODO="WAITING")}}}
 @item work/!-WAITING-NEXT
@@ -7515,7 +7515,7 @@ nor {{{samp(NEXT)}}}
 @item work/!+WAITING|+NEXT
 Select {{{samp(:work:)}}}-tagged TODO lines that are either {{{samp(WAITING)}}} or
 {{{samp(NEXT)}}}.
-@end table
+
 
 *** Timeline
     :PROPERTIES:
@@ -7530,12 +7530,12 @@ The timeline summarizes all time-stamped items from a single Org mode
 file in a @emph{time-sorted view}.  The main purpose of this command is
 to give an overview over events in a project.
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c a L,org-timeline}
 Show a time-sorted view of the Org file, with all time-stamped items.
 When called with a @kbd{C-u} prefix, all unfinished TODO entries
 (scheduled or not) are also listed under the current date.
-@end table
+
 
 {{{noindent}}}
 The commands available in the timeline buffer are listed in
@@ -7552,11 +7552,11 @@ The commands available in the timeline buffer are listed in
 This agenda view is a general text search facility for Org mode entries.
 It is particularly useful to find notes.
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c a s,org-search-view}
 This is a special search that lets you select entries by matching a substring
 or specific words using a boolean logic.
-@end table
+
 For example, the search string {{{samp(computer equipment)}}} will find entries
 that contain {{{samp(computer equipment)}}} as a substring.  If the two words are
 separated by more space or a line break, the search will still match.
@@ -7586,7 +7586,7 @@ has no defined next actions, so it will never show up in the TODO lists
 Org mode produces.  During the review, you need to identify such
 projects and define next actions for them.
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c a #,org-agenda-list-stuck-projects}
 List projects that are stuck.
 {{{kindex(C-c a !)}}}
@@ -7594,7 +7594,7 @@ List projects that are stuck.
 {{{vindex(org-stuck-projects)}}}
 Customize the variable ~org-stuck-projects~ to define what a stuck
 project is and how to find it.
-@end table
+
 
 You almost certainly will have to configure this view before it will
 work for you.  The built-in default assumes that all your projects are
@@ -7783,7 +7783,7 @@ removing the risk that your agenda and note files may diverge.
 Some commands can be executed with mouse clicks on agenda lines.  For
 the other commands, the cursor needs to be in the desired line.
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @tsubheading{Motion}
 {{{cindex(motion commands in agenda)}}}
 @orgcmd{n,org-agenda-next-line}
@@ -8053,7 +8053,7 @@ the effort criterion.  You can achieve the same effect by pressing @kbd{+} or
 {{{kindex(@{)}}}
 {{{kindex(@})}}}
 @item [ ] @{ @}
-@table @i
+#+attr_texinfo: :table-type "table" :indic "@i"
 @item @r{in} search view
 add new search words (@kbd{[} and @kbd{]}) or new regular expressions
 (@kbd{@{} and @kbd{@}}) to the query string.  The opening bracket/brace will
@@ -8061,7 +8061,7 @@ add a positive search term prefixed by {{{samp(+)}}}, indicating that this searc
 term /must/ occur/match in the entry.  The closing bracket/brace will add a
 negative search term which /must not/ occur/match in the entry for it to be
 selected.
-@end table
+
 
 @tsubheading{Remote editing}
 {{{cindex(remote editing\\\, from agenda)}}}
@@ -8325,7 +8325,7 @@ Quit agenda, remove the agenda buffer.
 Exit agenda, remove the agenda buffer and all buffers loaded by Emacs
 for the compilation of the agenda.  Buffers created by the user to
 visit Org files will not be removed.
-@end table
+
 
 
 ** Custom agenda views
@@ -8386,7 +8386,7 @@ parameter is the search type, followed by the string or regular
 expression to be used for the matching.  The example above will
 therefore define:
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @item C-c a w
 as a global search for TODO entries with {{{samp(WAITING)}}} as the TODO
 keyword
@@ -8409,7 +8409,7 @@ containing the word {{{samp(FIXME)}}}
 as a prefix command for a HOME tags search where you have to press an
 additional key (@kbd{l}, @kbd{p} or @kbd{k}) to select a name (Lisa,
 Peter, or Kim) as additional tag to match.
-@end table
+
 
 *** Block agenda
     :PROPERTIES:
@@ -8560,7 +8560,7 @@ ghostscript @file{ps2pdf} utility must be installed on the system.  Selecting
 a PDF file will also create the postscript file.}, and iCalendar files.  If
 you want to do this only occasionally, use the command
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-x C-w,org-agenda-write}
 {{{cindex(exporting agenda views)}}}
 {{{cindex(agenda views\\\, exporting)}}}
@@ -8583,7 +8583,7 @@ for @file{htmlize} to be used during export, for example
         (org-agenda-add-entry-text-maxlines 5)
         (htmlize-output-type 'css)))
 @end lisp
-@end table
+
 
 If you need to export certain agenda views frequently, you can associate
 any custom agenda command with a list of output file names
@@ -8630,11 +8630,11 @@ commands interactively because this might use too much overhead.
 Instead, there is a special command to produce @emph{all} specified
 files in one step:
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c a e,org-store-agenda-views}
 Export all agenda views that have export file names associated with
 them.
-@end table
+
 
 You can use the options section of the custom agenda commands to also
 set options for the export commands.  For example:
@@ -8703,10 +8703,10 @@ properties embedded in the hierarchical structure of an Org file.  It can be
 quite useful to use column view also from the agenda, where entries are
 collected by certain criteria.
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c C-x C-c,org-agenda-columns}
 Turn on column view in the agenda.
-@end table
+
 
 To understand how to use this properly, it is important to realize that the
 entries in the agenda are no longer in their proper outline environment.
@@ -8971,11 +8971,11 @@ Also entire subtrees starting with the word {{{samp(COMMENT)}}} will never be
 exported.  Finally, regions surrounded by {{{samp(#+BEGIN_COMMENT)}}}
 ... {{{samp(#+END_COMMENT)}}} will not be exported.
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 {{{kindex(C-c ;)}}}
 @item C-c ;
 Toggle the COMMENT keyword at the beginning of an entry.
-@end table
+
 
 ** Images and tables
    :PROPERTIES:
@@ -9117,7 +9117,7 @@ Because the ~#+BEGIN_...~ and ~#+END_...~ patterns need to be added
 so often, shortcuts are provided using the Easy Templates facility
 (see [[Easy Templates]]).
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 {{{kindex(C-c ')}}}
 @item C-c '
 Edit the source code example at point in its native mode.  This works by
@@ -9139,7 +9139,7 @@ temporary buffer created with @kbd{C-c '} will prompt for a label.  Make sure
 that it is unique in the current buffer, and insert it with the proper
 formatting like {{{samp((ref:label))}}} at the end of the current line.  Then the
 label is stored as a link {{{samp((label))}}}, for retrieval with @kbd{C-c C-l}.
-@end table
+
 
 
 ** Include files
@@ -9182,11 +9182,11 @@ obvious defaults.
 ,#+INCLUDE: "~/.emacs" :lines "10-"    @r{Include lines from 10 to EOF}
 #+end_example
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 {{{kindex(C-c ')}}}
 @item C-c '
 Visit the include file at point.
-@end table
+
 
 ** Index entries
    :PROPERTIES:
@@ -9291,13 +9291,13 @@ following command@footnote{You can turn this on by default by setting the
 variable ~org-pretty-entities~, or on a per-file base with the
 ~#+STARTUP~ option ~entitiespretty~.}:
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 {{{kindex(C-c C-x \)}}}
 @item C-c C-x \
 Toggle display of entities as UTF-8 characters.  This does not change the
 buffer content which remains plain ASCII, but it overlays the UTF-8 character
 for display purposes only.
-@end table
+
 
 *** Subscripts and superscripts
     :PROPERTIES:
@@ -9332,12 +9332,12 @@ convention, or use, on a per-file basis:
 {{{noindent}}} With this setting, {{{samp(a_b)}}} will not be interpreted as a
 subscript, but {{{samp(a_@{b@)}}}} will.
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 {{{kindex(C-c C-x \)}}}
 @item C-c C-x \
 In addition to showing entities as UTF-8 characters, this command will also
 format sub- and superscripts in a WYSIWYM way.
-@end table
+
 
 *** @LaTeX{} fragments
     :PROPERTIES:
@@ -9423,7 +9423,7 @@ of these lines:
 If you have @file{dvipng} installed, @LaTeX{} fragments can be processed to
 produce preview images of the typeset expressions:
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 {{{kindex(C-c C-x C-l)}}}
 @item C-c C-x C-l
 Produce a preview image of the @LaTeX{} fragment at point and overlay it
@@ -9435,7 +9435,7 @@ process the entire buffer.
 {{{kindex(C-c C-c)}}}
 @item C-c C-c
 Remove the overlay preview images.
-@end table
+
 
 {{{vindex(org-format-latex-options)}}}
 You can customize the variable ~org-format-latex-options~ to influence
@@ -9582,10 +9582,10 @@ specifically related to export, see @ref{In-buffer settings}.
 In particular, note that you can place commonly-used (export) options in
 a separate file which can be included using ~#+SETUPFILE~.
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c C-e t,org-insert-export-options-template}
 Insert template with export options, see example below.
-@end table
+
 
 {{{cindex(#+TITLE)}}}
 {{{cindex(#+AUTHOR)}}}
@@ -9709,7 +9709,7 @@ Normally the entire file is exported, but if there is an active region that
 contains one outline tree, the first heading is used as document title and
 the subtrees are exported.
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c C-e,org-export}
 {{{vindex(org-export-run-in-background)}}}
 Dispatcher for export and publishing commands.  Displays a help-window
@@ -9726,7 +9726,7 @@ Like @kbd{C-c C-e}, but only export the text that is currently visible
 Call the exporter, but reverse the setting of
 ~org-export-run-in-background~, i.e.@: request background processing if
 not set, or force processing in the current Emacs process if set.
-@end table
+
 
 ** ASCII/Latin-1/UTF-8 export
    :PROPERTIES:
@@ -9743,7 +9743,7 @@ with special characters and symbols available in these encodings.
 {{{cindex(region\\\, active)}}}
 {{{cindex(active region)}}}
 {{{cindex(transient-mark-mode)}}}
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c C-e a,org-export-as-ascii}
 {{{cindex(property\\\, EXPORT_FILE_NAME)}}}
 Export as an ASCII file.  For an Org file, @file{myfile.org}, the ASCII file
@@ -9765,7 +9765,7 @@ Like the above commands, but use Latin-1 encoding.
 Like the above commands, but use UTF-8 encoding.
 @item C-c C-e v a/n/u
 Export only the visible part of the document.
-@end table
+
 
 {{{cindex(headline levels\\\, for exporting)}}}
 In the exported version, the first 3 outline levels will become
@@ -9808,7 +9808,7 @@ language, but with additional support for tables.
 {{{cindex(region\\\, active)}}}
 {{{cindex(active region)}}}
 {{{cindex(transient-mark-mode)}}}
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c C-e h,org-export-as-html}
 {{{cindex(property\\\, EXPORT_FILE_NAME)}}}
 Export as a HTML file.  For an Org file @file{myfile.org},
@@ -9836,7 +9836,7 @@ buffer.
 @item M-x org-replace-region-by-HTML
 Replace the active region (assumed to be in Org mode syntax) by HTML
 code.
-@end table
+
 
 {{{cindex(headline levels\\\, for exporting)}}}
 In the exported version, the first 3 outline levels will become headlines,
@@ -10233,7 +10233,7 @@ sections.
 {{{cindex(region\\\, active)}}}
 {{{cindex(active region)}}}
 {{{cindex(transient-mark-mode)}}}
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c C-e l,org-export-as-latex}
 {{{cindex(property EXPORT_FILE_NAME)}}}
 Export as a @LaTeX{} file.  For an Org file
@@ -10259,7 +10259,7 @@ code.
 Export as @LaTeX{} and then process to PDF.
 @orgcmd{C-c C-e d,org-export-as-pdf-and-open}
 Export as @LaTeX{} and then process to PDF, then open the resulting PDF file.
-@end table
+
 
 {{{cindex(headline levels\\\, for exporting)}}}
 {{{vindex(org-latex-low-levels)}}}
@@ -10469,7 +10469,7 @@ editing special properties used by beamer.
 You can influence the structure of the presentation using the following
 properties:
 
-@table @code
+#+attr_texinfo: :table-type "table" :indic "@code"
 @item BEAMER_env
 The environment that should be used to format this entry.  Valid environments
 are defined in the constant ~org-beamer-environments-default~, and you
@@ -10496,7 +10496,7 @@ with value 0 or 1, or automatically at the end of the frame.
 Additional commands that should be inserted after the environment has been
 opened.  For example, when creating a frame, this can be used to specify
 transitions.
-@end table
+
 
 Frames will automatically receive a ~fragile~ option if they contain
 source code that uses the verbatim environment.  Special @file{beamer}
@@ -10520,11 +10520,11 @@ support with
 ,#+STARTUP: beamer
 #+end_example
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c C-b,org-beamer-select-environment}
 In ~org-beamer-mode~, this key offers fast selection of a beamer
 environment or the ~BEAMER_col~ property.
-@end table
+
 
 Column view provides a great way to set the environment of a node and other
 important parameters.  Make sure you are using a COLUMN format that is geared
@@ -10592,7 +10592,7 @@ Currently DocBook exporter only supports DocBook V5.0.
 {{{cindex(region\\\, active)}}}
 {{{cindex(active region)}}}
 {{{cindex(transient-mark-mode)}}}
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c C-e D,org-export-as-docbook}
 {{{cindex(property EXPORT_FILE_NAME)}}}
 Export as a DocBook file.  For an Org file, @file{myfile.org}, the DocBook XML
@@ -10622,7 +10622,7 @@ adding an in-buffer setting ~#+XSLT:~ to the Org file.
 
 @orgkey{C-c C-e v D}
 Export only the visible part of the document.
-@end table
+
 
 *** Quoting DocBook code
     :PROPERTIES:
@@ -10807,7 +10807,7 @@ output.  Check the availability of this program before proceeding further.
 {{{cindex(region\\\, active)}}}
 {{{cindex(active region)}}}
 {{{cindex(transient-mark-mode)}}}
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c C-e o,org-export-as-odt}
 {{{cindex(property EXPORT_FILE_NAME)}}}
 
@@ -10834,7 +10834,7 @@ Export as an OpenDocument Text file and open the resulting file.
 If ~org-export-odt-preferred-output-format~ is specified, open the
 converted file instead.  @xref{x-export-to-other-formats, , Automatically
 exporting to other formats}.
-@end table
+
 
 *** Extending ODT export
     :PROPERTIES:
@@ -10877,12 +10877,12 @@ converter.  Once a converter is configured, you can interact with it using
 the following command.
 
 {{{vindex(org-export-odt-convert)}}}
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 
 @item M-x org-export-odt-convert
 Convert an existing document from one format to another.  With a prefix
 argument, also open the newly produced file.
-@end table
+
 
 *** Applying custom styles
     :PROPERTIES:
@@ -11066,7 +11066,7 @@ achieve the best results.
 
 The examples below illustrate the various possibilities.
 
-@table @asis
+#+attr_texinfo: :table-type "table" :indic "@asis"
 @item Explicitly size the image
 To embed @file{img.png} as a 10 cm x 10 cm image, do the following:
 
@@ -11100,7 +11100,7 @@ height:width ratio, do the following
 #+ATTR_ODT: :height 10
 [[./img.png]]
 #+end_example
-@end table
+
 
 @subsubheading Anchoring of images
 
@@ -11167,7 +11167,7 @@ converter, you can configure the above variables as shown below.
 You can use the following commands to quickly verify the reliability of
 the @LaTeX{}-to-MathML converter.
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 
 @item M-x org-export-as-odf
 Convert a @LaTeX{} math snippet to an OpenDocument formula (@file{.odf}) file.
@@ -11175,7 +11175,7 @@ Convert a @LaTeX{} math snippet to an OpenDocument formula (@file{.odf}) file.
 @item M-x org-export-as-odf-and-open
 Convert a @LaTeX{} math snippet to an OpenDocument formula (@file{.odf}) file
 and open the formula file with the system-registered application.
-@end table
+
 
 {{{cindex(dvipng)}}}
 @item PNG images
@@ -11716,14 +11716,14 @@ defined in all the nodes.
 
 @subsection TaskJuggler export commands
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c C-e j,org-export-as-taskjuggler}
 Export as a TaskJuggler file.
 
 @orgcmd{C-c C-e J,org-export-as-taskjuggler-and-open}
 Export as a TaskJuggler file and then open the file with TaskJugglerUI (only
 for TaskJugglerUI 2.x).
-@end table
+
 
 @subsection Tasks
 
@@ -11843,11 +11843,11 @@ For more information and examples see the Org-taskjuggler tutorial at
 
 The Freemind exporter was written by Lennart Borgman.
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c C-e m,org-export-as-freemind}
 Export as a Freemind mind map.  For an Org file @file{myfile.org}, the Freemind
 file will be @file{myfile.mm}.
-@end table
+
 
 ** XOXO export
    :PROPERTIES:
@@ -11859,13 +11859,13 @@ Org mode contains an exporter that produces XOXO-style output.
 Currently, this exporter only handles the general outline structure and
 does not interpret any additional Org mode features.
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c C-e x,org-export-as-xoxo}
 Export as an XOXO file.  For an Org file @file{myfile.org}, the XOXO file will be
 @file{myfile.html}.
 @orgkey{C-c C-e v x}
 Export only the visible part of the document.
-@end table
+
 
 ** iCalendar export
    :PROPERTIES:
@@ -11907,7 +11907,7 @@ prefixes to the UID, depending on what triggered the inclusion of the entry.
 In this way the UID remains unique, but a synchronization program can still
 figure out from which entry all the different instances originate.
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c C-e i,org-export-icalendar-this-file}
 Create iCalendar entries for the current file and store them in the same
 directory, using a file extension @file{.ics}.
@@ -11921,7 +11921,7 @@ file will be written.
 Create a single large iCalendar file from all files in
 ~org-agenda-files~ and write it to the file given by
 ~org-combined-agenda-icalendar-file~.
-@end table
+
 
 {{{vindex(org-use-property-inheritance)}}}
 {{{vindex(org-icalendar-include-body)}}}
@@ -12462,7 +12462,7 @@ right place on the web server, and publishing images to it.
    :END:
 Once properly configured, Org can publish with the following commands:
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c C-e X,org-publish}
 Prompt for a specific project and publish all files that belong to it.
 @orgcmd{C-c C-e P,org-publish-current-project}
@@ -12471,7 +12471,7 @@ Publish the project containing the current file.
 Publish only the current file.
 @orgcmd{C-c C-e E,org-publish-all}
 Publish every project.
-@end table
+
 
 {{{vindex(org-publish-use-timestamps-flag)}}}
 Org uses timestamps to track when a file has changed.  The above functions
@@ -12547,7 +12547,7 @@ or
 src_<language>[<header arguments>]@{<body>@}
 #+end_example
 
-@table @code
+#+attr_texinfo: :table-type "table" :indic "@code"
 @item <#+NAME: name>
 This line associates a name with the code block.  This is similar to the
 ~#+TBLNAME: NAME~ lines that can be used to name tables in Org mode
@@ -12572,7 +12572,7 @@ basis using properties.
 @item source code, header arguments
 @item <body>
 Source code in the specified language.
-@end table
+
 
 ** Editing source code
    :PROPERTIES:
@@ -12592,7 +12592,7 @@ following variables can be used to configure the behavior of the edit
 buffer.  See also the customization group ~org-edit-structure~ for
 further configuration options.
 
-@table @code
+#+attr_texinfo: :table-type "table" :indic "@code"
 @item org-src-lang-modes
 If an Emacs major-mode named ~<lang>-mode~ exists, where
 ~<lang>~ is the language named in the header line of the code block,
@@ -12606,7 +12606,7 @@ Python, in which whitespace indentation in the output is critical.
 @item org-src-ask-before-returning-to-edit-buffer
 By default, Org will ask before returning to an open edit buffer.  Set this
 variable to nil to switch without asking.
-@end table
+
 
 To turn on native code fontification in the @emph{Org} buffer, configure the
 variable ~org-src-fontify-natively~.
@@ -12629,7 +12629,7 @@ The ~:exports~ header argument can be used to specify export
 behavior:
 
 @subsubheading Header arguments:
-@table @code
+#+attr_texinfo: :table-type "table" :indic "@code"
 @item :exports code
 The default in most languages.  The body of the code block is exported, as
 described in @ref{Literal examples}.
@@ -12643,7 +12643,7 @@ block will not be exported.
 Both the code block and its results will be exported.
 @item :exports none
 Neither the code block nor its results will be exported.
-@end table
+
 
 It is possible to inhibit the evaluation of code blocks during export.
 Setting the ~org-export-babel-evaluate~ variable to ~nil~ will
@@ -12667,7 +12667,7 @@ using ~org-babel-expand-src-block~ which can expand both variable and
 ``noweb'' style references  (see @ref{Noweb reference syntax}).
 
 @subsubheading Header arguments
-@table @code
+#+attr_texinfo: :table-type "table" :indic "@code"
 @item :tangle no
 The default.  The code block is not included in the tangled output.
 @item :tangle yes
@@ -12676,26 +12676,26 @@ name of the org file with the extension {{{samp(.org)}}} replaced by the extensi
 for the block language.
 @item :tangle filename
 Include the code block in the tangled output to file {{{samp(filename)}}}.
-@end table
+
 
 {{{kindex( C-c C-v t)}}}
 @subsubheading Functions
-@table @code
+#+attr_texinfo: :table-type "table" :indic "@code"
 @item org-babel-tangle
 Tangle the current file.  Bound to @kbd{C-c C-v t}.
 
 With prefix argument only tangle the current code block.
 @item org-babel-tangle-file
 Choose a file to tangle.  Bound to @kbd{C-c C-v f}.
-@end table
+
 
 @subsubheading Hooks
-@table @code
+#+attr_texinfo: :table-type "table" :indic "@code"
 @item org-babel-post-tangle-hook
 This hook is run from within code files tangled by ~org-babel-tangle~.
 Example applications could include post-processing, compilation or evaluation
 of tangled code files.
-@end table
+
 
 ** Evaluating code blocks
    :PROPERTIES:
@@ -12751,7 +12751,7 @@ The syntax for inline evaluation of named code blocks is
 ... call_<name>[<inside header arguments>](<arguments>)[<end header arguments>] ...
 #+end_example
 
-@table @code
+#+attr_texinfo: :table-type "table" :indic "@code"
 @item <name>
 The name of the code block to be evaluated (see @ref{Structure of code blocks}).
 @item <arguments>
@@ -12775,7 +12775,7 @@ evaluation in the Org buffer, wrapped in a ~BEGIN_HTML:~ block.
 
 For more examples of passing header arguments to ~#+CALL:~ lines see
 @ref{Header arguments in function calls}.
-@end table
+
 
 ** Library of Babel
    :PROPERTIES:
@@ -13110,7 +13110,7 @@ results of evaluating another code block.
 
 Here are examples of passing values by reference:
 
-@table @dfn
+#+attr_texinfo: :table-type "table" :indic "@dfn"
 
 @item table
 an Org mode table named with either a ~#+NAME:~ or ~#+TBLNAME:~ line
@@ -13206,7 +13206,7 @@ on two lines
 
 #+end_example
 
-@end table
+
 
 @subsubheading Alternate argument syntax
 It is also possible to specify arguments in a potentially more natural way
@@ -14013,7 +14013,7 @@ evaluation will require a query regardless of the value of the
 ~org-confirm-babel-evaluate~ variable.  The possible values of
 ~:eval~ and their effects are shown below.
 
-@table @code
+#+attr_texinfo: :table-type "table" :indic "@code"
 @item never or no
 The code block will not be evaluated under any circumstances.
 @item query
@@ -14023,7 +14023,7 @@ The code block will not be evaluated during export but may still be called
 interactively.
 @item query-export
 Evaluation of the code block during export will require a query.
-@end table
+
 
 If this header argument is not set then evaluation is determined by the value
 of the ~org-confirm-babel-evaluate~ variable see @ref{Code evaluation
@@ -14353,7 +14353,7 @@ Org supports in-buffer completion.  This type of completion does
 not make use of the minibuffer.  You simply type a few letters into
 the buffer and use the key to complete text right there.
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 {{{kindex(M-@key{TAB})}}}
 @item M-@key{TAB}
 Complete word at point
@@ -14387,7 +14387,7 @@ i.e.@: valid keys for this line.
 @item
 Elsewhere, complete dictionary words using Ispell.
 @end itemize
-@end table
+
 
 ** Easy templates
    :PROPERTIES:
@@ -14470,7 +14470,7 @@ you must be aware of the risks that are involved.
 
 Code evaluation can happen under the following circumstances:
 
-@table @i
+#+attr_texinfo: :table-type "table" :indic "@i"
 @item Source code blocks
 Source code blocks can be evaluated during export, or when pressing @kbd{C-c
 C-c} in the block.  The most important thing to realize here is that Org mode
@@ -14513,7 +14513,7 @@ Functions to query user for Emacs Lisp link execution.
 @item Formulas in tables
 Formulas in tables (see [[The spreadsheet]]) are code that is evaluated
 either by the /calc/ interpreter, or by the /Emacs Lisp/ interpreter.
-@end table
+
 
 ** Customization
    :PROPERTIES:
@@ -14550,7 +14550,7 @@ activate the changes immediately.  Otherwise they become effective only
 when the file is visited again in a new Emacs session.
 
 {{{vindex(org-archive-location)}}}
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @item #+ARCHIVE: %s_done::
 This line sets the archive location for the agenda file.  It applies for
 all subsequent lines until the next {{{samp(#+ARCHIVE)}}} line, or the end
@@ -14797,7 +14797,7 @@ These lines provide settings for exporting files.  For more details see
 {{{vindex(org-todo-keywords)}}}
 These lines set the TODO keywords and their interpretation in the
 current file.  The corresponding variable is ~org-todo-keywords~.
-@end table
+
 
 ** The busy C-c C-c key
    :PROPERTIES:
@@ -15038,7 +15038,7 @@ with other code out there.
     :TITLE:    Packages that Org cooperates with
     :END:
 
-@table @asis
+#+attr_texinfo: :table-type "table" :indic "@asis"
 {{{cindex(@file{calc.el})}}}
 {{{cindex(Gillespie\\\, Dave)}}}
 @item @file{calc.el} by Dave Gillespie
@@ -15107,7 +15107,7 @@ interference with other Org mode functionality, you unfortunately cannot edit
 these tables directly in the buffer.  Instead, you need to use the command
 @kbd{C-c '} to edit them, similar to source code snippets.
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c ',org-edit-special}
 Edit a @file{table.el} table.  Works when the cursor is in a table.el table.
 @c
@@ -15117,7 +15117,7 @@ command converts it between the @file{table.el} format and the Org mode
 format.  See the documentation string of the command
 ~org-convert-table~ for the restrictions under which this is
 possible.
-@end table
+
 @file{table.el} is part of Emacs since Emacs 22.
 @item @file{footnote.el} by Steven L. Baur
 {{{cindex(@file{footnote.el})}}}
@@ -15125,7 +15125,7 @@ possible.
 Org mode recognizes numerical footnotes as provided by this package.
 However, Org mode also has its own footnote support (see [[Footnotes]]),
 which makes using @file{footnote.el} unnecessary.
-@end table
+
 
 *** Conflicts
     :PROPERTIES:
@@ -15133,7 +15133,7 @@ which makes using @file{footnote.el} unnecessary.
     :TITLE:    Packages that lead to conflicts with Org mode
     :END:
 
-@table @asis
+#+attr_texinfo: :table-type "table" :indic "@asis"
 
 {{{cindex(@code{shift-selection-mode})}}}
 {{{vindex(org-support-shift-select)}}}
@@ -15246,7 +15246,7 @@ another key for this command, or override the key in
 (define-key viper-vi-global-user-map "C-c /" 'org-sparse-tree)
 @end lisp
 
-@end table
+
 
 ** org-crypt.el
    :PROPERTIES:
@@ -15531,7 +15531,7 @@ passed as a property list to the translation function for
 interpretation.  A few standard parameters are already recognized and
 acted upon before the translation function is called:
 
-@table @code
+#+attr_texinfo: :table-type "table" :indic "@code"
 @item :skip N
 Skip the first N lines of the table.  Hlines do count as separate lines for
 this parameter!
@@ -15546,7 +15546,7 @@ additional columns.
 @item :no-escape t
 When non-nil, do not escape special characters ~&%#_^~ when exporting
 the table.  The default value is nil.
-@end table
+
 
 {{{noindent}}}
 The one problem remaining is how to keep the source table in the buffer
@@ -15660,7 +15660,7 @@ Orgtbl mode.  It uses a ~tabular~ environment to typeset the table
 and marks horizontal lines with ~\hline~.  Furthermore, it
 interprets the following parameters (see also see [[Translator functions]]):
 
-@table @code
+#+attr_texinfo: :table-type "table" :indic "@code"
 @item :splice nil/t
 When set to t, return only table body lines, don't wrap them into a
 tabular environment.  Default is nil.
@@ -15682,7 +15682,7 @@ may also be a property list with column numbers and formats, for example
 ~efmt~ has been applied to a value, ~fmt~ will also be
 applied.  Similar to ~fmt~, functions of two arguments can be
 supplied instead of strings.
-@end table
+
 
 *** Translator functions
     :PROPERTIES:
@@ -15829,12 +15829,12 @@ the content of the block.
 
 Dynamic blocks are updated with the following commands
 
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 @orgcmd{C-c C-x C-u,org-dblock-update}
 Update dynamic block at point.
 @orgkey{C-u C-c C-x C-u}
 Update all dynamic blocks in the current file.
-@end table
+
 
 Updating a dynamic block means to remove all the text between BEGIN and
 END, parse the BEGIN line for parameters and then call the specific
@@ -15941,7 +15941,7 @@ You may also put a Lisp form into ~org-agenda-skip-function~.  In
 particular, you may use the functions ~org-agenda-skip-entry-if~
 and ~org-agenda-skip-subtree-if~ in this form, for example:
 
-@table @code
+#+attr_texinfo: :table-type "table" :indic "@code"
 @item (org-agenda-skip-entry-if 'scheduled)
 Skip current entry if it has been scheduled.
 @item (org-agenda-skip-entry-if 'notscheduled)
@@ -15963,7 +15963,7 @@ Skip current entry if the regular expression matches in the entry.
 Skip current entry unless the regular expression matches.
 @item (org-agenda-skip-subtree-if 'regexp "regular expression")
 Same as above, but check and skip the entire subtree.
-@end table
+
 
 Therefore we could also have written the search for WAITING projects
 like this, even without defining a special function:
@@ -16400,7 +16400,7 @@ should then go through these entries and do whatever actions are necessary.
 If a note has been stored while flagging an entry in /MobileOrg/, that note
 will be displayed in the echo area when the cursor is on the corresponding
 agenda line.
-@table @kbd
+#+attr_texinfo: :table-type "table" :indic "@kbd"
 {{{kindex(?)}}}
 @item ?
 Pressing @kbd{?} in that special agenda will display the full flagging note in
@@ -16410,7 +16410,7 @@ Pressing @kbd{?} twice in succession will offer to remove the
 ~:FLAGGED:~ tag along with the recorded flagging note (which is stored
 in a property).  In this way you indicate that the intended processing for
 this flagged entry is finished.
-@end table
+
 @end enumerate
 
 {{{kindex(C-c a ?)}}}
@@ -16456,7 +16456,7 @@ let me know.
 
 Before I get to this list, a few special mentions are in order:
 
-@table @i
+#+attr_texinfo: :table-type "table" :indic "@i"
 @item Bastien Guerry
 Bastien has written a large number of extensions to Org (most of them
 integrated into the core by now), including the @LaTeX{} exporter and the plain
@@ -16481,7 +16481,7 @@ of an ignorant amateur.  Sebastian has pushed this part of Org onto a much
 higher level.  He also wrote @file{org-info.js}, a Java script for displaying
 webpages derived from Org using an Info-like or a folding interface with
 single-key navigation.
-@end table
+
 
 {{{noindent}}} See below for the full list of contributions!  Again, please
 let me know what I am missing here!
@@ -16502,7 +16502,7 @@ knowledgeable than I am on many parts of the code.  Here is a list of the
 persons I could rely on, they should really be considered co-maintainers,
 either of the code or the community:
 
-@table @i
+#+attr_texinfo: :table-type "table" :indic "@i"
 @item Eric Schulte
 Eric is maintaining the Babel parts of Org.  His reactivity here kept me away
 from worrying about possible bugs here and let me focus on other parts.
@@ -16527,7 +16527,7 @@ many hicups that such a change can create for users.
 The Org mode mailing list would not be such a nice place without Nick, who
 patiently helped users so many times.  It is impossible to overestimate such
 a great help, and the list would not be so active without him.
-@end table
+
 
 I received support from so many users that it is clearly impossible to be
 fair when shortlisting a few of them -- but Org's history would not be
