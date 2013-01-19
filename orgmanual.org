@@ -4287,35 +4287,34 @@ well. For example, in the list
 ,*** TODO Prepare slides for him      :action:
 #+end_example
 
-{{{noindent}}}
-the final heading will have the tags {{{samp(:work:)}}}, {{{samp(:boss:)}}},
-{{{samp(:notes:)}}}, and {{{samp(:action:)}}} even though the final heading is not
-explicitly marked with those tags.  You can also set tags that all entries in
-a file should inherit just as if these tags were defined in a hypothetical
-level zero that surrounds the entire file.  Use a line like this@footnote{As
-with all these in-buffer settings, pressing @kbd{C-c C-c} activates any
-changes in the line.}:
+{{{noindent}}} the final heading will have the tags
+{{{samp(:work:)}}}, {{{samp(:boss:)}}}, {{{samp(:notes:)}}}, and
+{{{samp(:action:)}}} even though the final heading is not explicitly
+marked with those tags. You can also set tags that all entries in a
+file should inherit just as if these tags were defined in a
+hypothetical level zero that surrounds the entire file. Use a line
+like this:[fn:61]
 
 {{{cindex(#+FILETAGS)}}}
 #+begin_example
 ,#+FILETAGS: :Peter:Boss:Secret:
 #+end_example
 
-{{{noindent}}}
 {{{vindex(org-use-tag-inheritance)}}}
 {{{vindex(org-tags-exclude-from-inheritance)}}}
-To limit tag inheritance to specific tags, or to turn it off entirely, use
-the variables ~org-use-tag-inheritance~ and
+
+{{{noindent}}} To limit tag inheritance to specific tags, or to turn
+it off entirely, use the variables ~org-use-tag-inheritance~ and
 ~org-tags-exclude-from-inheritance~.
 
 {{{vindex(org-tags-match-list-sublevels)}}}
-When a headline matches during a tags search while tag inheritance is turned
-on, all the sublevels in the same tree will (for a simple match form) match
-as well@footnote{This is only true if the search does not involve more
-complex tests including properties (see [[Property searches]]).}.  The list
-of matches may then become very long.  If you only want to see the first tags
-match in a subtree, configure the variable
-~org-tags-match-list-sublevels~ (not recommended).
+
+When a headline matches during a tags search while tag inheritance is
+turned on, all the sublevels in the same tree will (for a simple match
+form) match as well.[fn:62] The list of matches may then become very
+long. If you only want to see the first tags match in a subtree,
+configure the variable ~org-tags-match-list-sublevels~ (not
+recommended).
 
 ** Setting tags
    :PROPERTIES:
@@ -4325,8 +4324,9 @@ match in a subtree, configure the variable
 {{{cindex(tags\\\, setting)}}}
 
 {{{kindex(M-@key{TAB})}}}
+
 Tags can simply be typed into the buffer at the end of a headline.
-After a colon, @kbd{M-@key{TAB}} offers completion on tags.  There is
+After a colon, {{{kbdkey(M-,TAB)}}} offers completion on tags.  There is
 also a special command for inserting tags:
 
 @table @kbd
@@ -4483,7 +4483,7 @@ This method lets you assign tags to a headline with very few keys.  With
 the above setup, you could clear the current tags and set {{{samp(@@home)}}},
 {{{samp(laptop)}}} and {{{samp(pc)}}} tags with just the following keys: @kbd{C-c
 C-c @key{SPC} h l p @key{RET}}.  Switching from {{{samp(@@home)}}} to
-{{{samp(@@work)}}} would be done with @kbd{C-c C-c w @key{RET}} or
+{{{samp(@@work)}}} would be done with {{{kbdkey(C-c C-c w ,RET)}}} or
 alternatively with @kbd{C-c C-c C-c w}.  Adding the non-predefined tag
 {{{samp(Sarah)}}} could be done with @kbd{C-c C-c @key{TAB} S a r a h
 @key{RET} @key{RET}}.
@@ -5784,14 +5784,14 @@ Update the effort estimate for the current clock task.
 @orgcmdkkc{C-c C-c,C-c C-y,org-evaluate-time-range}
 Recompute the time interval after changing one of the timestamps.  This
 is only necessary if you edit the timestamps directly.  If you change
-them with @kbd{S-@key{cursor}} keys, the update is automatic.
+them with {{{kbdkey(S-,cursor)}}} keys, the update is automatic.
 @orgcmd{C-S-@key{up/down},org-clock-timestamps-up/down}
 On ~CLOCK~ log lines, increase/decrease both timestamps so that the
 clock duration keeps the same.
 @orgcmd{S-M-@key{up/down},org-timestamp-up/down}
 On ~CLOCK~ log lines, increase/decrease the timestamp at point and
 the one of the previous (or the next clock) timestamp by the same duration.
-For example, if you hit @kbd{S-M-@key{up}} to increase a clocked-out timestamp
+For example, if you hit {{{kbdkey(S-M-,up)}}} to increase a clocked-out timestamp
 by five minutes, then the clocked-in timestamp of the next clock will be
 increased by five minutes.
 @orgcmd{C-c C-t,org-todo}
@@ -6090,7 +6090,7 @@ In particular if you want to use this setup also in the agenda, a global
 setup may be advised.
 
 The way to assign estimates to individual items is then to switch to column
-mode, and to use @kbd{S-@key{right}} and @kbd{S-@key{left}} to change the
+mode, and to use {{{kbdkey(S-,right)}}} and {{{kbdkey(S-,left)}}} to change the
 value.  The values you enter will immediately be summed up in the hierarchy.
 In the column next to it, any clocked time will be displayed.
 
@@ -6130,7 +6130,7 @@ restarted.
 Insert a description list item with the current relative time.  With a prefix
 argument, first reset the timer to 0.
 @orgcmd{M-@key{RET},org-insert-heading}
-Once the timer list is started, you can also use @kbd{M-@key{RET}} to insert
+Once the timer list is started, you can also use {{{kbdkey(M-,RET)}}} to insert
 new timer items.
 @c for key sequences with a comma, command name macros fail :(
 {{{kindex(C-c C-x ,)}}}
@@ -6197,7 +6197,7 @@ for org-remember at @url{http://orgmode.org/org-remember.pdf}.
 The new capturing setup described here is preferred and should be used by new
 users.  To convert your ~org-remember-templates~, run the command
 #+begin_example
-@kbd{M-x org-capture-import-remember-templates @key{RET}}
+{{{kbdkey(M-x org-capture-import-remember-templates ,RET)}}}
 #+end_example
 {{{noindent}}} and then customize the new variable with @kbd{M-x
 customize-variable org-capture-templates}, check the result, and save the
@@ -6898,7 +6898,7 @@ its location in the outline tree, but behaves in the following way:
 {{{vindex(org-cycle-open-archived-trees)}}}
 It does not open when you attempt to do so with a visibility cycling
 command (see [[Visibility cycling]]).  You can force cycling archived
-subtrees with @kbd{C-@key{TAB}}, or by setting the option
+subtrees with {{{kbdkey(C-,TAB)}}}, or by setting the option
 ~org-cycle-open-archived-trees~.  Also normal outline commands like
 ~show-all~ will open archived subtrees.
 @item
@@ -7251,7 +7251,7 @@ following to one of your agenda files:
 #+end_example
 
 You can then go ahead and define anniversaries for a BBDB record.  Basically,
-you need to press @kbd{C-o anniversary @key{RET}} with the cursor in a BBDB
+you need to press {{{kbdkey(C-o anniversary ,RET)}}} with the cursor in a BBDB
 record and then add the date in the format ~YYYY-MM-DD~ or ~MM-DD~,
 followed by a space and the class of the anniversary ({{{samp(birthday)}}} or
 {{{samp(wedding)}}}, or a format string).  If you omit the class, it will default to
@@ -7849,7 +7849,7 @@ February 1st, @kbd{9 w} to ISO week number 9.  When setting day, week, or
 month view, a year may be encoded in the prefix argument as well.  For
 example, @kbd{200712 w} will jump to week 12 in 2007.  If such a year
 specification has only one or two digits, it will be mapped to the interval
-1938-2037.  @kbd{v @key{SPC}} will reset to what is set in
+1938-2037.  {{{kbdkey(v ,SPC)}}} will reset to what is set in
 ~org-agenda-span~.
 @c
 @orgcmd{f,org-agenda-later}
@@ -7935,8 +7935,8 @@ Toggle the time grid on and off.  See also the variables
 @c
 @orgcmd{r,org-agenda-redo}
 Recreate the agenda buffer, for example to reflect the changes after
-modification of the timestamps of items with @kbd{S-@key{left}} and
-@kbd{S-@key{right}}.  When the buffer is the global TODO list, a prefix
+modification of the timestamps of items with {{{kbdkey(S-,left)}}} and
+{{{kbdkey(S-,right)}}}.  When the buffer is the global TODO list, a prefix
 argument is interpreted to create a selective list for a specific TODO
 keyword.
 @orgcmd{g,org-agenda-redo}
@@ -8158,7 +8158,7 @@ Change the timestamp associated with the current line by one day into the
 future.  If the date is in the past, the first call to this command will move
 it to today.@*
 With a numeric prefix argument, change it by that many days.  For example,
-@kbd{3 6 5 S-@key{right}} will change it by a year.  With a @kbd{C-u} prefix,
+{{{kbdkey(3 6 5 S-,right)}}} will change it by a year.  With a @kbd{C-u} prefix,
 change the time by one hour.  If you immediately repeat the command, it will
 continue to change hours even without the prefix arg.  With a double @kbd{C-u
 C-u} prefix, do the same for changing minutes.@*
@@ -9264,7 +9264,7 @@ readily processed to produce pretty output for a number of export backends.
 You can use @LaTeX{} macros to insert special symbols like {{{samp(\alpha)}}} to
 indicate the Greek letter, or {{{samp(\to)}}} to indicate an arrow.  Completion
 for these macros is available, just type {{{samp(\)}}} and maybe a few letters,
-and press @kbd{M-@key{TAB}} to see possible completions.  Unlike @LaTeX{}
+and press {{{kbdkey(M-,TAB)}}} to see possible completions.  Unlike @LaTeX{}
 code, Org mode allows these macros to be present without surrounding math
 delimiters, for example:
 
@@ -9576,7 +9576,7 @@ The exporter recognizes special lines in the buffer which provide
 additional information.  These lines may be put anywhere in the file.
 The whole set of lines can be inserted into the buffer with @kbd{C-c
 C-e t}.  For individual lines, a good way to make sure the keyword is
-correct is to type {{{samp(#+)}}} and then use @kbd{M-@key{TAB}} completion
+correct is to type {{{samp(#+)}}} and then use {{{kbdkey(M-,TAB)}}} completion
 (see [[Completion]]).   For a summary of other in-buffer settings not
 specifically related to export, see @ref{In-buffer settings}.
 In particular, note that you can place commonly-used (export) options in
@@ -14193,9 +14193,9 @@ are active:
 {{{kindex(C-c C-o)}}}
 @item @kbd{C-c C-o} @tab ~org-babel-open-src-block-result~
 {{{kindex(C-up)}}}
-@item @kbd{C-@key{up}}    @tab ~org-babel-load-in-session~
+@item {{{kbdkey(C-,up)}}}    @tab ~org-babel-load-in-session~
 {{{kindex(M-down)}}}
-@item @kbd{M-@key{down}}  @tab ~org-babel-pop-to-session~
+@item {{{kbdkey(M-,down)}}}  @tab ~org-babel-pop-to-session~
 @end multitable
 
 In an Org mode buffer, the following key bindings are active:
@@ -14379,7 +14379,7 @@ After {{{samp([)}}}, complete link abbreviations (see [[Link abbreviations]]).
 @item
 After {{{samp(#+)}}}, complete the special keywords like {{{samp(TYP_TODO)}}} or
 {{{samp(OPTIONS)}}} which set file-specific options for Org mode.  When the
-option keyword is already complete, pressing @kbd{M-@key{TAB}} again
+option keyword is already complete, pressing {{{kbdkey(M-,TAB)}}} again
 will insert example settings for this keyword.
 @item
 In the line after {{{samp(#+STARTUP: )}}}, complete startup keywords,
@@ -14403,7 +14403,7 @@ Note that Emacs has several other template mechanisms which could be used in
 a similar way, for example @file{yasnippet}.
 
 To insert a structural element, type a {{{samp(<)}}}, followed by a template
-selector and @kbd{@key{TAB}}.  Completion takes effect only when the above
+selector and {{{kbdkey(,TAB)}}}.  Completion takes effect only when the above
 keystrokes are typed on a line by itself.
 
 The following template selectors are currently supported.
@@ -14997,29 +14997,29 @@ these commands on a tty when special keys are unavailable, the following
 alternative bindings can be used.  The tty bindings below will likely be
 more cumbersome; you may find for some of the bindings below that a
 customized workaround suits you better.  For example, changing a timestamp
-is really only fun with @kbd{S-@key{cursor}} keys, whereas on a
+is really only fun with {{{kbdkey(S-,cursor)}}} keys, whereas on a
 tty you would rather use @kbd{C-c .} to re-insert the timestamp.
 
 @multitable @columnfractions 0.15 0.2 0.1 0.2
 @item @b{Default} @tab @b{Alternative 1} @tab @b{Speed key} @tab @b{Alternative 2}
-@item @kbd{S-@key{TAB}}     @tab @kbd{C-u @key{TAB}}       @tab @kbd{C} @tab
-@item @kbd{M-@key{left}}    @tab @kbd{C-c C-x l}           @tab @kbd{l} @tab @kbd{@key{Esc} @key{left}}
-@item @kbd{M-S-@key{left}}  @tab @kbd{C-c C-x L}           @tab @kbd{L} @tab
-@item @kbd{M-@key{right}}   @tab @kbd{C-c C-x r}           @tab @kbd{r} @tab @kbd{@key{Esc} @key{right}}
-@item @kbd{M-S-@key{right}} @tab @kbd{C-c C-x R}           @tab @kbd{R} @tab
-@item @kbd{M-@key{up}}      @tab @kbd{C-c C-x u}           @tab @kbd{ } @tab @kbd{@key{Esc} @key{up}}
-@item @kbd{M-S-@key{up}}    @tab @kbd{C-c C-x U}           @tab @kbd{U} @tab
-@item @kbd{M-@key{down}}    @tab @kbd{C-c C-x d}           @tab @kbd{ } @tab @kbd{@key{Esc} @key{down}}
-@item @kbd{M-S-@key{down}}  @tab @kbd{C-c C-x D}           @tab @kbd{D} @tab
-@item @kbd{S-@key{RET}}     @tab @kbd{C-c C-x c}           @tab @kbd{ } @tab
-@item @kbd{M-@key{RET}}     @tab @kbd{C-c C-x m}           @tab @kbd{ } @tab @kbd{@key{Esc} @key{RET}}
-@item @kbd{M-S-@key{RET}}   @tab @kbd{C-c C-x M}           @tab @kbd{ } @tab
-@item @kbd{S-@key{left}}    @tab @kbd{C-c @key{left}}      @tab @kbd{ } @tab
-@item @kbd{S-@key{right}}   @tab @kbd{C-c @key{right}}     @tab @kbd{ } @tab
-@item @kbd{S-@key{up}}      @tab @kbd{C-c @key{up}}        @tab @kbd{ } @tab
-@item @kbd{S-@key{down}}    @tab @kbd{C-c @key{down}}      @tab @kbd{ } @tab
-@item @kbd{C-S-@key{left}}  @tab @kbd{C-c C-x @key{left}}  @tab @kbd{ } @tab
-@item @kbd{C-S-@key{right}} @tab @kbd{C-c C-x @key{right}} @tab @kbd{ } @tab
+@item {{{kbdkey(S-,TAB)}}}     @tab {{{kbdkey(C-u ,TAB)}}}       @tab @kbd{C} @tab
+@item {{{kbdkey(M-,left)}}}    @tab @kbd{C-c C-x l}           @tab @kbd{l} @tab @kbd{@key{Esc} @key{left}}
+@item {{{kbdkey(M-S-,left)}}}  @tab @kbd{C-c C-x L}           @tab @kbd{L} @tab
+@item {{{kbdkey(M-,right)}}}   @tab @kbd{C-c C-x r}           @tab @kbd{r} @tab @kbd{@key{Esc} @key{right}}
+@item {{{kbdkey(M-S-,right)}}} @tab @kbd{C-c C-x R}           @tab @kbd{R} @tab
+@item {{{kbdkey(M-,up)}}}      @tab @kbd{C-c C-x u}           @tab @kbd{ } @tab @kbd{@key{Esc} @key{up}}
+@item {{{kbdkey(M-S-,up)}}}    @tab @kbd{C-c C-x U}           @tab @kbd{U} @tab
+@item {{{kbdkey(M-,down)}}}    @tab @kbd{C-c C-x d}           @tab @kbd{ } @tab @kbd{@key{Esc} @key{down}}
+@item {{{kbdkey(M-S-,down)}}}  @tab @kbd{C-c C-x D}           @tab @kbd{D} @tab
+@item {{{kbdkey(S-,RET)}}}     @tab @kbd{C-c C-x c}           @tab @kbd{ } @tab
+@item {{{kbdkey(M-,RET)}}}     @tab @kbd{C-c C-x m}           @tab @kbd{ } @tab @kbd{@key{Esc} @key{RET}}
+@item {{{kbdkey(M-S-,RET)}}}   @tab @kbd{C-c C-x M}           @tab @kbd{ } @tab
+@item {{{kbdkey(S-,left)}}}    @tab {{{kbdkey(C-c ,left)}}}      @tab @kbd{ } @tab
+@item {{{kbdkey(S-,right)}}}   @tab {{{kbdkey(C-c ,right)}}}     @tab @kbd{ } @tab
+@item {{{kbdkey(S-,up)}}}      @tab {{{kbdkey(C-c ,up)}}}        @tab @kbd{ } @tab
+@item {{{kbdkey(S-,down)}}}    @tab {{{kbdkey(C-c ,down)}}}      @tab @kbd{ } @tab
+@item {{{kbdkey(C-S-,left)}}}  @tab {{{kbdkey(C-c C-x ,left)}}}  @tab @kbd{ } @tab
+@item {{{kbdkey(C-S-,right)}}} @tab {{{kbdkey(C-c C-x ,right)}}} @tab @kbd{ } @tab
 @end multitable
 
 
@@ -15139,9 +15139,9 @@ which makes using @file{footnote.el} unnecessary.
 {{{vindex(org-support-shift-select)}}}
 In Emacs 23, ~shift-selection-mode~ is on by default, meaning that
 cursor motions combined with the shift key should start or enlarge regions.
-This conflicts with the use of @kbd{S-@key{cursor}} commands in Org to change
+This conflicts with the use of {{{kbdkey(S-,cursor)}}} commands in Org to change
 timestamps, TODO keywords, priorities, and item bullet types if the cursor is
-at such a location.  By default, @kbd{S-@key{cursor}} commands outside
+at such a location.  By default, {{{kbdkey(S-,cursor)}}} commands outside
 special contexts don't do anything, but you can customize the variable
 ~org-support-shift-select~.  Org mode then tries to accommodate shift
 selection by (i) using it outside of the special contexts where special
@@ -15223,7 +15223,7 @@ Then, tell Org mode what to do with the new function:
 This package also uses the @kbd{S-<cursor>} keys, so everything written
 in the paragraph above about CUA mode also applies here.  If you want make
 the windmove function active in locations where Org mode does not have
-special functionality on @kbd{S-@key{cursor}}, add this to your
+special functionality on {{{kbdkey(S-,cursor)}}}, add this to your
 configuration:
 
 @lisp
@@ -16416,8 +16416,8 @@ this flagged entry is finished.
 {{{kindex(C-c a ?)}}}
 If you are not able to process all flagged entries directly, you can always
 return to this agenda view@footnote{Note, however, that there is a subtle
-difference.  The view created automatically by @kbd{M-x org-mobile-pull
-@key{RET}} is guaranteed to search all files that have been addressed by the
+difference.  The view created automatically by {{{kbdkey(M-x org-mobile-pull
+,RET)}}} is guaranteed to search all files that have been addressed by the
 last pull.  This might include a file that is not currently in your list of
 agenda files.  If you later use @kbd{C-c a ?} to regenerate the view, only
 the current agenda files will be searched.} using @kbd{C-c a ?}.
@@ -16791,8 +16791,8 @@ and contributed various ideas and code snippets.
   :TEXINFO_MENU_TITLE: Variable Index
   :END:
 This is not a complete index of variables and faces, only the ones that are
-mentioned in the manual.  For a more complete list, use @kbd{M-x
-org-customize @key{RET}} and then click yourself through the tree.
+mentioned in the manual.  For a more complete list, use {{{kbdkey(M-x
+org-customize ,RET)}}} and then click yourself through the tree.
 
 @printindex vr
 
@@ -17048,6 +17048,12 @@ those belonging to direct children.
 
 [fn:60] {{{kbd(C-u C-c C-c)}}} on the /first/ item of a list with no
 checkbox will add checkboxes to the rest of the list.
+
+[fn:61] As with all these in-buffer settings, pressing {{{kbd(C-c
+C-c)}}} activates any changes in the line.
+
+[fn:62] This is only true if the search does not involve more complex
+tests including properties (see [[Property searches]]).
 
 * About orgmanual.org                                              :noexport:
 This document intends to be Org mode source for the Org mode manual
