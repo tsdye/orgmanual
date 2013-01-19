@@ -4543,8 +4543,8 @@ information into special lists.
 
 - {{{kbd(C-c a m)}}} ~org-tags-view~ ::
 
-Create a global list of tag matches from all agenda files.
-See [[Matching tags and properties]].
+  Create a global list of tag matches from all agenda files.
+  See [[Matching tags and properties]].
 
 - {{{kbd(C-c a M)}}} ~org-tags-view~ ::
   {{{vindex(org-tags-match-list-sublevels)}}}
@@ -4554,13 +4554,14 @@ See [[Matching tags and properties]].
   ~org-tags-match-list-sublevels~).
 
 
-These commands all prompt for a match string which allows basic Boolean logic
-like {{{samp(+boss+urgent-project1)}}}, to find entries with tags {{{samp(boss)}}} and
-{{{samp(urgent)}}}, but not {{{samp(project1)}}}, or {{{samp(Kathy|Sally)}}} to find entries
-which are tagged, like {{{samp(Kathy)}}} or {{{samp(Sally)}}}.  The full syntax of the search
-string is rich and allows also matching against TODO keywords, entry levels
-and properties.  For a complete description with many examples, see
-@ref{Matching tags and properties}.
+These commands all prompt for a match string which allows basic
+Boolean logic like {{{samp(+boss+urgent-project1)}}}, to find entries
+with tags {{{samp(boss)}}} and {{{samp(urgent)}}}, but not
+{{{samp(project1)}}}, or {{{samp(Kathy|Sally)}}} to find entries which
+are tagged, like {{{samp(Kathy)}}} or {{{samp(Sally)}}}. The full
+syntax of the search string is rich and allows also matching against
+TODO keywords, entry levels and properties. For a complete description
+with many examples, see [[Matching tags and properties]].
 
 * FIXME Properties and columns
   :PROPERTIES:
@@ -4614,7 +4615,7 @@ first, and the value after it.  Here is an example:
 
 Depending on the value of ~org-use-property-inheritance~, a property set
 this way will either be associated with a single entry, or the sub-tree
-defined by the entry, see @ref{Property inheritance}.
+defined by the entry, see [[Property inheritance]].
 
 You may define the allowed values for a particular property {{{samp(:Xyz:)}}}
 by setting a property {{{samp(:Xyz_ALL:)}}}.  This special property is
@@ -4783,8 +4784,8 @@ only TODO items and force checking of subitems (see variable
 ~org-tags-match-list-sublevels~).
 
 
-The syntax for the search string is described in @ref{Matching tags and
-properties}.
+The syntax for the search string is described in [[Matching tags and
+properties]].
 
 There is also a special command for creating sparse trees based on a
 single property:
@@ -5146,8 +5147,8 @@ process these values before inserting them into a table or a dynamic block.
 
 There is a full API for accessing and changing properties.  This API can
 be used by Emacs Lisp programs to work with properties and to implement
-features based on them.  For more information see @ref{Using the
-property API}.
+features based on them.  For more information see [[Using the
+property API]].
 
 * FIXME Dates and times                                            :noexport:
   :PROPERTIES:
@@ -5183,8 +5184,8 @@ simplest form, the day name is optional when you type the date yourself.
 However, any dates inserted or modified by Org will add that day name, for
 reading convenience.} or {{{samp(<2003-09-16 Tue 09:39>)}}} or {{{samp(<2003-09-16
 Tue 12:00-12:30>)}}}@footnote{This is inspired by the standard ISO 8601
-date/time format.  To use an alternative format, see @ref{Custom time
-format}.}.  A timestamp can appear anywhere in the headline or body of an Org
+date/time format.  To use an alternative format, see [[Custom time
+format]].}.  A timestamp can appear anywhere in the headline or body of an Org
 tree entry.  Its presence causes entries to be shown on specific dates in the
 agenda (see [[Weekly/daily agenda]]).  We distinguish:
 
@@ -5719,7 +5720,7 @@ task---just make sure that the repeater intervals on both are the same.
 
 An alternative to using a repeater is to create a number of copies of a task
 subtree, with dates shifted in each copy.  The command {{{kbd(C-c C-x c)}}} was
-created for this purpose, it is described in @ref{Structure editing}.
+created for this purpose, it is described in [[Structure editing]].
 
 ** Clocking work time
    :PROPERTIES:
@@ -5934,7 +5935,7 @@ be selected:
 :stepskip0   @r{Do not show steps that have zero time.}
 :fileskip0   @r{Do not show table sections from files which did not contribute.}
 :tags        @r{A tags match to select entries that should contribute.  See}
-             @r{@ref{Matching tags and properties} for the match syntax.}
+             @r{[[Matching tags and properties]] for the match syntax.}
 #+end_example
 
 Then there are options which determine the formatting of the table.  There
@@ -7215,8 +7216,8 @@ agenda, or to a span name, such a ~day~, ~week~, ~month~ or
 
 Remote editing from the agenda buffer means, for example, that you can
 change the dates of deadlines and appointments from the agenda buffer.
-The commands available in the Agenda buffer are listed in @ref{Agenda
-commands}.
+The commands available in the Agenda buffer are listed in [[Agenda
+commands]].
 
 @subsubheading Calendar/Diary integration
 {{{cindex(calendar integration)}}}
@@ -7358,7 +7359,7 @@ search (see [[Tag searches]]).
 
 Remote editing of TODO items means that you can change the state of a
 TODO entry with a single key press.  The commands available in the
-TODO list are described in @ref{Agenda commands}.
+TODO list are described in [[Agenda commands]].
 
 {{{cindex(sublevels\\\, inclusion into TODO list)}}}
 Normally the global TODO list simply shows all headlines with TODO
@@ -7416,11 +7417,11 @@ not-DONE state and force checking subitems (see variable
 ~org-tags-match-list-sublevels~).  To exclude scheduled/deadline items,
 see the variable ~org-agenda-tags-todo-honor-ignore-options~.  Matching
 specific TODO keywords together with a tags match is also possible, see
-@ref{Tag searches}.
+[[Tag searches]].
 
 
-The commands available in the tags list are described in @ref{Agenda
-commands}.
+The commands available in the tags list are described in [[Agenda
+commands]].
 
 
 @subsubheading Match syntax
@@ -7526,8 +7527,8 @@ price by accessing one property, testing additional properties is cheap
 again.
 
 You can configure Org mode to use property inheritance during a search, but
-beware that this can slow down searches considerably.  See @ref{Property
-inheritance}, for details.
+beware that this can slow down searches considerably.  See [[Property
+inheritance]], for details.
 
 For backward compatibility, and also for typing speed, there is also a
 different way to test TODO states in a search.  For this, terminate the
@@ -7575,7 +7576,7 @@ When called with a {{{kbd(C-u)}}} prefix, all unfinished TODO entries
 
 {{{noindent}}}
 The commands available in the timeline buffer are listed in
-@ref{Agenda commands}.
+[[Agenda commands]].
 
 *** Search view
     :PROPERTIES:
@@ -7908,7 +7909,7 @@ Prompt for a date and go there.
 Go to the currently clocked-in task /in the agenda buffer/.
 @c
 - {{{kbd(D)}}} ~org-agenda-toggle-diary~ ::
-Toggle the inclusion of diary entries.  See @ref{Weekly/daily agenda}.
+Toggle the inclusion of diary entries.  See [[Weekly/daily agenda]].
 @c
 @orgcmdkskc{v l,l,org-agenda-log-mode}
 {{{kindex(v L)}}}
@@ -8732,7 +8733,7 @@ which will create the agenda views restricted to the file
 extent.
 
 You can also extract agenda information in a way that allows further
-processing by other programs.  See @ref{Extracting agenda information}, for
+processing by other programs.  See [[Extracting agenda information]], for
 more information.
 
 ** Agenda column view
@@ -8849,8 +8850,8 @@ property ~EXPORT_TITLE~, that will take precedence.
 {{{cindex(headings and sections\\\, markup rules)}}}
 
 {{{vindex(org-export-headline-levels)}}}
-The outline structure of the document as described in @ref{Document
-Structure}, forms the basis for defining sections of the exported document.
+The outline structure of the document as described in [[Document
+Structure]], forms the basis for defining sections of the exported document.
 However, since the outline structure is also used for (for example) lists of
 tasks, only the first three outline levels will be used as headings.  Deeper
 levels will become itemized lists.  You can change the location of this
@@ -8919,7 +8920,7 @@ If you still want to have some text before the first headline, use the
     :END:
 {{{cindex(lists\\\, markup rules)}}}
 
-Plain lists as described in @ref{Plain lists}, are translated to the backend's
+Plain lists as described in [[Plain lists]], are translated to the backend's
 syntax for such lists.  Most backends support unordered, ordered, and
 description lists.
 
@@ -8974,7 +8975,7 @@ but not any simpler
 {{{cindex(footnotes\\\, markup rules)}}}
 {{{cindex(@file{footnote.el})}}}
 
-Footnotes defined in the way described in @ref{Footnotes}, will be exported
+Footnotes defined in the way described in [[Footnotes]], will be exported
 by all backends.  Org allows multiple references to the same note, and
 multiple footnotes side by side.
 
@@ -9111,7 +9112,7 @@ with the {{{samp(src)}}} block, where you also need to specify the name of the
 major mode that should be used to fontify the example@footnote{Code in
 {{{samp(src)}}} blocks may also be evaluated either interactively or on export.
 See see [[Working With Source Code]] for more information on evaluating code
-blocks.}, see @ref{Easy Templates} for shortcuts to easily insert code
+blocks.}, see [[Easy Templates]] for shortcuts to easily insert code
 blocks.
 {{{cindex(#+BEGIN_SRC)}}}
 
@@ -9241,8 +9242,8 @@ Visit the include file at point.
 
 You can specify entries that will be used for generating an index during
 publishing.  This is done by lines starting with ~#+INDEX~.  An entry
-the contains an exclamation mark will create a sub item.  See @ref{Generating
-an index} for more information.
+the contains an exclamation mark will create a sub item.  See [[Generating
+an index]] for more information.
 
 #+begin_example
 ,* Curriculum Vitae
@@ -9625,7 +9626,7 @@ The whole set of lines can be inserted into the buffer with {{{kbd(C-c
 C-e t)}}}.  For individual lines, a good way to make sure the keyword is
 correct is to type {{{samp(#+)}}} and then use {{{kbdkey(M-,TAB)}}} completion
 (see [[Completion]]).   For a summary of other in-buffer settings not
-specifically related to export, see @ref{In-buffer settings}.
+specifically related to export, see [[In-buffer settings]].
 In particular, note that you can place commonly-used (export) options in
 a separate file which can be included using ~#+SETUPFILE~.
 
@@ -9977,7 +9978,7 @@ the same /relative/ path as the published Org file.  Links to other
 that a HTML version also exists of the linked file, at the same relative
 path.  {{{samp(id:)}}} links can then be used to jump to specific entries across
 files.  For information related to linking files while publishing them to a
-publishing directory see @ref{Publishing links}.
+publishing directory see [[Publishing links]].
 
 If you want to specify attributes for links, you can do so using a special
 ~#+ATTR_HTML~ line to define attributes that will be added to the
@@ -10378,7 +10379,7 @@ below.
     :PROPERTIES:
     :DESCRIPTION: Incorporating literal @LaTeX{} code
     :END:
-Embedded @LaTeX{} as described in @ref{Embedded @LaTeX{}}, will be correctly
+Embedded @LaTeX{} as described in [[Embedded @LaTeX{]]}, will be correctly
 inserted into the @LaTeX{} file.  This includes simple macros like
 {{{samp(\ref@{LABEL@)}}}} to create a cross reference to a figure.  Furthermore,
 you can add special code that should only be present in @LaTeX{} export with
@@ -10449,7 +10450,7 @@ Images that are linked to without a description part in the link, like
 {{{samp([[file:img.jpg]])}}} or {{{samp([[./img.jpg]])}}} will be inserted into the PDF
 output file resulting from @LaTeX{} processing.  Org will use an
 ~\includegraphics~ macro to insert the image.  If you have specified a
-caption and/or a label as described in @ref{Images and tables}, the figure
+caption and/or a label as described in [[Images and tables]], the figure
 will be wrapped into a ~figure~ environment and thus become a floating
 element.  You can use an ~#+ATTR_LaTeX:~ line to specify various other
 options.  You can ask org to export an image as a float without specifying
@@ -10749,7 +10750,7 @@ Images that are linked to without a description part in the link, like
 {{{samp([[file:img.jpg]])}}} or {{{samp([[./img.jpg]])}}}, will be exported to DocBook
 using ~mediaobject~ elements.  Each ~mediaobject~ element contains
 an ~imageobject~ that wraps an ~imagedata~ element.  If you have
-specified a caption for an image as described in @ref{Images and tables}, a
+specified a caption for an image as described in [[Images and tables]], a
 ~caption~ element will be added in ~mediaobject~.  If a label is
 also specified, it will be exported as an ~xml:id~ attribute of the
 ~mediaobject~ element.
@@ -12300,7 +12301,7 @@ because ~file:~ links are converted to link to the corresponding
 
 You may also link to related files, such as images.  Provided you are careful
 with relative file names, and provided you have also configured Org to upload
-the related files, these links will work too.  See @ref{Complex example}, for
+the related files, these links will work too.  See [[Complex example]], for
 an example of this usage.
 
 Sometimes an Org file to be published may contain links that are
@@ -12583,7 +12584,7 @@ The following sections describe Org mode's code block handling facilities.
 
 Live code blocks can be specified with a {{{samp(src)}}} block or
 inline.@footnote{Note that {{{samp(src)}}} blocks may be inserted using Org mode's
-@ref{Easy Templates} system}  The structure of a {{{samp(src)}}} block is
+[[Easy Templates]] system}  The structure of a {{{samp(src)}}} block is
 
 #+begin_example
 #+NAME: <name>
@@ -12615,20 +12616,20 @@ This line associates a name with the code block.  This is similar to the
 ~#+TBLNAME: NAME~ lines that can be used to name tables in Org mode
 files.  Referencing the name of a code block makes it possible to evaluate
 the block from other places in the file, from other files, or from Org mode
-table formulas (see @ref{The spreadsheet}).  Names are assumed to be unique
+table formulas (see [[The spreadsheet]]).  Names are assumed to be unique
 and the behavior of Org mode when two or more blocks share the same name is
 undefined.
 {{{cindex(#+NAME)}}}
 - <language>
-The language of the code in the block (see @ref{Languages}).
+The language of the code in the block (see [[Languages]]).
 {{{cindex(source code\\\, language)}}}
 - <switches>
 Optional switches control code block export (see the discussion of switches in
-@ref{Literal examples})
+[[Literal examples]])
 {{{cindex(source code\\\, switches)}}}
 - <header arguments>
 Optional header arguments control many aspects of evaluation, export and
-tangling of code blocks (see @ref{Header arguments}).
+tangling of code blocks (see [[Header arguments]]).
 Header arguments can also be set on a per-buffer or per-subtree
 basis using properties.
 - source code, header arguments
@@ -12685,7 +12686,7 @@ of code block evaluation, /both/ the code and the results of code block
 evaluation, or /none/.  For most languages, the default exports code.
 However, for some languages (e.g.@: ~ditaa~) the default exports the
 results of code block evaluation.  For information on exporting code block
-bodies, see @ref{Literal examples}.
+bodies, see [[Literal examples]].
 
 The ~:exports~ header argument can be used to specify export
 behavior:
@@ -12694,7 +12695,7 @@ behavior:
 #+attr_texinfo: :table-type "table" :indic "@code"
 - :exports code
 The default in most languages.  The body of the code block is exported, as
-described in @ref{Literal examples}.
+described in [[Literal examples]].
 - :exports results
 The code block will be evaluated and the results will be placed in the
 Org mode buffer for export, either updating previous results of the code
@@ -12726,7 +12727,7 @@ Creating pure source code files by extracting code from source blocks is
 referred to as ``tangling''---a term adopted from the literate programming
 community.  During ``tangling'' of code blocks their bodies are expanded
 using ~org-babel-expand-src-block~ which can expand both variable and
-``noweb'' style references  (see @ref{Noweb reference syntax}).
+``noweb'' style references  (see [[Noweb reference syntax]]).
 
 @subsubheading Header arguments
 #+attr_texinfo: :table-type "table" :indic "@code"
@@ -12770,8 +12771,8 @@ of tangled code files.
 Code blocks can be evaluated@footnote{Whenever code is evaluated there is a
 potential for that code to do harm.  Org mode provides safeguards to ensure
 that code is only evaluated after explicit confirmation from the user.  For
-information on these safeguards (and on how to disable them) see @ref{Code
-evaluation security}.} and the results of evaluation optionally placed in the
+information on these safeguards (and on how to disable them) see [[Code
+evaluation security]].} and the results of evaluation optionally placed in the
 Org mode buffer.  The results of evaluation are placed following a line that
 begins by default with ~#+RESULTS~ and optionally a cache identifier
 and/or the name of the evaluated code block.  The default value of
@@ -12780,8 +12781,8 @@ and/or the name of the evaluated code block.  The default value of
 
 By default, the evaluation facility is only enabled for Lisp code blocks
 specified as ~emacs-lisp~.  However, source code blocks in many languages
-can be evaluated within Org mode (see @ref{Languages} for a list of supported
-languages and @ref{Structure of code blocks} for information on the syntax
+can be evaluated within Org mode (see [[Languages]] for a list of supported
+languages and [[Structure of code blocks]] for information on the syntax
 used to define a code block).
 
 {{{kindex(C-c C-c)}}}
@@ -12795,7 +12796,7 @@ its results into the Org mode buffer.
 
 It is also possible to evaluate named code blocks from anywhere in an Org
 mode buffer or an Org mode table.  Live code blocks located in the current
-Org mode buffer or in the ``Library of Babel'' (see @ref{Library of Babel})
+Org mode buffer or in the ``Library of Babel'' (see [[Library of Babel]])
 can be executed.  Named code blocks can be executed with a separate
 ~#+CALL:~ line or inline within a block of text.
 
@@ -12815,7 +12816,7 @@ The syntax for inline evaluation of named code blocks is
 
 #+attr_texinfo: :table-type "table" :indic "@code"
 - <name>
-The name of the code block to be evaluated (see @ref{Structure of code blocks}).
+The name of the code block to be evaluated (see [[Structure of code blocks]]).
 - <arguments>
 Arguments specified in this section will be passed to the code block.  These
 arguments use standard function call syntax, rather than
@@ -12836,7 +12837,7 @@ example, ~:results html~ will insert the results of the call line
 evaluation in the Org buffer, wrapped in a ~BEGIN_HTML:~ block.
 
 For more examples of passing header arguments to ~#+CALL:~ lines see
-@ref{Header arguments in function calls}.
+[[Header arguments in function calls]].
 
 
 ** Library of Babel
@@ -12849,8 +12850,8 @@ For more examples of passing header arguments to ~#+CALL:~ lines see
 
 The ``Library of Babel'' consists of code blocks that can be called from any
 Org mode file.  Code blocks defined in the ``Library of Babel'' can be called
-remotely as if they were in the current Org mode buffer (see @ref{Evaluating
-code blocks} for information on the syntax of remote code block evaluation).
+remotely as if they were in the current Org mode buffer (see [[Evaluating
+code blocks]] for information on the syntax of remote code block evaluation).
 
 
 The central repository of code blocks in the ``Library of Babel'' is housed
@@ -13005,7 +13006,7 @@ language-specific documentation available online at
      :END:
 Buffer-wide header arguments may be specified as properties through the use
 of ~#+PROPERTY:~ lines placed anywhere in an Org mode file (see
-@ref{Property syntax}).
+[[Property syntax]]).
 
 For example the following would set ~session~ to ~*R*~, and
 ~results~ to ~silent~ for every code block in the buffer, ensuring
@@ -13021,8 +13022,8 @@ inserted into the buffer.
      :PROPERTIES:
      :DESCRIPTION: Set default values for a buffer or heading
      :END:
-Header arguments are also read from Org mode properties (see @ref{Property
-syntax}), which can be set on a buffer-wide or per-heading basis.  An example
+Header arguments are also read from Org mode properties (see [[Property
+syntax]]), which can be set on a buffer-wide or per-heading basis.  An example
 of setting a header argument for all code blocks in a buffer is
 
 #+begin_example
@@ -13113,8 +13114,8 @@ Multi-line header arguments on a named code block:
      :END:
 At the most specific level, header arguments for ``Library of Babel'' or
 ~#+CALL:~ lines can be set as shown in the two examples below.  For more
-information on the structure of ~#+CALL:~ lines see @ref{Evaluating code
-blocks}.
+information on the structure of ~#+CALL:~ lines see [[Evaluating code
+blocks]].
 
 The following will apply the ~:exports results~ header argument to the
 evaluation of the ~#+CALL:~ line.
@@ -13134,7 +13135,7 @@ evaluation of the ~factorial~ code block.
     :END:
 Header arguments consist of an initial colon followed by the name of
 the argument in lowercase letters. Additional header arguments are
-defined on a language-specific basis, see @ref{Languages}.
+defined on a language-specific basis, see [[Languages]].
 
 The following header arguments are defined:
 
@@ -13149,14 +13150,14 @@ syntax used to specify arguments is the same across all languages.  In every
 case, variables require a default value when they are declared.
 
 The values passed to arguments can either be literal values, references, or
-Emacs Lisp code (see @ref{var, Emacs Lisp evaluation of variables}).  References
+Emacs Lisp code (see [[var, Emacs Lisp evaluation of variables]]).  References
 include anything in the Org mode file that takes a ~#+NAME:~,
 ~#+TBLNAME:~, or ~#+RESULTS:~ line.  This includes tables, lists,
 ~#+BEGIN_EXAMPLE~ blocks, other code blocks, and the results of other
 code blocks.
 
-Argument values can be indexed in a manner similar to arrays (see @ref{var,
-Indexable variable values}).
+Argument values can be indexed in a manner similar to arrays (see [[var,
+Indexable variable values]]).
 
 The following syntax is used to pass arguments to code blocks using the
 ~:var~ header argument.
@@ -13518,7 +13519,7 @@ inserted as with ~replace~.
 
 The header argument ~:file~ is used to specify an external file in which
 to save code block results.  After code block evaluation an Org mode style
-~[[file:]]~ link (see @ref{Link format}) to the file will be inserted
+~[[file:]]~ link (see [[Link format]]) to the file will be inserted
 into the Org mode buffer.  Some languages including R, gnuplot, dot, and
 ditaa provide special handling of the ~:file~ header argument
 automatically wrapping the code block body in the boilerplate code required
@@ -13535,7 +13536,7 @@ should be the path to a file and the second a description for the link.
      :END:
 The value of the ~:file-desc~ header argument is used to provide a
 description for file code block results which are inserted as Org mode links
-(see @ref{Link format}).  If the ~:file-desc~ header argument is given
+(see [[Link format]]).  If the ~:file-desc~ header argument is given
 with no value the link path will be placed in both the ``link'' and the
 ``description'' portion of the Org mode link.
 
@@ -13713,8 +13714,8 @@ Do not insert any newline padding in tangled output.
      :END:
 By default, code blocks are expanded with ~org-babel-expand-src-block~
 during tangling.  This has the effect of assigning values to variables
-specified with ~:var~ (see @ref{var}), and of replacing ``noweb''
-references (see @ref{Noweb reference syntax}) with their targets.  The
+specified with ~:var~ (see [[var]]), and of replacing ``noweb''
+references (see [[Noweb reference syntax]]) with their targets.  The
 ~:no-expand~ header argument can be used to turn off this behavior.
 
 **** session
@@ -13735,7 +13736,7 @@ interpreted language.
      :DESCRIPTION: Toggle expansion of noweb references
      :END:
 The ~:noweb~ header argument controls expansion of ``noweb'' syntax
-references (see @ref{Noweb reference syntax}) when the code block is
+references (see [[Noweb reference syntax]]) when the code block is
 evaluated, tangled, or exported.  The ~:noweb~ header argument can have
 one of the five values: ~no~, ~yes~, ~tangle~, or
 ~no-export~ ~strip-export~.
@@ -13803,8 +13804,8 @@ By setting this header argument at the sub-tree or file level, simple code
 block concatenation may be achieved.  For example, when tangling the
 following Org mode file, the bodies of code blocks will be concatenated into
 the resulting pure code file@footnote{(The example needs property inheritance
-to be turned on for the ~noweb-ref~ property, see @ref{Property
-inheritance}).}.
+to be turned on for the ~noweb-ref~ property, see [[Property
+inheritance]]).}.
 
 #+begin_example
  #+BEGIN_SRC sh :tangle yes :noweb yes :shebang #!/bin/sh
@@ -13836,7 +13837,7 @@ inheritance}).}.
  #+END_SRC
 #+end_example
 
-The ~:noweb-sep~ (see @ref{noweb-sep}) header argument holds the string
+The ~:noweb-sep~ (see [[noweb-sep]]) header argument holds the string
 used to separate accumulate noweb references like those above.  By default a
 newline is used.
 
@@ -13845,7 +13846,7 @@ newline is used.
      :DESCRIPTION: String used to separate noweb references
      :END:
 The ~:noweb-sep~ header argument holds the string used to separate
-accumulate noweb references (see @ref{noweb-ref}).  By default a newline is
+accumulate noweb references (see [[noweb-ref]]).  By default a newline is
 used.
 
 
@@ -13906,7 +13907,7 @@ The ~:sep~ header argument can be used to control the delimiter used
 when writing tabular results out to files external to Org mode.  This is used
 either when opening tabular results of a code block by calling the
 ~org-open-at-point~ function bound to {{{kbd(C-c C-o)}}} on the code block,
-or when writing code block results to an external file (see @ref{file})
+or when writing code block results to an external file (see [[file]])
 header argument.
 
 By default, when ~:sep~ is not specified output tables are tab
@@ -14088,8 +14089,8 @@ Evaluation of the code block during export will require a query.
 
 
 If this header argument is not set then evaluation is determined by the value
-of the ~org-confirm-babel-evaluate~ variable see @ref{Code evaluation
-security}.
+of the ~org-confirm-babel-evaluate~ variable see [[Code evaluation
+security]].
 
 **** wrap
      :PROPERTIES:
@@ -14111,7 +14112,7 @@ results.  If not string is specified then the results will be wrapped in a
 The way in which results are handled depends on whether a session is invoked,
 as well as on whether ~:results value~ or ~:results output~ is
 used.  The following table shows the table possibilities.  For a full listing
-of the possible results header arguments see @ref{results}.
+of the possible results header arguments see [[results]].
 
 @multitable @columnfractions 0.26 0.33 0.41
 - @tab @b{Non-session} @tab @b{Session}
@@ -14214,7 +14215,7 @@ When a code block is tangled or evaluated, whether or not ``noweb''
 references are expanded depends upon the value of the ~:noweb~ header
 argument.  If ~:noweb yes~, then a Noweb reference is expanded before
 evaluation.  If ~:noweb no~, the default, then the reference is not
-expanded before evaluation.  See the @ref{noweb-ref} header argument for
+expanded before evaluation.  See the [[noweb-ref]] header argument for
 a more flexible way to resolve noweb references.
 
 It is possible to include the /results/ of a code block rather than the
@@ -14854,7 +14855,7 @@ This line contains the formulas for the table directly above the line.
 @itemx #+LaTeX_HEADER:, #+STYLE:, #+LINK_UP:, #+LINK_HOME:,
 @itemx #+EXPORT_SELECT_TAGS:, #+EXPORT_EXCLUDE_TAGS:
 These lines provide settings for exporting files.  For more details see
-@ref{Export options}.
+[[Export options]].
 - #+TODO:    #+SEQ_TODO:   #+TYP_TODO:
 {{{vindex(org-todo-keywords)}}}
 These lines set the TODO keywords and their interpretation in the
@@ -15130,7 +15131,7 @@ setup.  See the installation instructions in the file
 {{{cindex(@file{cdlatex.el})}}}
 {{{cindex(Dominik\\\, Carsten)}}}
 Org mode can make use of the CD@LaTeX{} package to efficiently enter
-@LaTeX{} fragments into Org files.  See @ref{CDLaTeX mode}.
+@LaTeX{} fragments into Org files.  See [[CDLaTeX mode]].
 - {{{file(imenu.el)}}} by Ake Stenhoff and Lars Lindberg
 {{{cindex(@file{imenu.el})}}}
 Imenu allows menu access to an index of items in a file.  Org mode
@@ -15509,7 +15510,7 @@ special context for that add-on and executes functionality appropriate for
 the context.  Here is an example from Dan Davison's {{{file(org-R.el)}}} which
 allows you to evaluate commands based on the {{{file(R)}}} programming language
 @footnote{{{{file(org-R.el)}}} has been replaced by the Org mode functionality
-described in @ref{Working With Source Code} and is now obsolete.}.  For this
+described in [[Working With Source Code]] and is now obsolete.}.  For this
 package, special contexts are lines that start with ~#+R:~ or
 ~#+RR:~.
 
