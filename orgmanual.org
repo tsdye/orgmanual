@@ -4459,33 +4459,46 @@ keys:
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(a-z...)}}} ::
-Pressing keys assigned to tags will add or remove them from the list of
-tags in the current line.  Selecting a tag in a group of mutually
-exclusive tags will turn off any other tags from that group.
-{{{kindex(@key{TAB})}}}
+
+  Pressing keys assigned to tags will add or remove them from the list of
+  tags in the current line.  Selecting a tag in a group of mutually
+  exclusive tags will turn off any other tags from that group.
 
 - {{{key(TAB)}}} ::
-Enter a tag in the minibuffer, even if the tag is not in the predefined
-list.  You will be able to complete on all tags present in the buffer.
-You can also add several tags: just separate them with a comma.
+  {{{kindex(@key{TAB})}}}
 
-{{{kindex(@key{SPC})}}}
-- {{{key(SPC)}}}
-Clear all tags for this line.
-{{{kindex(@key{RET})}}}
-- {{{key(RET)}}}
-Accept the modified set.
-- C-g
-Abort without installing changes.
-- q
-If {{{kbd(q)}}} is not assigned to a tag, it aborts like {{{kbd(C-g)}}}.
-- !
-Turn off groups of mutually exclusive tags.  Use this to (as an
-exception) assign several tags from such a group.
-- C-c
-Toggle auto-exit after the next change (see below).
-If you are using expert mode, the first {{{kbd(C-c)}}} will display the
-selection window.
+  Enter a tag in the minibuffer, even if the tag is not in the predefined
+  list.  You will be able to complete on all tags present in the buffer.
+  You can also add several tags: just separate them with a comma.
+
+- {{{key(SPC)}}} ::
+  {{{kindex(@key{SPC})}}}
+
+  Clear all tags for this line.
+
+- {{{key(RET)}}} ::
+  {{{kindex(@key{RET})}}}
+
+  Accept the modified set.
+
+- C-g ::
+
+  Abort without installing changes.
+
+- q ::
+
+  If {{{kbd(q)}}} is not assigned to a tag, it aborts like {{{kbd(C-g)}}}.
+
+- ! ::
+
+  Turn off groups of mutually exclusive tags.  Use this to (as an
+  exception) assign several tags from such a group.
+
+- C-c ::
+
+  Toggle auto-exit after the next change (see below).
+  If you are using expert mode, the first {{{kbd(C-c)}}} will display the
+  selection window.
 
 
 {{{noindent}}} This method lets you assign tags to a headline with
@@ -4494,21 +4507,22 @@ and set {{{samp(@@home)}}}, {{{samp(laptop)}}} and {{{samp(pc)}}} tags
 with just the following keys: {{{kbd(C-c C-c @key{SPC} h l p
 @key{RET})}}}}. Switching from {{{samp(@@home)}}} to
 {{{samp(@@work)}}} would be done with {{{kbdkey(C-c C-c w ,RET)}}} or
-alternatively with {{{kbd(C-c C-c C-c w)}}}. Adding the non-predefined tag
-{{{samp(Sarah)}}} could be done with {{{kbd(C-c C-c @key{TAB} S a r a h
-@key{RET} @key{RET})}}}.
+alternatively with {{{kbd(C-c C-c C-c w)}}}. Adding the non-predefined
+tag {{{samp(Sarah)}}} could be done with {{{kbd(C-c C-c @key{TAB} S a
+r a h @key{RET} @key{RET})}}}.
 
 {{{vindex(org-fast-tag-selection-single-key)}}}
+
 If you find that most of the time you need only a single key press to
 modify your list of tags, set the variable
-~org-fast-tag-selection-single-key~.  Then you no longer have to
-press @key{RET} to exit fast tag selection---it will immediately exit
-after the first change.  If you then occasionally need more keys, press
-{{{kbd(C-c)}}} to turn off auto-exit for the current tag selection process
-(in effect: start selection with {{{kbd(C-c C-c C-c)}}} instead of {{{kbd(C-c
-C-c)}}}).  If you set the variable to the value ~expert~, the special
-window is not even shown for single-key tag selection, it comes up only
-when you press an extra {{{kbd(C-c)}}}.
+~org-fast-tag-selection-single-key~. Then you no longer have to press
+@key{RET} to exit fast tag selection---it will immediately exit after
+the first change. If you then occasionally need more keys, press
+{{{kbd(C-c)}}} to turn off auto-exit for the current tag selection
+process (in effect: start selection with {{{kbd(C-c C-c C-c)}}}
+instead of {{{kbd(C-c C-c)}}}). If you set the variable to the value
+~expert~, the special window is not even shown for single-key tag
+selection, it comes up only when you press an extra {{{kbd(C-c)}}}.
 
 ** Tag searches
    :PROPERTIES:
@@ -4521,7 +4535,7 @@ Once a system of tags has been set up, it can be used to collect related
 information into special lists.
 
 #+attr_texinfo: :table-type "table" :indic "@kbd"
-@orgcmdkkc{C-c / m,C-c \\,org-match-sparse-tree}
+- {{{kbd(C-c / m)}}} {{{kbd(C-c \\)}}} ~org-match-sparse-tree~ ::
 Create a sparse tree with all headlines matching a tags search.  With a
 {{{kbd(C-u)}}} prefix argument, ignore headlines that are not a TODO line.
 - {{{kbd(C-c a m)}}} ~org-tags-view~ ::
@@ -4750,7 +4764,7 @@ FILE         @r{The filename the entry is located in.}
 To create sparse trees and special lists with selection based on properties,
 the same commands are used as for tag searches (see [[Tag searches]]).
 #+attr_texinfo: :table-type "table" :indic "@kbd"
-@orgcmdkkc{C-c / m,C-c \,org-match-sparse-tree}
+- {{{kbd(C-c / m)}}} {{{kbd(C-c \)}}} ~org-match-sparse-tree~ ::
 Create a sparse tree with all matching entries.  With a
 {{{kbd(C-u)}}} prefix argument, ignore headlines that are not a TODO line.
 - {{{kbd(C-c a m)}}} ~org-tags-view~ ::
@@ -5095,7 +5109,7 @@ The following commands insert or update the dynamic block:
 - {{{kbd(C-c C-x i)}}} ~org-insert-columns-dblock~ ::
 Insert a dynamic block capturing a column view.  You will be prompted
 for the scope or ID of the view.
-@orgcmdkkc{C-c C-c,C-c C-x C-u,org-dblock-update}
+- {{{kbd(C-c C-c)}}} {{{kbd(C-c C-x C-u)}}} ~org-dblock-update~ ::
 Update dynamic block at point.  The cursor needs to be in the
 ~#+BEGIN~ line of the dynamic block.
 - {{{kbd(C-u C-c C-x C-u)}}} ~org-update-all-dblocks~ ::
@@ -5793,7 +5807,7 @@ stopped.
 Update the effort estimate for the current clock task.
 {{{kindex(C-c C-y)}}}
 {{{kindex(C-c C-c)}}}
-@orgcmdkkc{C-c C-c,C-c C-y,org-evaluate-time-range}
+- {{{kbd(C-c C-c)}}} {{{kbd(C-c C-y)}}} ~org-evaluate-time-range~ ::
 Recompute the time interval after changing one of the timestamps.  This
 is only necessary if you edit the timestamps directly.  If you change
 them with {{{kbdkey(S-,cursor)}}} keys, the update is automatic.
@@ -5852,7 +5866,7 @@ at an existing clock table, just update it.  When called with a prefix
 argument, jump to the first clock report in the current document and
 update it.  The clock table always includes also trees with
 ~:ARCHIVE:~ tag.
-@orgcmdkkc{C-c C-c,C-c C-x C-u,org-dblock-update}
+- {{{kbd(C-c C-c)}}} {{{kbd(C-c C-x C-u)}}} ~org-dblock-update~ ::
 Update dynamic block at point.  The cursor needs to be in the
 ~#+BEGIN~ line of the dynamic block.
 @orgkey{C-u C-c C-x C-u}
@@ -7809,7 +7823,7 @@ Next line (same as @key{down} and {{{kbd(C-n)}}}).
 - {{{kbd(p)}}} ~org-agenda-previous-line~ ::
 Previous line (same as @key{up} and {{{kbd(C-p)}}}).
 @tsubheading{View/Go to Org file}
-@orgcmdkkc{@key{SPC},mouse-3,org-agenda-show-and-scroll-up}
+- {{{kbd(@key{SPC})}}} {{{kbd(mouse-3)}}} ~org-agenda-show-and-scroll-up~ ::
 Display the original location of the item in another window.
 With prefix arg, make sure that the entire entry is made visible in the
 outline, not only the heading.
@@ -7817,7 +7831,7 @@ outline, not only the heading.
 - {{{kbd(L)}}} ~org-agenda-recenter~ ::
 Display original location and recenter that window.
 @c
-@orgcmdkkc{@key{TAB},mouse-2,org-agenda-goto}
+- {{{kbd(@key{TAB})}}} {{{kbd(mouse-2)}}} ~org-agenda-goto~ ::
 Go to the original location of the item in another window.
 @c
 - {{{kbd(@key{RET})}}} ~org-agenda-switch-to~ ::
@@ -8150,15 +8164,15 @@ the priority cookie is removed from the entry.
 - {{{kbd(P)}}} ~org-agenda-show-priority~ ::
 Display weighted priority of current item.
 @c
-@orgcmdkkc{+,S-@key{up},org-agenda-priority-up}
+- {{{kbd(+)}}} {{{kbd(S-@key{up})}}} ~org-agenda-priority-up~ ::
 Increase the priority of the current item.  The priority is changed in
 the original buffer, but the agenda is not resorted.  Use the {{{kbd(r)}}}
 key for this.
 @c
-@orgcmdkkc{-,S-@key{down},org-agenda-priority-down}
+- {{{kbd(-)}}} {{{kbd(S-@key{down})}}} ~org-agenda-priority-down~ ::
 Decrease the priority of the current item.
 @c
-@orgcmdkkc{z,C-c C-z,org-agenda-add-note}
+- {{{kbd(z)}}} {{{kbd(C-c C-z)}}} ~org-agenda-add-note~ ::
 {{{vindex(org-log-into-drawer)}}}
 Add a note to the entry.  This note will be recorded, and then filed to the
 same location where state change notes are put.  Depending on
@@ -17476,6 +17490,15 @@ This section contains source code blocks that help translate from
   "Convert @orgcmd to list entry."
   (interactive)
   (query-replace-regexp "@orgcmd{\\([^,]*\\),\\([^}]*\\)}" "- {{{kbd(\\1)}}} ~\\2~ ::" nil))
+#+end_src
+
+#+name: tsd-orgcmdkkc
+#+header: :results silent
+#+begin_src emacs-lisp
+(defun tsd-orgcmdkkc ()
+  "Convert @orgcmdkkc to list entry."
+  (interactive)
+  (query-replace-regexp "@orgcmdkkc{\\([^,]*\\),\\([^,]*\\),\\([^}]*\\)}" "- {{{kbd(\\1)}}} {{{kbd(\\2)}}} ~\\3~ ::" nil))
 #+end_src
 
 #+name: tsd-orgkey
