@@ -4255,7 +4255,7 @@ check off a box while there are unchecked boxes above it.
 {{{cindex(sparse tree\\\, tag based)}}}
 
 An excellent way to implement labels and contexts for cross-correlating
-information is to assign @i{tags} to headlines.  Org mode has extensive
+information is to assign /tags/ to headlines.  Org mode has extensive
 support for tags.
 
 {{{vindex(org-tag-faces)}}}
@@ -4276,7 +4276,7 @@ You may specify special faces for specific tags using the variable
 {{{cindex(inheritance\\\, of tags)}}}
 {{{cindex(sublevels\\\, inclusion into tags match)}}}
 
-@i{Tags} make use of the hierarchical structure of outline trees.  If a
+/Tags/ make use of the hierarchical structure of outline trees.  If a
 heading has a certain tag, all subheadings will inherit the tag as
 well.  For example, in the list
 
@@ -5060,7 +5060,7 @@ global    @r{make a global view, including all headings in the file}
 "file:@var{path-to-file}"
           @r{run column view at the top of this file}
 "@var{ID}"      @r{call column view in the tree that has an @code{:ID:}}
-          @r{property with the value @i{label}.  You can use}
+          @r{property with the value /label/.  You can use}
           @r{@kbd{M-x org-id-copy} to create a globally unique ID for}
           @r{the current entry and copy it to the kill-ring.}
 @end example
@@ -5315,7 +5315,7 @@ modifying an existing timestamp, or when entering the second stamp of a
 range, it is taken from the stamp in the buffer.  When filling in
 information, Org mode assumes that most of the time you will want to enter a
 date in the future: if you omit the month/year and the given day/month is
-@i{before} today, it will assume that you mean a future date@footnote{See the
+/before/ today, it will assume that you mean a future date@footnote{See the
 variable @code{org-read-date-prefer-future}.  You may set that variable to
 the symbol @code{time} to even make a time before now shift the date to
 tomorrow.}.  If the date has been automatically shifted into the future, the
@@ -5524,18 +5524,18 @@ the task will automatically be forwarded until completed.
 @end example
 
 @noindent
-@b{Important:} Scheduling an item in Org mode should @i{not} be
-understood in the same way that we understand @i{scheduling a meeting}.
+@b{Important:} Scheduling an item in Org mode should /not/ be
+understood in the same way that we understand /scheduling a meeting/.
 Setting a date for a meeting is just a simple appointment, you should
 mark this entry with a simple plain timestamp, to get this item shown
 on the date where it applies.  This is a frequent misunderstanding by
-Org users.  In Org mode, @i{scheduling} means setting a date when you
+Org users.  In Org mode, /scheduling/ means setting a date when you
 want to start working on an action item.
 @end table
 
 You may use timestamps with repeaters in scheduling and deadline
 entries.  Org mode will issue early and late warnings based on the
-assumption that the timestamp represents the @i{nearest instance} of
+assumption that the timestamp represents the /nearest instance/ of
 the repeater.  However, the use of diary sexp entries like
 @c
 @code{<%%(org-float t 42)>}
@@ -5667,7 +5667,7 @@ task, this may not be the best way to handle it.  For example, if you
 forgot to call your father for 3 weeks, it does not make sense to call
 him 3 times in a single day to make up for it.  Finally, there are tasks
 like changing batteries which should always repeat a certain time
-@i{after} the last time you did it.  For these tasks, Org mode has
+/after/ the last time you did it.  For these tasks, Org mode has
 special repeaters  @samp{++} and @samp{.+}.  For example:
 
 @example
@@ -6176,8 +6176,8 @@ default value.
 
 An important part of any organization system is the ability to quickly
 capture new ideas and tasks, and to associate reference material with them.
-Org does this using a process called @i{capture}.  It also can store files
-related to a task (@i{attachments}) in a special directory.  Once in the
+Org does this using a process called /capture/.  It also can store files
+related to a task (/attachments/) in a special directory.  Once in the
 system, tasks and projects need to be moved around.  Moving completed project
 trees to an archive file keeps the system compact and fast.
 
@@ -6595,7 +6595,7 @@ It is often useful to associate reference material with an outline node/task.
 Small chunks of plain text can simply be stored in the subtree of a project.
 Hyperlinks (@pxref{Hyperlinks}) can establish associations with
 files that live elsewhere on your computer or in the cloud, like emails or
-source code files belonging to a project.  Another method is @i{attachments},
+source code files belonging to a project.  Another method is /attachments/,
 which are files located in a directory belonging to an outline node.  Org
 uses directories named by the unique ID of each entry.  These directories are
 located in the @file{data} directory which lives in the same directory where
@@ -7405,7 +7405,7 @@ Like before, but require the @samp{:laptop:} lines to be tagged also
 Instead of a tag, you may also specify a regular expression enclosed in curly
 braces.  For example,
 @samp{work+@{^boss.*@}} matches headlines that contain the tag
-@samp{:work:} and any tag @i{starting} with @samp{boss}.
+@samp{:work:} and any tag /starting/ with @samp{boss}.
 
 {{{cindex(TODO keyword matching\\\, with tags search)}}}
 {{{cindex(level\\\, require for tags/property match)}}}
@@ -7858,7 +7858,7 @@ Go to today.
 Prompt for a date and go there.
 @c
 @orgcmd{J,org-agenda-clock-goto}
-Go to the currently clocked-in task @i{in the agenda buffer}.
+Go to the currently clocked-in task /in the agenda buffer/.
 @c
 @orgcmd{D,org-agenda-toggle-diary}
 Toggle the inclusion of diary entries.  See @ref{Weekly/daily agenda}.
@@ -8049,8 +8049,8 @@ the effort criterion.  You can achieve the same effect by pressing @kbd{+} or
 add new search words (@kbd{[} and @kbd{]}) or new regular expressions
 (@kbd{@{} and @kbd{@}}) to the query string.  The opening bracket/brace will
 add a positive search term prefixed by @samp{+}, indicating that this search
-term @i{must} occur/match in the entry.  The closing bracket/brace will add a
-negative search term which @i{must not} occur/match in the entry for it to be
+term /must/ occur/match in the entry.  The closing bracket/brace will add a
+negative search term which /must not/ occur/match in the entry for it to be
 selected.
 @end table
 
@@ -8927,7 +8927,7 @@ multiple footnotes side by side.
 {{{cindex(verbatim text\\\, markup rules)}}}
 {{{cindex(code text\\\, markup rules)}}}
 {{{cindex(strike-through text\\\, markup rules)}}}
-You can make words @b{*bold*}, @i{/italic/}, _underlined_, @code{=code=}
+You can make words @b{*bold*}, //italic//, _underlined_, @code{=code=}
 and @code{~verbatim~}, and, if you must, @samp{+strike-through+}.  Text
 in the code and verbatim string is not processed for Org mode specific
 syntax; it is exported verbatim.
@@ -9025,7 +9025,7 @@ Some example from a text file.
 #+END_EXAMPLE
 @end example
 
-Note that such blocks may be @i{indented} in order to align nicely with
+Note that such blocks may be /indented/ in order to align nicely with
 indented text and in particular with plain list structure (@pxref{Plain
 lists}).  For simplicity when using small examples, you can also start the
 example lines with a colon followed by a space.  There may also be additional
@@ -9071,8 +9071,8 @@ enclosed in single parenthesis).  In HTML, hovering the mouse over such a
 link will remote-highlight the corresponding code line, which is kind of
 cool.
 
-You can also add a @code{-r} switch which @i{removes} the labels from the
-source code@footnote{Adding @code{-k} to @code{-n -r} will @i{keep} the
+You can also add a @code{-r} switch which /removes/ the labels from the
+source code@footnote{Adding @code{-k} to @code{-n -r} will /keep/ the
 labels in the source code while using line numbers for the links, which might
 be useful to explain those in an Org mode example code.}.  With the @code{-n}
 switch, links to these references will be labeled by the line numbers from
@@ -9908,7 +9908,7 @@ All lines between these markers are exported literally
 Internal links (@pxref{Internal links}) will continue to work in HTML.  This
 includes automatic links created by radio targets (@pxref{Radio
 targets}).  Links to external files will still work if the target file is on
-the same @i{relative} path as the published Org file.  Links to other
+the same /relative/ path as the published Org file.  Links to other
 @file{.org} files will be translated into HTML links under the assumption
 that a HTML version also exists of the linked file, at the same relative
 path.  @samp{id:} links can then be used to jump to specific entries across
@@ -12048,8 +12048,8 @@ Org files as HTML files, and this is done by the function
 export}).  But you also can publish your content as PDF files using
 @code{org-publish-org-to-pdf}, or as @code{ascii}, @code{latin1} or
 @code{utf8} encoded files using the corresponding functions.  If you want to
-publish the Org file itself, but with @i{archived}, @i{commented}, and
-@i{tag-excluded} trees removed, use @code{org-publish-org-to-org} and set the
+publish the Org file itself, but with /archived/, /commented/, and
+/tag-excluded/ trees removed, use @code{org-publish-org-to-org} and set the
 parameters @code{:plain-source} and/or @code{:htmlized-source}.  This will
 produce @file{file.org} and @file{file.org.html} in the publishing
 directory@footnote{@file{file-source.org} and @file{file-source.org.html} if
@@ -12333,7 +12333,7 @@ a title, style information, etc.
 
 For those people already utilizing third party sync tools such as
 @command{rsync} or @command{unison}, it might be preferable not to use the built in
-@i{remote} publishing facilities of Org mode which rely heavily on
+/remote/ publishing facilities of Org mode which rely heavily on
 Tramp.  Tramp, while very useful and powerful, tends not to be
 so efficient for multiple file transfer and has been known to cause problems
 under heavy usage.
@@ -12341,7 +12341,7 @@ under heavy usage.
 Specialized synchronization utilities offer several advantages.  In addition
 to timestamp comparison, they also do content and permissions/attribute
 checks.  For this reason you might prefer to publish your web to a local
-directory (possibly even @i{in place} with your Org files) and then use
+directory (possibly even /in place/ with your Org files) and then use
 @file{unison} or @file{rsync} to do the synchronization with the remote host.
 
 Since Unison (for example) can be configured as to which files to transfer to
@@ -14327,7 +14327,7 @@ emacs -Q --batch \
 {{{cindex(link abbreviations\\\, completion of)}}}
 
 Emacs would not be Emacs without completion, and Org mode uses it whenever it
-makes sense.  If you prefer an @i{iswitchb}- or @i{ido}-like interface for
+makes sense.  If you prefer an /iswitchb/- or /ido/-like interface for
 some of the completion prompts, you can specify your preference by setting at
 most one of the variables @code{org-completion-use-iswitchb}
 @code{org-completion-use-ido}.
@@ -14493,7 +14493,7 @@ Functions to query user for Emacs Lisp link execution.
 
 @item Formulas in tables
 Formulas in tables (@pxref{The spreadsheet}) are code that is evaluated
-either by the @i{calc} interpreter, or by the @i{Emacs Lisp} interpreter.
+either by the /calc/ interpreter, or by the /Emacs Lisp/ interpreter.
 @end table
 
 ** Customization
@@ -14939,7 +14939,7 @@ The leading stars are not truly replaced by whitespace, they are only
 fontified with the face @code{org-hide} that uses the background color as
 font color.  If you are not using either white or black background, you may
 have to customize this face to get the wanted effect.  Another possibility is
-to set this font such that the extra stars are @i{almost} invisible, for
+to set this font such that the extra stars are /almost/ invisible, for
 example using the color @code{grey90} on a white background.
 
 @item
@@ -15465,9 +15465,9 @@ and would take away much of the simplicity of the Orgtbl mode table
 editor.
 
 This appendix describes a different approach.  We keep the Orgtbl mode
-table in its native format (the @i{source table}), and use a custom
-function to @i{translate} the table to the correct syntax, and to
-@i{install} it in the right location (the @i{target table}).  This puts
+table in its native format (the /source table/), and use a custom
+function to /translate/ the table to the correct syntax, and to
+/install/ it in the right location (the /target table/).  This puts
 the burden of writing conversion functions on the user, but it allows
 for a very flexible system.
 
@@ -15539,7 +15539,7 @@ The table could be placed in a block comment if that is supported by the
 language.  For example, in C mode you could wrap the table between
 @samp{/*} and @samp{*/} lines.
 @item
-Sometimes it is possible to put the table after some kind of @i{END}
+Sometimes it is possible to put the table after some kind of /END/
 statement, for example @samp{\bye} in @TeX{} and @samp{\end@{document@}}
 in @LaTeX{}.
 @item
@@ -15613,7 +15613,7 @@ table inserted between the two marker lines.
 Now let's assume you want to make the table header by hand, because you
 want to control how columns are aligned, etc@.  In this case we make sure
 that the table translator skips the first 2 lines of the source
-table, and tell the command to work as a @i{splice}, i.e.@: to not produce
+table, and tell the command to work as a /splice/, i.e.@: to not produce
 header and footer commands of the target table:
 
 @example
@@ -16261,27 +16261,27 @@ The following example counts the number of entries with TODO keyword
 {{{cindex(iPhone)}}}
 {{{cindex(MobileOrg)}}}
 
-@i{MobileOrg} is the name of the mobile companion app for Org mode, currently
-available for iOS and for Android.  @i{MobileOrg} offers offline viewing and
+/MobileOrg/ is the name of the mobile companion app for Org mode, currently
+available for iOS and for Android.  /MobileOrg/ offers offline viewing and
 capture support for an Org mode system rooted on a ``real'' computer.  It
 does also allow you to record changes to existing entries.
 The @uref{http://mobileorg.ncogni.to/, iOS implementation} for the
-@i{iPhone/iPod Touch/iPad} series of devices, was developed by Richard
+/iPhone/iPod Touch/iPad/ series of devices, was developed by Richard
 Moreland.  Android users should check out
 @uref{http://wiki.github.com/matburt/mobileorg-android/, MobileOrg Android}
 by Matt Jones.  The two implementations are not identical but offer similar
 features.
 
 This appendix describes the support Org has for creating agenda views in a
-format that can be displayed by @i{MobileOrg}, and for integrating notes
-captured and changes made by @i{MobileOrg} into the main system.
+format that can be displayed by /MobileOrg/, and for integrating notes
+captured and changes made by /MobileOrg/ into the main system.
 
 For changing tags and TODO states in MobileOrg, you should have set up the
 customization variables @code{org-todo-keywords} and @code{org-tags-alist} to
 cover all important tags and TODO keywords, even if individual files use only
 part of these.  MobileOrg will also offer you states and tags set up with
 in-buffer settings, but it will understand the logistics of TODO state
-@i{sets} (@pxref{Per-file keywords}) and @i{mutually exclusive} tags
+/sets/ (@pxref{Per-file keywords}) and /mutually exclusive/ tags
 (@pxref{Setting tags}) only for those set in these variables.
 
 ** Setting up the staging area
@@ -16291,9 +16291,9 @@ in-buffer settings, but it will understand the logistics of TODO state
 MobileOrg needs to interact with Emacs through a directory on a server.  If you
 are using a public server, you should consider to encrypt the files that are
 uploaded to the server.  This can be done with Org mode 7.02 and with
-@i{MobileOrg 1.5} (iPhone version), and you need an @file{openssl}
+/MobileOrg 1.5/ (iPhone version), and you need an @file{openssl}
 installation on your system.  To turn on encryption, set a password in
-@i{MobileOrg} and, on the Emacs side, configure the variable
+/MobileOrg/ and, on the Emacs side, configure the variable
 @code{org-mobile-use-encryption}@footnote{If you can safely store the
 password in your Emacs setup, you might also want to configure
 @code{org-mobile-encryption-password}.  Please read the docstring of that
@@ -16306,14 +16306,14 @@ Dropbox, or if your version of MobileOrg does not support it, you can use a
 webdav server.  For more information, check out the documentation of MobileOrg and also this
 @uref{http://orgmode.org/worg/org-faq.html#mobileorg_webdav, FAQ entry}.}.
 When MobileOrg first connects to your Dropbox, it will create a directory
-@i{MobileOrg} inside the Dropbox.  After the directory has been created, tell
+/MobileOrg/ inside the Dropbox.  After the directory has been created, tell
 Emacs about it:
 
 @lisp
 (setq org-mobile-directory "~/Dropbox/MobileOrg")
 @end lisp
 
-Org mode has commands to put files for @i{MobileOrg} into that directory,
+Org mode has commands to put files for /MobileOrg/ into that directory,
 and to read captured notes from there.
 
 ** Pushing to MobileOrg
@@ -16329,12 +16329,12 @@ inside this directory.  The push operation also creates a special Org file
 @file{agendas.org} with all custom agenda view defined by the
 user@footnote{While creating the agendas, Org mode will force ID properties
 on all referenced entries, so that these entries can be uniquely identified
-if @i{MobileOrg} flags them for further action.  If you do not want to get
+if /MobileOrg/ flags them for further action.  If you do not want to get
 these properties in so many entries, you can set the variable
 @code{org-mobile-force-id-on-agenda-items} to @code{nil}.  Org mode will then
 rely on outline paths, in the hope that these will be unique enough.}.
 Finally, Org writes the file @file{index.org}, containing links to all other
-files.  @i{MobileOrg} first reads this file from the server, and then
+files.  /MobileOrg/ first reads this file from the server, and then
 downloads all agendas and Org files listed in it.  To speed up the download,
 MobileOrg will only read files whose checksums@footnote{Checksums are stored
 automatically in the file @file{checksums.dat}} have changed.
@@ -16343,7 +16343,7 @@ automatically in the file @file{checksums.dat}} have changed.
    :PROPERTIES:
    :DESCRIPTION: Integrating captured and flagged items
    :END:
-When @i{MobileOrg} synchronizes with the server, it not only pulls the Org
+When /MobileOrg/ synchronizes with the server, it not only pulls the Org
 files for viewing.  It also appends captured entries and pointers to flagged
 and changed entries to the file @file{mobileorg.org} on the server.  Org has
 a @emph{pull} operation that integrates this information into an inbox file
@@ -16358,7 +16358,7 @@ operation.} and appends them to the file pointed to by the variable
 will be a top-level entry in the inbox file.
 @item
 After moving the entries, Org will attempt to implement the changes made in
-@i{MobileOrg}.  Some changes are applied directly and without user
+/MobileOrg/.  Some changes are applied directly and without user
 interaction.  Examples are all changes to tags, TODO state, headline and body
 text that can be cleanly applied.  Entries that have been flagged for further
 action will receive a tag @code{:FLAGGED:}, so that they can be easily found
@@ -16368,7 +16368,7 @@ message.  You need to later resolve these issues by hand.
 @item
 Org will then generate an agenda view with all flagged entries.  The user
 should then go through these entries and do whatever actions are necessary.
-If a note has been stored while flagging an entry in @i{MobileOrg}, that note
+If a note has been stored while flagging an entry in /MobileOrg/, that note
 will be displayed in the echo area when the cursor is on the corresponding
 agenda line.
 @table @kbd
@@ -16509,228 +16509,228 @@ complete if the ones above were not mentioned in this manual.
 @itemize @bullet
 
 @item
-@i{Russel Adams} came up with the idea for drawers.
+/Russel Adams/ came up with the idea for drawers.
 @item
-@i{Thomas Baumann} wrote @file{org-bbdb.el} and @file{org-mhe.el}.
+/Thomas Baumann/ wrote @file{org-bbdb.el} and @file{org-mhe.el}.
 @item
-@i{Christophe Bataillon} created the great unicorn logo that we use on the
+/Christophe Bataillon/ created the great unicorn logo that we use on the
 Org mode website.
 @item
-@i{Alex Bochannek} provided a patch for rounding timestamps.
+/Alex Bochannek/ provided a patch for rounding timestamps.
 @item
-@i{Jan Böcker} wrote @file{org-docview.el}.
+/Jan Böcker/ wrote @file{org-docview.el}.
 @item
-@i{Brad Bozarth} showed how to pull RSS feed data into Org mode files.
+/Brad Bozarth/ showed how to pull RSS feed data into Org mode files.
 @item
-@i{Tom Breton} wrote @file{org-choose.el}.
+/Tom Breton/ wrote @file{org-choose.el}.
 @item
-@i{Charles Cave}'s suggestion sparked the implementation of templates
+/Charles Cave/'s suggestion sparked the implementation of templates
 for Remember, which are now templates for capture.
 @item
-@i{Pavel Chalmoviansky} influenced the agenda treatment of items with
+/Pavel Chalmoviansky/ influenced the agenda treatment of items with
 specified time.
 @item
-@i{Gregory Chernov} patched support for Lisp forms into table
+/Gregory Chernov/ patched support for Lisp forms into table
 calculations and improved XEmacs compatibility, in particular by porting
 @file{nouline.el} to XEmacs.
 @item
-@i{Sacha Chua} suggested copying some linking code from Planner.
+/Sacha Chua/ suggested copying some linking code from Planner.
 @item
-@i{Baoqiu Cui} contributed the DocBook exporter.
+/Baoqiu Cui/ contributed the DocBook exporter.
 @item
-@i{Eddward DeVilla} proposed and tested checkbox statistics.  He also
+/Eddward DeVilla/ proposed and tested checkbox statistics.  He also
 came up with the idea of properties, and that there should be an API for
 them.
 @item
-@i{Nick Dokos} tracked down several nasty bugs.
+/Nick Dokos/ tracked down several nasty bugs.
 @item
-@i{Kees Dullemond} used to edit projects lists directly in HTML and so
+/Kees Dullemond/ used to edit projects lists directly in HTML and so
 inspired some of the early development, including HTML export.  He also
 asked for a way to narrow wide table columns.
 @item
-@i{Thomas S. Dye} contributed documentation on Worg and helped integrating
+/Thomas S. Dye/ contributed documentation on Worg and helped integrating
 the Org-Babel documentation into the manual.
 @item
-@i{Christian Egli} converted the documentation into Texinfo format, inspired
+/Christian Egli/ converted the documentation into Texinfo format, inspired
 the agenda, patched CSS formatting into the HTML exporter, and wrote
 @file{org-taskjuggler.el}.
 @item
-@i{David Emery} provided a patch for custom CSS support in exported
+/David Emery/ provided a patch for custom CSS support in exported
 HTML agendas.
 @item
-@i{Nic Ferrier} contributed mailcap and XOXO support.
+/Nic Ferrier/ contributed mailcap and XOXO support.
 @item
-@i{Miguel A. Figueroa-Villanueva} implemented hierarchical checkboxes.
+/Miguel A. Figueroa-Villanueva/ implemented hierarchical checkboxes.
 @item
-@i{John Foerch} figured out how to make incremental search show context
+/John Foerch/ figured out how to make incremental search show context
 around a match in a hidden outline tree.
 @item
-@i{Raimar Finken} wrote @file{org-git-line.el}.
+/Raimar Finken/ wrote @file{org-git-line.el}.
 @item
-@i{Mikael Fornius} works as a mailing list moderator.
+/Mikael Fornius/ works as a mailing list moderator.
 @item
-@i{Austin Frank} works as a mailing list moderator.
+/Austin Frank/ works as a mailing list moderator.
 @item
-@i{Eric Fraga} drove the development of BEAMER export with ideas and
+/Eric Fraga/ drove the development of BEAMER export with ideas and
 testing.
 @item
-@i{Barry Gidden} did proofreading the manual in preparation for the book
+/Barry Gidden/ did proofreading the manual in preparation for the book
 publication through Network Theory Ltd.
 @item
-@i{Niels Giesen} had the idea to automatically archive DONE trees.
+/Niels Giesen/ had the idea to automatically archive DONE trees.
 @item
-@i{Nicolas Goaziou} rewrote much of the plain list code.
+/Nicolas Goaziou/ rewrote much of the plain list code.
 @item
-@i{Kai Grossjohann} pointed out key-binding conflicts with other packages.
+/Kai Grossjohann/ pointed out key-binding conflicts with other packages.
 @item
-@i{Brian Gough} of Network Theory Ltd publishes the Org mode manual as a
+/Brian Gough/ of Network Theory Ltd publishes the Org mode manual as a
 book.
 @item
-@i{Bernt Hansen} has driven much of the support for auto-repeating tasks,
+/Bernt Hansen/ has driven much of the support for auto-repeating tasks,
 task state change logging, and the clocktable.  His clear explanations have
 been critical when we started to adopt the Git version control system.
 @item
-@i{Manuel Hermenegildo} has contributed various ideas, small fixes and
+/Manuel Hermenegildo/ has contributed various ideas, small fixes and
 patches.
 @item
-@i{Phil Jackson} wrote @file{org-irc.el}.
+/Phil Jackson/ wrote @file{org-irc.el}.
 @item
-@i{Scott Jaderholm} proposed footnotes, control over whitespace between
+/Scott Jaderholm/ proposed footnotes, control over whitespace between
 folded entries, and column view for properties.
 @item
-@i{Matt Jones} wrote @i{MobileOrg Android}.
+/Matt Jones/ wrote /MobileOrg Android/.
 @item
-@i{Tokuya Kameshima} wrote @file{org-wl.el} and @file{org-mew.el}.
+/Tokuya Kameshima/ wrote @file{org-wl.el} and @file{org-mew.el}.
 @item
-@i{Shidai Liu} ("Leo") asked for embedded @LaTeX{} and tested it.  He also
+/Shidai Liu/ ("Leo") asked for embedded @LaTeX{} and tested it.  He also
 provided frequent feedback and some patches.
 @item
-@i{Matt Lundin} has proposed last-row references for table formulas and named
+/Matt Lundin/ has proposed last-row references for table formulas and named
 invisible anchors.  He has also worked a lot on the FAQ.
 @item
-@i{David Maus} wrote @file{org-atom.el}, maintains the issues file for Org,
+/David Maus/ wrote @file{org-atom.el}, maintains the issues file for Org,
 and is a prolific contributor on the mailing list with competent replies,
 small fixes and patches.
 @item
-@i{Jason F. McBrayer} suggested agenda export to CSV format.
+/Jason F. McBrayer/ suggested agenda export to CSV format.
 @item
-@i{Max Mikhanosha} came up with the idea of refiling.
+/Max Mikhanosha/ came up with the idea of refiling.
 @item
-@i{Dmitri Minaev} sent a patch to set priority limits on a per-file
+/Dmitri Minaev/ sent a patch to set priority limits on a per-file
 basis.
 @item
-@i{Stefan Monnier} provided a patch to keep the Emacs-Lisp compiler
+/Stefan Monnier/ provided a patch to keep the Emacs-Lisp compiler
 happy.
 @item
-@i{Richard Moreland} wrote @i{MobileOrg} for the iPhone.
+/Richard Moreland/ wrote /MobileOrg/ for the iPhone.
 @item
-@i{Rick Moynihan} proposed allowing multiple TODO sequences in a file
+/Rick Moynihan/ proposed allowing multiple TODO sequences in a file
 and being able to quickly restrict the agenda to a subtree.
 @item
-@i{Todd Neal} provided patches for links to Info files and Elisp forms.
+/Todd Neal/ provided patches for links to Info files and Elisp forms.
 @item
-@i{Greg Newman} refreshed the unicorn logo into its current form.
+/Greg Newman/ refreshed the unicorn logo into its current form.
 @item
-@i{Tim O'Callaghan} suggested in-file links, search options for general
+/Tim O'Callaghan/ suggested in-file links, search options for general
 file links, and TAGS.
 @item
-@i{Osamu Okano} wrote @file{orgcard2ref.pl}, a Perl program to create a text
+/Osamu Okano/ wrote @file{orgcard2ref.pl}, a Perl program to create a text
 version of the reference card.
 @item
-@i{Takeshi Okano} translated the manual and David O'Toole's tutorial
+/Takeshi Okano/ translated the manual and David O'Toole's tutorial
 into Japanese.
 @item
-@i{Oliver Oppitz} suggested multi-state TODO items.
+/Oliver Oppitz/ suggested multi-state TODO items.
 @item
-@i{Scott Otterson} sparked the introduction of descriptive text for
+/Scott Otterson/ sparked the introduction of descriptive text for
 links, among other things.
 @item
-@i{Pete Phillips} helped during the development of the TAGS feature, and
+/Pete Phillips/ helped during the development of the TAGS feature, and
 provided frequent feedback.
 @item
-@i{Martin Pohlack} provided the code snippet to bundle character insertion
+/Martin Pohlack/ provided the code snippet to bundle character insertion
 into bundles of 20 for undo.
 @item
-@i{T.V. Raman} reported bugs and suggested improvements.
+/T.V. Raman/ reported bugs and suggested improvements.
 @item
-@i{Matthias Rempe} (Oelde) provided ideas, Windows support, and quality
+/Matthias Rempe/ (Oelde) provided ideas, Windows support, and quality
 control.
 @item
-@i{Paul Rivier} provided the basic implementation of named footnotes.  He
+/Paul Rivier/ provided the basic implementation of named footnotes.  He
 also acted as mailing list moderator for some time.
 @item
-@i{Kevin Rogers} contributed code to access VM files on remote hosts.
+/Kevin Rogers/ contributed code to access VM files on remote hosts.
 @item
-@i{Frank Ruell} solved the mystery of the @code{keymapp nil} bug, a
+/Frank Ruell/ solved the mystery of the @code{keymapp nil} bug, a
 conflict with @file{allout.el}.
 @item
-@i{Jason Riedy} generalized the send-receive mechanism for Orgtbl tables with
+/Jason Riedy/ generalized the send-receive mechanism for Orgtbl tables with
 extensive patches.
 @item
-@i{Philip Rooke} created the Org reference card, provided lots
+/Philip Rooke/ created the Org reference card, provided lots
 of feedback, developed and applied standards to the Org documentation.
 @item
-@i{Christian Schlauer} proposed angular brackets around links, among
+/Christian Schlauer/ proposed angular brackets around links, among
 other things.
 @item
-@i{Paul Sexton} wrote @file{org-ctags.el}.
+/Paul Sexton/ wrote @file{org-ctags.el}.
 @item
-Linking to VM/BBDB/Gnus was first inspired by @i{Tom Shannon}'s
+Linking to VM/BBDB/Gnus was first inspired by /Tom Shannon/'s
 @file{organizer-mode.el}.
 @item
-@i{Ilya Shlyakhter} proposed the Archive Sibling, line numbering in literal
+/Ilya Shlyakhter/ proposed the Archive Sibling, line numbering in literal
 examples, and remote highlighting for referenced code lines.
 @item
-@i{Stathis Sideris} wrote the @file{ditaa.jar} ASCII to PNG converter that is
+/Stathis Sideris/ wrote the @file{ditaa.jar} ASCII to PNG converter that is
 now packaged into Org's @file{contrib} directory.
 @item
-@i{Daniel Sinder} came up with the idea of internal archiving by locking
+/Daniel Sinder/ came up with the idea of internal archiving by locking
 subtrees.
 @item
-@i{Dale Smith} proposed link abbreviations.
+/Dale Smith/ proposed link abbreviations.
 @item
-@i{James TD Smith} has contributed a large number of patches for useful
+/James TD Smith/ has contributed a large number of patches for useful
 tweaks and features.
 @item
-@i{Adam Spiers} asked for global linking commands, inspired the link
+/Adam Spiers/ asked for global linking commands, inspired the link
 extension system, added support for mairix, and proposed the mapping API.
 @item
-@i{Ulf Stegemann} created the table to translate special symbols to HTML,
+/Ulf Stegemann/ created the table to translate special symbols to HTML,
 @LaTeX{}, UTF-8, Latin-1 and ASCII.
 @item
-@i{Andy Stewart} contributed code to @file{org-w3m.el}, to copy HTML content
+/Andy Stewart/ contributed code to @file{org-w3m.el}, to copy HTML content
 with links transformation to Org syntax.
 @item
-@i{David O'Toole} wrote @file{org-publish.el} and drafted the manual
+/David O'Toole/ wrote @file{org-publish.el} and drafted the manual
 chapter about publishing.
 @item
-@i{Jambunathan K} contributed the ODT exporter.
+/Jambunathan K/ contributed the ODT exporter.
 @item
-@i{Sebastien Vauban} reported many issues with @LaTeX{} and BEAMER export and
+/Sebastien Vauban/ reported many issues with @LaTeX{} and BEAMER export and
 enabled source code highlighting in Gnus.
 @item
-@i{Stefan Vollmar} organized a video-recorded talk at the
+/Stefan Vollmar/ organized a video-recorded talk at the
 Max-Planck-Institute for Neurology.  He also inspired the creation of a
 concept index for HTML export.
 @item
-@i{J@"urgen Vollmer} contributed code generating the table of contents
+/J@"urgen Vollmer/ contributed code generating the table of contents
 in HTML output.
 @item
-@i{Samuel Wales} has provided important feedback and bug reports.
+/Samuel Wales/ has provided important feedback and bug reports.
 @item
-@i{Chris Wallace} provided a patch implementing the @samp{QUOTE}
+/Chris Wallace/ provided a patch implementing the @samp{QUOTE}
 keyword.
 @item
-@i{David Wainberg} suggested archiving, and improvements to the linking
+/David Wainberg/ suggested archiving, and improvements to the linking
 system.
 @item
-@i{Carsten Wimmer} suggested some changes and helped fix a bug in
+/Carsten Wimmer/ suggested some changes and helped fix a bug in
 linking to Gnus.
 @item
-@i{Roland Winkler} requested additional key bindings to make Org
+/Roland Winkler/ requested additional key bindings to make Org
 work on a tty.
 @item
-@i{Piotr Zielinski} wrote @file{org-mouse.el}, proposed agenda blocks
+/Piotr Zielinski/ wrote @file{org-mouse.el}, proposed agenda blocks
 and contributed various ideas and code snippets.
 @end itemize
 
