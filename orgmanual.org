@@ -4534,18 +4534,24 @@ selection, it comes up only when you press an extra {{{kbd(C-c)}}}.
 Once a system of tags has been set up, it can be used to collect related
 information into special lists.
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
+#+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c / m)}}} {{{kbd(C-c \\)}}} ~org-match-sparse-tree~ ::
-Create a sparse tree with all headlines matching a tags search.  With a
-{{{kbd(C-u)}}} prefix argument, ignore headlines that are not a TODO line.
+
+  Create a sparse tree with all headlines matching a tags search. With a
+  {{{kbd(C-u)}}} prefix argument, ignore headlines that are not a TODO
+  line.
+
 - {{{kbd(C-c a m)}}} ~org-tags-view~ ::
+
 Create a global list of tag matches from all agenda files.
-@xref{Matching tags and properties}.
+See [[Matching tags and properties]].
+
 - {{{kbd(C-c a M)}}} ~org-tags-view~ ::
-{{{vindex(org-tags-match-list-sublevels)}}}
-Create a global list of tag matches from all agenda files, but check
-only TODO items and force checking subitems (see variable
-~org-tags-match-list-sublevels~).
+  {{{vindex(org-tags-match-list-sublevels)}}}
+
+  Create a global list of tag matches from all agenda files, but check
+  only TODO items and force checking subitems (see variable
+  ~org-tags-match-list-sublevels~).
 
 
 These commands all prompt for a match string which allows basic Boolean logic
@@ -4769,7 +4775,7 @@ Create a sparse tree with all matching entries.  With a
 {{{kbd(C-u)}}} prefix argument, ignore headlines that are not a TODO line.
 - {{{kbd(C-c a m)}}} ~org-tags-view~ ::
 Create a global list of tag/property  matches from all agenda files.
-@xref{Matching tags and properties}.
+See [[Matching tags and properties]].
 - {{{kbd(C-c a M)}}} ~org-tags-view~ ::
 {{{vindex(org-tags-match-list-sublevels)}}}
 Create a global list of tag matches from all agenda files, but check
@@ -7167,7 +7173,7 @@ You can also define custom commands that will be accessible through the
 dispatcher, just like the default commands.  This includes the
 possibility to create extended agenda buffers that contain several
 blocks together, for example the weekly agenda, the global TODO list and
-a number of special tags matches.  @xref{Custom agenda views}.
+a number of special tags matches.  See [[Custom agenda views]].
 
 ** Built-in agenda views
    :PROPERTIES:
@@ -7639,7 +7645,7 @@ and TODO indicate next actions.  The tag @@SHOP indicates shopping and
 is a next action even without the NEXT tag.  Finally, if the project
 contains the special word IGNORE anywhere, it should not be listed
 either.  In this case you would start by identifying eligible projects
-with a tags/todo match@footnote{@xref{Tag searches}.}
+with a tags/todo match@footnote{See [[Tag searches]].}
 {{{samp(+PROJECT/-MAYBE-DONE)}}}, and then check for TODO, NEXT, @@SHOP, and
 IGNORE in the subtree to identify projects that are not stuck.  The
 correct customization for this is
@@ -9061,7 +9067,7 @@ You may also define additional attributes for the figure.  As this is
 backend-specific, see the sections about the individual backends for more
 information.
 
-@xref{Handling links,the discussion of image links}.
+See [[Handling links,the discussion of image links]].
 
 ** Literal examples
    :PROPERTIES:
@@ -10856,8 +10862,8 @@ Export as OpenDocument Text file.
 
 {{{vindex(org-export-odt-preferred-output-format)}}}
 If ~org-export-odt-preferred-output-format~ is specified, automatically
-convert the exported file to that format.  @xref{x-export-to-other-formats, ,
-Automatically exporting to other formats}.
+convert the exported file to that format.  See [[x-export-to-other-formats, ,
+Automatically exporting to other formats]].
 
 For an Org file {{{file(myfile.org)}}}, the ODT file will be
 {{{file(myfile.odt)}}}.  The file will be overwritten without warning.  If there
@@ -10873,8 +10879,8 @@ Export as an OpenDocument Text file and open the resulting file.
 
 {{{vindex(org-export-odt-preferred-output-format)}}}
 If ~org-export-odt-preferred-output-format~ is specified, open the
-converted file instead.  @xref{x-export-to-other-formats, , Automatically
-exporting to other formats}.
+converted file instead.  See [[x-export-to-other-formats, , Automatically
+exporting to other formats]].
 
 
 *** Extending ODT export
@@ -10893,8 +10899,8 @@ pre-configured for you and you can use it right away.  If you would like to
 use {{{file(unoconv)}}} as your preferred converter, customize the variable
 ~org-export-odt-convert-process~ to point to ~unoconv~.  You can
 also use your own favorite converter or tweak the default settings of the
-{{{file(LibreOffice)}}} and {{{samp(unoconv)}}} converters.  @xref{Configuring a
-document converter}.
+{{{file(LibreOffice)}}} and {{{samp(unoconv)}}} converters.  See [[Configuring a
+document converter]].
 
 @subsubsection Automatically exporting to other formats
 @anchor{x-export-to-other-formats}
@@ -11002,7 +11008,7 @@ heading is replaced with a cross-reference and section number of the heading.
 
 A {{{samp(\ref@{label@)}}}}-style reference to an image, table etc. is replaced
 with a cross-reference and sequence number of the labeled entity.
-@xref{Labels and captions in ODT export}.
+See [[Labels and captions in ODT export]].
 
 
 *** Tables in ODT export
@@ -11052,7 +11058,7 @@ be horizontal rules separating the header and last rows from other rows.
 
 If you are not satisfied with the above formatting options, you can create
 custom table styles and associate them with a table using the
-~#+ATTR_ODT~ line.  @xref{Customizing tables in ODT export}.
+~#+ATTR_ODT~ line.  See [[Customizing tables in ODT export]].
 
 *** Images in ODT export
     :PROPERTIES:
@@ -11259,7 +11265,7 @@ or
     :END:
 You can label and caption various category of objects - an inline image, a
 table, a @LaTeX{} fragment or a Math formula - using ~#+LABEL~ and
-~#+CAPTION~ lines.  @xref{Images and tables}.  ODT exporter enumerates
+~#+CAPTION~ lines.  See [[Images and tables]].  ODT exporter enumerates
 each labeled or captioned object of a given category separately.  As a
 result, each such object is assigned a sequence number based on order of it's
 appearance in the Org file.
@@ -11340,7 +11346,7 @@ that would be of interest to power users.
 {{{cindex(converter)}}}
 
 The ODT exporter can work with popular converters with little or no
-extra configuration from your side. @xref{Extending ODT export}.
+extra configuration from your side. See [[Extending ODT export]].
 If you are using a converter that is not supported by default or if you would
 like to tweak the default converter settings, proceed as below.
 
@@ -14003,7 +14009,7 @@ processing, then reapplied to the results.
 #+end_example
 
 Please note that column names are not removed before the table is indexed
-using variable indexing @xref{var, Indexable variable values}.
+using variable indexing See [[var, Indexable variable values]].
 
 - ~no~
 No column name pre-processing takes place
@@ -14045,7 +14051,7 @@ and is then reapplied to the results.
 #+end_example
 
 Please note that row names are not removed before the table is indexed using
-variable indexing @xref{var, Indexable variable values}.
+variable indexing See [[var, Indexable variable values]].
 
 @end itemize
 
@@ -14638,7 +14644,7 @@ variable is ~org-drawers~.
 - #+LINK:  linkword replace
 {{{vindex(org-link-abbrev-alist)}}}
 These lines (several are allowed) specify link abbreviations.
-@xref{Link abbreviations}.  The corresponding variable is
+See [[Link abbreviations]].  The corresponding variable is
 ~org-link-abbrev-alist~.
 - #+PRIORITIES: highest lowest default
 {{{vindex(org-highest-priority)}}}
@@ -15104,8 +15110,8 @@ checks for the availability of Calc by looking for the function
 ~calc-eval~ which will have been autoloaded during setup if Calc has
 been installed properly.  As of Emacs 22, Calc is part of the Emacs
 distribution.  Another possibility for interaction between the two
-packages is using Calc for embedded calculations.  @xref{Embedded Mode,
-, Embedded Mode, calc, GNU Emacs Calc Manual}.
+packages is using Calc for embedded calculations.  See [[Embedded Mode,
+, Embedded Mode, calc, GNU Emacs Calc Manual]].
 - {{{file(constants.el)}}} by Carsten Dominik
 {{{cindex(@file{constants.el})}}}
 {{{cindex(Dominik\\\, Carsten)}}}
