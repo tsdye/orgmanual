@@ -4329,25 +4329,27 @@ Tags can simply be typed into the buffer at the end of a headline.
 After a colon, {{{kbdkey(M-,TAB)}}} offers completion on tags.  There is
 also a special command for inserting tags:
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
+#+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c C-q)}}} ~org-set-tags-command~ ::
 
-{{{cindex(completion\\\, of tags)}}}
-{{{vindex(org-tags-column)}}}
+  {{{cindex(completion\\\, of tags)}}}
+  {{{vindex(org-tags-column)}}}
 
-Enter new tags for the current headline.  Org mode will either offer
-completion or a special single-key interface for setting tags, see
-below.  After pressing {{{key(RET)}}}, the tags will be inserted and aligned
-to ~org-tags-column~.  When called with a @kbd{C-u} prefix, all
-tags in the current buffer will be aligned to that column, just to make
-things look nice.  TAGS are automatically realigned after promotion,
-demotion, and TODO state changes (see [[TODO basics]]).
+  Enter new tags for the current headline.  Org mode will either offer
+  completion or a special single-key interface for setting tags, see
+  below.  After pressing {{{key(RET)}}}, the tags will be inserted and aligned
+  to ~org-tags-column~.  When called with a {{{kbd(C-u)}}} prefix, all
+  tags in the current buffer will be aligned to that column, just to make
+  things look nice.  TAGS are automatically realigned after promotion,
+  demotion, and TODO state changes (see [[TODO basics]]).
+
 - {{{kbd(C-c C-c)}}} ~org-set-tags-command~ ::
-When the cursor is in a headline, this does the same as @kbd{C-c C-q}.
+
+  When the cursor is in a headline, this does the same as {{{kbd(C-c C-q)}}}.
 
 
 {{{vindex(org-tag-alist)}}}
-Org supports tag insertion based on a @emph{list of tags}.  By
+Org supports tag insertion based on a /list of tags/.  By
 default this list is constructed dynamically, containing all tags
 currently used in the buffer.  You may also globally specify a hard list
 of tags with the variable ~org-tag-alist~.  Finally you can set
@@ -4380,7 +4382,7 @@ by adding a STARTUP option line to that file:
 
 By default Org mode uses the standard minibuffer completion facilities for
 entering tags.  However, it also implements another, quicker, tag selection
-method called @emph{fast tag selection}.  This allows you to select and
+method called /fast tag selection/.  This allows you to select and
 deselect tags with just a single key press.  For this to work well you should
 assign unique letters to most of your commonly used tags.  You can do this
 globally by configuring the variable ~org-tag-alist~ in your
@@ -4425,7 +4427,7 @@ braces, as in:
 {{{noindent}}} you indicate that at most one of {{{samp(@@work)}}}, {{{samp(@@home)}}},
 and {{{samp(@@tennisclub)}}} should be selected.  Multiple such groups are allowed.
 
-{{{noindent}}} Don't forget to press @kbd{C-c C-c} with the cursor in one of
+{{{noindent}}} Don't forget to press {{{kbd(C-c C-c)}}} with the cursor in one of
 these lines to activate any changes.
 
 {{{noindent}}}
@@ -4443,7 +4445,7 @@ configuration:
                       ("laptop" . ?l) ("pc" . ?p)))
 @end lisp
 
-If at least one tag has a selection key then pressing @kbd{C-c C-c} will
+If at least one tag has a selection key then pressing {{{kbd(C-c C-c)}}} will
 automatically present you with a special interface, listing inherited tags,
 the tags of the current headline, and a list of all valid tags with
 corresponding keys@footnote{Keys will automatically be assigned to tags which
@@ -4470,13 +4472,13 @@ Accept the modified set.
 @item C-g
 Abort without installing changes.
 @item q
-If @kbd{q} is not assigned to a tag, it aborts like @kbd{C-g}.
+If {{{kbd(q)}}} is not assigned to a tag, it aborts like {{{kbd(C-g)}}}.
 @item !
 Turn off groups of mutually exclusive tags.  Use this to (as an
 exception) assign several tags from such a group.
 @item C-c
 Toggle auto-exit after the next change (see below).
-If you are using expert mode, the first @kbd{C-c} will display the
+If you are using expert mode, the first {{{kbd(C-c)}}} will display the
 selection window.
 
 
@@ -4590,7 +4592,7 @@ defined by the entry, see @ref{Property inheritance}.
 
 You may define the allowed values for a particular property {{{samp(:Xyz:)}}}
 by setting a property {{{samp(:Xyz_ALL:)}}}.  This special property is
-@emph{inherited}, so if you set it in a level 1 entry, it will apply to
+/inherited/, so if you set it in a level 1 entry, it will apply to
 the entire tree.  When allowed values are defined, setting the
 corresponding property becomes easier and is less prone to typing
 errors.  For the example with the CD collection, we can predefine
@@ -4822,7 +4824,7 @@ subtree (see [[Tracking TODO state changes]]).
    :END:
 
 A great way to view and edit properties in an outline tree is
-@emph{column view}.  In column view, each outline node is turned into a
+/column view/.  In column view, each outline node is turned into a
 table row.  Columns in this table provide access to properties of the
 entries.  Org mode implements columns by overlaying a tabular structure
 over the headline of each item.  While the headlines have been turned
@@ -5133,7 +5135,7 @@ property API}.
 
 To assist project planning, TODO items can be labeled with a date and/or
 a time.  The specially formatted string carrying the date and time
-information is called a @emph{timestamp} in Org mode.  This may be a
+information is called a /timestamp/ in Org mode.  This may be a
 little confusing because timestamp is often used as indicating when
 something was created or last changed.  However, in Org mode this term
 is used in a much wider sense.
@@ -5178,7 +5180,7 @@ plain timestamp will be shown exactly on that date.
 
 @item Timestamp with repeater interval
 {{{cindex(timestamp\\\, with repeater interval)}}}
-A timestamp may contain a @emph{repeater interval}, indicating that it
+A timestamp may contain a /repeater interval/, indicating that it
 applies not only on the given date, but again and again after a certain
 interval of N days (d), weeks (w), months (m), or years (y).  The
 following will show up in the agenda every Wednesday:
@@ -5226,7 +5228,7 @@ that are displayed and fall in the range.  Here is an example:
 {{{cindex(inactive timestamp)}}}
 Just like a plain timestamp, but with square brackets instead of
 angular ones.  These timestamps are inactive in the sense that they do
-@emph{not} trigger an entry to show up in the agenda.
+/not/ trigger an entry to show up in the agenda.
 
 #+begin_example
 ,* Gillian comes late for the fifth time
@@ -5312,8 +5314,8 @@ date/time format, and the prompt therefore seems to ask for a specific
 format.  But it will in fact accept date/time information in a variety of
 formats.  Generally, the information should start at the beginning of the
 string.  Org mode will find whatever information is in
-there and derive anything you have not specified from the @emph{default date
-and time}.  The default is usually the current date and time, but when
+there and derive anything you have not specified from the /default date
+and time/.  The default is usually the current date and time, but when
 modifying an existing timestamp, or when entering the second stamp of a
 range, it is taken from the stamp in the buffer.  When filling in
 information, Org mode assumes that most of the time you will want to enter a
@@ -5346,7 +5348,7 @@ w4            @result{} ISO week for of the current year @b{2006}
 #+end_example
 
 Furthermore you can specify a relative date by giving, as the
-@emph{first} thing in the input: a plus/minus sign, a number and a
+/first/ thing in the input: a plus/minus sign, a number and a
 letter ([dwmy]) to indicate change in days, weeks, months, or years.  With a
 single plus or minus, the date is always relative to today.  With a
 double plus or minus, it is relative to the default date.  If instead of
@@ -5450,8 +5452,8 @@ Toggle the display of custom formats for dates and times.
 
 {{{noindent}}}
 Org mode needs the default format for scanning, so the custom date/time
-format does not @emph{replace} the default format---instead it is put
-@emph{over} the default format using text properties.  This has the
+format does not /replace/ the default format---instead it is put
+/over/ the default format using text properties.  This has the
 following consequences:
 @itemize @bullet
 @item
@@ -5468,7 +5470,7 @@ If the timestamp contains a range of clock times or a repeater, these
 will not be overlaid, but remain in the buffer as they were.
 @item
 When you delete a timestamp character-by-character, it will only
-disappear from the buffer after @emph{all} (invisible) characters
+disappear from the buffer after /all/ (invisible) characters
 belonging to the ISO timestamp have been removed.
 @item
 If the custom timestamp format is longer than the default and you are
@@ -5492,7 +5494,7 @@ to be finished on that date.
 
 {{{vindex(org-deadline-warning-days)}}}
 On the deadline date, the task will be listed in the agenda.  In
-addition, the agenda for @emph{today} will carry a warning about the
+addition, the agenda for /today/ will carry a warning about the
 approaching or missed deadline, starting
 ~org-deadline-warning-days~ before the due date, and continuing
 until the entry is marked DONE.  An example:
@@ -5518,7 +5520,7 @@ The headline will be listed under the given date@footnote{It will still
 be listed on that date after it has been marked DONE.  If you don't like
 this, set the variable ~org-agenda-skip-scheduled-if-done~.}.  In
 addition, a reminder that the scheduled date has passed will be present
-in the compilation for @emph{today}, until the entry is marked DONE, i.e.@:
+in the compilation for /today/, until the entry is marked DONE, i.e.@:
 the task will automatically be forwarded until completed.
 
 #+begin_example
@@ -5636,7 +5638,7 @@ Deadlines and scheduled items produce entries in the agenda when they are
 over-due, so it is important to be able to mark such an entry as completed
 once you have done so.  When you mark a DEADLINE or a SCHEDULE with the TODO
 keyword DONE, it will no longer produce entries in the agenda.  The problem
-with this is, however, that then also the @emph{next} instance of the
+with this is, however, that then also the /next/ instance of the
 repeated entry will not be active.  Org mode deals with this in the following
 way: When you try to mark such an entry DONE (using {{{kbd(C-c C-t)}}}), it will
 shift the base date of the repeating timestamp by the repeater interval, and
@@ -5831,7 +5833,7 @@ modify the window disposition.
 {{{cindex(report\\\, of clocked time)}}}
 
 Org mode can produce quite complex reports based on the time clocking
-information.  Such a report is called a @emph{clock table}, because it is
+information.  Such a report is called a /clock table/, because it is
 formatted as one or several Org tables.
 
 #+attr_texinfo: :table-type "table" :indic "@kbd"
@@ -6845,7 +6847,7 @@ given by ~org-archive-location~.
 Check if any direct children of the current headline could be moved to
 the archive.  To do this, each subtree is checked for open TODO entries.
 If none are found, the command offers to move it to the archive
-location.  If the cursor is @emph{not} on a headline when this command
+location.  If the cursor is /not/ on a headline when this command
 is invoked, the level 1 trees will be checked.
 
 
@@ -6863,7 +6865,7 @@ example@footnote{For backward compatibility, the following also works:
 If there are several such lines in a file, each specifies the archive
 location for the text below it.  The first such line also applies to any
 text before its definition.  However, using this method is
-@emph{strongly} deprecated as it is incompatible with the outline
+/strongly/ deprecated as it is incompatible with the outline
 structure of the document.  The correct method for setting multiple
 archive locations in a buffer is using properties.}:
 
@@ -6937,12 +6939,12 @@ hidden.
 Check if any direct children of the current headline should be archived.
 To do this, each subtree is checked for open TODO entries.  If none are
 found, the command offers to set the ARCHIVE tag for the child.  If the
-cursor is @emph{not} on a headline when this command is invoked, the
+cursor is /not/ on a headline when this command is invoked, the
 level 1 trees will be checked.
 - {{{kbdkey(C-,TAB)}}} ~org-force-cycle-archived~ ::
 Cycle a tree even if it is tagged with ARCHIVE.
 - {{{kbd(C-c C-x A)}}} ~org-archive-to-archive-sibling~ ::
-Move the current entry to the @emph{Archive Sibling}.  This is a sibling of
+Move the current entry to the /Archive Sibling/.  This is a sibling of
 the entry with the heading {{{samp(Archive)}}} and the tag {{{samp(ARCHIVE)}}}.  The
 entry becomes a child of that sibling and in this way retains a lot of its
 original context, including inherited tags and approximate position in the
@@ -6965,31 +6967,31 @@ in a separate buffer.  Seven different view types are provided:
 
 @itemize @bullet
 @item
-an @emph{agenda} that is like a calendar and shows information
+an /agenda/ that is like a calendar and shows information
 for specific dates,
 @item
-a @emph{TODO list} that covers all unfinished
+a /TODO list/ that covers all unfinished
 action items,
 @item
-a @emph{match view}, showings headlines based on the tags, properties, and
+a /match view/, showings headlines based on the tags, properties, and
 TODO state associated with them,
 @item
-a @emph{timeline view} that shows all events in a single Org file,
+a /timeline view/ that shows all events in a single Org file,
 in time-sorted view,
 @item
-a @emph{text search view} that shows all entries from multiple files
+a /text search view/ that shows all entries from multiple files
 that contain specified keywords,
 @item
-a @emph{stuck projects view} showing projects that currently don't move
+a /stuck projects view/ showing projects that currently don't move
 along, and
 @item
-@emph{custom views} that are special searches and combinations of different
+/custom views/ that are special searches and combinations of different
 views.
 @end itemize
 
 {{{noindent}}}
-The extracted information is displayed in a special @emph{agenda
-buffer}.  This buffer is read-only, but provides commands to visit the
+The extracted information is displayed in a special /agenda
+buffer/.  This buffer is read-only, but provides commands to visit the
 corresponding locations in the original Org files, and even to
 edit these files remotely.
 
@@ -7009,8 +7011,8 @@ window configuration is restored when the agenda exits:
 {{{cindex(files for agenda)}}}
 
 {{{vindex(org-agenda-files)}}}
-The information to be shown is normally collected from all @emph{agenda
-files}, the files listed in the variable
+The information to be shown is normally collected from all /agenda
+files/, the files listed in the variable
 ~org-agenda-files~@footnote{If the value of that variable is not a
 list, but a single file name, then the list of agenda files will be
 maintained in that external file.}.  If a directory is part of this list,
@@ -7159,7 +7161,7 @@ In this section we describe the built-in views.
 {{{cindex(weekly agenda)}}}
 {{{cindex(daily agenda)}}}
 
-The purpose of the weekly/daily @emph{agenda} is to act like a page of a
+The purpose of the weekly/daily /agenda/ is to act like a page of a
 paper agenda, showing all the tasks for the current week or day.
 
 #+attr_texinfo: :table-type "table" :indic "@kbd"
@@ -7336,8 +7338,8 @@ it more compact:
 {{{vindex(org-agenda-todo-ignore-deadlines)}}}
 {{{vindex(org-agenda-todo-ignore-timestamp)}}}
 {{{vindex(org-agenda-todo-ignore-with-date)}}}
-Some people view a TODO item that has been @emph{scheduled} for execution or
-have a @emph{deadline} (see [[Timestamps]]) as no longer @emph{open}.
+Some people view a TODO item that has been /scheduled/ for execution or
+have a /deadline/ (see [[Timestamps]]) as no longer /open/.
 Configure the variables ~org-agenda-todo-ignore-scheduled~,
 ~org-agenda-todo-ignore-deadlines~,
 ~org-agenda-todo-ignore-timestamp~ and/or
@@ -7361,7 +7363,7 @@ and omit the sublevels from the global list.  Configure the variable
 {{{cindex(tags view)}}}
 {{{cindex(match view)}}}
 
-If headlines in the agenda files are marked with @emph{tags} (see [[Tags]]),
+If headlines in the agenda files are marked with /tags/ (see [[Tags]]),
 or have properties (see [[Properties and Columns]]), you can select headlines
 based on this metadata and collect them into an agenda buffer.  The match
 syntax described here also applies when creating sparse trees with {{{kbd(C-c /
@@ -7428,7 +7430,7 @@ properties that represent other metadata (see [[Special properties]]).  For
 example, the ``property'' ~TODO~ represents the TODO keyword of the
 entry.  Or, the ``property'' ~LEVEL~ represents the level of an entry.
 So a search {{{samp(+LEVEL=3+boss-TODO="DONE")}}} lists all level three headlines
-that have the tag {{{samp(boss)}}} and are @emph{not} marked with the TODO keyword
+that have the tag {{{samp(boss)}}} and are /not/ marked with the TODO keyword
 DONE.  In buffers with ~org-odd-levels-only~ set, {{{samp(LEVEL)}}} does not
 count the number of stars, but {{{samp(LEVEL=2)}}} will correspond to 3 stars etc.
 The ITEM special property cannot currently be used in tags/property
@@ -7463,7 +7465,7 @@ and the allowed operators are {{{samp(<)}}}, {{{samp(=)}}}, {{{samp(>)}}}, {{{sa
 If the comparison value is enclosed in double-quotes,
 a string comparison is done, and the same operators are allowed.
 @item
-If the comparison value is enclosed in double-quotes @emph{and} angular
+If the comparison value is enclosed in double-quotes /and/ angular
 brackets (like {{{samp(DEADLINE<="<2008-12-24 18:30>")}}}), both values are
 assumed to be date/time specifications in the standard Org way, and the
 comparison will be done accordingly.  Special values that will be recognized
@@ -7502,7 +7504,7 @@ connected with {{{samp(|)}}}) with a {{{samp(/)}}} and then specify a Boolean
 expression just for TODO keywords.  The syntax is then similar to that for
 tags, but should be applied with care: for example, a positive selection on
 several TODO keywords cannot meaningfully be combined with boolean AND.
-However, @emph{negative selection} combined with AND can be meaningful.  To
+However, /negative selection/ combined with AND can be meaningful.  To
 make sure that only lines are checked that actually have any TODO keyword
 (resulting in a speed-up), use {{{kbd(C-c a M)}}}, or equivalently start the TODO
 part after the slash with {{{samp(!)}}}.  Using {{{kbd(C-c a M)}}} or {{{samp(/!)}}} will
@@ -7529,7 +7531,7 @@ Select {{{samp(:work:)}}}-tagged TODO lines that are either {{{samp(WAITING)}}} 
 {{{cindex(time-sorted view)}}}
 
 The timeline summarizes all time-stamped items from a single Org mode
-file in a @emph{time-sorted view}.  The main purpose of this command is
+file in a /time-sorted view/.  The main purpose of this command is
 to give an overview over events in a project.
 
 #+attr_texinfo: :table-type "table" :indic "@kbd"
@@ -7583,7 +7585,7 @@ the files listed in ~org-agenda-text-search-extra-files~.
 
 If you are following a system like David Allen's GTD to organize your
 work, one of the ``duties'' you have is a regular review to make sure
-that all projects move along.  A @emph{stuck} project is a project that
+that all projects move along.  A /stuck/ project is a project that
 has no defined next actions, so it will never show up in the TODO lists
 Org mode produces.  During the review, you need to identify such
 projects and define next actions for them.
@@ -7635,7 +7637,7 @@ will still be searched for stuck projects.
 {{{vindex(org-agenda-tags-column)}}}
 Before displaying items in an agenda view, Org mode visually prepares the
 items and sorts them.  Each item occupies a single line.  The line starts
-with a @emph{prefix} that contains the @emph{category} (see [[Categories]])
+with a /prefix/ that contains the /category/ (see [[Categories]])
 of the item and other important information.  You can customize in which
 column tags will be displayed through ~org-agenda-tags-column~.  You can
 also customize the prefix using the option ~org-agenda-prefix-format~.
@@ -7655,7 +7657,7 @@ specify it with a special line in the buffer, like this@footnote{For
 backward compatibility, the following also works: if there are several
 such lines in a file, each specifies the category for the text below it.
 The first category also applies to any text before the first CATEGORY
-line.  However, using this method is @emph{strongly} deprecated as it is
+line.  However, using this method is /strongly/ deprecated as it is
 incompatible with the outline structure of the document.  The correct
 method for setting multiple categories in a buffer is using a
 property.}:
@@ -7746,7 +7748,7 @@ done depends on the type of view.
 For the daily/weekly agenda, the items for each day are sorted.  The
 default order is to first collect all items containing an explicit
 time-of-day specification.  These entries will be shown at the beginning
-of the list, as a @emph{schedule} for the day.  After that, items remain
+of the list, as a /schedule/ for the day.  After that, items remain
 grouped in categories, in the sequence given by ~org-agenda-files~.
 Within each category, items are sorted by priority (see [[Priorities]]),
 which is composed of the base priority (2000 for priority {{{samp(A)}}}, 1000
@@ -7992,7 +7994,7 @@ You will be prompted for a tag selection letter; @key{SPC} will mean any tag at
 all.  Pressing @key{TAB} at that prompt will offer use completion to select a
 tag (including any tags that do not have a selection character).  The command
 then hides all entries that do not contain or inherit this tag.  When called
-with prefix arg, remove the entries that @emph{do} have the tag.  A second
+with prefix arg, remove the entries that /do/ have the tag.  A second
 {{{kbd(/)}}} at the prompt will turn off the filter and unhide any hidden entries.
 If the first key you press is either {{{kbd(+)}}} or {{{kbd(-)}}}, the previous filter
 will be narrowed by requiring or forbidding the selected additional tag.
@@ -8045,7 +8047,7 @@ Internet, and outside of business hours, with something like this:
 
 - {{{kbd(\\)}}} ~org-agenda-filter-by-tag-refine~ ::
 Narrow the current agenda filter by an additional condition.  When called with
-prefix arg, remove the entries that @emph{do} have the tag, or that do match
+prefix arg, remove the entries that /do/ have the tag, or that do match
 the effort criterion.  You can achieve the same effect by pressing {{{kbd(+)}}} or
 {{{kbd(-)}}} as the first key after the {{{kbd(/)}}} command.
 
@@ -8105,8 +8107,8 @@ archiving command set in ~org-archive-default-command~.  When using the
 Toggle the ARCHIVE tag for the current headline.
 @c
 - {{{kbd(C-c C-x A)}}} ~org-agenda-archive-to-archive-sibling~ ::
-Move the subtree corresponding to the current entry to its @emph{archive
-sibling}.
+Move the subtree corresponding to the current entry to its /archive
+sibling/.
 @c
 @orgcmdkskc{C-c C-x C-s,$,org-agenda-archive}
 Archive the subtree corresponding to the current headline.  This means the
@@ -8421,7 +8423,7 @@ Peter, or Kim) as additional tag to match.
 {{{cindex(agenda\\\, with block views)}}}
 
 Another possibility is the construction of agenda views that comprise
-the results of @emph{several} commands, each of which creates a block in
+the results of /several/ commands, each of which creates a block in
 the agenda buffer.  The available commands include ~agenda~ for the
 daily or weekly agenda (as created with {{{kbd(C-c a a)}}}), ~alltodo~
 for the global TODO list (as constructed with {{{kbd(C-c a t)}}}), and the
@@ -8518,7 +8520,7 @@ the results for GARDEN tags query in the opposite order,
 As you see, the values and parentheses setting is a little complex.
 When in doubt, use the customize interface to set this variable---it
 fully supports its structure.  Just one caveat: when setting options in
-this interface, the @emph{values} are just Lisp expressions.  So if the
+this interface, the /values/ are just Lisp expressions.  So if the
 value is a string, you need to add the double-quotes around the value
 yourself.
 
@@ -8627,9 +8629,9 @@ run export over all files that were used to construct the agenda, and
 limit the export to entries listed in the agenda.  Any other
 extension produces a plain ASCII file.
 
-The export files are @emph{not} created when you use one of those
+The export files are /not/ created when you use one of those
 commands interactively because this might use too much overhead.
-Instead, there is a special command to produce @emph{all} specified
+Instead, there is a special command to produce /all/ specified
 files in one step:
 
 #+attr_texinfo: :table-type "table" :indic "@kbd"
@@ -8734,9 +8736,9 @@ make sure that the computations of this property are up to date.  This is
 also true for the special ~CLOCKSUM~ property.  Org will then sum the
 values displayed in the agenda.  In the daily/weekly agenda, the sums will
 cover a single day; in all other views they cover the entire block.  It is
-vital to realize that the agenda may show the same entry @emph{twice} (for
+vital to realize that the agenda may show the same entry /twice/ (for
 example as scheduled and as a deadline), and it may show two entries from the
-same hierarchy (for example a @emph{parent} and its @emph{child}).  In these
+same hierarchy (for example a /parent/ and its /child/).  In these
 cases, the summation in the agenda will lead to incorrect results because
 some values will count double.
 @item
@@ -9549,7 +9551,7 @@ respectively defaulting to ~'(:export:)~ and ~'(:noexport:)~.
 
 @enumerate
 @item
-Org first checks if any of the @emph{select} tags is present in the
+Org first checks if any of the /select/ tags is present in the
 buffer.  If yes, all trees that do not carry one of these tags will be
 excluded.  If a selected tree is a subtree, the heading hierarchy above it
 will also be selected for export, but not the text below those headings.
@@ -9559,7 +9561,7 @@ If none of the select tags is found, the whole buffer will be selected for
 export.
 
 @item
-Finally, all subtrees that are marked by any of the @emph{exclude} tags will
+Finally, all subtrees that are marked by any of the /exclude/ tags will
 be removed from the export buffer.
 @end enumerate
 
@@ -9800,7 +9802,7 @@ the text and the link in a note before the next heading.  See the variable
 {{{cindex(HTML export)}}}
 
 Org mode contains a HTML (XHTML 1.0 strict) exporter with extensive
-HTML formatting, in ways similar to John Gruber's @emph{markdown}
+HTML formatting, in ways similar to John Gruber's /markdown/
 language, but with additional support for tables.
 
 *** HTML Export commands
@@ -10148,10 +10150,10 @@ property.
 Sebastian Rose has written a JavaScript program especially designed to
 enhance the web viewing experience of HTML files created with Org.  This
 program allows you to view large files in two different ways.  The first one
-is an @emph{Info}-like mode where each section is displayed separately and
+is an /Info/-like mode where each section is displayed separately and
 navigation can be done with the {{{kbd(n)}}} and {{{kbd(p)}}} keys (and some other keys
 as well, press {{{kbd(?)}}} for an overview of the available keys).  The second
-view type is a @emph{folding} view much like Org provides inside Emacs.  The
+view type is a /folding/ view much like Org provides inside Emacs.  The
 script is available at @url{http://orgmode.org/org-info.js} and you can find
 the documentation for it at @url{http://orgmode.org/worg/code/org-info-js/}.
 We host the script at our site, but if you use it a lot, you might
@@ -10188,7 +10190,7 @@ sdepth:  @r{Maximum headline level that will still become an independent}
          @r{~org-export-headline-levels~ (= the ~H~ switch in ~#+OPTIONS~).}
          @r{If this is smaller than in ~org-export-headline-levels~, each}
          @r{info/folding section can still contain child headlines.}
-toc:     @r{Should the table of contents @emph{initially} be visible?}
+toc:     @r{Should the table of contents /initially/ be visible?}
          @r{Even when ~nil~, you can always get to the "toc" with {{{kbd(i)}}}.}
 tdepth:  @r{The depth of the table of contents.  The defaults are taken from}
          @r{the variables ~org-export-headline-levels~ and ~org-export-with-toc~.}
@@ -10511,7 +10513,7 @@ Outline nodes with ~BEAMER_env~ property value {{{samp(note)}}} or
 {{{samp(noteNH)}}} will be formatted as beamer notes, i,e, they will be wrapped
 into ~\note@{...@~}.  The former will include the heading as part of the
 note text, the latter will ignore the heading of that node.  To simplify note
-generation, it is actually enough to mark the note with a @emph{tag} (either
+generation, it is actually enough to mark the note with a /tag/ (either
 ~:B_note:~ or ~:B_noteNH:~) instead of creating the
 ~BEAMER_env~ property.
 
@@ -11947,7 +11949,7 @@ you are using.  The FAQ covers this issue.
 {{{cindex(publishing)}}}
 
 Org includes a publishing management system that allows you to configure
-automatic HTML conversion of @emph{projects} composed of interlinked org
+automatic HTML conversion of /projects/ composed of interlinked org
 files.  You can also configure Org to automatically upload your exported HTML
 pages and related attachments, such as images and source code files, to a web
 server.
@@ -12610,7 +12612,7 @@ By default, Org will ask before returning to an open edit buffer.  Set this
 variable to nil to switch without asking.
 
 
-To turn on native code fontification in the @emph{Org} buffer, configure the
+To turn on native code fontification in the /Org/ buffer, configure the
 variable ~org-src-fontify-natively~.
 
 ** Exporting code blocks
@@ -12620,9 +12622,9 @@ variable ~org-src-fontify-natively~.
 {{{cindex(code block\\\, exporting)}}}
 {{{cindex(source code\\\, exporting)}}}
 
-It is possible to export the @emph{code} of code blocks, the @emph{results}
-of code block evaluation, @emph{both} the code and the results of code block
-evaluation, or @emph{none}.  For most languages, the default exports code.
+It is possible to export the /code/ of code blocks, the /results/
+of code block evaluation, /both/ the code and the results of code block
+evaluation, or /none/.  For most languages, the default exports code.
 However, for some languages (e.g.@: ~ditaa~) the default exports the
 results of code block evaluation.  For information on exporting code block
 bodies, see @ref{Literal examples}.
@@ -13228,7 +13230,7 @@ It is possible to reference portions of variable values by ``indexing'' into
 the variables.  Indexes are 0 based with negative values counting back from
 the end.  If an index is separated by ~,~s then each subsequent section
 will index into the next deepest nesting or dimension of the value.  Note
-that this indexing occurs @emph{before} other table related header arguments
+that this indexing occurs /before/ other table related header arguments
 like ~:hlines~, ~:colnames~ and ~:rownames~ are applied.  The
 following example assigns the last cell of the first row the table
 ~example-table~ to the variable ~data~:
@@ -13544,7 +13546,7 @@ currently made to alter the directory associated with an existing session.
 ~:dir~ should typically not be used to create files during export with
 ~:exports results~ or ~:exports both~.  The reason is that, in order
 to retain portability of exported material between machines, during export
-links inserted into the buffer will @emph{not} be expanded against ~default
+links inserted into the buffer will /not/ be expanded against ~default
 directory~.  Therefore, if ~default-directory~ is altered using
 ~:dir~, it is probable that the file will be created in a location to
 which the link does not point.
@@ -13735,7 +13737,7 @@ references.
      :DESCRIPTION: Specify block's noweb reference resolution target
      :END:
 When expanding ``noweb'' style references the bodies of all code block with
-@emph{either} a block name matching the reference name @emph{or} a
+/either/ a block name matching the reference name /or/ a
 ~:noweb-ref~ header argument matching the reference name will be
 concatenated together to form the replacement text.
 
@@ -14157,7 +14159,7 @@ evaluation.  If ~:noweb no~, the default, then the reference is not
 expanded before evaluation.  See the @ref{noweb-ref} header argument for
 a more flexible way to resolve noweb references.
 
-It is possible to include the @emph{results} of a code block rather than the
+It is possible to include the /results/ of a code block rather than the
 body.  This is done by appending parenthesis to the code block name which may
 optionally contain arguments to the code block as shown below.
 
@@ -14784,7 +14786,7 @@ entitiesplain   @r{Leave entities plain}
 @item #+TAGS:  TAG1(c1) TAG2(c2)
 {{{vindex(org-tag-alist)}}}
 These lines (several such lines are allowed) specify the valid tags in
-this file, and (potentially) the corresponding @emph{fast tag selection}
+this file, and (potentially) the corresponding /fast tag selection/
 keys.  The corresponding variable is ~org-tag-alist~.
 @item #+TBLFM:
 This line contains the formulas for the table directly above the line.
@@ -14811,9 +14813,9 @@ current file.  The corresponding variable is ~org-todo-keywords~.
 
 The key {{{kbd(C-c C-c)}}} has many purposes in Org, which are all
 mentioned scattered throughout this manual.  One specific function of
-this key is to add @emph{tags} to a headline (see [[Tags]]).  In many
-other circumstances it means something like @emph{``Hey Org, look
-here and update according to what you see here''}.  Here is a summary of
+this key is to add /tags/ to a headline (see [[Tags]]).  In many
+other circumstances it means something like /``Hey Org, look
+here and update according to what you see here''/.  Here is a summary of
 what this means in different contexts.
 
 @itemize @minus
@@ -14870,9 +14872,9 @@ If the cursor is at a timestamp, fix the day name in the timestamp.
 
 Some people find it noisy and distracting that the Org headlines start with a
 potentially large number of stars, and that text below the headlines is not
-indented.  While this is no problem when writing a @emph{book-like} document
+indented.  While this is no problem when writing a /book-like/ document
 where the outline headings are really section headings, in a more
-@emph{list-oriented} outline, indented structure is a lot cleaner:
+/list-oriented/ outline, indented structure is a lot cleaner:
 
 #+begin_example
 @group
@@ -14917,7 +14919,7 @@ the following way:
 
 @enumerate
 @item
-@emph{Indentation of text below headlines}@*
+/Indentation of text below headlines/@*
 You may indent text below each headline to make the left boundary line up
 with the headline, like
 
@@ -14933,7 +14935,7 @@ preserving or adapting the indentation as appropriate.
 
 @item
 {{{vindex(org-hide-leading-stars)}}}
-@emph{Hiding leading stars}@* You can modify the display in such a way that
+/Hiding leading stars/@* You can modify the display in such a way that
 all leading stars become invisible.  To do this in a global way, configure
 the variable ~org-hide-leading-stars~ or change this on a per-file basis
 with
@@ -15541,7 +15543,7 @@ this parameter!
 @item :skipcols (n1 n2 ...)
 List of columns that should be skipped.  If the table has a column with
 calculation marks, that column is automatically discarded as well.
-Please note that the translator function sees the table @emph{after} the
+Please note that the translator function sees the table /after/ the
 removal of these columns, the function never knows that there have been
 additional columns.
 
@@ -15813,7 +15815,7 @@ Pressing `C-c C-c' on ~a new house~ and will insert the converted
    :END:
 {{{cindex(dynamic blocks)}}}
 
-Org documents can contain @emph{dynamic blocks}.  These are
+Org documents can contain /dynamic blocks/.  These are
 specially marked regions that are updated by some user-written function.
 A good example for such a block is the clock table inserted by the
 command {{{kbd(C-c C-x C-r)}}} (see [[Clocking work time]]).
@@ -16155,7 +16157,7 @@ values and make sure that VALUE is in this list.
 
 @defun org-entry-remove-from-multivalued-property pom property value
 Treat the value of the property PROPERTY as a whitespace-separated list of
-values and make sure that VALUE is @emph{not} in this list.
+values and make sure that VALUE is /not/ in this list.
 @end defun
 
 @defun org-entry-member-in-multivalued-property pom property value
@@ -16377,7 +16379,7 @@ automatically in the file @file{checksums.dat}} have changed.
 When /MobileOrg/ synchronizes with the server, it not only pulls the Org
 files for viewing.  It also appends captured entries and pointers to flagged
 and changed entries to the file @file{mobileorg.org} on the server.  Org has
-a @emph{pull} operation that integrates this information into an inbox file
+a /pull/ operation that integrates this information into an inbox file
 and operates on the pointers to flagged entries.  Here is how it works:
 
 @enumerate
@@ -16437,12 +16439,12 @@ Emacs seemed to be the natural way to go.  However, having to remember eleven
 different commands with two or three keys per command, only to hide and show
 parts of the outline tree, that seemed entirely unacceptable to me.  Also,
 when using outlines to take notes, I constantly wanted to restructure the
-tree, organizing it parallel to my thoughts and plans.  @emph{Visibility
-cycling} and @emph{structure editing} were originally implemented in the
+tree, organizing it parallel to my thoughts and plans.  /Visibility
+cycling/ and /structure editing/ were originally implemented in the
 package @file{outline-magic.el}, but quickly moved to the more general
 @file{org.el}.  As this environment became comfortable for project planning,
-the next step was adding @emph{TODO entries}, basic @emph{timestamps}, and
-@emph{table support}.  These areas highlighted the two main goals that Org
+the next step was adding /TODO entries/, basic /timestamps/, and
+/table support/.  These areas highlighted the two main goals that Org
 still has today: to be a new, outline-based, plain text mode with innovative
 and intuitive editing features, and to incorporate project planning
 functionality directly into a notes file.
@@ -16521,7 +16523,7 @@ feature of Org.  Here too, I knew I could rely on him to fix bugs in these
 areas and to patiently explain the users what was the problems and solutions.
 
 @item Achim Gratz
-Achim rewrote the building process of Org, turning some @emph{ad hoc} tools
+Achim rewrote the building process of Org, turning some /ad hoc/ tools
 into a flexible and conceptually clean process.  He patiently coped with the
 many hicups that such a change can create for users.
 
