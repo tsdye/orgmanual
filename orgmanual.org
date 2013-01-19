@@ -4570,19 +4570,19 @@ with many examples, see [[Matching tags and properties]].
   :END:
 {{{cindex(properties)}}}
 
-A property is a key-value pair associated with an entry.  Properties can be
-set so they are associated with a single entry, with every entry in a tree,
-or with every entry in an Org mode file.
+A property is a key-value pair associated with an entry. Properties
+can be set so they are associated with a single entry, with every
+entry in a tree, or with every entry in an Org mode file.
 
-There are two main applications for properties in Org mode.  First,
-properties are like tags, but with a value.  Imagine maintaining a file where
-you document bugs and plan releases for a piece of software.  Instead of
-using tags like ~:release_1:~, ~:release_2:~, you can use a
+There are two main applications for properties in Org mode. First,
+properties are like tags, but with a value. Imagine maintaining a file
+where you document bugs and plan releases for a piece of software.
+Instead of using tags like ~:release_1:~, ~:release_2:~, you can use a
 property, say ~:Release:~, that in different subtrees has different
-values, such as ~1.0~ or ~2.0~.  Second, you can use properties to
-implement (very basic) database capabilities in an Org buffer.  Imagine
-keeping track of your music CDs, where properties could be things such as the
-album, artist, date of release, number of tracks, and so on.
+values, such as ~1.0~ or ~2.0~. Second, you can use properties to
+implement (very basic) database capabilities in an Org buffer. Imagine
+keeping track of your music CDs, where properties could be things such
+as the album, artist, date of release, number of tracks, and so on.
 
 Properties can be conveniently edited and viewed in column view
 (see [[Column view]]).
@@ -4594,11 +4594,11 @@ Properties can be conveniently edited and viewed in column view
 {{{cindex(property syntax)}}}
 {{{cindex(drawer\\\, for properties)}}}
 
-Properties are key-value pairs.  When they are associated with a single entry
-or with a tree they need to be inserted into a special
-drawer (see [[Drawers]]) with the name ~PROPERTIES~.  Each property
-is specified on a single line, with the key (surrounded by colons)
-first, and the value after it.  Here is an example:
+Properties are key-value pairs. When they are associated with a single
+entry or with a tree they need to be inserted into a special drawer
+(see [[Drawers]]) with the name ~PROPERTIES~. Each property is specified
+on a single line, with the key (surrounded by colons) first, and the
+value after it. Here is an example:
 
 #+begin_example
 ,* CD collection
@@ -4613,17 +4613,17 @@ first, and the value after it.  Here is an example:
     :END:
 #+end_example
 
-Depending on the value of ~org-use-property-inheritance~, a property set
-this way will either be associated with a single entry, or the sub-tree
-defined by the entry, see [[Property inheritance]].
+Depending on the value of ~org-use-property-inheritance~, a property
+set this way will either be associated with a single entry, or the
+sub-tree defined by the entry, see [[Property inheritance]].
 
-You may define the allowed values for a particular property {{{samp(:Xyz:)}}}
-by setting a property {{{samp(:Xyz_ALL:)}}}.  This special property is
-/inherited/, so if you set it in a level 1 entry, it will apply to
-the entire tree.  When allowed values are defined, setting the
-corresponding property becomes easier and is less prone to typing
-errors.  For the example with the CD collection, we can predefine
-publishers and the number of disks in a box like this:
+You may define the allowed values for a particular property
+{{{samp(:Xyz:)}}} by setting a property {{{samp(:Xyz_ALL:)}}}. This
+special property is /inherited/, so if you set it in a level 1 entry,
+it will apply to the entire tree. When allowed values are defined,
+setting the corresponding property becomes easier and is less prone to
+typing errors. For the example with the CD collection, we can
+predefine publishers and the number of disks in a box like this:
 
 #+begin_example
 ,* CD collection
@@ -4634,25 +4634,28 @@ publishers and the number of disks in a box like this:
 #+end_example
 
 If you want to set properties that can be inherited by any entry in a
-file, use a line like
+file, use a line like:
+
 {{{cindex(property\\\, _ALL)}}}
 {{{cindex(#+PROPERTY)}}}
 #+begin_example
 ,#+PROPERTY: NDisks_ALL 1 2 3 4
 #+end_example
 
-If you want to add to the value of an existing property, append a ~+~ to
-the property name.  The following results in the property ~var~ having
-the value ``foo=1 bar=2''.
+If you want to add to the value of an existing property, append a ~+~
+to the property name. The following results in the property ~var~
+having the value ``foo=1 bar=2''.
+
 {{{cindex(property\\\, +)}}}
 #+begin_example
 ,#+PROPERTY: var  foo=1
 ,#+PROPERTY: var+ bar=2
 #+end_example
 
-It is also possible to add to the values of inherited properties.  The
+It is also possible to add to the values of inherited properties. The
 following results in the ~genres~ property having the value ``Classic
 Baroque'' under the ~Goldberg Variations~ subtree.
+
 {{{cindex(property\\\, +)}}}
 #+begin_example
 ,* CD collection
@@ -4673,31 +4676,41 @@ Baroque'' under the ~Goldberg Variations~ subtree.
 Note that a property can only have one entry per Drawer.
 
 {{{vindex(org-global-properties)}}}
-Property values set with the global variable
-~org-global-properties~ can be inherited by all entries in all
-Org files.
+
+Property values set with the global variable ~org-global-properties~
+can be inherited by all entries in all Org files.
 
 {{{noindent}}}
 The following commands help to work with properties:
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
+#+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(M-@key{TAB})}}} ~pcomplete~ ::
-After an initial colon in a line, complete property keys.  All keys used
-in the current file will be offered as possible completions.
+
+  After an initial colon in a line, complete property keys. All keys
+  used in the current file will be offered as possible completions.
+
 - {{{kbd(C-c C-x p)}}} ~org-set-property~ ::
-Set a property.  This prompts for a property name and a value.  If
-necessary, the property drawer is created as well.
+
+  Set a property. This prompts for a property name and a value. If
+  necessary, the property drawer is created as well.
+
 - C-u M-x org-insert-drawer
-{{{cindex(org-insert-drawer)}}}
-Insert a property drawer into the current entry.  The drawer will be
-inserted early in the entry, but after the lines with planning
-information like deadlines.
+  {{{cindex(org-insert-drawer)}}}
+
+  Insert a property drawer into the current entry. The drawer will be
+  inserted early in the entry, but after the lines with planning
+  information like deadlines.
+
 - {{{kbd(C-c C-c)}}} ~org-property-action~ ::
-With the cursor in a property drawer, this executes property commands.
+
+  With the cursor in a property drawer, this executes property commands.
+
 - {{{kbd(C-c C-c s)}}} ~org-set-property~ ::
-Set a property in the current entry.  Both the property and the value
-can be inserted using completion.
-@orgcmdkkcc{S-@key{right},S-@key{left},org-property-next-allowed-value,org-property-previous-allowed-value}
+
+  Set a property in the current entry.  Both the property and the value
+  can be inserted using completion.
+
+- {{{kbd(S-@key{right})}}} {{{kbd(S-@key{left})}}} ~org-property-next-allowed-value~ ~org-property-previous-allowed-value~ ::
 Switch property at point to the next/previous allowed value.
 - {{{kbd(C-c C-c d)}}} ~org-delete-property~ ::
 Remove a property from the current entry.
@@ -5033,7 +5046,7 @@ Switch to the next/previous allowed value of the field.  For this, you
 have to have specified allowed values for a property.
 - 1..9,0
 Directly select the Nth allowed value, {{{kbd(0)}}} selects the 10th value.
-@orgcmdkkcc{n,p,org-columns-next-allowed-value,org-columns-previous-allowed-value}
+- {{{kbd(n)}}} {{{kbd(p)}}} ~org-columns-next-allowed-value~ ~org-columns-previous-allowed-value~ ::
 Same as @kbd{S-@key{left}/@key{right}}
 - {{{kbd(e)}}} ~org-columns-edit-value~ ::
 Edit the property at point.  For the special properties, this will
@@ -5051,7 +5064,7 @@ in the hierarchy, the modified values is stored there.  If no list is
 found, the new value is stored in the first entry that is part of the
 current column view.
 @tsubheading{Modifying the table structure}
-@orgcmdkkcc{<,>,org-columns-narrow,org-columns-widen}
+- {{{kbd(<)}}} {{{kbd(>)}}} ~org-columns-narrow~ ~org-columns-widen~ ::
 Make the column narrower/wider by one character.
 - {{{kbd(S-M-@key{right})}}} ~org-columns-new~ ::
 Insert a new column, to the left of the current column.
@@ -5307,11 +5320,11 @@ instead.
 Access the agenda for the date given by the timestamp or -range at
 point (see [[Weekly/daily agenda]]).
 @c
-@orgcmdkkcc{S-@key{left},S-@key{right},org-timestamp-down-day,org-timestamp-up-day}
+- {{{kbd(S-@key{left})}}} {{{kbd(S-@key{right})}}} ~org-timestamp-down-day~ ~org-timestamp-up-day~ ::
 Change date at cursor by one day.  These key bindings conflict with
 shift-selection and related modes (see [[Conflicts]]).
 @c
-@orgcmdkkcc{S-@key{up},S-@key{down},org-timestamp-up,org-timestamp-down-down}
+- {{{kbd(S-@key{up})}}} {{{kbd(S-@key{down})}}} ~org-timestamp-up~ ~org-timestamp-down-down~ ::
 Change the item under the cursor in a timestamp.  The cursor can be on a
 year, month, day, hour or minute.  When the timestamp contains a time range
 like {{{samp(15:30-16:30)}}}, modifying the first time will also shift the second,
@@ -17506,6 +17519,15 @@ This section contains source code blocks that help translate from
   "Convert @orgcmdkkc to list entry."
   (interactive)
   (query-replace-regexp "@orgcmdkkc{\\([^,]*\\),\\([^,]*\\),\\([^}]*\\)}" "- {{{kbd(\\1)}}} {{{kbd(\\2)}}} ~\\3~ ::" nil))
+#+end_src
+
+#+name: tsd-orgcmdkkcc
+#+header: :results silent
+#+begin_src emacs-lisp
+(defun tsd-orgcmdkkcc ()
+  "Convert @orgcmdkkcc to list entry."
+  (interactive)
+  (query-replace-regexp "@orgcmdkkcc{\\([^,]*\\),\\([^,]*\\),\\([^,]*\\),\\([^}]*\\)}" "- {{{kbd(\\1)}}} {{{kbd(\\2)}}} ~\\3~ ~\\4~ ::" nil))
 #+end_src
 
 #+name: tsd-orgkey
