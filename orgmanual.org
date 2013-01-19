@@ -4711,14 +4711,21 @@ The following commands help to work with properties:
   can be inserted using completion.
 
 - {{{kbd(S-@key{right})}}} {{{kbd(S-@key{left})}}} ~org-property-next-allowed-value~ ~org-property-previous-allowed-value~ ::
-Switch property at point to the next/previous allowed value.
+
+  Switch property at point to the next/previous allowed value.
+
 - {{{kbd(C-c C-c d)}}} ~org-delete-property~ ::
-Remove a property from the current entry.
+
+  Remove a property from the current entry.
+
 - {{{kbd(C-c C-c D)}}} ~org-delete-property-globally~ ::
-Globally remove a property, from all entries in the current file.
+
+  Globally remove a property, from all entries in the current file.
+
 - {{{kbd(C-c C-c c)}}} ~org-compute-property-at-point~ ::
-Compute the property at point, using the operator and scope from the
-nearest column format definition.
+
+  Compute the property at point, using the operator and scope from the
+  nearest column format definition.
 
 
 ** Special properties
@@ -4727,12 +4734,12 @@ nearest column format definition.
    :END:
 {{{cindex(properties\\\, special)}}}
 
-Special properties provide an alternative access method to Org mode features,
-like the TODO state or the priority of an entry, discussed in the previous
-chapters.  This interface exists so that you can include these states in a
-column view (see [[Column view]]), or to use them in queries.  The following
-property names are special and (except for ~:CATEGORY:~) should not be
-used as keys in the properties drawer:
+Special properties provide an alternative access method to Org mode
+features, like the TODO state or the priority of an entry, discussed
+in the previous chapters. This interface exists so that you can
+include these states in a column view (see [[Column view]]), or to use
+them in queries. The following property names are special and (except
+for ~:CATEGORY:~) should not be used as keys in the properties drawer:
 
 {{{cindex(property\\\, special\\\, ID)}}}
 {{{cindex(property\\\, special\\\, TODO)}}}
@@ -4748,7 +4755,7 @@ used as keys in the properties drawer:
 {{{cindex(property\\\, special\\\, CLOCKSUM)}}}
 {{{cindex(property\\\, special\\\, CLOCKSUM_T)}}}
 {{{cindex(property\\\, special\\\, BLOCKED)}}}
-@c guessing that ITEM is needed in this area; also, should this list be sorted?
+#+comment  guessing that ITEM is needed in this area; also, should this list be sorted?
 {{{cindex(property\\\, special\\\, ITEM)}}}
 {{{cindex(property\\\, special\\\, FILE)}}}
 #+begin_example
@@ -5291,11 +5298,11 @@ Prompt for a date and insert a corresponding timestamp.  When the cursor is
 at an existing timestamp in the buffer, the command is used to modify this
 timestamp instead of inserting a new one.  When this command is used twice in
 succession, a time range is inserted.
-@c
+
 - {{{kbd(C-c !)}}} ~org-time-stamp-inactive~ ::
 Like {{{kbd(C-c .)}}}, but insert an inactive timestamp that will not cause
 an agenda entry.
-@c
+
 {{{kindex(C-u C-c .)}}}
 {{{kindex(C-u C-c !)}}}
 - C-u C-c .
@@ -5304,26 +5311,26 @@ an agenda entry.
 Like {{{kbd(C-c .)}}} and {{{kbd(C-c !)}}}, but use the alternative format which
 contains date and time.  The default time can be rounded to multiples of 5
 minutes, see the option ~org-time-stamp-rounding-minutes~.
-@c
+
 @orgkey{C-c C-c}
 Normalize timestamp, insert/fix day name if missing or wrong.
-@c
+
 - {{{kbd(C-c <)}}} ~org-date-from-calendar~ ::
 Insert a timestamp corresponding to the cursor date in the Calendar.
-@c
+
 - {{{kbd(C-c >)}}} ~org-goto-calendar~ ::
 Access the Emacs calendar for the current date.  If there is a
 timestamp in the current line, go to the corresponding date
 instead.
-@c
+
 - {{{kbd(C-c C-o)}}} ~org-open-at-point~ ::
 Access the agenda for the date given by the timestamp or -range at
 point (see [[Weekly/daily agenda]]).
-@c
+
 - {{{kbd(S-@key{left})}}} {{{kbd(S-@key{right})}}} ~org-timestamp-down-day~ ~org-timestamp-up-day~ ::
 Change date at cursor by one day.  These key bindings conflict with
 shift-selection and related modes (see [[Conflicts]]).
-@c
+
 - {{{kbd(S-@key{up})}}} {{{kbd(S-@key{down})}}} ~org-timestamp-up~ ~org-timestamp-down-down~ ::
 Change the item under the cursor in a timestamp.  The cursor can be on a
 year, month, day, hour or minute.  When the timestamp contains a time range
@@ -5333,7 +5340,7 @@ the second time.  Note that if the cursor is in a headline and not at a
 timestamp, these same keys modify the priority of an item.
 (see [[Priorities]]).  The key bindings also conflict with shift-selection and
 related modes (see [[Conflicts]]).
-@c
+
 - {{{kbd(C-c C-y)}}} ~org-evaluate-time-range~ ::
 {{{cindex(evaluate time range)}}}
 Evaluate a time range by computing the difference between start and end.
@@ -5582,9 +5589,9 @@ You may use timestamps with repeaters in scheduling and deadline
 entries.  Org mode will issue early and late warnings based on the
 assumption that the timestamp represents the /nearest instance/ of
 the repeater.  However, the use of diary sexp entries like
-@c
+
 ~<%%(org-float t 42)>~
-@c
+
 in scheduling and deadline timestamps is limited.  Org mode does not
 know enough about the internals of each sexp function to issue early and
 late warnings.  However, it will show the item on each day where the
@@ -5602,7 +5609,7 @@ any text between this line and the headline.} a deadline or to schedule
 an item:
 
 #+attr_texinfo: :table-type "table" :indic "@kbd"
-@c
+
 - {{{kbd(C-c C-d)}}} ~org-deadline~ ::
 Insert {{{samp(DEADLINE)}}} keyword along with a stamp.  The insertion will happen
 in the line directly following the headline.  Any CLOSED timestamp will be
@@ -5621,7 +5628,7 @@ date from the entry.  Depending on the variable
 keywords ~logreschedule~, ~lognotereschedule~, and
 ~nologreschedule~}, a note will be taken when changing an existing
 scheduling time.
-@c
+
 - {{{kbd(C-c C-x C-k)}}} ~org-mark-entry-for-agenda-action~ ::
 {{{kindex(k a)}}}
 {{{kindex(k s)}}}
@@ -5629,7 +5636,7 @@ Mark the current entry for agenda action.  After you have marked the entry
 like this, you can open the agenda or the calendar to find an appropriate
 date.  With the cursor on the selected date, press {{{kbd(k s)}}} or {{{kbd(k d)}}} to
 schedule the marked item.
-@c
+
 - {{{kbd(C-c / d)}}} ~org-check-deadlines~ ::
 {{{cindex(sparse tree\\\, for deadlines)}}}
 {{{vindex(org-deadline-warning-days)}}}
@@ -5638,10 +5645,10 @@ which will become due within ~org-deadline-warning-days~.
 With {{{kbd(C-u)}}} prefix, show all deadlines in the file.  With a numeric
 prefix, check that many days.  For example, {{{kbd(C-1 C-c / d)}}} shows
 all deadlines due tomorrow.
-@c
+
 - {{{kbd(C-c / b)}}} ~org-check-before-date~ ::
 Sparse tree for deadlines and scheduled items before a given date.
-@c
+
 - {{{kbd(C-c / a)}}} ~org-check-after-date~ ::
 Sparse tree for deadlines and scheduled items after a given date.
 
@@ -5807,7 +5814,7 @@ show all time clocked on this tasks today (see also the variable
 ~auto~ which is the default@footnote{See also the variable
 ~org-clock-modeline-total~.}.@* Clicking with {{{kbd(mouse-1)}}} onto the
 mode line entry will pop up a menu with clocking options.
-@c
+
 - {{{kbd(C-c C-x C-o)}}} ~org-clock-out~ ::
 {{{vindex(org-log-note-clock-out)}}}
 Stop the clock (clock-out).  This inserts another timestamp at the same
@@ -6178,12 +6185,12 @@ argument, first reset the timer to 0.
 - {{{kbd(M-@key{RET})}}} ~org-insert-heading~ ::
 Once the timer list is started, you can also use {{{kbdkey(M-,RET)}}} to insert
 new timer items.
-@c for key sequences with a comma, command name macros fail :(
+#+comment  for key sequences with a comma, command name macros fail :(
 {{{kindex(C-c C-x ,)}}}
 - C-c C-x ,
 Pause the timer, or continue it if it is already paused
 (@command{org-timer-pause-or-continue}).
-@c removed the sentence because it is redundant to the following item
+#+comment  removed the sentence because it is redundant to the following item
 {{{kindex(C-u C-c C-x ,)}}}
 - C-u C-c C-x ,
 Stop the timer.  After this, you can only start a new timer, not continue the
@@ -7739,7 +7746,7 @@ Org mode checks each agenda item for a time-of-day specification.  The
 time can be part of the timestamp that triggered inclusion into the
 agenda, for example as in @w{{{{samp(<2005-05-10 Tue 19:00>)}}}}.  Time
 ranges can be specified with two timestamps, like
-@c
+
 @w{{{{samp(<2005-05-10 Tue 20:30>--<2005-05-10 Tue 22:15>)}}}}.
 
 In the headline of the entry itself, a time(range) may also appear as
@@ -7847,16 +7854,16 @@ Previous line (same as @key{up} and {{{kbd(C-p)}}}).
 Display the original location of the item in another window.
 With prefix arg, make sure that the entire entry is made visible in the
 outline, not only the heading.
-@c
+
 - {{{kbd(L)}}} ~org-agenda-recenter~ ::
 Display original location and recenter that window.
-@c
+
 - {{{kbd(@key{TAB})}}} {{{kbd(mouse-2)}}} ~org-agenda-goto~ ::
 Go to the original location of the item in another window.
-@c
+
 - {{{kbd(@key{RET})}}} ~org-agenda-switch-to~ ::
 Go to the original location of the item and delete other windows.
-@c
+
 - {{{kbd(F)}}} ~org-agenda-follow-mode~ ::
 {{{vindex(org-agenda-start-with-follow-mode)}}}
 Toggle Follow mode.  In Follow mode, as you move the cursor through
@@ -7864,7 +7871,7 @@ the agenda buffer, the other window always shows the corresponding
 location in the Org file.  The initial setting for this mode in new
 agenda buffers can be set with the variable
 ~org-agenda-start-with-follow-mode~.
-@c
+
 - {{{kbd(C-c C-x b)}}} ~org-agenda-tree-to-indirect-buffer~ ::
 Display the entire subtree of the current item in an indirect buffer.  With a
 numeric prefix argument N, go up to level N and then take that tree.  If N is
@@ -7881,11 +7888,11 @@ will be followed without a selection prompt.
 {{{kindex(A)}}}
 - A
 Interactively select another agenda view and append it to the current view.
-@c
+
 {{{kindex(o)}}}
 - o
 Delete other windows.
-@c
+
 @orgcmdkskc{v d,d,org-agenda-day-view}
 @xorgcmdkskc{v w,w,org-agenda-week-view}
 @xorgcmd{v m,org-agenda-month-view}
@@ -7903,27 +7910,27 @@ example, {{{kbd(200712 w)}}} will jump to week 12 in 2007.  If such a year
 specification has only one or two digits, it will be mapped to the interval
 1938-2037.  {{{kbdkey(v ,SPC)}}} will reset to what is set in
 ~org-agenda-span~.
-@c
+
 - {{{kbd(f)}}} ~org-agenda-later~ ::
 Go forward in time to display the following ~org-agenda-current-span~ days.
 For example, if the display covers a week, switch to the following week.
 With prefix arg, go forward that many times ~org-agenda-current-span~ days.
-@c
+
 - {{{kbd(b)}}} ~org-agenda-earlier~ ::
 Go backward in time to display earlier dates.
-@c
+
 - {{{kbd(.)}}} ~org-agenda-goto-today~ ::
 Go to today.
-@c
+
 - {{{kbd(j)}}} ~org-agenda-goto-date~ ::
 Prompt for a date and go there.
-@c
+
 - {{{kbd(J)}}} ~org-agenda-clock-goto~ ::
 Go to the currently clocked-in task /in the agenda buffer/.
-@c
+
 - {{{kbd(D)}}} ~org-agenda-toggle-diary~ ::
 Toggle the inclusion of diary entries.  See [[Weekly/daily agenda]].
-@c
+
 @orgcmdkskc{v l,l,org-agenda-log-mode}
 {{{kindex(v L)}}}
 {{{vindex(org-log-done)}}}
@@ -7936,18 +7943,18 @@ types that should be included in log mode using the variable
 all possible logbook entries, including state changes.  When called with two
 prefix args {{{kbd(C-u C-u)}}}, show only logging information, nothing else.
 {{{kbd(v L)}}} is equivalent to {{{kbd(C-u v l)}}}.
-@c
+
 @orgcmdkskc{v [,[,org-agenda-manipulate-query-add}
 Include inactive timestamps into the current view.  Only for weekly/daily
 agenda and timeline views.
-@c
+
 - {{{kbd(v a)}}} ~org-agenda-archives-mode~ ::
 @xorgcmd{v A,org-agenda-archives-mode 'files}
 Toggle Archives mode.  In Archives mode, trees that are marked
 ~ARCHIVED~ are also scanned when producing the agenda.  When you use the
 capital {{{kbd(A)}}}, even all archive files are included.  To exit archives mode,
 press {{{kbd(v a)}}} again.
-@c
+
 @orgcmdkskc{v R,R,org-agenda-clockreport-mode}
 {{{vindex(org-agenda-start-with-clockreport-mode)}}}
 {{{vindex(org-clock-report-include-clocking-task)}}}
@@ -7960,7 +7967,7 @@ when toggling this mode (i.e.@: {{{kbd(C-u R)}}}), the clock table will not show
 contributions from entries that are hidden by agenda filtering@footnote{Only
 tags filtering will be respected here, effort filtering is ignored.}.  See
 also the variable ~org-clock-report-include-clocking-task~.
-@c
+
 @orgkey{v c}
 {{{vindex(org-agenda-clock-consistency-checks)}}}
 Show overlapping clock entries, clocking gaps, and other clocking problems in
@@ -7969,7 +7976,7 @@ manually.  See the variable ~org-agenda-clock-consistency-checks~ for
 information on how to customize the definition of what constituted a clocking
 problem.  To return to normal agenda display, press {{{kbd(l)}}} to exit Logbook
 mode.
-@c
+
 @orgcmdkskc{v E,E,org-agenda-entry-text-mode}
 {{{vindex(org-agenda-start-with-entry-text-mode)}}}
 {{{vindex(org-agenda-entry-text-maxlines)}}}
@@ -7978,13 +7985,13 @@ outline node referenced by an agenda line will be displayed below the line.
 The maximum number of lines is given by the variable
 ~org-agenda-entry-text-maxlines~.  Calling this command with a numeric
 prefix argument will temporarily modify that number to the prefix value.
-@c
+
 - {{{kbd(G)}}} ~org-agenda-toggle-time-grid~ ::
 {{{vindex(org-agenda-use-time-grid)}}}
 {{{vindex(org-agenda-time-grid)}}}
 Toggle the time grid on and off.  See also the variables
 ~org-agenda-use-time-grid~ and ~org-agenda-time-grid~.
-@c
+
 - {{{kbd(r)}}} ~org-agenda-redo~ ::
 Recreate the agenda buffer, for example to reflect the changes after
 modification of the timestamps of items with {{{kbdkey(S-,left)}}} and
@@ -7993,11 +8000,11 @@ argument is interpreted to create a selective list for a specific TODO
 keyword.
 - {{{kbd(g)}}} ~org-agenda-redo~ ::
 Same as {{{kbd(r)}}}.
-@c
+
 @orgcmdkskc{C-x C-s,s,org-save-all-org-buffers}
 Save all Org buffers in the current Emacs session, and also the locations of
 IDs.
-@c
+
 - {{{kbd(C-c C-x C-c)}}} ~org-agenda-columns~ ::
 {{{vindex(org-columns-default-format)}}}
 Invoke column view (see [[Column view]]) in the agenda buffer.  The column
@@ -8101,7 +8108,7 @@ prefix arg, remove the entries that /do/ have the tag, or that do match
 the effort criterion.  You can achieve the same effect by pressing {{{kbd(+)}}} or
 {{{kbd(-)}}} as the first key after the {{{kbd(/)}}} command.
 
-@c
+
 {{{kindex([)}}}
 {{{kindex(])}}}
 {{{kindex(@{)}}}
@@ -8122,91 +8129,91 @@ selected.
 
 - 0-9
 Digit argument.
-@c
+
 {{{cindex(undoing remote-editing events)}}}
 {{{cindex(remote editing\\\, undo)}}}
 - {{{kbd(C-_)}}} ~org-agenda-undo~ ::
 Undo a change due to a remote editing command.  The change is undone
 both in the agenda buffer and in the remote buffer.
-@c
+
 - {{{kbd(t)}}} ~org-agenda-todo~ ::
 Change the TODO state of the item, both in the agenda and in the
 original org file.
-@c
+
 - {{{kbd(C-S-@key{right})}}} ~org-agenda-todo-nextset~ ::
 - {{{kbd(C-S-@key{left})}}} ~org-agenda-todo-previousset~ ::
 Switch to the next/previous set of TODO keywords.
-@c
+
 - {{{kbd(C-k)}}} ~org-agenda-kill~ ::
 {{{vindex(org-agenda-confirm-kill)}}}
 Delete the current agenda item along with the entire subtree belonging
 to it in the original Org file.  If the text to be deleted remotely
 is longer than one line, the kill needs to be confirmed by the user.  See
 variable ~org-agenda-confirm-kill~.
-@c
+
 - {{{kbd(C-c C-w)}}} ~org-agenda-refile~ ::
 Refile the entry at point.
-@c
+
 @orgcmdkskc{C-c C-x C-a,a,org-agenda-archive-default-with-confirmation}
 {{{vindex(org-archive-default-command)}}}
 Archive the subtree corresponding to the entry at point using the default
 archiving command set in ~org-archive-default-command~.  When using the
 ~a~ key, confirmation will be required.
-@c
+
 - {{{kbd(C-c C-x a)}}} ~org-agenda-toggle-archive-tag~ ::
 Toggle the ARCHIVE tag for the current headline.
-@c
+
 - {{{kbd(C-c C-x A)}}} ~org-agenda-archive-to-archive-sibling~ ::
 Move the subtree corresponding to the current entry to its /archive
 sibling/.
-@c
+
 @orgcmdkskc{C-c C-x C-s,$,org-agenda-archive}
 Archive the subtree corresponding to the current headline.  This means the
 entry will be moved to the configured archive location, most likely a
 different file.
-@c
+
 - {{{kbd(T)}}} ~org-agenda-show-tags~ ::
 {{{vindex(org-agenda-show-inherited-tags)}}}
 Show all tags associated with the current item.  This is useful if you have
 turned off ~org-agenda-show-inherited-tags~, but still want to see all
 tags of a headline occasionally.
-@c
+
 - {{{kbd(:)}}} ~org-agenda-set-tags~ ::
 Set tags for the current headline.  If there is an active region in the
 agenda, change a tag for all headings in the region.
-@c
+
 {{{kindex(,)}}}
 - ,
 Set the priority for the current item (@command{org-agenda-priority}).
 Org mode prompts for the priority character.  If you reply with @key{SPC},
 the priority cookie is removed from the entry.
-@c
+
 - {{{kbd(P)}}} ~org-agenda-show-priority~ ::
 Display weighted priority of current item.
-@c
+
 - {{{kbd(+)}}} {{{kbd(S-@key{up})}}} ~org-agenda-priority-up~ ::
 Increase the priority of the current item.  The priority is changed in
 the original buffer, but the agenda is not resorted.  Use the {{{kbd(r)}}}
 key for this.
-@c
+
 - {{{kbd(-)}}} {{{kbd(S-@key{down})}}} ~org-agenda-priority-down~ ::
 Decrease the priority of the current item.
-@c
+
 - {{{kbd(z)}}} {{{kbd(C-c C-z)}}} ~org-agenda-add-note~ ::
 {{{vindex(org-log-into-drawer)}}}
 Add a note to the entry.  This note will be recorded, and then filed to the
 same location where state change notes are put.  Depending on
 ~org-log-into-drawer~, this may be inside a drawer.
-@c
+
 - {{{kbd(C-c C-a)}}} ~org-attach~ ::
 Dispatcher for all command related to attachments.
-@c
+
 - {{{kbd(C-c C-s)}}} ~org-agenda-schedule~ ::
 Schedule this item.  With prefix arg remove the scheduling timestamp
-@c
+
 - {{{kbd(C-c C-d)}}} ~org-agenda-deadline~ ::
 Set a deadline for this item.  With prefix arg remove the deadline.
-@c
+
 - {{{kbd(S-@key{right})}}} ~org-agenda-do-date-later~ ::
 Change the timestamp associated with the current line by one day into the
 future.  If the date is in the past, the first call to this command will move
@@ -8218,28 +8225,28 @@ continue to change hours even without the prefix arg.  With a double {{{kbd(C-u
 C-u)}}} prefix, do the same for changing minutes.@*
 The stamp is changed in the original Org file, but the change is not directly
 reflected in the agenda buffer.  Use {{{kbd(r)}}} or {{{kbd(g)}}} to update the buffer.
-@c
+
 - {{{kbd(S-@key{left})}}} ~org-agenda-do-date-earlier~ ::
 Change the timestamp associated with the current line by one day
 into the past.
-@c
+
 - {{{kbd(>)}}} ~org-agenda-date-prompt~ ::
 Change the timestamp associated with the current line.  The key {{{kbd(>)}}} has
 been chosen, because it is the same as {{{kbd(S-.)}}}  on my keyboard.
-@c
+
 - {{{kbd(I)}}} ~org-agenda-clock-in~ ::
 Start the clock on the current item.  If a clock is running already, it
 is stopped first.
-@c
+
 - {{{kbd(O)}}} ~org-agenda-clock-out~ ::
 Stop the previously started clock.
-@c
+
 - {{{kbd(X)}}} ~org-agenda-clock-cancel~ ::
 Cancel the currently running clock.
-@c
+
 - {{{kbd(J)}}} ~org-agenda-clock-goto~ ::
 Jump to the running clock in another window.
-@c
+
 - {{{kbd(k)}}} ~org-agenda-capture~ ::
 Like ~org-capture~, but use the date at point as the default date for
 the capture template.  See @var{org-capture-use-agenda-date} to make this
@@ -8255,16 +8262,16 @@ the default behavior of ~org-capture~.
 - {{{kbd(m)}}} ~org-agenda-bulk-mark~ ::
 Mark the entry at point for bulk action.  With prefix arg, mark that many
 successive entries.
-@c
+
 - {{{kbd(%)}}} ~org-agenda-bulk-mark-regexp~ ::
 Mark entries matching a regular expression for bulk action.
-@c
+
 - {{{kbd(u)}}} ~org-agenda-bulk-unmark~ ::
 Unmark entry for bulk action.
-@c
+
 - {{{kbd(U)}}} ~org-agenda-bulk-remove-all-marks~ ::
 Unmark all marked entries for bulk action.
-@c
+
 - {{{kbd(B)}}} ~org-agenda-bulk-action~ ::
 Bulk action: act on all marked entries in the agenda.  This will prompt for
 another key to select the action to be applied.  The prefix arg to {{{kbd(B)}}}
@@ -8313,11 +8320,11 @@ f  @r{Apply a function@footnote{You can also create persistent custom functions 
 
 - {{{kbd(c)}}} ~org-agenda-goto-calendar~ ::
 Open the Emacs calendar and move to the date at the agenda cursor.
-@c
+
 - {{{kbd(c)}}} ~org-calendar-goto-agenda~ ::
 When in the calendar, compute and show the Org mode agenda for the
 date at the cursor.
-@c
+
 {{{cindex(diary entries\\\, creating from agenda)}}}
 - {{{kbd(i)}}} ~org-agenda-diary-entry~ ::
 {{{vindex(org-agenda-diary-file)}}}
@@ -8338,18 +8345,18 @@ it, the entry will be created in ~org-agenda-diary-file~ without further
 interaction.  If you directly press @key{RET} at the prompt without typing
 text, the target file will be shown in another window for you to finish the
 entry there.  See also the {{{kbd(k r)}}} command.
-@c
+
 - {{{kbd(M)}}} ~org-agenda-phases-of-moon~ ::
 Show the phases of the moon for the three months around current date.
-@c
+
 - {{{kbd(S)}}} ~org-agenda-sunrise-sunset~ ::
 Show sunrise and sunset times.  The geographical location must be set
 with calendar variables, see the documentation for the Emacs calendar.
-@c
+
 - {{{kbd(C)}}} ~org-agenda-convert-date~ ::
 Convert the date at cursor into many other cultural and historic
 calendars.
-@c
+
 - {{{kbd(H)}}} ~org-agenda-holidays~ ::
 Show holidays for three months around the cursor date.
 
@@ -8373,7 +8380,7 @@ for {{{file(htmlize)}}} to be used during export.
 @tsubheading{Quit and Exit}
 - {{{kbd(q)}}} ~org-agenda-quit~ ::
 Quit agenda, remove the agenda buffer.
-@c
+
 {{{cindex(agenda files\\\, removing buffers)}}}
 - {{{kbd(x)}}} ~org-agenda-exit~ ::
 Exit agenda, remove the agenda buffer and all buffers loaded by Emacs
@@ -10196,8 +10203,8 @@ property to assign a class to the tree.  In order to specify CSS styles for a
 particular headline, you can use the id specified in a ~:CUSTOM_ID:~
 property.
 
-@c FIXME: More about header and footer styles
-@c FIXME: Talk about links and targets.
+#+comment  FIXME: More about header and footer styles
+#+comment  FIXME: Talk about links and targets.
 
 *** JavaScript support
     :PROPERTIES:
@@ -12494,11 +12501,11 @@ To ensure that links are preserved, care should be taken to replicate
 your directory structure on the web server, and to use relative file
 paths.  For example, if your Org files are kept in {{{file(~/org)}}} and your
 publishable images in {{{file(~/images)}}}, you would link to an image with
-@c
+
 #+begin_example
 file:../images/myimage.png
 #+end_example
-@c
+
 On the web server, the relative path to the image should be the
 same.  You can accomplish this by setting up an "images" folder in the
 right place on the web server, and publishing images to it.
@@ -12979,19 +12986,19 @@ System-wide values of header arguments can be specified by customizing the
 :noweb      => "no"
 #+end_example
 
-@c #+begin_example
-@c   org-babel-default-header-args is a variable defined in `org-babel.el'.
-@c   Its value is
-@c   ((:session . "none")
-@c    (:results . "replace")
-@c    (:exports . "code")
-@c    (:cache . "no")
-@c    (:noweb . "no"))
+#+comment  #+begin_example
+#+comment    org-babel-default-header-args is a variable defined in `org-babel.el'.
+#+comment    Its value is
+#+comment    ((:session . "none")
+#+comment     (:results . "replace")
+#+comment     (:exports . "code")
+#+comment     (:cache . "no")
+#+comment     (:noweb . "no"))
 
 
-@c   Documentation:
-@c   Default arguments to use when evaluating a code block.
-@c #+end_example
+#+comment    Documentation:
+#+comment    Default arguments to use when evaluating a code block.
+#+comment  #+end_example
 
 For example, the following example could be used to set the default value of
 ~:noweb~ header arguments to ~yes~.  This would have the effect of
@@ -14345,19 +14352,19 @@ In an Org mode buffer, the following key bindings are active:
 - {{{kbd(C-c C-v x)}}} @ @ @r{or} @ @ {{{kbd(C-c C-v C-x)}}} @tab ~org-babel-do-key-sequence-in-edit-buffer~
 @end multitable
 
-@c When possible these keybindings were extended to work when the control key is
-@c kept pressed, resulting in the following additional keybindings.
+#+comment  When possible these keybindings were extended to work when the control key is
+#+comment  kept pressed, resulting in the following additional keybindings.
 
-@c @multitable @columnfractions 0.25 0.75
-@c - {{{kbd(C-c C-v C-a)}}} @tab ~org-babel-sha1-hash~
-@c - {{{kbd(C-c C-v C-b)}}} @tab ~org-babel-execute-buffer~
-@c - {{{kbd(C-c C-v C-f)}}} @tab ~org-babel-tangle-file~
-@c - {{{kbd(C-c C-v C-l)}}} @tab ~org-babel-lob-ingest~
-@c - {{{kbd(C-c C-v C-p)}}} @tab ~org-babel-expand-src-block~
-@c - {{{kbd(C-c C-v C-s)}}} @tab ~org-babel-execute-subtree~
-@c - {{{kbd(C-c C-v C-t)}}} @tab ~org-babel-tangle~
-@c - {{{kbd(C-c C-v C-z)}}} @tab ~org-babel-switch-to-session~
-@c @end multitable
+#+comment  @multitable @columnfractions 0.25 0.75
+#+comment  - {{{kbd(C-c C-v C-a)}}} @tab ~org-babel-sha1-hash~
+#+comment  - {{{kbd(C-c C-v C-b)}}} @tab ~org-babel-execute-buffer~
+#+comment  - {{{kbd(C-c C-v C-f)}}} @tab ~org-babel-tangle-file~
+#+comment  - {{{kbd(C-c C-v C-l)}}} @tab ~org-babel-lob-ingest~
+#+comment  - {{{kbd(C-c C-v C-p)}}} @tab ~org-babel-expand-src-block~
+#+comment  - {{{kbd(C-c C-v C-s)}}} @tab ~org-babel-execute-subtree~
+#+comment  - {{{kbd(C-c C-v C-t)}}} @tab ~org-babel-tangle~
+#+comment  - {{{kbd(C-c C-v C-z)}}} @tab ~org-babel-switch-to-session~
+#+comment  @end multitable
 
 ** Batch execution
    :PROPERTIES:
@@ -15186,7 +15193,7 @@ these tables directly in the buffer.  Instead, you need to use the command
 #+attr_texinfo: :table-type "table" :indic "@kbd"
 - {{{kbd(C-c ')}}} ~org-edit-special~ ::
 Edit a {{{file(table.el)}}} table.  Works when the cursor is in a table.el table.
-@c
+
 - {{{kbd(C-c ~)}}} ~org-table-create-with-table.el~ ::
 Insert a {{{file(table.el)}}} table.  If there is already a table at point, this
 command converts it between the {{{file(table.el)}}} format and the Org mode
