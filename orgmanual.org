@@ -55,6 +55,7 @@
 #+MACRO: samp {{{markup(samp,$1)}}}
 #+MACRO: command {{{markup(command,$1)}}}
 #+MACRO: file {{{markup(file,$1)}}}
+#+MACRO: var {{{markup(var,$1)}}}
 
 #+MACRO: noindent @@info:@noindent@@
 
@@ -4245,7 +4246,7 @@ check off a box while there are unchecked boxes above it.
      changing TODO states. If you delete boxes/entries or add/change
      them by hand, use this command to get things back into sync.
 
-* FIXME Tags                                                       :noexport:
+* FIXED Tags
   :PROPERTIES:
   :DESCRIPTION: Tagging headlines and matching sets of tags
   :END:
@@ -4563,7 +4564,7 @@ syntax of the search string is rich and allows also matching against
 TODO keywords, entry levels and properties. For a complete description
 with many examples, see [[Matching tags and properties]].
 
-* FIXME Properties and columns
+* FIXED Properties and columns
   :PROPERTIES:
   :DESCRIPTION: Storing information about an entry
   :TEXINFO_MENU_TITLE: Properties and Columns
@@ -4816,13 +4817,15 @@ properties]].
 There is also a special command for creating sparse trees based on a
 single property:
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
+#+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c / p)}}} ::
-Create a sparse tree based on the value of a property.  This first
-prompts for the name of a property, and then for a value.  A sparse tree
-is created with all entries that define this property with the given
-value.  If you enclose the value in curly braces, it is interpreted as
-a regular expression and matched against the property values.
+
+  Create a sparse tree based on the value of a property. This first
+  prompts for the name of a property, and then for a value. A sparse
+  tree is created with all entries that define this property with the
+  given value. If you enclose the value in curly braces, it is
+  interpreted as a regular expression and matched against the property
+  values.
 
 
 ** Property inheritance
@@ -4833,42 +4836,51 @@ a regular expression and matched against the property values.
 {{{cindex(inheritance\\\, of properties)}}}
 
 {{{vindex(org-use-property-inheritance)}}}
+
 The outline structure of Org mode documents lends itself to an
 inheritance model of properties: if the parent in a tree has a certain
-property, the children can inherit this property.  Org mode does not
+property, the children can inherit this property. Org mode does not
 turn this on by default, because it can slow down property searches
-significantly and is often not needed.  However, if you find inheritance
-useful, you can turn it on by setting the variable
-~org-use-property-inheritance~.  It may be set to ~t~ to make
-all properties inherited from the parent, to a list of properties
-that should be inherited, or to a regular expression that matches
-inherited properties.  If a property has the value {{{samp(nil)}}}, this is
-interpreted as an explicit undefine of the property, so that inheritance
-search will stop at this value and return ~nil~.
+significantly and is often not needed. However, if you find
+inheritance useful, you can turn it on by setting the variable
+~org-use-property-inheritance~. It may be set to ~t~ to make all
+properties inherited from the parent, to a list of properties that
+should be inherited, or to a regular expression that matches inherited
+properties. If a property has the value {{{samp(nil)}}}, this is
+interpreted as an explicit undefine of the property, so that
+inheritance search will stop at this value and return ~nil~.
 
 Org mode has a few properties for which inheritance is hard-coded, at
 least for the special applications for which they are used:
 
 {{{cindex(property\\\, COLUMNS)}}}
-#+attr_texinfo: :table-type "table" :indic "@code"
-- COLUMNS
-The ~:COLUMNS:~ property defines the format of column view
-(see [[Column view]]).  It is inherited in the sense that the level
-where a ~:COLUMNS:~ property is defined is used as the starting
-point for a column view table, independently of the location in the
-subtree from where columns view is turned on.
-- CATEGORY
-{{{cindex(property\\\, CATEGORY)}}}
-For agenda view, a category set through a ~:CATEGORY:~ property
-applies to the entire subtree.
-- ARCHIVE
-{{{cindex(property\\\, ARCHIVE)}}}
-For archiving, the ~:ARCHIVE:~ property may define the archive
-location for the entire subtree (see [[Moving subtrees]]).
-- LOGGING
-{{{cindex(property\\\, LOGGING)}}}
-The LOGGING property may define logging settings for an entry or a
-subtree (see [[Tracking TODO state changes]]).
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- ~COLUMNS~ ::
+
+  The ~:COLUMNS:~ property defines the format of column view (see [[Column
+  view]]). It is inherited in the sense that the level where a ~:COLUMNS:~
+  property is defined is used as the starting point for a column view
+  table, independently of the location in the subtree from where columns
+  view is turned on.
+
+- ~CATEGORY~ ::
+  {{{cindex(property\\\, CATEGORY)}}}
+
+  For agenda view, a category set through a ~:CATEGORY:~ property
+  applies to the entire subtree.
+
+- ~ARCHIVE~ ::
+  {{{cindex(property\\\, ARCHIVE)}}}
+
+  For archiving, the ~:ARCHIVE:~ property may define the archive
+  location for the entire subtree (see [[Moving subtrees]]).
+
+- ~LOGGING~ ::
+  {{{cindex(property\\\, LOGGING)}}}
+
+  The LOGGING property may define logging settings for an entry or a
+  subtree (see [[Tracking TODO state changes]]).
 
 
 ** Column view
@@ -4876,19 +4888,20 @@ subtree (see [[Tracking TODO state changes]]).
    :DESCRIPTION: Tabular viewing and editing
    :END:
 
-A great way to view and edit properties in an outline tree is
-/column view/.  In column view, each outline node is turned into a
-table row.  Columns in this table provide access to properties of the
-entries.  Org mode implements columns by overlaying a tabular structure
-over the headline of each item.  While the headlines have been turned
-into a table row, you can still change the visibility of the outline
-tree.  For example, you get a compact table by switching to CONTENTS
-view (@kbd{S-@key{TAB} S-@key{TAB}}, or simply {{{kbd(c)}}} while column view
-is active), but you can still open, read, and edit the entry below each
-headline.  Or, you can switch to column view after executing a sparse
-tree command and in this way get a table only for the selected items.
-Column view also works in agenda buffers (see [[Agenda Views]]) where
-queries have collected selected items, possibly from a number of files.
+A great way to view and edit properties in an outline tree is /column
+view/. In column view, each outline node is turned into a table row.
+Columns in this table provide access to properties of the entries. Org
+mode implements columns by overlaying a tabular structure over the
+headline of each item. While the headlines have been turned into a
+table row, you can still change the visibility of the outline tree.
+For example, you get a compact table by switching to CONTENTS view
+({{{kbd(S-@key{TAB} S-@key{TAB})}}}, or simply {{{kbd(c)}}} while
+column view is active), but you can still open, read, and edit the
+entry below each headline. Or, you can switch to column view after
+executing a sparse tree command and in this way get a table only for
+the selected items. Column view also works in agenda buffers (see
+[[Agenda Views]]) where queries have collected selected items, possibly
+from a number of files.
 
 *** Defining columns
     :PROPERTIES:
@@ -4905,7 +4918,7 @@ done by defining a column format line.
      :DESCRIPTION: Where defined, where valid?
      :END:
 
-To define a column format for an entire file, use a line like
+To define a column format for an entire file, use a line like:
 
 {{{cindex(#+COLUMNS)}}}
 #+begin_example
@@ -4923,11 +4936,11 @@ To specify a format that only applies to a specific tree, add a
 #+end_example
 
 If a ~:COLUMNS:~ property is present in an entry, it defines columns
-for the entry itself, and for the entire subtree below it.  Since the
-column definition is part of the hierarchical structure of the document,
-you can define columns on level 1 that are general enough for all
-sublevels, and more specific columns further down, when you edit a
-deeper part of the tree.
+for the entry itself, and for the entire subtree below it. Since the
+column definition is part of the hierarchical structure of the
+document, you can define columns on level 1 that are general enough
+for all sublevels, and more specific columns further down, when you
+edit a deeper part of the tree.
 
 **** Column attributes
      :PROPERTIES:
@@ -4940,9 +4953,8 @@ definition looks like this:
  %[@var{width}]@var{property}[(@var{title})][@{@var{summary-type}@}]
 #+end_example
 
-{{{noindent}}}
-Except for the percent sign and the property name, all items are
-optional.  The individual parts have the following meaning:
+{{{noindent}}} Except for the percent sign and the property name, all
+items are optional. The individual parts have the following meaning:
 
 #+begin_example
 @var{width}           @r{An integer specifying the width of the column in characters.}
@@ -4974,26 +4986,27 @@ optional.  The individual parts have the following meaning:
                 @{est+@}    @r{Add low-high estimates.}
 #+end_example
 
-{{{noindent}}}
-Be aware that you can only have one summary type for any property you
-include.  Subsequent columns referencing the same property will all display the
-same summary information.
+{{{noindent}}} Be aware that you can only have one summary type for
+any property you include. Subsequent columns referencing the same
+property will all display the same summary information.
 
-The ~est+~ summary type requires further explanation.  It is used for
-combining estimates, expressed as low-high ranges.  For example, instead
-of estimating a particular task will take 5 days, you might estimate it as
-5-6 days if you're fairly confident you know how much work is required, or
-1-10 days if you don't really know what needs to be done.  Both ranges
-average at 5.5 days, but the first represents a more predictable delivery.
+The ~est+~ summary type requires further explanation. It is used for
+combining estimates, expressed as low-high ranges. For example,
+instead of estimating a particular task will take 5 days, you might
+estimate it as 5-6 days if you're fairly confident you know how much
+work is required, or 1-10 days if you don't really know what needs to
+be done. Both ranges average at 5.5 days, but the first represents a
+more predictable delivery.
 
-When combining a set of such estimates, simply adding the lows and highs
-produces an unrealistically wide result.  Instead, ~est+~ adds the
-statistical mean and variance of the sub-tasks, generating a final estimate
-from the sum.  For example, suppose you had ten tasks, each of which was
-estimated at 0.5 to 2 days of work.  Straight addition produces an estimate
-of 5 to 20 days, representing what to expect if everything goes either
-extremely well or extremely poorly.  In contrast, ~est+~ estimates the
-full job more realistically, at 10-15 days.
+When combining a set of such estimates, simply adding the lows and
+highs produces an unrealistically wide result. Instead, ~est+~ adds
+the statistical mean and variance of the sub-tasks, generating a final
+estimate from the sum. For example, suppose you had ten tasks, each of
+which was estimated at 0.5 to 2 days of work. Straight addition
+produces an estimate of 5 to 20 days, representing what to expect if
+everything goes either extremely well or extremely poorly. In
+contrast, ~est+~ estimates the full job more realistically, at 10-15
+days.
 
 Here is an example for a complete columns definition, along with allowed
 values.
@@ -5006,21 +5019,22 @@ values.
 :Approved_ALL: "[ ]" "[X]"
 #+end_example
 
-{{{noindent}}}
-The first column, {{{samp(%25ITEM)}}}, means the first 25 characters of the
-item itself, i.e.@: of the headline.  You probably always should start the
-column definition with the {{{samp(ITEM)}}} specifier.  The other specifiers
-create columns {{{samp(Owner)}}} with a list of names as allowed values, for
-{{{samp(Status)}}} with four different possible values, and for a checkbox
-field {{{samp(Approved)}}}.  When no width is given after the {{{samp(%)}}}
-character, the column will be exactly as wide as it needs to be in order
-to fully display all values.  The {{{samp(Approved)}}} column does have a
-modified title ({{{samp(Approved?)}}}, with a question mark).  Summaries will
-be created for the {{{samp(Time_Estimate)}}} column by adding time duration
-expressions like HH:MM, and for the {{{samp(Approved)}}} column, by providing
-an {{{samp([X])}}} status if all children have been checked.  The
-{{{samp(CLOCKSUM)}}} and {{{samp(CLOCKSUM_T)}}} columns are special, they lists the
-sums of CLOCK intervals in the subtree, either for all clocks or just for
+{{{noindent}}} The first column, {{{samp(%25ITEM)}}}, means the first
+25 characters of the item itself, i.e., of the headline. You probably
+always should start the column definition with the {{{samp(ITEM)}}}
+specifier. The other specifiers create columns {{{samp(Owner)}}} with
+a list of names as allowed values, for {{{samp(Status)}}} with four
+different possible values, and for a checkbox field
+{{{samp(Approved)}}}. When no width is given after the {{{samp(%)}}}
+character, the column will be exactly as wide as it needs to be in
+order to fully display all values. The {{{samp(Approved)}}} column
+does have a modified title ({{{samp(Approved?)}}}, with a question
+mark). Summaries will be created for the {{{samp(Time_Estimate)}}}
+column by adding time duration expressions like HH:MM, and for the
+{{{samp(Approved)}}} column, by providing an {{{samp([X])}}} status if
+all children have been checked. The {{{samp(CLOCKSUM)}}} and
+{{{samp(CLOCKSUM_T)}}} columns are special, they lists the sums of
+CLOCK intervals in the subtree, either for all clocks or just for
 today.
 
 
@@ -5030,59 +5044,95 @@ today.
     :END:
 
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
-@tsubheading{Turning column view on and off}
+**** Turning column view on and off
+#+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c C-x C-c)}}} ~org-columns~ ::
-{{{vindex(org-columns-default-format)}}}
-Turn on column view.  If the cursor is before the first headline in the file,
-column view is turned on for the entire file, using the ~#+COLUMNS~
-definition.  If the cursor is somewhere inside the outline, this command
-searches the hierarchy, up from point, for a ~:COLUMNS:~ property that
-defines a format.  When one is found, the column view table is established
-for the tree starting at the entry that contains the ~:COLUMNS:~
-property.  If no such property is found, the format is taken from the
-~#+COLUMNS~ line or from the variable ~org-columns-default-format~,
-and column view is established for the current entry and its subtree.
+  {{{vindex(org-columns-default-format)}}}
+
+  Turn on column view. If the cursor is before the first headline in the
+  file, column view is turned on for the entire file, using the
+  ~#+COLUMNS~ definition. If the cursor is somewhere inside the outline,
+  this command searches the hierarchy, up from point, for a ~:COLUMNS:~
+  property that defines a format. When one is found, the column view
+  table is established for the tree starting at the entry that contains
+  the ~:COLUMNS:~ property. If no such property is found, the format is
+  taken from the ~#+COLUMNS~ line or from the variable
+  ~org-columns-default-format~, and column view is established for the
+  current entry and its subtree.
+
 - {{{kbd(r)}}} ~org-columns-redo~ ::
-Recreate the column view, to include recent changes made in the buffer.
+
+  Recreate the column view, to include recent changes made in the
+  buffer.
+
 - {{{kbd(g)}}} ~org-columns-redo~ ::
-Same as {{{kbd(r)}}}.
+
+  Same as {{{kbd(r)}}}.
+
 - {{{kbd(q)}}} ~org-columns-quit~ ::
-Exit column view.
-@tsubheading{Editing values}
-- @key{left} @key{right} @key{up} @key{down}
-Move through the column view from field to field.
-{{{kindex(S-@key{left})}}}
-{{{kindex(S-@key{right})}}}
--  S-@key{left}/@key{right}
-Switch to the next/previous allowed value of the field.  For this, you
-have to have specified allowed values for a property.
-- 1..9,0
-Directly select the Nth allowed value, {{{kbd(0)}}} selects the 10th value.
+
+  Exit column view.
+
+
+**** Editing values
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- {{{key(left)}}} {{{key(right)}}} {{{key(up)}}} {{{key(down)}}} ::
+
+  Move through the column view from field to field.
+
+-  {{{kbdkey(S-,left)}}} {{{kbdkey(S-,right)}}} ::
+  {{{kindex(S-@key{left})}}}
+  {{{kindex(S-@key{right})}}}
+
+  Switch to the next/previous allowed value of the field. For this, you
+  have to have specified allowed values for a property.
+
+- {{{kbd(1..9,0)}}} ::
+
+  Directly select the Nth allowed value, {{{kbd(0)}}} selects the 10th
+  value.
+
 - {{{kbd(n)}}} {{{kbd(p)}}} ~org-columns-next-allowed-value~ ~org-columns-previous-allowed-value~ ::
-Same as @kbd{S-@key{left}/@key{right}}
+
+  Same as {{{kbdkey(S-,left)}}} {{{kbdkey(S-,right)}}}
+
 - {{{kbd(e)}}} ~org-columns-edit-value~ ::
-Edit the property at point.  For the special properties, this will
-invoke the same interface that you normally use to change that
-property.  For example, when editing a TAGS property, the tag completion
-or fast selection interface will pop up.
+
+  Edit the property at point. For the special properties, this will
+  invoke the same interface that you normally use to change that
+  property. For example, when editing a TAGS property, the tag
+  completion or fast selection interface will pop up.
+
 - {{{kbd(C-c C-c)}}} ~org-columns-set-tags-or-toggle~ ::
-When there is a checkbox at point, toggle it.
+
+  When there is a checkbox at point, toggle it.
+
 - {{{kbd(v)}}} ~org-columns-show-value~ ::
-View the full value of this property.  This is useful if the width of
-the column is smaller than that of the value.
+
+  View the full value of this property. This is useful if the width of
+  the column is smaller than that of the value.
+
 - {{{kbd(a)}}} ~org-columns-edit-allowed~ ::
-Edit the list of allowed values for this property.  If the list is found
-in the hierarchy, the modified values is stored there.  If no list is
-found, the new value is stored in the first entry that is part of the
-current column view.
-@tsubheading{Modifying the table structure}
+
+  Edit the list of allowed values for this property.  If the list is found
+  in the hierarchy, the modified values is stored there.  If no list is
+  found, the new value is stored in the first entry that is part of the
+  current column view.
+
+
+**** Modifying the table structure
+
 - {{{kbd(<)}}} {{{kbd(>)}}} ~org-columns-narrow~ ~org-columns-widen~ ::
-Make the column narrower/wider by one character.
+
+  Make the column narrower/wider by one character.
+
 - {{{kbd(S-M-@key{right})}}} ~org-columns-new~ ::
-Insert a new column, to the left of the current column.
+
+  Insert a new column, to the left of the current column.
+
 - {{{kbd(S-M-@key{left})}}} ~org-columns-delete~ ::
-Delete the current column.
+  
+  Delete the current column.
 
 
 *** Capturing column view
@@ -5091,9 +5141,9 @@ Delete the current column.
     :END:
 
 Since column view is just an overlay over a buffer, it cannot be
-exported or printed directly.  If you want to capture a column view, use
-a ~columnview~ dynamic block (see [[Dynamic blocks]]).  The frame
-of this block looks like this:
+exported or printed directly. If you want to capture a column view,
+use a ~columnview~ dynamic block (see [[Dynamic blocks]]). The frame of
+this block looks like this:
 
 {{{cindex(#+BEGIN\\\, columnview)}}}
 #+begin_example
@@ -5106,49 +5156,64 @@ of this block looks like this:
 {{{noindent}}} This dynamic block has the following parameters:
 
 #+attr_texinfo: :table-type "table" :indic "@code"
-- :id
-This is the most important parameter.  Column view is a feature that is
-often localized to a certain (sub)tree, and the capture block might be
-at a different location in the file.  To identify the tree whose view to
-capture, you can use 4 values:
-{{{cindex(property\\\, ID)}}}
-#+begin_example
-local     @r{use the tree in which the capture block is located}
-global    @r{make a global view, including all headings in the file}
-"file:@var{path-to-file}"
-          @r{run column view at the top of this file}
-"@var{ID}"      @r{call column view in the tree that has an ~:ID:~}
-          @r{property with the value /label/.  You can use}
-          @r{{{{kbd(M-x org-id-copy)}}} to create a globally unique ID for}
-          @r{the current entry and copy it to the kill-ring.}
-#+end_example
-- :hlines
-When ~t~, insert an hline after every line.  When a number @var{N}, insert
-an hline before each headline with level ~<= @var{N~}.
-- :vlines
-When set to ~t~, force column groups to get vertical lines.
-- :maxlevel
-When set to a number, don't capture entries below this level.
-- :skip-empty-rows
-When set to ~t~, skip rows where the only non-empty specifier of the
-column view is ~ITEM~.
+- ~:id~ ::
+
+  This is the most important parameter. Column view is a feature that is
+  often localized to a certain (sub)tree, and the capture block might be
+  at a different location in the file. To identify the tree whose view
+  to capture, you can use 4 values:
+
+  {{{cindex(property\\\, ID)}}}
+  #+begin_example
+  local     @r{use the tree in which the capture block is located}
+  global    @r{make a global view, including all headings in the file}
+  "file:@var{path-to-file}"
+            @r{run column view at the top of this file}
+  "@var{ID}"      @r{call column view in the tree that has an ~:ID:~}
+            @r{property with the value /label/.  You can use}
+            @r{{{{kbd(M-x org-id-copy)}}} to create a globally unique ID for}
+            @r{the current entry and copy it to the kill-ring.}
+  #+end_example
+
+- ~:hlines~ ::
+
+  When ~t~, insert an hline after every line. When a number
+  {{{var(N)}}}, insert an hline before each headline with level ~<= @var{N}~.
+
+- ~:vlines~ ::
+
+  When set to ~t~, force column groups to get vertical lines.
+
+- ~:maxlevel~ ::
+
+  When set to a number, don't capture entries below this level.
+
+- ~:skip-empty-rows~ ::
+
+  When set to ~t~, skip rows where the only non-empty specifier of the
+  column view is ~ITEM~.
 
 
 
-{{{noindent}}}
-The following commands insert or update the dynamic block:
+{{{noindent}}} The following commands insert or update the dynamic
+block:
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
+#+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c C-x i)}}} ~org-insert-columns-dblock~ ::
-Insert a dynamic block capturing a column view.  You will be prompted
-for the scope or ID of the view.
+
+  Insert a dynamic block capturing a column view. You will be prompted
+  for the scope or ID of the view.
+
 - {{{kbd(C-c C-c)}}} {{{kbd(C-c C-x C-u)}}} ~org-dblock-update~ ::
-Update dynamic block at point.  The cursor needs to be in the
-~#+BEGIN~ line of the dynamic block.
+
+  Update dynamic block at point. The cursor needs to be in the ~#+BEGIN~
+  line of the dynamic block.
+
 - {{{kbd(C-u C-c C-x C-u)}}} ~org-update-all-dblocks~ ::
-Update all dynamic blocks (see [[Dynamic blocks]]).  This is useful if
-you have several clock table blocks, column-capturing blocks or other dynamic
-blocks in a buffer.
+
+  Update all dynamic blocks (see [[Dynamic blocks]]). This is useful if you
+  have several clock table blocks, column-capturing blocks or other
+  dynamic blocks in a buffer.
 
 
 You can add formulas to the column view table and you may add plotting
@@ -5156,13 +5221,12 @@ instructions in front of the table---these will survive an update of the
 block.  If there is a ~#+TBLFM:~ after the table, the table will
 actually be recalculated automatically after an update.
 
-An alternative way to capture and process property values into a table is
-provided by Eric Schulte's {{{file(org-collector.el)}}} which is a contributed
-package@footnote{Contributed packages are not part of Emacs, but are
-distributed with the main distribution of Org (visit
-@uref{http://orgmode.org}).}.  It provides a general API to collect
-properties from entries in a certain scope, and arbitrary Lisp expressions to
-process these values before inserting them into a table or a dynamic block.
+An alternative way to capture and process property values into a table
+is provided by Eric Schulte's {{{file(org-collector.el)}}} which is a
+contributed package.[fn:64] It provides a general API to collect
+properties from entries in a certain scope, and arbitrary Lisp
+expressions to process these values before inserting them into a table
+or a dynamic block.
 
 ** Property API
    :PROPERTIES:
@@ -5171,12 +5235,12 @@ process these values before inserting them into a table or a dynamic block.
 {{{cindex(properties\\\, API)}}}
 {{{cindex(API\\\, for properties)}}}
 
-There is a full API for accessing and changing properties.  This API can
-be used by Emacs Lisp programs to work with properties and to implement
-features based on them.  For more information see [[Using the
+There is a full API for accessing and changing properties. This API
+can be used by Emacs Lisp programs to work with properties and to
+implement features based on them. For more information see [[Using the
 property API]].
 
-* FIXME Dates and times                                            :noexport:
+* FIXED Dates and times
   :PROPERTIES:
   :DESCRIPTION: Making items useful for planning
   :TEXINFO_MENU_TITLE: Dates and Times
@@ -5204,89 +5268,79 @@ is used in a much wider sense.
 {{{cindex(deadlines)}}}
 {{{cindex(scheduling)}}}
 
-A timestamp is a specification of a date (possibly with a time or a range of
-times) in a special format, either {{{samp(<2003-09-16 Tue>)}}}@footnote{In this
-simplest form, the day name is optional when you type the date yourself.
-However, any dates inserted or modified by Org will add that day name, for
-reading convenience.} or {{{samp(<2003-09-16 Tue 09:39>)}}} or {{{samp(<2003-09-16
-Tue 12:00-12:30>)}}}@footnote{This is inspired by the standard ISO 8601
-date/time format.  To use an alternative format, see [[Custom time
-format]].}.  A timestamp can appear anywhere in the headline or body of an Org
-tree entry.  Its presence causes entries to be shown on specific dates in the
-agenda (see [[Weekly/daily agenda]]).  We distinguish:
+A timestamp is a specification of a date (possibly with a time or a
+range of times) in a special format, either {{{samp(<2003-09-16 Tue>)}}}[fn:65] or {{{samp(<2003-09-16 Tue 09:39>)}}} or
+{{{samp(<2003-09-16 Tue 12:00-12:30>)}}}.[fn:66] A timestamp can
+appear anywhere in the headline or body of an Org tree entry. Its
+presence causes entries to be shown on specific dates in the agenda
+(see [[Weekly/daily agenda]]). We distinguish:
 
-#+attr_texinfo: :table-type "table" :indic "@var"
-- Plain timestamp; Event; Appointment
-{{{cindex(timestamp)}}}
-{{{cindex(appointment)}}}
-A simple timestamp just assigns a date/time to an item.  This is just
-like writing down an appointment or event in a paper agenda.  In the
-timeline and agenda displays, the headline of an entry associated with a
-plain timestamp will be shown exactly on that date.
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- Plain timestamp; Event; Appointment ::
+  {{{cindex(timestamp)}}}
+  {{{cindex(appointment)}}}
 
-#+begin_example
-,* Meet Peter at the movies
-  <2006-11-01 Wed 19:15>
-,* Discussion on climate change
-  <2006-11-02 Thu 20:00-22:00>
-#+end_example
+  A simple timestamp just assigns a date/time to an item. This is just
+  like writing down an appointment or event in a paper agenda. In the
+  timeline and agenda displays, the headline of an entry associated with
+  a plain timestamp will be shown exactly on that date.
 
-- Timestamp with repeater interval
-{{{cindex(timestamp\\\, with repeater interval)}}}
-A timestamp may contain a /repeater interval/, indicating that it
-applies not only on the given date, but again and again after a certain
-interval of N days (d), weeks (w), months (m), or years (y).  The
-following will show up in the agenda every Wednesday:
+  #+begin_example
+  ,* Meet Peter at the movies
+    <2006-11-01 Wed 19:15>
+  ,* Discussion on climate change
+    <2006-11-02 Thu 20:00-22:00>
+  #+end_example
 
-#+begin_example
-,* Pick up Sam at school
-  <2007-05-16 Wed 12:30 +1w>
-#+end_example
+- Timestamp with repeater interval ::
+  {{{cindex(timestamp\\\, with repeater interval)}}}
 
-- Diary-style sexp entries
-For more complex date specifications, Org mode supports using the special
-sexp diary entries implemented in the Emacs calendar/diary
-package@footnote{When working with the standard diary sexp functions, you
-need to be very careful with the order of the arguments.  That order depend
-evilly on the variable ~calendar-date-style~ (or, for older Emacs
-versions, ~european-calendar-style~).  For example, to specify a date
-December 12, 2005, the call might look like ~(diary-date 12 1 2005)~ or
-~(diary-date 1 12 2005)~ or ~(diary-date 2005 12 1)~, depending on
-the settings.  This has been the source of much confusion.  Org mode users
-can resort to special versions of these functions like ~org-date~ or
-~org-anniversary~.  These work just like the corresponding ~diary-~
-functions, but with stable ISO order of arguments (year, month, day) wherever
-applicable, independent of the value of ~calendar-date-style~.}.  For
-example with optional time
+  A timestamp may contain a /repeater interval/, indicating that it
+  applies not only on the given date, but again and again after a
+  certain interval of N days (d), weeks (w), months (m), or years (y).
+  The following will show up in the agenda every Wednesday:
 
-#+begin_example
-,* 22:00-23:00 The nerd meeting on every 2nd Thursday of the month
-  <%%(org-float t 4 2)>
-#+end_example
+  #+begin_example
+  ,* Pick up Sam at school
+    <2007-05-16 Wed 12:30 +1w>
+  #+end_example
 
-- Time/Date range
-{{{cindex(timerange)}}}
-{{{cindex(date range)}}}
-Two timestamps connected by {{{samp(--)}}} denote a range.  The headline
-will be shown on the first and last day of the range, and on any dates
-that are displayed and fall in the range.  Here is an example:
+- Diary-style sexp entries ::
 
-#+begin_example
-,** Meeting in Amsterdam
-   <2004-08-23 Mon>--<2004-08-26 Thu>
-#+end_example
+  For more complex date specifications, Org mode supports using the
+  special sexp diary entries implemented in the Emacs calendar/diary
+  package.[fn:67] For example, with optional time:
 
-- Inactive timestamp
-{{{cindex(timestamp\\\, inactive)}}}
-{{{cindex(inactive timestamp)}}}
-Just like a plain timestamp, but with square brackets instead of
-angular ones.  These timestamps are inactive in the sense that they do
-/not/ trigger an entry to show up in the agenda.
+  #+begin_example
+  ,* 22:00-23:00 The nerd meeting on every 2nd Thursday of the month
+    <%%(org-float t 4 2)>
+  #+end_example
 
-#+begin_example
-,* Gillian comes late for the fifth time
-  [2006-11-01 Wed]
-#+end_example
+- Time/Date range ::
+  {{{cindex(timerange)}}}
+  {{{cindex(date range)}}}
+
+  Two timestamps connected by {{{samp(--)}}} denote a range.  The headline
+  will be shown on the first and last day of the range, and on any dates
+  that are displayed and fall in the range.  Here is an example:
+
+  #+begin_example
+  ,** Meeting in Amsterdam
+     <2004-08-23 Mon>--<2004-08-26 Thu>
+  #+end_example
+
+- Inactive timestamp ::
+  {{{cindex(timestamp\\\, inactive)}}}
+  {{{cindex(inactive timestamp)}}}
+
+  Just like a plain timestamp, but with square brackets instead of
+  angular ones.  These timestamps are inactive in the sense that they do
+  /not/ trigger an entry to show up in the agenda.
+
+  #+begin_example
+  ,* Gillian comes late for the fifth time
+    [2006-11-01 Wed]
+  #+end_example
 
 
 
@@ -5295,63 +5349,72 @@ angular ones.  These timestamps are inactive in the sense that they do
    :DESCRIPTION: Commands to insert timestamps
    :END:
 For Org mode to recognize timestamps, they need to be in the specific
-format.  All commands listed below produce timestamps in the correct
+format. All commands listed below produce timestamps in the correct
 format.
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
+#+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c .)}}} ~org-time-stamp~ ::
-Prompt for a date and insert a corresponding timestamp.  When the cursor is
-at an existing timestamp in the buffer, the command is used to modify this
-timestamp instead of inserting a new one.  When this command is used twice in
-succession, a time range is inserted.
+
+  Prompt for a date and insert a corresponding timestamp. When the
+  cursor is at an existing timestamp in the buffer, the command is used
+  to modify this timestamp instead of inserting a new one. When this
+  command is used twice in succession, a time range is inserted.
 
 - {{{kbd(C-c !)}}} ~org-time-stamp-inactive~ ::
-Like {{{kbd(C-c .)}}}, but insert an inactive timestamp that will not cause
-an agenda entry.
 
-{{{kindex(C-u C-c .)}}}
-{{{kindex(C-u C-c !)}}}
-- C-u C-c .
-@itemx C-u C-c !
-{{{vindex(org-time-stamp-rounding-minutes)}}}
-Like {{{kbd(C-c .)}}} and {{{kbd(C-c !)}}}, but use the alternative format which
-contains date and time.  The default time can be rounded to multiples of 5
-minutes, see the option ~org-time-stamp-rounding-minutes~.
+  Like {{{kbd(C-c .)}}}, but insert an inactive timestamp that will not
+  cause an agenda entry.
+
+- {{{kbd(C-u C-c .)}}} {{{kbd(C-u C-c !)}}}
+  {{{kindex(C-u C-c .)}}}
+  {{{kindex(C-u C-c !)}}}
+  {{{vindex(org-time-stamp-rounding-minutes)}}}
+
+  Like {{{kbd(C-c .)}}} and {{{kbd(C-c !)}}}, but use the alternative
+  format which contains date and time. The default time can be rounded
+  to multiples of 5 minutes, see the option
+  ~org-time-stamp-rounding-minutes~.
 
 - {{{kbd(C-c C-c)}}} ::
-Normalize timestamp, insert/fix day name if missing or wrong.
+
+  Normalize timestamp, insert/fix day name if missing or wrong.
 
 - {{{kbd(C-c <)}}} ~org-date-from-calendar~ ::
-Insert a timestamp corresponding to the cursor date in the Calendar.
+
+  Insert a timestamp corresponding to the cursor date in the Calendar.
 
 - {{{kbd(C-c >)}}} ~org-goto-calendar~ ::
-Access the Emacs calendar for the current date.  If there is a
-timestamp in the current line, go to the corresponding date
-instead.
+
+  Access the Emacs calendar for the current date. If there is a
+  timestamp in the current line, go to the corresponding date instead.
 
 - {{{kbd(C-c C-o)}}} ~org-open-at-point~ ::
-Access the agenda for the date given by the timestamp or -range at
-point (see [[Weekly/daily agenda]]).
+
+  Access the agenda for the date given by the timestamp or -range at
+  point (see [[Weekly/daily agenda]]).
 
 - {{{kbd(S-@key{left})}}} {{{kbd(S-@key{right})}}} ~org-timestamp-down-day~ ~org-timestamp-up-day~ ::
-Change date at cursor by one day.  These key bindings conflict with
-shift-selection and related modes (see [[Conflicts]]).
+
+  Change date at cursor by one day.  These key bindings conflict with
+  shift-selection and related modes (see [[Conflicts]]).
 
 - {{{kbd(S-@key{up})}}} {{{kbd(S-@key{down})}}} ~org-timestamp-up~ ~org-timestamp-down-down~ ::
-Change the item under the cursor in a timestamp.  The cursor can be on a
-year, month, day, hour or minute.  When the timestamp contains a time range
-like {{{samp(15:30-16:30)}}}, modifying the first time will also shift the second,
-shifting the time block with constant length.  To change the length, modify
-the second time.  Note that if the cursor is in a headline and not at a
-timestamp, these same keys modify the priority of an item.
-(see [[Priorities]]).  The key bindings also conflict with shift-selection and
-related modes (see [[Conflicts]]).
+
+  Change the item under the cursor in a timestamp. The cursor can be on
+  a year, month, day, hour or minute. When the timestamp contains a time
+  range like {{{samp(15:30-16:30)}}}, modifying the first time will also
+  shift the second, shifting the time block with constant length. To
+  change the length, modify the second time. Note that if the cursor is
+  in a headline and not at a timestamp, these same keys modify the
+  priority of an item. (see [[Priorities]]). The key bindings also conflict
+  with shift-selection and related modes (see [[Conflicts]]).
 
 - {{{kbd(C-c C-y)}}} ~org-evaluate-time-range~ ::
-{{{cindex(evaluate time range)}}}
-Evaluate a time range by computing the difference between start and end.
-With a prefix argument, insert result after the time range (in a table: into
-the following column).
+  {{{cindex(evaluate time range)}}}
+
+  Evaluate a time range by computing the difference between start and
+  end. With a prefix argument, insert result after the time range (in a
+  table: into the following column).
 
 
 *** The date/time prompt
@@ -5362,26 +5425,25 @@ the following column).
 {{{cindex(time\\\, reading in minibuffer)}}}
 
 {{{vindex(org-read-date-prefer-future)}}}
+
 When Org mode prompts for a date/time, the default is shown in default
 date/time format, and the prompt therefore seems to ask for a specific
-format.  But it will in fact accept date/time information in a variety of
-formats.  Generally, the information should start at the beginning of the
-string.  Org mode will find whatever information is in
-there and derive anything you have not specified from the /default date
-and time/.  The default is usually the current date and time, but when
-modifying an existing timestamp, or when entering the second stamp of a
-range, it is taken from the stamp in the buffer.  When filling in
-information, Org mode assumes that most of the time you will want to enter a
-date in the future: if you omit the month/year and the given day/month is
-/before/ today, it will assume that you mean a future date@footnote{See the
-variable ~org-read-date-prefer-future~.  You may set that variable to
-the symbol ~time~ to even make a time before now shift the date to
-tomorrow.}.  If the date has been automatically shifted into the future, the
-time prompt will show this with {{{samp((=>F).)}}}
+format. But it will in fact accept date/time information in a variety
+of formats. Generally, the information should start at the beginning
+of the string. Org mode will find whatever information is in there and
+derive anything you have not specified from the /default date and
+time/. The default is usually the current date and time, but when
+modifying an existing timestamp, or when entering the second stamp of
+a range, it is taken from the stamp in the buffer. When filling in
+information, Org mode assumes that most of the time you will want to
+enter a date in the future: if you omit the month/year and the given
+day/month is /before/ today, it will assume that you mean a future
+date.[fn:68] If the date has been automatically shifted into the
+future, the time prompt will show this with {{{samp((=>F).)}}}
 
-For example, let's assume that today is @b{June 13, 2006}.  Here is how
-various inputs will be interpreted, the items filled in by Org mode are
-in @b{bold}.
+For example, let's assume that today is *June 13, 2006*. Here is how
+various inputs will be interpreted, the items filled in by Org mode
+are in *bold*.
 
 #+begin_example
 3-2-5         @result{} 2003-02-05
@@ -5400,13 +5462,13 @@ w4            @result{} ISO week for of the current year @b{2006}
 2012-w04-5    @result{} Same as above
 #+end_example
 
-Furthermore you can specify a relative date by giving, as the
-/first/ thing in the input: a plus/minus sign, a number and a
-letter ([dwmy]) to indicate change in days, weeks, months, or years.  With a
-single plus or minus, the date is always relative to today.  With a
-double plus or minus, it is relative to the default date.  If instead of
-a single letter, you use the abbreviation of day name, the date will be
-the Nth such day, e.g.@:
+Furthermore you can specify a relative date by giving, as the /first/
+thing in the input: a plus/minus sign, a number and a letter ([dwmy])
+to indicate change in days, weeks, months, or years. With a single
+plus or minus, the date is always relative to today. With a double
+plus or minus, it is relative to the default date. If instead of a
+single letter, you use the abbreviation of day name, the date will be
+the Nth such day, e.g.:
 
 #+begin_example
 +0            @result{} today
@@ -5420,21 +5482,23 @@ the Nth such day, e.g.@:
 
 {{{vindex(parse-time-months)}}}
 {{{vindex(parse-time-weekdays)}}}
-The function understands English month and weekday abbreviations.  If
+
+The function understands English month and weekday abbreviations. If
 you want to use unabbreviated names and/or other languages, configure
 the variables ~parse-time-months~ and ~parse-time-weekdays~.
 
 {{{vindex(org-read-date-force-compatible-dates)}}}
-Not all dates can be represented in a given Emacs implementation.  By default
-Org mode forces dates into the compatibility range 1970--2037 which works on
-all Emacs implementations.  If you want to use dates outside of this range,
-read the docstring of the variable
+
+Not all dates can be represented in a given Emacs implementation. By
+default Org mode forces dates into the compatibility range 1970--2037
+which works on all Emacs implementations. If you want to use dates
+outside of this range, read the docstring of the variable
 ~org-read-date-force-compatible-dates~.
 
-You can specify a time range by giving start and end times or by giving a
-start time and a duration (in HH:MM format).  Use one or two dash(es) as the
-separator in the former case and use '+' as the separator in the latter
-case, e.g.@:
+You can specify a time range by giving start and end times or by
+giving a start time and a duration (in HH:MM format). Use one or two
+dash(es) as the separator in the former case and use '+' as the
+separator in the latter case, e.g.:
 
 #+begin_example
 11am-1:15pm    @result{} 11:00-13:15
@@ -5444,13 +5508,12 @@ case, e.g.@:
 
 {{{cindex(calendar\\\, for selecting date)}}}
 {{{vindex(org-popup-calendar-for-date-prompt)}}}
-Parallel to the minibuffer prompt, a calendar is popped up@footnote{If
-you don't need/want the calendar, configure the variable
-~org-popup-calendar-for-date-prompt~.}.  When you exit the date
-prompt, either by clicking on a date in the calendar, or by pressing
-@key{RET}, the date selected in the calendar will be combined with the
-information entered at the prompt.  You can control the calendar fully
-from the minibuffer:
+
+Parallel to the minibuffer prompt, a calendar is popped up.[fn:69]
+When you exit the date prompt, either by clicking on a date in the
+calendar, or by pressing {{{key(RET)}}}, the date selected in the
+calendar will be combined with the information entered at the prompt.
+You can control the calendar fully from the minibuffer:
 
 {{{kindex(<)}}}
 {{{kindex(>)}}}
@@ -5475,12 +5538,12 @@ M-v / C-v      @r{Scroll calendar forward/backward by 3 months.}
 #+end_example
 
 {{{vindex(org-read-date-display-live)}}}
+
 The actions of the date/time prompt may seem complex, but I assure you they
 will grow on you, and you will start getting annoyed by pretty much any other
 way of entering a date/time out there.  To help you understand what is going
 on, the current interpretation of your input will be displayed live in the
-minibuffer@footnote{If you find this distracting, turn the display of with
-~org-read-date-display-live~.}.
+minibuffer.[fn:70]
 
 *** Custom time format
     :PROPERTIES:
@@ -5492,15 +5555,17 @@ minibuffer@footnote{If you find this distracting, turn the display of with
 
 {{{vindex(org-display-custom-times)}}}
 {{{vindex(org-time-stamp-custom-formats)}}}
+
 Org mode uses the standard ISO notation for dates and times as it is
-defined in ISO 8601.  If you cannot get used to this and require another
-representation of date and time to keep you happy, you can get it by
-customizing the variables ~org-display-custom-times~ and
+defined in ISO 8601. If you cannot get used to this and require
+another representation of date and time to keep you happy, you can get
+it by customizing the variables ~org-display-custom-times~ and
 ~org-time-stamp-custom-formats~.
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
+#+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c C-x C-t)}}} ~org-toggle-time-stamp-overlays~ ::
-Toggle the display of custom formats for dates and times.
+
+  Toggle the display of custom formats for dates and times.
 
 
 {{{noindent}}}
@@ -5508,28 +5573,29 @@ Org mode needs the default format for scanning, so the custom date/time
 format does not /replace/ the default format---instead it is put
 /over/ the default format using text properties.  This has the
 following consequences:
-@itemize @bullet
-@item
-You cannot place the cursor onto a timestamp anymore, only before or
-after.
-@item
-The @kbd{S-@key{up}/@key{down}} keys can no longer be used to adjust
-each component of a timestamp.  If the cursor is at the beginning of
-the stamp, @kbd{S-@key{up}/@key{down}} will change the stamp by one day,
-just like @kbd{S-@key{left}/@key{right}}.  At the end of the stamp, the
-time will be changed by one minute.
-@item
-If the timestamp contains a range of clock times or a repeater, these
-will not be overlaid, but remain in the buffer as they were.
-@item
-When you delete a timestamp character-by-character, it will only
-disappear from the buffer after /all/ (invisible) characters
-belonging to the ISO timestamp have been removed.
-@item
-If the custom timestamp format is longer than the default and you are
-using dates in tables, table alignment will be messed up.  If the custom
-format is shorter, things do work as expected.
-@end itemize
+
+
+- You cannot place the cursor onto a timestamp anymore, only before or
+  after.
+
+- The {{{kbdkey(S-,up)}}} {{{kbdkey(S-,down)}}} keys can no longer be
+  used to adjust each component of a timestamp. If the cursor is at
+  the beginning of the stamp, {{{kbdkey(S-,up)}}}
+  {{{kbdkey(S-,down)}}} will change the stamp by one day, just like
+  {{{kbdkey(S-,left)}}} {{{kbdkey(S-,right)}}}. At the end of the
+  stamp, the time will be changed by one minute.
+
+-  If the timestamp contains a range of clock times or a repeater,
+   these will not be overlaid, but remain in the buffer as they were.
+
+-  When you delete a timestamp character-by-character, it will only
+   disappear from the buffer after /all/ (invisible) characters
+   belonging to the ISO timestamp have been removed.
+
+- If the custom timestamp format is longer than the default and you
+  are using dates in tables, table alignment will be messed up.  If
+  the custom format is shorter, things do work as expected.
+
 
 ** Deadlines and scheduling
    :PROPERTIES:
@@ -5538,57 +5604,57 @@ format is shorter, things do work as expected.
 
 A timestamp may be preceded by special keywords to facilitate planning:
 
-#+attr_texinfo: :table-type "table" :indic "@var"
-- DEADLINE
-{{{cindex(DEADLINE keyword)}}}
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- {{{var(DEADLINE)}}} ::
+  {{{cindex(DEADLINE keyword)}}}
 
-Meaning: the task (most likely a TODO item, though not necessarily) is supposed
-to be finished on that date.
+  Meaning: the task (most likely a TODO item, though not necessarily) is
+  supposed to be finished on that date.
 
-{{{vindex(org-deadline-warning-days)}}}
-On the deadline date, the task will be listed in the agenda.  In
-addition, the agenda for /today/ will carry a warning about the
-approaching or missed deadline, starting
-~org-deadline-warning-days~ before the due date, and continuing
-until the entry is marked DONE.  An example:
+  {{{vindex(org-deadline-warning-days)}}}
 
-#+begin_example
-,*** TODO write article about the Earth for the Guide
-    DEADLINE: <2004-02-29 Sun>
-    The editor in charge is [[bbdb:Ford Prefect]]
-#+end_example
+  On the deadline date, the task will be listed in the agenda. In
+  addition, the agenda for /today/ will carry a warning about the
+  approaching or missed deadline, starting ~org-deadline-warning-days~
+  before the due date, and continuing until the entry is marked DONE. An
+  example:
 
-You can specify a different lead time for warnings for a specific
-deadlines using the following syntax.  Here is an example with a warning
-period of 5 days ~DEADLINE: <2004-02-29 Sun -5d>~.
+  #+begin_example
+  ,*** TODO write article about the Earth for the Guide
+      DEADLINE: <2004-02-29 Sun>
+      The editor in charge is [[bbdb:Ford Prefect]]
+  #+end_example
 
-- SCHEDULED
-{{{cindex(SCHEDULED keyword)}}}
+  You can specify a different lead time for warnings for a specific
+  deadlines using the following syntax. Here is an example with a
+  warning period of 5 days ~DEADLINE: <2004-02-29 Sun -5d>~.
 
-Meaning: you are planning to start working on that task on the given
-date.
+- {{{var(SCHEDULED)}}} ::
+  {{{cindex(SCHEDULED keyword)}}}
 
-{{{vindex(org-agenda-skip-scheduled-if-done)}}}
-The headline will be listed under the given date@footnote{It will still
-be listed on that date after it has been marked DONE.  If you don't like
-this, set the variable ~org-agenda-skip-scheduled-if-done~.}.  In
-addition, a reminder that the scheduled date has passed will be present
-in the compilation for /today/, until the entry is marked DONE, i.e.@:
-the task will automatically be forwarded until completed.
+  Meaning: you are planning to start working on that task on the given
+  date.
 
-#+begin_example
-,*** TODO Call Trillian for a date on New Years Eve.
-    SCHEDULED: <2004-12-25 Sat>
-#+end_example
+  {{{vindex(org-agenda-skip-scheduled-if-done)}}}
 
-{{{noindent}}}
-@b{Important:} Scheduling an item in Org mode should /not/ be
-understood in the same way that we understand /scheduling a meeting/.
-Setting a date for a meeting is just a simple appointment, you should
-mark this entry with a simple plain timestamp, to get this item shown
-on the date where it applies.  This is a frequent misunderstanding by
-Org users.  In Org mode, /scheduling/ means setting a date when you
-want to start working on an action item.
+  The headline will be listed under the given date.[fn:71] In addition,
+  a reminder that the scheduled date has passed will be present in the
+  compilation for /today/, until the entry is marked DONE, i.e., the
+  task will automatically be forwarded until completed.
+
+  #+begin_example
+  ,*** TODO Call Trillian for a date on New Years Eve.
+      SCHEDULED: <2004-12-25 Sat>
+  #+end_example
+
+  {{{noindent}}}
+  *Important:* Scheduling an item in Org mode should /not/ be
+  understood in the same way that we understand /scheduling a meeting/.
+  Setting a date for a meeting is just a simple appointment, you should
+  mark this entry with a simple plain timestamp, to get this item shown
+  on the date where it applies.  This is a frequent misunderstanding by
+  Org users.  In Org mode, /scheduling/ means setting a date when you
+  want to start working on an action item.
 
 
 You may use timestamps with repeaters in scheduling and deadline
@@ -5609,60 +5675,61 @@ sexp entry matches.
     :TITLE:    Inserting deadlines or schedules
     :END:
 
-The following commands allow you to quickly insert@footnote{The {{{samp(SCHEDULED)}}} and
-{{{samp(DEADLINE)}}} dates are inserted on the line right below the headline.  Don't put
-any text between this line and the headline.} a deadline or to schedule
-an item:
+The following commands allow you to quickly insert a deadline or to schedule
+an item:[fn:72]
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
+#+attr_texinfo: :table-type "table" :indic "@asis"
 
 - {{{kbd(C-c C-d)}}} ~org-deadline~ ::
-Insert {{{samp(DEADLINE)}}} keyword along with a stamp.  The insertion will happen
-in the line directly following the headline.  Any CLOSED timestamp will be
-removed.  When called with a prefix arg, an existing deadline will be removed
-from the entry.  Depending on the variable ~org-log-redeadline~@footnote{with corresponding
-~#+STARTUP~ keywords ~logredeadline~, ~lognoteredeadline~,
-and ~nologredeadline~}, a note will be taken when changing an existing
-deadline.
+
+  Insert {{{samp(DEADLINE)}}} keyword along with a stamp. The insertion
+  will happen in the line directly following the headline. Any CLOSED
+  timestamp will be removed. When called with a prefix arg, an existing
+  deadline will be removed from the entry. Depending on the variable
+  ~org-log-redeadline~, a note will be taken when changing an existing
+  deadline.[fn:73]
 
 - {{{kbd(C-c C-s)}}} ~org-schedule~ ::
-Insert {{{samp(SCHEDULED)}}} keyword along with a stamp.  The insertion will
-happen in the line directly following the headline.  Any CLOSED timestamp
-will be removed.  When called with a prefix argument, remove the scheduling
-date from the entry.  Depending on the variable
-~org-log-reschedule~@footnote{with corresponding ~#+STARTUP~
-keywords ~logreschedule~, ~lognotereschedule~, and
-~nologreschedule~}, a note will be taken when changing an existing
-scheduling time.
+
+  Insert {{{samp(SCHEDULED)}}} keyword along with a stamp. The insertion
+  will happen in the line directly following the headline. Any
+  {{{samp(CLOSED)}}} timestamp will be removed. When called with a
+  prefix argument, remove the scheduling date from the entry. Depending
+  on the variable ~org-log-reschedule~, a note will be taken when
+  changing an existing scheduling time.[fn:74]
 
 - {{{kbd(C-c C-x C-k)}}} ~org-mark-entry-for-agenda-action~ ::
-{{{kindex(k a)}}}
-{{{kindex(k s)}}}
-Mark the current entry for agenda action.  After you have marked the entry
-like this, you can open the agenda or the calendar to find an appropriate
-date.  With the cursor on the selected date, press {{{kbd(k s)}}} or {{{kbd(k d)}}} to
-schedule the marked item.
+  {{{kindex(k a)}}}
+  {{{kindex(k s)}}}
+
+  Mark the current entry for agenda action. After you have marked the
+  entry like this, you can open the agenda or the calendar to find an
+  appropriate date. With the cursor on the selected date, press {{{kbd(k
+  s)}}} or {{{kbd(k d)}}} to schedule the marked item.
 
 - {{{kbd(C-c / d)}}} ~org-check-deadlines~ ::
-{{{cindex(sparse tree\\\, for deadlines)}}}
-{{{vindex(org-deadline-warning-days)}}}
-Create a sparse tree with all deadlines that are either past-due, or
-which will become due within ~org-deadline-warning-days~.
-With {{{kbd(C-u)}}} prefix, show all deadlines in the file.  With a numeric
-prefix, check that many days.  For example, {{{kbd(C-1 C-c / d)}}} shows
-all deadlines due tomorrow.
+  {{{cindex(sparse tree\\\, for deadlines)}}}
+  {{{vindex(org-deadline-warning-days)}}}
+
+  Create a sparse tree with all deadlines that are either past-due, or
+  which will become due within ~org-deadline-warning-days~. With
+  {{{kbd(C-u)}}} prefix, show all deadlines in the file. With a numeric
+  prefix, check that many days. For example, {{{kbd(C-1 C-c / d)}}}
+  shows all deadlines due tomorrow.
 
 - {{{kbd(C-c / b)}}} ~org-check-before-date~ ::
-Sparse tree for deadlines and scheduled items before a given date.
+
+  Sparse tree for deadlines and scheduled items before a given date.
 
 - {{{kbd(C-c / a)}}} ~org-check-after-date~ ::
-Sparse tree for deadlines and scheduled items after a given date.
+  
+  Sparse tree for deadlines and scheduled items after a given date.
 
 
-Note that ~org-schedule~ and ~org-deadline~ supports
-setting the date by indicating a relative time: e.g. +1d will set
-the date to the next day after today, and --1w will set the date
-to the previous week before any current timestamp.
+Note that ~org-schedule~ and ~org-deadline~ supports setting the date
+by indicating a relative time: e.g. +1d will set the date to the next
+day after today, and --1w will set the date to the previous week
+before any current timestamp.
 
 *** Repeated tasks
     :PROPERTIES:
@@ -5678,41 +5745,37 @@ or plain timestamp.  In the following example
 ,** TODO Pay the rent
    DEADLINE: <2005-10-01 Sat +1m>
 #+end_example
-{{{noindent}}}
-the ~+1m~ is a repeater; the intended interpretation is that the task
-has a deadline on <2005-10-01> and repeats itself every (one) month starting
-from that time.  You can use yearly, monthly, weekly, daily and hourly repeat
-cookies by using the ~y/w/m/d/h~ letters.  If you need both a repeater
-and a special warning period in a deadline entry, the repeater should come
-first and the warning period last: ~DEADLINE: <2005-10-01 Sat +1m -3d>~.
+{{{noindent}}} the ~+1m~ is a repeater; the intended interpretation is
+that the task has a deadline on <2005-10-01> and repeats itself every
+(one) month starting from that time. You can use yearly, monthly,
+weekly, daily and hourly repeat cookies by using the ~y/w/m/d/h~
+letters. If you need both a repeater and a special warning period in a
+deadline entry, the repeater should come first and the warning period
+last: ~DEADLINE: <2005-10-01 Sat +1m -3d>~.
 
 {{{vindex(org-todo-repeat-to-state)}}}
-Deadlines and scheduled items produce entries in the agenda when they are
-over-due, so it is important to be able to mark such an entry as completed
-once you have done so.  When you mark a DEADLINE or a SCHEDULE with the TODO
-keyword DONE, it will no longer produce entries in the agenda.  The problem
-with this is, however, that then also the /next/ instance of the
-repeated entry will not be active.  Org mode deals with this in the following
-way: When you try to mark such an entry DONE (using {{{kbd(C-c C-t)}}}), it will
-shift the base date of the repeating timestamp by the repeater interval, and
-immediately set the entry state back to TODO@footnote{In fact, the target
-state is taken from, in this sequence, the ~REPEAT_TO_STATE~ property or
-the variable ~org-todo-repeat-to-state~.  If neither of these is
-specified, the target state defaults to the first state of the TODO state
-sequence.}.  In the example above, setting the state to DONE would actually
-switch the date like this:
+
+Deadlines and scheduled items produce entries in the agenda when they
+are over-due, so it is important to be able to mark such an entry as
+completed once you have done so. When you mark a DEADLINE or a
+SCHEDULE with the TODO keyword DONE, it will no longer produce entries
+in the agenda. The problem with this is, however, that then also the
+/next/ instance of the repeated entry will not be active. Org mode
+deals with this in the following way: When you try to mark such an
+entry DONE (using {{{kbd(C-c C-t)}}}), it will shift the base date of
+the repeating timestamp by the repeater interval, and immediately set
+the entry state back to TODO.[fn:75] In the example above, setting the
+state to DONE would actually switch the date like this:
 
 #+begin_example
 ,** TODO Pay the rent
    DEADLINE: <2005-11-01 Tue +1m>
 #+end_example
 
-{{{vindex(org-log-repeat)}}}
-A timestamp@footnote{You can change this using the option
-~org-log-repeat~, or the ~#+STARTUP~ options ~logrepeat~,
-~lognoterepeat~, and ~nologrepeat~.  With ~lognoterepeat~, you
-will also be prompted for a note.} will be added under the deadline, to keep
-a record that you actually acted on the previous instance of this deadline.
+{{{vindex(org-log-repeat)}}} 
+
+A timestamp will be added under the deadline, to keep a record that
+you actually acted on the previous instance of this deadline.[fn:76]
 
 As a consequence of shifting the base date, this entry will no longer be
 visible in the agenda when checking past dates, but all future instances
@@ -5742,11 +5805,13 @@ special repeaters  {{{samp(++)}}} and {{{samp(.+)}}}.  For example:
 #+end_example
 
 You may have both scheduling and deadline information for a specific
-task---just make sure that the repeater intervals on both are the same.
+task---just make sure that the repeater intervals on both are the
+same.
 
-An alternative to using a repeater is to create a number of copies of a task
-subtree, with dates shifted in each copy.  The command {{{kbd(C-c C-x c)}}} was
-created for this purpose, it is described in [[Structure editing]].
+An alternative to using a repeater is to create a number of copies of
+a task subtree, with dates shifted in each copy. The command
+{{{kbd(C-c C-x c)}}} was created for this purpose, it is described in
+[[Structure editing]].
 
 ** Clocking work time
    :PROPERTIES:
@@ -5759,9 +5824,7 @@ Org mode allows you to clock the time you spend on specific tasks in a
 project.  When you start working on an item, you can start the clock.  When
 you stop working on that task, or when you mark the task done, the clock is
 stopped and the corresponding time interval is recorded.  It also computes
-the total time spent on each subtree@footnote{Clocking only works if all
-headings are indented with less than 30 stars.  This is a hardcoded
-limitation of `lmax' in `org-clock-sum'.} of a project.  And it remembers a
+the total time spent on each subtree of a project.[fn:77]  And it remembers a
 history or tasks recently clocked, to that you can jump quickly between a
 number of tasks absorbing your time.
 
@@ -5773,10 +5836,8 @@ To save the clock history across Emacs sessions, use
 (org-clock-persistence-insinuate)
 #+end_src
 When you clock into a new task after resuming Emacs, the incomplete
-clock@footnote{To resume the clock under the assumption that you have worked
-on this task while outside Emacs, use ~(setq org-clock-persist t)~.}
-will be found (see [[Resolving idle time]]) and you will be prompted about
-what to do with it.
+clock will be found (see [[Resolving idle time]]) and you will be prompted
+about what to do with it.[fn:78]
 
 *** Clocking commands
     :PROPERTIES:
@@ -5785,100 +5846,118 @@ what to do with it.
 
 #+attr_texinfo: :table-type "table" :indic "@kbd"
 - {{{kbd(C-c C-x C-i)}}} ~org-clock-in~ ::
-{{{vindex(org-clock-into-drawer)}}}
-{{{vindex(org-clock-continuously)}}}
-{{{cindex(property\\\, LOG_INTO_DRAWER)}}}
-Start the clock on the current item (clock-in).  This inserts the CLOCK
-keyword together with a timestamp.  If this is not the first clocking of
-this item, the multiple CLOCK lines will be wrapped into a
-~:LOGBOOK:~ drawer (see also the variable
-~org-clock-into-drawer~).  You can also overrule
-the setting of this variable for a subtree by setting a
-~CLOCK_INTO_DRAWER~ or ~LOG_INTO_DRAWER~ property.
-When called with a {{{kbd(C-u)}}} prefix argument,
-select the task from a list of recently clocked tasks.  With two {{{kbd(C-u
-C-u)}}} prefixes, clock into the task at point and mark it as the default task;
-the default task will then always be available with letter {{{kbd(d)}}} when
-selecting a clocking task.  With three {{{kbd(C-u C-u C-u)}}} prefixes, force
-continuous clocking by starting the clock when the last clock stopped.@*
-{{{cindex(property: CLOCK_MODELINE_TOTAL)}}}
-{{{cindex(property: LAST_REPEAT)}}}
-{{{vindex(org-clock-modeline-total)}}}
-While the clock is running, the current clocking time is shown in the mode
-line, along with the title of the task.  The clock time shown will be all
-time ever clocked for this task and its children.  If the task has an effort
-estimate (see [[Effort estimates]]), the mode line displays the current
-clocking time against it@footnote{To add an effort estimate ``on the fly'',
-hook a function doing this to ~org-clock-in-prepare-hook~.}  If the task
-is a repeating one (see [[Repeated tasks]]), only the time since the last
-reset of the task @footnote{as recorded by the ~LAST_REPEAT~ property}
-will be shown.  More control over what time is shown can be exercised with
-the ~CLOCK_MODELINE_TOTAL~ property.  It may have the values
-~current~ to show only the current clocking instance, ~today~ to
-show all time clocked on this tasks today (see also the variable
-~org-extend-today-until~), ~all~ to include all time, or
-~auto~ which is the default@footnote{See also the variable
-~org-clock-modeline-total~.}.@* Clicking with {{{kbd(mouse-1)}}} onto the
-mode line entry will pop up a menu with clocking options.
+  {{{vindex(org-clock-into-drawer)}}}
+  {{{vindex(org-clock-continuously)}}}
+  {{{cindex(property\\\, LOG_INTO_DRAWER)}}}
+
+  Start the clock on the current item (clock-in). This inserts the CLOCK
+  keyword together with a timestamp. If this is not the first clocking
+  of this item, the multiple CLOCK lines will be wrapped into a
+  ~:LOGBOOK:~ drawer (see also the variable ~org-clock-into-drawer~).
+  You can also overrule the setting of this variable for a subtree by
+  setting a ~CLOCK_INTO_DRAWER~ or ~LOG_INTO_DRAWER~ property. When
+  called with a {{{kbd(C-u)}}} prefix argument, select the task from a
+  list of recently clocked tasks. With two {{{kbd(C-u C-u)}}} prefixes,
+  clock into the task at point and mark it as the default task; the
+  default task will then always be available with letter {{{kbd(d)}}}
+  when selecting a clocking task. With three {{{kbd(C-u C-u C-u)}}}
+  prefixes, force continuous clocking by starting the clock when the
+  last clock stopped.@*
+
+  {{{cindex(property: CLOCK_MODELINE_TOTAL)}}}
+  {{{cindex(property: LAST_REPEAT)}}}
+  {{{vindex(org-clock-modeline-total)}}}
+
+  While the clock is running, the current clocking time is shown in the
+  mode line, along with the title of the task. The clock time shown will
+  be all time ever clocked for this task and its children. If the task
+  has an effort estimate (see [[Effort estimates]]), the mode line displays
+  the current clocking time against it.[fn:81] If the task is a
+  repeating one (see [[Repeated tasks]]), only the time since the last reset
+  of the task will be shown.[fn:79] More control over what time is shown
+  can be exercised with the ~CLOCK_MODELINE_TOTAL~ property. It may have
+  the values ~current~ to show only the current clocking instance,
+  ~today~ to show all time clocked on this tasks today (see also the
+  variable ~org-extend-today-until~), ~all~ to include all time, or
+  ~auto~ which is the default.[fn:80]@* Clicking with {{{kbd(mouse-1)}}}
+  onto the mode line entry will pop up a menu with clocking options.
 
 - {{{kbd(C-c C-x C-o)}}} ~org-clock-out~ ::
-{{{vindex(org-log-note-clock-out)}}}
-Stop the clock (clock-out).  This inserts another timestamp at the same
-location where the clock was last started.  It also directly computes
-the resulting time in inserts it after the time range as {{{samp(=>
-HH:MM)}}}.  See the variable ~org-log-note-clock-out~ for the
-possibility to record an additional note together with the clock-out
-timestamp@footnote{The corresponding in-buffer setting is:
-~#+STARTUP: lognoteclock-out~}.
+  {{{vindex(org-log-note-clock-out)}}}
+
+  Stop the clock (clock-out).  This inserts another timestamp at the same
+  location where the clock was last started.  It also directly computes
+  the resulting time in inserts it after the time range as
+  {{{samp(=>HH:MM)}}}.  See the variable ~org-log-note-clock-out~ for the
+  possibility to record an additional note together with the clock-out
+  timestamp.[fn:82]
+
 - {{{kbd(C-c C-x C-x)}}} ~org-clock-in-last~ ::
 {{{vindex(org-clock-continuously)}}}
-Reclock the last clocked task.  With one {{{kbd(C-u)}}} prefix argument,
-select the task from the clock history.  With two {{{kbd(C-u)}}} prefixes,
-force continuous clocking by starting the clock when the last clock
-stopped.
+
+Reclock the last clocked task. With one {{{kbd(C-u)}}} prefix
+argument, select the task from the clock history. With two
+{{{kbd(C-u)}}} prefixes, force continuous clocking by starting the
+clock when the last clock stopped.
+
 - {{{kbd(C-c C-x C-e)}}} ~org-clock-modify-effort-estimate~ ::
-Update the effort estimate for the current clock task.
-{{{kindex(C-c C-y)}}}
-{{{kindex(C-c C-c)}}}
+
+  Update the effort estimate for the current clock task.
 - {{{kbd(C-c C-c)}}} {{{kbd(C-c C-y)}}} ~org-evaluate-time-range~ ::
-Recompute the time interval after changing one of the timestamps.  This
-is only necessary if you edit the timestamps directly.  If you change
-them with {{{kbdkey(S-,cursor)}}} keys, the update is automatic.
+  {{{kindex(C-c C-y)}}}
+  {{{kindex(C-c C-c)}}}
+
+  Recompute the time interval after changing one of the timestamps. This
+  is only necessary if you edit the timestamps directly. If you change
+  them with {{{kbdkey(S-,cursor)}}} keys, the update is automatic.
+
 - {{{kbd(C-S-@key{up/down})}}} ~org-clock-timestamps-up/down~ ::
-On ~CLOCK~ log lines, increase/decrease both timestamps so that the
-clock duration keeps the same.
+
+  On ~CLOCK~ log lines, increase/decrease both timestamps so that the
+  clock duration keeps the same.
+
 - {{{kbd(S-M-@key{up/down})}}} ~org-timestamp-up/down~ ::
-On ~CLOCK~ log lines, increase/decrease the timestamp at point and
-the one of the previous (or the next clock) timestamp by the same duration.
-For example, if you hit {{{kbdkey(S-M-,up)}}} to increase a clocked-out timestamp
-by five minutes, then the clocked-in timestamp of the next clock will be
-increased by five minutes.
+
+  On ~CLOCK~ log lines, increase/decrease the timestamp at point and the
+  one of the previous (or the next clock) timestamp by the same
+  duration. For example, if you hit {{{kbdkey(S-M-,up)}}} to increase a
+  clocked-out timestamp by five minutes, then the clocked-in timestamp
+  of the next clock will be increased by five minutes.
+
 - {{{kbd(C-c C-t)}}} ~org-todo~ ::
-Changing the TODO state of an item to DONE automatically stops the clock
-if it is running in this same item.
+
+  Changing the TODO state of an item to DONE automatically stops the
+  clock if it is running in this same item.
+
 - {{{kbd(C-c C-x C-q)}}} ~org-clock-cancel~ ::
-Cancel the current clock.  This is useful if a clock was started by
-mistake, or if you ended up working on something else.
+
+  Cancel the current clock. This is useful if a clock was started by
+  mistake, or if you ended up working on something else.
+
 - {{{kbd(C-c C-x C-j)}}} ~org-clock-goto~ ::
-Jump to the headline of the currently clocked in task.  With a {{{kbd(C-u)}}}
-prefix arg, select the target task from a list of recently clocked tasks.
+
+  Jump to the headline of the currently clocked in task. With a
+  {{{kbd(C-u)}}} prefix arg, select the target task from a list of
+  recently clocked tasks.
+
 - {{{kbd(C-c C-x C-d)}}} ~org-clock-display~ ::
-{{{vindex(org-remove-highlights-with-change)}}}
-Display time summaries for each subtree in the current buffer.  This puts
-overlays at the end of each headline, showing the total time recorded under
-that heading, including the time of any subheadings.  You can use visibility
-cycling to study the tree, but the overlays disappear when you change the
-buffer (see variable ~org-remove-highlights-with-change~) or press
-{{{kbd(C-c C-c)}}}.
+  {{{vindex(org-remove-highlights-with-change)}}}
+
+  Display time summaries for each subtree in the current buffer. This
+  puts overlays at the end of each headline, showing the total time
+  recorded under that heading, including the time of any subheadings.
+  You can use visibility cycling to study the tree, but the overlays
+  disappear when you change the buffer (see variable
+  ~org-remove-highlights-with-change~) or press {{{kbd(C-c C-c)}}}.
 
 
 The {{{kbd(l)}}} key may be used in the timeline (see [[Timeline]]) and in
 the agenda (see [[Weekly/daily agenda]]) to show which tasks have been
 worked on or closed during a day.
 
-@strong{Important:} note that both ~org-clock-out~ and
-~org-clock-in-last~ can have a global keybinding and will not
-modify the window disposition.
+*Important:* note that both ~org-clock-out~ and ~org-clock-in-last~
+can have a global keybinding and will not modify the window
+disposition.
 
 *** The clock table
     :PROPERTIES:
@@ -5891,29 +5970,35 @@ Org mode can produce quite complex reports based on the time clocking
 information.  Such a report is called a /clock table/, because it is
 formatted as one or several Org tables.
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
+#+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c C-x C-r)}}} ~org-clock-report~ ::
-Insert a dynamic block (see [[Dynamic blocks]]) containing a clock
-report as an Org mode table into the current file.  When the cursor is
-at an existing clock table, just update it.  When called with a prefix
-argument, jump to the first clock report in the current document and
-update it.  The clock table always includes also trees with
-~:ARCHIVE:~ tag.
+
+  Insert a dynamic block (see [[Dynamic blocks]]) containing a clock report
+  as an Org mode table into the current file. When the cursor is at an
+  existing clock table, just update it. When called with a prefix
+  argument, jump to the first clock report in the current document and
+  update it. The clock table always includes also trees with ~:ARCHIVE:~
+  tag.
+
 - {{{kbd(C-c C-c)}}} {{{kbd(C-c C-x C-u)}}} ~org-dblock-update~ ::
-Update dynamic block at point.  The cursor needs to be in the
-~#+BEGIN~ line of the dynamic block.
+
+  Update dynamic block at point.  The cursor needs to be in the
+  ~#+BEGIN~ line of the dynamic block.
+
 - {{{kbd(C-u C-c C-x C-u)}}} ::
-Update all dynamic blocks (see [[Dynamic blocks]]).  This is useful if
-you have several clock table blocks in a buffer.
-@orgcmdkxkc{S-@key{left},S-@key{right},org-clocktable-try-shift}
-Shift the current ~:block~ interval and update the table.  The cursor
-needs to be in the ~#+BEGIN: clocktable~ line for this command.  If
-~:block~ is ~today~, it will be shifted to ~today-1~ etc.
+
+  Update all dynamic blocks (see [[Dynamic blocks]]). This is useful if you
+  have several clock table blocks in a buffer.
+
+- {{{kbdkey(S-,left)}} {{{kbdkey(S-,right)}}} ~org-clocktable-try-shift~ ::
+
+  Shift the current ~:block~ interval and update the table. The cursor
+  needs to be in the ~#+BEGIN: clocktable~ line for this command. If
+  ~:block~ is ~today~, it will be shifted to ~today-1~ etc.
 
 
-
-Here is an example of the frame for a clock table as it is inserted into the
-buffer with the {{{kbd(C-c C-x C-r)}}} command:
+Here is an example of the frame for a clock table as it is inserted
+into the buffer with the {{{kbd(C-c C-x C-r)}}} command:
 
 {{{cindex(#+BEGIN\\\, clocktable)}}}
 #+begin_example
@@ -5998,21 +6083,19 @@ day, you could write
 ,#+END: clocktable
 #+end_example
 {{{noindent}}}
-and to use a specific time range you could write@footnote{Note that all
-parameters must be specified in a single line---the line is broken here
-only to fit it into the manual.}
+and to use a specific time range you could write:[fn:83]
 #+begin_example
 ,#+BEGIN: clocktable :tstart "<2006-08-10 Thu 10:00>"
                     :tend "<2006-08-10 Thu 12:00>"
 ,#+END: clocktable
 #+end_example
-A summary of the current subtree with % times would be
+A summary of the current subtree with % times would be:
 #+begin_example
 ,#+BEGIN: clocktable :scope subtree :link t :formula %
 ,#+END: clocktable
 #+end_example
 A horizontally compact representation of everything clocked during last week
-would be
+would be:
 #+begin_example
 ,#+BEGIN: clocktable :scope agenda :block lastweek :compact t
 ,#+END: clocktable
@@ -6024,149 +6107,167 @@ would be
     :TITLE:    Resolving idle time and continuous clocking
     :END:
 
-@subsubheading Resolving idle time
 {{{cindex(resolve idle time)}}}
-
 {{{cindex(idle\\\, resolve\\\, dangling)}}}
+
 If you clock in on a work item, and then walk away from your
-computer---perhaps to take a phone call---you often need to ``resolve'' the
-time you were away by either subtracting it from the current clock, or
-applying it to another one.
+computer---perhaps to take a phone call---you often need to
+``resolve'' the time you were away by either subtracting it from the
+current clock, or applying it to another one.
 
 {{{vindex(org-clock-idle-time)}}}
-By customizing the variable ~org-clock-idle-time~ to some integer, such
-as 10 or 15, Emacs can alert you when you get back to your computer after
-being idle for that many minutes@footnote{On computers using Mac OS X,
-idleness is based on actual user idleness, not just Emacs' idle time.  For
-X11, you can install a utility program {{{file(x11idle.c)}}}, available in the
-~contrib/scripts~ directory of the Org git distribution, to get the same
-general treatment of idleness.  On other systems, idle time refers to Emacs
-idle time only.}, and ask what you want to do with the idle time.  There will
-be a question waiting for you when you get back, indicating how much idle
-time has passed (constantly updated with the current amount), as well as a
-set of choices to correct the discrepancy:
+
+By customizing the variable ~org-clock-idle-time~ to some integer,
+such as 10 or 15, Emacs can alert you when you get back to your
+computer after being idle for that many minutes, and ask what you want
+to do with the idle time.[fn:84] There will be a question waiting for you
+when you get back, indicating how much idle time has passed
+(constantly updated with the current amount), as well as a set of
+choices to correct the discrepancy:
 
 #+attr_texinfo: :table-type "table" :indic "@kbd"
-- k
-To keep some or all of the minutes and stay clocked in, press {{{kbd(k)}}}.  Org
-will ask how many of the minutes to keep.  Press @key{RET} to keep them all,
-effectively changing nothing, or enter a number to keep that many minutes.
-- K
-If you use the shift key and press {{{kbd(K)}}}, it will keep however many minutes
-you request and then immediately clock out of that task.  If you keep all of
-the minutes, this is the same as just clocking out of the current task.
-- s
-To keep none of the minutes, use {{{kbd(s)}}} to subtract all the away time from
-the clock, and then check back in from the moment you returned.
-- S
-To keep none of the minutes and just clock out at the start of the away time,
-use the shift key and press {{{kbd(S)}}}.  Remember that using shift will always
-leave you clocked out, no matter which option you choose.
-- C
-To cancel the clock altogether, use {{{kbd(C)}}}.  Note that if instead of
-canceling you subtract the away time, and the resulting clock amount is less
-than a minute, the clock will still be canceled rather than clutter up the
-log with an empty entry.
+- {{{kbd(k)}}} ::
+
+  To keep some or all of the minutes and stay clocked in, press
+  {{{kbd(k)}}}. Org will ask how many of the minutes to keep. Press
+  {{{key(RET)}}} to keep them all, effectively changing nothing, or
+  enter a number to keep that many minutes.
+
+- {{{kbd(K)}}} ::
+
+  If you use the shift key and press {{{kbd(K)}}}, it will keep however
+  many minutes you request and then immediately clock out of that task.
+  If you keep all of the minutes, this is the same as just clocking out
+  of the current task.
+
+- {{{kbd(s)}}} ::
+
+  To keep none of the minutes, use {{{kbd(s)}}} to subtract all the away
+  time from the clock, and then check back in from the moment you
+  returned.
+
+- {{{kbd(S)}}} ::
+
+  To keep none of the minutes and just clock out at the start of the
+  away time, use the shift key and press {{{kbd(S)}}}. Remember that
+  using shift will always leave you clocked out, no matter which option
+  you choose.
+
+- {{{kbd(C)}}} ::
+
+  To cancel the clock altogether, use {{{kbd(C)}}}. Note that if instead
+  of canceling you subtract the away time, and the resulting clock
+  amount is less than a minute, the clock will still be canceled rather
+  than clutter up the log with an empty entry.
 
 
-What if you subtracted those away minutes from the current clock, and now
-want to apply them to a new clock?  Simply clock in to any task immediately
-after the subtraction.  Org will notice that you have subtracted time ``on
-the books'', so to speak, and will ask if you want to apply those minutes to
-the next task you clock in on.
+What if you subtracted those away minutes from the current clock, and
+now want to apply them to a new clock? Simply clock in to any task
+immediately after the subtraction. Org will notice that you have
+subtracted time ``on the books'', so to speak, and will ask if you
+want to apply those minutes to the next task you clock in on.
 
-There is one other instance when this clock resolution magic occurs.  Say you
-were clocked in and hacking away, and suddenly your cat chased a mouse who
-scared a hamster that crashed into your UPS's power button!  You suddenly
-lose all your buffers, but thanks to auto-save you still have your recent Org
-mode changes, including your last clock in.
+There is one other instance when this clock resolution magic occurs.
+Say you were clocked in and hacking away, and suddenly your cat chased
+a mouse who scared a hamster that crashed into your UPS's power
+button! You suddenly lose all your buffers, but thanks to auto-save
+you still have your recent Org mode changes, including your last clock
+in.
 
-If you restart Emacs and clock into any task, Org will notice that you have a
-dangling clock which was never clocked out from your last session.  Using
-that clock's starting time as the beginning of the unaccounted-for period,
-Org will ask how you want to resolve that time.  The logic and behavior is
-identical to dealing with away time due to idleness; it is just happening due
-to a recovery event rather than a set amount of idle time.
+If you restart Emacs and clock into any task, Org will notice that you
+have a dangling clock which was never clocked out from your last
+session. Using that clock's starting time as the beginning of the
+unaccounted-for period, Org will ask how you want to resolve that
+time. The logic and behavior is identical to dealing with away time
+due to idleness; it is just happening due to a recovery event rather
+than a set amount of idle time.
 
-You can also check all the files visited by your Org agenda for dangling
-clocks at any time using {{{kbd(M-x org-resolve-clocks RET)}}} (or {{{kbd(C-c C-x C-z)}}}).
+You can also check all the files visited by your Org agenda for
+dangling clocks at any time using {{{kbd(M-x org-resolve-clocks RET)}}}
+ (or {{{kbd(C-c C-x C-z)}}}).
 
-@subsubheading Continuous clocking
+*** Continuous clocking
 {{{cindex(continuous clocking)}}}
 {{{vindex(org-clock-continuously)}}}
 
 You may want to start clocking from the time when you clocked out the
-previous task.  To enable this systematically, set ~org-clock-continuously~
-to ~t~.  Each time you clock in, Org retrieves the clock-out time of the
-last clocked entry for this session, and start the new clock from there.
+previous task. To enable this systematically, set
+~org-clock-continuously~ to ~t~. Each time you clock in, Org retrieves
+the clock-out time of the last clocked entry for this session, and
+start the new clock from there.
 
-If you only want this from time to time, use three universal prefix arguments
-with ~org-clock-in~ and two {{{kbd(C-u C-u)}}} with ~org-clock-in-last~.
+If you only want this from time to time, use three universal prefix
+arguments with ~org-clock-in~ and two {{{kbd(C-u C-u)}}} with
+~org-clock-in-last~.
 
 ** Effort estimates
    :PROPERTIES:
    :DESCRIPTION: Planning work effort in advance
    :END:
 {{{cindex(effort estimates)}}}
-
 {{{cindex(property\\\, Effort)}}}
 {{{vindex(org-effort-property)}}}
-If you want to plan your work in a very detailed way, or if you need to
-produce offers with quotations of the estimated work effort, you may want to
-assign effort estimates to entries.  If you are also clocking your work, you
-may later want to compare the planned effort with the actual working time, a
-great way to improve planning estimates.  Effort estimates are stored in a
-special property {{{samp(Effort)}}}@footnote{You may change the property being
-used with the variable ~org-effort-property~.}.  You can set the effort
-for an entry with the following commands:
+
+If you want to plan your work in a very detailed way, or if you need
+to produce offers with quotations of the estimated work effort, you
+may want to assign effort estimates to entries. If you are also
+clocking your work, you may later want to compare the planned effort
+with the actual working time, a great way to improve planning
+estimates. Effort estimates are stored in a special property
+{{{samp(Effort)}}}.[fn:85] You can set the effort for an entry with
+the following commands:
 
 #+attr_texinfo: :table-type "table" :indic "@kbd"
 - {{{kbd(C-c C-x e)}}} ~org-set-effort~ ::
-Set the effort estimate for the current entry.  With a numeric prefix
-argument, set it to the Nth allowed value (see below).  This command is also
-accessible from the agenda with the {{{kbd(e)}}} key.
+
+  Set the effort estimate for the current entry. With a numeric prefix
+  argument, set it to the Nth allowed value (see below). This command is
+  also accessible from the agenda with the {{{kbd(e)}}} key.
+
 - {{{kbd(C-c C-x C-e)}}} ~org-clock-modify-effort-estimate~ ::
-Modify the effort estimate of the item currently being clocked.
+
+  Modify the effort estimate of the item currently being clocked.
 
 
-Clearly the best way to work with effort estimates is through column view
-(see [[Column view]]).  You should start by setting up discrete values for
-effort estimates, and a ~COLUMNS~ format that displays these values
-together with clock sums (if you want to clock your time).  For a specific
-buffer you can use
+Clearly the best way to work with effort estimates is through column
+view (see [[Column view]]). You should start by setting up discrete values
+for effort estimates, and a ~COLUMNS~ format that displays these
+values together with clock sums (if you want to clock your time). For
+a specific buffer you can use:
 
 #+begin_example
 ,#+PROPERTY: Effort_ALL 0 0:10 0:30 1:00 2:00 3:00 4:00 5:00 6:00 7:00
 ,#+COLUMNS: %40ITEM(Task) %17Effort(Estimated Effort)@{:@} %CLOCKSUM
 #+end_example
 
-{{{noindent}}}
 {{{vindex(org-global-properties)}}}
 {{{vindex(org-columns-default-format)}}}
-or, even better, you can set up these values globally by customizing the
-variables ~org-global-properties~ and ~org-columns-default-format~.
-In particular if you want to use this setup also in the agenda, a global
-setup may be advised.
 
-The way to assign estimates to individual items is then to switch to column
-mode, and to use {{{kbdkey(S-,right)}}} and {{{kbdkey(S-,left)}}} to change the
-value.  The values you enter will immediately be summed up in the hierarchy.
-In the column next to it, any clocked time will be displayed.
+{{{noindent}}} or, even better, you can set up these values globally
+by customizing the variables ~org-global-properties~ and
+~org-columns-default-format~. In particular if you want to use this
+setup also in the agenda, a global setup may be advised.
+
+The way to assign estimates to individual items is then to switch to
+column mode, and to use {{{kbdkey(S-,right)}}} and
+{{{kbdkey(S-,left)}}} to change the value. The values you enter will
+immediately be summed up in the hierarchy. In the column next to it,
+any clocked time will be displayed.
 
 {{{vindex(org-agenda-columns-add-appointments-to-effort-sum)}}}
+
 If you switch to column view in the daily/weekly agenda, the effort column
-will summarize the estimated work effort for each day@footnote{Please note
-the pitfalls of summing hierarchical data in a flat list
-(see [[Agenda column view]]).}, and you can use this to find space in your schedule.  To get
+will summarize the estimated work effort for each day, and you can use this to find space in your schedule.  To get
 an overview of the entire part of the day that is committed, you can set the
-option ~org-agenda-columns-add-appointments-to-effort-sum~.  The
+option ~org-agenda-columns-add-appointments-to-effort-sum~.[fn:86] The
 appointments on a day that take place over a specified time interval will
 then also be added to the load estimate of the day.
 
-Effort estimates can be used in secondary agenda filtering that is triggered
-with the {{{kbd(/)}}} key in the agenda (see [[Agenda commands]]).  If you have
-these estimates defined consistently, two or three key presses will narrow
-down the list to stuff that fits into an available time slot.
+Effort estimates can be used in secondary agenda filtering that is
+triggered with the {{{kbd(/)}}} key in the agenda (see [[Agenda
+commands]]). If you have these estimates defined consistently, two or
+three key presses will narrow down the list to stuff that fits into an
+available time slot.
 
 
 ** Relative timer
@@ -6180,36 +6281,50 @@ When taking notes during, for example, a meeting or a video viewing, it can
 be useful to have access to times relative to a starting time.  Org provides
 such a relative timer and make it easy to create timed notes.
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
+#+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c C-x .)}}} ~org-timer~ ::
-Insert a relative time into the buffer.  The first time you use this, the
-timer will be started.  When called with a prefix argument, the timer is
-restarted.
+
+  Insert a relative time into the buffer.  The first time you use this, the
+  timer will be started.  When called with a prefix argument, the timer is
+  restarted.
+
 - {{{kbd(C-c C-x -)}}} ~org-timer-item~ ::
-Insert a description list item with the current relative time.  With a prefix
-argument, first reset the timer to 0.
+
+  Insert a description list item with the current relative time.  With a prefix
+  argument, first reset the timer to 0.
+
 - {{{kbd(M-@key{RET})}}} ~org-insert-heading~ ::
-Once the timer list is started, you can also use {{{kbdkey(M-,RET)}}} to insert
-new timer items.
+
+  Once the timer list is started, you can also use {{{kbdkey(M-,RET)}}}
+  to insert new timer items.
+
 #+comment  for key sequences with a comma, command name macros fail :(
-{{{kindex(C-c C-x ,)}}}
-- C-c C-x ,
-Pause the timer, or continue it if it is already paused
-(@command{org-timer-pause-or-continue}).
+
+- {{{kbd(C-c C-x ,)}}} ::
+  {{{kindex(C-c C-x ,)}}}
+
+  Pause the timer, or continue it if it is already paused
+  ({{{command(org-timer-pause-or-continue)}}}}).
 #+comment  removed the sentence because it is redundant to the following item
-{{{kindex(C-u C-c C-x ,)}}}
-- C-u C-c C-x ,
-Stop the timer.  After this, you can only start a new timer, not continue the
-old one.  This command also removes the timer from the mode line.
+
+- {{{kbd(C-u C-c C-x ,)}}} ::
+  {{{kindex(C-u C-c C-x ,)}}}
+
+  Stop the timer. After this, you can only start a new timer, not
+  continue the old one. This command also removes the timer from the
+  mode line.
+
 - {{{kbd(C-c C-x 0)}}} ~org-timer-start~ ::
-Reset the timer without inserting anything into the buffer.  By default, the
-timer is reset to 0.  When called with a {{{kbd(C-u)}}} prefix, reset the timer to
-specific starting offset.  The user is prompted for the offset, with a
-default taken from a timer string at point, if any, So this can be used to
-restart taking notes after a break in the process.  When called with a double
-prefix argument {{{kbd(C-u C-u)}}}, change all timer strings in the active region
-by a certain amount.  This can be used to fix timer strings if the timer was
-not started at exactly the right moment.
+
+  Reset the timer without inserting anything into the buffer. By
+  default, the timer is reset to 0. When called with a {{{kbd(C-u)}}}
+  prefix, reset the timer to specific starting offset. The user is
+  prompted for the offset, with a default taken from a timer string at
+  point, if any, So this can be used to restart taking notes after a
+  break in the process. When called with a double prefix argument
+  {{{kbd(C-u C-u)}}}, change all timer strings in the active region by a
+  certain amount. This can be used to fix timer strings if the timer was
+  not started at exactly the right moment.
 
 
 ** Countdown timer
@@ -6221,14 +6336,15 @@ not started at exactly the right moment.
 {{{kindex(;)}}}
 
 Calling ~org-timer-set-timer~ from an Org mode buffer runs a countdown
-timer.  Use {{{kbd(;)}}} from agenda buffers, @key{C-c C-x ;} everywhere else.
+timer. Use {{{kbd(;)}}} from agenda buffers, {{{key(C-c C-x ;)}}}
+everywhere else.
 
 ~org-timer-set-timer~ prompts the user for a duration and displays a
 countdown timer in the modeline.  ~org-timer-default-timer~ sets the
 default countdown value.  Giving a prefix numeric argument overrides this
 default value.
 
-* FIXME Capture - Refile - Archive
+* FIXME Capture - Refile - Archive                                 :noexport:
   :PROPERTIES:
   :DESCRIPTION: The ins and outs for projects
   :END:
@@ -6630,7 +6746,7 @@ To place the cursor after template expansion use:
 
 {{{vindex(org-capture-templates-contexts)}}}
 To control whether a capture template should be accessible from a specific
-context, you can customize @var{org-capture-templates-contexts}.  Let's say
+context, you can customize {{{var(org-capture-templates-contexts)}}}.  Let's say
 for example that you have a capture template ~"p"~ for storing Gnus
 emails containing patches.  Then you would configure this option like this:
 
@@ -6955,31 +7071,31 @@ moving them to a different file, you can use the ~ARCHIVE tag~.
 A headline that is marked with the ARCHIVE tag (see [[Tags]]) stays at
 its location in the outline tree, but behaves in the following way:
 @itemize @minus
-@item
+- 
 {{{vindex(org-cycle-open-archived-trees)}}}
 It does not open when you attempt to do so with a visibility cycling
 command (see [[Visibility cycling]]).  You can force cycling archived
 subtrees with {{{kbdkey(C-,TAB)}}}, or by setting the option
 ~org-cycle-open-archived-trees~.  Also normal outline commands like
 ~show-all~ will open archived subtrees.
-@item
+- 
 {{{vindex(org-sparse-tree-open-archived-trees)}}}
 During sparse tree construction (see [[Sparse trees]]), matches in
 archived subtrees are not exposed, unless you configure the option
 ~org-sparse-tree-open-archived-trees~.
-@item
+- 
 {{{vindex(org-agenda-skip-archived-trees)}}}
 During agenda view construction (see [[Agenda Views]]), the content of
 archived trees is ignored unless you configure the option
 ~org-agenda-skip-archived-trees~, in which case these trees will always
 be included.  In the agenda you can press {{{kbd(v a)}}} to get archives
 temporarily included.
-@item
+- 
 {{{vindex(org-export-with-archived-trees)}}}
 Archived trees are not exported (see [[Exporting]]), only the headline
 is.  Configure the details using the variable
 ~org-export-with-archived-trees~.
-@item
+- 
 {{{vindex(org-columns-skip-archived-trees)}}}
 Archived trees are excluded from column view unless the variable
 ~org-columns-skip-archived-trees~ is configured to ~nil~.
@@ -7007,8 +7123,7 @@ entry becomes a child of that sibling and in this way retains a lot of its
 original context, including inherited tags and approximate position in the
 outline.
 
-
-* FIXME Agenda views
+* FIXME Agenda views                                               :noexport:
   :PROPERTIES:
   :DESCRIPTION: Collecting information into views
   :TEXINFO_MENU_TITLE: Agenda Views
@@ -7023,25 +7138,25 @@ Org can select items based on various criteria and display them
 in a separate buffer.  Seven different view types are provided:
 
 @itemize @bullet
-@item
+- 
 an /agenda/ that is like a calendar and shows information
 for specific dates,
-@item
+- 
 a /TODO list/ that covers all unfinished
 action items,
-@item
+- 
 a /match view/, showings headlines based on the tags, properties, and
 TODO state associated with them,
-@item
+- 
 a /timeline view/ that shows all events in a single Org file,
 in time-sorted view,
-@item
+- 
 a /text search view/ that shows all entries from multiple files
 that contain specified keywords,
-@item
+- 
 a /stuck projects view/ showing projects that currently don't move
 along, and
-@item
+- 
 /custom views/ that are special searches and combinations of different
 views.
 @end itemize
@@ -7268,8 +7383,8 @@ agenda, you only need to customize the variable
 
 {{{noindent}}} After that, everything will happen automatically.  All diary
 entries including holidays, anniversaries, etc., will be included in the
-agenda buffer created by Org mode.  @key{SPC}, @key{TAB}, and
-@key{RET} can be used from the agenda buffer to jump to the diary
+agenda buffer created by Org mode.  {{{key(SPC)}}}, {{{key(TAB)}}}, and
+{{{key(RET)}}} can be used from the agenda buffer to jump to the diary
 file in order to edit existing diary entries.  The {{{kbd(i)}}} command to
 insert new entries for the current date works in the agenda buffer, as
 well as the commands {{{kbd(S)}}}, {{{kbd(M)}}}, and {{{kbd(C)}}} to display
@@ -7392,7 +7507,7 @@ Normally the global TODO list simply shows all headlines with TODO
 keywords.  This list can become very long.  There are two ways to keep
 it more compact:
 @itemize @minus
-@item
+- 
 {{{vindex(org-agenda-todo-ignore-scheduled)}}}
 {{{vindex(org-agenda-todo-ignore-deadlines)}}}
 {{{vindex(org-agenda-todo-ignore-timestamp)}}}
@@ -7404,7 +7519,7 @@ Configure the variables ~org-agenda-todo-ignore-scheduled~,
 ~org-agenda-todo-ignore-timestamp~ and/or
 ~org-agenda-todo-ignore-with-date~ to exclude such items from the global
 TODO list.
-@item
+- 
 {{{vindex(org-agenda-todo-list-sublevels)}}}
 TODO items may have sublevels to break up the task into subtasks.  In
 such cases it may be enough to list only the highest level TODO headline
@@ -7516,14 +7631,14 @@ the value of a property.  Here is a complex example:
 {{{noindent}}}
 The type of comparison will depend on how the comparison value is written:
 @itemize @minus
-@item
+- 
 If the comparison value is a plain number, a numerical comparison is done,
 and the allowed operators are {{{samp(<)}}}, {{{samp(=)}}}, {{{samp(>)}}}, {{{samp(<=)}}},
 {{{samp(>=)}}}, and {{{samp(<>)}}}.
-@item
+- 
 If the comparison value is enclosed in double-quotes,
 a string comparison is done, and the same operators are allowed.
-@item
+- 
 If the comparison value is enclosed in double-quotes /and/ angular
 brackets (like {{{samp(DEADLINE<="<2008-12-24 18:30>")}}}), both values are
 assumed to be date/time specifications in the standard Org way, and the
@@ -7533,7 +7648,7 @@ are ~"<now>"~ for now (including time), and ~"<today>"~, and
 specification.  Also strings like ~"<+5d>"~ or ~"<-2m>"~ with units
 ~d~, ~w~, ~m~, and ~y~ for day, week, month, and year,
 respectively, can be used.
-@item
+- 
 If the comparison value is enclosed
 in curly braces, a regexp match is performed, with {{{samp(=)}}} meaning that the
 regexp matches the property value, and {{{samp(<>)}}} meaning that it does not
@@ -7804,7 +7919,7 @@ The time grid can be turned on and off with the variable
 Before being inserted into a view, the items are sorted.  How this is
 done depends on the type of view.
 @itemize @bullet
-@item
+- 
 {{{vindex(org-agenda-files)}}}
 For the daily/weekly agenda, the items for each day are sorted.  The
 default order is to first collect all items containing an explicit
@@ -7815,13 +7930,13 @@ Within each category, items are sorted by priority (see [[Priorities]]),
 which is composed of the base priority (2000 for priority {{{samp(A)}}}, 1000
 for {{{samp(B)}}}, and 0 for {{{samp(C)}}}), plus additional increments for
 overdue scheduled or deadline items.
-@item
+- 
 For the TODO list, items remain in the order of categories, but within
 each category, sorting takes place according to priority
 (see [[Priorities]]).  The priority used for sorting derives from the
 priority cookie, with additions depending on how close an item is to its due
 or scheduled date.
-@item
+- 
 For tags matches, items are not sorted at all, but just appear in the
 sequence in which they are found in the agenda files.
 @end itemize
@@ -7852,9 +7967,9 @@ the other commands, the cursor needs to be in the desired line.
 @tsubheading{Motion}
 {{{cindex(motion commands in agenda)}}}
 - {{{kbd(n)}}} ~org-agenda-next-line~ ::
-Next line (same as @key{down} and {{{kbd(C-n)}}}).
+Next line (same as {{{key(down)}}} and {{{kbd(C-n)}}}).
 - {{{kbd(p)}}} ~org-agenda-previous-line~ ::
-Previous line (same as @key{up} and {{{kbd(C-p)}}}).
+Previous line (same as {{{key(up)}}} and {{{kbd(C-p)}}}).
 @tsubheading{View/Go to Org file}
 - {{{kbd(@key{SPC})}}} {{{kbd(mouse-3)}}} ~org-agenda-show-and-scroll-up~ ::
 Display the original location of the item in another window.
@@ -8255,7 +8370,7 @@ Jump to the running clock in another window.
 
 - {{{kbd(k)}}} ~org-agenda-capture~ ::
 Like ~org-capture~, but use the date at point as the default date for
-the capture template.  See @var{org-capture-use-agenda-date} to make this
+the capture template.  See {{{var(org-capture-use-agenda-date)}}} to make this
 the default behavior of ~org-capture~.
 {{{cindex(capturing\\\, from agenda)}}}
 {{{vindex(org-capture-use-agenda-date)}}}
@@ -8589,7 +8704,7 @@ yourself.
 
 {{{vindex(org-agenda-custom-commands-contexts)}}}
 To control whether an agenda command should be accessible from a specific
-context, you can customize @var{org-agenda-custom-commands-contexts}.  Let's
+context, you can customize {{{var(org-agenda-custom-commands-contexts)}}}.  Let's
 say for example that you have an agenda commands ~"o"~ displaying a view
 that you only need when reading emails.  Then you would configure this option
 like this:
@@ -8785,7 +8900,7 @@ entries in the agenda are no longer in their proper outline environment.
 This causes the following issues:
 
 @enumerate
-@item
+- 
 {{{vindex(org-columns-default-format)}}}
 {{{vindex(org-overriding-columns-format)}}}
 Org needs to make a decision which ~COLUMNS~ format to use.  Since the
@@ -8796,7 +8911,7 @@ currently set, and if so, takes the format from there.  Otherwise it takes
 the format associated with the first item in the agenda, or, if that item
 does not have a specific format (defined in a property, or in its file), it
 uses ~org-columns-default-format~.
-@item
+- 
 {{{cindex(property\\\, special\\\, CLOCKSUM)}}}
 If any of the columns has a summary type defined (see [[Column attributes]]),
 turning on column view in the agenda will visit all relevant agenda files and
@@ -8809,7 +8924,7 @@ example as scheduled and as a deadline), and it may show two entries from the
 same hierarchy (for example a /parent/ and its /child/).  In these
 cases, the summation in the agenda will lead to incorrect results because
 some values will count double.
-@item
+- 
 When the column view in the agenda shows the ~CLOCKSUM~, that is always
 the entire clocked time for this item.  So even in the daily/weekly agenda,
 the clocksum listed in column view may originate from times outside the
@@ -8819,7 +8934,7 @@ applications for column view in the agenda.  If you want information about
 clocked time in the displayed period use clock table mode (press {{{kbd(R)}}} in
 the agenda).
 
-@item
+- 
 {{{cindex(property\\\, special\\\, CLOCKSUM_T)}}}
 When the column view in the agenda shows the ~CLOCKSUM_T~, that is
 always today's clocked time for this item.  So even in the weekly agenda,
@@ -8828,7 +8943,7 @@ you compare the time you spent on a task for today, with the time already
 spent (via ~CLOCKSUM~) and with the planned total effort for it.
 @end enumerate
 
-* FIXME Markup for rich export
+* FIXME Markup for rich export                                     :noexport:
   :PROPERTIES:
   :DESCRIPTION: Prepare text for rich export
   :TEXINFO_MENU_TITLE: Markup
@@ -9016,7 +9131,7 @@ multiple footnotes side by side.
 {{{cindex(verbatim text\\\, markup rules)}}}
 {{{cindex(code text\\\, markup rules)}}}
 {{{cindex(strike-through text\\\, markup rules)}}}
-You can make words @b{*bold*}, //italic//, _underlined_, ~=code=~
+You can make words **bold**, //italic//, _underlined_, ~=code=~
 and ~~verbatim~~, and, if you must, {{{samp(+strike-through+)}}}.  Text
 in the code and verbatim string is not processed for Org mode specific
 syntax; it is exported verbatim.
@@ -9297,7 +9412,7 @@ will reference information set by the ~#+TITLE:~, ~#+AUTHOR:~, and
 similar lines.  Also, ~@{@{@{date(@var{FORMAT~)@}@}@}} and
 ~@{@{@{modification-time(@var{FORMAT~)@}@}@}} refer to current date time
 and to the modification time of the file being exported, respectively.
-@var{FORMAT} should be a format string understood by
+{{{var(FORMAT)}}} should be a format string understood by
 ~format-time-string~.
 
 Macro expansion takes place during export, and some people use it to
@@ -9439,13 +9554,13 @@ DocBook documents.
 @LaTeX{} fragments don't need any special marking at all.  The following
 snippets will be identified as @LaTeX{} source code:
 @itemize @bullet
-@item
+- 
 Environments of any kind@footnote{When {{{file(MathJax)}}} is used, only the
 environment recognized by {{{file(MathJax)}}} will be processed.  When
 {{{file(dvipng)}}} is used to create images, any @LaTeX{} environments will be
 handled.}.  The only requirement is that the ~\begin~ statement appears
 on a new line, preceded by only whitespace.
-@item
+- 
 Text within the usual @LaTeX{} math delimiters.  To avoid conflicts with
 currency specifications, single {{{samp($)}}} characters are only recognized as
 math delimiters if the enclosed text contains at most two line breaks, is
@@ -9543,9 +9658,9 @@ When this mode is enabled, the following features are present (for more
 details see the documentation of CD@LaTeX{} mode):
 @itemize @bullet
 {{{kindex(C-c @{)}}}
-@item
+- 
 Environment templates can be inserted with {{{kbd(C-c @{)}}}.
-@item
+- 
 {{{kindex(@key{TAB})}}}
 The @key{TAB} key will do template expansion if the cursor is inside a
 @LaTeX{} fragment@footnote{Org mode has a method to test if the cursor is
@@ -9558,7 +9673,7 @@ environment abbreviations at the beginning of a line.  For example, if
 you write {{{samp(equ)}}} at the beginning of a line and press @key{TAB},
 this abbreviation will be expanded to an ~equation~ environment.
 To get a list of all abbreviations, type {{{kbd(M-x cdlatex-command-help)}}}.
-@item
+- 
 {{{kindex(_)}}}
 {{{kindex(^)}}}
 {{{vindex(cdlatex-simplify-sub-super-scripts)}}}
@@ -9567,12 +9682,12 @@ characters together with a pair of braces.  If you use @key{TAB} to move
 out of the braces, and if the braces surround only a single character or
 macro, they are removed again (depending on the variable
 ~cdlatex-simplify-sub-super-scripts~).
-@item
+- 
 {{{kindex(`)}}}
 Pressing the backquote {{{kbd(`)}}} followed by a character inserts math
 macros, also outside @LaTeX{} fragments.  If you wait more than 1.5 seconds
 after the backquote, a help window will pop up.
-@item
+- 
 {{{kindex(')}}}
 Pressing the single-quote {{{kbd(')}}} followed by another character modifies
 the symbol before point with an accent or a font.  If you wait more than
@@ -9581,7 +9696,7 @@ modification will work only inside @LaTeX{} fragments; outside the quote
 is normal.
 @end itemize
 
-* FIXME Exporting
+* FIXME Exporting                                                  :noexport:
   :PROPERTIES:
   :DESCRIPTION: Sharing and publishing notes
   :END:
@@ -9620,17 +9735,17 @@ or to exclude parts from export.  This behavior is governed by two variables:
 respectively defaulting to ~'(:export:)~ and ~'(:noexport:)~.
 
 @enumerate
-@item
+- 
 Org first checks if any of the /select/ tags is present in the
 buffer.  If yes, all trees that do not carry one of these tags will be
 excluded.  If a selected tree is a subtree, the heading hierarchy above it
 will also be selected for export, but not the text below those headings.
 
-@item
+- 
 If none of the select tags is found, the whole buffer will be selected for
 export.
 
-@item
+- 
 Finally, all subtrees that are marked by any of the /exclude/ tags will
 be removed from the export buffer.
 @end enumerate
@@ -10976,7 +11091,7 @@ users alike, and is described here.
 @subsubsection Applying custom styles - the easy way
 
 @enumerate
-@item
+- 
 Create a sample {{{file(example.org)}}} file with the below settings and export it
 to ODT format.
 
@@ -10984,13 +11099,13 @@ to ODT format.
 ,#+OPTIONS: H:10 num:t
 #+end_example
 
-@item
+- 
 Open the above {{{file(example.odt)}}} using LibreOffice.  Use the {{{file(Stylist)}}}
 to locate the target styles - these typically have the {{{samp(Org)}}} prefix -
 and modify those to your taste.  Save the modified file either as an
 OpenDocument Text ({{{file(.odt)}}}) or OpenDocument Template ({{{file(.ott)}}}) file.
 
-@item
+- 
 {{{cindex(#+ODT_STYLES_FILE)}}}
 {{{vindex(org-export-odt-styles-file)}}}
 Customize the variable ~org-export-odt-styles-file~ and point it to the
@@ -11424,23 +11539,23 @@ by the variable ~org-odt-styles-dir~.  The two files are:
 
 @itemize
 @anchor{x-orgodtstyles-xml}
-@item
+- 
 {{{file(OrgOdtStyles.xml)}}}
 
 This file contributes to the {{{file(styles.xml)}}} file of the final {{{samp(ODT)}}}
 document.  This file gets modified for the following purposes:
 @enumerate
 
-@item
+- 
 To control outline numbering based on user settings.
 
-@item
+- 
 To add styles generated by {{{file(htmlfontify.el)}}} for fontification of code
 blocks.
 @end enumerate
 
 @anchor{x-orgodtcontenttemplate-xml}
-@item
+- 
 {{{file(OrgOdtContentTemplate.xml)}}}
 
 This file contributes to the {{{file(content.xml)}}} file of the final {{{samp(ODT)}}}
@@ -11451,11 +11566,11 @@ Apart from serving as a template file for the final {{{file(content.xml)}}}, the
 file serves the following purposes:
 @enumerate
 
-@item
+- 
 It contains automatic styles for formatting of tables which are referenced by
 the exporter.
 
-@item
+- 
 It contains {{{samp(<text:sequence-decl>)}}}@dots{}{{{samp(</text:sequence-decl>)}}}
 elements that control how various entities - tables, images, equations etc -
 are numbered.
@@ -11471,7 +11586,7 @@ exporter.
 
 @itemize
 @anchor{x-org-export-odt-styles-file}
-@item
+- 
 ~org-export-odt-styles-file~
 
 Use this variable to specify the {{{file(styles.xml)}}} that will be used in the
@@ -11502,7 +11617,7 @@ Use the default {{{file(styles.xml)}}}
 @end enumerate
 
 @anchor{x-org-export-odt-content-template-file}
-@item
+- 
 ~org-export-odt-content-template-file~
 
 Use this variable to specify the blank {{{file(content.xml)}}} that will be used
@@ -11633,7 +11748,7 @@ additional templates you have to define these styles yourselves.
 To use this feature proceed as follows:
 
 @enumerate
-@item
+- 
 Create a table template@footnote{See the ~<table:table-template>~
 element of the OpenDocument-v1.2 specification}
 
@@ -11663,7 +11778,7 @@ the following table.
 @headitem Table cell type
 @tab ~table-cell~ style
 @tab ~paragraph~ style
-@item
+- 
 @tab
 @tab
 - Body
@@ -11701,7 +11816,7 @@ styles in the
 of the content template file (see [[x-orgodtcontenttemplate-xml,,Factory
 styles]]).
 
-@item
+- 
 Define a table style@footnote{See the attributes ~table:template-name~,
 ~table:use-first-row-styles~, ~table:use-last-row-styles~,
 ~table:use-first-column-styles~, ~table:use-last-column-styles~,
@@ -11736,7 +11851,7 @@ effect by selectively activating the individual cell styles in that template.
 		  (use-last-row-styles . t))))))
 #+end_src
 
-@item
+- 
 Associate a table with the table style
 
 To do this, specify the table style created in step (2) as part of
@@ -12020,7 +12135,7 @@ and the description from the body (limited to
 How this calendar is best read and updated, depends on the application
 you are using.  The FAQ covers this issue.
 
-* FIXME Publishing
+* FIXME Publishing                                                 :noexport:
   :PROPERTIES:
   :DESCRIPTION: Create a web site of linked Org files
   :END:
@@ -12570,7 +12685,7 @@ above, or by customizing the variable ~org-publish-use-timestamps-flag~.
 This may be necessary in particular if files include other files via
 ~#+SETUPFILE:~ or ~#+INCLUDE:~.
 
-* FIXME Working with source code
+* FIXME Working with source code                                   :noexport:
   :PROPERTIES:
   :DESCRIPTION: Export, evaluate, and tangle code blocks
   :TEXINFO_MENU_TITLE: Working With Source Code
@@ -12904,7 +13019,7 @@ i)}}}.
 Code blocks in the following languages are supported.
 
 @multitable @columnfractions 0.28 0.3 0.22 0.2
-- @b{Language} @tab @b{Identifier} @tab @b{Language} @tab @b{Identifier}
+- *Language* @tab *Identifier* @tab *Language* @tab *Identifier*
 - Asymptote @tab asymptote @tab Awk @tab awk
 - Emacs Calc @tab calc @tab C @tab C
 - C++ @tab C++ @tab Clojure @tab clojure
@@ -13439,15 +13554,15 @@ There are three classes of ~:results~ header argument.  Only one option
 per class may be supplied per code block.
 
 @itemize @bullet
-@item
-@b{collection} header arguments specify how the results should be collected
+- 
+*collection* header arguments specify how the results should be collected
 from the code block
-@item
-@b{type} header arguments specify what type of result the code block will
+- 
+*type* header arguments specify what type of result the code block will
 return---which has implications for how they will be inserted into the
 Org mode buffer
-@item
-@b{handling} header arguments specify how the results of evaluating the code
+- 
+*handling* header arguments specify how the results of evaluating the code
 block should be handled.
 @end itemize
 
@@ -13623,11 +13738,11 @@ install tramp separately in order for these features to work correctly.
 @subsubheading Further points
 
 @itemize @bullet
-@item
+- 
 If ~:dir~ is used in conjunction with ~:session~, although it will
 determine the starting directory for a new session as expected, no attempt is
 currently made to alter the directory associated with an existing session.
-@item
+- 
 ~:dir~ should typically not be used to create files during export with
 ~:exports results~ or ~:exports both~.  The reason is that, in order
 to retain portability of exported material between machines, during export
@@ -14141,7 +14256,7 @@ used.  The following table shows the table possibilities.  For a full listing
 of the possible results header arguments see [[results]].
 
 @multitable @columnfractions 0.26 0.33 0.41
-- @tab @b{Non-session} @tab @b{Session}
+- @tab *Non-session* @tab *Session*
 - ~:results value~ @tab value of last expression @tab value of last expression
 - ~:results output~ @tab contents of STDOUT @tab concatenation of interpreter output
 @end multitable
@@ -14409,7 +14524,7 @@ emacs -Q --batch \
        (kill-buffer)) '($FILES)))" 2>&1 |grep tangled
 #+end_example
 
-* FIXME Miscellaneous
+* FIXME Miscellaneous                                              :noexport:
   :PROPERTIES:
   :DESCRIPTION: All the rest which did not fit elsewhere
   :END:
@@ -14447,33 +14562,33 @@ the buffer and use the key to complete text right there.
 - M-@key{TAB}
 Complete word at point
 @itemize @bullet
-@item
+- 
 At the beginning of a headline, complete TODO keywords.
-@item
+- 
 After {{{samp(\)}}}, complete @TeX{} symbols supported by the exporter.
-@item
+- 
 After {{{samp(*)}}}, complete headlines in the current buffer so that they
 can be used in search links like {{{samp([[*find this headline]])}}}.
-@item
+- 
 After {{{samp(:)}}} in a headline, complete tags.  The list of tags is taken
 from the variable ~org-tag-alist~ (possibly set through the
 {{{samp(#+TAGS)}}} in-buffer option, see [[Setting tags]]), or it is created
 dynamically from all tags used in the current buffer.
-@item
+- 
 After {{{samp(:)}}} and not in a headline, complete property keys.  The list
 of keys is constructed dynamically from all keys used in the current
 buffer.
-@item
+- 
 After {{{samp([)}}}, complete link abbreviations (see [[Link abbreviations]]).
-@item
+- 
 After {{{samp(#+)}}}, complete the special keywords like {{{samp(TYP_TODO)}}} or
 {{{samp(OPTIONS)}}} which set file-specific options for Org mode.  When the
 option keyword is already complete, pressing {{{kbdkey(M-,TAB)}}} again
 will insert example settings for this keyword.
-@item
+- 
 In the line after {{{samp(#+STARTUP: )}}}, complete startup keywords,
 i.e.@: valid keys for this line.
-@item
+- 
 Elsewhere, complete dictionary words using Ispell.
 @end itemize
 
@@ -14904,44 +15019,44 @@ here and update according to what you see here''/.  Here is a summary of
 what this means in different contexts.
 
 @itemize @minus
-@item
+- 
 If there are highlights in the buffer from the creation of a sparse
 tree, or from clock display, remove these highlights.
-@item
+- 
 If the cursor is in one of the special ~#+KEYWORD~ lines, this
 triggers scanning the buffer for these lines and updating the
 information.
-@item
+- 
 If the cursor is inside a table, realign the table.  This command
 works even if the automatic table editor has been turned off.
-@item
+- 
 If the cursor is on a ~#+TBLFM~ line, re-apply the formulas to
 the entire table.
-@item
+- 
 If the current buffer is a capture buffer, close the note and file it.
 With a prefix argument, file it, without further interaction, to the
 default location.
-@item
+- 
 If the cursor is on a ~<<<target>>>~, update radio targets and
 corresponding links in this buffer.
-@item
+- 
 If the cursor is in a property line or at the start or end of a property
 drawer, offer property commands.
-@item
+- 
 If the cursor is at a footnote reference, go to the corresponding
 definition, and vice versa.
-@item
+- 
 If the cursor is on a statistics cookie, update it.
-@item
+- 
 If the cursor is in a plain list item with a checkbox, toggle the status
 of the checkbox.
-@item
+- 
 If the cursor is on a numbered item in a plain list, renumber the
 ordered list.
-@item
+- 
 If the cursor is on the ~#+BEGIN~ line of a dynamic block, the
 block is updated.
-@item
+- 
 If the cursor is at a timestamp, fix the day name in the timestamp.
 @end itemize
 
@@ -15003,7 +15118,7 @@ file looks as similar as possible to the Emacs display, Org supports you in
 the following way:
 
 @enumerate
-@item
+- 
 /Indentation of text below headlines/@*
 You may indent text below each headline to make the left boundary line up
 with the headline, like
@@ -15018,7 +15133,7 @@ Org supports this with paragraph filling, line wrapping, and structure
 editing@footnote{See also the variable ~org-adapt-indentation~.},
 preserving or adapting the indentation as appropriate.
 
-@item
+- 
 {{{vindex(org-hide-leading-stars)}}}
 /Hiding leading stars/@* You can modify the display in such a way that
 all leading stars become invisible.  To do this in a global way, configure
@@ -15050,7 +15165,7 @@ have to customize this face to get the wanted effect.  Another possibility is
 to set this font such that the extra stars are /almost/ invisible, for
 example using the color ~grey90~ on a white background.
 
-@item
+- 
 {{{vindex(org-odd-levels-only)}}}
 Things become cleaner still if you skip all the even levels and use only odd
 levels 1, 3, 5..., effectively adding two stars to go from one outline level
@@ -15090,7 +15205,7 @@ is really only fun with {{{kbdkey(S-,cursor)}}} keys, whereas on a
 tty you would rather use {{{kbd(C-c .)}}} to re-insert the timestamp.
 
 @multitable @columnfractions 0.15 0.2 0.1 0.2
-- @b{Default} @tab @b{Alternative 1} @tab @b{Speed key} @tab @b{Alternative 2}
+- *Default* @tab *Alternative 1* @tab *Speed key* @tab *Alternative 2*
 - {{{kbdkey(S-,TAB)}}}     @tab {{{kbdkey(C-u ,TAB)}}}       @tab {{{kbd(C)}}} @tab
 - {{{kbdkey(M-,left)}}}    @tab {{{kbd(C-c C-x l)}}}           @tab {{{kbd(l)}}} @tab @kbd{@key{Esc} @key{left}}
 - {{{kbdkey(M-S-,left)}}}  @tab {{{kbd(C-c C-x L)}}}           @tab {{{kbd(L)}}} @tab
@@ -15380,7 +15495,7 @@ To use org-crypt it is suggested that you have the following in your
 Excluding the crypt tag from inheritance prevents already encrypted text
 being encrypted again.
 
-* FIXME Hacking
+* FIXME Hacking                                                    :noexport:
   :PROPERTIES:
   :DESCRIPTION: How to hack your way around
   :END:
@@ -15479,14 +15594,14 @@ You would activate this new link type in {{{file(.emacs)}}} with
 {{{noindent}}}
 Let's go through the file and see what it does.
 @enumerate
-@item
+- 
 It does ~(require 'org)~ to make sure that {{{file(org.el)}}} has been
 loaded.
-@item
+- 
 The next line calls ~org-add-link-type~ to define a new link type
 with prefix {{{samp(man)}}}.  The call also contains the name of a function
 that will be called to follow such a link.
-@item
+- 
 {{{vindex(org-store-link-functions)}}}
 The next line adds a function to ~org-store-link-functions~, in
 order to allow the command {{{kbd(C-c l)}}} to record a useful link in a
@@ -15644,15 +15759,15 @@ compilation of a C file or processing of a @LaTeX{} file.  There are a
 number of different solutions:
 
 @itemize @bullet
-@item
+- 
 The table could be placed in a block comment if that is supported by the
 language.  For example, in C mode you could wrap the table between
 {{{samp(/*)}}} and {{{samp(*/)}}} lines.
-@item
+- 
 Sometimes it is possible to put the table after some kind of /END/
 statement, for example {{{samp(\bye)}}} in @TeX{} and {{{samp(\end@{document@)}}}}
 in @LaTeX{}.
-@item
+- 
 You can just comment the table line-by-line whenever you want to process
 the file, and uncomment it whenever you need to edit the table.  This
 only sounds tedious---the command {{{kbd(M-x orgtbl-toggle-comment)}}}
@@ -15807,8 +15922,8 @@ hands processing over to the generic translator.  Here is the entire code:
 #+end_src
 
 As you can see, the properties passed into the function (variable
-@var{PARAMS}) are combined with the ones newly defined in the function
-(variable @var{PARAMS2}).  The ones passed into the function (i.e.@: the
+{{{var(PARAMS)}}}) are combined with the ones newly defined in the function
+(variable {{{var(PARAMS2)}}}).  The ones passed into the function (i.e.@: the
 ones set by the {{{samp(ORGTBL SEND)}}} line) take precedence.  So if you
 would like to use the @LaTeX{} translator, but wanted the line endings to
 be {{{samp(\\[2mm])}}} instead of the default {{{samp(\\)}}}, you could just
@@ -15863,14 +15978,14 @@ insert radio list templates in HTML, @LaTeX{} and Texinfo modes by calling
 Here are the differences with radio tables:
 
 @itemize @minus
-@item
+- 
 Orgstruct mode must be active.
-@item
+- 
 Use the ~ORGLST~ keyword instead of ~ORGTBL~.
-@item
+- 
 The available translation functions for radio lists don't take
 parameters.
-@item
+- 
 {{{kbd(C-c C-c)}}} will work when pressed on the first item of the list.
 @end itemize
 
@@ -16468,13 +16583,13 @@ a /pull/ operation that integrates this information into an inbox file
 and operates on the pointers to flagged entries.  Here is how it works:
 
 @enumerate
-@item
+- 
 Org moves all entries found in
 {{{file(mobileorg.org)}}}@footnote{{{{file(mobileorg.org)}}} will be empty after this
 operation.} and appends them to the file pointed to by the variable
 ~org-mobile-inbox-for-pull~.  Each captured entry and each editing event
 will be a top-level entry in the inbox file.
-@item
+- 
 After moving the entries, Org will attempt to implement the changes made in
 /MobileOrg/.  Some changes are applied directly and without user
 interaction.  Examples are all changes to tags, TODO state, headline and body
@@ -16483,7 +16598,7 @@ action will receive a tag ~:FLAGGED:~, so that they can be easily found
 again.  When there is a problem finding an entry or applying the change, the
 pointer entry will remain in the inbox and will be marked with an error
 message.  You need to later resolve these issues by hand.
-@item
+- 
 Org will then generate an agenda view with all flagged entries.  The user
 should then go through these entries and do whatever actions are necessary.
 If a note has been stored while flagging an entry in /MobileOrg/, that note
@@ -16626,228 +16741,228 @@ complete if the ones above were not mentioned in this manual.
 
 @itemize @bullet
 
-@item
+- 
 /Russel Adams/ came up with the idea for drawers.
-@item
+- 
 /Thomas Baumann/ wrote {{{file(org-bbdb.el)}}} and {{{file(org-mhe.el)}}}.
-@item
+- 
 /Christophe Bataillon/ created the great unicorn logo that we use on the
 Org mode website.
-@item
+- 
 /Alex Bochannek/ provided a patch for rounding timestamps.
-@item
+- 
 /Jan Böcker/ wrote {{{file(org-docview.el)}}}.
-@item
+- 
 /Brad Bozarth/ showed how to pull RSS feed data into Org mode files.
-@item
+- 
 /Tom Breton/ wrote {{{file(org-choose.el)}}}.
-@item
+- 
 /Charles Cave/'s suggestion sparked the implementation of templates
 for Remember, which are now templates for capture.
-@item
+- 
 /Pavel Chalmoviansky/ influenced the agenda treatment of items with
 specified time.
-@item
+- 
 /Gregory Chernov/ patched support for Lisp forms into table
 calculations and improved XEmacs compatibility, in particular by porting
 {{{file(nouline.el)}}} to XEmacs.
-@item
+- 
 /Sacha Chua/ suggested copying some linking code from Planner.
-@item
+- 
 /Baoqiu Cui/ contributed the DocBook exporter.
-@item
+- 
 /Eddward DeVilla/ proposed and tested checkbox statistics.  He also
 came up with the idea of properties, and that there should be an API for
 them.
-@item
+- 
 /Nick Dokos/ tracked down several nasty bugs.
-@item
+- 
 /Kees Dullemond/ used to edit projects lists directly in HTML and so
 inspired some of the early development, including HTML export.  He also
 asked for a way to narrow wide table columns.
-@item
+- 
 /Thomas S. Dye/ contributed documentation on Worg and helped integrating
 the Org-Babel documentation into the manual.
-@item
+- 
 /Christian Egli/ converted the documentation into Texinfo format, inspired
 the agenda, patched CSS formatting into the HTML exporter, and wrote
 {{{file(org-taskjuggler.el)}}}.
-@item
+- 
 /David Emery/ provided a patch for custom CSS support in exported
 HTML agendas.
-@item
+- 
 /Nic Ferrier/ contributed mailcap and XOXO support.
-@item
+- 
 /Miguel A. Figueroa-Villanueva/ implemented hierarchical checkboxes.
-@item
+- 
 /John Foerch/ figured out how to make incremental search show context
 around a match in a hidden outline tree.
-@item
+- 
 /Raimar Finken/ wrote {{{file(org-git-line.el)}}}.
-@item
+- 
 /Mikael Fornius/ works as a mailing list moderator.
-@item
+- 
 /Austin Frank/ works as a mailing list moderator.
-@item
+- 
 /Eric Fraga/ drove the development of BEAMER export with ideas and
 testing.
-@item
+- 
 /Barry Gidden/ did proofreading the manual in preparation for the book
 publication through Network Theory Ltd.
-@item
+- 
 /Niels Giesen/ had the idea to automatically archive DONE trees.
-@item
+- 
 /Nicolas Goaziou/ rewrote much of the plain list code.
-@item
+- 
 /Kai Grossjohann/ pointed out key-binding conflicts with other packages.
-@item
+- 
 /Brian Gough/ of Network Theory Ltd publishes the Org mode manual as a
 book.
-@item
+- 
 /Bernt Hansen/ has driven much of the support for auto-repeating tasks,
 task state change logging, and the clocktable.  His clear explanations have
 been critical when we started to adopt the Git version control system.
-@item
+- 
 /Manuel Hermenegildo/ has contributed various ideas, small fixes and
 patches.
-@item
+- 
 /Phil Jackson/ wrote {{{file(org-irc.el)}}}.
-@item
+- 
 /Scott Jaderholm/ proposed footnotes, control over whitespace between
 folded entries, and column view for properties.
-@item
+- 
 /Matt Jones/ wrote /MobileOrg Android/.
-@item
+- 
 /Tokuya Kameshima/ wrote {{{file(org-wl.el)}}} and {{{file(org-mew.el)}}}.
-@item
+- 
 /Shidai Liu/ ("Leo") asked for embedded @LaTeX{} and tested it.  He also
 provided frequent feedback and some patches.
-@item
+- 
 /Matt Lundin/ has proposed last-row references for table formulas and named
 invisible anchors.  He has also worked a lot on the FAQ.
-@item
+- 
 /David Maus/ wrote {{{file(org-atom.el)}}}, maintains the issues file for Org,
 and is a prolific contributor on the mailing list with competent replies,
 small fixes and patches.
-@item
+- 
 /Jason F. McBrayer/ suggested agenda export to CSV format.
-@item
+- 
 /Max Mikhanosha/ came up with the idea of refiling.
-@item
+- 
 /Dmitri Minaev/ sent a patch to set priority limits on a per-file
 basis.
-@item
+- 
 /Stefan Monnier/ provided a patch to keep the Emacs-Lisp compiler
 happy.
-@item
+- 
 /Richard Moreland/ wrote /MobileOrg/ for the iPhone.
-@item
+- 
 /Rick Moynihan/ proposed allowing multiple TODO sequences in a file
 and being able to quickly restrict the agenda to a subtree.
-@item
+- 
 /Todd Neal/ provided patches for links to Info files and Elisp forms.
-@item
+- 
 /Greg Newman/ refreshed the unicorn logo into its current form.
-@item
+- 
 /Tim O'Callaghan/ suggested in-file links, search options for general
 file links, and TAGS.
-@item
+- 
 /Osamu Okano/ wrote {{{file(orgcard2ref.pl)}}}, a Perl program to create a text
 version of the reference card.
-@item
+- 
 /Takeshi Okano/ translated the manual and David O'Toole's tutorial
 into Japanese.
-@item
+- 
 /Oliver Oppitz/ suggested multi-state TODO items.
-@item
+- 
 /Scott Otterson/ sparked the introduction of descriptive text for
 links, among other things.
-@item
+- 
 /Pete Phillips/ helped during the development of the TAGS feature, and
 provided frequent feedback.
-@item
+- 
 /Martin Pohlack/ provided the code snippet to bundle character insertion
 into bundles of 20 for undo.
-@item
+- 
 /T.V. Raman/ reported bugs and suggested improvements.
-@item
+- 
 /Matthias Rempe/ (Oelde) provided ideas, Windows support, and quality
 control.
-@item
+- 
 /Paul Rivier/ provided the basic implementation of named footnotes.  He
 also acted as mailing list moderator for some time.
-@item
+- 
 /Kevin Rogers/ contributed code to access VM files on remote hosts.
-@item
+- 
 /Frank Ruell/ solved the mystery of the ~keymapp nil~ bug, a
 conflict with {{{file(allout.el)}}}.
-@item
+- 
 /Jason Riedy/ generalized the send-receive mechanism for Orgtbl tables with
 extensive patches.
-@item
+- 
 /Philip Rooke/ created the Org reference card, provided lots
 of feedback, developed and applied standards to the Org documentation.
-@item
+- 
 /Christian Schlauer/ proposed angular brackets around links, among
 other things.
-@item
+- 
 /Paul Sexton/ wrote {{{file(org-ctags.el)}}}.
-@item
+- 
 Linking to VM/BBDB/Gnus was first inspired by /Tom Shannon/'s
 {{{file(organizer-mode.el)}}}.
-@item
+- 
 /Ilya Shlyakhter/ proposed the Archive Sibling, line numbering in literal
 examples, and remote highlighting for referenced code lines.
-@item
+- 
 /Stathis Sideris/ wrote the {{{file(ditaa.jar)}}} ASCII to PNG converter that is
 now packaged into Org's {{{file(contrib)}}} directory.
-@item
+- 
 /Daniel Sinder/ came up with the idea of internal archiving by locking
 subtrees.
-@item
+- 
 /Dale Smith/ proposed link abbreviations.
-@item
+- 
 /James TD Smith/ has contributed a large number of patches for useful
 tweaks and features.
-@item
+- 
 /Adam Spiers/ asked for global linking commands, inspired the link
 extension system, added support for mairix, and proposed the mapping API.
-@item
+- 
 /Ulf Stegemann/ created the table to translate special symbols to HTML,
 @LaTeX{}, UTF-8, Latin-1 and ASCII.
-@item
+- 
 /Andy Stewart/ contributed code to {{{file(org-w3m.el)}}}, to copy HTML content
 with links transformation to Org syntax.
-@item
+- 
 /David O'Toole/ wrote {{{file(org-publish.el)}}} and drafted the manual
 chapter about publishing.
-@item
+- 
 /Jambunathan K/ contributed the ODT exporter.
-@item
+- 
 /Sebastien Vauban/ reported many issues with @LaTeX{} and BEAMER export and
 enabled source code highlighting in Gnus.
-@item
+- 
 /Stefan Vollmar/ organized a video-recorded talk at the
 Max-Planck-Institute for Neurology.  He also inspired the creation of a
 concept index for HTML export.
-@item
+- 
 /J@"urgen Vollmer/ contributed code generating the table of contents
 in HTML output.
-@item
+- 
 /Samuel Wales/ has provided important feedback and bug reports.
-@item
+- 
 /Chris Wallace/ provided a patch implementing the {{{samp(QUOTE)}}}
 keyword.
-@item
+- 
 /David Wainberg/ suggested archiving, and improvements to the linking
 system.
-@item
+- 
 /Carsten Wimmer/ suggested some changes and helped fix a bug in
 linking to Gnus.
-@item
+- 
 /Roland Winkler/ requested additional key bindings to make Org
 work on a tty.
-@item
+- 
 /Piotr Zielinski/ wrote {{{file(org-mouse.el)}}}, proposed agenda blocks
 and contributed various ideas and code snippets.
 @end itemize
@@ -17147,6 +17262,97 @@ tests including properties (see [[Property searches]]).
 [fn:63] Keys will automatically be assigned to tags that have no
 configured keys.
 
+[fn:64] Contributed packages are not part of Emacs, but are
+distributed with the main distribution of Org (visit
+[[http://orgmode.org]]).
+
+[fn:65] In this simplest form, the day name is optional when you type
+the date yourself. However, any dates inserted or modified by Org will
+add that day name, for reading convenience.
+
+[fn:66] This is inspired by the standard ISO 8601 date/time format. To
+use an alternative format, see [[Custom time format]].
+
+[fn:67] When working with the standard diary sexp functions, you need
+to be very careful with the order of the arguments. That order depends
+evilly on the variable ~calendar-date-style~ (or, for older Emacs
+versions, ~european-calendar-style~). For example, to specify a date
+December 12, 2005, the call might look like ~(diary-date 12 1 2005)~
+or ~(diary-date 1 12 2005)~ or ~(diary-date 2005 12 1)~, depending on
+the settings. This has been the source of much confusion. Org mode
+users can resort to special versions of these functions like
+~org-date~ or ~org-anniversary~. These work just like the
+corresponding ~diary-~ functions, but with stable ISO order of
+arguments (year, month, day) wherever applicable, independent of the
+value of ~calendar-date-style~.
+
+[fn:68] See the variable ~org-read-date-prefer-future~. You may
+set that variable to the symbol ~time~ to even make a time before now
+shift the date to tomorrow.
+
+[fn:69] If you don't need/want the calendar, configure the variable
+~org-popup-calendar-for-date-prompt~.
+
+[fn:70] If you find this distracting, turn off the display with
+~org-read-date-display-live~.
+
+[fn:71] It will still be listed on that date after it has been marked
+DONE. If you don't like this, set the variable
+~org-agenda-skip-scheduled-if-done~.
+
+[fn:72] The {{{samp(SCHEDULED)}}} and {{{samp(DEADLINE)}}} dates are
+inserted on the line right below the headline. Don't put any text
+between this line and the headline.
+
+[fn:73] Note the corresponding ~#+STARTUP~ keywords ~logredeadline~,
+~lognoteredeadline~, and ~nologredeadline~.
+
+[fn:74] Note the corresponding ~#+STARTUP~ keywords ~logreschedule~,
+~lognotereschedule~, and ~nologreschedule~.
+
+[fn:75] In fact, the target state is taken from, in this sequence, the
+~REPEAT_TO_STATE~ property or the variable ~org-todo-repeat-to-state~.
+If neither of these is specified, the target state defaults to the
+first state of the TODO state sequence.
+
+[fn:76] You can change this using the option ~org-log-repeat~, or the
+~#+STARTUP~ options ~logrepeat~, ~lognoterepeat~, and ~nologrepeat~.
+With ~lognoterepeat~, you will also be prompted for a note.
+
+[fn:77] Clocking only works if all headings are indented with less
+than 30 stars. This is a hardcoded limitation of {{{var(lmax)}}} in
+~org-clock-sum~.
+
+[fn:78] To resume the clock under the assumption that you have worked
+on this task while outside Emacs, use ~(setq org-clock-persist t)~.
+
+[fn:79] The last reset of the task is recorded by the ~LAST_REPEAT~
+property.
+
+[fn:80] See also the variable ~org-clock-modeline-total~.
+
+[fn:81] To add an effort estimate ``on the fly'', hook a function
+doing this to ~org-clock-in-prepare-hook~.
+
+[fn:82] The corresponding in-buffer setting is: ~#+STARTUP:
+lognoteclock-out~.
+
+[fn:83] Note that all parameters must be specified in a single
+line---the line is broken here only to fit it into the manual.
+
+[fn:84] On computers using Mac OS X, idleness is based on actual user
+idleness, not just Emacs' idle time. For X11, you can install a
+utility program {{{file(x11idle.c)}}}, available in the
+~contrib/scripts~ directory of the Org git distribution, to get the
+same general treatment of idleness. On other systems, idle time refers
+to Emacs idle time only.
+
+[fn:85] You may change the property being used with the variable
+~org-effort-property~.
+
+[fn:86] Please note the pitfalls of summing hierarchical data in a
+flat list (see [[Agenda column view]]).
+
 * About orgmanual.org                                              :noexport:
 This document intends to be Org mode source for the Org mode manual
 and the Org mode guide. It is intended to be a major revision of the
@@ -17435,6 +17641,15 @@ This section contains source code blocks that help translate from
   (query-replace-regexp "@command{\\([^}]*\\)}" "{{{command(\\1)}}}" nil))
 #+end_src
 
+#+name: tsd-var-to-macro
+#+header: :results silent
+#+begin_src emacs-lisp
+(defun tsd-var-to-macro ()
+  "Make macros out of @var commands."
+  (interactive)
+  (query-replace-regexp "@var{\\([^}]*\\)}" "{{{var(\\1)}}}" nil))
+#+end_src
+
 #+name: tsd-file-to-macro
 #+header: :results silent
 #+begin_src emacs-lisp
@@ -17577,6 +17792,15 @@ This section contains source code blocks that help translate from
   "Convert @i to markup."
   (interactive)
   (query-replace-regexp "@i{\\([^}]*\\)}" "/\\1/" nil))
+#+end_src
+
+#+name: tsd-b-to-markup
+#+header: :results silent
+#+begin_src emacs-lisp
+(defun tsd-b-to-markup ()
+  "Convert @b to markup."
+  (interactive)
+  (query-replace-regexp "@b{\\([^}]*\\)}" "*\\1*" nil))
 #+end_src
 
 #+name: tsd-lisp-begin
