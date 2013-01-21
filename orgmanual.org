@@ -4517,7 +4517,7 @@ keys:
 very few keys. With the above setup, you could clear the current tags
 and set {{{samp(@@home)}}}, {{{samp(laptop)}}} and {{{samp(pc)}}} tags
 with just the following keys: {{{kbd(C-c C-c @key{SPC} h l p
-@key{RET})}}}}. Switching from {{{samp(@@home)}}} to
+@key{RET}})}}}. Switching from {{{samp(@@home)}}} to
 {{{samp(@@work)}}} would be done with {{{kbdkey(C-c C-c w ,RET)}}} or
 alternatively with {{{kbd(C-c C-c C-c w)}}}. Adding the non-predefined
 tag {{{samp(Sarah)}}} could be done with {{{kbd(C-c C-c @key{TAB} S a
@@ -6387,7 +6387,7 @@ such a relative timer and make it easy to create timed notes.
   {{{kindex(C-c C-x ,)}}}
 
   Pause the timer, or continue it if it is already paused
-  ({{{command(org-timer-pause-or-continue)}}}}).
+  ({{{command(org-timer-pause-or-continue)}}}).
 #+comment  removed the sentence because it is redundant to the following item
 
 - {{{kbd(C-u C-c C-x ,)}}} ::
@@ -8151,11 +8151,11 @@ category is not longer than 10 characters.
 
 Org mode checks each agenda item for a time-of-day specification.  The
 time can be part of the timestamp that triggered inclusion into the
-agenda, for example as in {{{{samp(<2005-05-10 Tue 19:00>)}}}}.  Time
+agenda, for example as in {{{samp(<2005-05-10 Tue 19:00>)}}}.  Time
 ranges can be specified with two timestamps, like:
 
 #+begin_example
-{{{{samp(<2005-05-10 Tue 20:30>--<2005-05-10 Tue 22:15>)}}}}.
+{{{samp(<2005-05-10 Tue 20:30>--<2005-05-10 Tue 22:15>)}}}.
 #+end_example
 
 In the headline of the entry itself, a time(range) may also appear as
@@ -8654,7 +8654,7 @@ press {{{kbd(v a)}}} again.
   {{{kindex(@})}}}
 
   Add new search words ({{{kbd([)}}} and {{{kbd(])}}}) or new regular
-  expressions ({{{kbd(@{)}}} and {{{kbd(@)}}}}) to the query string. The
+  expressions ({{{kbd(@{)}}} and {{{kbd(@))}}}) to the query string. The
   opening bracket/brace will add a positive search term prefixed by
   {{{samp(+)}}}, indicating that this search term /must/ occur/match in
   the entry. The closing bracket/brace will add a negative search term
@@ -9477,7 +9477,7 @@ This causes the following issues:
 
   {{{cindex(property\\\, special\\\, CLOCKSUM_T)}}}
 
-* FIXME Markup for rich export                                     :noexport:
+* FIXED Markup for rich export
   :PROPERTIES:
   :DESCRIPTION: Prepare text for rich export
   :TEXINFO_MENU_TITLE: Markup
@@ -9499,24 +9499,25 @@ summarizes the markup rules used in an Org mode buffer.
     :END:
 {{{cindex(document title\\\, markup rules)}}}
 
-{{{noindent}}}
-The title of the exported document is taken from the special line
+{{{noindent}}} The title of the exported document is taken from the
+special line:
 
 {{{cindex(#+TITLE)}}}
 #+begin_example
 ,#+TITLE: This is the title of the document
 #+end_example
 
-{{{noindent}}}
-If this line does not exist, the title is derived from the first non-empty,
-non-comment line in the buffer.  If no such line exists, or if you have
-turned off exporting of the text before the first headline (see below), the
-title will be the file name without extension.
+{{{noindent}}} If this line does not exist, the title is derived from
+the first non-empty, non-comment line in the buffer. If no such line
+exists, or if you have turned off exporting of the text before the
+first headline (see below), the title will be the file name without
+extension.
 
 {{{cindex(property\\\, EXPORT_TITLE)}}}
-If you are exporting only a subtree by marking is as the region, the heading
-of the subtree will become the title of the document.  If the subtree has a
-property ~EXPORT_TITLE~, that will take precedence.
+
+If you are exporting only a subtree by marking is as the region, the
+heading of the subtree will become the title of the document. If the
+subtree has a property ~EXPORT_TITLE~, that will take precedence.
 
 *** Headings and sections
     :PROPERTIES:
@@ -9525,13 +9526,14 @@ property ~EXPORT_TITLE~, that will take precedence.
 {{{cindex(headings and sections\\\, markup rules)}}}
 
 {{{vindex(org-export-headline-levels)}}}
+
 The outline structure of the document as described in [[Document
-Structure]], forms the basis for defining sections of the exported document.
-However, since the outline structure is also used for (for example) lists of
-tasks, only the first three outline levels will be used as headings.  Deeper
-levels will become itemized lists.  You can change the location of this
-switch globally by setting the variable ~org-export-headline-levels~, or on a
-per-file basis with a line
+Structure]], forms the basis for defining sections of the exported
+document. However, since the outline structure is also used for (for
+example) lists of tasks, only the first three outline levels will be
+used as headings. Deeper levels will become itemized lists. You can
+change the location of this switch globally by setting the variable
+~org-export-headline-levels~, or on a per-file basis with the ~H~ option:
 
 {{{cindex(#+OPTIONS)}}}
 #+begin_example
@@ -9545,13 +9547,15 @@ per-file basis with a line
 {{{cindex(table of contents\\\, markup rules)}}}
 
 {{{vindex(org-export-with-toc)}}}
-The table of contents is normally inserted directly before the first headline
-of the file.  If you would like to get it to a different location, insert the
-string ~[TABLE-OF-CONTENTS]~ on a line by itself at the desired
-location.  The depth of the table of contents is by default the same as the
-number of headline levels, but you can choose a smaller number, or turn off
-the table of contents entirely, by configuring the variable
-~org-export-with-toc~, or on a per-file basis with a line like
+
+The table of contents is normally inserted directly before the first
+headline of the file. If you would like to get it to a different
+location, insert the string ~[TABLE-OF-CONTENTS]~ on a line by itself
+at the desired location. The depth of the table of contents is by
+default the same as the number of headline levels, but you can choose
+a smaller number, or turn off the table of contents entirely, by
+configuring the variable ~org-export-with-toc~, or on a per-file basis
+with the ~toc~ option:
 
 #+begin_example
 ,#+OPTIONS: toc:2          (only to two levels in TOC)
@@ -9572,13 +9576,16 @@ you need to include literal HTML, @LaTeX{}, or DocBook code, use the special
 constructs described below in the sections for the individual exporters.
 
 {{{vindex(org-export-skip-text-before-1st-heading)}}}
-Some people like to use the space before the first headline for setup and
-internal links and therefore would like to control the exported text before
-the first headline in a different way.  You can do so by setting the variable
-~org-export-skip-text-before-1st-heading~ to ~t~.  On a per-file
-basis, you can get the same effect with {{{samp(#+OPTIONS: skip:t)}}}.
+
+Some people like to use the space before the first headline for setup
+and internal links and therefore would like to control the exported
+text before the first headline in a different way. You can do so by
+setting the variable ~org-export-skip-text-before-1st-heading~ to ~t~.
+On a per-file basis, you can get the same effect with
+{{{samp(#+OPTIONS: skip:t)}}}.
 
 {{{noindent}}}
+
 If you still want to have some text before the first headline, use the
 ~#+TEXT~ construct:
 
@@ -9595,9 +9602,9 @@ If you still want to have some text before the first headline, use the
     :END:
 {{{cindex(lists\\\, markup rules)}}}
 
-Plain lists as described in [[Plain lists]], are translated to the backend's
-syntax for such lists.  Most backends support unordered, ordered, and
-description lists.
+Plain lists as described in [[Plain lists]], are translated to the
+backend's syntax for such lists. Most backends support unordered,
+ordered, and description lists.
 
 *** Paragraphs
     :PROPERTIES:
@@ -9605,11 +9612,13 @@ description lists.
     :END:
 {{{cindex(paragraphs\\\, markup rules)}}}
 
-Paragraphs are separated by at least one empty line.  If you need to enforce
-a line break within a paragraph, use {{{samp(\\)}}} at the end of a line.
+Paragraphs are separated by at least one empty line. If you need to
+enforce a line break within a paragraph, use {{{samp(\\)}}} at the end
+of a line.
 
-To keep the line breaks in a region, but otherwise use normal formatting, you
-can use this construct, which can also be used to format poetry.
+To keep the line breaks in a region, but otherwise use normal
+formatting, you can use ~VERSE~ blocks, which can also be used to
+format poetry:
 
 {{{cindex(#+BEGIN_VERSE)}}}
 #+begin_example
@@ -9622,9 +9631,10 @@ can use this construct, which can also be used to format poetry.
 #+END_VERSE
 #+end_example
 
-When quoting a passage from another document, it is customary to format this
-as a paragraph that is indented on both the left and the right margin.  You
-can include quotations in Org mode documents like this:
+When quoting a passage from another document, it is customary to
+format this as a paragraph that is indented on both the left and the
+right margin. You can include quotations in Org mode documents like
+this:
 
 {{{cindex(#+BEGIN_QUOTE)}}}
 #+begin_example
@@ -9665,6 +9675,7 @@ multiple footnotes side by side.
 {{{cindex(verbatim text\\\, markup rules)}}}
 {{{cindex(code text\\\, markup rules)}}}
 {{{cindex(strike-through text\\\, markup rules)}}}
+
 You can make words **bold**, //italic//, _underlined_, ~=code=~
 and ~~verbatim~~, and, if you must, {{{samp(+strike-through+)}}}.  Text
 in the code and verbatim string is not processed for Org mode specific
@@ -9675,8 +9686,10 @@ syntax; it is exported verbatim.
     :DESCRIPTION: Make a line
     :END:
 {{{cindex(horizontal rules\\\, markup rules)}}}
-A line consisting of only dashes, and at least 5 of them, will be exported as
-a horizontal line ({{{samp(<hr/>)}}} in HTML and ~\hrule~ in @LaTeX{}).
+
+A line consisting of only dashes, and at least 5 of them, will be
+exported as a horizontal line ({{{samp(<hr/>)}}} in HTML and ~\hrule~
+in @LaTeX{}).
 
 *** Comment lines
     :PROPERTIES:
@@ -9687,15 +9700,17 @@ a horizontal line ({{{samp(<hr/>)}}} in HTML and ~\hrule~ in @LaTeX{}).
 {{{cindex(#+BEGIN_COMMENT)}}}
 
 Lines starting with zero or more whitespace characters followed by one
-{{{samp(#)}}} and a whitespace are treated as comments and will never be exported.
-Also entire subtrees starting with the word {{{samp(COMMENT)}}} will never be
-exported.  Finally, regions surrounded by {{{samp(#+BEGIN_COMMENT)}}}
-... {{{samp(#+END_COMMENT)}}} will not be exported.
+{{{samp(#)}}} and a whitespace are treated as comments and will never
+be exported. Also entire subtrees starting with the word
+{{{samp(COMMENT)}}} will never be exported. Finally, regions
+surrounded by {{{samp(#+BEGIN_COMMENT)}}} ...
+{{{samp(#+END_COMMENT)}}} will not be exported.
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
+#+attr_texinfo: :table-type "table" :indic "@asis"
 {{{kindex(C-c ;)}}}
-- C-c ;
-Toggle the COMMENT keyword at the beginning of an entry.
+- {{{kbd(C-c ;)}}} ::
+
+  Toggle the COMMENT keyword at the beginning of an entry.
 
 
 ** Images and tables
@@ -9706,12 +9721,14 @@ Toggle the COMMENT keyword at the beginning of an entry.
 {{{cindex(tables\\\, markup rules)}}}
 {{{cindex(#+CAPTION)}}}
 {{{cindex(#+LABEL)}}}
+
 Both the native Org mode tables (see [[Tables]]) and tables formatted with
-the {{{file(table.el)}}} package will be exported properly.  For Org mode tables,
-the lines before the first horizontal separator line will become table header
-lines.  You can use the following lines somewhere before the table to assign
-a caption and a label for cross references, and in the text you can refer to
-the object with ~\ref@{tab:basic-data@~}:
+the {{{file(table.el)}}} package will be exported properly. For Org
+mode tables, the lines before the first horizontal separator line will
+become table header lines. You can use the following lines somewhere
+before the table to assign a caption and a label for cross references,
+and in the text you can refer to the object with
+~\ref@{tab:basic-data@~}:
 
 #+begin_example
 #+CAPTION: This is the caption for the next table (or link)
@@ -9726,12 +9743,14 @@ Optionally, the caption can take the form:
 #+end_example
 
 {{{cindex(inlined images\\\, markup rules)}}}
-Some backends (HTML, @LaTeX{}, and DocBook) allow you to directly include
-images into the exported document.  Org does this, if a link to an image
-files does not have a description part, for example ~[[./img/a.jpg]]~.
-If you wish to define a caption for the image and maybe a label for internal
-cross references, make sure that the link is on a line by itself and precede
-it with ~#+CAPTION~ and ~#+LABEL~ as follows:
+
+Some backends (HTML, @LaTeX{}, and DocBook) allow you to directly
+include images into the exported document. Org does this, if a link to
+an image files does not have a description part, for example
+~[[./img/a.jpg]]~. If you wish to define a caption for the image and maybe
+a label for internal cross references, make sure that the link is on a
+line by itself and precede it with ~#+CAPTION~ and ~#+LABEL~ as
+follows:
 
 #+begin_example
 #+CAPTION: This is the caption for the next figure link (or table)
@@ -9739,9 +9758,9 @@ it with ~#+CAPTION~ and ~#+LABEL~ as follows:
 [[./img/a.jpg]]
 #+end_example
 
-You may also define additional attributes for the figure.  As this is
-backend-specific, see the sections about the individual backends for more
-information.
+You may also define additional attributes for the figure. As this is
+backend-specific, see the sections about the individual backends for
+more information.
 
 See [[Handling links,the discussion of image links]].
 
@@ -9753,21 +9772,21 @@ See [[Handling links,the discussion of image links]].
 {{{cindex(code line references\\\, markup rules)}}}
 
 You can include literal examples that should not be subjected to
-markup.  Such examples will be typeset in monospace, so this is well suited
-for source code and similar examples.
+markup. Such examples will be typeset in monospace, so this is well
+suited for source code and similar examples.
 {{{cindex(#+BEGIN_EXAMPLE)}}}
 
 #+begin_example
-#+BEGIN_EXAMPLE
+,#+BEGIN_EXAMPLE
 Some example from a text file.
-#+END_EXAMPLE
+,#+END_EXAMPLE
 #+end_example
 
 Note that such blocks may be /indented/ in order to align nicely with
-indented text and in particular with plain list structure
-(see [[Plain lists]]).  For simplicity when using small examples, you can also start the
-example lines with a colon followed by a space.  There may also be additional
-whitespace before the colon:
+indented text and in particular with plain list structure (see [[Plain
+lists]]). For simplicity when using small examples, you can also start
+the example lines with a colon followed by a space. There may also be
+additional whitespace before the colon:
 
 #+begin_example
 Here is an example
@@ -9775,20 +9794,14 @@ Here is an example
 #+end_example
 
 {{{cindex(formatting source code\\\, markup rules)}}}
-If the example is source code from a programming language, or any other text
-that can be marked up by font-lock in Emacs, you can ask for the example to
-look like the fontified Emacs buffer@footnote{This works automatically for
-the HTML backend (it requires version 1.34 of the {{{file(htmlize.el)}}} package,
-which is distributed with Org).  Fontified code chunks in @LaTeX{} can be
-achieved using either the listings or the
-@url{http://code.google.com/p/minted, minted,} package.  Refer to
-~org-export-latex-listings~ documentation for details.}.  This is done
-with the {{{samp(src)}}} block, where you also need to specify the name of the
-major mode that should be used to fontify the example@footnote{Code in
-{{{samp(src)}}} blocks may also be evaluated either interactively or on export.
-See see [[Working With Source Code]] for more information on evaluating code
-blocks.}, see [[Easy Templates]] for shortcuts to easily insert code
-blocks.
+
+If the example is source code from a programming language, or any
+other text that can be marked up by font-lock in Emacs, you can ask
+for the example to look like the fontified Emacs buffer.[fn:109] This
+is done with the {{{samp(src)}}} block, where you also need to specify
+the name of the major mode that should be used to fontify the example,
+see [[Easy Templates]] for shortcuts to easily insert code blocks.[fn:110]
+
 {{{cindex(#+BEGIN_SRC)}}}
 
 #+begin_example
@@ -9799,23 +9812,20 @@ blocks.
 #+END_SRC
 #+end_example
 
-Both in ~example~ and in ~src~ snippets, you can add a ~-n~
-switch to the end of the ~BEGIN~ line, to get the lines of the example
-numbered.  If you use a ~+n~ switch, the numbering from the previous
-numbered snippet will be continued in the current one.  In literal examples,
-Org will interpret strings like {{{samp((ref:name))}}} as labels, and use them as
-targets for special hyperlinks like ~[[(name)]]~ (i.e.@: the reference name
-enclosed in single parenthesis).  In HTML, hovering the mouse over such a
-link will remote-highlight the corresponding code line, which is kind of
-cool.
+Both in ~example~ and in ~src~ snippets, you can add a ~-n~ switch to
+the end of the ~BEGIN~ line, to get the lines of the example numbered.
+If you use a ~+n~ switch, the numbering from the previous numbered
+snippet will be continued in the current one. In literal examples, Org
+will interpret strings like {{{samp((ref:name))}}} as labels, and use
+them as targets for special hyperlinks like ~[[(name)]]~ (i.e., the
+reference name enclosed in single parenthesis). In HTML, hovering the
+mouse over such a link will remote-highlight the corresponding code
+line, which is kind of cool.
 
 You can also add a ~-r~ switch which /removes/ the labels from the
-source code@footnote{Adding ~-k~ to ~-n -r~ will /keep/ the
-labels in the source code while using line numbers for the links, which might
-be useful to explain those in an Org mode example code.}.  With the ~-n~
-switch, links to these references will be labeled by the line numbers from
-the code listing, otherwise links will use the labels with no parentheses.
-Here is an example:
+source code.[fn:111] With the ~-n~ switch, links to these references
+will be labeled by the line numbers from the code listing, otherwise
+links will use the labels with no parentheses. Here is an example:
 
 #+begin_example
 #+BEGIN_SRC emacs-lisp -n -r
@@ -9827,40 +9837,41 @@ jumps to point-min.
 #+end_example
 
 {{{vindex(org-coderef-label-format)}}}
-If the syntax for the label format conflicts with the language syntax, use a
-~-l~ switch to change the format, for example {{{samp(#+BEGIN_SRC pascal
--n -r -l "((%s))")}}}.  See also the variable ~org-coderef-label-format~.
+
+If the syntax for the label format conflicts with the language syntax,
+use a ~-l~ switch to change the format, for example
+{{{samp(#+BEGIN_SRC pascal -n -r -l "((%s))")}}}. See also the
+variable ~org-coderef-label-format~.
 
 HTML export also allows examples to be published as text areas
 (see [[Text areas in HTML export]]).
 
-Because the ~#+BEGIN_...~ and ~#+END_...~ patterns need to be added
-so often, shortcuts are provided using the Easy Templates facility
-(see [[Easy Templates]]).
+Because the ~#+BEGIN_...~ and ~#+END_...~ patterns need to be added so
+often, shortcuts are provided using the Easy Templates facility (see
+[[Easy Templates]]).
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
-{{{kindex(C-c ')}}}
-- C-c '
-Edit the source code example at point in its native mode.  This works by
-switching to a temporary buffer with the source code.  You need to exit by
-pressing {{{kbd(C-c ')}}} again@footnote{Upon exit, lines starting with {{{samp(*)}}},
-{{{samp(,*)}}}, {{{samp(#+)}}} and {{{samp(,#+)}}} will get a comma prepended, to keep them
-from being interpreted by Org as outline nodes or special syntax.  These
-commas will be stripped for editing with {{{kbd(C-c ')}}}, and also for export.}.
-The edited version will then replace the old version in the Org buffer.
-Fixed-width regions (where each line starts with a colon followed by a space)
-will be edited using ~artist-mode~@footnote{You may select
-a different-mode with the variable ~org-edit-fixed-width-region-mode~.}
-to allow creating ASCII drawings easily.  Using this command in an empty line
-will create a new fixed-width region.
-{{{kindex(C-c l)}}}
-- C-c l
-Calling ~org-store-link~ while editing a source code example in a
-temporary buffer created with {{{kbd(C-c ')}}} will prompt for a label.  Make sure
-that it is unique in the current buffer, and insert it with the proper
-formatting like {{{samp((ref:label))}}} at the end of the current line.  Then the
-label is stored as a link {{{samp((label))}}}, for retrieval with {{{kbd(C-c C-l)}}}.
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- {{{kbd(C-c ')}}} ::
+  {{{kindex(C-c ')}}}
 
+  Edit the source code example at point in its native mode. This works
+  by switching to a temporary buffer with the source code. You need to
+  exit by pressing {{{kbd(C-c ')}}} again.[fn:112] The edited version
+  will then replace the old version in the Org buffer. Fixed-width
+  regions (where each line starts with a colon followed by a space) will
+  be edited using ~artist-mode~ to allow creating ASCII drawings
+  easily.[fn:113] Using this command in an empty line will create a new
+  fixed-width region. 
+
+- {{{kbd(C-c l)}}} ::
+  {{{kindex(C-c l)}}}
+
+  Calling ~org-store-link~ while editing a source code example in a
+  temporary buffer created with {{{kbd(C-c ')}}} will prompt for a
+  label. Make sure that it is unique in the current buffer, and insert
+  it with the proper formatting like {{{samp((ref:label))}}} at the end
+  of the current line. Then the label is stored as a link
+  {{{samp((label))}}}, for retrieval with {{{kbd(C-c C-l)}}}.
 
 
 ** Include files
@@ -9869,33 +9880,34 @@ label is stored as a link {{{samp((label))}}}, for retrieval with {{{kbd(C-c C-l
    :END:
 {{{cindex(include files\\\, markup rules)}}}
 
-During export, you can include the content of another file.  For example, to
-include your {{{file(.emacs)}}} file, you could use:
+During export, you can include the content of another file. For
+example, to include your {{{file(.emacs)}}} file, you could use:
+
 {{{cindex(#+INCLUDE)}}}
 
 #+begin_example
 ,#+INCLUDE: "~/.emacs" src emacs-lisp
 #+end_example
-{{{noindent}}}
-The optional second and third parameter are the markup (e.g.@: {{{samp(quote)}}},
-{{{samp(example)}}}, or {{{samp(src)}}}), and, if the markup is {{{samp(src)}}}, the
-language for formatting the contents.  The markup is optional; if it is not
-given, the text will be assumed to be in Org mode format and will be
-processed normally.  The include line will also allow additional keyword
-parameters ~:prefix1~ and ~:prefix~ to specify prefixes for the
-first line and for each following line, ~:minlevel~ in order to get
-Org mode content demoted to a specified level, as well as any options
-accepted by the selected markup.  For example, to include a file as an item,
-use
+
+{{{noindent}}} The optional second and third parameter are the markup
+(e.g., {{{samp(quote)}}}, {{{samp(example)}}}, or {{{samp(src)}}}),
+and, if the markup is {{{samp(src)}}}, the language for formatting the
+contents. The markup is optional; if it is not given, the text will be
+assumed to be in Org mode format and will be processed normally. The
+include line will also allow additional keyword parameters ~:prefix1~
+and ~:prefix~ to specify prefixes for the first line and for each
+following line, ~:minlevel~ in order to get Org mode content demoted
+to a specified level, as well as any options accepted by the selected
+markup. For example, to include a file as an item, use:
 
 #+begin_example
 ,#+INCLUDE: "~/snippets/xx" :prefix1 "   + " :prefix "     "
 #+end_example
 
-You can also include a portion of a file by specifying a lines range using
-the ~:lines~ parameter.  The line at the upper end of the range will not
-be included.  The start and/or the end of the range may be omitted to use the
-obvious defaults.
+You can also include a portion of a file by specifying a lines range
+using the ~:lines~ parameter. The line at the upper end of the range
+will not be included. The start and/or the end of the range may be
+omitted to use the obvious defaults.
 
 #+begin_example
 ,#+INCLUDE: "~/.emacs" :lines "5-10"   @r{Include lines 5 to 10, 10 excluded}
@@ -9903,10 +9915,11 @@ obvious defaults.
 ,#+INCLUDE: "~/.emacs" :lines "10-"    @r{Include lines from 10 to EOF}
 #+end_example
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
-{{{kindex(C-c ')}}}
-- C-c '
-Visit the include file at point.
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- {{{kbd(C-c ')}}}
+  {{{kindex(C-c ')}}}
+
+  Visit the include file at point.
 
 
 ** Index entries
@@ -9915,10 +9928,10 @@ Visit the include file at point.
    :END:
 {{{cindex(index entries\\\, for publishing)}}}
 
-You can specify entries that will be used for generating an index during
-publishing.  This is done by lines starting with ~#+INDEX~.  An entry
-the contains an exclamation mark will create a sub item.  See [[Generating
-an index]] for more information.
+You can specify entries that will be used for generating an index
+during publishing. This is done by lines starting with ~#+INDEX~. An
+entry the contains an exclamation mark will create a sub item. See
+[[Generating an index]] for more information.
 
 #+begin_example
 ,* Curriculum Vitae
@@ -9933,7 +9946,7 @@ an index]] for more information.
 {{{cindex(macro replacement\\\, during export)}}}
 {{{cindex(#+MACRO)}}}
 
-You can define text snippets with
+You can define text snippets with a macro:
 
 #+begin_example
 ,#+MACRO: name   replacement text $1, $2 are arguments
@@ -9952,7 +9965,6 @@ and to the modification time of the file being exported, respectively.
 Macro expansion takes place during export, and some people use it to
 construct complex HTML code.
 
-
 ** Embedded LaTeX
    :PROPERTIES:
    :DESCRIPTION: LaTeX can be freely used inside Org documents
@@ -9961,15 +9973,13 @@ construct complex HTML code.
 {{{cindex(@TeX{} interpretation)}}}
 {{{cindex(@LaTeX{} interpretation)}}}
 
-Plain ASCII is normally sufficient for almost all note taking.  Exceptions
-include scientific notes, which often require mathematical symbols and the
-occasional formula.  @LaTeX{}@footnote{@LaTeX{} is a macro system based on
-Donald E. Knuth's @TeX{} system.  Many of the features described here as
-``@LaTeX{}'' are really from @TeX{}, but for simplicity I am blurring this
-distinction.}  is widely used to typeset scientific documents.  Org mode
-supports embedding @LaTeX{} code into its files, because many academics are
-used to writing and reading @LaTeX{} source code, and because it can be
-readily processed to produce pretty output for a number of export backends.
+Plain ASCII is normally sufficient for almost all note taking.
+Exceptions include scientific notes, which often require mathematical
+symbols and the occasional formula. @LaTeX{} is widely used to typeset
+scientific documents.[fn:114] Org mode supports embedding @LaTeX{}
+code into its files, because many academics are used to writing and
+reading @LaTeX{} source code, and because it can be readily processed
+to produce pretty output for a number of export backends.
 
 *** Special symbols
     :PROPERTIES:
@@ -9982,42 +9992,44 @@ readily processed to produce pretty output for a number of export backends.
 {{{cindex(HTML entities)}}}
 {{{cindex(@LaTeX{} entities)}}}
 
-You can use @LaTeX{} macros to insert special symbols like {{{samp(\alpha)}}} to
-indicate the Greek letter, or {{{samp(\to)}}} to indicate an arrow.  Completion
-for these macros is available, just type {{{samp(\)}}} and maybe a few letters,
-and press {{{kbdkey(M-,TAB)}}} to see possible completions.  Unlike @LaTeX{}
-code, Org mode allows these macros to be present without surrounding math
-delimiters, for example:
+You can use @LaTeX{} macros to insert special symbols like
+{{{samp(\alpha)}}} to indicate the Greek letter, or {{{samp(\to)}}} to
+indicate an arrow. Completion for these macros is available, just type
+{{{samp(\)}}} and maybe a few letters, and press {{{kbdkey(M-,TAB)}}}
+to see possible completions. Unlike @LaTeX{} code, Org mode allows
+these macros to be present without surrounding math delimiters, for
+example:
 
 #+begin_example
 Angles are written as Greek letters \alpha, \beta and \gamma.
 #+end_example
 
 {{{vindex(org-entities)}}}
-During export, these symbols will be transformed into the native format of
-the exporter backend.  Strings like ~\alpha~ will be exported as
-~&alpha;~ in the HTML output, and as ~$\alpha$~ in the @LaTeX{}
-output.  Similarly, ~\nbsp~ will become ~&nbsp;~ in HTML and
-~~~ in @LaTeX{}.  If you need such a symbol inside a word, terminate it
-like this: {{{samp(\Aacute@{@)}}}stor}.
 
-A large number of entities is provided, with names taken from both HTML and
-@LaTeX{}; see the variable ~org-entities~ for the complete list.
-{{{samp(\-)}}} is treated as a shy hyphen, and {{{samp(--)}}}, {{{samp(---)}}}, and
-{{{samp(...)}}} are all converted into special commands creating hyphens of
-different lengths or a compact set of dots.
+During export, these symbols will be transformed into the native
+format of the exporter backend. Strings like ~\alpha~ will be exported
+as ~&alpha;~ in the HTML output, and as ~$\alpha$~ in the @LaTeX{}
+output. Similarly, ~\nbsp~ will become ~&nbsp;~ in HTML and ~~~ in
+@LaTeX{}. If you need such a symbol inside a word, terminate it like
+this: {{{samp(\Aacute@{@)}}}stor}.
+
+A large number of entities is provided, with names taken from both
+HTML and @LaTeX{}; see the variable ~org-entities~ for the complete
+list. {{{samp(\-)}}} is treated as a shy hyphen, and {{{samp(--)}}},
+{{{samp(---)}}}, and {{{samp(...)}}} are all converted into special
+commands creating hyphens of different lengths or a compact set of
+dots.
 
 If you would like to see entities displayed as UTF8 characters, use the
-following command@footnote{You can turn this on by default by setting the
-variable ~org-pretty-entities~, or on a per-file base with the
-~#+STARTUP~ option ~entitiespretty~.}:
+following command:[fn:115]
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
-{{{kindex(C-c C-x \)}}}
-- C-c C-x \
-Toggle display of entities as UTF-8 characters.  This does not change the
-buffer content which remains plain ASCII, but it overlays the UTF-8 character
-for display purposes only.
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- {{{kbd(C-c C-x \)}}} ::
+  {{{kindex(C-c C-x \)}}}
+
+  Toggle display of entities as UTF-8 characters. This does not change
+  the buffer content which remains plain ASCII, but it overlays the
+  UTF-8 character for display purposes only.
 
 
 *** Subscripts and superscripts
@@ -10027,11 +10039,11 @@ for display purposes only.
 {{{cindex(subscript)}}}
 {{{cindex(superscript)}}}
 
-Just like in @LaTeX{}, {{{samp(^)}}} and {{{samp(_)}}} are used to indicate super-
-and subscripts.  Again, these can be used without embedding them in
-math-mode delimiters.  To increase the readability of ASCII text, it is
-not necessary (but OK) to surround multi-character sub- and superscripts
-with curly braces.  For example
+Just like in @LaTeX{}, {{{samp(^)}}} and {{{samp(_)}}} are used to
+indicate super- and subscripts. Again, these can be used without
+embedding them in math-mode delimiters. To increase the readability of
+ASCII text, it is not necessary (but OK) to surround multi-character
+sub- and superscripts with curly braces. For example
 
 #+begin_example
 The mass of the sun is M_sun = 1.989 x 10^30 kg.  The radius of
@@ -10039,25 +10051,28 @@ the sun is R_@{sun@} = 6.96 x 10^8 m.
 #+end_example
 
 {{{vindex(org-export-with-sub-superscripts)}}}
-To avoid interpretation as raised or lowered text, you can quote {{{samp(^)}}} and
-{{{samp(_)}}} with a backslash: {{{samp(\^)}}} and {{{samp(\_)}}}.  If you write a text
-where the underscore is often used in a different context, Org's convention
-to always interpret these as subscripts can get in your way.  Configure the
-variable ~org-export-with-sub-superscripts~ to globally change this
-convention, or use, on a per-file basis:
+
+To avoid interpretation as raised or lowered text, you can quote
+{{{samp(^)}}} and {{{samp(_)}}} with a backslash: {{{samp(\^)}}} and
+{{{samp(\_)}}}. If you write a text where the underscore is often used
+in a different context, Org's convention to always interpret these as
+subscripts can get in your way. Configure the variable
+~org-export-with-sub-superscripts~ to globally change this convention,
+or use, on a per-file basis:
 
 #+begin_example
 ,#+OPTIONS: ^:@{@}
 #+end_example
 
 {{{noindent}}} With this setting, {{{samp(a_b)}}} will not be interpreted as a
-subscript, but {{{samp(a_@{b@)}}}} will.
+subscript, but {{{samp(a_@{b@})}}} will.
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
-{{{kindex(C-c C-x \)}}}
-- C-c C-x \
-In addition to showing entities as UTF-8 characters, this command will also
-format sub- and superscripts in a WYSIWYM way.
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- {{{kbd(C-c C-x \)}}} ::
+  {{{kindex(C-c C-x \)}}}
+
+  In addition to showing entities as UTF-8 characters, this command will
+  also format sub- and superscripts in a WYSIWYM way.
 
 
 *** @LaTeX{} fragments
@@ -10065,44 +10080,32 @@ format sub- and superscripts in a WYSIWYM way.
     :DESCRIPTION: Complex formulas made easy
     :END:
 {{{cindex(@LaTeX{} fragments)}}}
-
 {{{vindex(org-format-latex-header)}}}
-Going beyond symbols and sub- and superscripts, a full formula language is
-needed.  Org mode can contain @LaTeX{} math fragments, and it supports ways
-to process these for several export backends.  When exporting to @LaTeX{},
-the code is obviously left as it is.  When exporting to HTML, Org invokes the
-@uref{http://www.mathjax.org, MathJax library} (see [[Math formatting
-in HTML export]]) to process and display the math@footnote{If you plan to use
-this regularly or on pages with significant page views, you should install
-{{{file(MathJax)}}} on your own
-server in order to limit the load of our server.}.  Finally, it can also
-process the mathematical expressions into images@footnote{For this to work
-you need to be on a system with a working @LaTeX{} installation.  You also
-need the {{{file(dvipng)}}} program or the {{{file(convert)}}}, respectively available
-at @url{http://sourceforge.net/projects/dvipng/} and from the
-{{{file(imagemagick)}}} suite.  The @LaTeX{} header that will be used when
-processing a fragment can be configured with the variable
-~org-format-latex-header~.} that can be displayed in a browser or in
-DocBook documents.
+
+Going beyond symbols and sub- and superscripts, a full formula
+language is needed. Org mode can contain @LaTeX{} math fragments, and
+it supports ways to process these for several export backends. When
+exporting to @LaTeX{}, the code is obviously left as it is. When
+exporting to HTML, Org invokes the [[http://www.mathjax.org][MathJax library]] (see [[Math
+formatting in HTML export]]) to process and display the math.[fn:117]
+Finally, it can also process the mathematical expressions into images
+that can be displayed in a browser or in DocBook documents.[fn:118]
 
 @LaTeX{} fragments don't need any special marking at all.  The following
 snippets will be identified as @LaTeX{} source code:
-@itemize @bullet
-- 
-Environments of any kind@footnote{When {{{file(MathJax)}}} is used, only the
-environment recognized by {{{file(MathJax)}}} will be processed.  When
-{{{file(dvipng)}}} is used to create images, any @LaTeX{} environments will be
-handled.}.  The only requirement is that the ~\begin~ statement appears
-on a new line, preceded by only whitespace.
-- 
-Text within the usual @LaTeX{} math delimiters.  To avoid conflicts with
-currency specifications, single {{{samp($)}}} characters are only recognized as
-math delimiters if the enclosed text contains at most two line breaks, is
-directly attached to the {{{samp($)}}} characters with no whitespace in between,
-and if the closing {{{samp($)}}} is followed by whitespace, punctuation or a dash.
-For the other delimiters, there is no such restriction, so when in doubt, use
-{{{samp(\(...\))}}} as inline math delimiters.
-@end itemize
+
+- Environments of any kind.[fn:119]  The only requirement is that the
+  ~\begin~ statement appears on a new line, preceded by only whitespace.
+
+- Text within the usual @LaTeX{} math delimiters. To avoid conflicts
+  with currency specifications, single {{{samp($)}}} characters are
+  only recognized as math delimiters if the enclosed text contains at
+  most two line breaks, is directly attached to the {{{samp($)}}}
+  characters with no whitespace in between, and if the closing
+  {{{samp($)}}} is followed by whitespace, punctuation or a dash. For
+  the other delimiters, there is no such restriction, so when in
+  doubt, use {{{samp(\(...\))}}} as inline math delimiters.
+
 
 {{{noindent}}} For example:
 
@@ -10117,16 +10120,19 @@ either $$ a=+\sqrt@{2@} $$ or \[ a=-\sqrt@{2@} \].
 
 {{{noindent}}}
 {{{vindex(org-format-latex-options)}}}
-If you need any of the delimiter ASCII sequences for other purposes, you
-can configure the option ~org-format-latex-options~ to deselect the
-ones you do not wish to have interpreted by the @LaTeX{} converter.
+
+If you need any of the delimiter ASCII sequences for other purposes,
+you can configure the option ~org-format-latex-options~ to deselect
+the ones you do not wish to have interpreted by the @LaTeX{}
+converter.
 
 {{{vindex(org-export-with-LaTeX-fragments)}}}
+
 @LaTeX{} processing can be configured with the variable
-~org-export-with-LaTeX-fragments~.  The default setting is ~t~
-which means {{{file(MathJax)}}} for HTML, and no processing for DocBook, ASCII and
-@LaTeX{} backends.  You can also set this variable on a per-file basis using one
-of these lines:
+~org-export-with-LaTeX-fragments~. The default setting is ~t~ which
+means {{{file(MathJax)}}} for HTML, and no processing for DocBook,
+ASCII and @LaTeX{} backends. You can also set this variable on a
+per-file basis using one of these lines:
 
 #+begin_example
 ,#+OPTIONS: LaTeX:t          @r{Do the right thing automatically (MathJax)}
@@ -10141,26 +10147,30 @@ of these lines:
     :END:
 {{{cindex(@LaTeX{} fragments, preview)}}}
 
-If you have {{{file(dvipng)}}} installed, @LaTeX{} fragments can be processed to
-produce preview images of the typeset expressions:
+If you have {{{file(dvipng)}}} installed, @LaTeX{} fragments can be
+processed to produce preview images of the typeset expressions:
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
-{{{kindex(C-c C-x C-l)}}}
-- C-c C-x C-l
-Produce a preview image of the @LaTeX{} fragment at point and overlay it
-over the source code.  If there is no fragment at point, process all
-fragments in the current entry (between two headlines).  When called
-with a prefix argument, process the entire subtree.  When called with
-two prefix arguments, or when the cursor is before the first headline,
-process the entire buffer.
-{{{kindex(C-c C-c)}}}
-- C-c C-c
-Remove the overlay preview images.
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- {{{kbd(C-c C-x C-l)}}} ::
+  {{{kindex(C-c C-x C-l)}}}
+
+  Produce a preview image of the @LaTeX{} fragment at point and overlay
+  it over the source code. If there is no fragment at point, process all
+  fragments in the current entry (between two headlines). When called
+  with a prefix argument, process the entire subtree. When called with
+  two prefix arguments, or when the cursor is before the first headline,
+  process the entire buffer.
+
+- {{{kbd(C-c C-c)}}} ::
+  {{{kindex(C-c C-c)}}}
+
+  Remove the overlay preview images.
 
 
 {{{vindex(org-format-latex-options)}}}
+
 You can customize the variable ~org-format-latex-options~ to influence
-some aspects of the preview.  In particular, the ~:scale~ (and for HTML
+some aspects of the preview. In particular, the ~:scale~ (and for HTML
 export, ~:html-scale~) property can be used to adjust the size of the
 preview images.
 
@@ -10171,16 +10181,17 @@ preview images.
     :END:
 {{{cindex(CD@LaTeX{})}}}
 
-CD@LaTeX{} mode is a minor mode that is normally used in combination with a
-major @LaTeX{} mode like AUC@TeX{} in order to speed-up insertion of
-environments and math templates.  Inside Org mode, you can make use of
-some of the features of CD@LaTeX{} mode.  You need to install
-{{{file(cdlatex.el)}}} and {{{file(texmathp.el)}}} (the latter comes also with
-AUC@TeX{}) from @url{http://www.astro.uva.nl/~dominik/Tools/cdlatex}.
-Don't use CD@LaTeX{} mode itself under Org mode, but use the light
-version ~org-cdlatex-mode~ that comes as part of Org mode.  Turn it
-on for the current buffer with ~M-x org-cdlatex-mode~, or for all
-Org files with
+CD@LaTeX{} mode is a minor mode that is normally used in combination
+with a major @LaTeX{} mode like AUC@TeX{} in order to speed-up
+insertion of environments and math templates. Inside Org mode, you can
+make use of some of the features of CD@LaTeX{} mode. You need to
+install {{{file(cdlatex.el)}}} and {{{file(texmathp.el)}}} (the latter
+comes also with AUC@TeX{}) from
+[[http://www.astro.uva.nl/~dominik/Tools/cdlatex]]. Don't use CD@LaTeX{}
+mode itself under Org mode, but use the light version
+~org-cdlatex-mode~ that comes as part of Org mode. Turn it on for the
+current buffer with ~M-x org-cdlatex-mode~, or for all Org files with
+this hook:
 
 #+header: :eval no
 #+header: :exports code
@@ -10190,45 +10201,53 @@ Org files with
 
 When this mode is enabled, the following features are present (for more
 details see the documentation of CD@LaTeX{} mode):
-@itemize @bullet
-{{{kindex(C-c @{)}}}
-- 
-Environment templates can be inserted with {{{kbd(C-c @{)}}}.
-- 
-{{{kindex(@key{TAB})}}}
-The @key{TAB} key will do template expansion if the cursor is inside a
-@LaTeX{} fragment@footnote{Org mode has a method to test if the cursor is
-inside such a fragment, see the documentation of the function
-~org-inside-LaTeX-fragment-p~.}.  For example, @key{TAB} will
-expand ~fr~ to ~\frac@{@~@{@}} and position the cursor
-correctly inside the first brace.  Another @key{TAB} will get you into
-the second brace.  Even outside fragments, @key{TAB} will expand
-environment abbreviations at the beginning of a line.  For example, if
-you write {{{samp(equ)}}} at the beginning of a line and press @key{TAB},
-this abbreviation will be expanded to an ~equation~ environment.
-To get a list of all abbreviations, type {{{kbd(M-x cdlatex-command-help)}}}.
-- 
-{{{kindex(_)}}}
-{{{kindex(^)}}}
-{{{vindex(cdlatex-simplify-sub-super-scripts)}}}
-Pressing {{{kbd(_)}}} and {{{kbd(^)}}} inside a @LaTeX{} fragment will insert these
-characters together with a pair of braces.  If you use @key{TAB} to move
-out of the braces, and if the braces surround only a single character or
-macro, they are removed again (depending on the variable
-~cdlatex-simplify-sub-super-scripts~).
-- 
-{{{kindex(`)}}}
-Pressing the backquote {{{kbd(`)}}} followed by a character inserts math
-macros, also outside @LaTeX{} fragments.  If you wait more than 1.5 seconds
-after the backquote, a help window will pop up.
-- 
-{{{kindex(')}}}
-Pressing the single-quote {{{kbd(')}}} followed by another character modifies
-the symbol before point with an accent or a font.  If you wait more than
-1.5 seconds after the single-quote, a help window will pop up.  Character
-modification will work only inside @LaTeX{} fragments; outside the quote
-is normal.
-@end itemize
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+
+- {{{kbd(C-c @{)}}} ::
+  {{{kindex(C-c @{)}}}
+
+  Insert an environment template.
+
+- {{{key(TAB)}}} ::
+  {{{kindex(@key{TAB})}}}
+
+  Expand a template if the cursor is inside a @LaTeX{} fragment.[fn:120]
+  For example, {{{key(TAB)}}} will expand ~fr~ to ~\frac@{@ @{@}}~ and
+  position the cursor correctly inside the first brace. Another
+  {{{key(TAB)}}} will get you into the second brace. Even outside
+  fragments, {{{key(TAB)}}} will expand environment abbreviations at the
+  beginning of a line. For example, if you write {{{samp(equ)}}} at the
+  beginning of a line and press {{{key(TAB)}}}, this abbreviation will
+  be expanded to an ~equation~ environment. To get a list of all
+  abbreviations, type {{{kbd(M-x cdlatex-command-help)}}}.
+
+- {{{kbd(_)}}} {{{kbd(^)}}} ::
+  {{{kindex(_)}}}
+  {{{kindex(^)}}}
+  {{{vindex(cdlatex-simplify-sub-super-scripts)}}}
+
+  Pressing {{{kbd(_)}}} and {{{kbd(^)}}} inside a @LaTeX{} fragment will
+  insert these characters together with a pair of braces. If you use
+  {{{key(TAB)}}} to move out of the braces, and if the braces surround
+  only a single character or macro, they are removed again (depending on
+  the variable ~cdlatex-simplify-sub-super-scripts~).
+
+- {{{kbd(`)}}} ::
+  {{{kindex(`)}}}
+
+  Pressing the backquote followed by a character inserts math macros,
+  also outside @LaTeX{} fragments. If you wait more than 1.5 seconds
+  after the backquote, a help window will pop up.
+
+- {{{kbd(')}}} ::
+  {{{kindex(')}}}
+
+  Pressing the single-quote followed by another character modifies the
+  symbol before point with an accent or a font. If you wait more than
+  1.5 seconds after the single-quote, a help window will pop up.
+  Character modification will work only inside @LaTeX{} fragments;
+  outside the quote is normal.
 
 * FIXME Exporting                                                  :noexport:
   :PROPERTIES:
@@ -11072,7 +11091,7 @@ below.
     :END:
 Embedded @LaTeX{} as described in [[Embedded @LaTeX{]]}, will be correctly
 inserted into the @LaTeX{} file.  This includes simple macros like
-{{{samp(\ref@{LABEL@)}}}} to create a cross reference to a figure.  Furthermore,
+{{{samp(\ref@{LABEL@})}}} to create a cross reference to a figure.  Furthermore,
 you can add special code that should only be present in @LaTeX{} export with
 the following constructs:
 
@@ -11179,7 +11198,7 @@ can use the keyword ~multicolumn~ in the ~#+ATTR_LaTeX~ line.  This
 will export the image wrapped in a ~figure*~ environment.
 
 If you need references to a label created in this way, write
-{{{samp(\ref@{fig:SED-HR4049@)}}}} just like in @LaTeX{}.
+{{{samp(\ref@{fig:SED-HR4049@})}}} just like in @LaTeX{}.
 
 *** Beamer class export
     :PROPERTIES:
@@ -11566,7 +11585,7 @@ For an Org file {{{file(myfile.org)}}}, the ODT file will be
 {{{file(myfile.odt)}}}.  The file will be overwritten without warning.  If there
 is an active region,@footnote{This requires ~transient-mark-mode~ to be
 turned on} only the region will be exported.  If the selected region is a
-single tree,@footnote{To select the current subtree, use {{{kbd(C-c @@)}}}} the
+single tree,@footnote{To select the current subtree, use {{{kbd(C-c @@})}}} the
 tree head will become the document title.  If the tree head entry has, or
 inherits, an ~EXPORT_FILE_NAME~ property, that name will be used for the
 export.
@@ -11704,7 +11723,7 @@ Internet-style links for all other links.
 A link with no description and destined to a regular (un-itemized) outline
 heading is replaced with a cross-reference and section number of the heading.
 
-A {{{samp(\ref@{label@)}}}}-style reference to an image, table etc. is replaced
+A {{{samp(\ref@{label@})}}}-style reference to an image, table etc. is replaced
 with a cross-reference and sequence number of the labeled entity.
 See [[Labels and captions in ODT export]].
 
@@ -15807,9 +15826,9 @@ org-convert-to-oddeven-levels)}}}.
    :END:
 Because Org contains a large number of commands, by default many of
 Org's core commands are bound to keys that are generally not
-accessible on a tty, such as the cursor keys (@key{left}, @key{right},
-@key{up}, @key{down}), @key{TAB} and @key{RET}, in particular when used
-together with modifiers like @key{Meta} and/or @key{Shift}.  To access
+accessible on a tty, such as the cursor keys ({{{key(left)}}}, {{{key(right)}}},
+{{{key(up)}}}, {{{key(down)}}}), {{{key(TAB)}}} and {{{key(RET)}}}, in particular when used
+together with modifiers like {{{key(Meta)}}} and/or {{{key(Shift)}}}.  To access
 these commands on a tty when special keys are unavailable, the following
 alternative bindings can be used.  The tty bindings below will likely be
 more cumbersome; you may find for some of the bindings below that a
@@ -16380,7 +16399,7 @@ language.  For example, in C mode you could wrap the table between
 {{{samp(/*)}}} and {{{samp(*/)}}} lines.
 - 
 Sometimes it is possible to put the table after some kind of /END/
-statement, for example {{{samp(\bye)}}} in @TeX{} and {{{samp(\end@{document@)}}}}
+statement, for example {{{samp(\bye)}}} in @TeX{} and {{{samp(\end@{document@})}}}
 in @LaTeX{}.
 - 
 You can just comment the table line-by-line whenever you want to process
@@ -17186,8 +17205,7 @@ rely on outline paths, in the hope that these will be unique enough.}.
 Finally, Org writes the file {{{file(index.org)}}}, containing links to all other
 files.  /MobileOrg/ first reads this file from the server, and then
 downloads all agendas and Org files listed in it.  To speed up the download,
-MobileOrg will only read files whose checksums@footnote{Checksums are stored
-automatically in the file {{{file(checksums.dat)}}}} have changed.
+MobileOrg will only read files whose checksums have changed.[fn:116]
 
 ** Pulling from MobileOrg
    :PROPERTIES:
@@ -18056,6 +18074,61 @@ them in order to be able to specify file names.
 
 [fn:108] Quoting depends on the system you use, please check the FAQ
 for examples.
+
+[fn:109] This works automatically for the HTML backend (it requires
+version 1.34 of the {{{file(htmlize.el)}}} package, which is
+distributed with Org). Fontified code chunks in @LaTeX{} can be
+achieved using either the listings package or the [[http://code.google.com/p/minted][minted]] package.
+Refer to ~org-export-latex-listings~ documentation for details.
+
+[fn:110] Code in {{{samp(src)}}} blocks may also be evaluated either
+interactively or on export. See see [[Working With Source Code]] for more
+information on evaluating code blocks.
+
+[fn:111] Adding ~-k~ to ~-n -r~ will /keep/ the labels in the source
+code while using line numbers for the links, which might be useful to
+explain those in an Org mode example code.
+
+[fn:112] Upon exit, lines starting with {{{samp(*)}}}, {{{samp(,*)}}},
+{{{samp(#+)}}} and {{{samp(,#+)}}} will get a comma prepended, to keep
+them from being interpreted by Org as outline nodes or special syntax.
+These commas will be stripped for editing with {{{kbd(C-c ')}}}, and
+also for export.
+
+[fn:113] You may select a different-mode with the variable
+~org-edit-fixed-width-region-mode~.
+
+[fn:114] @LaTeX{} is a macro system based on Donald E. Knuth's @TeX{}
+system. Many of the features described here as ``@LaTeX{}'' are really
+from @TeX{}, but for simplicity I am blurring this distinction.
+
+[fn:115] You can turn this on by default by setting the variable
+~org-pretty-entities~, or on a per-file base with the ~#+STARTUP~
+option ~entitiespretty~.
+
+[fn:116] Checksums are stored automatically in the file
+{{{file(checksums.dat)}}}.
+
+[fn:117] If you plan to use this regularly or on pages with
+significant page views, you should install {{{file(MathJax)}}} on your
+own server in order to limit the load of our server.
+
+[fn:118] For this to work you need to be on a system with a working
+@LaTeX{} installation. You also need the {{{file(dvipng)}}} program or
+the {{{file(convert)}}}, respectively available at
+[[http://sourceforge.net/projects/dvipng/]] and from the
+{{{file(ImageMagick)}}} suite. The @LaTeX{} header that will be used
+when processing a fragment can be configured with the variable
+~org-format-latex-header~.
+
+[fn:119] When {{{file(MathJax)}}} is used, only the environment
+recognized by {{{file(MathJax)}}} will be processed. When
+{{{file(dvipng)}}} is used to create images, any @LaTeX{} environments
+will be handled.
+
+[fn:120] Org mode has a method to test if the cursor is inside such a
+fragment, see the documentation of the function
+~org-inside-LaTeX-fragment-p~.
 
 * About orgmanual.org                                              :noexport:
 This document intends to be Org mode source for the Org mode manual
