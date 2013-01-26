@@ -10249,26 +10249,27 @@ details see the documentation of CD@LaTeX{} mode):
   Character modification will work only inside @LaTeX{} fragments;
   outside the quote is normal.
 
-* FIXME Exporting                                                  :noexport:
+* FIXED Exporting
   :PROPERTIES:
   :DESCRIPTION: Sharing and publishing notes
   :END:
 {{{cindex(exporting)}}}
 
-Org mode documents can be exported into a variety of other formats.  For
-printing and sharing of notes, ASCII export produces a readable and simple
-version of an Org file.  HTML export allows you to publish a notes file on
-the web, while the XOXO format provides a solid base for exchange with a
-broad range of other applications.  @LaTeX{} export lets you use Org mode and
-its structured editing functions to easily create @LaTeX{} files.  DocBook
-export makes it possible to convert Org files to many other formats using
-DocBook tools.  OpenDocument Text (ODT) export allows seamless
-collaboration across organizational boundaries.  For project management you
-can create gantt and resource charts by using TaskJuggler export.  To
-incorporate entries with associated times like deadlines or appointments into
-a desktop calendar program like iCal, Org mode can also produce extracts in
-the iCalendar format.  Currently, Org mode only supports export, not import of
-these different formats.
+Org mode documents can be exported into a variety of other formats.
+For printing and sharing of notes, ASCII export produces a readable
+and simple version of an Org file. HTML export allows you to publish a
+notes file on the web, while the XOXO format provides a solid base for
+exchange with a broad range of other applications. @LaTeX{} export
+lets you use Org mode and its structured editing functions to easily
+create @LaTeX{} files. DocBook export makes it possible to convert Org
+files to many other formats using DocBook tools. OpenDocument Text
+(ODT) export allows seamless collaboration across organizational
+boundaries. For project management you can create gantt and resource
+charts by using TaskJuggler export. To incorporate entries with
+associated times like deadlines or appointments into a desktop
+calendar program like iCal, Org mode can also produce extracts in the
+iCalendar format. Currently, Org mode only supports export, not import
+of these different formats.
 
 Org supports export of selected regions when ~transient-mark-mode~ is
 enabled (default in Emacs 23).
@@ -10278,30 +10279,27 @@ enabled (default in Emacs 23).
    :DESCRIPTION: Using tags to select and exclude trees
    :END:
 {{{cindex(export\\\, selective by tags or TODO keyword)}}}
-
 {{{vindex(org-export-select-tags)}}}
 {{{vindex(org-export-exclude-tags)}}}
 {{{cindex(org-export-with-tasks)}}}
+
 You may use tags to select the parts of a document that should be exported,
 or to exclude parts from export.  This behavior is governed by two variables:
 ~org-export-select-tags~ and ~org-export-exclude-tags~,
-respectively defaulting to ~'(:export:)~ and ~'(:noexport:)~.
+respectively defaulting to ~:export:~ and ~:noexport:~.
 
-@enumerate
-- 
-Org first checks if any of the /select/ tags is present in the
-buffer.  If yes, all trees that do not carry one of these tags will be
-excluded.  If a selected tree is a subtree, the heading hierarchy above it
-will also be selected for export, but not the text below those headings.
+1. Org first checks if any of the /select/ tags is present in the
+   buffer. If yes, all trees that do not carry one of these tags will
+   be excluded. If a selected tree is a subtree, the heading hierarchy
+   above it will also be selected for export, but not the text below
+   those headings.
 
-- 
-If none of the select tags is found, the whole buffer will be selected for
-export.
+2. If none of the select tags is found, the whole buffer will be
+   selected for export.
 
-- 
-Finally, all subtrees that are marked by any of the /exclude/ tags will
-be removed from the export buffer.
-@end enumerate
+3. Finally, all subtrees that are marked by any of the /exclude/ tags
+   will be removed from the export buffer.
+
 
 The variable ~org-export-with-tasks~ can be configured to select which
 kind of tasks should be included for export.  See the docstring of the
@@ -10312,22 +10310,23 @@ variable for more information.
    :DESCRIPTION: Per-file export settings
    :END:
 {{{cindex(options\\\, for export)}}}
-
 {{{cindex(completion\\\, of option keywords)}}}
+
 The exporter recognizes special lines in the buffer which provide
-additional information.  These lines may be put anywhere in the file.
+additional information. These lines may be put anywhere in the file.
 The whole set of lines can be inserted into the buffer with {{{kbd(C-c
-C-e t)}}}.  For individual lines, a good way to make sure the keyword is
-correct is to type {{{samp(#+)}}} and then use {{{kbdkey(M-,TAB)}}} completion
-(see [[Completion]]).   For a summary of other in-buffer settings not
-specifically related to export, see [[In-buffer settings]].
-In particular, note that you can place commonly-used (export) options in
+C-e t)}}}. For individual lines, a good way to make sure the keyword
+is correct is to type {{{samp(#+)}}} and then use {{{kbdkey(M-,TAB)}}}
+completion (see [[Completion]]). For a summary of other in-buffer settings
+not specifically related to export, see [[In-buffer settings]]. In
+particular, note that you can place commonly-used (export) options in
 a separate file which can be included using ~#+SETUPFILE~.
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
+#+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c C-e t)}}} ~org-insert-export-options-template~ ::
   {{{kindex(C-c C-e t)}}}
-Insert template with export options, see example below.
+
+  Insert template with export options, see example below.
 
 
 {{{cindex(#+TITLE)}}}
@@ -10371,10 +10370,9 @@ Insert template with export options, see example below.
 ,#+XSLT:        the XSLT stylesheet used by DocBook exporter to generate FO file
 #+end_example
 
-{{{noindent}}}
-The ~#+OPTIONS~ line is a compact@footnote{If you want to configure many options
-this way, you can use several ~#+OPTIONS~ lines.} form to specify export
-settings.  Here you can:
+{{{noindent}}} The ~#+OPTIONS~ line is a compact form to specify
+export settings.[fn:121] Here you can:
+
 {{{cindex(headline levels)}}}
 {{{cindex(section-numbers)}}}
 {{{cindex(table of contents)}}}
@@ -10424,21 +10422,21 @@ creator:   @r{turn on/off inclusion of creator info into exported file}
 timestamp: @r{turn on/off inclusion creation time into exported file}
 d:         @r{turn on/off inclusion of drawers, or list drawers to include}
 #+end_example
-{{{noindent}}}
-These options take effect in both the HTML and @LaTeX{} export, except for
-~TeX~ and ~LaTeX~ options, which are respectively ~t~ and
-~nil~ for the @LaTeX{} export.
 
-The default values for these and many other options are given by a set of
-variables.  For a list of such variables, the corresponding OPTIONS keys and
-also the publishing keys (see [[Project alist]]), see the constant
-~org-export-plist-vars~.
+{{{noindent}}} These options take effect in both the HTML and @LaTeX{}
+export, except for ~TeX~ and ~LaTeX~ options, which are respectively
+~t~ and ~nil~ for the @LaTeX{} export.
 
-When exporting only a single subtree by selecting it with {{{kbd(C-c @@)}}} before
-calling an export command, the subtree can overrule some of the file's export
-settings with properties ~EXPORT_FILE_NAME~, ~EXPORT_TITLE~,
-~EXPORT_TEXT~, ~EXPORT_AUTHOR~, ~EXPORT_DATE~, and
-~EXPORT_OPTIONS~.
+The default values for these and many other options are given by a set
+of variables. For a list of such variables, the corresponding OPTIONS
+keys and also the publishing keys (see [[Project alist]]), see the
+constant ~org-export-plist-vars~.
+
+When exporting only a single subtree by selecting it with
+{{{kbd(C-c@@)}}} before calling an export command, the subtree can
+overrule some of the file's export settings with properties
+~EXPORT_FILE_NAME~, ~EXPORT_TITLE~, ~EXPORT_TEXT~, ~EXPORT_AUTHOR~,
+~EXPORT_DATE~, and ~EXPORT_OPTIONS~.
 
 ** The export dispatcher
    :PROPERTIES:
@@ -10446,33 +10444,36 @@ settings with properties ~EXPORT_FILE_NAME~, ~EXPORT_TITLE~,
    :END:
 {{{cindex(dispatcher\\\, for export commands)}}}
 
-All export commands can be reached using the export dispatcher, which is a
-prefix key that prompts for an additional key specifying the command.
-Normally the entire file is exported, but if there is an active region that
-contains one outline tree, the first heading is used as document title and
-the subtrees are exported.
+All export commands can be reached using the export dispatcher, which
+is a prefix key that prompts for an additional key specifying the
+command. Normally the entire file is exported, but if there is an
+active region that contains one outline tree, the first heading is
+used as document title and the subtrees are exported.
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
+#+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c C-e)}}} ~org-export~ ::
   {{{kindex(C-c C-e)}}}
-{{{vindex(org-export-run-in-background)}}}
-Dispatcher for export and publishing commands.  Displays a help-window
-listing the additional key(s) needed to launch an export or publishing
-command.  The prefix arg is passed through to the exporter.  A double prefix
-{{{kbd(C-u C-u)}}} causes most commands to be executed in the background, in a
-separate Emacs process@footnote{To make this behavior the default, customize
-the variable ~org-export-run-in-background~.}.
+  {{{vindex(org-export-run-in-background)}}}
+
+  Dispatcher for export and publishing commands. Displays a help-window
+  listing the additional key(s) needed to launch an export or publishing
+  command. The prefix arg is passed through to the exporter. A double
+  prefix {{{kbd(C-u C-u)}}} causes most commands to be executed in the
+  background, in a separate Emacs process.[fn:122]
+
 - {{{kbd(C-c C-e v)}}} ~org-export-visible~ ::
   {{{kindex(C-c C-e v)}}}
-Like {{{kbd(C-c C-e)}}}, but only export the text that is currently visible
-(i.e.@: not hidden by outline visibility).
+
+  Like {{{kbd(C-c C-e)}}}, but only export the text that is currently visible
+  (i.e., not hidden by outline visibility).
+
 - {{{kbd(C-u C-u C-c C-e)}}} ~org-export~ ::
   {{{kindex(C-u C-u C-c C-e)}}}
-{{{vindex(org-export-run-in-background)}}}
-Call the exporter, but reverse the setting of
-~org-export-run-in-background~, i.e.@: request background processing if
-not set, or force processing in the current Emacs process if set.
+  {{{vindex(org-export-run-in-background)}}}
 
+  Call the exporter, but reverse the setting of
+  ~org-export-run-in-background~, i.e., request background processing if
+  not set, or force processing in the current Emacs process if set.
 
 ** ASCII/Latin-1/UTF-8 export
    :PROPERTIES:
@@ -10482,74 +10483,99 @@ not set, or force processing in the current Emacs process if set.
 {{{cindex(Latin-1 export)}}}
 {{{cindex(UTF-8 export)}}}
 
-ASCII export produces a simple and very readable version of an Org mode
-file, containing only plain ASCII.  Latin-1 and UTF-8 export augment the file
-with special characters and symbols available in these encodings.
+ASCII export produces a simple and very readable version of an Org
+mode file, containing only plain ASCII. Latin-1 and UTF-8 export
+augment the file with special characters and symbols available in
+these encodings.
 
 {{{cindex(region\\\, active)}}}
 {{{cindex(active region)}}}
 {{{cindex(transient-mark-mode)}}}
-#+attr_texinfo: :table-type "table" :indic "@kbd"
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c C-e a)}}} ~org-export-as-ascii~ ::
   {{{kindex(C-c C-e a)}}}
-{{{cindex(property\\\, EXPORT_FILE_NAME)}}}
-Export as an ASCII file.  For an Org file, {{{file(myfile.org)}}}, the ASCII file
-will be {{{file(myfile.txt)}}}.  The file will be overwritten without
-warning.  If there is an active region@footnote{This requires
-~transient-mark-mode~ be turned on.}, only the region will be
-exported.  If the selected region is a single tree@footnote{To select the
-current subtree, use {{{kbd(C-c @@)}}}.}, the tree head will
-become the document title.  If the tree head entry has or inherits an
-~EXPORT_FILE_NAME~ property, that name will be used for the
-export.
+  {{{cindex(property\\\, EXPORT_FILE_NAME)}}}
+
+  Export as an ASCII file. For an Org file, {{{file(myfile.org)}}}, the
+  ASCII file will be {{{file(myfile.txt)}}}. The file will be
+  overwritten without warning. If there is an active region, only the
+  region will be exported.[fn:123] If the selected region is a single
+  tree, the tree head will become the document title.[fn:124] If the
+  tree head entry has or inherits an ~EXPORT_FILE_NAME~ property, that
+  name will be used for the export.
+
 - {{{kbd(C-c C-e A)}}} ~org-export-as-ascii-to-buffer~ ::
   {{{kindex(C-c C-e A)}}}
-Export to a temporary buffer.  Do not create a file.
+
+  Export to a temporary buffer.  Do not create a file.
+
 - {{{kbd(C-c C-e n)}}} ~org-export-as-latin1~ ::
   {{{kindex(C-c C-e n)}}}
-@xorgcmd{C-c C-e N,org-export-as-latin1-to-buffer}
-Like the above commands, but use Latin-1 encoding.
+
+  Like {{{kbd(C-c C-e a)}}}, but use Latin-1 encoding.
+
+- {{{kbd(C-c C-e N)}}} ~org-export-as-latin1-to-buffer~ ::
+  {{{kindex(C-c C-e N)}}}
+
+  Like {{{kbd(C-c C-e A)}}}, but use Latin-1 encoding.
+
 - {{{kbd(C-c C-e u)}}} ~org-export-as-utf8~ ::
   {{{kindex(C-c C-e u)}}}
-@xorgcmd{C-c C-e U,org-export-as-utf8-to-buffer}
-Like the above commands, but use UTF-8 encoding.
-- C-c C-e v a/n/u
-Export only the visible part of the document.
+
+  Like {{{kbd(C-c C-e a)}}}, but use UTF-8 encoding.
+
+- {{{kbd(C-c C-e U)}}} ~org-export-as-utf8-to-buffer~ ::
+  {{{kindex(C-c C-e U)}}}
+
+  Like {{{kbd(C-c C-e A)}}}, but use UTF-8 encoding.
+
+
+- {{{kbd(C-c C-e v a/n/u)}}} ::
+  {{{kindex(C-c C-e v a)}}}
+  {{{kindex(C-c C-e v n)}}}
+  {{{kindex(C-c C-e v u)}}}
+
+  Export only the visible part of the document.
 
 
 {{{cindex(headline levels\\\, for exporting)}}}
+
 In the exported version, the first 3 outline levels will become
-headlines, defining a general document structure.  Additional levels
-will be exported as itemized lists.  If you want that transition to occur
-at a different level, specify it with a prefix argument.  For example,
+headlines, defining a general document structure. Additional levels
+will be exported as itemized lists. If you want that transition to
+occur at a different level, specify it with a prefix argument, e.g.:
 
 #+begin_example
 {{{kbd(C-1 C-c C-e a)}}}
 #+end_example
 
-{{{noindent}}}
-creates only top level headlines and exports the rest as items.  When
-headlines are converted to items, the indentation of the text following
-the headline is changed to fit nicely under the item.  This is done with
-the assumption that the first body line indicates the base indentation of
-the body text.  Any indentation larger than this is adjusted to preserve
-the layout relative to the first line.  Should there be lines with less
+{{{noindent}}} This setting creates only top level headlines and
+exports the rest as items. When headlines are converted to items, the
+indentation of the text following the headline is changed to fit
+nicely under the item. This is done with the assumption that the first
+body line indicates the base indentation of the body text. Any
+indentation larger than this is adjusted to preserve the layout
+relative to the first line. Should there be lines with less
 indentation than the first one, these are left alone.
 
 {{{vindex(org-export-ascii-links-to-notes)}}}
-Links will be exported in a footnote-like style, with the descriptive part in
-the text and the link in a note before the next heading.  See the variable
-~org-export-ascii-links-to-notes~ for details and other options.
+
+Links will be exported in a footnote-like style, with the descriptive
+part in the text and the link in a note before the next heading. See
+the variable ~org-export-ascii-links-to-notes~ for details and other
+options.
 
 ** HTML export
    :PROPERTIES:
    :DESCRIPTION: Exporting to HTML
    :END:
 {{{cindex(HTML export)}}}
+{{{cindex(Gruber\\\, John)}}}
 
 Org mode contains a HTML (XHTML 1.0 strict) exporter with extensive
-HTML formatting, in ways similar to John Gruber's /markdown/
-language, but with additional support for tables.
+HTML formatting, in ways similar to John Gruber's /markdown/ language,
+but with additional support for tables.
 
 *** HTML Export commands
     :PROPERTIES:
@@ -10558,53 +10584,72 @@ language, but with additional support for tables.
 {{{cindex(region\\\, active)}}}
 {{{cindex(active region)}}}
 {{{cindex(transient-mark-mode)}}}
-#+attr_texinfo: :table-type "table" :indic "@kbd"
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c C-e h)}}} ~org-export-as-html~ ::
   {{{kindex(C-c C-e h)}}}
-{{{cindex(property\\\, EXPORT_FILE_NAME)}}}
-Export as a HTML file.  For an Org file {{{file(myfile.org)}}},
-the HTML file will be {{{file(myfile.html)}}}.  The file will be overwritten
-without warning.  If there is an active region@footnote{This requires
-~transient-mark-mode~ be turned on.}, only the region will be
-exported.  If the selected region is a single tree@footnote{To select the
-current subtree, use {{{kbd(C-c @@)}}}.}, the tree head will become the document
-title.  If the tree head entry has, or inherits, an ~EXPORT_FILE_NAME~
-property, that name will be used for the export.
+  {{{cindex(property\\\, EXPORT_FILE_NAME)}}}
+
+  Export as an HTML file. For an Org file {{{file(myfile.org)}}}, the
+  HTML file will be {{{file(myfile.html)}}}. The file will be
+  overwritten without warning. If there is an active region, only the
+  active region will be exported.[fn:125] If the selected region is a
+  single tree, the tree head will become the document title.[fn:126] If
+  the tree head entry has, or inherits, an ~EXPORT_FILE_NAME~ property,
+  that name will be used for the export.
+
 - {{{kbd(C-c C-e b)}}} ~org-export-as-html-and-open~ ::
   {{{kindex(C-c C-e b)}}}
-Export as a HTML file and immediately open it with a browser.
+
+  Export as a HTML file and immediately open it with a browser.
+
 - {{{kbd(C-c C-e H)}}} ~org-export-as-html-to-buffer~ ::
   {{{kindex(C-c C-e H)}}}
-Export to a temporary buffer.  Do not create a file.
+
+  Export to a temporary buffer.  Do not create a file.
+
 - {{{kbd(C-c C-e R)}}} ~org-export-region-as-html~ ::
   {{{kindex(C-c C-e R)}}}
-Export the active region to a temporary buffer.  With a prefix argument, do
-not produce the file header and footer, but just the plain HTML section for
-the region.  This is good for cut-and-paste operations.
-- C-c C-e v h/b/H/R
-Export only the visible part of the document.
-- M-x org-export-region-as-html
-Convert the region to HTML under the assumption that it was in Org mode
-syntax before.  This is a global command that can be invoked in any
-buffer.
-- M-x org-replace-region-by-HTML
-Replace the active region (assumed to be in Org mode syntax) by HTML
-code.
+
+  Export the active region to a temporary buffer. With a prefix
+  argument, do not produce the file header and footer, but just the
+  plain HTML section for the region. This is good for cut-and-paste
+  operations.
+
+- {{{kbd(C-c C-e v h/b/H/R)}}} ::
+  {{{kindex(C-c C-e v h)}}}
+  {{{kindex(C-c C-e v b)}}}
+  {{{kindex(C-c C-e v H)}}}
+  {{{kindex(C-c C-e v R)}}}
+
+  Export only the visible part of the document.
+
+- {{{kbd(M-x org-export-region-as-html)}}} ::
+
+  Convert the region to HTML under the assumption that it was in Org
+  mode syntax before. This is a global command that can be invoked in
+  any buffer.
+
+- {{{kbd(M-x org-replace-region-by-HTML)}}} ::
+
+  Replace the active region (assumed to be in Org mode syntax) by HTML
+  code.
 
 
 {{{cindex(headline levels\\\, for exporting)}}}
-In the exported version, the first 3 outline levels will become headlines,
-defining a general document structure.  Additional levels will be exported as
-itemized lists.  If you want that transition to occur at a different level,
-specify it with a numeric prefix argument.  For example,
+
+In the exported version, the first three outline levels will become
+headlines, defining a general document structure. Additional levels
+will be exported as itemized lists. If you want that transition to
+occur at a different level, specify it with a numeric prefix argument,
+e.g.:
 
 #+begin_example
 {{{kbd(C-2 C-c C-e b)}}}
 #+end_example
 
-{{{noindent}}}
-creates two levels of headings and does the rest as items.
-
+{{{noindent}}} This setting creates two levels of headings and exports
+the rest as list items.
 
 *** HTML preamble and postamble
     :PROPERTIES:
@@ -10622,8 +10667,8 @@ creates two levels of headings and does the rest as items.
 
 The HTML exporter lets you define a preamble and a postamble.
 
-The default value for ~org-export-html-preamble~ is ~t~, which
-means that the preamble is inserted depending on the relevant format string
+The default value for ~org-export-html-preamble~ is ~t~, which means
+that the preamble is inserted depending on the relevant format string
 in ~org-export-html-preamble-format~.
 
 Setting ~org-export-html-preamble~ to a string will override the default
@@ -10633,26 +10678,27 @@ can check against the value of ~opt-plist~, which contains the list of
 publishing properties for the current file.  Setting to ~nil~ will not
 insert any preamble.
 
-The default value for ~org-export-html-postamble~ is ~'auto~, which
-means that the HTML exporter will look for the value of
-~org-export-author-info~, ~org-export-email-info~,
+The default value for ~org-export-html-postamble~ is
+{{{samp('auto)}}}, which means that the HTML exporter will look for
+the value of ~org-export-author-info~, ~org-export-email-info~,
 ~org-export-creator-info~ and ~org-export-time-stamp-file~,
 ~org-export-html-validation-link~ and build the postamble from these
-values.  Setting ~org-export-html-postamble~ to ~t~ will insert the
+values. Setting ~org-export-html-postamble~ to ~t~ will insert the
 postamble from the relevant format string found in
-~org-export-html-postamble-format~.  Setting it to ~nil~ will not
+~org-export-html-postamble-format~. Setting it to ~nil~ will not
 insert any postamble.
 
 *** Quoting HTML tags
     :PROPERTIES:
     :DESCRIPTION: Using direct HTML in Org mode
     :END:
-Plain {{{samp(<)}}} and {{{samp(>)}}} are always transformed to {{{samp(&lt;)}}} and
-{{{samp(&gt;)}}} in HTML export.  If you want to include simple HTML tags
-which should be interpreted as such, mark them with {{{samp(@@)}}} as in
-{{{samp(@@<b>bold text@@</b>)}}}.  Note that this really works only for
-simple tags.  For more extensive HTML that should be copied verbatim to
-the exported file use either
+
+Plain {{{samp(<)}}} and {{{samp(>)}}} are always transformed to
+{{{samp(&lt;)}}} and {{{samp(&gt;)}}} in HTML export. If you want to
+include simple HTML tags which should be interpreted as such, mark
+them with {{{samp(@@)}}} as in {{{samp(@@<b>bold text@@</b>)}}}. Note
+that this really works only for simple tags. For more extensive HTML
+that should be copied verbatim to the exported file use either ~#+HTML~:
 
 {{{cindex(#+HTML)}}}
 {{{cindex(#+BEGIN_HTML)}}}
@@ -10660,7 +10706,7 @@ the exported file use either
 ,#+HTML: Literal HTML code for export
 #+end_example
 
-{{{noindent}}} or
+{{{noindent}}} or an HTML block:
 {{{cindex(#+BEGIN_HTML)}}}
 
 #+begin_example
@@ -10676,20 +10722,22 @@ All lines between these markers are exported literally
 {{{cindex(links\\\, in HTML export)}}}
 {{{cindex(internal links\\\, in HTML export)}}}
 {{{cindex(external links\\\, in HTML export)}}}
-Internal links (see [[Internal links]]) will continue to work in HTML.  This
-includes automatic links created by radio targets (see [[Radio
-targets]]).  Links to external files will still work if the target file is on
-the same /relative/ path as the published Org file.  Links to other
-{{{file(.org)}}} files will be translated into HTML links under the assumption
-that a HTML version also exists of the linked file, at the same relative
-path.  {{{samp(id:)}}} links can then be used to jump to specific entries across
-files.  For information related to linking files while publishing them to a
-publishing directory see [[Publishing links]].
 
-If you want to specify attributes for links, you can do so using a special
-~#+ATTR_HTML~ line to define attributes that will be added to the
-~<a>~ or ~<img>~ tags.  Here is an example that sets ~title~
-and ~style~ attributes for a link:
+Internal links (see [[Internal links]]) will continue to work in HTML.
+This includes automatic links created by radio targets (see [[Radio
+targets]]). Links to external files will still work if the target file
+is on the same /relative/ path as the published Org file. Links to
+other {{{file(.org)}}} files will be translated into HTML links under
+the assumption that a HTML version also exists of the linked file, at
+the same relative path. {{{samp(id:)}}} links can then be used to jump
+to specific entries across files. For information related to linking
+files while publishing them to a publishing directory see [[Publishing
+links]].
+
+If you want to specify attributes for links, you can do so using a
+special ~#+ATTR_HTML~ line to define attributes that will be added to
+the ~<a>~ or ~<img>~ tags. Here is an example that sets ~title~ and
+~style~ attributes for a link:
 
 {{{cindex(#+ATTR_HTML)}}}
 #+begin_example
@@ -10705,9 +10753,10 @@ and ~style~ attributes for a link:
 {{{vindex(org-export-html-table-tag)}}}
 
 Org mode tables are exported to HTML using the table tag defined in
-~org-export-html-table-tag~.  The default setting makes tables without
-cell borders and frame.  If you would like to change this for individual
-tables, place something like the following before the table:
+~org-export-html-table-tag~. The default setting makes tables without
+cell borders and frame. If you would like to change this for
+individual tables, place something like the following before the
+table:
 
 {{{cindex(#+CAPTION)}}}
 {{{cindex(#+ATTR_HTML)}}}
@@ -10723,17 +10772,17 @@ tables, place something like the following before the table:
 {{{cindex(images\\\, inline in HTML)}}}
 {{{cindex(inlining images in HTML)}}}
 {{{vindex(org-export-html-inline-images)}}}
-HTML export can inline images given as links in the Org file, and
-it can make an image the clickable part of a link.  By
-default@footnote{But see the variable
-~org-export-html-inline-images~.}, images are inlined if a link does
-not have a description.  So {{{samp([[file:myimg.jpg]])}}} will be inlined,
-while {{{samp([[file:myimg.jpg][the image]])}}} will just produce a link
-{{{samp(the image)}}} that points to the image.  If the description part
-itself is a ~file:~ link or a ~http:~ URL pointing to an
-image, this image will be inlined and activated so that clicking on the
-image will activate the link.  For example, to include a thumbnail that
-will link to a high resolution version of the image, you could use:
+
+HTML export can inline images given as links in the Org file, and it
+can make an image the clickable part of a link. By default, images are
+inlined if a link does not have a description.[fn:127] So
+{{{samp([[file:myimg.jpg]])}}} will be inlined, while {{{samp([[file:myimg.jpg][the
+image]])}}} will just produce a link {{{samp(the image)}}} that points
+to the image. If the description part itself is a ~file:~ link or a
+~http:~ URL pointing to an image, this image will be inlined and
+activated so that clicking on the image will activate the link. For
+example, to include a thumbnail that will link to a high resolution
+version of the image, you could use:
 
 #+begin_example
 [[file:highres.jpg][file:thumb.jpg]]
@@ -10751,8 +10800,7 @@ support text viewers and accessibility, and align it to the right.
 [[./img/a.jpg]]
 #+end_example
 
-{{{noindent}}}
-You could use ~http~ addresses just as well.
+{{{noindent}}} You could use ~http~ addresses just as well.
 
 *** Math formatting in HTML export
     :PROPERTIES:
@@ -10761,18 +10809,16 @@ You could use ~http~ addresses just as well.
 {{{cindex(MathJax)}}}
 {{{cindex(dvipng)}}}
 
-@LaTeX{} math snippets (see [[@LaTeX{]] fragments}) can be displayed in two
-different ways on HTML pages.  The default is to use the
-@uref{http://www.mathjax.org, MathJax system} which should work out of the
-box with Org mode installation because ~http://orgmode.org~ serves
-{{{file(MathJax)}}} for Org mode users for small applications and for testing
-purposes.  @b{If you plan to use this regularly or on pages with significant
-page views, you should install@footnote{Installation instructions can be
-found on the MathJax website, see
-@uref{http://www.mathjax.org/resources/docs/?installation.html}.} MathJax on
-your own server in order to limit the load of our server.}  To configure
-{{{file(MathJax)}}}, use the variable ~org-export-html-mathjax-options~ or
-insert something like the following into the buffer:
+@LaTeX{} math snippets (see [[@LaTeX{} fragments]]) can be displayed in
+two different ways on HTML pages. The default is to use the [[http://www.mathjax.org][MathJax
+system]] which should work out of the box with Org mode installation
+because ~http://orgmode.org~ serves {{{file(MathJax)}}} for Org mode
+users for small applications and for testing purposes. *Note:* If you
+plan to use this regularly or on pages with significant page views,
+you should install MathJax on your own server in order to limit the
+load of our server.[fn:128] To configure {{{file(MathJax)}}}, use the
+variable ~org-export-html-mathjax-options~ or insert something like
+the following into the buffer:
 
 #+begin_example
 #+MATHJAX: align:"left" mathml:t path:"/MathJax/MathJax.js"
@@ -10782,11 +10828,12 @@ insert something like the following into the buffer:
 ~org-export-html-mathjax-options~ for the meaning of the parameters in
 this line.
 
-If you prefer, you can also request that @LaTeX{} fragments are processed
-into small images that will be inserted into the browser page.  Before the
-availability of MathJax, this was the default method for Org files.  This
-method requires that the {{{file(dvipng)}}} program is available on your system.
-You can still get this processing with
+If you prefer, you can also request that @LaTeX{} fragments are
+processed into small images that will be inserted into the browser
+page. Before the availability of MathJax, this was the default method
+for Org files. This method requires that the {{{file(dvipng)}}}
+program is available on your system. You can still get this processing
+with the following option:
 
 #+begin_example
 ,#+OPTIONS: LaTeX:dvipng
@@ -10797,21 +10844,22 @@ You can still get this processing with
     :DESCRIPTION: An alternate way to show an example
     :END:
 {{{cindex(text areas\\\, in HTML)}}}
-An alternative way to publish literal code examples in HTML is to use text
-areas, where the example can even be edited before pasting it into an
-application.  It is triggered by a ~-t~ switch at an ~example~ or
-~src~ block.  Using this switch disables any options for syntax and
-label highlighting, and line numbering, which may be present.  You may also
-use ~-h~ and ~-w~ switches to specify the height and width of the
-text area, which default to the number of lines in the example, and 80,
-respectively.  For example
+
+An alternative way to publish literal code examples in HTML is to use
+text areas, where the example can even be edited before pasting it
+into an application. It is triggered by a ~-t~ switch at an ~example~
+or ~src~ block. Using this switch disables any options for syntax and
+label highlighting, and line numbering, which may be present. You may
+also use ~-h~ and ~-w~ switches to specify the height and width of the
+text area, which default to the number of lines in the example, and
+80, respectively. For example
 
 #+begin_example
-#+BEGIN_EXAMPLE -t -w 40
+,#+BEGIN_EXAMPLE -t -w 40
   (defun org-xor (a b)
      "Exclusive or."
      (if a (not b) b))
-#+END_EXAMPLE
+,#+END_EXAMPLE
 #+end_example
 
 *** CSS support
@@ -10820,16 +10868,15 @@ respectively.  For example
     :END:
 {{{cindex(CSS\\\, for HTML export)}}}
 {{{cindex(HTML export\\\, CSS)}}}
-
 {{{vindex(org-export-html-todo-kwd-class-prefix)}}}
 {{{vindex(org-export-html-tag-class-prefix)}}}
-You can also give style information for the exported file.  The HTML exporter
-assigns the following special CSS classes@footnote{If the classes on TODO
-keywords and tags lead to conflicts, use the variables
-~org-export-html-todo-kwd-class-prefix~ and
-~org-export-html-tag-class-prefix~ to make them unique.} to appropriate
+
+You can also give style information for the exported file. The HTML
+exporter assigns the following special CSS classes to appropriate
 parts of the document---your style specifications may change these, in
-addition to any of the standard classes like for headlines, tables, etc.
+addition to any of the standard classes like for headlines, tables,
+etc.[fn:129]
+
 #+begin_example
 p.author            @r{author information, including email}
 p.date              @r{publishing date}
@@ -10864,30 +10911,27 @@ p.footnote          @r{footnote definition paragraph, containing a footnote}
 {{{vindex(org-export-html-style)}}}
 {{{vindex(org-export-html-extra)}}}
 {{{vindex(org-export-html-style-default)}}}
+
 Each exported file contains a compact default style that defines these
-classes in a basic way@footnote{This style is defined in the constant
-~org-export-html-style-default~, which you should not modify.  To turn
-inclusion of these defaults off, customize
-~org-export-html-style-include-default~}.  You may overwrite these
+classes in a basic way.[fn:130]  You may overwrite these
 settings, or add to them by using the variables ~org-export-html-style~
 (for Org-wide settings) and ~org-export-html-style-extra~ (for more
 fine-grained settings, like file-local settings).  To set the latter variable
-individually for each file, you can use
+individually for each file, you can use a ~#+STYLE:~ line:
 
 {{{cindex(#+STYLE)}}}
 #+begin_example
 ,#+STYLE: <link rel="stylesheet" type="text/css" href="stylesheet.css" />
 #+end_example
 
-{{{noindent}}}
-For longer style definitions, you can use several such lines.  You could also
-directly write a ~<style>~ ~</style>~ section in this way, without
-referring to an external file.
+{{{noindent}}} For longer style definitions, you can use several such
+lines. You could also directly write a ~<style>~ ~</style>~ section in
+this way, without referring to an external file.
 
 In order to add styles to a subtree, use the ~:HTML_CONTAINER_CLASS:~
-property to assign a class to the tree.  In order to specify CSS styles for a
-particular headline, you can use the id specified in a ~:CUSTOM_ID:~
-property.
+property to assign a class to the tree. In order to specify CSS styles
+for a particular headline, you can use the id specified in a
+~:CUSTOM_ID:~ property.
 
 #+comment  FIXME: More about header and footer styles
 #+comment  FIXME: Talk about links and targets.
@@ -10897,6 +10941,7 @@ property.
     :DESCRIPTION: Info and folding in a web browser
     :END:
 {{{cindex(Rose\\\, Sebastian)}}}
+
 Sebastian Rose has written a JavaScript program especially designed to
 enhance the web viewing experience of HTML files created with Org.  This
 program allows you to view large files in two different ways.  The first one
@@ -10904,27 +10949,27 @@ is an /Info/-like mode where each section is displayed separately and
 navigation can be done with the {{{kbd(n)}}} and {{{kbd(p)}}} keys (and some other keys
 as well, press {{{kbd(?)}}} for an overview of the available keys).  The second
 view type is a /folding/ view much like Org provides inside Emacs.  The
-script is available at @url{http://orgmode.org/org-info.js} and you can find
-the documentation for it at @url{http://orgmode.org/worg/code/org-info-js/}.
+script is available at [[http://orgmode.org/org-info.js]] and you can find
+the documentation for it at [[http://orgmode.org/worg/code/org-info-js/]].
 We host the script at our site, but if you use it a lot, you might
-not want to be dependent on @url{orgmode.org} and prefer to install a local
+not want to be dependent on [[orgmode.org]] and prefer to install a local
 copy on your own web server.
 
-To use the script, you need to make sure that the {{{file(org-jsinfo.el)}}} module
-gets loaded.  It should be loaded by default, but you can try @kbd{M-x
-customize-variable @key{RET} org-modules @key{RET}} to convince yourself that
-this is indeed the case.  All it then takes to make use of the program is
-adding a single line to the Org file:
+To use the script, you need to make sure that the
+{{{file(org-jsinfo.el)}}} module gets loaded. It should be loaded by
+default, but you can try {{{kbd(M-x customize-variable @key{RET}
+org-modules @key{RET})}}} to convince yourself that this is indeed the
+case. All it then takes to make use of the program is adding a single
+line to the Org file:
 
 {{{cindex(#+INFOJS_OPT)}}}
 #+begin_example
 ,#+INFOJS_OPT: view:info toc:nil
 #+end_example
 
-{{{noindent}}}
-If this line is found, the HTML header will automatically contain the code
-needed to invoke the script.  Using the line above, you can set the following
-viewing options:
+{{{noindent}}} If this line is found, the HTML header will
+automatically contain the code needed to invoke the script. Using the
+line above, you can set the following viewing options:
 
 #+begin_example
 path:    @r{The path to the script.  The default is to grab the script from}
@@ -10953,12 +10998,14 @@ mouse:   @r{Headings are highlighted when the mouse is over them.  Should be}
 buttons: @r{Should view-toggle buttons be everywhere?  When ~nil~ (the}
          @r{default), only one such button will be present.}
 #+end_example
-{{{noindent}}}
+
 {{{vindex(org-infojs-options)}}}
 {{{vindex(org-export-html-use-infojs)}}}
-You can choose default values for these options by customizing the variable
-~org-infojs-options~.  If you always want to apply the script to your
-pages, configure the variable ~org-export-html-use-infojs~.
+
+{{{noindent}}} You can choose default values for these options by
+customizing the variable ~org-infojs-options~. If you always want to
+apply the script to your pages, configure the variable
+~org-export-html-use-infojs~.
 
 ** LaTeX and PDF export
    :PROPERTIES:
@@ -10968,17 +11015,13 @@ pages, configure the variable ~org-export-html-use-infojs~.
 {{{cindex(PDF export)}}}
 {{{cindex(Guerry\\\, Bastien)}}}
 
-Org mode contains a @LaTeX{} exporter written by Bastien Guerry.  With
-further processing@footnote{The default @LaTeX{} output is designed for
-processing with ~pdftex~ or @LaTeX{}.  It includes packages that are not
-compatible with ~xetex~ and possibly ~luatex~.  See the variables
-~org-export-latex-default-packages-alist~ and
-~org-export-latex-packages-alist~.}, this backend is also used to
-produce PDF output.  Since the @LaTeX{} output uses {{{file(hyperref)}}} to
-implement links and cross references, the PDF output file will be fully
-linked.  Beware of the fact that your ~org~ file has to be properly
-structured in order to be correctly exported: respect the hierarchy of
-sections.
+Org mode contains a @LaTeX{} exporter written by Bastien Guerry. With
+further processing, this backend is also used to produce PDF
+output.[fn:131] Since the @LaTeX{} output uses {{{file(hyperref)}}} to
+implement links and cross references, the PDF output file will be
+fully linked. Beware of the fact that your ~org~ file has to be
+properly structured in order to be correctly exported: respect the
+hierarchy of sections.
 
 *** @LaTeX{}/PDF export commands
     :PROPERTIES:
@@ -10987,55 +11030,69 @@ sections.
 {{{cindex(region\\\, active)}}}
 {{{cindex(active region)}}}
 {{{cindex(transient-mark-mode)}}}
-#+attr_texinfo: :table-type "table" :indic "@kbd"
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c C-e l)}}} ~org-export-as-latex~ ::
   {{{kindex(C-c C-e l)}}}
 {{{cindex(property EXPORT_FILE_NAME)}}}
-Export as a @LaTeX{} file.  For an Org file
-{{{file(myfile.org)}}}, the @LaTeX{} file will be {{{file(myfile.tex)}}}.  The file will
-be overwritten without warning.  If there is an active region@footnote{This
-requires ~transient-mark-mode~ be turned on.}, only the region will be
-exported.  If the selected region is a single tree@footnote{To select the
-current subtree, use {{{kbd(C-c @@)}}}.}, the tree head will become the document
-title.  If the tree head entry has or inherits an ~EXPORT_FILE_NAME~
-property, that name will be used for the export.
+
+Export as a @LaTeX{} file. For an Org file {{{file(myfile.org)}}}, the
+@LaTeX{} file will be {{{file(myfile.tex)}}}. The file will be
+overwritten without warning. If there is an active region, only the
+active region will be exported.[fn:132] If the selected region is a
+single tree, the tree head will become the document title.[fn:133] If
+the tree head entry has or inherits an ~EXPORT_FILE_NAME~ property,
+that name will be used for the export.
+
 - {{{kbd(C-c C-e L)}}} ~org-export-as-latex-to-buffer~ ::
   {{{kindex(C-c C-e L)}}}
-Export to a temporary buffer.  Do not create a file.
-- C-c C-e v l/L
-Export only the visible part of the document.
-- M-x org-export-region-as-latex
-Convert the region to @LaTeX{} under the assumption that it was in Org mode
-syntax before.  This is a global command that can be invoked in any
-buffer.
-- M-x org-replace-region-by-latex
-Replace the active region (assumed to be in Org mode syntax) by @LaTeX{}
-code.
+
+  Export to a temporary buffer.  Do not create a file.
+
+- {{{kbd(C-c C-e v l/L)}}} ::
+
+  Export only the visible part of the document.
+
+- {{{kbd(M-x org-export-region-as-latex)}}} ::
+
+  Convert the region to @LaTeX{} under the assumption that it was in Org
+  mode syntax before. This is a global command that can be invoked in
+  any buffer.
+
+- {{{kbd(M-x org-replace-region-by-latex)}}} ::
+
+  Replace the active region (assumed to be in Org mode syntax) by
+  @LaTeX{} code.
+
 - {{{kbd(C-c C-e p)}}} ~org-export-as-pdf~ ::
   {{{kindex(C-c C-e p)}}}
-Export as @LaTeX{} and then process to PDF.
+
+  Export as @LaTeX{} and then process to PDF.
+
 - {{{kbd(C-c C-e d)}}} ~org-export-as-pdf-and-open~ ::
   {{{kindex(C-c C-e d)}}}
-Export as @LaTeX{} and then process to PDF, then open the resulting PDF file.
+
+  Export as @LaTeX{} and then process to PDF, then open the resulting
+  PDF file.
 
 
 {{{cindex(headline levels\\\, for exporting)}}}
 {{{vindex(org-latex-low-levels)}}}
+
 In the exported version, the first 3 outline levels will become
-headlines, defining a general document structure.  Additional levels
-will be exported as description lists.  The exporter can ignore them or
-convert them to a custom string depending on
-~org-latex-low-levels~.
+headlines, defining a general document structure. Additional levels
+will be exported as description lists. The exporter can ignore them or
+convert them to a custom string depending on ~org-latex-low-levels~.
 
 If you want that transition to occur at a different level, specify it
-with a numeric prefix argument.  For example,
+with a numeric prefix argument, e.g.:
 
 #+begin_example
 {{{kbd(C-2 C-c C-e l)}}}
 #+end_example
 
-{{{noindent}}}
-creates two levels of headings and does the rest as items.
+{{{noindent}}} The example setting creates two levels of headings and
+exports the rest as list items.
 
 *** Header and sectioning
     :PROPERTIES:
@@ -11059,22 +11116,21 @@ By default, the @LaTeX{} output uses the class ~article~.
 {{{cindex(#+LaTeX_CLASS_OPTIONS)}}}
 {{{cindex(property\\\, LaTeX_CLASS)}}}
 {{{cindex(property\\\, LaTeX_CLASS_OPTIONS)}}}
+
 You can change this globally by setting a different value for
 ~org-export-latex-default-class~ or locally by adding an option like
 ~#+LaTeX_CLASS: myclass~ in your file, or with a ~:LaTeX_CLASS:~
-property that applies when exporting a region containing only this (sub)tree.
-The class must be listed in ~org-export-latex-classes~.  This variable
-defines a header template for each class@footnote{Into which the values of
-~org-export-latex-default-packages-alist~ and
-~org-export-latex-packages-alist~ are spliced.}, and allows you to
-define the sectioning structure for each class.  You can also define your own
-classes there.  ~#+LaTeX_CLASS_OPTIONS~ or a ~:LaTeX_CLASS_OPTIONS:~
-property can specify the options for the ~\documentclass~ macro.  The
-options to documentclass have to be provided, as expected by @LaTeX{}, within
-square brackets.  You can also use ~#+LaTeX_HEADER: \usepackage@{xyz@~}
-to add lines to the header.  See the docstring of
-~org-export-latex-classes~ for more information.  An example is shown
-below.
+property that applies when exporting a region containing only this
+(sub)tree. The class must be listed in ~org-export-latex-classes~.
+This variable defines a header template for each class, and allows you
+to define the sectioning structure for each class.[fn:134] You can
+also define your own classes there. ~#+LaTeX_CLASS_OPTIONS~ or a
+~:LaTeX_CLASS_OPTIONS:~ property can specify the options for the
+~\documentclass~ macro. The options to documentclass have to be
+provided, as expected by @LaTeX{}, within square brackets. You can
+also use ~#+LaTeX_HEADER: \usepackage@{xyz@}~ to add lines to the
+header. See the docstring of ~org-export-latex-classes~ for more
+information. An example is shown below.
 
 #+begin_example
 ,#+LaTeX_CLASS: article
@@ -11089,11 +11145,12 @@ below.
     :PROPERTIES:
     :DESCRIPTION: Incorporating literal @LaTeX{} code
     :END:
+
 Embedded @LaTeX{} as described in [[Embedded @LaTeX{]]}, will be correctly
-inserted into the @LaTeX{} file.  This includes simple macros like
-{{{samp(\ref@{LABEL@})}}} to create a cross reference to a figure.  Furthermore,
-you can add special code that should only be present in @LaTeX{} export with
-the following constructs:
+inserted into the @LaTeX{} file. This includes simple macros like
+{{{samp(\ref@{LABEL@})}}} to create a cross reference to a figure.
+Furthermore, you can add special code that should only be present in
+@LaTeX{} export with the following constructs:
 
 {{{cindex(#+LaTeX)}}}
 {{{cindex(#+BEGIN_LaTeX)}}}
@@ -11102,12 +11159,13 @@ the following constructs:
 #+end_example
 
 {{{noindent}}} or
+
 {{{cindex(#+BEGIN_LaTeX)}}}
 
 #+begin_example
-#+BEGIN_LaTeX
+,#+BEGIN_LaTeX
 All lines between these markers are exported literally
-#+END_LaTeX
+,#+END_LaTeX
 #+end_example
 
 *** Tables in @LaTeX{} export
@@ -11136,7 +11194,7 @@ width:
 | ..... | ..... |
 #+end_example
 
-or to specify a multicolumn table with ~tabulary~
+or to specify a multicolumn table with ~tabulary~:
 
 {{{cindex(#+CAPTION)}}}
 {{{cindex(#+LABEL)}}}
@@ -11157,28 +11215,27 @@ or to specify a multicolumn table with ~tabulary~
 {{{cindex(inlining images in @LaTeX{})}}}
 
 Images that are linked to without a description part in the link, like
-{{{samp([[file:img.jpg]])}}} or {{{samp([[./img.jpg]])}}} will be inserted into the PDF
-output file resulting from @LaTeX{} processing.  Org will use an
-~\includegraphics~ macro to insert the image.  If you have specified a
-caption and/or a label as described in [[Images and tables]], the figure
-will be wrapped into a ~figure~ environment and thus become a floating
-element.  You can use an ~#+ATTR_LaTeX:~ line to specify various other
-options.  You can ask org to export an image as a float without specifying
-a label or a caption by using the keyword ~float~ in this line.  Various
-optional arguments to the ~\includegraphics~ macro can also be specified
-in this fashion.  To modify the placement option of the floating environment,
-add something like {{{samp(placement=[h!])}}} to the attributes.  It is to be noted
-this option can be used with tables as well@footnote{One can also take
-advantage of this option to pass other, unrelated options into the figure or
-table environment.  For an example see the section ``Exporting org files'' in
-@url{http://orgmode.org/worg/org-hacks.html}}.
+{{{samp([[file:img.jpg]])}}} or {{{samp([[./img.jpg]])}}} will be inserted
+into the PDF output file resulting from @LaTeX{} processing. Org will
+use an ~\includegraphics~ macro to insert the image. If you have
+specified a caption and/or a label as described in [[Images and tables]],
+the figure will be wrapped into a ~figure~ environment and thus become
+a floating element. You can use an ~#+ATTR_LaTeX:~ line to specify
+various other options. You can ask org to export an image as a float
+without specifying a label or a caption by using the keyword ~float~
+in this line. Various optional arguments to the ~\includegraphics~
+macro can also be specified in this fashion. To modify the placement
+option of the floating environment, add something like
+{{{samp(placement=[h!])}}} to the attributes. It is to be noted this
+option can be used with tables as well.[fn:135]
 
-If you would like to let text flow around the image, add the word {{{samp(wrap)}}}
-to the ~#+ATTR_LaTeX:~ line, which will make the figure occupy the left
-half of the page.  To fine-tune, the ~placement~ field will be the set
-of additional arguments needed by the ~wrapfigure~ environment.  Note
-that if you change the size of the image, you need to use compatible settings
-for ~\includegraphics~ and ~wrapfigure~.
+If you would like to let text flow around the image, add the word
+{{{samp(wrap)}}} to the ~#+ATTR_LaTeX:~ line, which will make the
+figure occupy the left half of the page. To fine-tune, the ~placement~
+field will be the set of additional arguments needed by the
+~wrapfigure~ environment. Note that if you change the size of the
+image, you need to use compatible settings for ~\includegraphics~ and
+~wrapfigure~.
 
 {{{cindex(#+CAPTION)}}}
 {{{cindex(#+LABEL)}}}
@@ -11204,9 +11261,11 @@ If you need references to a label created in this way, write
     :PROPERTIES:
     :DESCRIPTION: Turning the file into a presentation
     :END:
-The @LaTeX{} class {{{file(beamer)}}} allows production of high quality presentations
-using @LaTeX{} and pdf processing.  Org mode has special support for turning an
-Org mode file or tree into a {{{file(beamer)}}} presentation.
+
+The @LaTeX{} class {{{file(beamer)}}} allows production of high
+quality presentations using @LaTeX{} and pdf processing. Org mode has
+special support for turning an Org mode file or tree into a
+{{{file(beamer)}}} presentation.
 
 When the @LaTeX{} class for the current buffer (as set with ~#+LaTeX_CLASS:
 beamer~) or subtree (set with a ~LaTeX_CLASS~ property) is
@@ -11219,41 +11278,50 @@ You can also configure the variable ~org-beamer-frame-level~ to a
 different level---then the hierarchy above frames will produce the sectioning
 structure of the presentation.
 
-A template for useful in-buffer settings or properties can be inserted into
-the buffer with {{{kbd(M-x org-insert-beamer-options-template)}}}.  Among other
-things, this will install a column view format which is very handy for
-editing special properties used by beamer.
+A template for useful in-buffer settings or properties can be inserted
+into the buffer with {{{kbd(M-x
+org-insert-beamer-options-template)}}}. Among other things, this will
+install a column view format which is very handy for editing special
+properties used by beamer.
 
 You can influence the structure of the presentation using the following
 properties:
 
-#+attr_texinfo: :table-type "table" :indic "@code"
-- BEAMER_env
-The environment that should be used to format this entry.  Valid environments
-are defined in the constant ~org-beamer-environments-default~, and you
-can define more in ~org-beamer-environments-extra~.  If this property is
-set, the entry will also get a ~:B_environment:~ tag to make this
-visible.  This tag has no semantic meaning, it is only a visual aid.
-- BEAMER_envargs
-The beamer-special arguments that should be used for the environment, like
-~[t]~ or ~[<+->]~ of ~<2-3>~.  If the ~BEAMER_col~
-property is also set, something like ~C[t]~ can be added here as well to
-set an options argument for the implied ~columns~ environment.
-~c[t]~ or ~c<2->~ will set an options for the implied ~column~
-environment.
-- BEAMER_col
-The width of a column that should start with this entry.  If this property is
-set, the entry will also get a ~:BMCOL:~ property to make this visible.
-Also this tag is only a visual aid.  When this is a plain number, it will be
-interpreted as a fraction of ~\textwidth~.  Otherwise it will be assumed
-that you have specified the units, like {{{samp(3cm)}}}.  The first such property
-in a frame will start a ~columns~ environment to surround the columns.
-This environment is closed when an entry has a ~BEAMER_col~ property
-with value 0 or 1, or automatically at the end of the frame.
-- BEAMER_extra
-Additional commands that should be inserted after the environment has been
-opened.  For example, when creating a frame, this can be used to specify
-transitions.
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- ~BEAMER_env~ ::
+
+  The environment that should be used to format this entry. Valid
+  environments are defined in the constant
+  ~org-beamer-environments-default~, and you can define more in
+  ~org-beamer-environments-extra~. If this property is set, the entry
+  will also get a ~:B_environment:~ tag to make this visible. This tag
+  has no semantic meaning, it is only a visual aid.
+
+- ~BEAMER_envargs~ ::
+
+  The beamer-special arguments that should be used for the environment,
+  like ~[t]~ or ~[<+->]~ of ~<2-3>~. If the ~BEAMER_col~ property is
+  also set, something like ~C[t]~ can be added here as well to set an
+  options argument for the implied ~columns~ environment. ~c[t]~ or
+  ~c<2->~ will set an options for the implied ~column~ environment.
+
+- ~BEAMER_col~ ::
+
+  The width of a column that should start with this entry. If this
+  property is set, the entry will also get a ~:BMCOL:~ property to make
+  this visible. Also this tag is only a visual aid. When this is a plain
+  number, it will be interpreted as a fraction of ~\textwidth~.
+  Otherwise it will be assumed that you have specified the units, like
+  {{{samp(3cm)}}}. The first such property in a frame will start a
+  ~columns~ environment to surround the columns. This environment is
+  closed when an entry has a ~BEAMER_col~ property with value 0 or 1, or
+  automatically at the end of the frame.
+
+- ~BEAMER_extra~ ::
+
+  Additional commands that should be inserted after the environment has
+  been opened. For example, when creating a frame, this can be used to
+  specify transitions.
 
 
 Frames will automatically receive a ~fragile~ option if they contain
@@ -11265,41 +11333,42 @@ in the presentation as well.
 
 Outline nodes with ~BEAMER_env~ property value {{{samp(note)}}} or
 {{{samp(noteNH)}}} will be formatted as beamer notes, i,e, they will be wrapped
-into ~\note@{...@~}.  The former will include the heading as part of the
+into ~\note@{...@}~.  The former will include the heading as part of the
 note text, the latter will ignore the heading of that node.  To simplify note
 generation, it is actually enough to mark the note with a /tag/ (either
 ~:B_note:~ or ~:B_noteNH:~) instead of creating the
 ~BEAMER_env~ property.
 
 You can turn on a special minor mode ~org-beamer-mode~ for editing
-support with
+support with the following line:
 
 #+begin_example
 ,#+STARTUP: beamer
 #+end_example
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
+#+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c C-b)}}} ~org-beamer-select-environment~ ::
   {{{kindex(C-c C-b)}}}
-In ~org-beamer-mode~, this key offers fast selection of a beamer
-environment or the ~BEAMER_col~ property.
+
+  In ~org-beamer-mode~, this key offers fast selection of a beamer
+  environment or the ~BEAMER_col~ property.
 
 
-Column view provides a great way to set the environment of a node and other
-important parameters.  Make sure you are using a COLUMN format that is geared
-toward this special purpose.  The command {{{kbd(M-x
-org-insert-beamer-options-template)}}} defines such a format.
+Column view provides a great way to set the environment of a node and
+other important parameters. Make sure you are using a COLUMN format
+that is geared toward this special purpose. The command 
+{{{kbd(M-x org-insert-beamer-options-template)}}} defines such a format.
 
 Here is a simple example Org document that is intended for beamer export.
 
-@smallexample
-#+LaTeX_CLASS: beamer
-#+TITLE: Example Presentation
-#+AUTHOR: Carsten Dominik
-#+LaTeX_CLASS_OPTIONS: [presentation]
-#+BEAMER_FRAME_LEVEL: 2
-#+BEAMER_HEADER_EXTRA: \usetheme@{Madrid@}\usecolortheme@{default@}
-#+COLUMNS: %35ITEM %10BEAMER_env(Env) %10BEAMER_envargs(Args) %4BEAMER_col(Col) %8BEAMER_extra(Ex)
+#+begin_example
+,#+LaTeX_CLASS: beamer
+,#+TITLE: Example Presentation
+,#+AUTHOR: Carsten Dominik
+,#+LaTeX_CLASS_OPTIONS: [presentation]
+,#+BEAMER_FRAME_LEVEL: 2
+,#+BEAMER_HEADER_EXTRA: \usetheme@{Madrid@}\usecolortheme@{default@}
+,#+COLUMNS: %35ITEM %10BEAMER_env(Env) %10BEAMER_envargs(Args) %4BEAMER_col(Col) %8BEAMER_extra(Ex)
 
 ,* This is the first structural section
 
@@ -11325,7 +11394,7 @@ Here is a simple example Org document that is intended for beamer export.
     :PROPERTIES:
     :BEAMER_env: block
     :END:
-@end smallexample
+#+end_example
 
 For more information, see the documentation on Worg.
 
@@ -11351,39 +11420,46 @@ Currently DocBook exporter only supports DocBook V5.0.
 {{{cindex(region\\\, active)}}}
 {{{cindex(active region)}}}
 {{{cindex(transient-mark-mode)}}}
-#+attr_texinfo: :table-type "table" :indic "@kbd"
+#+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c C-e D)}}} ~org-export-as-docbook~ ::
   {{{kindex(C-c C-e D)}}}
-{{{cindex(property EXPORT_FILE_NAME)}}}
-Export as a DocBook file.  For an Org file, {{{file(myfile.org)}}}, the DocBook XML
-file will be {{{file(myfile.xml)}}}.  The file will be overwritten without
-warning.  If there is an active region@footnote{This requires
-~transient-mark-mode~ to be turned on}, only the region will be
-exported.  If the selected region is a single tree@footnote{To select the
-current subtree, use {{{kbd(C-c @@)}}}.}, the tree head will become the document
-title.  If the tree head entry has, or inherits, an ~EXPORT_FILE_NAME~
-property, that name will be used for the export.
+  {{{cindex(property EXPORT_FILE_NAME)}}}
+
+  Export as a DocBook file. For an Org file, {{{file(myfile.org)}}}, the
+  DocBook XML file will be {{{file(myfile.xml)}}}. The file will be
+  overwritten without warning. If there is an active region, only the
+  region will be exported.[fn:136] If the selected region is a single
+  tree, the tree head will become the document title.[fn:137] If the
+  tree head entry has, or inherits, an ~EXPORT_FILE_NAME~ property, that
+  name will be used for the export.
+
 - {{{kbd(C-c C-e V)}}} ~org-export-as-docbook-pdf-and-open~ ::
   {{{kindex(C-c C-e V)}}}
-Export as a DocBook file, process to PDF, then open the resulting PDF file.
 
-{{{vindex(org-export-docbook-xslt-proc-command)}}}
-{{{vindex(org-export-docbook-xsl-fo-proc-command)}}}
-Note that, in order to produce PDF output based on an exported DocBook file,
-you need to have XSLT processor and XSL-FO processor software installed on your
-system.  Check variables ~org-export-docbook-xslt-proc-command~ and
-~org-export-docbook-xsl-fo-proc-command~.
+  Export as a DocBook file, process to PDF, then open the resulting PDF
+  file.
 
-{{{vindex(org-export-docbook-xslt-stylesheet)}}}
-The stylesheet argument ~%s~ in variable
-~org-export-docbook-xslt-proc-command~ is replaced by the value of
-variable ~org-export-docbook-xslt-stylesheet~, which needs to be set by
-the user.  You can also overrule this global setting on a per-file basis by
-adding an in-buffer setting ~#+XSLT:~ to the Org file.
+  {{{vindex(org-export-docbook-xslt-proc-command)}}}
+  {{{vindex(org-export-docbook-xsl-fo-proc-command)}}}
+
+  Note that, in order to produce PDF output based on an exported DocBook
+  file, you need to have XSLT processor and XSL-FO processor software
+  installed on your system. Check variables
+  ~org-export-docbook-xslt-proc-command~ and
+  ~org-export-docbook-xsl-fo-proc-command~.
+
+  {{{vindex(org-export-docbook-xslt-stylesheet)}}}
+
+  The stylesheet argument ~%s~ in variable
+  ~org-export-docbook-xslt-proc-command~ is replaced by the value of
+  variable ~org-export-docbook-xslt-stylesheet~, which needs to be set by
+  the user.  You can also overrule this global setting on a per-file basis by
+  adding an in-buffer setting ~#+XSLT:~ to the Org file.
 
 - {{{kbd(C-c C-e v D)}}} ::
   {{{kindex(C-c C-e v D)}}}
-Export only the visible part of the document.
+
+  Export only the visible part of the document.
 
 
 *** Quoting DocBook code
@@ -11396,17 +11472,17 @@ DocBook file with the following constructs:
 {{{cindex(#+DOCBOOK)}}}
 {{{cindex(#+BEGIN_DOCBOOK)}}}
 #+begin_example
-#+DOCBOOK: Literal DocBook code for export
+,#+DOCBOOK: Literal DocBook code for export
 #+end_example
 
 {{{noindent}}} or
 {{{cindex(#+BEGIN_DOCBOOK)}}}
 
 #+begin_example
-#+BEGIN_DOCBOOK
+,#+BEGIN_DOCBOOK
 All lines between these markers are exported by DocBook exporter
 literally.
-#+END_DOCBOOK
+,#+END_DOCBOOK
 #+end_example
 
 For example, you can use the following lines to include a DocBook warning
@@ -11415,13 +11491,13 @@ document context when quoting DocBook code in Org files.  You may make
 exported DocBook XML files invalid by not quoting DocBook code correctly.
 
 #+begin_example
-#+BEGIN_DOCBOOK
+,#+BEGIN_DOCBOOK
 <warning>
   <para>You should know what you are doing when quoting DocBook XML code
   in your Org file.  Invalid DocBook XML may be generated by
   DocBook exporter if you are not careful!</para>
 </warning>
-#+END_DOCBOOK
+,#+END_DOCBOOK
 #+end_example
 
 *** Recursive sections
@@ -11431,14 +11507,14 @@ exported DocBook XML files invalid by not quoting DocBook code correctly.
 {{{cindex(DocBook recursive sections)}}}
 
 DocBook exporter exports Org files as articles using the ~article~
-element in DocBook.  Recursive sections, i.e.@: ~section~ elements, are
-used in exported articles.  Top level headlines in Org files are exported as
-top level sections, and lower level headlines are exported as nested
-sections.  The entire structure of Org files will be exported completely, no
-matter how many nested levels of headlines there are.
+element in DocBook. Recursive sections, i.e., ~section~ elements, are
+used in exported articles. Top level headlines in Org files are
+exported as top level sections, and lower level headlines are exported
+as nested sections. The entire structure of Org files will be exported
+completely, no matter how many nested levels of headlines there are.
 
-Using recursive sections makes it easy to port and reuse exported DocBook
-code in other DocBook document types like ~book~ or ~set~.
+Using recursive sections makes it easy to port and reuse exported
+DocBook code in other DocBook document types like ~book~ or ~set~.
 
 *** Tables in DocBook export
     :PROPERTIES:
@@ -11446,12 +11522,12 @@ code in other DocBook document types like ~book~ or ~set~.
     :END:
 {{{cindex(tables\\\, in DocBook export)}}}
 
-Tables in Org files are exported as HTML tables, which have been supported since
-DocBook V4.3.
+Tables in Org files are exported as HTML tables, which have been
+supported since DocBook V4.3.
 
-If a table does not have a caption, an informal table is generated using the
-~informaltable~ element; otherwise, a formal table will be generated
-using the ~table~ element.
+If a table does not have a caption, an informal table is generated
+using the ~informaltable~ element; otherwise, a formal table will be
+generated using the ~table~ element.
 
 *** Images in DocBook export
     :PROPERTIES:
@@ -11461,45 +11537,48 @@ using the ~table~ element.
 {{{cindex(inlining images in DocBook)}}}
 
 Images that are linked to without a description part in the link, like
-{{{samp([[file:img.jpg]])}}} or {{{samp([[./img.jpg]])}}}, will be exported to DocBook
-using ~mediaobject~ elements.  Each ~mediaobject~ element contains
-an ~imageobject~ that wraps an ~imagedata~ element.  If you have
-specified a caption for an image as described in [[Images and tables]], a
-~caption~ element will be added in ~mediaobject~.  If a label is
-also specified, it will be exported as an ~xml:id~ attribute of the
+{{{samp([[file:img.jpg]])}}} or {{{samp([[./img.jpg]])}}}, will be exported to
+DocBook using ~mediaobject~ elements. Each ~mediaobject~ element
+contains an ~imageobject~ that wraps an ~imagedata~ element. If you
+have specified a caption for an image as described in [[Images and
+tables]], a ~caption~ element will be added in ~mediaobject~. If a label
+is also specified, it will be exported as an ~xml:id~ attribute of the
 ~mediaobject~ element.
 
 {{{vindex(org-export-docbook-default-image-attributes)}}}
-Image attributes supported by the ~imagedata~ element, like ~align~
-or ~width~, can be specified in two ways: you can either customize
+
+Image attributes supported by the ~imagedata~ element, like ~align~ or
+~width~, can be specified in two ways: you can either customize
 variable ~org-export-docbook-default-image-attributes~ or use the
-~#+ATTR_DOCBOOK:~ line.  Attributes specified in variable
-~org-export-docbook-default-image-attributes~ are applied to all inline
-images in the Org file to be exported (unless they are overridden by image
-attributes specified in ~#+ATTR_DOCBOOK:~ lines).
+~#+ATTR_DOCBOOK:~ line. Attributes specified in variable
+~org-export-docbook-default-image-attributes~ are applied to all
+inline images in the Org file to be exported (unless they are
+overridden by image attributes specified in ~#+ATTR_DOCBOOK:~ lines).
 
 The ~#+ATTR_DOCBOOK:~ line can be used to specify additional image
-attributes or override default image attributes for individual images.  If
-the same attribute appears in both the ~#+ATTR_DOCBOOK:~ line and
+attributes or override default image attributes for individual images.
+If the same attribute appears in both the ~#+ATTR_DOCBOOK:~ line and
 variable ~org-export-docbook-default-image-attributes~, the former
-takes precedence.  Here is an example about how image attributes can be
+takes precedence. Here is an example about how image attributes can be
 set:
 
 {{{cindex(#+CAPTION)}}}
 {{{cindex(#+LABEL)}}}
 {{{cindex(#+ATTR_DOCBOOK)}}}
 #+begin_example
-#+CAPTION:    The logo of Org mode
-#+LABEL:      unicorn-svg
-#+ATTR_DOCBOOK: scalefit="1" width="100%" depth="100%"
+,#+CAPTION:    The logo of Org mode
+,#+LABEL:      unicorn-svg
+,#+ATTR_DOCBOOK: scalefit="1" width="100%" depth="100%"
 [[./img/org-mode-unicorn.svg]]
 #+end_example
 
 {{{vindex(org-export-docbook-inline-image-extensions)}}}
-By default, DocBook exporter recognizes the following image file types:
-{{{file(jpeg)}}}, {{{file(jpg)}}}, {{{file(png)}}}, {{{file(gif)}}}, and {{{file(svg)}}}.  You can
-customize variable ~org-export-docbook-inline-image-extensions~ to add
-more types to this list as long as DocBook supports them.
+
+By default, DocBook exporter recognizes the following image file
+types: {{{file(jpeg)}}}, {{{file(jpg)}}}, {{{file(png)}}},
+{{{file(gif)}}}, and {{{file(svg)}}}. You can customize variable
+~org-export-docbook-inline-image-extensions~ to add more types to this
+list as long as DocBook supports them.
 
 *** Special characters
     :PROPERTIES:
@@ -11508,15 +11587,16 @@ more types to this list as long as DocBook supports them.
     :END:
 {{{vindex(org-export-docbook-doctype)}}}
 {{{vindex(org-entities)}}}
-Special characters that are written in @TeX{}-like syntax, such as ~\alpha~,
-~\Gamma~, and ~\Zeta~, are supported by DocBook exporter.  These
-characters are rewritten to XML entities, like ~&alpha;~,
+
+Special characters that are written in @TeX{}-like syntax, such as
+~\alpha~, ~\Gamma~, and ~\Zeta~, are supported by DocBook exporter.
+These characters are rewritten to XML entities, like ~&alpha;~,
 ~&Gamma;~, and ~&Zeta;~, based on the list saved in variable
-~org-entities~.  As long as the generated DocBook file includes the
+~org-entities~. As long as the generated DocBook file includes the
 corresponding entities, these special characters are recognized.
 
 You can customize variable ~org-export-docbook-doctype~ to include the
-entities you need.  For example, you can set variable
+entities you need. For example, you can set variable
 ~org-export-docbook-doctype~ to the following value to recognize all
 special characters included in XHTML entities:
 
@@ -11531,7 +11611,6 @@ special characters included in XHTML entities:
 "
 #+end_example
 
-
 ** OpenDocument Text export
    :PROPERTIES:
    :DESCRIPTION: Exporting to OpenDocument Text
@@ -11544,108 +11623,116 @@ special characters included in XHTML entities:
 {{{cindex(org-odt.el)}}}
 {{{cindex(org-modules)}}}
 
-Org Mode@footnote{Versions 7.8 or later} supports export to OpenDocument Text
-(ODT) format using the {{{file(org-odt.el)}}} module.  Documents created
-by this exporter use the @cite{OpenDocument-v1.2
-specification}@footnote{@url{http://docs.oasis-open.org/office/v1.2/OpenDocument-v1.2.html,
-Open Document Format for Office Applications (OpenDocument) Version 1.2}} and
-are compatible with LibreOffice 3.4.
+Org Mode supports export to OpenDocument Text (ODT) format using the
+{{{file(org-odt.el)}}} module.[fn:139] Documents created by this
+exporter use the @@info:@cite{OpenDocument-v1.2 specification}@@ and
+are compatible with LibreOffice 3.4.[fn:138]
 
 *** Pre-requisites for ODT export
     :PROPERTIES:
     :DESCRIPTION: What packages ODT exporter relies on
     :END:
 {{{cindex(zip)}}}
-The ODT exporter relies on the {{{file(zip)}}} program to create the final
-output.  Check the availability of this program before proceeding further.
+
+The ODT exporter relies on the {{{file(zip)}}} program to create the
+final output. Check the availability of this program before proceeding
+further.
 
 *** ODT export commands
     :PROPERTIES:
     :DESCRIPTION: How to invoke ODT export
+    :TEXINFO_MENU_TITLE: Exporting to ODT
     :END:
 @subsubheading Exporting to ODT
-@anchor{x-export-to-odt}
+# <<x-export-to-odt>>
 
 {{{cindex(region\\\, active)}}}
 {{{cindex(active region)}}}
 {{{cindex(transient-mark-mode)}}}
-#+attr_texinfo: :table-type "table" :indic "@kbd"
+#+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c C-e o)}}} ~org-export-as-odt~ ::
   {{{kindex(C-c C-e o)}}}
-{{{cindex(property EXPORT_FILE_NAME)}}}
+  {{{cindex(property EXPORT_FILE_NAME)}}}
 
-Export as OpenDocument Text file.
+  Export as OpenDocument Text file.
 
-{{{vindex(org-export-odt-preferred-output-format)}}}
-If ~org-export-odt-preferred-output-format~ is specified, automatically
-convert the exported file to that format.  See [[x-export-to-other-formats, ,
-Automatically exporting to other formats]].
+  {{{vindex(org-export-odt-preferred-output-format)}}}
 
-For an Org file {{{file(myfile.org)}}}, the ODT file will be
-{{{file(myfile.odt)}}}.  The file will be overwritten without warning.  If there
-is an active region,@footnote{This requires ~transient-mark-mode~ to be
-turned on} only the region will be exported.  If the selected region is a
-single tree,@footnote{To select the current subtree, use {{{kbd(C-c @@})}}} the
-tree head will become the document title.  If the tree head entry has, or
-inherits, an ~EXPORT_FILE_NAME~ property, that name will be used for the
-export.
+  If ~org-export-odt-preferred-output-format~ is specified,
+  automatically convert the exported file to that format. See
+  [[x-export-to-other-formats, , Automatically exporting to other formats]].
+
+  For an Org file {{{file(myfile.org)}}}, the ODT file will be
+  {{{file(myfile.odt)}}}. The file will be overwritten without warning.
+  If there is an active region, only the region will be
+  exported.[fn:140] If the selected region is a single tree, the tree
+  head will become the document title.[fn:141] If the tree head entry
+  has, or inherits, an ~EXPORT_FILE_NAME~ property, that name will be
+  used for the export.
 
 - {{{kbd(C-c C-e O)}}} ~org-export-as-odt-and-open~ ::
   {{{kindex(C-c C-e O)}}}
-Export as an OpenDocument Text file and open the resulting file.
 
-{{{vindex(org-export-odt-preferred-output-format)}}}
-If ~org-export-odt-preferred-output-format~ is specified, open the
-converted file instead.  See [[x-export-to-other-formats, , Automatically
-exporting to other formats]].
+  Export as an OpenDocument Text file and open the resulting file.
+
+  {{{vindex(org-export-odt-preferred-output-format)}}}
+
+  If ~org-export-odt-preferred-output-format~ is specified, open the
+  converted file instead.  See [[x-export-to-other-formats, ,
+  Automatically exporting to other formats]].
 
 
 *** Extending ODT export
     :PROPERTIES:
     :DESCRIPTION: How to produce {{{samp(doc)}}}, {{{samp(pdf)}}} files
     :END:
-The ODT exporter can interface with a variety of document
-converters and supports popular converters out of the box.  As a result, you
-can use it to export to formats like {{{samp(doc)}}} or convert a document from
-one format (say {{{samp(csv)}}}) to another format (say {{{samp(ods)}}} or {{{samp(xls)}}}).
+
+The ODT exporter can interface with a variety of document converters
+and supports popular converters out of the box. As a result, you can
+use it to export to formats like {{{samp(doc)}}} or convert a document
+from one format (say {{{samp(csv)}}}) to another format (say
+{{{samp(ods)}}} or {{{samp(xls)}}}).
 
 {{{cindex(@file{unoconv})}}}
 {{{cindex(LibreOffice)}}}
-If you have a working installation of LibreOffice, a document converter is
-pre-configured for you and you can use it right away.  If you would like to
-use {{{file(unoconv)}}} as your preferred converter, customize the variable
-~org-export-odt-convert-process~ to point to ~unoconv~.  You can
-also use your own favorite converter or tweak the default settings of the
-{{{file(LibreOffice)}}} and {{{samp(unoconv)}}} converters.  See [[Configuring a
-document converter]].
 
-@subsubsection Automatically exporting to other formats
-@anchor{x-export-to-other-formats}
+If you have a working installation of LibreOffice, a document
+converter is pre-configured for you and you can use it right away. If
+you would like to use {{{file(unoconv)}}} as your preferred converter,
+customize the variable ~org-export-odt-convert-process~ to point to
+~unoconv~. You can also use your own favorite converter or tweak the
+default settings of the {{{file(LibreOffice)}}} and
+{{{samp(unoconv)}}} converters. See [[Configuring a document converter]].
 
-{{{vindex(org-export-odt-preferred-output-format)}}}
+**** Automatically exporting to other formats
+# <<x-export-to-other-formats>>
+
+{{{vindex(org-export-odt-preferred-output-format)}}} 
+
 Very often, you will find yourself exporting to ODT format, only to
-immediately save the exported document to other formats like {{{samp(doc)}}},
-{{{samp(docx)}}}, {{{samp(rtf)}}}, {{{samp(pdf)}}} etc.  In such cases, you can specify your
-preferred output format by customizing the variable
-~org-export-odt-preferred-output-format~.  This way, the export commands
-(see [[x-export-to-odt,,Exporting to ODT]]) can be extended to export to a
-format that is of immediate interest to you.
+immediately save the exported document to other formats like
+{{{samp(doc)}}}, {{{samp(docx)}}}, {{{samp(rtf)}}}, {{{samp(pdf)}}}
+etc. In such cases, you can specify your preferred output format by
+customizing the variable ~org-export-odt-preferred-output-format~.
+This way, the export commands (see [[x-export-to-odt,,Exporting to ODT]])
+can be extended to export to a format that is of immediate interest to
+you.
 
-@subsubsection Converting between document formats
-@anchor{x-convert-to-other-formats}
+**** Converting between document formats
+# <<x-convert-to-other-formats>>
 
-There are many document converters in the wild which support conversion to
-and from various file formats, including, but not limited to the
-ODT format.  LibreOffice converter, mentioned above, is one such
-converter.  Once a converter is configured, you can interact with it using
-the following command.
+There are many document converters in the wild that support
+conversion to and from various file formats, including, but not
+limited to the ODT format. LibreOffice converter, mentioned above, is
+one such converter. Once a converter is configured, you can interact
+with it using the following command.
 
-{{{vindex(org-export-odt-convert)}}}
-#+attr_texinfo: :table-type "table" :indic "@kbd"
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- {{{kbd(M-x org-export-odt-convert)}}} ::
+  {{{vindex(org-export-odt-convert)}}}
 
-- M-x org-export-odt-convert
-Convert an existing document from one format to another.  With a prefix
-argument, also open the newly produced file.
+  Convert an existing document from one format to another. With a prefix
+  argument, also open the newly produced file.
 
 
 *** Applying custom styles
@@ -11655,61 +11742,62 @@ argument, also open the newly produced file.
 {{{cindex(styles\\\, custom)}}}
 {{{cindex(template\\\, custom)}}}
 
-The ODT exporter ships with a set of OpenDocument styles
-(see [[Working with OpenDocument style files]]) that ensure a well-formatted
-output.  These factory styles, however, may not cater to your specific
-tastes.  To customize the output, you can either modify the above styles
-files directly, or generate the required styles using an application like
-LibreOffice.  The latter method is suitable for expert and non-expert
+The ODT exporter ships with a set of OpenDocument styles 
+(see [[Working with OpenDocument style files]]) that ensure a well-formatted output.
+These factory styles, however, may not cater to your specific tastes.
+To customize the output, you can either modify the above styles files
+directly, or generate the required styles using an application like
+LibreOffice. The latter method is suitable for expert and non-expert
 users alike, and is described here.
 
-@subsubsection Applying custom styles - the easy way
+**** Applying custom styles - the easy way
 
-@enumerate
-- 
-Create a sample {{{file(example.org)}}} file with the below settings and export it
-to ODT format.
 
-#+begin_example
-,#+OPTIONS: H:10 num:t
-#+end_example
+1. Create a sample {{{file(example.org)}}} file with the below
+   settings and export it to ODT format.
 
-- 
-Open the above {{{file(example.odt)}}} using LibreOffice.  Use the {{{file(Stylist)}}}
-to locate the target styles - these typically have the {{{samp(Org)}}} prefix -
-and modify those to your taste.  Save the modified file either as an
-OpenDocument Text ({{{file(.odt)}}}) or OpenDocument Template ({{{file(.ott)}}}) file.
+   #+begin_example
+   ,#+OPTIONS: H:10 num:t
+   #+end_example
 
-- 
-{{{cindex(#+ODT_STYLES_FILE)}}}
-{{{vindex(org-export-odt-styles-file)}}}
-Customize the variable ~org-export-odt-styles-file~ and point it to the
-newly created file.  For additional configuration options
-see [[x-overriding-factory-styles,,Overriding factory styles]].
+2. Open the above {{{file(example.odt)}}} using LibreOffice. Use the
+   {{{file(Stylist)}}} to locate the target styles---these typically
+   have the {{{samp(Org)}}} prefix---and modify those to your taste.
+   Save the modified file either as an OpenDocument Text
+   ({{{file(.odt)}}}) or OpenDocument Template ({{{file(.ott)}}})
+   file.
 
-If you would like to choose a style on a per-file basis, you can use the
-~#+ODT_STYLES_FILE~ option.  A typical setting will look like
+3. Customize the variable ~org-export-odt-styles-file~ and point it to
+   the newly created file. For additional configuration options see
+   [[x-overriding-factory-styles,,Overriding factory styles]].
 
-#+begin_example
-,#+ODT_STYLES_FILE: "/path/to/example.ott"
-#+end_example
+   {{{cindex(#+ODT_STYLES_FILE)}}}
+   {{{vindex(org-export-odt-styles-file)}}}
 
-or
+   If you would like to choose a style on a per-file basis, you can use
+   the ~#+ODT_STYLES_FILE~ option. A typical setting will look like
+   one of these two examples:
 
-#+begin_example
-,#+ODT_STYLES_FILE: ("/path/to/file.ott" ("styles.xml" "image/hdr.png"))
-#+end_example
+   #+begin_example
+   ,#+ODT_STYLES_FILE: "/path/to/example.ott"
+   #+end_example
 
-@end enumerate
+   or
 
-@subsubsection Using third-party styles and templates
+   #+begin_example
+   ,#+ODT_STYLES_FILE: ("/path/to/file.ott" ("styles.xml" "image/hdr.png"))
+   #+end_example
 
-You can use third-party styles and templates for customizing your output.
-This will produce the desired output only if the template provides all
-style names that the {{{samp(ODT)}}} exporter relies on.  Unless this condition is
-met, the output is going to be less than satisfactory.  So it is highly
-recommended that you only work with templates that are directly derived from
-the factory settings.
+
+
+**** Using third-party styles and templates
+
+You can use third-party styles and templates for customizing your
+output. This will produce the desired output only if the template
+provides all style names that the {{{samp(ODT)}}} exporter relies
+upon. Unless this condition is met, the output is going to be less
+than satisfactory. It is highly recommended that you only work with
+templates that are directly derived from the factory settings.
 
 *** Links in ODT export
     :PROPERTIES:
@@ -11717,16 +11805,16 @@ the factory settings.
     :END:
 {{{cindex(tables\\\, in DocBook export)}}}
 
-ODT exporter creates native cross-references for internal links.  It creates
-Internet-style links for all other links.
+ODT exporter creates native cross-references for internal links. It
+creates Internet-style links for all other links.
 
-A link with no description and destined to a regular (un-itemized) outline
-heading is replaced with a cross-reference and section number of the heading.
+A link with no description and destined to a regular (un-itemized)
+outline heading is replaced with a cross-reference and section number
+of the heading.
 
-A {{{samp(\ref@{label@})}}}-style reference to an image, table etc. is replaced
-with a cross-reference and sequence number of the labeled entity.
-See [[Labels and captions in ODT export]].
-
+A {{{samp(\ref@{label@})}}}-style reference to an image, table etc. is
+replaced with a cross-reference and sequence number of the labeled
+entity. See [[Labels and captions in ODT export]].
 
 *** Tables in ODT export
     :PROPERTIES:
@@ -11735,24 +11823,25 @@ See [[Labels and captions in ODT export]].
 
 {{{cindex(tables\\\, in DocBook export)}}}
 
-Export of native Org mode tables (see [[Tables]]) and simple {{{file(table.el)}}}
-tables is supported.  However, export of complex {{{file(table.el)}}} tables -
-tables that have column or row spans - is not supported.  Such tables are
-stripped from the exported document.
+Export of native Org mode tables (see [[Tables]]) and simple
+{{{file(table.el)}}} tables is supported. However, export of complex
+{{{file(table.el)}}} tables---tables that have column or row
+spans---is not supported. Such tables are stripped from the exported
+document.
 
-By default, a table is exported with top and bottom frames and with rules
-separating row and column groups (see [[Column groups]]).  Furthermore, all
-tables are typeset to occupy the same width.  If the table specifies
-alignment and relative width for its columns (see [[Column width and
-alignment]]) then these are honored on export.@footnote{The column widths are
-interpreted as weighted ratios with the default weight being 1}
+By default, a table is exported with top and bottom frames and with
+rules separating row and column groups (see [[Column groups]]).
+Furthermore, all tables are typeset to occupy the same width. If the
+table specifies alignment and relative width for its columns (see
+[[Column width and alignment]]) then these are honored on export.[fn:142]
 
 {{{cindex(#+ATTR_ODT)}}}
+
 You can control the width of the table by specifying ~:rel-width~
 property using an ~#+ATTR_ODT~ line.
 
-For example, consider the following table which makes use of all the rules
-mentioned above.
+For example, consider the following table which makes use of all the
+rules mentioned above.
 
 #+begin_example
 #+ATTR_ODT: :rel-width 50
@@ -11767,15 +11856,16 @@ mentioned above.
 | Sum           |    16 |   123 |  2560 |  2699 |
 #+end_example
 
-On export, the table will occupy 50% of text area.  The columns will be sized
-(roughly) in the ratio of 13:5:5:5:6.  The first column will be left-aligned
-and rest of the columns will be right-aligned.  There will be vertical rules
-after separating the header and last columns from other columns.  There will
-be horizontal rules separating the header and last rows from other rows.
+On export, the table will occupy 50% of text area. The columns will be
+sized (roughly) in the ratio of 13:5:5:5:6. The first column will be
+left-aligned and rest of the columns will be right-aligned. There will
+be vertical rules after separating the header and last columns from
+other columns. There will be horizontal rules separating the header
+and last rows from other rows.
 
-If you are not satisfied with the above formatting options, you can create
-custom table styles and associate them with a table using the
-~#+ATTR_ODT~ line.  See [[Customizing tables in ODT export]].
+If you are not satisfied with the above formatting options, you can
+create custom table styles and associate them with a table using the
+~#+ATTR_ODT~ line. See [[Customizing tables in ODT export]].
 
 *** Images in ODT export
     :PROPERTIES:
@@ -11784,7 +11874,7 @@ custom table styles and associate them with a table using the
 {{{cindex(images\\\, embedding in ODT)}}}
 {{{cindex(embedding images in ODT)}}}
 
-@subsubheading Embedding images
+**** Embedding images
 You can embed images within the exported document by providing a link to the
 desired image file with no link description.  For example, to embed
 {{{samp(img.png)}}} do either of the following:
@@ -11797,80 +11887,84 @@ desired image file with no link description.  For example, to embed
 [[./img.png]]
 #+end_example
 
-@subsubheading Embedding clickable images
-You can create clickable images by providing a link whose description is a
-link to an image file.  For example, to embed a image
-{{{file(org-mode-unicorn.png)}}} which when clicked jumps to
-@uref{http://Orgmode.org} website, do the following
+**** Embedding clickable images
+
+You can create clickable images by providing a link whose description
+is a link to an image file. For example, to embed an image
+{{{file(org-mode-unicorn.png)}}}, which when clicked jumps to
+[[http://Orgmode.org]] website, do the following:
 
 #+begin_example
 [[http://orgmode.org][./org-mode-unicorn.png]]
 #+end_example
 
-@subsubheading Sizing and scaling of embedded images
-
+**** Sizing and scaling of embedded images
 {{{cindex(#+ATTR_ODT)}}}
+
 You can control the size and scale of the embedded images using the
 ~#+ATTR_ODT~ attribute.
 
 {{{cindex(identify\\\, ImageMagick)}}}
 {{{vindex(org-export-odt-pixels-per-inch)}}}
-The exporter specifies the desired size of the image in the final document in
-units of centimeters.  In order to scale the embedded images, the exporter
-queries for pixel dimensions of the images using one of a) ImageMagick's
-{{{file(identify)}}} program or b) Emacs `create-image' and `image-size'
-APIs.@footnote{Use of {{{file(ImageMagick)}}} is only desirable.  However, if you
-routinely produce documents that have large images or you export your Org
-files that has images using a Emacs batch script, then the use of
-{{{file(ImageMagick)}}} is mandatory.} The pixel dimensions are subsequently
-converted in to units of centimeters using
-~org-export-odt-pixels-per-inch~.  The default value of this variable is
-set to ~display-pixels-per-inch~.  You can tweak this variable to
+
+The exporter specifies the desired size of the image in the final
+document in units of centimeters. In order to scale the embedded
+images, the exporter queries for pixel dimensions of the images using
+either ImageMagick's {{{file(identify)}}} program, or Emacs'
+`create-image' and `image-size' APIs.[fn:143] The pixel dimensions are
+subsequently converted to centimeters using
+~org-export-odt-pixels-per-inch~. The default value of this variable
+is set to ~display-pixels-per-inch~. You can tweak this variable to
 achieve the best results.
 
 The examples below illustrate the various possibilities.
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-- Explicitly size the image
-To embed {{{file(img.png)}}} as a 10 cm x 10 cm image, do the following:
+- Explicitly size the image ::
 
-#+begin_example
-#+ATTR_ODT: :width 10 :height 10
-[[./img.png]]
-#+end_example
+  To embed {{{file(img.png)}}} as a 10 cm x 10 cm image, do the
+  following:
 
-- Scale the image
-To embed {{{file(img.png)}}} at half its size, do the following:
+  #+begin_example
+  #+ATTR_ODT: :width 10 :height 10
+  [[./img.png]]
+  #+end_example
 
-#+begin_example
-#+ATTR_ODT: :scale 0.5
-[[./img.png]]
-#+end_example
+- Scale the image ::
 
-- Scale the image to a specific width
-To embed {{{file(img.png)}}} with a width of 10 cm while retaining the original
-height:width ratio, do the following:
+  To embed {{{file(img.png)}}} at half its size, do the following:
 
-#+begin_example
-#+ATTR_ODT: :width 10
-[[./img.png]]
-#+end_example
+  #+begin_example
+  #+ATTR_ODT: :scale 0.5
+  [[./img.png]]
+  #+end_example
 
-- Scale the image to a specific height
-To embed {{{file(img.png)}}} with a height of 10 cm while retaining the original
-height:width ratio, do the following
+- Scale the image to a specific width ::
 
-#+begin_example
-#+ATTR_ODT: :height 10
-[[./img.png]]
-#+end_example
+  To embed {{{file(img.png)}}} with a width of 10 cm while retaining the
+  original height:width ratio, do the following:
+
+  #+begin_example
+  #+ATTR_ODT: :width 10
+  [[./img.png]]
+  #+end_example
+
+- Scale the image to a specific height ::
+
+  To embed {{{file(img.png)}}} with a height of 10 cm while retaining
+  the original height:width ratio, do the following
+
+  #+begin_example
+  #+ATTR_ODT: :height 10
+  [[./img.png]]
+  #+end_example
 
 
-@subsubheading Anchoring of images
-
+**** Anchoring of images
 {{{cindex(#+ATTR_ODT)}}}
-You can control the manner in which an image is anchored by setting the
-~:anchor~ property of it's ~#+ATTR_ODT~ line.  You can specify one
+
+You can control the manner in which an image is anchored by setting
+the ~:anchor~ property of it's ~#+ATTR_ODT~ line. You can specify one
 of the the following three values for the ~:anchor~ property -
 {{{samp("as-char")}}}, {{{samp("paragraph")}}} and {{{samp("page")}}}.
 
@@ -11897,73 +11991,75 @@ document in one of the following ways:
 
 {{{cindex(MathML)}}}
 @enumerate
-- MathML
+1. MathML ::
 
-This option is activated on a per-file basis with
+  This option is activated on a per-file basis with the following option:
 
-#+begin_example
-,#+OPTIONS: LaTeX:t
-#+end_example
+  #+begin_example
+  ,#+OPTIONS: LaTeX:t
+  #+end_example
 
-With this option, @LaTeX{} fragments are first converted into MathML
-fragments using an external @LaTeX{}-to-MathML converter program.  The
-resulting MathML fragments are then embedded as an OpenDocument Formula in
-the exported document.
+  With this option, @LaTeX{} fragments are first converted into MathML
+  fragments using an external @LaTeX{}-to-MathML converter program.  The
+  resulting MathML fragments are then embedded as an OpenDocument Formula in
+  the exported document.
 
-{{{vindex(org-latex-to-mathml-convert-command)}}}
-{{{vindex(org-latex-to-mathml-jar-file)}}}
+  {{{vindex(org-latex-to-mathml-convert-command)}}}
+  {{{vindex(org-latex-to-mathml-jar-file)}}}
 
-You can specify the @LaTeX{}-to-MathML converter by customizing the variables
-~org-latex-to-mathml-convert-command~ and
-~org-latex-to-mathml-jar-file~.
+  You can specify the @LaTeX{}-to-MathML converter by customizing the variables
+  ~org-latex-to-mathml-convert-command~ and
+  ~org-latex-to-mathml-jar-file~.
 
-If you prefer to use {{{file(MathToWeb)}}}@footnote{See
-@uref{http://www.mathtoweb.com/cgi-bin/mathtoweb_home.pl, MathToWeb}} as your
-converter, you can configure the above variables as shown below.
+  If you prefer to use {{{file(MathToWeb)}}} as your converter, you can
+  configure the above variables as shown below.[fn:144]
 
-#+header: :eval no
-#+header: :exports code
-#+begin_src emacs-lisp
-(setq org-latex-to-mathml-convert-command
-      "java -jar %j -unicode -force -df %o %I"
-      org-latex-to-mathml-jar-file
-      "/path/to/mathtoweb.jar")
-#+end_src
+  #+header: :eval no
+  #+header: :exports code
+  #+begin_src emacs-lisp
+  (setq org-latex-to-mathml-convert-command
+        "java -jar %j -unicode -force -df %o %I"
+        org-latex-to-mathml-jar-file
+        "/path/to/mathtoweb.jar")
+  #+end_src
 
-You can use the following commands to quickly verify the reliability of
-the @LaTeX{}-to-MathML converter.
+  You can use the following commands to quickly verify the reliability of
+  the @LaTeX{}-to-MathML converter.
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
+  - {{{kbd(M-x org-export-as-odf)}}} ::
 
-- M-x org-export-as-odf
-Convert a @LaTeX{} math snippet to an OpenDocument formula ({{{file(.odf)}}}) file.
+    Convert a @LaTeX{} math snippet to an OpenDocument formula
+    ({{{file(.odf)}}}) file.
 
-- M-x org-export-as-odf-and-open
-Convert a @LaTeX{} math snippet to an OpenDocument formula ({{{file(.odf)}}}) file
-and open the formula file with the system-registered application.
+  - {{{kbd(M-x org-export-as-odf-and-open)}}} ::
 
+    Convert a @LaTeX{} math snippet to an OpenDocument formula
+    ({{{file(.odf)}}}) file and open the formula file with the
+    system-registered application.
 
-{{{cindex(dvipng)}}}
-- PNG images
+2. PNG images ::
+  {{{cindex(dvipng)}}}
 
-This option is activated on a per-file basis with
+  This option is activated on a per-file basis with
 
-#+begin_example
-,#+OPTIONS: LaTeX:dvipng
-#+end_example
+  #+begin_example
+  ,#+OPTIONS: LaTeX:dvipng
+  #+end_example
 
-With this option, @LaTeX{} fragments are processed into PNG images and the
-resulting images are embedded in the exported document.  This method requires
-that the {{{file(dvipng)}}} program be available on your system.
-@end enumerate
+  With this option, @LaTeX{} fragments are processed into PNG images and
+  the resulting images are embedded in the exported document. This
+  method requires that the {{{file(dvipng)}}} program be available on
+  your system.
+
 
 **** Working with MathML or OpenDocument formula files
      :PROPERTIES:
      :DESCRIPTION: How to embed equations in native format
      :END:
-For various reasons, you may find embedding @LaTeX{} math snippets in an
-ODT document less than reliable.  In that case, you can embed a
-math equation by linking to its MathML ({{{file(.mml)}}}) source or its
+
+For various reasons, you may find embedding @LaTeX{} math snippets in
+an ODT document less than reliable. In that case, you can embed a math
+equation by linking to its MathML ({{{file(.mml)}}}) source or its
 OpenDocument formula ({{{file(.odf)}}}) file as shown below:
 
 #+begin_example
@@ -11980,16 +12076,17 @@ or
     :PROPERTIES:
     :DESCRIPTION: How captions are rendered
     :END:
-You can label and caption various category of objects - an inline image, a
-table, a @LaTeX{} fragment or a Math formula - using ~#+LABEL~ and
-~#+CAPTION~ lines.  See [[Images and tables]].  ODT exporter enumerates
-each labeled or captioned object of a given category separately.  As a
-result, each such object is assigned a sequence number based on order of it's
-appearance in the Org file.
 
-In the exported document, a user-provided caption is augmented with the
-category and sequence number.  Consider the following inline image in an Org
-file.
+You can label and caption various category of objects---an inline
+image, a table, a @LaTeX{} fragment or a Math formula---using
+~#+LABEL~ and ~#+CAPTION~ lines. See [[Images and tables]]. ODT exporter
+enumerates each labeled or captioned object of a given category
+separately. As a result, each such object is assigned a sequence
+number based on order of its appearance in the Org file.
+
+In the exported document, a user-provided caption is augmented with
+the category and sequence number. Consider the following inline image
+in an Org file:
 
 #+begin_example
 #+CAPTION: Bell curve
@@ -12004,10 +12101,11 @@ Figure 2: Bell curve
 #+end_example
 
 {{{vindex(org-export-odt-category-strings)}}}
-You can modify the category component of the caption by customizing the
-variable ~org-export-odt-category-strings~.  For example, to tag all
-embedded images with the string {{{samp(Illustration)}}} (instead of the default
-{{{samp(Figure)}}}) use the following setting.
+
+You can modify the category component of the caption by customizing
+the variable ~org-export-odt-category-strings~. For example, to tag
+all embedded images with the string {{{samp(Illustration)}}} (instead
+of the default {{{samp(Figure)}}}) use the following setting.
 
 #+header: :eval no
 #+header: :exports code
@@ -12028,20 +12126,21 @@ Illustration 2: Bell curve
     :DESCRIPTION: How source and example blocks are formatted
     :END:
 
-Export of literal examples (see [[Literal examples]]) with full fontification
-is supported.  Internally, the exporter relies on {{{file(htmlfontify.el)}}} to
-generate all style definitions needed for a fancy listing.@footnote{Your
-{{{file(htmlfontify.el)}}} library must at least be at Emacs 24.1 levels for
-fontification to be turned on.}  The auto-generated styles have {{{samp(OrgSrc)}}}
-as prefix and inherit their color from the faces used by Emacs
-~font-lock~ library for the source language.
+Export of literal examples (see [[Literal examples]]) with full
+fontification is supported. Internally, the exporter relies on
+{{{file(htmlfontify.el)}}} to generate all style definitions needed
+for a fancy listing.[fn:145] The auto-generated styles have
+{{{samp(OrgSrc)}}} as prefix and inherit their color from the faces
+used by Emacs ~font-lock~ library for the source language.
 
 {{{vindex(org-export-odt-fontify-srcblocks)}}}
-If you prefer to use your own custom styles for fontification, you can do so
-by customizing the variable
+
+If you prefer to use your own custom styles for fontification, you can
+do so by customizing the variable
 ~org-export-odt-create-custom-styles-for-srcblocks~.
 
 {{{vindex(org-export-odt-create-custom-styles-for-srcblocks)}}}
+
 You can turn off fontification of literal examples by customizing the
 variable ~org-export-odt-fontify-srcblocks~.
 
@@ -12051,8 +12150,8 @@ variable ~org-export-odt-fontify-srcblocks~.
     :END:
 
 If you rely heavily on ODT export, you may want to exploit the full
-set of features that the exporter offers.  This section describes features
-that would be of interest to power users.
+set of features that the exporter offers. This section describes
+features that would be of interest to power users.
 
 **** Configuring a document converter
      :PROPERTIES:
@@ -12063,35 +12162,40 @@ that would be of interest to power users.
 {{{cindex(converter)}}}
 
 The ODT exporter can work with popular converters with little or no
-extra configuration from your side. See [[Extending ODT export]].
-If you are using a converter that is not supported by default or if you would
+extra configuration from your side. See [[Extending ODT export]]. If you
+are using a converter that is not supported by default or if you would
 like to tweak the default converter settings, proceed as below.
 
-@enumerate
-- Register the converter
+#+attr_texinfo: :table-type "table" :indic "@asis"
 
-{{{vindex(org-export-odt-convert-processes)}}}
-Name your converter and add it to the list of known converters by customizing
-the variable ~org-export-odt-convert-processes~.  Also specify how the
-converter can be invoked via command-line to effect the conversion.
+1. Register the converter ::
 
-- Configure its capabilities
+  {{{vindex(org-export-odt-convert-processes)}}}
 
-{{{vindex(org-export-odt-convert-capabilities)}}}
-@anchor{x-odt-converter-capabilities}
-Specify the set of formats the converter can handle by customizing the
-variable ~org-export-odt-convert-capabilities~.  Use the default value
-for this variable as a guide for configuring your converter.  As suggested by
-the default setting, you can specify the full set of formats supported by the
-converter and not limit yourself to specifying formats that are related to
-just the OpenDocument Text format.
+  Name your converter and add it to the list of known converters by
+  customizing the variable ~org-export-odt-convert-processes~. Also
+  specify how the converter can be invoked via command-line to effect
+  the conversion.
 
-- Choose the converter
+2. Configure its capabilities ::
 
-{{{vindex(org-export-odt-convert-process)}}}
-Select the newly added converter as the preferred one by customizing the
-variable ~org-export-odt-convert-process~.
-@end enumerate
+  {{{vindex(org-export-odt-convert-capabilities)}}}
+  # <<x-odt-converter-capabilities>>
+
+  Specify the set of formats the converter can handle by customizing the
+  variable ~org-export-odt-convert-capabilities~.  Use the default value
+  for this variable as a guide for configuring your converter.  As suggested by
+  the default setting, you can specify the full set of formats supported by the
+  converter and not limit yourself to specifying formats that are related to
+  just the OpenDocument Text format.
+
+3. Choose the converter ::
+
+  {{{vindex(org-export-odt-convert-process)}}}
+
+  Select the newly added converter as the preferred one by customizing the
+  variable ~org-export-odt-convert-process~.
+
 
 **** Working with OpenDocument style files
      :PROPERTIES:
@@ -12100,207 +12204,190 @@ variable ~org-export-odt-convert-process~.
 {{{cindex(styles\\\, custom)}}}
 {{{cindex(template\\\, custom)}}}
 
-This section explores the internals of the ODT exporter and the
-means by which it produces styled documents.  Read this section if you are
-interested in exploring the automatic and custom OpenDocument styles used by
-the exporter.
+This section explores the internals of the ODT exporter and the means
+by which it produces styled documents. Read this section if you are
+interested in exploring the automatic and custom OpenDocument styles
+used by the exporter.
 
-@anchor{x-factory-styles}
-@subsubheading Factory styles
+# <<x-factory-styles>>
+***** Factory styles
 
 The ODT exporter relies on two files for generating its output.
 These files are bundled with the distribution under the directory pointed to
 by the variable ~org-odt-styles-dir~.  The two files are:
 
-@itemize
-@anchor{x-orgodtstyles-xml}
-- 
-{{{file(OrgOdtStyles.xml)}}}
 
-This file contributes to the {{{file(styles.xml)}}} file of the final {{{samp(ODT)}}}
-document.  This file gets modified for the following purposes:
-@enumerate
+1. {{{file(OrgOdtStyles.xml)}}} ::
+  # <<x-orgodtstyles-xml>>
 
-- 
-To control outline numbering based on user settings.
+  This file contributes to the {{{file(styles.xml)}}} file of the final
+  {{{samp(ODT)}}} document. This file is modified to control outline
+  numbering based on user settings, and To add styles generated by
+  {{{file(htmlfontify.el)}}} for fontification of code blocks.
 
-- 
-To add styles generated by {{{file(htmlfontify.el)}}} for fontification of code
-blocks.
-@end enumerate
+2. {{{file(OrgOdtContentTemplate.xml)}}} ::
+  # <<x-orgodtcontenttemplate-xml>>
 
-@anchor{x-orgodtcontenttemplate-xml}
-- 
-{{{file(OrgOdtContentTemplate.xml)}}}
+  This file contributes to the {{{file(content.xml)}}} file of the final
+  {{{samp(ODT)}}} document. The contents of the Org outline are inserted
+  between the {{{samp(<office:text>)}}} and {{{samp(</office:text>)}}}
+  elements of this file.
 
-This file contributes to the {{{file(content.xml)}}} file of the final {{{samp(ODT)}}}
-document.  The contents of the Org outline are inserted between the
-{{{samp(<office:text>)}}}@dots{}{{{samp(</office:text>)}}} elements of this file.
+  In addition to serving as a template file for the final
+  {{{file(content.xml)}}}, the file also contains automatic styles for
+  formatting of tables which are referenced by the exporter, and
+  {{{samp(<text:sequence-decl>)}}}@@info:@dots{}@@{{{samp(</text:sequence-decl>)}}}
+  elements that control how various entities---tables, images,
+  equations, etc.---are numbered.
 
-Apart from serving as a template file for the final {{{file(content.xml)}}}, the
-file serves the following purposes:
-@enumerate
 
-- 
-It contains automatic styles for formatting of tables which are referenced by
+# <<x-overriding-factory-styles>>
+***** Overriding factory styles
+
+The following two variables control the location from which the ODT
+exporter picks up the custom styles and content template files. You
+can customize these variables to override the factory styles used by
 the exporter.
 
-- 
-It contains {{{samp(<text:sequence-decl>)}}}@dots{}{{{samp(</text:sequence-decl>)}}}
-elements that control how various entities - tables, images, equations etc -
-are numbered.
-@end enumerate
-@end itemize
-
-@anchor{x-overriding-factory-styles}
-@subsubheading Overriding factory styles
-The following two variables control the location from which the ODT
-exporter picks up the custom styles and content template files.  You can
-customize these variables to override the factory styles used by the
-exporter.
-
 @itemize
-@anchor{x-org-export-odt-styles-file}
-- 
-~org-export-odt-styles-file~
+#+attr_texinfo: :table-type "table" :indic "@asis"
 
-Use this variable to specify the {{{file(styles.xml)}}} that will be used in the
-final output.  You can specify one of the following values:
+- ~org-export-odt-styles-file~ ::
+# <<x-org-export-odt-styles-file>>
 
-@enumerate
-- A {{{file(styles.xml)}}} file
+Use this variable to specify the {{{file(styles.xml)}}} that will be
+used in the final output. You can specify one of the following values:
 
-Use this file instead of the default {{{file(styles.xml)}}}
+  - A {{{file(styles.xml)}}} file ::
 
-- A {{{file(.odt)}}} or {{{file(.ott)}}} file
+    Use this file instead of the default {{{file(styles.xml)}}}
 
-Use the {{{file(styles.xml)}}} contained in the specified OpenDocument Text or
-Template file
+  - A {{{file(.odt)}}} or {{{file(.ott)}}} file ::
 
-- A {{{file(.odt)}}} or {{{file(.ott)}}} file and a subset of files contained within them
+    Use the {{{file(styles.xml)}}} contained in the specified OpenDocument
+    Text or Template file.
 
-Use the {{{file(styles.xml)}}} contained in the specified OpenDocument Text or
-Template file.  Additionally extract the specified member files and embed
-those within the final {{{samp(ODT)}}} document.
+  - A {{{file(.odt)}}} or {{{file(.ott)}}} file and a subset of files contained within them ::
 
-Use this option if the {{{file(styles.xml)}}} file references additional files
-like header and footer images.
+    Use the {{{file(styles.xml)}}} contained in the specified OpenDocument
+    Text or Template file. Additionally extract the specified member files
+    and embed those within the final {{{samp(ODT)}}} document.
 
-- ~nil~
+    Use this option if the {{{file(styles.xml)}}} file references
+    additional files like header and footer images.
 
-Use the default {{{file(styles.xml)}}}
-@end enumerate
+  - ~nil~ ::
 
-@anchor{x-org-export-odt-content-template-file}
-- 
-~org-export-odt-content-template-file~
+    Use the default {{{file(styles.xml)}}}
 
-Use this variable to specify the blank {{{file(content.xml)}}} that will be used
-in the final output.
-@end itemize
+- ~org-export-odt-content-template-file~ ::
+  # <<x-org-export-odt-content-template-file>>
+
+  Use this variable to specify the blank {{{file(content.xml)}}} that
+  will be used in the final output.
+
 
 **** Creating one-off styles
      :PROPERTIES:
      :DESCRIPTION: How to produce custom highlighting, etc.
      :END:
+
 There are times when you would want one-off formatting in the exported
-document.  You can achieve this by embedding raw OpenDocument XML in the Org
-file.  The use of this feature is better illustrated with couple of examples.
+document. You can achieve this by embedding raw OpenDocument XML in
+the Org file. The use of this feature is better illustrated with
+couple of examples.
 
 @enumerate
-- Embedding ODT tags as part of regular text
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- Embedding ODT tags as part of regular text ::
 
-You can include simple OpenDocument tags by prefixing them with
-{{{samp(@@)}}}.  For example, to highlight a region of text do the following:
+  You can include simple OpenDocument tags by prefixing them with
+  {{{samp(@@)}}}. For example, to highlight a region of text do the
+  following:
 
-#+begin_example
-@@<text:span text:style-name="Highlight">This is a
-highlighted text@@</text:span>.  But this is a
-regular text.
-#+end_example
+  #+begin_example
+  @@<text:span text:style-name="Highlight">This is a
+  highlighted text@@</text:span>.  But this is a
+  regular text.
+  #+end_example
 
-@strong{Hint:} To see the above example in action, edit your
-{{{file(styles.xml)}}} (see [[x-orgodtstyles-xml,,Factory styles]]) and add a
-custom {{{samp(Highlight)}}} style as shown below.
+  *Hint:* To see the above example in action, edit your
+  {{{file(styles.xml)}}} (see [[x-orgodtstyles-xml,,Factory styles]]) and
+  add a custom {{{samp(Highlight)}}} style as shown below.
 
-#+begin_example
-<style:style style:name="Highlight" style:family="text">
-  <style:text-properties fo:background-color="#ff0000"/>
-</style:style>
-#+end_example
+  #+begin_example
+  <style:style style:name="Highlight" style:family="text">
+    <style:text-properties fo:background-color="#ff0000"/>
+  </style:style>
+  #+end_example
 
-- Embedding a one-line OpenDocument XML
+- Embedding a one-line OpenDocument XML ::
 
-You can add a simple OpenDocument one-liner using the ~#+ODT:~
-directive.  For example, to force a page break do the following:
+  You can add a simple OpenDocument one-liner using the ~#+ODT:~
+  directive.  For example, to force a page break do the following:
 
-#+begin_example
-#+ODT: <text:p text:style-name="PageBreak"/>
-#+end_example
+  #+begin_example
+  #+ODT: <text:p text:style-name="PageBreak"/>
+  #+end_example
 
-@strong{Hint:} To see the above example in action, edit your
-{{{file(styles.xml)}}} (see [[x-orgodtstyles-xml,,Factory styles]]) and add a
-custom {{{samp(PageBreak)}}} style as shown below.
+  *Hint:* To see the above example in action, edit your
+  {{{file(styles.xml)}}} (see [[x-orgodtstyles-xml,,Factory styles]]) and
+  add a custom {{{samp(PageBreak)}}} style as shown below.
 
-#+begin_example
-<style:style style:name="PageBreak" style:family="paragraph"
-	     style:parent-style-name="Text_20_body">
-  <style:paragraph-properties fo:break-before="page"/>
-</style:style>
-#+end_example
+  #+begin_example
+  <style:style style:name="PageBreak" style:family="paragraph"
+               style:parent-style-name="Text_20_body">
+    <style:paragraph-properties fo:break-before="page"/>
+  </style:style>
+  #+end_example
 
-- Embedding a block of OpenDocument XML
+- Embedding a block of OpenDocument XML ::
 
-You can add a large block of OpenDocument XML using the
-~#+BEGIN_ODT~@dots{}~#+END_ODT~ construct.
+  You can add a large block of OpenDocument XML using the
+  ~#+BEGIN_ODT~@dots{}~#+END_ODT~ construct.
 
-For example, to create a one-off paragraph that uses bold text, do the
-following:
+  For example, to create a one-off paragraph that uses bold text, do the
+  following:
 
-#+begin_example
-#+BEGIN_ODT
-<text:p text:style-name="Text_20_body_20_bold">
-This paragraph is specially formatted and uses bold text.
-</text:p>
-#+END_ODT
-#+end_example
+  #+begin_example
+  #+BEGIN_ODT
+  <text:p text:style-name="Text_20_body_20_bold">
+  This paragraph is specially formatted and uses bold text.
+  </text:p>
+  #+END_ODT
+  #+end_example
 
-@end enumerate
 
 **** Customizing tables in ODT export
      :PROPERTIES:
      :DESCRIPTION: How to define and use table templates
      :END:
 {{{cindex(tables\\\, in ODT export)}}}
-
 {{{cindex(#+ATTR_ODT)}}}
-You can override the default formatting of the table by specifying a custom
-table style with the ~#+ATTR_ODT~ line.  For a discussion on default
-formatting of tables see [[Tables in ODT export]].
+
+You can override the default formatting of the table by specifying a
+custom table style with the ~#+ATTR_ODT~ line. For a discussion on
+default formatting of tables see [[Tables in ODT export]].
 
 This feature closely mimics the way table templates are defined in the
-OpenDocument-v1.2
-specification.@footnote{@url{http://docs.oasis-open.org/office/v1.2/OpenDocument-v1.2.html,
-OpenDocument-v1.2 Specification}}
+OpenDocument-v1.2 specification.[fn:146]
 
+***** Custom table styles - an illustration
 
-
-@subsubheading Custom table styles - an illustration
-
-To have a quick preview of this feature, install the below setting and export
-the table that follows.
+To have a quick preview of this feature, install the following setting and
+export the example table.
 
 #+header: :eval no
 #+header: :exports code
 #+begin_src emacs-lisp
-(setq org-export-odt-table-styles
-      (append org-export-odt-table-styles
-	      '(("TableWithHeaderRowAndColumn" "Custom"
-		 ((use-first-row-styles . t)
-		  (use-first-column-styles . t)))
-		("TableWithFirstRowandLastRow" "Custom"
-		 ((use-first-row-styles . t)
-		  (use-last-row-styles . t))))))
+  (setq org-export-odt-table-styles
+        (append org-export-odt-table-styles
+                '(("TableWithHeaderRowAndColumn" "Custom"
+                   ((use-first-row-styles . t)
+                    (use-first-column-styles . t)))
+                  ("TableWithFirstRowandLastRow" "Custom"
+                   ((use-first-row-styles . t)
+                    (use-last-row-styles . t))))))
 #+end_src
 
 #+begin_example
@@ -12310,159 +12397,128 @@ the table that follows.
 | Anna  |  4321 |  25 |
 #+end_example
 
-In the above example, you used a template named {{{samp(Custom)}}} and installed
-two table styles with the names {{{samp(TableWithHeaderRowAndColumn)}}} and
-{{{samp(TableWithFirstRowandLastRow)}}}.  (@strong{Important:} The OpenDocument
-styles needed for producing the above template have been pre-defined for you.
-These styles are available under the section marked {{{samp(Custom Table
-Template)}}} in {{{file(OrgOdtContentTemplate.xml)}}}
-(see [[x-orgodtcontenttemplate-xml,,Factory styles]]).  If you need
-additional templates you have to define these styles yourselves.
+In the above example, you used a template named {{{samp(Custom)}}} and
+installed two table styles with the names
+{{{samp(TableWithHeaderRowAndColumn)}}} and
+{{{samp(TableWithFirstRowandLastRow)}}}. (*Important:* The
+OpenDocument styles needed for producing the above template have been
+pre-defined for you. These styles are available under the section
+marked {{{samp(Custom Table Template)}}} in
+{{{file(OrgOdtContentTemplate.xml)}}} (see
+[[x-orgodtcontenttemplate-xml,,Factory styles]]). If you need additional
+templates you have to define these styles yourself.
 
-@subsubheading Custom table styles - the nitty-gritty
+***** Custom table styles - the nitty-gritty
 To use this feature proceed as follows:
 
 @enumerate
-- 
-Create a table template@footnote{See the ~<table:table-template>~
-element of the OpenDocument-v1.2 specification}
+1. Create a table template[fn:147] ::
 
-A table template is nothing but a set of {{{samp(table-cell)}}} and
-{{{samp(paragraph)}}} styles for each of the following table cell categories:
+  A table template is nothing but a set of {{{samp(table-cell)}}} and
+  {{{samp(paragraph)}}} styles for each of the following table cell
+  categories:
 
-@itemize @minus
-- Body
-- First column
-- Last column
-- First row
-- Last row
-- Even row
-- Odd row
-- Even column
-- Odd Column
-@end itemize
+    - Body
+    - First column
+    - Last column
+    - First row
+    - Last row
+    - Even row
+    - Odd row
+    - Even column
+    - Odd Column
 
-The names for the above styles must be chosen based on the name of the table
-template using a well-defined convention.
+  The names for the above styles must be chosen based on the name of the
+  table template using a well-defined convention.
 
-The naming convention is better illustrated with an example.  For a table
-template with the name {{{samp(Custom)}}}, the needed style names are listed in
-the following table.
+  The naming convention is better illustrated with an example. For a
+  table template with the name {{{samp(Custom)}}}, the needed style
+  names are listed in the following table.
 
-@multitable  {Table cell type} {CustomEvenColumnTableCell} {CustomEvenColumnTableParagraph}
-@headitem Table cell type
-@tab ~table-cell~ style
-@tab ~paragraph~ style
-- 
-@tab
-@tab
-- Body
-@tab {{{samp(CustomTableCell)}}}
-@tab {{{samp(CustomTableParagraph)}}}
-- First column
-@tab {{{samp(CustomFirstColumnTableCell)}}}
-@tab {{{samp(CustomFirstColumnTableParagraph)}}}
-- Last column
-@tab {{{samp(CustomLastColumnTableCell)}}}
-@tab {{{samp(CustomLastColumnTableParagraph)}}}
-- First row
-@tab {{{samp(CustomFirstRowTableCell)}}}
-@tab {{{samp(CustomFirstRowTableParagraph)}}}
-- Last row
-@tab {{{samp(CustomLastRowTableCell)}}}
-@tab {{{samp(CustomLastRowTableParagraph)}}}
-- Even row
-@tab {{{samp(CustomEvenRowTableCell)}}}
-@tab {{{samp(CustomEvenRowTableParagraph)}}}
-- Odd row
-@tab {{{samp(CustomOddRowTableCell)}}}
-@tab {{{samp(CustomOddRowTableParagraph)}}}
-- Even column
-@tab {{{samp(CustomEvenColumnTableCell)}}}
-@tab {{{samp(CustomEvenColumnTableParagraph)}}}
-- Odd column
-@tab {{{samp(CustomOddColumnTableCell)}}}
-@tab {{{samp(CustomOddColumnTableParagraph)}}}
-@end multitable
+  | Table cell type | ~table-cell~ style                     | ~paragraph~ style                           |
+  |-----------------+----------------------------------------+---------------------------------------------|
+  | Body            | {{{samp(CustomTableCell)}}}            | {{{samp(CustomTableParagraph)}}}            |
+  | First column    | {{{samp(CustomFirstColumnTableCell)}}} | {{{samp(CustomFirstColumnTableParagraph)}}} |
+  | Last column     | {{{samp(CustomLastColumnTableCell)}}}  | {{{samp(CustomLastColumnTableParagraph)}}}  |
+  | First row       | {{{samp(CustomFirstRowTableCell)}}}    | {{{samp(CustomFirstRowTableParagraph)}}}    |
+  | Last row        | {{{samp(CustomLastRowTableCell)}}}     | {{{samp(CustomLastRowTableParagraph)}}}     |
+  | Even row        | {{{samp(CustomEvenRowTableCell)}}}     | {{{samp(CustomEvenRowTableParagraph)}}}     |
+  | Odd row         | {{{samp(CustomOddRowTableCell)}}}      | {{{samp(CustomOddRowTableParagraph)}}}      |
+  | Even column     | {{{samp(CustomEvenColumnTableCell)}}}  | {{{samp(CustomEvenColumnTableParagraph)}}}  |
+  | Odd column      | {{{samp(CustomOddColumnTableCell)}}}   | {{{samp(CustomOddColumnTableParagraph)}}}   |
 
-To create a table template with the name {{{samp(Custom)}}}, define the above
-styles in the
-~<office:automatic-styles>~...~</office:automatic-styles>~ element
-of the content template file (see [[x-orgodtcontenttemplate-xml,,Factory
-styles]]).
 
-- 
-Define a table style@footnote{See the attributes ~table:template-name~,
-~table:use-first-row-styles~, ~table:use-last-row-styles~,
-~table:use-first-column-styles~, ~table:use-last-column-styles~,
-~table:use-banding-rows-styles~, and
-~table:use-banding-column-styles~ of the ~<table:table>~ element in
-the OpenDocument-v1.2 specification}
+  To create a table template with the name {{{samp(Custom)}}}, define
+  the above styles in the ~<office:automatic-styles>~ ...
+  ~</office:automatic-styles>~ element of the content template file (see
+  [[x-orgodtcontenttemplate-xml,,Factory styles]]).
 
-{{{vindex(org-export-odt-table-styles)}}}
-To define a table style, create an entry for the style in the variable
-~org-export-odt-table-styles~ and specify the following:
+2. Define a table style[fn:148] ::
 
-@itemize @minus
-- the name of the table template created in step (1)
-- the set of cell styles in that template that are to be activated
-@end itemize
+  {{{vindex(org-export-odt-table-styles)}}}
 
-For example, the entry below defines two different table styles
-{{{samp(TableWithHeaderRowAndColumn)}}} and {{{samp(TableWithFirstRowandLastRow)}}}
-based on the same template {{{samp(Custom)}}}.  The styles achieve their intended
-effect by selectively activating the individual cell styles in that template.
+  To define a table style, create an entry for the style in the variable
+  ~org-export-odt-table-styles~ and specify the following:
 
-#+header: :eval no
-#+header: :exports code
-#+begin_src emacs-lisp
-(setq org-export-odt-table-styles
-      (append org-export-odt-table-styles
-	      '(("TableWithHeaderRowAndColumn" "Custom"
-		 ((use-first-row-styles . t)
-		  (use-first-column-styles . t)))
-		("TableWithFirstRowandLastRow" "Custom"
-		 ((use-first-row-styles . t)
-		  (use-last-row-styles . t))))))
-#+end_src
+    - the name of the table template created in step (1)
+    - the set of cell styles in that template that are to be activated
 
-- 
-Associate a table with the table style
 
-To do this, specify the table style created in step (2) as part of
-the ~ATTR_ODT~ line as shown below.
+  For example, the entry below defines two different table styles
+  {{{samp(TableWithHeaderRowAndColumn)}}} and
+  {{{samp(TableWithFirstRowandLastRow)}}} based on the same template
+  {{{samp(Custom)}}}. The styles achieve their intended effect by
+  selectively activating the individual cell styles in that template.
 
-#+begin_example
-#+ATTR_ODT: :style "TableWithHeaderRowAndColumn"
-| Name  | Phone | Age |
-| Peter |  1234 |  17 |
-| Anna  |  4321 |  25 |
-#+end_example
-@end enumerate
+  #+header: :eval no
+  #+header: :exports code
+  #+begin_src emacs-lisp
+  (setq org-export-odt-table-styles
+        (append org-export-odt-table-styles
+                '(("TableWithHeaderRowAndColumn" "Custom"
+                   ((use-first-row-styles . t)
+                    (use-first-column-styles . t)))
+                  ("TableWithFirstRowandLastRow" "Custom"
+                   ((use-first-row-styles . t)
+                    (use-last-row-styles . t))))))
+  #+end_src
+
+3. Associate a table with the table style ::
+
+  To do this, specify the table style created in step (2) as part of
+  the ~ATTR_ODT~ line as shown below.
+
+  #+begin_example
+  #+ATTR_ODT: :style "TableWithHeaderRowAndColumn"
+  | Name  | Phone | Age |
+  | Peter |  1234 |  17 |
+  | Anna  |  4321 |  25 |
+  #+end_example
+
 
 **** Validating OpenDocument XML
      :PROPERTIES:
      :DESCRIPTION: How to debug corrupt OpenDocument files
      :END:
 
-Occasionally, you will discover that the document created by the
-ODT exporter cannot be opened by your favorite application.  One of
-the common reasons for this is that the {{{file(.odt)}}} file is corrupt.  In such
-cases, you may want to validate the document against the OpenDocument RELAX
-NG Compact Syntax (RNC) schema.
+Occasionally, you will discover that the document created by the ODT
+exporter cannot be opened by your favorite application. One of the
+common reasons for this is that the {{{file(.odt)}}} file is corrupt.
+In such cases, you may want to validate the document against the
+OpenDocument RELAX NG Compact Syntax (RNC) schema.
 
-For de-compressing the {{{file(.odt)}}} file@footnote{{{{file(.odt)}}} files are
-nothing but {{{samp(zip)}}} archives}: @inforef{File Archives,,emacs}.  For
-general help with validation (and schema-sensitive editing) of XML files:
-@inforef{Introduction,,nxml-mode}.
+For de-compressing the {{{file(.odt)}}} file:[fn:149]
+@@info:@inforef{File Archives,,emacs}@@. For general help with
+validation (and schema-sensitive editing) of XML files:
+@@info:@inforef{Introduction,,nxml-mode}@@.
 
 {{{vindex(org-export-odt-schema-dir)}}}
-If you have ready access to OpenDocument {{{file(.rnc)}}} files and the needed
-schema-locating rules in a single folder, you can customize the variable
-~org-export-odt-schema-dir~ to point to that directory.  The
-ODT exporter will take care of updating the
-~rng-schema-locating-files~ for you.
 
+If you have ready access to OpenDocument {{{file(.rnc)}}} files and
+the needed schema-locating rules in a single folder, you can customize
+the variable ~org-export-odt-schema-dir~ to point to that directory.
+The ODT exporter will take care of updating the
+~rng-schema-locating-files~ for you.
 
 ** TaskJuggler export
    :PROPERTIES:
@@ -12471,93 +12527,103 @@ ODT exporter will take care of updating the
 {{{cindex(TaskJuggler export)}}}
 {{{cindex(Project management)}}}
 
-@uref{http://www.taskjuggler.org/, TaskJuggler} is a project management tool.
-It provides an optimizing scheduler that computes your project time lines and
-resource assignments based on the project outline and the constraints that
-you have provided.
+[[http://www.taskjuggler.org/][TaskJuggler]] is a project management tool. It provides an optimizing
+scheduler that computes your project time lines and resource
+assignments based on the project outline and the constraints that you
+have provided.
 
-The TaskJuggler exporter is a bit different from other exporters, such as the
-~HTML~ and @LaTeX{} exporters for example, in that it does not export all the
-nodes of a document or strictly follow the order of the nodes in the
-document.
+The TaskJuggler exporter is a bit different from other exporters, such
+as the ~HTML~ and @LaTeX{} exporters for example, in that it does not
+export all the nodes of a document or strictly follow the order of the
+nodes in the document.
 
-Instead the TaskJuggler exporter looks for a tree that defines the tasks and
-optionally trees that define the resources and reports for this project.
-It then creates a TaskJuggler file based on these trees and the attributes
-defined in all the nodes.
+Instead the TaskJuggler exporter looks for a tree that defines the
+tasks and optionally trees that define the resources and reports for
+this project. It then creates a TaskJuggler file based on these trees
+and the attributes defined in all the nodes.
 
-@subsection TaskJuggler export commands
+*** TaskJuggler export commands
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
+#+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c C-e j)}}} ~org-export-as-taskjuggler~ ::
   {{{kindex(C-c C-e j)}}}
-Export as a TaskJuggler file.
+
+  Export as a TaskJuggler file.
 
 - {{{kbd(C-c C-e J)}}} ~org-export-as-taskjuggler-and-open~ ::
   {{{kindex(C-c C-e J)}}}
-Export as a TaskJuggler file and then open the file with TaskJugglerUI (only
-for TaskJugglerUI 2.x).
+
+  Export as a TaskJuggler file and then open the file with TaskJugglerUI
+  (only for TaskJugglerUI 2.x).
 
 
-@subsection Tasks
-
+*** Tasks
 {{{vindex(org-export-taskjuggler-project-tag)}}}
-Create your tasks as you usually do with Org mode.  Assign efforts to each
-task using properties (it is easiest to do this in the column view).  You
-should end up with something similar to the example by Peter Jones in
-@url{http://www.contextualdevelopment.com/static/artifacts/articles/2008/project-planning/project-planning.org}.
+
+Create your tasks as you usually do with Org mode. Assign efforts to
+each task using properties (it is easiest to do this in the column
+view). You should end up with something similar to the example by
+Peter Jones in
+[[http://www.contextualdevelopment.com/static/artifacts/articles/2008/project-planning/project-planning.org]].
 Now mark the top node of your tasks with a tag named
 ~:taskjuggler_project:~ (or whatever you customized
-~org-export-taskjuggler-project-tag~ to).  You are now ready to export
-the project plan with {{{kbd(C-c C-e J)}}} which will export the project plan and
-open a gantt chart in TaskJugglerUI.
+~org-export-taskjuggler-project-tag~ to). You are now ready to export
+the project plan with {{{kbd(C-c C-e J)}}} which will export the
+project plan and open a gantt chart in TaskJugglerUI.
 
-@subsection Resources
-
+*** Resources
 {{{vindex(org-export-taskjuggler-resource-tag)}}}
-Next you can define resources and assign those to work on specific tasks.  You
-can group your resources hierarchically.  Tag the top node of the resources
-with ~:taskjuggler_resource:~ (or whatever you customized
-~org-export-taskjuggler-resource-tag~ to).  You can optionally assign an
-identifier (named {{{samp(resource_id)}}}) to the resources (using the standard
-Org properties commands, see [[Property syntax]]) or you can let the exporter
-generate identifiers automatically (the exporter picks the first word of the
-headline as the identifier as long as it is unique---see the documentation of
-~org-taskjuggler-get-unique-id~).  Using that identifier you can then
-allocate resources to tasks.  This is again done with the {{{samp(allocate)}}}
-property on the tasks.  Do this in column view or when on the task type
-@kbd{C-c C-x p allocate @key{RET} <resource_id> @key{RET}}.
 
-Once the allocations are done you can again export to TaskJuggler and check
-in the Resource Allocation Graph which person is working on what task at what
-time.
+Next you can define resources and assign those to work on specific
+tasks. You can group your resources hierarchically. Tag the top node
+of the resources with ~:taskjuggler_resource:~ (or whatever you
+customized ~org-export-taskjuggler-resource-tag~ to). You can
+optionally assign an identifier (named {{{samp(resource_id)}}}) to the
+resources (using the standard Org properties commands, see [[Property
+syntax]]) or you can let the exporter generate identifiers automatically
+(the exporter picks the first word of the headline as the identifier
+as long as it is unique---see the documentation of
+~org-taskjuggler-get-unique-id~). Using that identifier you can then
+allocate resources to tasks. This is again done with the
+{{{samp(allocate)}}} property on the tasks. Do this in column view or
+when on the task type {{{kbd(C-c C-x p allocate @key{RET} <resource_id>
+@key{RET})}}}.
 
-@subsection Export of properties
+Once the allocations are done you can again export to TaskJuggler and
+check in the Resource Allocation Graph which person is working on what
+task at what time.
 
-The exporter also takes TODO state information into consideration, i.e.@: if
-a task is marked as done it will have the corresponding attribute in
-TaskJuggler ({{{samp(complete 100)}}}).  Scheduling information is also taken into
-account to set start/end dates for tasks.
+*** Export of properties
 
-The exporter will also export any property on a task resource or resource
-node which is known to TaskJuggler, such as {{{samp(limits)}}}, {{{samp(vacation)}}},
-{{{samp(shift)}}}, {{{samp(booking)}}}, {{{samp(efficiency)}}}, {{{samp(journalentry)}}},
-{{{samp(rate)}}} for resources or {{{samp(account)}}}, {{{samp(start)}}}, {{{samp(note)}}},
-{{{samp(duration)}}}, {{{samp(end)}}}, {{{samp(journalentry)}}}, {{{samp(milestone)}}},
-{{{samp(reference)}}}, {{{samp(responsible)}}}, {{{samp(scheduling)}}}, etc for tasks.
+The exporter also takes TODO state information into consideration,
+i.e., if a task is marked as done it will have the corresponding
+attribute in TaskJuggler ({{{samp(complete 100)}}}). Scheduling
+information is also taken into account to set start/end dates for
+tasks.
 
-@subsection Dependencies
+The exporter will also export any property on a task resource or
+resource node which is known to TaskJuggler, such as
+{{{samp(limits)}}}, {{{samp(vacation)}}}, {{{samp(shift)}}},
+{{{samp(booking)}}}, {{{samp(efficiency)}}}, {{{samp(journalentry)}}},
+{{{samp(rate)}}} for resources or {{{samp(account)}}},
+{{{samp(start)}}}, {{{samp(note)}}}, {{{samp(duration)}}},
+{{{samp(end)}}}, {{{samp(journalentry)}}}, {{{samp(milestone)}}},
+{{{samp(reference)}}}, {{{samp(responsible)}}},
+{{{samp(scheduling)}}}, etc for tasks.
 
-The exporter will handle dependencies that are defined in the tasks either
-with the {{{samp(ORDERED)}}} attribute (see [[TODO dependencies]]), with the
-{{{samp(BLOCKER)}}} attribute (see {{{file(org-depend.el)}}}) or alternatively with a
-{{{samp(depends)}}} attribute.  Both the {{{samp(BLOCKER)}}} and the {{{samp(depends)}}}
-attribute can be either {{{samp(previous-sibling)}}} or a reference to an
-identifier (named {{{samp(task_id)}}}) which is defined for another task in the
-project.  {{{samp(BLOCKER)}}} and the {{{samp(depends)}}} attribute can define multiple
-dependencies separated by either space or comma.  You can also specify
-optional attributes on the dependency by simply appending it.  The following
-examples should illustrate this:
+*** Dependencies
+
+The exporter will handle dependencies that are defined in the tasks
+either with the {{{samp(ORDERED)}}} attribute (see [[TODO dependencies]]),
+with the {{{samp(BLOCKER)}}} attribute (see {{{file(org-depend.el)}}})
+or alternatively with a {{{samp(depends)}}} attribute. Both the
+{{{samp(BLOCKER)}}} and the {{{samp(depends)}}} attribute can be
+either {{{samp(previous-sibling)}}} or a reference to an identifier
+(named {{{samp(task_id)}}}) which is defined for another task in the
+project. {{{samp(BLOCKER)}}} and the {{{samp(depends)}}} attribute can
+define multiple dependencies separated by either space or comma. You
+can also specify optional attributes on the dependency by simply
+appending it. The following examples should illustrate this:
 
 #+begin_example
 ,* Preparation
@@ -12585,28 +12651,30 @@ examples should illustrate this:
   :END:
 #+end_example
 
-@subsection Reports
-
+*** Reports
 {{{vindex(org-export-taskjuggler-default-reports)}}}
-TaskJuggler can produce many kinds of reports (e.g.@: gantt chart, resource
-allocation, etc).  The user defines what kind of reports should be generated
-for a project in the TaskJuggler file.  By default, the exporter will
-automatically insert some pre-set reports in the file.  These defaults are
-defined in ~org-export-taskjuggler-default-reports~.  They can be
-modified using customize along with a number of other options.  For a more
-complete list, see @kbd{M-x customize-group @key{RET} org-export-taskjuggler
-@key{RET}}.
+
+TaskJuggler can produce many kinds of reports (e.g., gantt chart,
+resource allocation, etc). The user defines what kind of reports
+should be generated for a project in the TaskJuggler file. By default,
+the exporter will automatically insert some pre-set reports in the
+file. These defaults are defined in
+~org-export-taskjuggler-default-reports~. They can be modified using
+customize along with a number of other options. For a more complete
+list, see {{{kbd(M-x customize-group @key{RET} org-export-taskjuggler
+@key{RET})}}}.
 
 Alternately, the user can tag a tree with
 ~org-export-taskjuggler-report-tag~, and define reports in sub-nodes,
-similarly to what is done with tasks or resources.  The properties used for
-report generation are defined in
-~org-export-taskjuggler-valid-report-attributes~. In addition, a special
-property named {{{samp(report-kind)}}} is used to define the kind of report one
-wants to generate (by default, a {{{samp(taskreport)}}}).
+similarly to what is done with tasks or resources. The properties used
+for report generation are defined in
+~org-export-taskjuggler-valid-report-attributes~. In addition, a
+special property named {{{samp(report-kind)}}} is used to define the
+kind of report one wants to generate (by default, a
+{{{samp(taskreport)}}}).
 
 For more information and examples see the Org-taskjuggler tutorial at
-@uref{http://orgmode.org/worg/org-tutorials/org-taskjuggler.html}.
+[[http://orgmode.org/worg/org-tutorials/org-taskjuggler.html]].
 
 ** Freemind export
    :PROPERTIES:
@@ -12617,12 +12685,12 @@ For more information and examples see the Org-taskjuggler tutorial at
 
 The Freemind exporter was written by Lennart Borgman.
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
+#+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c C-e m)}}} ~org-export-as-freemind~ ::
   {{{kindex(C-c C-e m)}}}
-Export as a Freemind mind map.  For an Org file {{{file(myfile.org)}}}, the Freemind
-file will be {{{file(myfile.mm)}}}.
 
+  Export as a Freemind mind map. For an Org file {{{file(myfile.org)}}},
+  the Freemind file will be {{{file(myfile.mm)}}}.
 
 ** XOXO export
    :PROPERTIES:
@@ -12631,17 +12699,20 @@ file will be {{{file(myfile.mm)}}}.
 {{{cindex(XOXO export)}}}
 
 Org mode contains an exporter that produces XOXO-style output.
-Currently, this exporter only handles the general outline structure and
-does not interpret any additional Org mode features.
+Currently, this exporter only handles the general outline structure
+and does not interpret any additional Org mode features.
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
+#+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c C-e x)}}} ~org-export-as-xoxo~ ::
   {{{kindex(C-c C-e x)}}}
-Export as an XOXO file.  For an Org file {{{file(myfile.org)}}}, the XOXO file will be
-{{{file(myfile.html)}}}.
+
+  Export as an XOXO file. For an Org file {{{file(myfile.org)}}}, the
+  XOXO file will be {{{file(myfile.html)}}}.
+
 - {{{kbd(C-c C-e v x)}}} ::
   {{{kindex(C-c C-e v x)}}}
-Export only the visible part of the document.
+
+  Export only the visible part of the document.
 
 
 ** iCalendar export
@@ -12655,52 +12726,58 @@ Export only the visible part of the document.
 {{{vindex(org-icalendar-use-scheduled)}}}
 {{{vindex(org-icalendar-categories)}}}
 {{{vindex(org-icalendar-alarm-time)}}}
-Some people use Org mode for keeping track of projects, but still prefer a
-standard calendar application for anniversaries and appointments.  In this
-case it can be useful to show deadlines and other time-stamped items in Org
-files in the calendar application.  Org mode can export calendar information
-in the standard iCalendar format.  If you also want to have TODO entries
-included in the export, configure the variable
-~org-icalendar-include-todo~.  Plain timestamps are exported as VEVENT,
-and TODO items as VTODO.  It will also create events from deadlines that are
-in non-TODO items.  Deadlines and scheduling dates in TODO items will be used
-to set the start and due dates for the TODO entry@footnote{See the variables
-~org-icalendar-use-deadline~ and ~org-icalendar-use-scheduled~.}.
-As categories, it will use the tags locally defined in the heading, and the
-file/tree category@footnote{To add inherited tags or the TODO state,
-configure the variable ~org-icalendar-categories~.}.  See the variable
-~org-icalendar-alarm-time~ for a way to assign alarms to entries with a
-time.
+
+Some people use Org mode for keeping track of projects, but still
+prefer a standard calendar application for anniversaries and
+appointments. In this case it can be useful to show deadlines and
+other time-stamped items in Org files in the calendar application. Org
+mode can export calendar information in the standard iCalendar format.
+If you also want to have TODO entries included in the export,
+configure the variable ~org-icalendar-include-todo~. Plain timestamps
+are exported as VEVENT, and TODO items as VTODO. It will also create
+events from deadlines that are in non-TODO items. Deadlines and
+scheduling dates in TODO items will be used to set the start and due
+dates for the TODO entry.[fn:150] As categories, it will use the tags
+locally defined in the heading, and the file/tree category.[fn:151]
+See the variable ~org-icalendar-alarm-time~ for a way to assign alarms
+to entries with a time.
 
 {{{vindex(org-icalendar-store-UID)}}}
 {{{cindex(property\\\, ID)}}}
-The iCalendar standard requires each entry to have a globally unique
-identifier (UID).  Org creates these identifiers during export.  If you set
-the variable ~org-icalendar-store-UID~, the UID will be stored in the
-~:ID:~ property of the entry and re-used next time you report this
-entry.  Since a single entry can give rise to multiple iCalendar entries (as
-a timestamp, a deadline, a scheduled item, and as a TODO item), Org adds
-prefixes to the UID, depending on what triggered the inclusion of the entry.
-In this way the UID remains unique, but a synchronization program can still
-figure out from which entry all the different instances originate.
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
+The iCalendar standard requires each entry to have a globally unique
+identifier (UID). Org creates these identifiers during export. If you
+set the variable ~org-icalendar-store-UID~, the UID will be stored in
+the ~:ID:~ property of the entry and re-used next time you report this
+entry. Since a single entry can give rise to multiple iCalendar
+entries (as a timestamp, a deadline, a scheduled item, and as a TODO
+item), Org adds prefixes to the UID, depending on what triggered the
+inclusion of the entry. In this way the UID remains unique, but a
+synchronization program can still figure out from which entry all the
+different instances originate.
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c C-e i)}}} ~org-export-icalendar-this-file~ ::
   {{{kindex(C-c C-e i)}}}
-Create iCalendar entries for the current file and store them in the same
-directory, using a file extension {{{file(.ics)}}}.
+
+  Create iCalendar entries for the current file and store them in the
+  same directory, using a file extension {{{file(.ics)}}}.
+
 - {{{kbd(C-c C-e I)}}} ~ org-export-icalendar-all-agenda-files~ ::
   {{{kindex(C-c C-e I)}}}
-{{{vindex(org-agenda-files)}}}
-Like {{{kbd(C-c C-e i)}}}, but do this for all files in
-~org-agenda-files~.  For each of these files, a separate iCalendar
-file will be written.
+  {{{vindex(org-agenda-files)}}}
+
+  Like {{{kbd(C-c C-e i)}}}, but do this for all files in
+  ~org-agenda-files~. For each of these files, a separate iCalendar file
+  will be written.
+
 - {{{kbd(C-c C-e c)}}} ~org-export-icalendar-combine-agenda-files~ ::
   {{{kindex(C-c C-e c)}}}
-{{{vindex(org-combined-agenda-icalendar-file)}}}
-Create a single large iCalendar file from all files in
-~org-agenda-files~ and write it to the file given by
-~org-combined-agenda-icalendar-file~.
+  {{{vindex(org-combined-agenda-icalendar-file)}}}
+
+  Create a single large iCalendar file from all files in
+  ~org-agenda-files~ and write it to the file given by
+  ~org-combined-agenda-icalendar-file~.
 
 
 {{{vindex(org-use-property-inheritance)}}}
@@ -12708,12 +12785,11 @@ Create a single large iCalendar file from all files in
 {{{cindex(property\\\, SUMMARY)}}}
 {{{cindex(property\\\, DESCRIPTION)}}}
 {{{cindex(property\\\, LOCATION)}}}
-The export will honor SUMMARY, DESCRIPTION and LOCATION@footnote{The LOCATION
-property can be inherited from higher in the hierarchy if you configure
-~org-use-property-inheritance~ accordingly.} properties if the selected
-entries have them.  If not, the summary will be derived from the headline,
-and the description from the body (limited to
-~org-icalendar-include-body~ characters).
+
+The export will honor SUMMARY, DESCRIPTION and LOCATION properties if
+the selected entries have them.[fn:152] If not, the summary will be
+derived from the headline, and the description from the body (limited
+to ~org-icalendar-include-body~ characters).
 
 How this calendar is best read and updated, depends on the application
 you are using.  The FAQ covers this issue.
@@ -18129,6 +18205,102 @@ will be handled.
 [fn:120] Org mode has a method to test if the cursor is inside such a
 fragment, see the documentation of the function
 ~org-inside-LaTeX-fragment-p~.
+
+[fn:121] If you want to configure many options this way, you can use
+several ~#+OPTIONS~ lines.
+
+[fn:122] To make this behavior the default, customize the variable
+~org-export-run-in-background~.
+
+[fn:123] This requires ~transient-mark-mode~ be turned on.
+
+[fn:124] To select the current subtree, use {{{kbd(C-c @@)}}}.
+
+[fn:125] This requires ~transient-mark-mode~ be turned on.
+
+[fn:126] To select the current subtree, use {{{kbd(C-c @@)}}}.
+
+[fn:127] But see the variable ~org-export-html-inline-images~.
+
+[fn:128] Installation instructions can be found on the MathJax
+website, see [[http://www.mathjax.org/resources/docs/?installation.html]].
+
+[fn:129] If the classes on TODO keywords and tags lead to conflicts,
+use the variables ~org-export-html-todo-kwd-class-prefix~ and
+~org-export-html-tag-class-prefix~ to make them unique.
+
+[fn:130] This style is defined in the constant
+~org-export-html-style-default~, which you should not modify. To turn
+inclusion of these defaults off, customize
+~org-export-html-style-include-default~.
+
+[fn:131] The default @LaTeX{} output is designed for processing with
+~pdftex~ or @LaTeX{}. It includes packages that are not compatible
+with ~xetex~ and possibly ~luatex~. See the variables
+~org-export-latex-default-packages-alist~ and
+~org-export-latex-packages-alist~.
+
+[fn:132] This requires ~transient-mark-mode~ be turned on.
+
+[fn:133] To select the current subtree, use {{{kbd(C-c @@)}}}.
+
+[fn:134] Into which the values of
+~org-export-latex-default-packages-alist~ and
+~org-export-latex-packages-alist~ are spliced.
+
+[fn:135] One can also take advantage of this option to pass other,
+unrelated options into the figure or table environment. For an example
+see the section ``Exporting org files'' in
+[[http://orgmode.org/worg/org-hacks.html]].
+
+[fn:136] This requires ~transient-mark-mode~ to be turned on.
+
+[fn:137] To select the current subtree, use {{{kbd(C-c @@)}}}.
+
+[fn:138] See [[http://docs.oasis-open.org/office/v1.2/OpenDocument-v1.2.html][Open Document Format for Office Applications (OpenDocument)
+Version 1.2]].
+
+[fn:139] ODT export was added in Org mode version 7.8.
+
+[fn:140] This requires ~transient-mark-mode~ to be turned on.
+
+[fn:141] To select the current subtree, use {{{kbd(C-c @@)}}}.
+
+[fn:142] The column widths are interpreted as weighted ratios with the
+default weight being 1.
+
+[fn:143] Use of {{{file(ImageMagick)}}} is only desirable. However, if
+you routinely produce documents that have large images or you export
+your Org files that has images using a Emacs batch script, then the
+use of {{{file(ImageMagick)}}} is mandatory.
+
+[fn:144] See [[http://www.mathtoweb.com/cgi-bin/mathtoweb_home.pl][MathToWeb]].
+
+[fn:145] Your {{{file(htmlfontify.el)}}} library must at least be at
+Emacs 24.1 levels for fontification to be turned on.
+
+[fn:146] See [[http://docs.oasis-open.org/office/v1.2/OpenDocument-v1.2.html][OpenDocument-v1.2 Specification]].
+
+[fn:147] See the ~<table:table-template>~ element of the
+OpenDocument-v1.2 specification.
+
+[fn:148] See the attributes ~table:template-name~,
+~table:use-first-row-styles~, ~table:use-last-row-styles~,
+~table:use-first-column-styles~, ~table:use-last-column-styles~,
+~table:use-banding-rows-styles~, and ~table:use-banding-column-styles~
+of the ~<table:table>~ element in the OpenDocument-v1.2 specification.
+
+[fn:149] Note that {{{{file(.odt)}}} files are {{{samp(zip)}}}
+archives.
+
+[fn:150] See the variables ~org-icalendar-use-deadline~ and
+~org-icalendar-use-scheduled~.
+
+[fn:151] To add inherited tags or the TODO state, configure the
+variable ~org-icalendar-categories~.
+
+[fn:152] The LOCATION property can be inherited from higher in the
+hierarchy if you configure ~org-use-property-inheritance~ accordingly.
 
 * About orgmanual.org                                              :noexport:
 This document intends to be Org mode source for the Org mode manual
