@@ -13282,6 +13282,8 @@ more complex, with a multi-component project.
 This example publishes a set of Org files to the {{{file(public_html)}}}
 directory on the local machine.
 
+#+header: :eval no
+#+header: :exports code
 #+begin_src emacs-lisp
 (setq org-publish-project-alist
       '(("org"
@@ -13318,6 +13320,8 @@ On the web server, the relative path to the image should be the
 same.  You can accomplish this by setting up an "images" folder in the
 right place on the web server, and publishing images to it.
 
+#+header: :eval no
+#+header: :exports code
 #+begin_src emacs-lisp
 (setq org-publish-project-alist
       '(("orgfiles"
@@ -13384,7 +13388,7 @@ of the commands above, or by customizing the variable
 ~org-publish-use-timestamps-flag~. This may be necessary in particular
 if files include other files via ~#+SETUPFILE:~ or ~#+INCLUDE:~.
 
-* FIXME Working with source code                                   :noexport:
+* FIXED Working with source code
   :PROPERTIES:
   :DESCRIPTION: Export, evaluate, and tangle code blocks
   :TEXINFO_MENU_TITLE: Working With Source Code
@@ -13393,8 +13397,8 @@ if files include other files via ~#+SETUPFILE:~ or ~#+INCLUDE:~.
 {{{cindex(Davison\\\, Dan)}}}
 {{{cindex(source code\\\, working with)}}}
 
-Source code can be included in Org mode documents using a {{{samp(src)}}} block,
-e.g.@:
+Source code can be included in Org mode documents using a
+{{{samp(src)}}} block, e.g.:
 
 #+begin_example
 #+BEGIN_SRC emacs-lisp
@@ -13404,12 +13408,13 @@ e.g.@:
 #+END_SRC
 #+end_example
 
-Org mode provides a number of features for working with live source code,
-including editing of code blocks in their native major-mode, evaluation of
-code blocks, converting code blocks into source files (known as @dfn{tangling}
-in literate programming), and exporting code blocks and their
-results in several formats.  This functionality was contributed by Eric
-Schulte and Dan Davison, and was originally named Org-babel.
+Org mode provides a number of features for working with live source
+code, including editing of code blocks in their native major-mode,
+evaluation of code blocks, converting code blocks into source files
+(known as /tangling/ in literate programming), and exporting code
+blocks and their results in several formats. This functionality was
+contributed by Eric Schulte and Dan Davison, and was originally named
+Org-babel.
 
 The following sections describe Org mode's code block handling facilities.
 
@@ -13423,8 +13428,8 @@ The following sections describe Org mode's code block handling facilities.
 {{{cindex(#+BEGIN_SRC)}}}
 
 Live code blocks can be specified with a {{{samp(src)}}} block or
-inline.@footnote{Note that {{{samp(src)}}} blocks may be inserted using Org mode's
-[[Easy Templates]] system}  The structure of a {{{samp(src)}}} block is
+inline.[fn:154] The structure of a {{{samp(src)}}} block is shown in
+the following example:
 
 #+begin_example
 #+NAME: <name>
@@ -13434,11 +13439,12 @@ inline.@footnote{Note that {{{samp(src)}}} blocks may be inserted using Org mode
 #+end_example
 
 The ~#+NAME:~ line is optional, and can be used to name the code
-block.  Live code blocks require that a language be specified on the
-~#+BEGIN_SRC~ line.  Switches and header arguments are optional.
+block. Live code blocks require that a language be specified on the
+~#+BEGIN_SRC~ line. Switches and header arguments are optional.
 {{{cindex(source code\\\, inline)}}}
 
-Live code blocks can also be specified inline using
+Live code blocks can also be specified inline using the following
+syntax:
 
 #+begin_example
 src_<language>@{<body>@}
@@ -13450,31 +13456,39 @@ or
 src_<language>[<header arguments>]@{<body>@}
 #+end_example
 
-#+attr_texinfo: :table-type "table" :indic "@code"
-- <#+NAME: name>
-This line associates a name with the code block.  This is similar to the
-~#+TBLNAME: NAME~ lines that can be used to name tables in Org mode
-files.  Referencing the name of a code block makes it possible to evaluate
-the block from other places in the file, from other files, or from Org mode
-table formulas (see [[The spreadsheet]]).  Names are assumed to be unique
-and the behavior of Org mode when two or more blocks share the same name is
-undefined.
-{{{cindex(#+NAME)}}}
-- <language>
-The language of the code in the block (see [[Languages]]).
-{{{cindex(source code\\\, language)}}}
-- <switches>
-Optional switches control code block export (see the discussion of switches in
-[[Literal examples]])
-{{{cindex(source code\\\, switches)}}}
-- <header arguments>
-Optional header arguments control many aspects of evaluation, export and
-tangling of code blocks (see [[Header arguments]]).
-Header arguments can also be set on a per-buffer or per-subtree
-basis using properties.
-- source code, header arguments
-- <body>
-Source code in the specified language.
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- ~<#+NAME: name>~ ::
+  {{{cindex(#+NAME)}}}
+
+  This line associates a name with the code block. This is similar to
+  the ~#+TBLNAME: NAME~ lines that can be used to name tables in Org
+  mode files. Referencing the name of a code block makes it possible to
+  evaluate the block from other places in the file, from other files, or
+  from Org mode table formulas (see [[The spreadsheet]]). Names are assumed
+  to be unique and the behavior of Org mode when two or more blocks
+  share the same name is undefined.
+
+- ~<language>~ ::
+  {{{cindex(source code\\\, language)}}}
+
+  The language of the code in the block (see [[Languages]]).
+
+- ~<switches>~ ::
+  {{{cindex(source code\\\, switches)}}}
+
+  Optional switches control code block export (see the discussion of
+  switches in [[Literal examples]]).
+
+- ~<header arguments>~ ::
+  {{{cindex(source code\\\, header arguments)}}}
+
+  Optional header arguments control many aspects of evaluation, export
+  and tangling of code blocks (see [[Header arguments]]). Header arguments
+  can also be set on a per-buffer or per-subtree basis using properties.
+
+- ~<body>~ ::
+
+  Source code in the specified language.
 
 
 ** Editing source code
@@ -13483,36 +13497,44 @@ Source code in the specified language.
    :END:
 {{{cindex(code block\\\, editing)}}}
 {{{cindex(source code\\\, editing)}}}
-
 {{{kindex(C-c ')}}}
-Use {{{kbd(C-c ')}}} to edit the current code block.  This brings up
-a language major-mode edit buffer containing the body of the code
-block.  Saving this buffer will write the new contents back to the Org
-buffer.  Use {{{kbd(C-c ')}}} again to exit.
 
-The ~org-src-mode~ minor mode will be active in the edit buffer.  The
+Use {{{kbd(C-c ')}}} to edit the current code block. This brings up a
+language major-mode edit buffer containing the body of the code block.
+Saving this buffer will write the new contents back to the Org buffer.
+Use {{{kbd(C-c ')}}} again to exit.
+
+The ~org-src-mode~ minor mode will be active in the edit buffer. The
 following variables can be used to configure the behavior of the edit
-buffer.  See also the customization group ~org-edit-structure~ for
+buffer. See also the customization group ~org-edit-structure~ for
 further configuration options.
 
-#+attr_texinfo: :table-type "table" :indic "@code"
-- org-src-lang-modes
-If an Emacs major-mode named ~<lang>-mode~ exists, where
-~<lang>~ is the language named in the header line of the code block,
-then the edit buffer will be placed in that major-mode.  This variable
-can be used to map arbitrary language names to existing major modes.
-- org-src-window-setup
-Controls the way Emacs windows are rearranged when the edit buffer is created.
-- org-src-preserve-indentation
-This variable is especially useful for tangling languages such as
-Python, in which whitespace indentation in the output is critical.
-- org-src-ask-before-returning-to-edit-buffer
-By default, Org will ask before returning to an open edit buffer.  Set this
-variable to nil to switch without asking.
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- ~org-src-lang-modes~ ::
+
+  If an Emacs major-mode named ~<lang>-mode~ exists, where
+  ~<lang>~ is the language named in the header line of the code block,
+  then the edit buffer will be placed in that major-mode.  This variable
+  can be used to map arbitrary language names to existing major modes.
+
+- ~org-src-window-setup~ ::
+
+  Controls the way Emacs windows are rearranged when the edit buffer is
+  created.
+
+- ~org-src-preserve-indentation~ ::
+
+  This variable is especially useful for tangling languages such as
+  Python, in which whitespace indentation in the output is meaningful.
+
+- ~org-src-ask-before-returning-to-edit-buffer~ ::
+
+  By default, Org will ask before returning to an open edit buffer.  Set this
+  variable to nil to switch without asking.
 
 
-To turn on native code fontification in the /Org/ buffer, configure the
-variable ~org-src-fontify-natively~.
+To turn on native code fontification in the Org mode buffer, configure
+the variable ~org-src-fontify-natively~.
 
 ** Exporting code blocks
    :PROPERTIES:
@@ -13521,39 +13543,46 @@ variable ~org-src-fontify-natively~.
 {{{cindex(code block\\\, exporting)}}}
 {{{cindex(source code\\\, exporting)}}}
 
-It is possible to export the /code/ of code blocks, the /results/
-of code block evaluation, /both/ the code and the results of code block
-evaluation, or /none/.  For most languages, the default exports code.
-However, for some languages (e.g.@: ~ditaa~) the default exports the
-results of code block evaluation.  For information on exporting code block
-bodies, see [[Literal examples]].
+It is possible to export the /code/ of code blocks, the /results/ of
+code block evaluation, /both/ the code and the results of code block
+evaluation, or /none/. For most languages, the default exports code.
+However, for some languages (e.g., ~ditaa~) the default exports the
+results of code block evaluation. For information on exporting code
+block bodies, see [[Literal examples]].
 
 The ~:exports~ header argument can be used to specify export
 behavior:
 
-@subsubheading Header arguments:
-#+attr_texinfo: :table-type "table" :indic "@code"
-- :exports code
-The default in most languages.  The body of the code block is exported, as
-described in [[Literal examples]].
-- :exports results
-The code block will be evaluated and the results will be placed in the
-Org mode buffer for export, either updating previous results of the code
-block located anywhere in the buffer or, if no previous results exist,
-placing the results immediately after the code block.  The body of the code
-block will not be exported.
-- :exports both
-Both the code block and its results will be exported.
-- :exports none
-Neither the code block nor its results will be exported.
+*** Header arguments 
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- ~:exports code~ ::
+
+  The default in most languages.  The body of the code block is exported, as
+  described in [[Literal examples]].
+
+- ~:exports results~ ::
+
+  The code block will be evaluated and the results will be placed in the
+  Org mode buffer for export, either updating previous results of the
+  code block located anywhere in the buffer or, if no previous results
+  exist, placing the results immediately after the code block. The body
+  of the code block will not be exported.
+
+- ~:exports both~ ::
+
+  Both the code block and its results will be exported.
+
+- ~:exports none~ ::
+
+  Neither the code block nor its results will be exported.
 
 
 It is possible to inhibit the evaluation of code blocks during export.
-Setting the ~org-export-babel-evaluate~ variable to ~nil~ will
-ensure that no code blocks are evaluated as part of the export process.  This
-can be useful in situations where potentially untrusted Org mode files are
-exported in an automated fashion, for example when Org mode is used as the
-markup language for a wiki.
+Setting the ~org-export-babel-evaluate~ variable to ~nil~ will ensure
+that no code blocks are evaluated as part of the export process. This
+can be useful in situations where potentially untrusted Org mode files
+are exported in an automated fashion, for example when Org mode is
+used as the markup language for a wiki.
 
 ** Extracting source code
    :PROPERTIES:
@@ -13563,41 +13592,52 @@ markup language for a wiki.
 {{{cindex(source code\\\, extracting)}}}
 {{{cindex(code block\\\, extracting source code)}}}
 
-Creating pure source code files by extracting code from source blocks is
-referred to as ``tangling''---a term adopted from the literate programming
-community.  During ``tangling'' of code blocks their bodies are expanded
-using ~org-babel-expand-src-block~ which can expand both variable and
-``noweb'' style references  (see [[Noweb reference syntax]]).
+Creating pure source code files by extracting code from source blocks
+is referred to as /tangling/---a term adopted from the literate
+programming community. During tangling of code blocks their bodies are
+expanded using ~org-babel-expand-src-block~ which can expand both
+variable and ``noweb'' style references (see [[Noweb reference syntax]]).
 
-@subsubheading Header arguments
-#+attr_texinfo: :table-type "table" :indic "@code"
-- :tangle no
-The default.  The code block is not included in the tangled output.
-- :tangle yes
-Include the code block in the tangled output.  The output file name is the
-name of the org file with the extension {{{samp(.org)}}} replaced by the extension
-for the block language.
-- :tangle filename
-Include the code block in the tangled output to file {{{samp(filename)}}}.
+*** Header arguments
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- ~:tangle no~ ::
 
+  The default.  The code block is not included in the tangled output.
 
-{{{kindex( C-c C-v t)}}}
-@subsubheading Functions
-#+attr_texinfo: :table-type "table" :indic "@code"
-- org-babel-tangle
-Tangle the current file.  Bound to {{{kbd(C-c C-v t)}}}.
+- ~:tangle yes~ ::
 
-With prefix argument only tangle the current code block.
-- org-babel-tangle-file
-Choose a file to tangle.  Bound to {{{kbd(C-c C-v f)}}}.
+  Include the code block in the tangled output. The output file name is
+  the name of the org file with the extension {{{samp(.org)}}} replaced
+  by the extension for the block language.
+
+- ~:tangle filename~ ::
+
+  Include the code block in the tangled output to file
+  {{{samp(filename)}}}.
 
 
-@subsubheading Hooks
-#+attr_texinfo: :table-type "table" :indic "@code"
-- org-babel-post-tangle-hook
-This hook is run from within code files tangled by ~org-babel-tangle~.
-Example applications could include post-processing, compilation or evaluation
-of tangled code files.
+*** Functions
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- ~org-babel-tangle~ ::
+  {{{kindex(C-c C-v t)}}}
+
+  Tangle the current file.  Bound to {{{kbd(C-c C-v t)}}}.
+
+  With a prefix argument only tangle the current code block.
+
+- ~org-babel-tangle-file~ ::
+  {{{kindex(C-c C-v f)}}}
+
+  Choose a file to tangle.  Bound to {{{kbd(C-c C-v f)}}}.
+
+
+*** Hooks
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- ~org-babel-post-tangle-hook~ ::
+
+  This hook is run from within code files tangled by ~org-babel-tangle~.
+  Example applications could include post-processing, compilation or
+  evaluation of tangled code files.
 
 
 ** Evaluating code blocks
@@ -13608,73 +13648,82 @@ of tangled code files.
 {{{cindex(source code\\\, evaluating)}}}
 {{{cindex(#+RESULTS)}}}
 
-Code blocks can be evaluated@footnote{Whenever code is evaluated there is a
-potential for that code to do harm.  Org mode provides safeguards to ensure
-that code is only evaluated after explicit confirmation from the user.  For
-information on these safeguards (and on how to disable them) see [[Code
-evaluation security]].} and the results of evaluation optionally placed in the
-Org mode buffer.  The results of evaluation are placed following a line that
-begins by default with ~#+RESULTS~ and optionally a cache identifier
-and/or the name of the evaluated code block.  The default value of
-~#+RESULTS~ can be changed with the customizable variable
-~org-babel-results-keyword~.
+Code blocks can be evaluated and the results of evaluation optionally
+placed in the Org mode buffer.[fn:155] The results of evaluation are
+placed following a line that begins by default with ~#+RESULTS~ and
+optionally a cache identifier and/or the name of the evaluated code
+block. The default value of ~#+RESULTS~ can be changed with the
+customizable variable ~org-babel-results-keyword~.
 
-By default, the evaluation facility is only enabled for Lisp code blocks
-specified as ~emacs-lisp~.  However, source code blocks in many languages
-can be evaluated within Org mode (see [[Languages]] for a list of supported
-languages and [[Structure of code blocks]] for information on the syntax
-used to define a code block).
+By default, the evaluation facility is only enabled for Lisp code
+blocks specified as ~emacs-lisp~. However, source code blocks in many
+languages can be evaluated within Org mode (see [[Languages]] for a list
+of supported languages and [[Structure of code blocks]] for information on
+the syntax used to define a code block).
 
 {{{kindex(C-c C-c)}}}
-There are a number of ways to evaluate code blocks.  The simplest is to press
-{{{kbd(C-c C-c)}}} or {{{kbd(C-c C-v e)}}} with the point on a code block@footnote{The
-~org-babel-no-eval-on-ctrl-c-ctrl-c~ variable can be used to remove code
-evaluation from the {{{kbd(C-c C-c)}}} key binding.}.  This will call the
-~org-babel-execute-src-block~ function to evaluate the block and insert
-its results into the Org mode buffer.
+{{{kindex(C-c C-v e)}}}
+
+There are a number of ways to evaluate code blocks. The simplest is to
+press {{{kbd(C-c C-c)}}} or {{{kbd(C-c C-v e)}}} with the point on a
+code block.[fn:156] This will call the ~org-babel-execute-src-block~
+function to evaluate the block and insert its results into the Org
+mode buffer.
+
 {{{cindex(#+CALL)}}}
 
-It is also possible to evaluate named code blocks from anywhere in an Org
-mode buffer or an Org mode table.  Live code blocks located in the current
-Org mode buffer or in the ``Library of Babel'' (see [[Library of Babel]])
-can be executed.  Named code blocks can be executed with a separate
-~#+CALL:~ line or inline within a block of text.
+It is also possible to evaluate named code blocks from anywhere in an
+Org mode buffer or an Org mode table. Live code blocks located in the
+current Org mode buffer or in the ``Library of Babel'' (see [[Library of
+Babel]]) can be executed. Named code blocks can be executed with a
+separate ~#+CALL:~ line or inline within a block of text.
 
-The syntax of the ~#+CALL:~ line is
+The syntax of the ~#+CALL:~ line is:
 
 #+begin_example
 #+CALL: <name>(<arguments>)
 #+CALL: <name>[<inside header arguments>](<arguments>) <end header arguments>
 #+end_example
 
-The syntax for inline evaluation of named code blocks is
+The syntax for inline evaluation of named code blocks is:
 
 #+begin_example
 ... call_<name>(<arguments>) ...
 ... call_<name>[<inside header arguments>](<arguments>)[<end header arguments>] ...
 #+end_example
 
-#+attr_texinfo: :table-type "table" :indic "@code"
-- <name>
-The name of the code block to be evaluated (see [[Structure of code blocks]]).
-- <arguments>
-Arguments specified in this section will be passed to the code block.  These
-arguments use standard function call syntax, rather than
-header argument syntax.  For example, a ~#+CALL:~ line that passes the
-number four to a code block named ~double~, which declares the header
-argument ~:var n=2~, would be written as ~#+CALL: double(n=4)~.
-- <inside header arguments>
-Inside header arguments are passed through and applied to the named code
-block.  These arguments use header argument syntax rather than standard
-function call syntax.  Inside header arguments affect how the code block is
-evaluated.  For example, ~[:results output]~ will collect the results of
-everything printed to ~STDOUT~ during execution of the code block.
-- <end header arguments>
-End header arguments are applied to the calling instance and do not affect
-evaluation of the named code block.  They affect how the results are
-incorporated into the Org mode buffer and how the call line is exported.  For
-example, ~:results html~ will insert the results of the call line
-evaluation in the Org buffer, wrapped in a ~BEGIN_HTML:~ block.
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- ~<name>~ ::
+
+  The name of the code block to be evaluated (see [[Structure of code
+  blocks]]).
+
+- ~<arguments>~ ::
+
+  Arguments specified in this section will be passed to the code block.
+  These arguments use standard function call syntax, rather than header
+  argument syntax. For example, a ~#+CALL:~ line that passes the number
+  four to a code block named ~double~, which declares the header
+  argument ~:var n=2~, would be written as ~#+CALL: double(n=4)~.
+
+- ~<inside header arguments>~ ::
+
+  Inside header arguments are passed through and applied to the named
+  code block. These arguments use header argument syntax rather than
+  standard function call syntax. Inside header arguments affect how the
+  code block is evaluated. For example, ~[:results output]~ will collect
+  the results of everything printed to ~STDOUT~ during execution of the
+  code block.
+
+- ~<end header arguments>~ ::
+
+  End header arguments are applied to the calling instance and do not
+  affect evaluation of the named code block. They affect how the results
+  are incorporated into the Org mode buffer and how the call line is
+  exported. For example, ~:results html~ will insert the results of the
+  call line evaluation in the Org buffer, wrapped in a ~BEGIN_HTML:~
+  block.
+
 
 For more examples of passing header arguments to ~#+CALL:~ lines see
 [[Header arguments in function calls]].
@@ -13688,24 +13737,26 @@ For more examples of passing header arguments to ~#+CALL:~ lines see
 {{{cindex(source code\\\, library)}}}
 {{{cindex(code block\\\, library)}}}
 
-The ``Library of Babel'' consists of code blocks that can be called from any
-Org mode file.  Code blocks defined in the ``Library of Babel'' can be called
-remotely as if they were in the current Org mode buffer (see [[Evaluating
-code blocks]] for information on the syntax of remote code block evaluation).
+The ``Library of Babel'' consists of code blocks that can be called
+from any Org mode file. Code blocks defined in the ``Library of
+Babel'' can be called remotely as if they were in the current Org mode
+buffer (see [[Evaluating code blocks]] for information on the syntax of
+remote code block evaluation).
 
 
-The central repository of code blocks in the ``Library of Babel'' is housed
-in an Org mode file located in the {{{samp(contrib)}}} directory of Org mode.
+The central repository of code blocks in the ``Library of Babel'' is
+housed in an Org mode file located in the {{{samp(contrib)}}}
+directory of Org mode.
 
 Users can add code blocks they believe to be generally useful to their
-``Library of Babel.''  The code blocks can be stored in any Org mode file and
-then loaded into the library with ~org-babel-lob-ingest~.
-
+``Library of Babel.'' The code blocks can be stored in any Org mode
+file and then loaded into the library with ~org-babel-lob-ingest~.
 
 {{{kindex(C-c C-v i)}}}
-Code blocks located in any Org mode file can be loaded into the ``Library of
-Babel'' with the ~org-babel-lob-ingest~ function, bound to {{{kbd(C-c C-v
-i)}}}.
+
+Code blocks located in any Org mode file can be loaded into the
+``Library of Babel'' with the ~org-babel-lob-ingest~ function, bound
+to {{{kbd(C-c C-v i)}}}.
 
 ** Languages
    :PROPERTIES:
@@ -13717,42 +13768,40 @@ i)}}}.
 
 Code blocks in the following languages are supported.
 
-@multitable @columnfractions 0.28 0.3 0.22 0.2
-- *Language* @tab *Identifier* @tab *Language* @tab *Identifier*
-- Asymptote @tab asymptote @tab Awk @tab awk
-- Emacs Calc @tab calc @tab C @tab C
-- C++ @tab C++ @tab Clojure @tab clojure
-- CSS @tab css @tab ditaa @tab ditaa
-- Graphviz @tab dot @tab Emacs Lisp @tab emacs-lisp
-- gnuplot @tab gnuplot @tab Haskell @tab haskell
-- Java @tab java @tab @tab
-- Javascript @tab js @tab LaTeX @tab latex
-- Ledger @tab ledger @tab Lisp @tab lisp
-- Lilypond @tab lilypond @tab MATLAB @tab matlab
-- Mscgen @tab mscgen @tab Objective Caml @tab ocaml
-- Octave @tab octave @tab Org mode @tab org
-- Oz @tab oz @tab Perl @tab perl
-- Plantuml @tab plantuml @tab Python @tab python
-- R @tab R @tab Ruby @tab ruby
-- Sass @tab sass @tab Scheme @tab scheme
-- GNU Screen @tab screen @tab shell @tab sh
-- SQL @tab sql @tab SQLite @tab sqlite
-@end multitable
+| *Language* | *Identifier* |   | *Language*     | *Identifier* |
+|------------+--------------+---+----------------+--------------|
+| Asymptote  | asymptote    |   | Awk            | awk          |
+| Emacs Calc | calc         |   | C              | C            |
+| C++        | C++          |   | Clojure        | clojure      |
+| CSS        | css          |   | ditaa          | ditaa        |
+| Graphviz   | dot          |   | Emacs Lisp     | emacs-lisp   |
+| gnuplot    | gnuplot      |   | Haskell        | haskell      |
+| Java       | java         |   |                |              |
+| Javascript | js           |   | LaTeX          | latex        |
+| Ledger     | ledger       |   | Lisp           | lisp         |
+| Lilypond   | lilypond     |   | MATLAB         | matlab       |
+| Mscgen     | mscgen       |   | Objective Caml | ocaml        |
+| Octave     | octave       |   | Org mode       | org          |
+| Oz         | oz           |   | Perl           | perl         |
+| Plantuml   | plantuml     |   | Python         | python       |
+| R          | R            |   | Ruby           | ruby         |
+| Sass       | sass         |   | Scheme         | scheme       |
+| GNU Screen | screen       |   | shell          | sh           |
+| SQL        | sql          |   | SQLite         | sqlite       |
 
-Language-specific documentation is available for some languages.  If
+
+Language-specific documentation is available for some languages. If
 available, it can be found at
-@uref{http://orgmode.org/worg/org-contrib/babel/languages.html}.
+[[http://orgmode.org/worg/org-contrib/babel/languages.html]].
 
-The ~org-babel-load-languages~ controls which languages are enabled for
-evaluation (by default only ~emacs-lisp~ is enabled).  This variable can
-be set using the customization interface or by adding code like the following
-to your emacs configuration.
+The ~org-babel-load-languages~ controls which languages are enabled
+for evaluation (by default only ~emacs-lisp~ is enabled). This
+variable can be set using the customization interface or by adding
+code like the following example, disables ~emacs-lisp~ evaluation and
+enables evaluation of ~R~ code blocks, to your emacs configuration:
 
-@quotation
-The following disables ~emacs-lisp~ evaluation and enables evaluation of
-~R~ code blocks.
-@end quotation
-
+#+header: :eval no
+#+header: :exports code
 #+begin_src emacs-lisp
 (org-babel-do-load-languages
  'org-babel-load-languages
@@ -13760,13 +13809,14 @@ The following disables ~emacs-lisp~ evaluation and enables evaluation of
    (R . t)))
 #+end_src
 
-It is also possible to enable support for a language by loading the related
-elisp file with ~require~.
+It is also possible to enable support for a language by loading the
+related elisp file with ~require~.
 
-@quotation
-The following adds support for evaluating ~clojure~ code blocks.
-@end quotation
+{{{noindent}}} The following example adds support for evaluating
+~clojure~ code blocks:
 
+#+header: :eval no
+#+header: :exports code
 #+begin_src emacs-lisp
 (require 'ob-clojure)
 #+end_src
@@ -13778,7 +13828,7 @@ The following adds support for evaluating ~clojure~ code blocks.
 {{{cindex(code block\\\, header arguments)}}}
 {{{cindex(source code\\\, block header arguments)}}}
 
-Code block functionality can be configured with header arguments.  This
+Code block functionality can be configured with header arguments. This
 section provides an overview of the use of header arguments, and then
 describes each header argument in detail.
 
@@ -13787,16 +13837,17 @@ describes each header argument in detail.
     :DESCRIPTION: Different ways to set header arguments
     :END:
 
-The values of header arguments can be set in six different ways, each more
-specific (and having higher priority) than the last.
+The values of header arguments can be set in six different ways, each
+more specific (and having higher priority) than the last.
 
 **** System-wide header arguments
      :PROPERTIES:
      :DESCRIPTION: Set global default values
      :END:
 {{{vindex(org-babel-default-header-args)}}}
-System-wide values of header arguments can be specified by customizing the
-~org-babel-default-header-args~ variable:
+
+System-wide values of header arguments can be specified by customizing
+the ~org-babel-default-header-args~ variable:
 
 #+begin_example
 :session    => "none"
@@ -13820,37 +13871,40 @@ System-wide values of header arguments can be specified by customizing the
 #+comment    Default arguments to use when evaluating a code block.
 #+comment  #+end_example
 
-For example, the following example could be used to set the default value of
-~:noweb~ header arguments to ~yes~.  This would have the effect of
-expanding ~:noweb~ references by default when evaluating source code
-blocks.
+For example, the following example could be used to set the default
+value of ~:noweb~ header arguments to ~yes~. This would have the
+effect of expanding ~:noweb~ references by default when evaluating
+source code blocks.
 
+#+header: :eval no
+#+header: :exports code
 #+begin_src emacs-lisp
-(setq org-babel-default-header-args
-(cons '(:noweb . "yes")
-(assq-delete-all :noweb org-babel-default-header-args)))
+  (setq org-babel-default-header-args
+        (cons '(:noweb . "yes")
+              (assq-delete-all :noweb org-babel-default-header-args)))
 #+end_src
-
 
 **** Language-specific header arguments
      :PROPERTIES:
      :DESCRIPTION: Set default values by language
      :END:
-Each language can define its own set of default header arguments.  See the
-language-specific documentation available online at
-@uref{http://orgmode.org/worg/org-contrib/babel}.
+
+Each language can define its own set of default header arguments. See
+the language-specific documentation available online at
+[[http://orgmode.org/worg/org-contrib/babel]].
 
 **** Buffer-wide header arguments
      :PROPERTIES:
      :DESCRIPTION: Set default values for a specific buffer
      :END:
-Buffer-wide header arguments may be specified as properties through the use
-of ~#+PROPERTY:~ lines placed anywhere in an Org mode file (see
-[[Property syntax]]).
 
-For example the following would set ~session~ to ~*R*~, and
-~results~ to ~silent~ for every code block in the buffer, ensuring
-that all execution took place in the same session, and no results would be
+Buffer-wide header arguments may be specified as properties through
+the use of ~#+PROPERTY:~ lines placed anywhere in an Org mode file
+(see [[Property syntax]]).
+
+For example the following would set ~session~ to ~*R*~, and ~results~
+to ~silent~ for every code block in the buffer, ensuring that all
+execution took place in the same session, and no results would be
 inserted into the buffer.
 
 #+begin_example
@@ -13862,49 +13916,54 @@ inserted into the buffer.
      :PROPERTIES:
      :DESCRIPTION: Set default values for a buffer or heading
      :END:
+
 Header arguments are also read from Org mode properties (see [[Property
-syntax]]), which can be set on a buffer-wide or per-heading basis.  An example
-of setting a header argument for all code blocks in a buffer is
+syntax]]), which can be set on a buffer-wide or per-heading basis. An
+example of setting a header argument for all code blocks in a buffer
+is as follows:
 
 #+begin_example
 ,#+PROPERTY: tangle yes
 #+end_example
 
 {{{vindex(org-use-property-inheritance)}}}
-When properties are used to set default header arguments, they are looked up
-with inheritance, regardless of the value of
-~org-use-property-inheritance~.  In the following example the value of
-the ~:cache~ header argument will default to ~yes~ in all code
-blocks in the subtree rooted at the following heading:
+
+When properties are used to set default header arguments, they are
+looked up with inheritance, regardless of the value of
+~org-use-property-inheritance~. In the following example the value of
+the ~:cache~ header argument will default to ~yes~ in all code blocks
+in the subtree rooted at the following heading:
 
 #+begin_example
 ,* outline header
-:PROPERTIES:
-:cache:    yes
-:END:
+,:PROPERTIES:
+,:cache:    yes
+,:END:
 #+end_example
 
 {{{kindex(C-c C-x p)}}}
 {{{vindex(org-babel-default-header-args)}}}
+
 Properties defined in this way override the properties set in
-~org-babel-default-header-args~.  It is convenient to use the
-~org-set-property~ function bound to {{{kbd(C-c C-x p)}}} to set properties
-in Org mode documents.
+~org-babel-default-header-args~. It is convenient to use the
+~org-set-property~ function bound to {{{kbd(C-c C-x p)}}} to set
+properties in Org mode documents.
 
 **** Code block specific header arguments
      :PROPERTIES:
      :DESCRIPTION: The most common way to set values
      :END:
+
 The most common way to assign values to header arguments is at the
-code block level.  This can be done by listing a sequence of header
+code block level. This can be done by listing a sequence of header
 arguments and their values as part of the ~#+BEGIN_SRC~ line.
 Properties set in this way override both the values of
 ~org-babel-default-header-args~ and header arguments specified as
-properties.  In the following example, the ~:results~ header argument
+properties. In the following example, the ~:results~ header argument
 is set to ~silent~, meaning the results of execution will not be
 inserted in the buffer, and the ~:exports~ header argument is set to
-~code~, meaning only the body of the code block will be
-preserved on export to HTML or @LaTeX{}.
+~code~, meaning only the body of the code block will be preserved on
+export to HTML or @LaTeX{}.
 
 #+begin_example
 #+NAME: factorial
@@ -13913,58 +13972,66 @@ fac 0 = 1
 fac n = n * fac (n-1)
 #+END_SRC
 #+end_example
-Similarly, it is possible to set header arguments for inline code blocks
+
+Similarly, it is possible to set header arguments for inline code blocks:
 
 #+begin_example
 src_haskell[:exports both]@{fac 5@}
 #+end_example
 
-Code block header arguments can span multiple lines using ~#+HEADER:~ or
-~#+HEADERS:~ lines preceding a code block or nested between the
+Code block header arguments can span multiple lines using ~#+HEADER:~
+or ~#+HEADERS:~ lines preceding a code block or nested between the
 ~#+NAME:~ line and the ~#+BEGIN_SRC~ line of a named code block.
+
 {{{cindex(#+HEADER:)}}}
 {{{cindex(#+HEADERS:)}}}
 
-Multi-line header arguments on an un-named code block:
-#+begin_example
- #+HEADERS: :var data1=1
- #+BEGIN_SRC emacs-lisp :var data2=2
-   (message "data1:%S, data2:%S" data1 data2)
- #+END_SRC
+This is an example of multi-line header arguments on an un-named code
+block:
 
- #+RESULTS:
- : data1:1, data2:2
+#+begin_example
+,#+HEADERS: :var data1=1
+,#+BEGIN_SRC emacs-lisp :var data2=2
+   (message "data1:%S, data2:%S" data1 data2)
+,#+END_SRC
+
+,#+RESULTS:
+: data1:1, data2:2
 #+end_example
 
-Multi-line header arguments on a named code block:
-#+begin_example
-   #+NAME: named-block
-   #+HEADER: :var data=2
-   #+BEGIN_SRC emacs-lisp
-     (message "data:%S" data)
-   #+END_SRC
+This is an example of multi-line header arguments on a named code block:
 
-   #+RESULTS: named-block
-   : data:2
+#+begin_example
+,#+NAME: named-block
+,#+HEADER: :var data=2
+,#+BEGIN_SRC emacs-lisp
+  (message "data:%S" data)
+,#+END_SRC
+
+,#+RESULTS: named-block
+ : data:2
 #+end_example
 
 **** Header arguments in function calls
      :PROPERTIES:
      :DESCRIPTION: The most specific level
      :END:
-At the most specific level, header arguments for ``Library of Babel'' or
-~#+CALL:~ lines can be set as shown in the two examples below.  For more
-information on the structure of ~#+CALL:~ lines see [[Evaluating code
-blocks]].
 
-The following will apply the ~:exports results~ header argument to the
-evaluation of the ~#+CALL:~ line.
+At the most specific level, header arguments for ``Library of Babel''
+or ~#+CALL:~ lines can be set as shown in the two examples below. For
+more information on the structure of ~#+CALL:~ lines see [[Evaluating
+code blocks]].
+
+The following example will apply the ~:exports results~ header
+argument to the evaluation of the ~#+CALL:~ line:
+
 #+begin_example
 #+CALL: factorial(n=5) :exports results
 #+end_example
 
-The following will apply the ~:session special~ header argument to the
-evaluation of the ~factorial~ code block.
+The following example will apply the ~:session special~ header
+argument to the evaluation of the ~factorial~ code block:
+
 #+begin_example
 #+CALL: factorial[:session special](n=5)
 #+end_example
@@ -13984,175 +14051,170 @@ The following header arguments are defined:
      :DESCRIPTION: Pass arguments to code blocks
      :END:
 The ~:var~ header argument is used to pass arguments to code blocks.
-The specifics of how arguments are included in a code block vary by language;
-these are addressed in the language-specific documentation.  However, the
-syntax used to specify arguments is the same across all languages.  In every
-case, variables require a default value when they are declared.
+The specifics of how arguments are included in a code block vary by
+language; these are addressed in the language-specific documentation.
+However, the syntax used to specify arguments is the same across all
+languages. In every case, variables require a default value when they
+are declared.
 
-The values passed to arguments can either be literal values, references, or
-Emacs Lisp code (see [[var, Emacs Lisp evaluation of variables]]).  References
-include anything in the Org mode file that takes a ~#+NAME:~,
-~#+TBLNAME:~, or ~#+RESULTS:~ line.  This includes tables, lists,
-~#+BEGIN_EXAMPLE~ blocks, other code blocks, and the results of other
-code blocks.
+The values passed to arguments can either be literal values,
+references, or Emacs Lisp code (see [[var, Emacs Lisp evaluation of
+variables]]). References include anything in the Org mode file that
+takes a ~#+NAME:~, ~#+TBLNAME:~, or ~#+RESULTS:~ line. This includes
+tables, lists, ~#+BEGIN_EXAMPLE~ blocks, other code blocks, and the
+results of other code blocks.
 
 Argument values can be indexed in a manner similar to arrays (see [[var,
 Indexable variable values]]).
 
 The following syntax is used to pass arguments to code blocks using the
-~:var~ header argument.
+~:var~ header argument:
 
 #+begin_example
 :var name=assign
 #+end_example
 
-The argument, ~assign~, can either be a literal value, such as a string
-{{{samp("string")}}} or a number {{{samp(9)}}}, or a reference to a table, a list, a
-literal example, another code block (with or without arguments), or the
-results of evaluating another code block.
+The argument, ~assign~, can either be a literal value, such as a
+string {{{samp("string")}}} or a number {{{samp(9)}}}, or a reference
+to a table, a list, a literal example, another code block (with or
+without arguments), or the results of evaluating another code block.
 
 Here are examples of passing values by reference:
 
-#+attr_texinfo: :table-type "table" :indic "@dfn"
+#+attr_texinfo: :table-type "table" :indic "@asis"
 
-- table
-an Org mode table named with either a ~#+NAME:~ or ~#+TBLNAME:~ line
+- a table named with either ~#+NAME:~ or ~#+TBLNAME:~ ::
+
+  #+begin_example
+  #+TBLNAME: example-table
+  | 1 |
+  | 2 |
+  | 3 |
+  | 4 |
+
+  #+NAME: table-length
+  #+BEGIN_SRC emacs-lisp :var table=example-table
+  (length table)
+  #+END_SRC
+
+  #+RESULTS: table-length
+  : 4
+  #+end_example
+
+- a simple list named with ~#+NAME:~ :: 
+
+  #+begin_example
+  #+NAME: example-list
+    - simple
+      - not
+      - nested
+    - list
+
+  #+BEGIN_SRC emacs-lisp :var x=example-list
+    (print x)
+  #+END_SRC
+
+  #+RESULTS:
+  | simple | list |
+  #+end_example
+
+  Note that nesting is not carried through to the source code block.
+
+- a named code block without arguments, optionally followed by parentheses ::
+
+  #+begin_example
+  #+BEGIN_SRC emacs-lisp :var length=table-length()
+  (* 2 length)
+  #+END_SRC
+
+  #+RESULTS:
+  : 8
+  #+end_example
+
+- a named code block with arguments ::
+
+  #+begin_example
+  #+NAME: double
+  #+BEGIN_SRC emacs-lisp :var input=8
+  (* 2 input)
+  #+END_SRC
+
+  #+RESULTS: double
+  : 16
+
+  #+NAME: squared
+  #+BEGIN_SRC emacs-lisp :var input=double(input=1)
+  (* input input)
+  #+END_SRC
+
+  #+RESULTS: squared
+  : 4
+  #+end_example
+
+- a literal example block ::
+
+  #+begin_example
+  ,#+NAME: literal-example
+  ,#+BEGIN_EXAMPLE
+  A literal example
+  on two lines
+  ,#+END_EXAMPLE
+
+  ,#+NAME: read-literal-example
+  ,#+BEGIN_SRC emacs-lisp :var x=literal-example
+    (concatenate 'string x " for you.")
+  ,#+END_SRC
+
+  ,#+RESULTS: read-literal-example
+   : A literal example
+   : on two lines for you.
+  #+end_example
+
+
+***** Alternate argument syntax
+
+It is also possible to specify arguments in a potentially more natural
+way using the ~#+NAME:~ line of a code block. As in the following
+example, arguments can be packed inside of parentheses, separated by
+commas, following the source name.
+
 #+begin_example
-#+TBLNAME: example-table
-| 1 |
-| 2 |
-| 3 |
-| 4 |
-
-#+NAME: table-length
-#+BEGIN_SRC emacs-lisp :var table=example-table
-(length table)
-#+END_SRC
-
-#+RESULTS: table-length
-: 4
+,#+NAME: double(input=0, x=2)
+,#+BEGIN_SRC emacs-lisp
+ (* 2 (+ input x))
+,#+END_SRC
 #+end_example
 
-- list
-a simple list named with a ~#+NAME:~ line (note that nesting is not
-carried through to the source code block)
+***** Indexable variable values
+
+It is possible to reference portions of variable values by
+/indexing/ into the variables. Indexes are 0 based with negative
+values counting back from the end. If an index is separated by commas
+then each subsequent section will index into the next deepest nesting
+or dimension of the value. Note that this indexing occurs /before/
+other table related header arguments like ~:hlines~, ~:colnames~, and
+~:rownames~ are applied. The following example assigns the last cell
+of the first row the table ~example-table~ to the variable ~data~:
 
 #+begin_example
-#+NAME: example-list
-  - simple
-    - not
-    - nested
-  - list
-
-#+BEGIN_SRC emacs-lisp :var x=example-list
-  (print x)
-#+END_SRC
-
-#+RESULTS:
-| simple | list |
-#+end_example
-
-- code block without arguments
-a code block name (from the example above), as assigned by ~#+NAME:~,
-optionally followed by parentheses
-
-#+begin_example
-#+BEGIN_SRC emacs-lisp :var length=table-length()
-(* 2 length)
-#+END_SRC
-
-#+RESULTS:
-: 8
-#+end_example
-
-- code block with arguments
-a code block name, as assigned by ~#+NAME:~, followed by parentheses and
-optional arguments passed within the parentheses following the
-code block name using standard function call syntax
-
-#+begin_example
-#+NAME: double
-#+BEGIN_SRC emacs-lisp :var input=8
-(* 2 input)
-#+END_SRC
-
-#+RESULTS: double
-: 16
-
-#+NAME: squared
-#+BEGIN_SRC emacs-lisp :var input=double(input=1)
-(* input input)
-#+END_SRC
-
-#+RESULTS: squared
-: 4
-#+end_example
-
-- literal example
-a literal example block named with a ~#+NAME:~ line
-
-#+begin_example
-#+NAME: literal-example
-#+BEGIN_EXAMPLE
-A literal example
-on two lines
-#+END_EXAMPLE
-
-#+NAME: read-literal-example
-#+BEGIN_SRC emacs-lisp :var x=literal-example
-  (concatenate 'string x " for you.")
-#+END_SRC
-
-#+RESULTS: read-literal-example
-: A literal example
-: on two lines for you.
-
-#+end_example
-
-
-
-@subsubheading Alternate argument syntax
-It is also possible to specify arguments in a potentially more natural way
-using the ~#+NAME:~ line of a code block.  As in the following
-example, arguments can be packed inside of parentheses, separated by commas,
-following the source name.
-
-#+begin_example
-#+NAME: double(input=0, x=2)
-#+BEGIN_SRC emacs-lisp
-(* 2 (+ input x))
-#+END_SRC
-#+end_example
-
-@subsubheading Indexable variable values
-It is possible to reference portions of variable values by ``indexing'' into
-the variables.  Indexes are 0 based with negative values counting back from
-the end.  If an index is separated by ~,~s then each subsequent section
-will index into the next deepest nesting or dimension of the value.  Note
-that this indexing occurs /before/ other table related header arguments
-like ~:hlines~, ~:colnames~ and ~:rownames~ are applied.  The
-following example assigns the last cell of the first row the table
-~example-table~ to the variable ~data~:
-
-#+begin_example
-#+NAME: example-table
+,#+NAME: example-table
 | 1 | a |
 | 2 | b |
 | 3 | c |
 | 4 | d |
 
-#+BEGIN_SRC emacs-lisp :var data=example-table[0,-1]
+,#+BEGIN_SRC emacs-lisp :var data=example-table[0,-1]
   data
-#+END_SRC
+,#+END_SRC
 
-#+RESULTS:
+,#+RESULTS:
 : a
 #+end_example
 
-Ranges of variable values can be referenced using two integers separated by a
-~:~, in which case the entire inclusive range is referenced.  For
-example the following assigns the middle three rows of ~example-table~
-to ~data~.
+Ranges of variable values can be referenced using two integers
+separated by a ~:~, in which case the entire inclusive range is
+referenced. The following example assigns the middle three rows of
+~example-table~ to ~data~.
 
 #+begin_example
 #+NAME: example-table
@@ -14175,7 +14237,7 @@ to ~data~.
 Additionally, an empty index, or the single character ~*~, are both
 interpreted to mean the entire range and as such are equivalent to
 ~0:-1~, as shown in the following example in which the entire first
-column is referenced.
+column is referenced:
 
 #+begin_example
 #+NAME: example-table
@@ -14192,9 +14254,10 @@ column is referenced.
 | 1 | 2 | 3 | 4 |
 #+end_example
 
-It is possible to index into the results of code blocks as well as tables.
-Any number of dimensions can be indexed.  Dimensions are separated from one
-another by commas, as shown in the following example.
+It is possible to index into the results of code blocks as well as
+tables. Any number of dimensions can be indexed. Dimensions are
+separated from one another by commas, as shown in the following
+example:
 
 #+begin_example
 #+NAME: 3D
@@ -14212,16 +14275,14 @@ another by commas, as shown in the following example.
 | 11 | 14 | 17 |
 #+end_example
 
-@subsubheading Emacs Lisp evaluation of variables
+***** Emacs Lisp evaluation of variables
 
-Emacs lisp code can be used to initialize variable values.  When a variable
-value starts with ~(~, ~[~, ~'~ or ~`~ it will be
-evaluated as Emacs Lisp and the result of the evaluation will be assigned as
-the variable value.  The following example demonstrates use of this
-evaluation to reliably pass the file-name of the Org mode buffer to a code
-block---note that evaluation of header arguments is guaranteed to take place
-in the original Org mode file, while there is no such guarantee for
-evaluation of the code block body.
+Emacs lisp code can be used to initialize variable values. When a
+variable value starts with ~(~, ~[~, ~'~ or ~`~ it will be evaluated
+as Emacs Lisp and the result of the evaluation will be assigned as the
+variable value. The following example demonstrates use of this
+evaluation to reliably pass the file-name of the Org mode buffer to a
+code block:[fn:157]
 
 #+begin_example
 #+BEGIN_SRC sh :var filename=(buffer-file-name) :exports both
@@ -14230,7 +14291,8 @@ evaluation of the code block body.
 #+end_example
 
 Note that values read from tables and lists will not be evaluated as
-Emacs Lisp, as shown in the following example.
+Emacs Lisp, as shown in the following example, which contains a Lisp
+list as the sole table element:
 
 #+begin_example
 #+NAME: table
@@ -14252,153 +14314,203 @@ Emacs Lisp, as shown in the following example.
 There are three classes of ~:results~ header argument.  Only one option
 per class may be supplied per code block.
 
-@itemize @bullet
-- 
-*collection* header arguments specify how the results should be collected
-from the code block
-- 
-*type* header arguments specify what type of result the code block will
-return---which has implications for how they will be inserted into the
-Org mode buffer
-- 
-*handling* header arguments specify how the results of evaluating the code
-block should be handled.
-@end itemize
+#+attr_texinfo: :table-type "table" :indic "@asis"
 
-@subsubheading Collection
-The following options are mutually exclusive, and specify how the results
-should be collected from the code block.
+- Collection ::
 
-@itemize @bullet
-- ~value~
-This is the default.  The result is the value of the last statement in the
-code block.  This header argument places the evaluation in functional
-mode.  Note that in some languages, e.g., Python, use of this result type
-requires that a ~return~ statement be included in the body of the source
-code block.  E.g., ~:results value~.
-- ~output~
-The result is the collection of everything printed to STDOUT during the
-execution of the code block.  This header argument places the
-evaluation in scripting mode.  E.g., ~:results output~.
-@end itemize
+  These header arguments specify how the results should be collected
+  from the code block.
 
-@subsubheading Type
+- Type ::
 
-The following options are mutually exclusive and specify what type of results
-the code block will return.  By default, results are inserted as either a
-table or scalar depending on their value.
+  These header arguments specify what type of result the code block will
+  return---which has implications for how they will be inserted into the
+  Org mode buffer.
 
-@itemize @bullet
-- ~table~, ~vector~
-The results should be interpreted as an Org mode table.  If a single value is
-returned, it will be converted into a table with one row and one column.
-E.g., ~:results value table~.
-- ~list~
-The results should be interpreted as an Org mode list.  If a single scalar
-value is returned it will be converted into a list with only one element.
-- ~scalar~, ~verbatim~
-The results should be interpreted literally---they will not be
-converted into a table.  The results will be inserted into the Org mode
-buffer as quoted text.  E.g., ~:results value verbatim~.
-- ~file~
-The results will be interpreted as the path to a file, and will be inserted
-into the Org mode buffer as a file link.  E.g., ~:results value file~.
-- ~raw~
-The results are interpreted as raw Org mode code and are inserted directly
-into the buffer.  If the results look like a table they will be aligned as
-such by Org mode.  E.g., ~:results value raw~.
-- ~org~
-The results are will be enclosed in a ~BEGIN_SRC org~ block.
-They are not comma-escaped by default but they will be if you hit {{{kbd(TAB)}}}
-in the block and/or if you export the file.  E.g., ~:results value org~.
-- ~html~
-Results are assumed to be HTML and will be enclosed in a ~BEGIN_HTML~
-block.  E.g., ~:results value html~.
-- ~latex~
-Results assumed to be @LaTeX{} and are enclosed in a ~BEGIN_LaTeX~ block.
-E.g., ~:results value latex~.
-- ~code~
-Result are assumed to be parsable code and are enclosed in a code block.
-E.g., ~:results value code~.
-- ~pp~
-The result is converted to pretty-printed code and is enclosed in a code
-block.  This option currently supports Emacs Lisp, Python, and Ruby.  E.g.,
-~:results value pp~.
-- ~drawer~
-The result is wrapped in a RESULTS drawer.  This can be useful for
-inserting ~raw~ or ~org~ syntax results in such a way that their
-extent is known and they can be automatically removed or replaced.
-@end itemize
+- Handling ::
 
-@subsubheading Handling
-The following results options indicate what happens with the
+  These header arguments specify how the results of evaluating the code
+  block should be handled.
+
+
+***** Collection
+
+The following ~:results~ options are mutually exclusive, and specify
+how the results should be collected from the code block.
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+
+- ~value~ ::
+
+  This is the default. The result is the value of the last statement in
+  the code block. This header argument places the evaluation in
+  functional mode. Note that in some languages, e.g., Python, use of
+  this result type requires that a ~return~ statement be included in the
+  body of the source code block.
+
+- ~output~ ::
+
+  The result is the collection of everything printed to STDOUT during
+  the execution of the code block. This header argument places the
+  evaluation in scripting mode.
+
+
+***** Type
+
+The following ~:results~ options are mutually exclusive and specify
+what type of results the code block will return. By default, results
+are inserted as either a table or scalar depending on their value.
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+
+- ~table~, ~vector~ ::
+
+  The results should be interpreted as an Org mode table. If a single
+  value is returned, it will be converted into a table with one row and
+  one column. E.g., ~:results value table~.
+
+- ~scalar~, ~verbatim~ ::
+
+  The results should be interpreted literally---they will not be
+  converted into a table. The results will be inserted into the Org mode
+  buffer as quoted text. E.g., ~:results value verbatim~.
+
+- ~list~ ::
+
+  The results should be interpreted as an Org mode list. If a single
+  scalar value is returned it will be converted into a list with only
+  one element.
+
+- ~file~ ::
+
+  The results will be interpreted as the path to a file, and will be
+  inserted into the Org mode buffer as a file link. E.g., ~:results
+  value file~.
+
+- ~raw~ ::
+
+  The results are interpreted as raw Org mode code and are inserted
+  directly into the buffer. If the results look like a table they will
+  be aligned as such by Org mode. E.g., ~:results value raw~.
+
+- ~org~ ::
+
+  The results are will be enclosed in a ~BEGIN_SRC org~ block. They are
+  not comma-escaped by default but they will be if you hit
+  {{{kbd(TAB)}}} in the block and/or if you export the file. E.g.,
+  ~:results value org~.
+
+- ~html~ ::
+
+  Results are assumed to be HTML and will be enclosed in a ~BEGIN_HTML~
+  block. E.g., ~:results value html~.
+
+- ~latex~ ::
+
+  Results assumed to be @LaTeX{} and are enclosed in a ~BEGIN_LaTeX~
+  block. E.g., ~:results value latex~.
+
+- ~code~ ::
+
+  Result are assumed to be parsable code and are enclosed in a code
+  block. E.g., ~:results value code~.
+
+- ~pp~ ::
+
+  The result is converted to pretty-printed code and is enclosed in a
+  code block. This option currently supports Emacs Lisp, Python, and
+  Ruby. E.g., ~:results value pp~.
+
+- ~drawer~ ::
+
+  The result is wrapped in a RESULTS drawer. This can be useful for
+  inserting ~raw~ or ~org~ syntax results in such a way that their
+  extent is known and they can be automatically removed or replaced.
+
+
+***** Handling
+
+The following ~:results~ options indicate what happens with the
 results once they are collected.
 
-@itemize @bullet
-- ~silent~
-The results will be echoed in the minibuffer but will not be inserted into
-the Org mode buffer.  E.g., ~:results output silent~.
-- ~replace~
-The default value.  Any existing results will be removed, and the new results
-will be inserted into the Org mode buffer in their place.  E.g.,
-~:results output replace~.
-- ~append~
-If there are pre-existing results of the code block then the new results will
-be appended to the existing results.  Otherwise the new results will be
-inserted as with ~replace~.
-- ~prepend~
-If there are pre-existing results of the code block then the new results will
-be prepended to the existing results.  Otherwise the new results will be
-inserted as with ~replace~.
-@end itemize
+#+attr_texinfo: :table-type "table" :indic "@asis"
+
+- ~replace~ ::
+
+  The default value. Any existing results will be removed, and the new
+  results will be inserted into the Org mode buffer in their place.
+  E.g., ~:results output replace~.
+
+- ~append~ ::
+
+  If there are pre-existing results of the code block then the new
+  results will be appended to the existing results. Otherwise the new
+  results will be inserted as with ~replace~.
+
+- ~prepend~ ::
+
+  If there are pre-existing results of the code block then the new
+  results will be prepended to the existing results. Otherwise the new
+  results will be inserted as with ~replace~.
+
+- ~silent~ ::
+
+  The results will be echoed in the minibuffer but will not be inserted
+  into the Org mode buffer. E.g., ~:results output silent~.
+
 
 **** file
      :PROPERTIES:
      :DESCRIPTION: Specify a path for file output
      :END:
 
-The header argument ~:file~ is used to specify an external file in which
-to save code block results.  After code block evaluation an Org mode style
-~[[file:]]~ link (see [[Link format]]) to the file will be inserted
-into the Org mode buffer.  Some languages including R, gnuplot, dot, and
-ditaa provide special handling of the ~:file~ header argument
-automatically wrapping the code block body in the boilerplate code required
-to save output to the specified file.  This is often useful for saving
-graphical output of a code block to the specified file.
+The header argument ~:file~ is used to specify an external file in
+which to save code block results. After code block evaluation an Org
+mode style ~[[file:]]~ link (see [[Link format]]) to the file will be inserted
+into the Org mode buffer. Some languages including R, gnuplot, dot,
+and ditaa provide special handling of the ~:file~ header argument,
+automatically wrapping the code block body in the boilerplate code
+required to save output to the specified file. This is often useful
+for saving graphical output of a code block to the specified file.
 
-The argument to ~:file~ should be either a string specifying the path to
-a file, or a list of two strings in which case the first element of the list
-should be the path to a file and the second a description for the link.
+The argument to ~:file~ should be either a string specifying the path
+to a file, or a list of two strings in which case the first element of
+the list should be the path to a file and the second a description for
+the link.
 
 **** file-desc
      :PROPERTIES:
      :DESCRIPTION: Specify a description for file results
      :END:
+
 The value of the ~:file-desc~ header argument is used to provide a
-description for file code block results which are inserted as Org mode links
-(see [[Link format]]).  If the ~:file-desc~ header argument is given
-with no value the link path will be placed in both the ``link'' and the
-``description'' portion of the Org mode link.
+description for file code block results which are inserted as Org mode
+links (see [[Link format]]). If the ~:file-desc~ header argument is given
+with no value the link path will be placed in both the ``link'' and
+the ``description'' portion of the Org mode link.
 
 **** dir
      :PROPERTIES:
      :DESCRIPTION: Specify the default (possibly remote) directory for code block execution
      :TITLE:    ~:dir~ and remote execution
      :END:
-While the ~:file~ header argument can be used to specify the path to the
-output file, ~:dir~ specifies the default directory during code block
-execution.  If it is absent, then the directory associated with the current
-buffer is used.  In other words, supplying ~:dir path~ temporarily has
-the same effect as changing the current directory with {{{kbd(M-x cd path)}}}, and
-then not supplying ~:dir~.  Under the surface, ~:dir~ simply sets
-the value of the Emacs variable ~default-directory~.
+
+While the ~:file~ header argument can be used to specify the path to
+the output file, ~:dir~ specifies the default directory during code
+block execution. If it is absent, then the directory associated with
+the current buffer is used. In other words, supplying ~:dir path~
+temporarily has the same effect as changing the current directory with
+{{{kbd(M-x cd path)}}}, and then not supplying ~:dir~. Under the
+surface, ~:dir~ simply sets the value of the Emacs variable
+~default-directory~.
 
 When using ~:dir~, you should supply a relative path for file output
-(e.g.@: ~:file myfile.jpg~ or ~:file results/myfile.jpg~) in which
+(e.g., ~:file myfile.jpg~ or ~:file results/myfile.jpg~) in which
 case that path will be interpreted relative to the default directory.
 
-In other words, if you want your plot to go into a folder called {{{file(Work)}}}
-in your home directory, you could use
+In other words, if you want your plot to go into a folder called
+{{{file(Work)}}} in your home directory, you could use a code block
+like the following example:
 
 #+begin_example
 #+BEGIN_SRC R :file myplot.png :dir ~/Work
@@ -14407,9 +14519,10 @@ matplot(matrix(rnorm(100), 10), type="l")
 #+end_example
 
 
-@subsubheading Remote execution
-A directory on a remote machine can be specified using tramp file syntax, in
-which case the code will be evaluated on the remote machine.  An example is
+***** Remote execution
+A directory on a remote machine can be specified using tramp file
+syntax, in which case the code will be evaluated on the remote
+machine. An example is:
 
 #+begin_example
 #+BEGIN_SRC R :file plot.png :dir /dand@@yakuba.princeton.edu:
@@ -14417,10 +14530,10 @@ plot(1:10, main=system("hostname", intern=TRUE))
 #+END_SRC
 #+end_example
 
-Text results will be returned to the local Org mode buffer as usual, and file
-output will be created on the remote machine with relative paths interpreted
-relative to the remote directory.  An Org mode link to the remote file will be
-created.
+Text results will be returned to the local Org mode buffer as usual,
+and file output will be created on the remote machine with relative
+paths interpreted relative to the remote directory. An Org mode link
+to the remote file will be created.
 
 So, in the above example a plot will be created on the remote machine,
 and a link of the following form will be inserted in the org buffer:
@@ -14429,27 +14542,27 @@ and a link of the following form will be inserted in the org buffer:
 [[file:/scp:dand@@yakuba.princeton.edu:/home/dand/plot.png][plot.png]]
 #+end_example
 
-Most of this functionality follows immediately from the fact that ~:dir~
-sets the value of the Emacs variable ~default-directory~, thanks to
-tramp.  Those using XEmacs, or GNU Emacs prior to version 23 may need to
-install tramp separately in order for these features to work correctly.
+Most of this functionality follows immediately from the fact that
+~:dir~ sets the value of the Emacs variable ~default-directory~,
+thanks to tramp. Those using XEmacs, or GNU Emacs prior to version 23
+may need to install tramp separately in order for these features to
+work correctly.
 
-@subsubheading Further points
+***** Further points
 
-@itemize @bullet
-- 
-If ~:dir~ is used in conjunction with ~:session~, although it will
-determine the starting directory for a new session as expected, no attempt is
-currently made to alter the directory associated with an existing session.
-- 
-~:dir~ should typically not be used to create files during export with
-~:exports results~ or ~:exports both~.  The reason is that, in order
-to retain portability of exported material between machines, during export
-links inserted into the buffer will /not/ be expanded against ~default
-directory~.  Therefore, if ~default-directory~ is altered using
-~:dir~, it is probable that the file will be created in a location to
-which the link does not point.
-@end itemize
+- If ~:dir~ is used in conjunction with ~:session~, although it will
+  determine the starting directory for a new session as expected, no
+  attempt is currently made to alter the directory associated with an
+  existing session.
+
+- ~:dir~ should typically not be used to create files during export
+  with ~:exports results~ or ~:exports both~.  The reason is that, in
+  order to retain portability of exported material between machines,
+  during export links inserted into the buffer will /not/ be expanded
+  against ~default directory~.  Therefore, if ~default-directory~ is
+  altered using ~:dir~, it is probable that the file will be created
+  in a location to which the link does not point.
+
 
 **** exports
      :PROPERTIES:
@@ -14458,19 +14571,27 @@ which the link does not point.
 The ~:exports~ header argument specifies what should be included in HTML
 or @LaTeX{} exports of the Org mode file.
 
-@itemize @bullet
-- ~code~
-The default.  The body of code is included into the exported file.  E.g.,
-~:exports code~.
-- ~results~
-The result of evaluating the code is included in the exported file.  E.g.,
-~:exports results~.
-- ~both~
-Both the code and results are included in the exported file.  E.g.,
-~:exports both~.
-- ~none~
-Nothing is included in the exported file.  E.g., ~:exports none~.
-@end itemize
+#+attr_texinfo: :table-type "table" :indic "@asis"
+
+- ~code~ ::
+
+  The default. The body of code is included into the exported file.
+  E.g., ~:exports code~.
+
+- ~results~ ::
+
+  The result of evaluating the code is included in the exported file.
+  E.g., ~:exports results~.
+
+- ~both~ ::
+
+  Both the code and results are included in the exported file. E.g.,
+  ~:exports both~.
+
+- ~none~ ::
+
+  Nothing is included in the exported file.  E.g., ~:exports none~.
+
 
 **** tangle
      :PROPERTIES:
@@ -14480,19 +14601,26 @@ Nothing is included in the exported file.  E.g., ~:exports none~.
 The ~:tangle~ header argument specifies whether or not the code
 block should be included in tangled extraction of source code files.
 
-@itemize @bullet
-- ~tangle~
-The code block is exported to a source code file named after the full path
-(including the directory) and file name (w/o extension) of the Org mode file.
-E.g., ~:tangle yes~.
-- ~no~
-The default.  The code block is not exported to a source code file.
-E.g., ~:tangle no~.
-- other
-Any other string passed to the ~:tangle~ header argument is interpreted
-as a path (directory and file name relative to the directory of the Org mode
-file) to which the block will be exported.  E.g., ~:tangle path~.
-@end itemize
+#+attr_texinfo: :table-type "table" :indic "@asis"
+
+- ~tangle~ ::
+
+  The code block is exported to a source code file named after the full
+  path (including the directory) and file name (w/o extension) of the
+  Org mode file. E.g., ~:tangle yes~.
+
+- ~no~ ::
+
+  The default. The code block is not exported to a source code file.
+  E.g., ~:tangle no~.
+
+- other ::
+
+  Any other string passed to the ~:tangle~ header argument is
+  interpreted as a path (directory and file name relative to the
+  directory of the Org mode file) to which the block will be exported.
+  E.g., ~:tangle path~.
+
 
 **** mkdirp
      :PROPERTIES:
@@ -14500,37 +14628,51 @@ file) to which the block will be exported.  E.g., ~:tangle path~.
      :END:
 
 The ~:mkdirp~ header argument can be used to create parent directories
-of tangled files when missing.  This can be set to ~yes~ to enable
+of tangled files when missing. This can be set to ~yes~ to enable
 directory creation or to ~no~ to inhibit directory creation.
 
 **** comments
      :PROPERTIES:
      :DESCRIPTION: Toggle insertion of comments in tangled code files
      :END:
-By default code blocks are tangled to source-code files without any insertion
-of comments beyond those which may already exist in the body of the code
-block.  The ~:comments~ header argument can be set as follows to control
-the insertion of extra comments into the tangled code file.
 
-@itemize @bullet
-- ~no~
-The default.  No extra comments are inserted during tangling.
-- ~link~
-The code block is wrapped in comments which contain pointers back to the
-original Org file from which the code was tangled.
-- ~yes~
-A synonym for ``link'' to maintain backwards compatibility.
-- ~org~
-Include text from the Org mode file as a comment.
+By default code blocks are tangled to source-code files without any
+insertion of comments beyond those which may already exist in the body
+of the code block. The ~:comments~ header argument can be set as
+follows to control the insertion of extra comments into the tangled
+code file.
 
-The text is picked from the leading context of the tangled code and is
-limited by the nearest headline or source block as the case may be.
-- ~both~
-Turns on both the ``link'' and ``org'' comment options.
-- ~noweb~
-Turns on the ``link'' comment option, and additionally wraps expanded noweb
-references in the code block body in link comments.
-@end itemize
+#+attr_texinfo: :table-type "table" :indic "@asis"
+
+- ~no~ ::
+
+  The default.  No extra comments are inserted during tangling.
+
+- ~link~ ::
+
+  The code block is wrapped in comments which contain pointers back to
+  the original Org file from which the code was tangled.
+
+- ~yes~ ::
+
+  A synonym for ``link'' to maintain backwards compatibility.
+
+- ~org~ ::
+
+  Include text from the Org mode file as a comment.
+
+  The text is picked from the leading context of the tangled code and is
+  limited by the nearest headline or source block as the case may be.
+
+- ~both~ ::
+
+  Turns on both the ``link'' and ``org'' comment options.
+
+- ~noweb~ ::
+
+  Turns on the ``link'' comment option, and additionally wraps expanded
+  noweb references in the code block body in link comments.
+
 
 **** padline
      :PROPERTIES:
@@ -14539,79 +14681,101 @@ references in the code block body in link comments.
 Control in insertion of padding lines around code block bodies in tangled
 code files.  The default value is ~yes~ which results in insertion of
 newlines before and after each tangled code block.  The following arguments
-are accepted.
+are accepted:
 
-@itemize @bullet
-- ~yes~
-Insert newlines before and after each code block body in tangled code files.
-- ~no~
-Do not insert any newline padding in tangled output.
-@end itemize
+#+attr_texinfo: :table-type "table" :indic "@asis"
+
+- ~yes~ ::
+
+  Insert newlines before and after each code block body in tangled code
+  files.
+
+- ~no~ ::
+
+  Do not insert any newline padding in tangled output.
+
 
 **** no-expand
      :PROPERTIES:
      :DESCRIPTION: Turn off variable assignment and noweb expansion during tangling
      :END:
+
 By default, code blocks are expanded with ~org-babel-expand-src-block~
-during tangling.  This has the effect of assigning values to variables
-specified with ~:var~ (see [[var]]), and of replacing ``noweb''
-references (see [[Noweb reference syntax]]) with their targets.  The
-~:no-expand~ header argument can be used to turn off this behavior.
+during tangling. This has the effect of assigning values to variables
+specified with ~:var~ (see [[var]]), and of replacing ``noweb'' references
+(see [[Noweb reference syntax]]) with their targets. The ~:no-expand~
+header argument can be used to turn off this behavior.
 
 **** session
      :PROPERTIES:
      :DESCRIPTION: Preserve state of code evaluation
      :END:
+
 The ~:session~ header argument starts a session for an interpreted
 language where state is preserved.
 
 By default, a session is not started.
 
-A string passed to the ~:session~ header argument will give the session
-a name.  This makes it possible to run concurrent sessions for each
-interpreted language.
+A string passed to the ~:session~ header argument will give the
+session a name. This makes it possible to run concurrent sessions for
+each interpreted language.
 
 **** noweb
      :PROPERTIES:
      :DESCRIPTION: Toggle expansion of noweb references
      :END:
+
 The ~:noweb~ header argument controls expansion of ``noweb'' syntax
 references (see [[Noweb reference syntax]]) when the code block is
-evaluated, tangled, or exported.  The ~:noweb~ header argument can have
-one of the five values: ~no~, ~yes~, ~tangle~, or
-~no-export~ ~strip-export~.
+evaluated, tangled, or exported. The ~:noweb~ header argument can have
+one of the five values: ~no~, ~yes~, ~tangle~, ~no-export~, or
+~strip-export~.
 
-@itemize @bullet
-- ~no~
-The default.  ``Noweb'' syntax references in the body of the code block will
-not be expanded before the code block is evaluated, tangled or exported.
-- ~yes~
-``Noweb'' syntax references in the body of the code block will be
-expanded before the code block is evaluated, tangled or exported.
-- ~tangle~
-``Noweb'' syntax references in the body of the code block will be expanded
-before the code block is tangled.  However, ``noweb'' syntax references will
-not be expanded when the code block is evaluated or exported.
-- ~no-export~
-``Noweb'' syntax references in the body of the code block will be expanded
-before the block is evaluated or tangled.  However, ``noweb'' syntax
-references will not be expanded when the code block is exported.
-- ~strip-export~
-``Noweb'' syntax references in the body of the code block will be expanded
-before the block is evaluated or tangled.  However, ``noweb'' syntax
-references will not be removed when the code block is exported.
-- ~eval~
-``Noweb'' syntax references in the body of the code block will only be
-expanded before the block is evaluated.
-@end itemize
+#+attr_texinfo: :table-type "table" :indic "@asis"
+
+- ~no~ ::
+
+  The default. ``Noweb'' syntax references in the body of the code block
+  will not be expanded before the code block is evaluated, tangled or
+  exported.
+
+- ~yes~ ::
+
+  ``Noweb'' syntax references in the body of the code block will be
+  expanded before the code block is evaluated, tangled or exported.
+
+- ~tangle~ ::
+
+  ``Noweb'' syntax references in the body of the code block will be
+  expanded before the code block is tangled. However, ``noweb'' syntax
+  references will not be expanded when the code block is evaluated or
+  exported.
+
+- ~no-export~ ::
+
+  ``Noweb'' syntax references in the body of the code block will be
+  expanded before the block is evaluated or tangled. However, ``noweb''
+  syntax references will not be expanded when the code block is
+  exported.
+
+- ~strip-export~ ::
+
+  ``Noweb'' syntax references in the body of the code block will be
+  expanded before the block is evaluated or tangled. However, ``noweb''
+  syntax references will not be removed when the code block is exported.
+
+- ~eval~ ::
+
+  ``Noweb'' syntax references in the body of the code block will only be
+  expanded before the block is evaluated.
 
 
-@subsubheading Noweb prefix lines
-Noweb insertions are now placed behind the line prefix of the
-~<<reference>>~.
-This behavior is illustrated in the following example.  Because the
-~<<example>>~ noweb reference appears behind the SQL comment syntax,
-each line of the expanded noweb reference will be commented.
+***** Noweb prefix lines
+
+Noweb insertions are placed behind the line prefix of the
+~<<reference>>~. Because the ~<<example>>~ noweb reference appears
+behind the SQL comment syntax in the following example, each line of
+the expanded noweb reference will be commented.
 
 This code block:
 
@@ -14627,25 +14791,24 @@ expands to:
 -- multi-line body of example
 #+end_example
 
-Note that noweb replacement text that does not contain any newlines will not
-be affected by this change, so it is still possible to use inline noweb
-references.
+Note that noweb replacement text that does not contain any newlines
+will not be inserted behind the line prefix, so it is always possible
+to use inline noweb references.
 
 **** noweb-ref
      :PROPERTIES:
      :DESCRIPTION: Specify block's noweb reference resolution target
      :END:
-When expanding ``noweb'' style references the bodies of all code block with
-/either/ a block name matching the reference name /or/ a
+
+When expanding ``noweb'' style references the bodies of all code block
+with /either/ a block name matching the reference name /or/ a
 ~:noweb-ref~ header argument matching the reference name will be
 concatenated together to form the replacement text.
 
 By setting this header argument at the sub-tree or file level, simple code
 block concatenation may be achieved.  For example, when tangling the
 following Org mode file, the bodies of code blocks will be concatenated into
-the resulting pure code file@footnote{(The example needs property inheritance
-to be turned on for the ~noweb-ref~ property, see [[Property
-inheritance]]).}.
+the resulting pure code file.[fn:158]
 
 #+begin_example
  #+BEGIN_SRC sh :tangle yes :noweb yes :shebang #!/bin/sh
@@ -14677,18 +14840,18 @@ inheritance]]).}.
  #+END_SRC
 #+end_example
 
-The ~:noweb-sep~ (see [[noweb-sep]]) header argument holds the string
-used to separate accumulate noweb references like those above.  By default a
+The ~:noweb-sep~ (see [[noweb-sep]]) header argument holds the string used
+to separate accumulate noweb references like those above. By default a
 newline is used.
 
 **** noweb-sep
      :PROPERTIES:
      :DESCRIPTION: String used to separate noweb references
      :END:
-The ~:noweb-sep~ header argument holds the string used to separate
-accumulate noweb references (see [[noweb-ref]]).  By default a newline is
-used.
 
+The ~:noweb-sep~ header argument holds the string used to separate
+accumulated noweb references (see [[noweb-ref]]). By default a newline is
+used.
 
 **** cache
      :PROPERTIES:
@@ -14696,24 +14859,28 @@ used.
      :END:
 
 The ~:cache~ header argument controls the use of in-buffer caching of
-the results of evaluating code blocks.  It can be used to avoid re-evaluating
-unchanged code blocks.  Note that the ~:cache~ header argument will not
-attempt to cache results when the ~:session~ header argument is used,
-because the results of the code block execution may be stored in the session
-outside of the Org mode buffer.  The ~:cache~ header argument can have
-one of two values: ~yes~ or ~no~.
+the results of evaluating code blocks. It can be used to avoid
+re-evaluating unchanged code blocks. Note that the ~:cache~ header
+argument will not attempt to cache results when the ~:session~ header
+argument is used, because the results of the code block execution may
+be stored in the session outside of the Org mode buffer. The ~:cache~
+header argument can have one of two values: ~yes~ or ~no~.
 
-@itemize @bullet
-- ~no~
-The default.  No caching takes place, and the code block will be evaluated
-every time it is called.
-- ~yes~
-Every time the code block is run a SHA1 hash of the code and arguments
-passed to the block will be generated.  This hash is packed into the
-~#+RESULTS:~ line and will be checked on subsequent
-executions of the code block.  If the code block has not
-changed since the last time it was evaluated, it will not be re-evaluated.
-@end itemize
+#+attr_texinfo: :table-type "table" :indic "@asis"
+
+- ~no~ ::
+
+The default. No caching takes place, and the code block will be
+evaluated every time it is called.
+
+- ~yes~ ::
+
+  Every time the code block is run a SHA1 hash of the code and arguments
+  passed to the block will be generated. This hash is packed into the
+  ~#+RESULTS:~ line and will be checked on subsequent executions of the
+  code block. If the code block has not changed since the last time it
+  was evaluated, it will not be re-evaluated.
+
 
 Code block caches notice if the value of a variable argument
 to the code block has changed.  If this is the case, the cache is
@@ -14743,12 +14910,14 @@ changed since it was last run.
      :PROPERTIES:
      :DESCRIPTION: Delimiter for writing tabular results outside Org
      :END:
+{{{kindex(C-c C-o)}}}
+
 The ~:sep~ header argument can be used to control the delimiter used
-when writing tabular results out to files external to Org mode.  This is used
-either when opening tabular results of a code block by calling the
-~org-open-at-point~ function bound to {{{kbd(C-c C-o)}}} on the code block,
-or when writing code block results to an external file (see [[file]])
-header argument.
+when writing tabular results out to files external to Org mode. This
+is used either when opening tabular results of a code block by calling
+the ~org-open-at-point~ function bound to {{{kbd(C-c C-o)}}} on the
+code block, or when writing code block results to an external file
+(see [[file]]) header argument.
 
 By default, when ~:sep~ is not specified output tables are tab
 delimited.
@@ -14757,109 +14926,117 @@ delimited.
      :PROPERTIES:
      :DESCRIPTION: Handle horizontal lines in tables
      :END:
-Tables are frequently represented with one or more horizontal lines, or
-hlines.  The ~:hlines~ argument to a code block accepts the
-values ~yes~ or ~no~, with a default value of ~no~.
 
-@itemize @bullet
-- ~no~
-Strips horizontal lines from the input table.  In most languages this is the
-desired effect because an ~hline~ symbol is interpreted as an unbound
-variable and raises an error.  Setting ~:hlines no~ or relying on the
-default value yields the following results.
+Tables are frequently represented with one or more horizontal lines,
+or hlines. The ~:hlines~ argument to a code block accepts the values
+~yes~ or ~no~, with a default value of ~no~.
 
-#+begin_example
-#+TBLNAME: many-cols
-| a | b | c |
-|---+---+---|
-| d | e | f |
-|---+---+---|
-| g | h | i |
+#+attr_texinfo: :table-type "table" :indic "@asis"
 
-#+NAME: echo-table
-#+BEGIN_SRC python :var tab=many-cols
-  return tab
-#+END_SRC
+- ~no~ ::
 
-#+RESULTS: echo-table
-| a | b | c |
-| d | e | f |
-| g | h | i |
-#+end_example
+  Strips horizontal lines from the input table. In most languages this
+  is the desired effect because an ~hline~ symbol is interpreted as an
+  unbound variable and raises an error. Setting ~:hlines no~ or relying
+  on the default value yields the following results.
 
-- ~yes~
-Leaves hlines in the table.  Setting ~:hlines yes~ has this effect.
+  #+begin_example
+  #+TBLNAME: many-cols
+  | a | b | c |
+  |---+---+---|
+  | d | e | f |
+  |---+---+---|
+  | g | h | i |
 
-#+begin_example
-#+TBLNAME: many-cols
-| a | b | c |
-|---+---+---|
-| d | e | f |
-|---+---+---|
-| g | h | i |
+  #+NAME: echo-table
+  #+BEGIN_SRC python :var tab=many-cols
+    return tab
+  #+END_SRC
 
-#+NAME: echo-table
-#+BEGIN_SRC python :var tab=many-cols :hlines yes
-  return tab
-#+END_SRC
+  #+RESULTS: echo-table
+  | a | b | c |
+  | d | e | f |
+  | g | h | i |
+  #+end_example
 
-#+RESULTS: echo-table
-| a | b | c |
-|---+---+---|
-| d | e | f |
-|---+---+---|
-| g | h | i |
-#+end_example
-@end itemize
+- ~yes~ ::
+
+  Leaves hlines in the table. Setting ~:hlines yes~ has this effect.
+
+  #+begin_example
+  #+TBLNAME: many-cols
+  | a | b | c |
+  |---+---+---|
+  | d | e | f |
+  |---+---+---|
+  | g | h | i |
+
+  #+NAME: echo-table
+  #+BEGIN_SRC python :var tab=many-cols :hlines yes
+    return tab
+  #+END_SRC
+
+  #+RESULTS: echo-table
+  | a | b | c |
+  |---+---+---|
+  | d | e | f |
+  |---+---+---|
+  | g | h | i |
+  #+end_example
+
 
 **** colnames
      :PROPERTIES:
      :DESCRIPTION: Handle column names in tables
      :END:
-The ~:colnames~ header argument accepts the values ~yes~,
-~no~, or ~nil~ for unassigned.  The default value is ~nil~.
-Note that the behavior of the ~:colnames~ header argument may differ
-across languages.  For example Emacs Lisp code blocks ignore the
-~:colnames~ header argument entirely given the ease with which tables
-with column names may be handled directly in Emacs Lisp.
 
-@itemize @bullet
-- ~nil~
-If an input table looks like it has column names
-(because its second row is an hline), then the column
-names will be removed from the table before
-processing, then reapplied to the results.
+The ~:colnames~ header argument accepts the values ~yes~, ~no~, or
+~nil~ for unassigned. The default value is ~nil~. Note that the
+behavior of the ~:colnames~ header argument may differ across
+languages. For example Emacs Lisp code blocks ignore the ~:colnames~
+header argument entirely given the ease with which tables with column
+names may be handled directly in Emacs Lisp.
 
-#+begin_example
-#+TBLNAME: less-cols
-| a |
-|---|
-| b |
-| c |
+#+attr_texinfo: :table-type "table" :indic "@asis"
 
-#+NAME: echo-table-again
-#+BEGIN_SRC python :var tab=less-cols
-  return [[val + '*' for val in row] for row in tab]
-#+END_SRC
+- ~nil~ ::
 
-#+RESULTS: echo-table-again
-| a  |
-|----|
-| b* |
-| c* |
-#+end_example
+  If an input table looks like it has column names (because its second
+  row is an hline), then the column names will be removed from the table
+  before processing, then reapplied to the results.
 
-Please note that column names are not removed before the table is indexed
-using variable indexing See [[var, Indexable variable values]].
+  #+begin_example
+  #+TBLNAME: less-cols
+  | a |
+  |---|
+  | b |
+  | c |
 
-- ~no~
-No column name pre-processing takes place
+  #+NAME: echo-table-again
+  #+BEGIN_SRC python :var tab=less-cols
+    return [[val + '*' for val in row] for row in tab]
+  #+END_SRC
 
-- ~yes~
-Column names are removed and reapplied as with ~nil~ even if the table
-does not ``look like'' it has column names (i.e.@: the second row is not an
-hline)
-@end itemize
+  #+RESULTS: echo-table-again
+  | a  |
+  |----|
+  | b* |
+  | c* |
+  #+end_example
+
+  Please note that column names are not removed before the table is
+  indexed using variable indexing See [[var, Indexable variable values]].
+
+- ~no~ ::
+
+  No column name pre-processing takes place
+
+- ~yes~ ::
+
+  Column names are removed and reapplied as with ~nil~ even if the table
+  does not ``look like'' it has column names (i.e., the second row is
+  not an hline).
+
 
 **** rownames
      :PROPERTIES:
@@ -14868,40 +15045,43 @@ hline)
 The ~:rownames~ header argument can take on the values ~yes~
 or ~no~, with a default value of ~no~.
 
-@itemize @bullet
-- ~no~
-No row name pre-processing will take place.
+#+attr_texinfo: :table-type "table" :indic "@asis"
 
-- ~yes~
-The first column of the table is removed from the table before processing,
-and is then reapplied to the results.
+- ~no~ ::
 
-#+begin_example
-#+TBLNAME: with-rownames
-| one | 1 | 2 | 3 | 4 |  5 |
-| two | 6 | 7 | 8 | 9 | 10 |
+  No row name pre-processing will take place.
 
-#+NAME: echo-table-once-again
-#+BEGIN_SRC python :var tab=with-rownames :rownames yes
-  return [[val + 10 for val in row] for row in tab]
-#+END_SRC
+- ~yes~ ::
 
-#+RESULTS: echo-table-once-again
-| one | 11 | 12 | 13 | 14 | 15 |
-| two | 16 | 17 | 18 | 19 | 20 |
-#+end_example
+  The first column of the table is removed from the table before
+  processing, and is then reapplied to the results.
 
-Please note that row names are not removed before the table is indexed using
-variable indexing See [[var, Indexable variable values]].
+  #+begin_example
+  #+TBLNAME: with-rownames
+  | one | 1 | 2 | 3 | 4 |  5 |
+  | two | 6 | 7 | 8 | 9 | 10 |
 
-@end itemize
+  #+NAME: echo-table-once-again
+  #+BEGIN_SRC python :var tab=with-rownames :rownames yes
+    return [[val + 10 for val in row] for row in tab]
+  #+END_SRC
+
+  #+RESULTS: echo-table-once-again
+  | one | 11 | 12 | 13 | 14 | 15 |
+  | two | 16 | 17 | 18 | 19 | 20 |
+  #+end_example
+
+  Please note that row names are not removed before the table is indexed
+  using variable indexing. See [[var][Indexable variable values]].
+
 
 **** shebang
      :PROPERTIES:
      :DESCRIPTION: Make tangles files executable
      :END:
-Setting the ~:shebang~ header argument to a string value
-(e.g.@: ~:shebang "#!/bin/bash"~) causes the string to be inserted as the
+
+Setting the ~:shebang~ header argument to a string value (e.g.,
+~:shebang "#!/bin/bash"~) causes the string to be inserted as the
 first line of any tangled file holding the code block, and the file
 permissions of the tangled file are set to make it executable.
 
@@ -14909,38 +15089,49 @@ permissions of the tangled file are set to make it executable.
      :PROPERTIES:
      :DESCRIPTION: Limit evaluation of specific code blocks
      :END:
+
 The ~:eval~ header argument can be used to limit the evaluation of
-specific code blocks.  The ~:eval~ header argument can be useful for
-protecting against the evaluation of dangerous code blocks or to ensure that
-evaluation will require a query regardless of the value of the
-~org-confirm-babel-evaluate~ variable.  The possible values of
+specific code blocks. The ~:eval~ header argument can be useful for
+protecting against the evaluation of dangerous code blocks or to
+ensure that evaluation will require a query regardless of the value of
+the ~org-confirm-babel-evaluate~ variable. The possible values of
 ~:eval~ and their effects are shown below.
 
-#+attr_texinfo: :table-type "table" :indic "@code"
-- never or no
-The code block will not be evaluated under any circumstances.
-- query
-Evaluation of the code block will require a query.
-- never-export or no-export
-The code block will not be evaluated during export but may still be called
-interactively.
-- query-export
-Evaluation of the code block during export will require a query.
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- ~never~ or ~no~ ::
+
+  The code block will not be evaluated under any circumstances.
+
+- ~query~ ::
+
+  Evaluation of the code block will require an affirmative answer to a
+  query.
+
+- ~never-export~ or ~no-export~ ::
+
+  The code block will not be evaluated during export but may still be
+  called interactively.
+
+- ~query-export~ ::
+
+  Evaluation of the code block during export will require an affirmative
+  answer to a query.
 
 
 If this header argument is not set then evaluation is determined by the value
-of the ~org-confirm-babel-evaluate~ variable see [[Code evaluation
-security]].
+of the ~org-confirm-babel-evaluate~ variable (see [[Code evaluation
+security]]).
 
 **** wrap
      :PROPERTIES:
      :DESCRIPTION: Mark source block evaluation results
      :END:
-The ~:wrap~ header argument is used to mark the results of source block
-evaluation.  The header argument can be passed a string that will be appended
-to ~#+BEGIN_~ and ~#+END_~, which will then be used to wrap the
-results.  If not string is specified then the results will be wrapped in a
-~#+BEGIN/END_RESULTS~ block.
+
+The ~:wrap~ header argument is used to mark the results of source
+block evaluation. The header argument can be passed a string that will
+be appended to ~#+BEGIN_~ and ~#+END_~, which will then be used to
+wrap the results. If no string is specified then the results will be
+wrapped in a ~#+BEGIN/END_RESULTS~ block.
 
 ** Results of evaluation
    :PROPERTIES:
@@ -14949,92 +15140,103 @@ results.  If not string is specified then the results will be wrapped in a
 {{{cindex(code block\\\, results of evaluation)}}}
 {{{cindex(source code\\\, results of evaluation)}}}
 
-The way in which results are handled depends on whether a session is invoked,
-as well as on whether ~:results value~ or ~:results output~ is
-used.  The following table shows the table possibilities.  For a full listing
-of the possible results header arguments see [[results]].
+The way in which results are handled depends on whether a session is
+invoked, as well as on whether ~:results value~ or ~:results output~
+is used. The following table shows the table possibilities. For a full
+listing of the possible results header arguments, see [[results]].
 
-@multitable @columnfractions 0.26 0.33 0.41
-- @tab *Non-session* @tab *Session*
-- ~:results value~ @tab value of last expression @tab value of last expression
-- ~:results output~ @tab contents of STDOUT @tab concatenation of interpreter output
-@end multitable
+|                   | *Non-session*            | *Session*                           |
+|-------------------+--------------------------+-------------------------------------|
+| ~:results value~  | value of last expression | value of last expression            |
+| ~:results output~ | contents of STDOUT       | concatenation of interpreter output |
 
-Note: With ~:results value~, the result in both ~:session~ and
-non-session is returned to Org mode as a table (a one- or two-dimensional
-vector of strings or numbers) when appropriate.
 
-@subsection Non-session
-@subsubsection ~:results value~
-This is the default.  Internally, the value is obtained by wrapping the code
-in a function definition in the external language, and evaluating that
-function.  Therefore, code should be written as if it were the body of such a
-function.  In particular, note that Python does not automatically return a
-value from a function unless a ~return~ statement is present, and so a
-{{{samp(return)}}} statement will usually be required in Python.
+*Note:* With ~:results value~, the result in both ~:session~ and
+non-session is returned to Org mode as a table (a one- or
+two-dimensional vector of strings or numbers) when appropriate.
 
-This is the only one of the four evaluation contexts in which the code is
-automatically wrapped in a function definition.
+*** Non-session
 
-@subsubsection ~:results output~
-The code is passed to the interpreter as an external process, and the
-contents of the standard output stream are returned as text.  (In certain
-languages this also contains the error output stream; this is an area for
-future work.)
+#+attr_texinfo: :table-type "table" :indic "@asis"
 
-@subsection Session
-@subsubsection ~:results value~
-The code is passed to an interpreter running as an interactive Emacs inferior
-process.  Only languages which provide tools for interactive evaluation of
-code have session support, so some language (e.g., C and ditaa) do not
-support the ~:session~ header argument, and in other languages (e.g.,
-Python and Haskell) which have limitations on the code which may be entered
-into interactive sessions, those limitations apply to the code in code blocks
-using the ~:session~ header argument as well.
+- ~:results value~ ::
 
-Unless the ~:results output~ option is supplied (see below) the result
-returned is the result of the last evaluation performed by the
-interpreter.  (This is obtained in a language-specific manner: the value of
-the variable ~_~ in Python and Ruby, and the value of ~.Last.value~
-in R).
+  This is the default. Internally, the value is obtained by wrapping the
+  code in a function definition in the external language, and evaluating
+  that function. Therefore, code should be written as if it were the
+  body of such a function. In particular, note that Python does not
+  automatically return a value from a function unless a ~return~
+  statement is present, and so a {{{samp(return)}}} statement will
+  usually be required in Python.
 
-@subsubsection ~:results output~
-The code is passed to the interpreter running as an interactive Emacs
-inferior process.  The result returned is the concatenation of the sequence of
-(text) output from the interactive interpreter.  Notice that this is not
-necessarily the same as what would be sent to ~STDOUT~ if the same code
-were passed to a non-interactive interpreter running as an external
-process.  For example, compare the following two blocks:
+  This is the only one of the four evaluation contexts in which the code
+  is automatically wrapped in a function definition.
 
-#+begin_example
-#+BEGIN_SRC python :results output
- print "hello"
- 2
- print "bye"
-#+END_SRC
+- ~:results output~ ::
 
-#+RESULTS:
-: hello
-: bye
-#+end_example
+  The code is passed to the interpreter as an external process, and the
+  contents of the standard output stream are returned as text.[fn:159]
 
-In non-session mode, the `2' is not printed and does not appear.
-#+begin_example
-#+BEGIN_SRC python :results output :session
- print "hello"
- 2
- print "bye"
-#+END_SRC
 
-#+RESULTS:
-: hello
-: 2
-: bye
-#+end_example
+*** Session
 
-But in ~:session~ mode, the interactive interpreter receives input `2'
-and prints out its value, `2'.  (Indeed, the other print statements are
-unnecessary here).
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- ~:results value~ ::
+
+  The code is passed to an interpreter running as an interactive Emacs
+  inferior process. Only languages which provide tools for interactive
+  evaluation of code have session support, so some language (e.g., C and
+  ditaa) do not support the ~:session~ header argument, and in other
+  languages (e.g., Python and Haskell) which have limitations on the
+  code which may be entered into interactive sessions, those limitations
+  apply to the code in code blocks using the ~:session~ header argument
+  as well.
+
+  Unless the ~:results output~ option is supplied (see below) the result
+  returned is the result of the last evaluation performed by the
+  interpreter.[fn:160]
+
+- ~:results output~ ::
+
+  The code is passed to the interpreter running as an interactive Emacs
+  inferior process. The result returned is the concatenation of the
+  sequence of (text) output from the interactive interpreter. Notice
+  that this is not necessarily the same as what would be sent to
+  ~STDOUT~ if the same code were passed to a non-interactive interpreter
+  running as an external process. Compare the following two
+  examples:
+
+  #+begin_example
+  #+BEGIN_SRC python :results output
+   print "hello"
+   2
+   print "bye"
+  #+END_SRC
+
+  #+RESULTS:
+  : hello
+  : bye
+  #+end_example
+
+  In non-session mode, the `2' is not printed and does not appear.
+
+  #+begin_example
+  #+BEGIN_SRC python :results output :session
+   print "hello"
+   2
+   print "bye"
+  #+END_SRC
+
+  #+RESULTS:
+  : hello
+  : 2
+  : bye
+  #+end_example
+
+  But in ~:session~ mode, the interactive interpreter receives input `2'
+  and prints out its value, `2'. (Indeed, the other print statements are
+  unnecessary here).
+
 ** Noweb reference syntax
    :PROPERTIES:
    :DESCRIPTION: Literate programming in Org mode
@@ -15043,9 +15245,9 @@ unnecessary here).
 {{{cindex(syntax\\\, noweb)}}}
 {{{cindex(source code\\\, noweb reference)}}}
 
-The ``noweb'' (see @uref{http://www.cs.tufts.edu/~nr/noweb/}) Literate
-Programming system allows named blocks of code to be referenced by using the
-familiar Noweb syntax:
+The ``noweb'' (see [[http://www.cs.tufts.edu/~nr/noweb/]]) Literate
+Programming system allows named blocks of code to be referenced using
+the familiar Noweb syntax:
 
 #+begin_example
 <<code-block-name>>
@@ -15053,30 +15255,31 @@ familiar Noweb syntax:
 
 When a code block is tangled or evaluated, whether or not ``noweb''
 references are expanded depends upon the value of the ~:noweb~ header
-argument.  If ~:noweb yes~, then a Noweb reference is expanded before
-evaluation.  If ~:noweb no~, the default, then the reference is not
-expanded before evaluation.  See the [[noweb-ref]] header argument for
-a more flexible way to resolve noweb references.
+argument. If ~:noweb yes~, then a Noweb reference is expanded before
+evaluation. If ~:noweb no~, the default, then the reference is not
+expanded before evaluation. See the [[noweb-ref]] header argument for a
+more flexible way to resolve noweb references.
 
-It is possible to include the /results/ of a code block rather than the
-body.  This is done by appending parenthesis to the code block name which may
-optionally contain arguments to the code block as shown below.
+It is possible to include the /results/ of a code block rather than
+the body. This is done by appending parenthesis to the code block
+name, which may optionally contain arguments to the code block as
+shown below.
 
 #+begin_example
 <<code-block-name(optional arguments)>>
 #+end_example
 
-Note: the default value, ~:noweb no~, was chosen to ensure that
+*Note:* the default value, ~:noweb no~, was chosen to ensure that
 correct code is not broken in a language, such as Ruby, where
-~<<arg>>~ is a syntactically valid construct.  If ~<<arg>>~ is not
-syntactically valid in languages that you use, then please consider setting
-the default value.
+~<<arg>>~ is a syntactically valid construct. If ~<<arg>>~ is not
+syntactically valid in languages that you use, then please consider
+setting the default value.
 
-Note: if noweb tangling is slow in large Org mode files consider setting the
-~*org-babel-use-quick-and-dirty-noweb-expansion*~ variable to true.
-This will result in faster noweb reference resolution at the expense of not
-correctly resolving inherited values of the ~:noweb-ref~ header
-argument.
+*Note:* if noweb tangling is slow in large Org mode files consider
+setting the ~*org-babel-use-quick-and-dirty-noweb-expansion*~ variable
+to true. This will result in faster noweb reference resolution at the
+expense of not correctly resolving inherited values of the
+~:noweb-ref~ header argument.
 
 ** Key bindings and useful functions
    :PROPERTIES:
@@ -15089,133 +15292,104 @@ the context.
 
 Within a code block, the following key bindings
 are active:
-
-@multitable @columnfractions 0.25 0.75
 {{{kindex(C-c C-c)}}}
-- {{{kbd(C-c C-c)}}} @tab ~org-babel-execute-src-block~
-  {{{kindex(C-c C-c)}}}
 {{{kindex(C-c C-o)}}}
-- {{{kbd(C-c C-o)}}} @tab ~org-babel-open-src-block-result~
-  {{{kindex(C-c C-o)}}}
 {{{kindex(C-up)}}}
-- {{{kbdkey(C-,up)}}}    @tab ~org-babel-load-in-session~
 {{{kindex(M-down)}}}
-- {{{kbdkey(M-,down)}}}  @tab ~org-babel-pop-to-session~
-@end multitable
+
+| *Keybinding*          | *Function*                        |
+|-----------------------+-----------------------------------|
+| {{{kbd(C-c C-c)}}}    | ~org-babel-execute-src-block~     |
+| {{{kbd(C-c C-o)}}}    | ~org-babel-open-src-block-result~ |
+| {{{kbdkey(C-,up)}}}   | ~org-babel-load-in-session~       |
+| {{{kbdkey(M-,down)}}} | ~org-babel-pop-to-session~        |
+
 
 In an Org mode buffer, the following key bindings are active:
 
-@multitable @columnfractions 0.45 0.55
 {{{kindex(C-c C-v p)}}}
 {{{kindex(C-c C-v C-p)}}}
-- {{{kbd(C-c C-v p)}}} @ @ @r{or} @ @ {{{kbd(C-c C-v C-p)}}} @tab ~org-babel-previous-src-block~
-  {{{kindex(C-c C-v p)}}}
 {{{kindex(C-c C-v n)}}}
 {{{kindex(C-c C-v C-n)}}}
-- {{{kbd(C-c C-v n)}}} @ @ @r{or} @ @ {{{kbd(C-c C-v C-n)}}} @tab ~org-babel-next-src-block~
-  {{{kindex(C-c C-v n)}}}
 {{{kindex(C-c C-v e)}}}
 {{{kindex(C-c C-v C-e)}}}
-- {{{kbd(C-c C-v e)}}} @ @ @r{or} @ @ {{{kbd(C-c C-v C-e)}}} @tab ~org-babel-execute-maybe~
-  {{{kindex(C-c C-v e)}}}
 {{{kindex(C-c C-v o)}}}
 {{{kindex(C-c C-v C-o)}}}
-- {{{kbd(C-c C-v o)}}} @ @ @r{or} @ @ {{{kbd(C-c C-v C-o)}}} @tab ~org-babel-open-src-block-result~
-  {{{kindex(C-c C-v o)}}}
 {{{kindex(C-c C-v v)}}}
 {{{kindex(C-c C-v C-v)}}}
-- {{{kbd(C-c C-v v)}}} @ @ @r{or} @ @ {{{kbd(C-c C-v C-v)}}} @tab ~org-babel-expand-src-block~
-  {{{kindex(C-c C-v v)}}}
 {{{kindex(C-c C-v u)}}}
 {{{kindex(C-c C-v C-u)}}}
-- {{{kbd(C-c C-v u)}}} @ @ @r{or} @ @ {{{kbd(C-c C-v C-u)}}} @tab ~org-babel-goto-src-block-head~
-  {{{kindex(C-c C-v u)}}}
 {{{kindex(C-c C-v g)}}}
 {{{kindex(C-c C-v C-g)}}}
-- {{{kbd(C-c C-v g)}}} @ @ @r{or} @ @ {{{kbd(C-c C-v C-g)}}} @tab ~org-babel-goto-named-src-block~
-  {{{kindex(C-c C-v g)}}}
 {{{kindex(C-c C-v r)}}}
 {{{kindex(C-c C-v C-r)}}}
-- {{{kbd(C-c C-v r)}}} @ @ @r{or} @ @ {{{kbd(C-c C-v C-r)}}} @tab ~org-babel-goto-named-result~
-  {{{kindex(C-c C-v r)}}}
 {{{kindex(C-c C-v b)}}}
 {{{kindex(C-c C-v C-b)}}}
-- {{{kbd(C-c C-v b)}}} @ @ @r{or} @ @ {{{kbd(C-c C-v C-b)}}} @tab ~org-babel-execute-buffer~
-  {{{kindex(C-c C-v b)}}}
 {{{kindex(C-c C-v s)}}}
 {{{kindex(C-c C-v C-s)}}}
-- {{{kbd(C-c C-v s)}}} @ @ @r{or} @ @ {{{kbd(C-c C-v C-s)}}} @tab ~org-babel-execute-subtree~
-  {{{kindex(C-c C-v s)}}}
 {{{kindex(C-c C-v d)}}}
 {{{kindex(C-c C-v C-d)}}}
-- {{{kbd(C-c C-v d)}}} @ @ @r{or} @ @ {{{kbd(C-c C-v C-d)}}} @tab ~org-babel-demarcate-block~
-  {{{kindex(C-c C-v d)}}}
 {{{kindex(C-c C-v t)}}}
 {{{kindex(C-c C-v C-t)}}}
-- {{{kbd(C-c C-v t)}}} @ @ @r{or} @ @ {{{kbd(C-c C-v C-t)}}} @tab ~org-babel-tangle~
-  {{{kindex(C-c C-v t)}}}
 {{{kindex(C-c C-v f)}}}
 {{{kindex(C-c C-v C-f)}}}
-- {{{kbd(C-c C-v f)}}} @ @ @r{or} @ @ {{{kbd(C-c C-v C-f)}}} @tab ~org-babel-tangle-file~
-  {{{kindex(C-c C-v f)}}}
 {{{kindex(C-c C-v c)}}}
 {{{kindex(C-c C-v C-c)}}}
-- {{{kbd(C-c C-v c)}}} @ @ @r{or} @ @ {{{kbd(C-c C-v C-c)}}} @tab ~org-babel-check-src-block~
-  {{{kindex(C-c C-v c)}}}
 {{{kindex(C-c C-v j)}}}
 {{{kindex(C-c C-v C-j)}}}
-- {{{kbd(C-c C-v j)}}} @ @ @r{or} @ @ {{{kbd(C-c C-v C-j)}}} @tab ~org-babel-insert-header-arg~
-  {{{kindex(C-c C-v j)}}}
 {{{kindex(C-c C-v l)}}}
 {{{kindex(C-c C-v C-l)}}}
-- {{{kbd(C-c C-v l)}}} @ @ @r{or} @ @ {{{kbd(C-c C-v C-l)}}} @tab ~org-babel-load-in-session~
-  {{{kindex(C-c C-v l)}}}
 {{{kindex(C-c C-v i)}}}
 {{{kindex(C-c C-v C-i)}}}
-- {{{kbd(C-c C-v i)}}} @ @ @r{or} @ @ {{{kbd(C-c C-v C-i)}}} @tab ~org-babel-lob-ingest~
-  {{{kindex(C-c C-v i)}}}
 {{{kindex(C-c C-v I)}}}
 {{{kindex(C-c C-v C-I)}}}
-- {{{kbd(C-c C-v I)}}} @ @ @r{or} @ @ {{{kbd(C-c C-v C-I)}}} @tab ~org-babel-view-src-block-info~
-  {{{kindex(C-c C-v I)}}}
 {{{kindex(C-c C-v z)}}}
 {{{kindex(C-c C-v C-z)}}}
-- {{{kbd(C-c C-v z)}}} @ @ @r{or} @ @ {{{kbd(C-c C-v C-z)}}} @tab ~org-babel-switch-to-session-with-code~
-  {{{kindex(C-c C-v z)}}}
 {{{kindex(C-c C-v a)}}}
 {{{kindex(C-c C-v C-a)}}}
-- {{{kbd(C-c C-v a)}}} @ @ @r{or} @ @ {{{kbd(C-c C-v C-a)}}} @tab ~org-babel-sha1-hash~
-  {{{kindex(C-c C-v a)}}}
 {{{kindex(C-c C-v h)}}}
 {{{kindex(C-c C-v C-h)}}}
-- {{{kbd(C-c C-v h)}}} @ @ @r{or} @ @ {{{kbd(C-c C-v C-h)}}} @tab ~org-babel-describe-bindings~
-  {{{kindex(C-c C-v h)}}}
 {{{kindex(C-c C-v x)}}}
 {{{kindex(C-c C-v C-x)}}}
-- {{{kbd(C-c C-v x)}}} @ @ @r{or} @ @ {{{kbd(C-c C-v C-x)}}} @tab ~org-babel-do-key-sequence-in-edit-buffer~
-  {{{kindex(C-c C-v x)}}}
-@end multitable
+
+| *Keybinding*                                   | *Function*                                 |
+|------------------------------------------------+--------------------------------------------|
+| {{{kbd(C-c C-v p)}}} or {{{kbd(C-c C-v C-p)}}} | ~org-babel-previous-src-block~             |
+| {{{kbd(C-c C-v n)}}} or {{{kbd(C-c C-v C-n)}}} | ~org-babel-next-src-block~                 |
+| {{{kbd(C-c C-v e)}}} or {{{kbd(C-c C-v C-e)}}} | ~org-babel-execute-maybe~                  |
+| {{{kbd(C-c C-v o)}}} or {{{kbd(C-c C-v C-o)}}} | ~org-babel-open-src-block-result~          |
+| {{{kbd(C-c C-v v)}}} or {{{kbd(C-c C-v C-v)}}} | ~org-babel-expand-src-block~               |
+| {{{kbd(C-c C-v u)}}} or {{{kbd(C-c C-v C-u)}}} | ~org-babel-goto-src-block-head~            |
+| {{{kbd(C-c C-v g)}}} or {{{kbd(C-c C-v C-g)}}} | ~org-babel-goto-named-src-block~           |
+| {{{kbd(C-c C-v r)}}} or {{{kbd(C-c C-v C-r)}}} | ~org-babel-goto-named-result~              |
+| {{{kbd(C-c C-v b)}}} or {{{kbd(C-c C-v C-b)}}} | ~org-babel-execute-buffer~                 |
+| {{{kbd(C-c C-v s)}}} or {{{kbd(C-c C-v C-s)}}} | ~org-babel-execute-subtree~                |
+| {{{kbd(C-c C-v d)}}} or {{{kbd(C-c C-v C-d)}}} | ~org-babel-demarcate-block~                |
+| {{{kbd(C-c C-v t)}}} or {{{kbd(C-c C-v C-t)}}} | ~org-babel-tangle~                         |
+| {{{kbd(C-c C-v f)}}} or {{{kbd(C-c C-v C-f)}}} | ~org-babel-tangle-file~                    |
+| {{{kbd(C-c C-v c)}}} or {{{kbd(C-c C-v C-c)}}} | ~org-babel-check-src-block~                |
+| {{{kbd(C-c C-v j)}}} or {{{kbd(C-c C-v C-j)}}} | ~org-babel-insert-header-arg~              |
+| {{{kbd(C-c C-v l)}}} or {{{kbd(C-c C-v C-l)}}} | ~org-babel-load-in-session~                |
+| {{{kbd(C-c C-v i)}}} or {{{kbd(C-c C-v C-i)}}} | ~org-babel-lob-ingest~                     |
+| {{{kbd(C-c C-v I)}}} or {{{kbd(C-c C-v C-I)}}} | ~org-babel-view-src-block-info~            |
+| {{{kbd(C-c C-v z)}}} or {{{kbd(C-c C-v C-z)}}} | ~org-babel-switch-to-session-with-code~    |
+| {{{kbd(C-c C-v a)}}} or {{{kbd(C-c C-v C-a)}}} | ~org-babel-sha1-hash~                      |
+| {{{kbd(C-c C-v h)}}} or {{{kbd(C-c C-v C-h)}}} | ~org-babel-describe-bindings~              |
+| {{{kbd(C-c C-v x)}}} or {{{kbd(C-c C-v C-x)}}} | ~org-babel-do-key-sequence-in-edit-buffer~ |
+
 
 #+comment  When possible these keybindings were extended to work when the control key is
 #+comment  kept pressed, resulting in the following additional keybindings.
 
 #+comment  @multitable @columnfractions 0.25 0.75
 #+comment  - {{{kbd(C-c C-v C-a)}}} @tab ~org-babel-sha1-hash~
-  {{{kindex(C-c C-v C-a)}}}
 #+comment  - {{{kbd(C-c C-v C-b)}}} @tab ~org-babel-execute-buffer~
-  {{{kindex(C-c C-v C-b)}}}
 #+comment  - {{{kbd(C-c C-v C-f)}}} @tab ~org-babel-tangle-file~
-  {{{kindex(C-c C-v C-f)}}}
 #+comment  - {{{kbd(C-c C-v C-l)}}} @tab ~org-babel-lob-ingest~
-  {{{kindex(C-c C-v C-l)}}}
 #+comment  - {{{kbd(C-c C-v C-p)}}} @tab ~org-babel-expand-src-block~
-  {{{kindex(C-c C-v C-p)}}}
 #+comment  - {{{kbd(C-c C-v C-s)}}} @tab ~org-babel-execute-subtree~
-  {{{kindex(C-c C-v C-s)}}}
 #+comment  - {{{kbd(C-c C-v C-t)}}} @tab ~org-babel-tangle~
-  {{{kindex(C-c C-v C-t)}}}
 #+comment  - {{{kbd(C-c C-v C-z)}}} @tab ~org-babel-switch-to-session~
-  {{{kindex(C-c C-v C-z)}}}
 #+comment  @end multitable
 
 ** Batch execution
@@ -17235,7 +17409,7 @@ The following example counts the number of entries with TODO keyword
 (length (org-map-entries t "/+WAITING" 'agenda))
 #+end_src
 
-* MobileOrg                                                        :noexport:
+* FIXME MobileOrg                                                  :noexport:
   :PROPERTIES:
   :DESCRIPTION: Viewing and capture on a mobile device
   :END:
@@ -17373,7 +17547,7 @@ last pull.  This might include a file that is not currently in your list of
 agenda files.  If you later use {{{kbd(C-c a ?)}}} to regenerate the view, only
 the current agenda files will be searched.} using {{{kbd(C-c a ?)}}}.
 
-* History and acknowledgments                                      :noexport:
+* FIXME History and acknowledgments                                :noexport:
   :PROPERTIES:
   :DESCRIPTION: How Org came into being
   :TEXINFO_MENU_TITLE: History and Acknowledgments
@@ -18345,6 +18519,32 @@ are equal. Note that with this kind of setup, you need to add
 ~org-publish-project-alist~ to prevent the published source files from
 being considered as new org files the next time the project is
 published.
+
+[fn:154] Note that {{{samp(src)}}} blocks may be inserted using Org
+mode's [[Easy Templates]] system.
+
+[fn:155] Whenever code is evaluated there is a potential for that code
+to do harm. Org mode provides safeguards to ensure that code is only
+evaluated after explicit confirmation from the user. For information
+on these safeguards (and on how to disable them) see [[Code evaluation
+security]].
+
+[fn:156] The ~org-babel-no-eval-on-ctrl-c-ctrl-c~ variable can be used
+to remove code evaluation from the {{{kbd(C-c C-c)}}} key binding.
+
+[fn:157] Note that evaluation of header arguments is guaranteed to
+take place in the original Org mode file, while there is no such
+guarantee for evaluation of the code block body.
+
+[fn:158] The example requires that property inheritance be turned on
+for the ~noweb-ref~ property, see [[Property inheritance]].
+
+[fn:159]  In certain languages this also contains the error output
+stream; this is an area for future work.
+
+[fn:160] The last evaluation performed by the interpreter is obtained
+in a language-specific manner: the value of the variable ~_~ in Python
+and Ruby, and the value of ~.Last.value~ in R.
 
 * About orgmanual.org                                              :noexport:
 This document intends to be Org mode source for the Org mode manual
