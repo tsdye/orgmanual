@@ -12794,20 +12794,22 @@ to ~org-icalendar-include-body~ characters).
 How this calendar is best read and updated, depends on the application
 you are using.  The FAQ covers this issue.
 
-* FIXME Publishing                                                 :noexport:
+* FIXED Publishing
   :PROPERTIES:
   :DESCRIPTION: Create a web site of linked Org files
   :END:
 {{{cindex(publishing)}}}
+{{{cindex(O'Toole\\\, David)}}}
 
-Org includes a publishing management system that allows you to configure
-automatic HTML conversion of /projects/ composed of interlinked org
-files.  You can also configure Org to automatically upload your exported HTML
-pages and related attachments, such as images and source code files, to a web
+Org includes a publishing management system that allows you to
+configure automatic HTML conversion of /projects/ composed of
+interlinked org files. You can also configure Org to automatically
+upload your exported HTML pages and related attachments, such as
+images and source code files, to a web server.
+
+You can also use Org to convert files into PDF, or even combine HTML
+and PDF conversion so that files are available in both formats on the
 server.
-
-You can also use Org to convert files into PDF, or even combine HTML and PDF
-conversion so that files are available in both formats on the server.
 
 Publishing has been contributed to Org by David O'Toole.
 
@@ -12815,8 +12817,8 @@ Publishing has been contributed to Org by David O'Toole.
    :PROPERTIES:
    :DESCRIPTION: Defining projects
    :END:
-Publishing needs significant configuration to specify files, destination
-and many other properties of a project.
+Publishing needs significant configuration to specify files,
+destination and many other properties of a project.
 
 *** Project alist
     :PROPERTIES:
@@ -12825,11 +12827,12 @@ and many other properties of a project.
     :END:
 {{{cindex(org-publish-project-alist)}}}
 {{{cindex(projects\\\, for publishing)}}}
-
 {{{vindex(org-publish-project-alist)}}}
-Publishing is configured almost entirely through setting the value of one
-variable, called ~org-publish-project-alist~.  Each element of the list
-configures one project, and may be in one of the two following forms:
+
+Publishing is configured almost entirely through setting the value of
+one variable, called ~org-publish-project-alist~. Each element of the
+list configures one project, and may be in one of the two following
+forms:
 
 #+header: :eval no
 #+header: :exports code
@@ -12838,7 +12841,7 @@ configures one project, and may be in one of the two following forms:
 #+end_src
 
 i.e., a well-formed property list with alternating keys and values,
-or
+or:
 
 #+header: :eval no
 #+header: :exports code
@@ -12862,30 +12865,37 @@ published, in the sequence given.
     :END:
 {{{cindex(directories\\\, for publishing)}}}
 
-Most properties are optional, but some should always be set.  In
-particular, Org needs to know where to look for source files,
-and where to put published files.
+Most properties are optional, but some should always be set. In
+particular, Org needs to know where to look for source files, and
+where to put published files.
 
-@multitable @columnfractions 0.3 0.7
-- ~:base-directory~
-@tab Directory containing publishing source files
-- ~:publishing-directory~
-@tab Directory where output files will be published.  You can directly
-publish to a webserver using a file name syntax appropriate for
-the Emacs {{{file(tramp)}}} package.  Or you can publish to a local directory and
-use external tools to upload your website (see [[Uploading files]]).
-- ~:preparation-function~
-@tab Function or list of functions to be called before starting the
-publishing process, for example, to run ~make~ for updating files to be
-published.  The project property list is scoped into this call as the
-variable ~project-plist~.
-- ~:completion-function~
-@tab Function or list of functions called after finishing the publishing
-process, for example, to change permissions of the resulting files.  The
-project property list is scoped into this call as the variable
-~project-plist~.
-@end multitable
-{{{noindent}}}
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- ~:base-directory~ ::
+ 
+  Directory containing publishing source files
+
+- ~:publishing-directory~ ::
+
+  Directory where output files will be published. You can directly
+  publish to a webserver using a file name syntax appropriate for the
+  Emacs {{{file(tramp)}}} package. Or you can publish to a local
+  directory and use external tools to upload your website 
+  (see [[Uploading files]]).
+
+- ~:preparation-function~ ::
+
+  Function or list of functions to be called before starting the
+  publishing process, for example, to run ~make~ for updating files to
+  be published. The project property list is scoped into this call as
+  the variable ~project-plist~.
+
+- ~:completion-function~ ::
+
+  Function or list of functions called after finishing the publishing
+  process, for example, to change permissions of the resulting files.
+  The project property list is scoped into this call as the variable
+  ~project-plist~.
+
 
 *** Selecting files
     :PROPERTIES:
@@ -12895,25 +12905,29 @@ project property list is scoped into this call as the variable
 
 By default, all files with extension {{{file(.org)}}} in the base directory
 are considered part of the project.  This can be modified by setting the
-properties
-@multitable @columnfractions 0.25 0.75
-- ~:base-extension~
-@tab Extension (without the dot!) of source files.  This actually is a
-regular expression.  Set this to the symbol ~any~ if you want to get all
-files in ~:base-directory~, even without extension.
+following properties:
 
-- ~:exclude~
-@tab Regular expression to match file names that should not be
-published, even though they have been selected on the basis of their
-extension.
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- ~:base-extension~ ::
 
-- ~:include~
-@tab List of files to be included regardless of ~:base-extension~
-and ~:exclude~.
+  Extension (without the dot!) of source files. This actually is a
+  regular expression. Set this to the symbol ~any~ if you want to get
+  all files in ~:base-directory~, even without extension.
 
-- ~:recursive~
-@tab Non-nil means, check base-directory recursively for files to publish.
-@end multitable
+- ~:exclude~ ::
+
+  Regular expression to match file names that should not be published,
+  even though they have been selected on the basis of their extension.
+
+- ~:include~ ::
+
+  List of files to be included regardless of ~:base-extension~ and
+  ~:exclude~.
+
+- ~:recursive~ ::
+
+  Non-nil means, check base-directory recursively for files to publish.
+
 
 *** Publishing action
     :PROPERTIES:
@@ -12932,31 +12946,31 @@ publish the Org file itself, but with /archived/, /commented/, and
 /tag-excluded/ trees removed, use ~org-publish-org-to-org~ and set the
 parameters ~:plain-source~ and/or ~:htmlized-source~.  This will
 produce {{{file(file.org)}}} and {{{file(file.org.html)}}} in the publishing
-directory@footnote{{{{file(file-source.org)}}} and {{{file(file-source.org.html)}}} if
-source and publishing directories are equal.  Note that with this kind of
-setup, you need to add ~:exclude "-source\\.org"~ to the project
-definition in ~org-publish-project-alist~ to prevent the published
-source files from being considered as new org files the next time the project
-is published.}.  Other files like images only need to be copied to the
+directory.[fn:153]  Other files like images only need to be copied to the
 publishing destination; for this you may use ~org-publish-attachment~.
 For non-Org files, you always need to specify the publishing function:
 
-@multitable @columnfractions 0.3 0.7
-- ~:publishing-function~
-@tab Function executing the publication of a file.  This may also be a
-list of functions, which will all be called in turn.
-- ~:plain-source~
-@tab Non-nil means, publish plain source.
-- ~:htmlized-source~
-@tab Non-nil means, publish htmlized source.
-@end multitable
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- ~:publishing-function~ ::
 
-The function must accept three arguments: a property list containing at least
-a ~:publishing-directory~ property, the name of the file to be
-published, and the path to the publishing directory of the output file.  It
-should take the specified file, make the necessary transformation (if any)
-and place the result into the destination folder.
+  Function executing the publication of a file. This may also be a list
+  of functions, which will all be called in turn.
 
+- ~:plain-source~ ::
+
+  Non-nil means, publish plain source.
+
+- ~:htmlized-source~ ::
+
+  Non-nil means, publish htmlized source.
+
+
+The function must accept three arguments: a property list containing
+at least a ~:publishing-directory~ property, the name of the file to
+be published, and the path to the publishing directory of the output
+file. It should take the specified file, make the necessary
+transformation (if any) and place the result into the destination
+folder.
 
 *** Publishing options
     :PROPERTIES:
@@ -13019,68 +13033,68 @@ respective variable for details.
 {{{vindex(org-export-select-tags)}}}
 {{{vindex(org-export-exclude-tags)}}}
 
-@multitable @columnfractions 0.32 0.68
-- ~:link-up~               @tab ~org-export-html-link-up~
-- ~:link-home~             @tab ~org-export-html-link-home~
-- ~:language~              @tab ~org-export-default-language~
-- ~:customtime~            @tab ~org-display-custom-times~
-- ~:headline-levels~       @tab ~org-export-headline-levels~
-- ~:section-numbers~       @tab ~org-export-with-section-numbers~
-- ~:section-number-format~ @tab ~org-export-section-number-format~
-- ~:table-of-contents~     @tab ~org-export-with-toc~
-- ~:preserve-breaks~       @tab ~org-export-preserve-breaks~
-- ~:archived-trees~        @tab ~org-export-with-archived-trees~
-- ~:emphasize~             @tab ~org-export-with-emphasize~
-- ~:sub-superscript~       @tab ~org-export-with-sub-superscripts~
-- ~:special-strings~       @tab ~org-export-with-special-strings~
-- ~:footnotes~             @tab ~org-export-with-footnotes~
-- ~:drawers~               @tab ~org-export-with-drawers~
-- ~:tags~                  @tab ~org-export-with-tags~
-- ~:todo-keywords~         @tab ~org-export-with-todo-keywords~
-- ~:tasks~                 @tab ~org-export-with-tasks~
-- ~:priority~              @tab ~org-export-with-priority~
-- ~:TeX-macros~            @tab ~org-export-with-TeX-macros~
-- ~:LaTeX-fragments~       @tab ~org-export-with-LaTeX-fragments~
-- ~:latex-listings~        @tab ~org-export-latex-listings~
-- ~:skip-before-1st-heading~ @tab ~org-export-skip-text-before-1st-heading~
-- ~:fixed-width~           @tab ~org-export-with-fixed-width~
-- ~:timestamps~            @tab ~org-export-with-timestamps~
-- ~:author~                @tab ~user-full-name~
-- ~:email~                 @tab ~user-mail-address~ : ~addr;addr;..~
-- ~:author-info~           @tab ~org-export-author-info~
-- ~:email-info~            @tab ~org-export-email-info~
-- ~:creator-info~          @tab ~org-export-creator-info~
-- ~:tables~                @tab ~org-export-with-tables~
-- ~:table-auto-headline~   @tab ~org-export-highlight-first-table-line~
-- ~:style-include-default~ @tab ~org-export-html-style-include-default~
-- ~:style-include-scripts~ @tab ~org-export-html-style-include-scripts~
-- ~:style~                 @tab ~org-export-html-style~
-- ~:style-extra~           @tab ~org-export-html-style-extra~
-- ~:convert-org-links~     @tab ~org-export-html-link-org-files-as-html~
-- ~:inline-images~         @tab ~org-export-html-inline-images~
-- ~:html-extension~        @tab ~org-export-html-extension~
-- ~:html-preamble~         @tab ~org-export-html-preamble~
-- ~:html-postamble~        @tab ~org-export-html-postamble~
-- ~:xml-declaration~       @tab ~org-export-html-xml-declaration~
-- ~:html-table-tag~        @tab ~org-export-html-table-tag~
-- ~:expand-quoted-html~    @tab ~org-export-html-expand~
-- ~:timestamp~             @tab ~org-export-html-with-timestamp~
-- ~:publishing-directory~  @tab ~org-export-publishing-directory~
-- ~:select-tags~           @tab ~org-export-select-tags~
-- ~:exclude-tags~          @tab ~org-export-exclude-tags~
-- ~:latex-image-options~   @tab ~org-export-latex-image-default-option~
-@end multitable
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- ~:link-up~ :: ~org-export-html-link-up~
+- ~:link-home~ :: ~org-export-html-link-home~
+- ~:language~ :: ~org-export-default-language~
+- ~:customtime~ :: ~org-display-custom-times~
+- ~:headline-levels~ :: ~org-export-headline-levels~
+- ~:section-numbers~ :: ~org-export-with-section-numbers~
+- ~:section-number-format~ :: ~org-export-section-number-format~
+- ~:table-of-contents~ :: ~org-export-with-toc~
+- ~:preserve-breaks~ :: ~org-export-preserve-breaks~
+- ~:archived-trees~ :: ~org-export-with-archived-trees~
+- ~:emphasize~ :: ~org-export-with-emphasize~
+- ~:sub-superscript~ :: ~org-export-with-sub-superscripts~
+- ~:special-strings~ :: ~org-export-with-special-strings~
+- ~:footnotes~ :: ~org-export-with-footnotes~
+- ~:drawers~ :: ~org-export-with-drawers~
+- ~:tags~ :: ~org-export-with-tags~
+- ~:todo-keywords~ :: ~org-export-with-todo-keywords~
+- ~:tasks~ :: ~org-export-with-tasks~
+- ~:priority~ :: ~org-export-with-priority~
+- ~:TeX-macros~ :: ~org-export-with-TeX-macros~
+- ~:LaTeX-fragments~ :: ~org-export-with-LaTeX-fragments~
+- ~:latex-listings~ :: ~org-export-latex-listings~
+- ~:skip-before-1st-heading~ :: ~org-export-skip-text-before-1st-heading~
+- ~:fixed-width~ :: ~org-export-with-fixed-width~
+- ~:timestamps~ :: ~org-export-with-timestamps~
+- ~:author~ :: ~user-full-name~
+- ~:email~ :: ~user-mail-address~ : ~addr;addr;..~
+- ~:author-info~ :: ~org-export-author-info~
+- ~:email-info~ :: ~org-export-email-info~
+- ~:creator-info~ :: ~org-export-creator-info~
+- ~:tables~ :: ~org-export-with-tables~
+- ~:table-auto-headline~ :: ~org-export-highlight-first-table-line~
+- ~:style-include-default~ :: ~org-export-html-style-include-default~
+- ~:style-include-scripts~ :: ~org-export-html-style-include-scripts~
+- ~:style~ :: ~org-export-html-style~
+- ~:style-extra~ :: ~org-export-html-style-extra~
+- ~:convert-org-links~ :: ~org-export-html-link-org-files-as-html~
+- ~:inline-images~ :: ~org-export-html-inline-images~
+- ~:html-extension~ :: ~org-export-html-extension~
+- ~:html-preamble~ :: ~org-export-html-preamble~
+- ~:html-postamble~ :: ~org-export-html-postamble~
+- ~:xml-declaration~ :: ~org-export-html-xml-declaration~
+- ~:html-table-tag~ :: ~org-export-html-table-tag~
+- ~:expand-quoted-html~ :: ~org-export-html-expand~
+- ~:timestamp~ :: ~org-export-html-with-timestamp~
+- ~:publishing-directory~ :: ~org-export-publishing-directory~
+- ~:select-tags~ :: ~org-export-select-tags~
+- ~:exclude-tags~ :: ~org-export-exclude-tags~
+- ~:latex-image-options~ :: ~org-export-latex-image-default-option~
 
-Most of the ~org-export-with-*~ variables have the same effect in
-both HTML and @LaTeX{} exporters, except for ~:TeX-macros~ and
-~:LaTeX-fragments~ options, respectively ~nil~ and ~t~ in the
-@LaTeX{} export.  See ~org-export-plist-vars~ to check this list of
-options.
+
+Most of the ~org-export-with-*~ variables have the same effect in both
+HTML and @LaTeX{} exporters, except for ~:TeX-macros~ and
+~:LaTeX-fragments~ options, respectively ~nil~ and ~t~ in the @LaTeX{}
+export. See ~org-export-plist-vars~ to check this list of options.
 
 {{{vindex(org-publish-project-alist)}}}
-When a property is given a value in ~org-publish-project-alist~,
-its setting overrides the value of the corresponding user variable (if
-any) during publishing.  Options set within a file (see [[Export
+
+When a property is given a value in ~org-publish-project-alist~, its
+setting overrides the value of the corresponding user variable (if
+any) during publishing. Options set within a file (see [[Export
 options]]), however, override everything.
 
 *** Publishing links
@@ -13089,38 +13103,38 @@ options]]), however, override everything.
     :END:
 {{{cindex(links\\\, publishing)}}}
 
-To create a link from one Org file to another, you would use
-something like {{{samp([[file:foo.org][The foo]])}}} or simply
-{{{samp(file:foo.org.)}}} (see [[Hyperlinks]]).  When published, this link
-becomes a link to {{{file(foo.html)}}}.  In this way, you can interlink the
-pages of your "org web" project and the links will work as expected when
-you publish them to HTML.  If you also publish the Org source file and want
-to link to that, use an ~http:~ link instead of a ~file:~ link,
-because ~file:~ links are converted to link to the corresponding
+To create a link from one Org file to another, you would use something
+like {{{samp([[file:foo.org][The foo]])}}} or simply {{{samp(file:foo.org.)}}} (see
+[[Hyperlinks]]). When published, this link becomes a link to
+{{{file(foo.html)}}}. In this way, you can interlink the pages of your
+"org web" project and the links will work as expected when you publish
+them to HTML. If you also publish the Org source file and want to link
+to that, use an ~http:~ link instead of a ~file:~ link, because
+~file:~ links are converted to link to the corresponding
 {{{file(html)}}} file.
 
-You may also link to related files, such as images.  Provided you are careful
-with relative file names, and provided you have also configured Org to upload
-the related files, these links will work too.  See [[Complex example]], for
-an example of this usage.
+You may also link to related files, such as images. Provided you are
+careful with relative file names, and provided you have also
+configured Org to upload the related files, these links will work too.
+See [[Complex example]], for an example of this usage.
 
-Sometimes an Org file to be published may contain links that are
-only valid in your production environment, but not in the publishing
-location.  In this case, use the property
+Sometimes an Org file to be published may contain links that are only
+valid in your production environment, but not in the publishing
+location. In this case, use the following property to define a
+function for checking link validity:
 
-@multitable @columnfractions 0.4 0.6
-- ~:link-validation-function~
-@tab Function to validate links
-@end multitable
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- ~:link-validation-function~ ::
+  Function to validate links
 
-{{{noindent}}}
-to define a function for checking link validity.  This function must
-accept two arguments, the file name and a directory relative to which
-the file name is interpreted in the production environment.  If this
-function returns ~nil~, then the HTML generator will only insert a
-description into the HTML file, but no link.  One option for this
-function is ~org-publish-validate-link~ which checks if the given
-file is part of any project in ~org-publish-project-alist~.
+
+{{{noindent}}} This function must accept two arguments, the file name
+and a directory relative to which the file name is interpreted in the
+production environment. If this function returns ~nil~, then the HTML
+generator will only insert a description into the HTML file, but no
+link. One option for this function is ~org-publish-validate-link~
+which checks if the given file is part of any project in
+~org-publish-project-alist~.
 
 *** Sitemap
     :PROPERTIES:
@@ -13132,58 +13146,67 @@ file is part of any project in ~org-publish-project-alist~.
 The following properties may be used to control publishing of
 a map of files for a given project.
 
-@multitable @columnfractions 0.35 0.65
-- ~:auto-sitemap~
-@tab When non-nil, publish a sitemap during ~org-publish-current-project~
-or ~org-publish-all~.
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- ~:auto-sitemap~ ::
 
-- ~:sitemap-filename~
-@tab Filename for output of sitemap.  Defaults to {{{file(sitemap.org)}}} (which
-becomes {{{file(sitemap.html)}}}).
+  When non-nil, publish a sitemap during ~org-publish-current-project~
+  or ~org-publish-all~.
 
-- ~:sitemap-title~
-@tab Title of sitemap page.  Defaults to name of file.
+- ~:sitemap-filename~ ::
 
-- ~:sitemap-function~
-@tab Plug-in function to use for generation of the sitemap.
-Defaults to ~org-publish-org-sitemap~, which generates a plain list
-of links to all files in the project.
+  Filename for output of sitemap.  Defaults to {{{file(sitemap.org)}}} (which
+  becomes {{{file(sitemap.html)}}}).
 
-- ~:sitemap-sort-folders~
-@tab Where folders should appear in the sitemap.  Set this to ~first~
-(default) or ~last~ to display folders first or last,
-respectively.  Any other value will mix files and folders.
+- ~:sitemap-title~ ::
 
-- ~:sitemap-sort-files~
-@tab How the files are sorted in the site map.  Set this to
-~alphabetically~ (default), ~chronologically~ or
-~anti-chronologically~.  ~chronologically~ sorts the files with
-older date first while ~anti-chronologically~ sorts the files with newer
-date first.  ~alphabetically~ sorts the files alphabetically.  The date of
-a file is retrieved with ~org-publish-find-date~.
+  Title of sitemap page.  Defaults to name of file.
 
-- ~:sitemap-ignore-case~
-@tab Should sorting be case-sensitive?  Default ~nil~.
+- ~:sitemap-function~ ::
 
-- ~:sitemap-file-entry-format~
-@tab With this option one can tell how a sitemap's entry is formatted in the
-sitemap.  This is a format string with some escape sequences: ~%t~ stands
-for the title of the file, ~%a~ stands for the author of the file and
-~%d~ stands for the date of the file.  The date is retrieved with the
-~org-publish-find-date~ function and formatted with
-~org-publish-sitemap-date-format~.  Default ~%t~.
+  Plug-in function to use for generation of the sitemap. Defaults to
+  ~org-publish-org-sitemap~, which generates a plain list of links to
+  all files in the project.
 
-- ~:sitemap-date-format~
-@tab Format string for the ~format-time-string~ function that tells how
-a sitemap entry's date is to be formatted.  This property bypasses
-~org-publish-sitemap-date-format~ which defaults to ~%Y-%m-%d~.
+- ~:sitemap-sort-folders~ ::
 
-- ~:sitemap-sans-extension~
-@tab When non-nil, remove filenames' extensions from the generated sitemap.
-Useful to have cool URIs (see @uref{http://www.w3.org/Provider/Style/URI}).
-Defaults to ~nil~.
+  Where folders should appear in the sitemap. Set this to ~first~
+  (default) or ~last~ to display folders first or last, respectively.
+  Any other value will mix files and folders.
 
-@end multitable
+- ~:sitemap-sort-files~ ::
+
+  How the files are sorted in the site map. Set this to ~alphabetically~
+  (default), ~chronologically~ or ~anti-chronologically~.
+  ~chronologically~ sorts the files with older date first while
+  ~anti-chronologically~ sorts the files with newer date first.
+  ~alphabetically~ sorts the files alphabetically. The date of a file is
+  retrieved with ~org-publish-find-date~.
+
+- ~:sitemap-ignore-case~ ::
+
+  Should sorting be case-sensitive?  Default ~nil~.
+
+- ~:sitemap-file-entry-format~ ::
+
+  With this option one can tell how a sitemap's entry is formatted in
+  the sitemap. This is a format string with some escape sequences: ~%t~
+  stands for the title of the file, ~%a~ stands for the author of the
+  file and ~%d~ stands for the date of the file. The date is retrieved
+  with the ~org-publish-find-date~ function and formatted with
+  ~org-publish-sitemap-date-format~. Default ~%t~.
+
+- ~:sitemap-date-format~ ::
+
+  Format string for the ~format-time-string~ function that tells how a
+  sitemap entry's date is to be formatted. This property bypasses
+  ~org-publish-sitemap-date-format~ which defaults to ~%Y-%m-%d~.
+
+- ~:sitemap-sans-extension~ ::
+
+  When non-nil, remove filenames' extensions from the generated sitemap.
+  Useful to have cool URIs (see [[http://www.w3.org/Provider/Style/URI]]).
+  Defaults to ~nil~.
+
 
 *** Generating an index
     :PROPERTIES:
@@ -13193,11 +13216,12 @@ Defaults to ~nil~.
 
 Org mode can generate an index across the files of a publishing project.
 
-@multitable @columnfractions 0.25 0.75
-- ~:makeindex~
-@tab When non-nil, generate in index in the file {{{file(theindex.org)}}} and
-publish it as {{{file(theindex.html)}}}.
-@end multitable
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- ~:makeindex~ ::
+
+  When non-nil, generate in index in the file {{{file(theindex.org)}}}
+  and publish it as {{{file(theindex.html)}}}.
+
 
 The file will be created when first publishing a project with the
 ~:makeindex~ set.  The file only contains a statement ~#+INCLUDE:
@@ -13212,32 +13236,35 @@ a title, style information, etc.
 {{{cindex(unison)}}}
 
 For those people already utilizing third party sync tools such as
-{{{command(rsync)}}} or {{{command(unison)}}}, it might be preferable not to use the built in
-/remote/ publishing facilities of Org mode which rely heavily on
-Tramp.  Tramp, while very useful and powerful, tends not to be
-so efficient for multiple file transfer and has been known to cause problems
-under heavy usage.
+{{{command(rsync)}}} or {{{command(unison)}}}, it might be preferable
+not to use the built in /remote/ publishing facilities of Org mode
+which rely heavily on Tramp. Tramp, while very useful and powerful,
+tends not to be so efficient for multiple file transfer and has been
+known to cause problems under heavy usage.
 
-Specialized synchronization utilities offer several advantages.  In addition
-to timestamp comparison, they also do content and permissions/attribute
-checks.  For this reason you might prefer to publish your web to a local
-directory (possibly even /in place/ with your Org files) and then use
-{{{file(unison)}}} or {{{file(rsync)}}} to do the synchronization with the remote host.
+Specialized synchronization utilities offer several advantages. In
+addition to timestamp comparison, they also do content and
+permissions/attribute checks. For this reason you might prefer to
+publish your web to a local directory (possibly even /in place/ with
+your Org files) and then use {{{file(unison)}}} or {{{file(rsync)}}}
+to do the synchronization with the remote host.
 
-Since Unison (for example) can be configured as to which files to transfer to
-a certain remote destination, it can greatly simplify the project publishing
-definition.  Simply keep all files in the correct location, process your Org
-files with ~org-publish~ and let the synchronization tool do the rest.
-You do not need, in this scenario, to include attachments such as {{{file(jpg)}}},
-{{{file(css)}}} or {{{file(gif)}}} files in the project definition since the 3rd party
+Since Unison (for example) can be configured as to which files to
+transfer to a certain remote destination, it can greatly simplify the
+project publishing definition. Simply keep all files in the correct
+location, process your Org files with ~org-publish~ and let the
+synchronization tool do the rest. You do not need, in this scenario,
+to include attachments such as {{{file(jpg)}}}, {{{file(css)}}} or
+{{{file(gif)}}} files in the project definition since the 3rd party
 tool syncs them.
 
-Publishing to a local directory is also much faster than to a remote one, so
-that you can afford more easily to republish entire projects.  If you set
-~org-publish-use-timestamps-flag~ to ~nil~, you gain the main
-benefit of re-including any changed external files such as source example
-files you might include with ~#+INCLUDE:~.  The timestamp mechanism in
-Org is not smart enough to detect if included files have been modified.
+Publishing to a local directory is also much faster than to a remote
+one, so that you can afford more easily to republish entire projects.
+If you set ~org-publish-use-timestamps-flag~ to ~nil~, you gain the
+main benefit of re-including any changed external files such as source
+example files you might include with ~#+INCLUDE:~. The timestamp
+mechanism in Org is not smart enough to detect if included files have
+been modified.
 
 ** Sample configuration
    :PROPERTIES:
@@ -13279,8 +13306,9 @@ excluded.
 
 To ensure that links are preserved, care should be taken to replicate
 your directory structure on the web server, and to use relative file
-paths.  For example, if your Org files are kept in {{{file(~/org)}}} and your
-publishable images in {{{file(~/images)}}}, you would link to an image with
+paths. For example, if your Org files are kept in {{{file(~/org)}}}
+and your publishable images in {{{file(~/images)}}}, you would link to
+an image with
 
 #+begin_example
 file:../images/myimage.png
@@ -13325,28 +13353,36 @@ right place on the web server, and publishing images to it.
    :END:
 Once properly configured, Org can publish with the following commands:
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
+#+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c C-e X)}}} ~org-publish~ ::
   {{{kindex(C-c C-e X)}}}
-Prompt for a specific project and publish all files that belong to it.
+  
+  Prompt for a specific project and publish all files that belong to it.
+
 - {{{kbd(C-c C-e P)}}} ~org-publish-current-project~ ::
   {{{kindex(C-c C-e P)}}}
-Publish the project containing the current file.
+
+  Publish the project containing the current file.
+
 - {{{kbd(C-c C-e F)}}} ~org-publish-current-file~ ::
   {{{kindex(C-c C-e F)}}}
-Publish only the current file.
+
+  Publish only the current file.
+
 - {{{kbd(C-c C-e E)}}} ~org-publish-all~ ::
   {{{kindex(C-c C-e E)}}}
-Publish every project.
+
+  Publish every project.
 
 
 {{{vindex(org-publish-use-timestamps-flag)}}}
-Org uses timestamps to track when a file has changed.  The above functions
-normally only publish changed files.  You can override this and force
-publishing of all files by giving a prefix argument to any of the commands
-above, or by customizing the variable ~org-publish-use-timestamps-flag~.
-This may be necessary in particular if files include other files via
-~#+SETUPFILE:~ or ~#+INCLUDE:~.
+
+Org uses timestamps to track when a file has changed. The above
+functions normally only publish changed files. You can override this
+and force publishing of all files by giving a prefix argument to any
+of the commands above, or by customizing the variable
+~org-publish-use-timestamps-flag~. This may be necessary in particular
+if files include other files via ~#+SETUPFILE:~ or ~#+INCLUDE:~.
 
 * FIXME Working with source code                                   :noexport:
   :PROPERTIES:
@@ -18301,6 +18337,14 @@ variable ~org-icalendar-categories~.
 
 [fn:152] The LOCATION property can be inherited from higher in the
 hierarchy if you configure ~org-use-property-inheritance~ accordingly.
+
+[fn:153] The files {{{{file(file-source.org)}}} and
+{{{file(file-source.org.html)}}} if source and publishing directories
+are equal. Note that with this kind of setup, you need to add
+~:exclude "-source\\.org"~ to the project definition in
+~org-publish-project-alist~ to prevent the published source files from
+being considered as new org files the next time the project is
+published.
 
 * About orgmanual.org                                              :noexport:
 This document intends to be Org mode source for the Org mode manual
