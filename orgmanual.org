@@ -16491,7 +16491,7 @@ To use org-crypt it is suggested that you have the following in your
 Excluding the crypt tag from inheritance prevents already encrypted text
 being encrypted again.
 
-* FIXED Hacking                                                    :noexport:
+* FIXED Hacking
   :PROPERTIES:
   :DESCRIPTION: How to hack your way around
   :END:
@@ -17518,60 +17518,59 @@ The following example counts the number of entries with TODO keyword
 (length (org-map-entries t "/+WAITING" 'agenda))
 #+end_src
 
-* FIXME MobileOrg                                                  :noexport:
+* FIXED MobileOrg
   :PROPERTIES:
   :DESCRIPTION: Viewing and capture on a mobile device
   :END:
 {{{cindex(iPhone)}}}
 {{{cindex(MobileOrg)}}}
+{{{cindex(Moreland\\\, Richard)}}}
+{{{cindex(Jones\\\, Matt)}}}
 
-/MobileOrg/ is the name of the mobile companion app for Org mode, currently
-available for iOS and for Android.  /MobileOrg/ offers offline viewing and
-capture support for an Org mode system rooted on a ``real'' computer.  It
-does also allow you to record changes to existing entries.
-The @uref{http://mobileorg.ncogni.to/, iOS implementation} for the
-/iPhone/iPod Touch/iPad/ series of devices, was developed by Richard
-Moreland.  Android users should check out
-@uref{http://wiki.github.com/matburt/mobileorg-android/, MobileOrg Android}
-by Matt Jones.  The two implementations are not identical but offer similar
-features.
+/MobileOrg/ is the name of the mobile companion app for Org mode,
+currently available for iOS and for Android. /MobileOrg/ offers
+offline viewing and capture support for an Org mode system rooted on a
+``real'' computer. It does also allow you to record changes to
+existing entries. The [[http://mobileorg.ncogni.to/][iOS implementation]] for the /iPhone/iPod
+Touch/iPad/ series of devices, was developed by Richard Moreland.
+Android users should check out [[http://wiki.github.com/matburt/mobileorg-android/][MobileOrg Android]] by Matt Jones. The
+two implementations are not identical but offer similar features.
 
-This appendix describes the support Org has for creating agenda views in a
-format that can be displayed by /MobileOrg/, and for integrating notes
-captured and changes made by /MobileOrg/ into the main system.
+This appendix describes the support Org has for creating agenda views
+in a format that can be displayed by /MobileOrg/, and for integrating
+notes captured and changes made by /MobileOrg/ into the main system.
 
-For changing tags and TODO states in MobileOrg, you should have set up the
-customization variables ~org-todo-keywords~ and ~org-tags-alist~ to
-cover all important tags and TODO keywords, even if individual files use only
-part of these.  MobileOrg will also offer you states and tags set up with
-in-buffer settings, but it will understand the logistics of TODO state
-/sets/ (see [[Per-file keywords]]) and /mutually exclusive/ tags
-(see [[Setting tags]]) only for those set in these variables.
+For changing tags and TODO states in MobileOrg, you should have set up
+the customization variables ~org-todo-keywords~ and ~org-tags-alist~
+to cover all important tags and TODO keywords, even if individual
+files use only part of these. MobileOrg will also offer you states and
+tags set up with in-buffer settings, but it will understand the
+logistics of TODO state /sets/ (see [[Per-file keywords]]) and /mutually
+exclusive/ tags (see [[Setting tags]]) only for those set in these
+variables.
 
 ** Setting up the staging area
    :PROPERTIES:
    :DESCRIPTION: Where to interact with the mobile device
    :END:
-MobileOrg needs to interact with Emacs through a directory on a server.  If you
-are using a public server, you should consider to encrypt the files that are
-uploaded to the server.  This can be done with Org mode 7.02 and with
-/MobileOrg 1.5/ (iPhone version), and you need an {{{file(openssl)}}}
-installation on your system.  To turn on encryption, set a password in
-/MobileOrg/ and, on the Emacs side, configure the variable
-~org-mobile-use-encryption~@footnote{If you can safely store the
-password in your Emacs setup, you might also want to configure
-~org-mobile-encryption-password~.  Please read the docstring of that
-variable.  Note that encryption will apply only to the contents of the
-{{{file(.org)}}} files.  The file names themselves will remain visible.}.
 
-The easiest way to create that directory is to use a free
-@uref{http://dropbox.com,Dropbox.com} account@footnote{If you cannot use
-Dropbox, or if your version of MobileOrg does not support it, you can use a
-webdav server.  For more information, check out the documentation of MobileOrg and also this
-@uref{http://orgmode.org/worg/org-faq.html#mobileorg_webdav, FAQ entry}.}.
-When MobileOrg first connects to your Dropbox, it will create a directory
-/MobileOrg/ inside the Dropbox.  After the directory has been created, tell
-Emacs about it:
+MobileOrg needs to interact with Emacs through a directory on a
+server. If you are using a public server, you should consider to
+encrypt the files that are uploaded to the server. This can be done
+with Org mode 7.02 and with /MobileOrg 1.5/ (iPhone version), and you
+need an {{{file(openssl)}}} installation on your system. To turn on
+encryption, set a password in /MobileOrg/ and, on the Emacs side,
+configure the variable ~org-mobile-use-encryption~@footnote{If you can
+safely store the password in your Emacs setup, you might also want to
+configure ~org-mobile-encryption-password~. Please read the docstring
+of that variable. Note that encryption will apply only to the contents
+of the {{{file(.org)}}} files. The file names themselves will remain
+visible.}.
+
+The easiest way to create that directory is to use a free [[http://dropbox.com][Dropbox]]
+account.[fn:173] When MobileOrg first connects to your Dropbox, it
+will create a directory /MobileOrg/ inside the Dropbox. After the
+directory has been created, tell Emacs about it:
 
 #+header: :eval no
 #+header: :exports code
@@ -17579,84 +17578,78 @@ Emacs about it:
 (setq org-mobile-directory "~/Dropbox/MobileOrg")
 #+end_src
 
-Org mode has commands to put files for /MobileOrg/ into that directory,
-and to read captured notes from there.
+Org mode has commands to put files for /MobileOrg/ into that
+directory, and to read captured notes from there.
 
 ** Pushing to MobileOrg
    :PROPERTIES:
    :DESCRIPTION: Uploading Org files and agendas
    :END:
+
 This operation copies all files currently listed in ~org-mobile-files~
-to the directory ~org-mobile-directory~.  By default this list contains
-all agenda files (as listed in ~org-agenda-files~), but additional files
-can be included by customizing ~org-mobile-files~.  File names will be
-staged with paths relative to ~org-directory~, so all files should be
-inside this directory.  The push operation also creates a special Org file
-{{{file(agendas.org)}}} with all custom agenda view defined by the
-user@footnote{While creating the agendas, Org mode will force ID properties
-on all referenced entries, so that these entries can be uniquely identified
-if /MobileOrg/ flags them for further action.  If you do not want to get
-these properties in so many entries, you can set the variable
-~org-mobile-force-id-on-agenda-items~ to ~nil~.  Org mode will then
-rely on outline paths, in the hope that these will be unique enough.}.
-Finally, Org writes the file {{{file(index.org)}}}, containing links to all other
-files.  /MobileOrg/ first reads this file from the server, and then
-downloads all agendas and Org files listed in it.  To speed up the download,
+to the directory ~org-mobile-directory~. By default this list contains
+all agenda files (as listed in ~org-agenda-files~), but additional
+files can be included by customizing ~org-mobile-files~. File names
+will be staged with paths relative to ~org-directory~, so all files
+should be inside this directory. The push operation also creates a
+special Org file {{{file(agendas.org)}}} with all custom agenda view
+defined by the user.[fn:174] Finally, Org writes the file
+{{{file(index.org)}}}, containing links to all other files.
+/MobileOrg/ first reads this file from the server, and then downloads
+all agendas and Org files listed in it. To speed up the download,
 MobileOrg will only read files whose checksums have changed.[fn:116]
 
 ** Pulling from MobileOrg
    :PROPERTIES:
    :DESCRIPTION: Integrating captured and flagged items
    :END:
-When /MobileOrg/ synchronizes with the server, it not only pulls the Org
-files for viewing.  It also appends captured entries and pointers to flagged
-and changed entries to the file {{{file(mobileorg.org)}}} on the server.  Org has
-a /pull/ operation that integrates this information into an inbox file
-and operates on the pointers to flagged entries.  Here is how it works:
 
-@enumerate
-- 
-Org moves all entries found in
-{{{file(mobileorg.org)}}}@footnote{{{{file(mobileorg.org)}}} will be empty after this
-operation.} and appends them to the file pointed to by the variable
-~org-mobile-inbox-for-pull~.  Each captured entry and each editing event
-will be a top-level entry in the inbox file.
-- 
-After moving the entries, Org will attempt to implement the changes made in
-/MobileOrg/.  Some changes are applied directly and without user
-interaction.  Examples are all changes to tags, TODO state, headline and body
-text that can be cleanly applied.  Entries that have been flagged for further
-action will receive a tag ~:FLAGGED:~, so that they can be easily found
-again.  When there is a problem finding an entry or applying the change, the
-pointer entry will remain in the inbox and will be marked with an error
-message.  You need to later resolve these issues by hand.
-- 
-Org will then generate an agenda view with all flagged entries.  The user
-should then go through these entries and do whatever actions are necessary.
-If a note has been stored while flagging an entry in /MobileOrg/, that note
-will be displayed in the echo area when the cursor is on the corresponding
-agenda line.
-#+attr_texinfo: :table-type "table" :indic "@kbd"
-{{{kindex(?)}}}
-- ?
-Pressing {{{kbd(?)}}} in that special agenda will display the full flagging note in
-another window and also push it onto the kill ring.  So you could use {{{kbd(?
-z C-y C-c C-c)}}} to store that flagging note as a normal note in the entry.
-Pressing {{{kbd(?)}}} twice in succession will offer to remove the
-~:FLAGGED:~ tag along with the recorded flagging note (which is stored
-in a property).  In this way you indicate that the intended processing for
-this flagged entry is finished.
+When /MobileOrg/ synchronizes with the server, it not only pulls the
+Org files for viewing. It also appends captured entries and pointers
+to flagged and changed entries to the file {{{file(mobileorg.org)}}}
+on the server. Org has a /pull/ operation that integrates this
+information into an inbox file and operates on the pointers to flagged
+entries. Here is how it works:
 
-@end enumerate
+1. Org moves all entries found in {{{file(mobileorg.org)}}} and
+   appends them to the file pointed to by the variable
+   ~org-mobile-inbox-for-pull~. [fn:175] Each captured entry and each
+   editing event will be a top-level entry in the inbox file.
+
+2. After moving the entries, Org will attempt to implement the changes
+   made in /MobileOrg/. Some changes are applied directly and without
+   user interaction. Examples are all changes to tags, TODO state,
+   headline and body text that can be cleanly applied. Entries that
+   have been flagged for further action will receive a tag
+   ~:FLAGGED:~, so that they can be easily found again. When there is
+   a problem finding an entry or applying the change, the pointer
+   entry will remain in the inbox and will be marked with an error
+   message. You need to later resolve these issues by hand.
+
+3. Org will then generate an agenda view with all flagged entries. The
+   user should then go through these entries and do whatever actions
+   are necessary. If a note has been stored while flagging an entry in
+   /MobileOrg/, that note will be displayed in the echo area when the
+   cursor is on the corresponding agenda line.
+
+   #+attr_texinfo: :table-type "table" :indic "@kbd"
+   - {{{kbd(?)}}} ::
+     {{{kindex(?)}}}
+
+     Pressing {{{kbd(?)}}} in that special agenda will display the full
+     flagging note in another window and also push it onto the kill ring.
+     So you could use {{{kbd(? z C-y C-c C-c)}}} to store that flagging
+     note as a normal note in the entry. Pressing {{{kbd(?)}}} twice in
+     succession will offer to remove the ~:FLAGGED:~ tag along with the
+     recorded flagging note (which is stored in a property). In this way
+     you indicate that the intended processing for this flagged entry is
+     finished.
+
 
 {{{kindex(C-c a ?)}}}
+
 If you are not able to process all flagged entries directly, you can always
-return to this agenda view@footnote{Note, however, that there is a subtle
-difference.  The view created automatically by {{{kbdkey(M-x org-mobile-pull
-,RET)}}} is guaranteed to search all files that have been addressed by the
-last pull.  This might include a file that is not currently in your list of
-agenda files.  If you later use {{{kbd(C-c a ?)}}} to regenerate the view, only
-the current agenda files will be searched.} using {{{kbd(C-c a ?)}}}.
+return to this agenda view using {{{kbd(C-c a ?)}}}.[fn:176]
 
 * FIXME History and acknowledgments                                :noexport:
   :PROPERTIES:
@@ -18697,6 +18690,29 @@ during HTML export.
 
 [fn:172] Note that, when using ~org-odd-levels-only~, a level number
 corresponds to order in the hierarchy, not to the number of stars.
+
+[fn:173] If you cannot use Dropbox, or if your version of MobileOrg
+does not support it, you can use a webdav server. For more
+information, check out the documentation of MobileOrg and also this
+[[http://orgmode.org/worg/org-faq.html#mobileorg_webdav][FAQ entry]].
+
+[fn:174] While creating the agendas, Org mode will force ID properties
+on all referenced entries, so that these entries can be uniquely
+identified if /MobileOrg/ flags them for further action. If you do not
+want to get these properties in so many entries, you can set the
+variable ~org-mobile-force-id-on-agenda-items~ to ~nil~. Org mode will
+then rely on outline paths, in the hope that these will be unique
+enough.
+
+[fn:175] The file {{{{file(mobileorg.org)}}} will be empty after this
+operation.
+
+[fn:176] Note, however, that there is a subtle difference. The view
+created automatically by {{{kbdkey(M-x org-mobile-pull ,RET)}}} is
+guaranteed to search all files that have been addressed by the last
+pull. This might include a file that is not currently in your list of
+agenda files. If you later use {{{kbd(C-c a ?)}}} to regenerate the
+view, only the current agenda files will be searched.
 
 * About orgmanual.org                                              :noexport:
 This document intends to be Org mode source for the Org mode manual
