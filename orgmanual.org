@@ -58,6 +58,10 @@
 #+MACRO: var {{{markup(var,$1)}}}
 
 #+MACRO: noindent @@info:@noindent@@
+#+MACRO: defun @@info:@defun@@
+#+MACRO: enddefun @@info:@end defun@@
+#+MACRO: defopt @@info:@defopt@@
+#+MACRO: enddefopt @@info:@end defopt@@
 
 * FIXED Introduction
   :PROPERTIES:
@@ -16487,7 +16491,7 @@ To use org-crypt it is suggested that you have the following in your
 Excluding the crypt tag from inheritance prevents already encrypted text
 being encrypted again.
 
-* FIXME Hacking                                                    :noexport:
+* FIXED Hacking                                                    :noexport:
   :PROPERTIES:
   :DESCRIPTION: How to hack your way around
   :END:
@@ -16506,7 +16510,7 @@ Org has a large number of hook variables that can be used to add
 functionality.  This appendix about hacking is going to illustrate the
 use of some of them.  A complete list of all hooks with documentation is
 maintained by the Worg project and can be found at
-@uref{http://orgmode.org/worg/org-configs/org-hooks.php}.
+[[http://orgmode.org/worg/org-configs/org-hooks.php]].
 
 ** Add-on packages
    :PROPERTIES:
@@ -16514,12 +16518,13 @@ maintained by the Worg project and can be found at
    :END:
 {{{cindex(add-on packages)}}}
 
-A large number of add-on packages have been written by various authors.
-These packages are not part of Emacs, but they are distributed as contributed
-packages with the separate release available at the Org mode home page at
-@uref{http://orgmode.org}.  The list of contributed packages, along with
-documentation about each package, is maintained by the Worg project at
-@uref{http://orgmode.org/worg/org-contrib/}.
+A large number of add-on packages have been written by various
+authors. These packages are not part of Emacs, but they are
+distributed as contributed packages with the separate release
+available at the Org mode home page at [[http://orgmode.org]]. The
+list of contributed packages, along with documentation about each
+package, is maintained by the Worg project at
+[[http://orgmode.org/worg/org-contrib/]].
 
 ** Adding hyperlink types
    :PROPERTIES:
@@ -16527,13 +16532,14 @@ documentation about each package, is maintained by the Worg project at
    :END:
 {{{cindex(hyperlinks\\\, adding new types)}}}
 
-Org has a large number of hyperlink types built-in
-(see [[Hyperlinks]]).  If you would like to add new link types, Org
-provides an interface for doing so.  Let's look at an example file,
-{{{file(org-man.el)}}}, that will add support for creating links like
-{{{samp([[man:printf][The printf manpage]])}}} to show Unix manual pages inside
-Emacs:
+Org has a large number of hyperlink types built-in (see [[Hyperlinks]]).
+If you would like to add new link types, Org provides an interface for
+doing so. Let's look at an example file, {{{file(org-man.el)}}}, that
+will add support for creating links like {{{samp([[man:printf][The printf
+manpage]])}}} to show Unix manual pages inside Emacs:
 
+#+header: :eval no
+#+header: :exports code
 #+begin_src emacs-lisp
 ;;; org-man.el - Support for links to manpages in Org
 
@@ -16576,55 +16582,56 @@ PATH should be a topic that can be thrown at the man command."
 ;;; org-man.el ends here
 #+end_src
 
-{{{noindent}}}
-You would activate this new link type in {{{file(.emacs)}}} with
+{{{noindent}}} You would activate this new link type in
+{{{file(.emacs)}}} with:
 
+#+header: :eval no
+#+header: :exports code
 #+begin_src emacs-lisp
 (require 'org-man)
 #+end_src
 
-{{{noindent}}}
-Let's go through the file and see what it does.
-@enumerate
-- 
-It does ~(require 'org)~ to make sure that {{{file(org.el)}}} has been
-loaded.
-- 
-The next line calls ~org-add-link-type~ to define a new link type
-with prefix {{{samp(man)}}}.  The call also contains the name of a function
-that will be called to follow such a link.
-- 
+{{{noindent}}} Let's go through the file and see what it does.
 {{{vindex(org-store-link-functions)}}}
-The next line adds a function to ~org-store-link-functions~, in
-order to allow the command {{{kbd(C-c l)}}} to record a useful link in a
-buffer displaying a man page.
-@end enumerate
+
+1. It does ~(require 'org)~ to make sure that {{{file(org.el)}}} has
+   been loaded.
+
+2. The next line calls ~org-add-link-type~ to define a new link type
+   with prefix {{{samp(man)}}}.  The call also contains the name of a
+   function that will be called to follow such a link.
+
+3. The next line adds a function to ~org-store-link-functions~, in
+   order to allow the command {{{kbd(C-c l)}}} to record a useful link
+   in a buffer displaying a man page.
+   
 
 The rest of the file defines the necessary variables and functions.
 First there is a customization variable that determines which Emacs
-command should be used to display man pages.  There are two options,
-~man~ and ~woman~.  Then the function to follow a link is
-defined.  It gets the link path as an argument---in this case the link
-path is just a topic for the manual command.  The function calls the
-value of ~org-man-command~ to display the man page.
+command should be used to display man pages. There are two options,
+~man~ and ~woman~. Then the function to follow a link is defined. It
+gets the link path as an argument---in this case the link path is just
+a topic for the manual command. The function calls the value of
+~org-man-command~ to display the man page.
 
-Finally the function ~org-man-store-link~ is defined.  When you try
-to store a link with {{{kbd(C-c l)}}}, this function will be called to
-try to make a link.  The function must first decide if it is supposed to
-create the link for this buffer type; we do this by checking the value
-of the variable ~major-mode~.  If not, the function must exit and
-return the value ~nil~.  If yes, the link is created by getting the
+Finally the function ~org-man-store-link~ is defined. When you try to
+store a link with {{{kbd(C-c l)}}}, this function will be called to
+try to make a link. The function must first decide if it is supposed
+to create the link for this buffer type; we do this by checking the
+value of the variable ~major-mode~. If not, the function must exit and
+return the value ~nil~. If yes, the link is created by getting the
 manual topic from the buffer name and prefixing it with the string
-{{{samp(man:)}}}.  Then it must call the command ~org-store-link-props~
-and set the ~:type~ and ~:link~ properties.  Optionally you
-can also set the ~:description~ property to provide a default for
-the link description when the link is later inserted into an Org
-buffer with {{{kbd(C-c C-l)}}}.
+{{{samp(man:)}}}. Then it must call the command ~org-store-link-props~
+and set the ~:type~ and ~:link~ properties. Optionally you can also
+set the ~:description~ property to provide a default for the link
+description when the link is later inserted into an Org buffer with
+{{{kbd(C-c C-l)}}}.
 
-When it makes sense for your new link type, you may also define a function
-~org-PREFIX-complete-link~ that implements special (e.g.@: completion)
-support for inserting such a link with {{{kbd(C-c C-l)}}}.  Such a function should
-not accept any arguments, and return the full link with prefix.
+When it makes sense for your new link type, you may also define a
+function ~org-PREFIX-complete-link~ that implements special (e.g.,
+completion) support for inserting such a link with {{{kbd(C-c C-l)}}}.
+Such a function should not accept any arguments, and return the full
+link with prefix.
 
 ** Context-sensitive commands
    :PROPERTIES:
@@ -16634,19 +16641,20 @@ not accept any arguments, and return the full link with prefix.
 {{{cindex(add-ons\\\, context-sensitive commands)}}}
 {{{vindex(org-ctrl-c-ctrl-c-hook)}}}
 
-Org has several commands that act differently depending on context.  The most
-important example is the {{{kbd(C-c C-c)}}} (see [[The very busy C-c C-c key]]).
-Also the {{{kbd(M-cursor)}}} and {{{kbd(M-S-cursor)}}} keys have this property.
+Org has several commands that act differently depending on context.
+The most important example is the {{{kbd(C-c C-c)}}} (see [[The very
+busy C-c C-c key]]). Also the {{{kbd(M-cursor)}}} and
+{{{kbd(M-S-cursor)}}} keys have this property.
 
-Add-ons can tap into this functionality by providing a function that detects
-special context for that add-on and executes functionality appropriate for
-the context.  Here is an example from Dan Davison's {{{file(org-R.el)}}} which
-allows you to evaluate commands based on the {{{file(R)}}} programming language
-@footnote{{{{file(org-R.el)}}} has been replaced by the Org mode functionality
-described in [[Working With Source Code]] and is now obsolete.}.  For this
-package, special contexts are lines that start with ~#+R:~ or
-~#+RR:~.
+Add-ons can tap into this functionality by providing a function that
+detects special context for that add-on and executes functionality
+appropriate for the context. Here is an example from Dan Davison's
+{{{file(org-R.el)}}} which allows you to evaluate commands based on
+the {{{file(R)}}} programming language.[fn:168] For this package,
+special contexts are lines that start with ~#+R:~ or ~#+RR:~.
 
+#+header: :eval no
+#+header: :exports code
 #+begin_src emacs-lisp
 (defun org-R-apply-maybe ()
   "Detect if this is context for org-R and execute R commands."
@@ -16660,11 +16668,12 @@ package, special contexts are lines that start with ~#+R:~ or
 (add-hook 'org-ctrl-c-ctrl-c-hook 'org-R-apply-maybe)
 #+end_src
 
-The function first checks if the cursor is in such a line.  If that is the
-case, ~org-R-apply~ is called and the function returns ~t~ to
-signal that action was taken, and {{{kbd(C-c C-c)}}} will stop looking for other
-contexts.  If the function finds it should do nothing locally, it returns
-~nil~ so that other, similar functions can have a try.
+The function first checks if the cursor is in such a line. If that is
+the case, ~org-R-apply~ is called and the function returns ~t~ to
+signal that action was taken, and {{{kbd(C-c C-c)}}} will stop looking
+for other contexts. If the function finds it should do nothing
+locally, it returns ~nil~ so that other, similar functions can have a
+try.
 
 ** Tables in arbitrary syntax
    :PROPERTIES:
@@ -16675,11 +16684,11 @@ contexts.  If the function finds it should do nothing locally, it returns
 {{{cindex(Orgtbl mode)}}}
 
 Since Orgtbl mode can be used as a minor mode in arbitrary buffers, a
-frequent feature request has been to make it work with native tables in
-specific languages, for example @LaTeX{}.  However, this is extremely
-hard to do in a general way, would lead to a customization nightmare,
-and would take away much of the simplicity of the Orgtbl mode table
-editor.
+frequent feature request has been to make it work with native tables
+in specific languages, for example @LaTeX{}. However, this is
+extremely hard to do in a general way, would lead to a customization
+nightmare, and would take away much of the simplicity of the Orgtbl
+mode table editor.
 
 This appendix describes a different approach.  We keep the Orgtbl mode
 table in its native format (the /source table/), and use a custom
@@ -16688,10 +16697,10 @@ function to /translate/ the table to the correct syntax, and to
 the burden of writing conversion functions on the user, but it allows
 for a very flexible system.
 
-Bastien added the ability to do the same with lists, in Orgstruct mode.  You
-can use Org's facilities to edit and structure lists by turning
-~orgstruct-mode~ on, then locally exporting such lists in another format
-(HTML, @LaTeX{} or Texinfo.)
+Bastien added the ability to do the same with lists, in Orgstruct
+mode. You can use Org's facilities to edit and structure lists by
+turning ~orgstruct-mode~ on, then locally exporting such lists in
+another format (HTML, @LaTeX{} or Texinfo.)
 
 *** Radio tables
     :PROPERTIES:
@@ -16699,90 +16708,88 @@ can use Org's facilities to edit and structure lists by turning
     :END:
 {{{cindex(radio tables)}}}
 
-To define the location of the target table, you first need to create two
-lines that are comments in the current mode, but contain magic words for
-Orgtbl mode to find.  Orgtbl mode will insert the translated table
-between these lines, replacing whatever was there before.  For example:
+To define the location of the target table, you first need to create
+two lines that are comments in the current mode, but contain magic
+words for Orgtbl mode to find. Orgtbl mode will insert the translated
+table between these lines, replacing whatever was there before. For
+example:
 
 #+begin_example
 /* BEGIN RECEIVE ORGTBL table_name */
 /* END RECEIVE ORGTBL table_name */
 #+end_example
 
-{{{noindent}}}
-Just above the source table, we put a special line that tells
-Orgtbl mode how to translate this table and where to install it.  For
-example:
+{{{noindent}}} Just above the source table, we put a special line that
+tells Orgtbl mode how to translate this table and where to install it.
+For example: 
+
 {{{cindex(#+ORGTBL)}}}
 #+begin_example
 #+ORGTBL: SEND table_name translation_function arguments....
 #+end_example
 
-{{{noindent}}}
-~table_name~ is the reference name for the table that is also used
-in the receiver lines.  ~translation_function~ is the Lisp function
-that does the translation.  Furthermore, the line can contain a list of
-arguments (alternating key and value) at the end.  The arguments will be
-passed as a property list to the translation function for
-interpretation.  A few standard parameters are already recognized and
-acted upon before the translation function is called:
+{{{noindent}}} Here, ~table_name~ is the reference name for the table
+that is also used in the receiver lines. ~translation_function~ is the
+Lisp function that does the translation. Furthermore, the line can
+contain a list of arguments (alternating key and value) at the end.
+The arguments will be passed as a property list to the translation
+function for interpretation. A few standard parameters are already
+recognized and acted upon before the translation function is called:
 
-#+attr_texinfo: :table-type "table" :indic "@code"
-- :skip N
-Skip the first N lines of the table.  Hlines do count as separate lines for
-this parameter!
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- ~:skip N~ ::
 
-- :skipcols (n1 n2 ...)
-List of columns that should be skipped.  If the table has a column with
-calculation marks, that column is automatically discarded as well.
-Please note that the translator function sees the table /after/ the
-removal of these columns, the function never knows that there have been
-additional columns.
+  Skip the first N lines of the table. Hlines do count as separate lines
+  for this parameter!
 
-- :no-escape t
-When non-nil, do not escape special characters ~&%#_^~ when exporting
-the table.  The default value is nil.
+- ~:skipcols (n1 n2 ...)~ ::
+
+  List of columns that should be skipped. If the table has a column with
+  calculation marks, that column is automatically discarded as well.
+  Please note that the translator function sees the table /after/ the
+  removal of these columns, the function never knows that there have
+  been additional columns.
+
+- ~:no-escape t~ ::
+
+  When non-nil, do not escape special characters ~&%#_^~ when exporting
+  the table. The default value is nil.
 
 
-{{{noindent}}}
-The one problem remaining is how to keep the source table in the buffer
-without disturbing the normal workings of the file, for example during
-compilation of a C file or processing of a @LaTeX{} file.  There are a
-number of different solutions:
+{{{noindent}}} The one problem remaining is how to keep the source
+table in the buffer without disturbing the normal workings of the
+file, for example during compilation of a C file or processing of a
+@LaTeX{} file. There are a number of different solutions:
 
-@itemize @bullet
-- 
-The table could be placed in a block comment if that is supported by the
-language.  For example, in C mode you could wrap the table between
-{{{samp(/*)}}} and {{{samp(*/)}}} lines.
-- 
-Sometimes it is possible to put the table after some kind of /END/
-statement, for example {{{samp(\bye)}}} in @TeX{} and {{{samp(\end@{document@})}}}
-in @LaTeX{}.
-- 
-You can just comment the table line-by-line whenever you want to process
-the file, and uncomment it whenever you need to edit the table.  This
-only sounds tedious---the command {{{kbd(M-x orgtbl-toggle-comment)}}}
-makes this comment-toggling very easy, in particular if you bind it to a
-key.
-@end itemize
+- The table could be placed in a block comment if that is supported by
+  the language.  For example, in C mode you could wrap the table
+  between {{{samp(/*)}}} and {{{samp(*/)}}} lines.
+
+- Sometimes it is possible to put the table after some kind of /END/
+  statement, for example {{{samp(\bye)}}} in @TeX{} and
+  {{{samp(\end@{document@})}}} in @LaTeX{}.
+
+- You can just comment the table line-by-line whenever you want to
+  process the file, and uncomment it whenever you need to edit the
+  table.  This only sounds tedious---the command {{{kbd(M-x
+  orgtbl-toggle-comment)}}} makes this comment-toggling very easy, in
+  particular if you bind it to a key.
+
 
 *** A @LaTeX{} example
     :PROPERTIES:
     :DESCRIPTION: Step by step, almost a tutorial
     :TITLE:    A @LaTeX{} example of radio tables
     :END:
-{{{cindex(@LaTeX{}, and Orgtbl mode)}}}
+{{{cindex(@LaTeX{}\\\, and Orgtbl mode)}}}
 
 The best way to wrap the source table in @LaTeX{} is to use the
-~comment~ environment provided by {{{file(comment.sty)}}}.  It has to be
-activated by placing ~\usepackage@{comment@~} into the document
-header.  Orgtbl mode can insert a radio table skeleton@footnote{By
-default this works only for @LaTeX{}, HTML, and Texinfo.  Configure the
-variable ~orgtbl-radio-tables~ to install templates for other
-modes.}  with the command {{{kbd(M-x orgtbl-insert-radio-table)}}}.  You will
-be prompted for a table name, let's say we use {{{samp(salesfigures)}}}.  You
-will then get the following template:
+~comment~ environment provided by {{{file(comment.sty)}}}. It has to
+be activated by placing ~\usepackage@{comment@~} into the document
+header. Orgtbl mode can insert a radio table skeleton with the command
+{{{kbd(M-x orgtbl-insert-radio-table)}}}.[fn:169] You will be prompted
+for a table name, let's say we use {{{samp(salesfigures)}}}. You will
+then get the following template:
 
 {{{cindex(#+ORGTBL\\\, SEND)}}}
 #+begin_example
@@ -16794,19 +16801,12 @@ will then get the following template:
 \end@{comment@}
 #+end_example
 
-{{{noindent}}}
 {{{vindex(@LaTeX{}-verbatim-environments)}}}
-The ~#+ORGTBL: SEND~ line tells Orgtbl mode to use the function
-~orgtbl-to-latex~ to convert the table into @LaTeX{} and to put it
-into the receiver location with name ~salesfigures~.  You may now
-fill in the table---feel free to use the spreadsheet features@footnote{If
-the {{{samp(#+TBLFM)}}} line contains an odd number of dollar characters,
-this may cause problems with font-lock in @LaTeX{} mode.  As shown in the
-example you can fix this by adding an extra line inside the
-~comment~ environment that is used to balance the dollar
-expressions.  If you are using AUC@TeX{} with the font-latex library, a
-much better solution is to add the ~comment~ environment to the
-variable ~LaTeX-verbatim-environments~.}:
+
+{{{noindent}}} The ~#+ORGTBL: SEND~ line tells Orgtbl mode to use the
+function ~orgtbl-to-latex~ to convert the table into @LaTeX{} and to
+put it into the receiver location with name ~salesfigures~. You may
+now fill in the table---feel free to use the spreadsheet features:[fn:170]
 
 #+begin_example
 % BEGIN RECEIVE ORGTBL salesfigures
@@ -16823,15 +16823,15 @@ variable ~LaTeX-verbatim-environments~.}:
 \end@{comment@}
 #+end_example
 
-{{{noindent}}}
-When you are done, press {{{kbd(C-c C-c)}}} in the table to get the converted
-table inserted between the two marker lines.
+{{{noindent}}} When you are done, press {{{kbd(C-c C-c)}}} in the
+table to get the converted table inserted between the two marker
+lines.
 
-Now let's assume you want to make the table header by hand, because you
-want to control how columns are aligned, etc@.  In this case we make sure
-that the table translator skips the first 2 lines of the source
-table, and tell the command to work as a /splice/, i.e.@: to not produce
-header and footer commands of the target table:
+Now let's assume you want to make the table header by hand, because
+you want to control how columns are aligned, etc. In this case we make
+sure that the table translator skips the first 2 lines of the source
+table, and tell the command to work as a /splice/, i.e., to not
+produce header and footer commands of the target table:
 
 #+begin_example
 \begin@{tabular@}@{lrrr@}
@@ -16852,32 +16852,34 @@ Month & \multicolumn@{1@}@{c@}@{Days@} & Nr.\ sold & per day\\
 #+end_example
 
 The @LaTeX{} translator function ~orgtbl-to-latex~ is already part of
-Orgtbl mode.  It uses a ~tabular~ environment to typeset the table
-and marks horizontal lines with ~\hline~.  Furthermore, it
-interprets the following parameters (see also see [[Translator functions]]):
+Orgtbl mode. It uses a ~tabular~ environment to typeset the table and
+marks horizontal lines with ~\hline~. Furthermore, it interprets the
+following parameters (see also see [[Translator functions]]):
 
 #+attr_texinfo: :table-type "table" :indic "@code"
-- :splice nil/t
-When set to t, return only table body lines, don't wrap them into a
-tabular environment.  Default is nil.
+- ~:splice nil/t~ ::
 
-- :fmt fmt
-A format to be used to wrap each field, it should contain ~%s~ for the
-original field value.  For example, to wrap each field value in dollars,
-you could use ~:fmt "$%s$"~.  This may also be a property list with
-column numbers and formats, for example ~:fmt (2 "$%s$" 4 "%s\\%%")~.
-A function of one argument can be used in place of the strings; the
-function must return a formatted string.
+  When set to ~t~, return only table body lines, don't wrap them into a
+  tabular environment. Default is ~nil~.
 
-- :efmt efmt
-Use this format to print numbers with exponentials.  The format should
-have ~%s~ twice for inserting mantissa and exponent, for example
-~"%s\\times10^@{%s@~"}.  The default is ~"%s\\,(%s)"~.  This
-may also be a property list with column numbers and formats, for example
-~:efmt (2 "$%s\\times10^@{%s@~$" 4 "$%s\\cdot10^@{%s@}$")}.  After
-~efmt~ has been applied to a value, ~fmt~ will also be
-applied.  Similar to ~fmt~, functions of two arguments can be
-supplied instead of strings.
+- ~:fmt fmt~ ::
+
+  A format to be used to wrap each field, it should contain ~%s~ for the
+  original field value. For example, to wrap each field value in
+  dollars, you could use ~:fmt "$%s$"~. This may also be a property list
+  with column numbers and formats, for example ~:fmt (2 "$%s$" 4
+  "%s\\%%")~. A function of one argument can be used in place of the
+  strings; the function must return a formatted string.
+
+- ~:efmt efmt~ ::
+
+  Use this format to print numbers with exponentials. The format should
+  have ~%s~ twice for inserting mantissa and exponent, for example
+  ~"%s\\times10^@{%s@~"}. The default is ~"%s\\,(%s)"~. This may also be
+  a property list with column numbers and formats, for example ~:efmt (2
+  "$%s\\times10^@{%s@~$" 4 "$%s\\cdot10^@{%s@}$")}. After ~efmt~ has
+  been applied to a value, ~fmt~ will also be applied. Similar to ~fmt~,
+  functions of two arguments can be supplied instead of strings.
 
 
 *** Translator functions
@@ -16889,16 +16891,17 @@ supplied instead of strings.
 
 Orgtbl mode has several translator functions built-in: ~orgtbl-to-csv~
 (comma-separated values), ~orgtbl-to-tsv~ (TAB-separated values)
-~orgtbl-to-latex~, ~orgtbl-to-html~, and ~orgtbl-to-texinfo~.
-Except for ~orgtbl-to-html~@footnote{The HTML translator uses the same
-code that produces tables during HTML export.}, these all use a generic
-translator, ~orgtbl-to-generic~.  For example, ~orgtbl-to-latex~
-itself is a very short function that computes the column definitions for the
-~tabular~ environment, defines a few field and line separators and then
-hands processing over to the generic translator.  Here is the entire code:
+~orgtbl-to-latex~, ~orgtbl-to-html~, and ~orgtbl-to-texinfo~. Except
+for ~orgtbl-to-html~, these all use a generic translator,
+~orgtbl-to-generic~.[fn:171] For example, ~orgtbl-to-latex~ itself is
+a very short function that computes the column definitions for the
+~tabular~ environment, defines a few field and line separators and
+then hands processing over to the generic translator. Here is the
+entire code:
 
+#+header: :eval no
+#+header: :exports code
 #+begin_src emacs-lisp
-@group
 (defun orgtbl-to-latex (table params)
   "Convert the Orgtbl mode TABLE to LaTeX."
   (let* ((alignment (mapconcat (lambda (x) (if x "r" "l"))
@@ -16910,50 +16913,48 @@ hands processing over to the generic translator.  Here is the entire code:
            :lstart "" :lend " \\\\" :sep " & "
            :efmt "%s\\,(%s)" :hline "\\hline")))
     (orgtbl-to-generic table (org-combine-plists params2 params))))
-@end group
 #+end_src
 
 As you can see, the properties passed into the function (variable
 ~PARAMS~) are combined with the ones newly defined in the function
-(variable ~PARAMS2~).  The ones passed into the function (i.e.@: the
-ones set by the {{{samp(ORGTBL SEND)}}} line) take precedence.  So if you
-would like to use the @LaTeX{} translator, but wanted the line endings to
-be {{{samp(\\[2mm])}}} instead of the default {{{samp(\\)}}}, you could just
-overrule the default with
+(variable ~PARAMS2~). The ones passed into the function (i.e.@: the
+ones set by the {{{samp(ORGTBL SEND)}}} line) take precedence. So if
+you would like to use the @LaTeX{} translator, but wanted the line
+endings to be {{{samp(\\[2mm])}}} instead of the default
+{{{samp(\\)}}}, you could just overrule the default with:
 
 #+begin_example
 #+ORGTBL: SEND test orgtbl-to-latex :lend " \\\\[2mm]"
 #+end_example
 
-For a new language, you can either write your own converter function in
-analogy with the @LaTeX{} translator, or you can use the generic function
-directly.  For example, if you have a language where a table is started
-with {{{samp(!BTBL!)}}}, ended with {{{samp(!ETBL!)}}}, and where table lines are
-started with {{{samp(!BL!)}}}, ended with {{{samp(!EL!)}}}, and where the field
-separator is a TAB, you could call the generic translator like this (on
-a single line!):
+For a new language, you can either write your own converter function
+in analogy with the @LaTeX{} translator, or you can use the generic
+function directly. For example, if you have a language where a table
+is started with {{{samp(!BTBL!)}}}, ended with {{{samp(!ETBL!)}}}, and
+where table lines are started with {{{samp(!BL!)}}}, ended with
+{{{samp(!EL!)}}}, and where the field separator is a TAB, you could
+call the generic translator like this (on a single line!):
 
 #+begin_example
 #+ORGTBL: SEND test orgtbl-to-generic :tstart "!BTBL!" :tend "!ETBL!"
                               :lstart "!BL! " :lend " !EL!" :sep "\t"
 #+end_example
 
-{{{noindent}}}
-Please check the documentation string of the function
-~orgtbl-to-generic~ for a full list of parameters understood by
-that function, and remember that you can pass each of them into
-~orgtbl-to-latex~, ~orgtbl-to-texinfo~, and any other function
-using the generic function.
+{{{noindent}}} Please check the documentation string of the function
+~orgtbl-to-generic~ for a full list of parameters understood by that
+function, and remember that you can pass each of them into
+~orgtbl-to-latex~, ~orgtbl-to-texinfo~, and any other function using
+the generic function.
 
-Of course you can also write a completely new function doing complicated
-things the generic translator cannot do.  A translator function takes
-two arguments.  The first argument is the table, a list of lines, each
-line either the symbol ~hline~ or a list of fields.  The second
-argument is the property list containing all parameters specified in the
-{{{samp(#+ORGTBL: SEND)}}} line.  The function must return a single string
-containing the formatted table.  If you write a generally useful
-translator, please post it on @email{emacs-orgmode@@gnu.org} so that
-others can benefit from your work.
+Of course you can also write a completely new function doing
+complicated things the generic translator cannot do. A translator
+function takes two arguments. The first argument is the table, a list
+of lines, each line either the symbol ~hline~ or a list of fields. The
+second argument is the property list containing all parameters
+specified in the {{{samp(#+ORGTBL: SEND)}}} line. The function must
+return a single string containing the formatted table. If you write a
+generally useful translator, please post it to the [[mailto:emacs-orgmode@gnu.org][mailing list]] so
+that others can benefit from your work.
 
 *** Radio lists
     :PROPERTIES:
@@ -16962,24 +16963,23 @@ others can benefit from your work.
 {{{cindex(radio lists)}}}
 {{{cindex(org-list-insert-radio-list)}}}
 
-Sending and receiving radio lists works exactly the same way as sending and
-receiving radio tables (see [[Radio tables]]).  As for radio tables, you can
-insert radio list templates in HTML, @LaTeX{} and Texinfo modes by calling
-~org-list-insert-radio-list~.
+Sending and receiving radio lists works exactly the same way as
+sending and receiving radio tables (see [[Radio tables]]). As for radio
+tables, you can insert radio list templates in HTML, @LaTeX{} and
+Texinfo modes by calling ~org-list-insert-radio-list~.
 
 Here are the differences with radio tables:
 
-@itemize @minus
-- 
-Orgstruct mode must be active.
-- 
-Use the ~ORGLST~ keyword instead of ~ORGTBL~.
-- 
-The available translation functions for radio lists don't take
-parameters.
-- 
-{{{kbd(C-c C-c)}}} will work when pressed on the first item of the list.
-@end itemize
+- Orgstruct mode must be active.
+
+- Use the ~ORGLST~ keyword instead of ~ORGTBL~.
+
+- The available translation functions for radio lists don't take
+  parameters.
+
+- {{{kbd(C-c C-c)}}} will work when pressed on the first item of the
+  list.
+
 
 Here is a @LaTeX{} example.  Let's say that you have this in your
 @LaTeX{} file:
@@ -17007,14 +17007,14 @@ Pressing `C-c C-c' on ~a new house~ and will insert the converted
    :END:
 {{{cindex(dynamic blocks)}}}
 
-Org documents can contain /dynamic blocks/.  These are
-specially marked regions that are updated by some user-written function.
-A good example for such a block is the clock table inserted by the
-command {{{kbd(C-c C-x C-r)}}} (see [[Clocking work time]]).
+Org documents can contain /dynamic blocks/. These are specially marked
+regions that are updated by some user-written function. A good example
+for such a block is the clock table inserted by the command {{{kbd(C-c
+C-x C-r)}}} (see [[Clocking work time]]).
 
-Dynamic blocks are enclosed by a BEGIN-END structure that assigns a name
-to the block and can also specify parameters for the function producing
-the content of the block.
+Dynamic blocks are enclosed by a BEGIN-END structure that assigns a
+name to the block and can also specify parameters for the function
+producing the content of the block.
 
 {{{cindex(#+BEGIN:dynamic block)}}}
 #+begin_example
@@ -17025,20 +17025,23 @@ the content of the block.
 
 Dynamic blocks are updated with the following commands
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
+#+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c C-x C-u)}}} ~org-dblock-update~ ::
   {{{kindex(C-c C-x C-u)}}}
-Update dynamic block at point.
+
+  Update dynamic block at point.
+
 - {{{kbd(C-u C-c C-x C-u)}}} ::
   {{{kindex(C-u C-c C-x C-u)}}}
-Update all dynamic blocks in the current file.
+
+  Update all dynamic blocks in the current file.
 
 
-Updating a dynamic block means to remove all the text between BEGIN and
-END, parse the BEGIN line for parameters and then call the specific
-writer function for this block to insert the new content.  If you want
-to use the original content in the writer function, you can use the
-extra parameter ~:content~.
+Updating a dynamic block means to remove all the text between ~BEGIN~
+and ~END~, parse the ~BEGIN~ line for parameters and then call the
+specific writer function for this block to insert the new content. If
+you want to use the original content in the writer function, you can
+use the extra parameter ~:content~.
 
 For a block with name ~myblock~, the writer function is
 ~org-dblock-write:myblock~ with as only parameter a property list
@@ -17052,9 +17055,11 @@ run:
 #+END:
 #+end_example
 
-{{{noindent}}}
-The corresponding block writer function could look like this:
+{{{noindent}}} The corresponding block writer function could look like
+this:
 
+#+header: :eval no
+#+header: :exports code
 #+begin_src emacs-lisp
 (defun org-dblock-write:block-update-time (params)
    (let ((fmt (or (plist-get params :format) "%d. %m. %Y")))
@@ -17062,39 +17067,40 @@ The corresponding block writer function could look like this:
              (format-time-string fmt (current-time)))))
 #+end_src
 
-If you want to make sure that all dynamic blocks are always up-to-date,
-you could add the function ~org-update-all-dblocks~ to a hook, for
-example ~before-save-hook~.  ~org-update-all-dblocks~ is
+If you want to make sure that all dynamic blocks are always
+up-to-date, you could add the function ~org-update-all-dblocks~ to a
+hook, for example ~before-save-hook~. ~org-update-all-dblocks~ is
 written in a way such that it does nothing in buffers that are not in
 ~org-mode~.
 
-You can narrow the current buffer to the current dynamic block (like any
-other block) with ~org-narrow-to-block~.
+You can narrow the current buffer to the current dynamic block (like
+any other block) with ~org-narrow-to-block~.
 
 ** Special agenda views
    :PROPERTIES:
    :DESCRIPTION: Customized views
    :END:
 {{{cindex(agenda views\\\, user-defined)}}}
-
 {{{vindex(org-agenda-skip-function)}}}
 {{{vindex(org-agenda-skip-function-global)}}}
-Org provides a special hook that can be used to narrow down the selection
-made by these agenda views: ~agenda~, ~todo~, ~alltodo~,
-~tags~, ~tags-todo~, ~tags-tree~.  You may specify a function
-that is used at each match to verify if the match should indeed be part of
-the agenda view, and if not, how much should be skipped.  You can specify a
-global condition that will be applied to all agenda views, this condition
-would be stored in the variable ~org-agenda-skip-function-global~.  More
-commonly, such a definition is applied only to specific custom searches,
-using ~org-agenda-skip-function~.
 
-Let's say you want to produce a list of projects that contain a WAITING
-tag anywhere in the project tree.  Let's further assume that you have
-marked all tree headings that define a project with the TODO keyword
-PROJECT.  In this case you would run a TODO search for the keyword
-PROJECT, but skip the match unless there is a WAITING tag anywhere in
-the subtree belonging to the project line.
+Org provides a special hook that can be used to narrow down the
+selection made by these agenda views: ~agenda~, ~todo~, ~alltodo~,
+~tags~, ~tags-todo~, ~tags-tree~. You may specify a function that is
+used at each match to verify if the match should indeed be part of the
+agenda view, and if not, how much should be skipped. You can specify a
+global condition that will be applied to all agenda views, this
+condition would be stored in the variable
+~org-agenda-skip-function-global~. More commonly, such a definition is
+applied only to specific custom searches, using
+~org-agenda-skip-function~.
+
+Let's say you want to produce a list of projects that contain a
+~WAITING~ tag anywhere in the project tree. Let's further assume that
+you have marked all tree headings that define a project with the TODO
+keyword PROJECT. In this case you would run a TODO search for the
+keyword PROJECT, but skip the match unless there is a ~WAITING~ tag
+anywhere in the subtree belonging to the project line.
 
 To achieve this, you must write a function that searches the subtree for
 the tag.  If the tag is found, the function must return ~nil~ to
@@ -17102,6 +17108,8 @@ indicate that this match should not be skipped.  If there is no such
 tag, return the location of the end of the subtree, to indicate that
 search should continue from there.
 
+#+header: :eval no
+#+header: :exports code
 #+begin_src emacs-lisp
 (defun my-skip-unless-waiting ()
   "Skip trees that are not waiting"
@@ -17114,6 +17122,8 @@ search should continue from there.
 Now you may use this function in an agenda custom command, for example
 like this:
 
+#+header: :eval no
+#+header: :exports code
 #+begin_src emacs-lisp
 (org-add-agenda-custom-command
  '("b" todo "PROJECT"
@@ -17122,50 +17132,71 @@ like this:
 #+end_src
 
 {{{vindex(org-agenda-overriding-header)}}}
+
 Note that this also binds ~org-agenda-overriding-header~ to get a
 meaningful header in the agenda view.
 
 {{{vindex(org-odd-levels-only)}}}
 {{{vindex(org-agenda-skip-function)}}}
-A general way to create custom searches is to base them on a search for
-entries with a certain level limit.  If you want to study all entries with
-your custom search function, simply do a search for
-{{{samp(LEVEL>0)}}}@footnote{Note that, when using ~org-odd-levels-only~, a
-level number corresponds to order in the hierarchy, not to the number of
-stars.}, and then use ~org-agenda-skip-function~ to select the entries
-you really want to have.
+
+A general way to create custom searches is to base them on a search
+for entries with a certain level limit. If you want to study all
+entries with your custom search function, simply do a search for
+{{{samp(LEVEL>0)}}}, and then use ~org-agenda-skip-function~ to select
+the entries you really want to have.[fn:172]
 
 You may also put a Lisp form into ~org-agenda-skip-function~.  In
 particular, you may use the functions ~org-agenda-skip-entry-if~
 and ~org-agenda-skip-subtree-if~ in this form, for example:
 
-#+attr_texinfo: :table-type "table" :indic "@code"
-- (org-agenda-skip-entry-if 'scheduled)
-Skip current entry if it has been scheduled.
-- (org-agenda-skip-entry-if 'notscheduled)
-Skip current entry if it has not been scheduled.
-- (org-agenda-skip-entry-if 'deadline)
-Skip current entry if it has a deadline.
-- (org-agenda-skip-entry-if 'scheduled 'deadline)
-Skip current entry if it has a deadline, or if it is scheduled.
-- (org-agenda-skip-entry-if 'todo '("TODO" "WAITING"))
-Skip current entry if the TODO keyword is TODO or WAITING.
-- (org-agenda-skip-entry-if 'todo 'done)
-Skip current entry if the TODO keyword marks a DONE state.
-- (org-agenda-skip-entry-if 'timestamp)
-Skip current entry if it has any timestamp, may also be deadline or scheduled.
-@anchor{x-agenda-skip-entry-regexp}
-- (org-agenda-skip-entry-if 'regexp "regular expression")
-Skip current entry if the regular expression matches in the entry.
-- (org-agenda-skip-entry-if 'notregexp "regular expression")
-Skip current entry unless the regular expression matches.
-- (org-agenda-skip-subtree-if 'regexp "regular expression")
-Same as above, but check and skip the entire subtree.
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- {{{samp('(org-agenda-skip-entry-if 'scheduled))}}} ::
+
+  Skip current entry if it has been scheduled.
+
+- {{{samp('(org-agenda-skip-entry-if 'notscheduled))}}} ::
+
+  Skip current entry if it has not been scheduled.
+
+- {{{samp('(org-agenda-skip-entry-if 'deadline))}}} ::
+
+  Skip current entry if it has a deadline.
+
+- {{{samp('(org-agenda-skip-entry-if 'scheduled 'deadline))}}} ::
+
+  Skip current entry if it has a deadline, or if it is scheduled.
+
+- {{{samp('(org-agenda-skip-entry-if 'todo '("TODO" "WAITING")))}}} ::
+
+  Skip current entry if the TODO keyword is TODO or WAITING.
+
+- {{{samp('(org-agenda-skip-entry-if 'todo 'done))}}} ::
+
+  Skip current entry if the TODO keyword marks a DONE state.
+
+- {{{samp('(org-agenda-skip-entry-if 'timestamp))}}} ::
+
+  Skip current entry if it has any timestamp, may also be deadline or scheduled.
+  # <<x-agenda-skip-entry-regexp>>
+
+- {{{samp('(org-agenda-skip-entry-if 'regexp "regular expression"))}}} ::
+  
+  Skip current entry if the regular expression matches in the entry.
+
+- {{{samp('(org-agenda-skip-entry-if 'notregexp "regular expression"))}}} ::
+
+  Skip current entry unless the regular expression matches.
+
+- {{{samp('(org-agenda-skip-subtree-if 'regexp "regular expression"))}}} ::
+
+  Same as above, but check and skip the entire subtree.
 
 
 Therefore we could also have written the search for WAITING projects
 like this, even without defining a special function:
 
+#+header: :eval no
+#+header: :exports code
 #+begin_src emacs-lisp
 (org-add-agenda-custom-command
  '("b" todo "PROJECT"
@@ -17180,18 +17211,18 @@ like this, even without defining a special function:
    :END:
 {{{cindex(agenda\\\, pipe)}}}
 {{{cindex(Scripts\\\, for agenda processing)}}}
-
 {{{vindex(org-agenda-custom-commands)}}}
+
 Org provides commands to access agenda information for the command
-line in Emacs batch mode.  This extracted information can be sent
-directly to a printer, or it can be read by a program that does further
-processing of the data.  The first of these commands is the function
-~org-batch-agenda~, that produces an agenda view and sends it as
-ASCII text to STDOUT.  The command takes a single string as parameter.
-If the string has length 1, it is used as a key to one of the commands
-you have configured in ~org-agenda-custom-commands~, basically any
-key you can use after {{{kbd(C-c a)}}}.  For example, to directly print the
-current TODO list, you could use
+line in Emacs batch mode. This extracted information can be sent
+directly to a printer, or it can be read by a program that does
+further processing of the data. The first of these commands is the
+function ~org-batch-agenda~, that produces an agenda view and sends it
+as ASCII text to STDOUT. The command takes a single string as
+parameter. If the string has length 1, it is used as a key to one of
+the commands you have configured in ~org-agenda-custom-commands~,
+basically any key you can use after {{{kbd(C-c a)}}}. For example, to
+directly print the current TODO list, you could use:
 
 #+header: :eval no
 #+header: :exports code
@@ -17199,10 +17230,10 @@ current TODO list, you could use
 emacs -batch -l ~/.emacs -eval '(org-batch-agenda "t")' | lpr
 #+end_src
 
-If the parameter is a string with 2 or more characters, it is used as a
-tags/TODO match string.  For example, to print your local shopping list
-(all items with the tag {{{samp(shop)}}}, but excluding the tag
-{{{samp(NewYork)}}}), you could use
+If the parameter is a string with 2 or more characters, it is used as
+a tags/TODO match string. For example, to print your local shopping
+list (all items with the tag {{{samp(shop)}}}, but excluding the tag
+{{{samp(NewYork)}}}), you could use:
 
 #+header: :eval no
 #+header: :exports code
@@ -17211,8 +17242,7 @@ emacs -batch -l ~/.emacs                                      \
       -eval '(org-batch-agenda "+shop-NewYork")' | lpr
 #+end_src
 
-{{{noindent}}}
-You may also modify parameters on the fly like this:
+{{{noindent}}} You may also modify parameters on the fly like this:
 
 #+header: :eval no
 #+header: :exports code
@@ -17225,9 +17255,9 @@ emacs -batch -l ~/.emacs                                      \
    | lpr
 #+end_src
 
-{{{noindent}}}
-which will produce a 30-day agenda, fully restricted to the Org file
-{{{file(~/org/projects.org)}}}, not even including the diary.
+{{{noindent}}} which will produce a 30-day agenda, fully restricted to
+the Org file {{{file(~/org/projects.org)}}}, not even including the
+diary.
 
 If you want to process the agenda data in more sophisticated ways, you
 can use the command ~org-batch-agenda-csv~ to get a comma-separated
@@ -17258,9 +17288,8 @@ priority-l   @r{The priority letter if any was given}
 priority-n   @r{The computed numerical priority}
 #+end_example
 
-{{{noindent}}}
-Time and date will only be given if a timestamp (or deadline/scheduled)
-led to the selection of the item.
+{{{noindent}}} Time and date will only be given if a timestamp (or
+deadline/scheduled) led to the selection of the item.
 
 A CSV list like this is very easy to use in a post-processing script.
 For example, here is a Perl program that gets the TODO list from
@@ -17297,7 +17326,7 @@ foreach $line (split(/\n/,$agenda)) @{
 Here is a description of the functions that can be used to work with
 properties.
 
-@defun org-entry-properties &optional pom which
+{{{defun}}} org-entry-properties &optional pom which
 Get all properties of the entry at point-or-marker POM.@*
 This includes the TODO keyword, the tags, time strings for deadline,
 scheduled, and clocking, and any additional properties defined in the
@@ -17306,67 +17335,69 @@ if the property key was used several times.@*
 POM may also be nil, in which case the current entry is used.
 If WHICH is nil or `all', get all properties.  If WHICH is
 `special' or `standard', only get that subclass.
-@end defun
+{{{enddefun}}}
+
 {{{vindex(org-use-property-inheritance)}}}
 {{{findex(org-insert-property-drawer)}}}
-@defun org-entry-get pom property &optional inherit
+
+{{{defun}}} org-entry-get pom property &optional inherit
 Get value of PROPERTY for entry at point-or-marker POM.  By default,
 this only looks at properties defined locally in the entry.  If INHERIT
 is non-nil and the entry does not have the property, then also check
 higher levels of the hierarchy.  If INHERIT is the symbol
 ~selective~, use inheritance if and only if the setting of
 ~org-use-property-inheritance~ selects PROPERTY for inheritance.
-@end defun
+{{{enddefun}}}
 
-@defun org-entry-delete pom property
+{{{defun}}} org-entry-delete pom property
 Delete the property PROPERTY from entry at point-or-marker POM.
-@end defun
+{{{enddefun}}}
 
-@defun org-entry-put pom property value
+{{{defun}}} org-entry-put pom property value
 Set PROPERTY to VALUE for entry at point-or-marker POM.
-@end defun
+{{{enddefun}}}
 
-@defun org-buffer-property-keys &optional include-specials
+{{{defun}}} org-buffer-property-keys &optional include-specials
 Get all property keys in the current buffer.
-@end defun
+{{{enddefun}}}
 
-@defun org-insert-property-drawer
+{{{defun}}} org-insert-property-drawer
 Insert a property drawer for the current entry.  Also
-@end defun
+{{{enddefun}}}
 
-@defun org-entry-put-multivalued-property pom property &rest values
+{{{defun}}} org-entry-put-multivalued-property pom property &rest values
 Set PROPERTY at point-or-marker POM to VALUES.  VALUES should be a list of
 strings.  They will be concatenated, with spaces as separators.
-@end defun
+{{{enddefun}}}
 
-@defun org-entry-get-multivalued-property pom property
+{{{defun}}} org-entry-get-multivalued-property pom property
 Treat the value of the property PROPERTY as a whitespace-separated list of
 values and return the values as a list of strings.
-@end defun
+{{{enddefun}}}
 
-@defun org-entry-add-to-multivalued-property pom property value
+{{{defun}}} org-entry-add-to-multivalued-property pom property value
 Treat the value of the property PROPERTY as a whitespace-separated list of
 values and make sure that VALUE is in this list.
-@end defun
+{{{enddefun}}}
 
-@defun org-entry-remove-from-multivalued-property pom property value
+{{{defun}}} org-entry-remove-from-multivalued-property pom property value
 Treat the value of the property PROPERTY as a whitespace-separated list of
 values and make sure that VALUE is /not/ in this list.
-@end defun
+{{{enddefun}}}
 
-@defun org-entry-member-in-multivalued-property pom property value
+{{{defun}}} org-entry-member-in-multivalued-property pom property value
 Treat the value of the property PROPERTY as a whitespace-separated list of
 values and check if VALUE is in this list.
-@end defun
+{{{enddefun}}}
 
-@defopt org-property-allowed-value-functions
+{{{defopt}}} org-property-allowed-value-functions
 Hook for functions supplying allowed values for a specific property.
 The functions must take a single argument, the name of the property, and
 return a flat list of allowed values.  If {{{samp(:ETC)}}} is one of
 the values, use the values as completion help, but allow also other values
 to be entered.  The functions must return ~nil~ if they are not
 responsible for this property.
-@end defopt
+{{{enddefopt}}}
 
 ** Using the mapping API
    :PROPERTIES:
@@ -17381,7 +17412,7 @@ views, but there is also an API that can be used to execute arbitrary
 functions for each or selected entries.  The main entry point for this API
 is:
 
-@defun org-map-entries func &optional match scope &rest skip
+{{{defun}}} org-map-entries func &optional match scope &rest skip
 Call FUNC at each headline selected by MATCH in SCOPE.
 
 FUNC is a function or a Lisp form.  The function will be called without
@@ -17420,11 +17451,13 @@ agenda-with-archives
 (file1 file2 ...)
         @r{if this is a list, all files in the list will be scanned}
 #+end_example
-{{{noindent}}}
-The remaining args are treated as settings for the skipping facilities of
-the scanner.  The following items can be given here:
+
+{{{noindent}}} The remaining args are treated as settings for the
+skipping facilities of the scanner. The following items can be given
+here:
 
 {{{vindex(org-agenda-skip-function)}}}
+
 #+begin_example
 archive   @r{skip trees with the archive tag}
 comment   @r{skip trees with the COMMENT keyword}
@@ -17434,40 +17467,42 @@ function or Lisp form
           @r{will not be called for that entry and search will}
           @r{continue from the point where the function leaves it}
 #+end_example
-@end defun
+{{{enddefun}}}
 
 The function given to that mapping routine can really do anything you like.
 It can use the property API (see [[Using the property API]]) to gather more
 information about the entry, or in order to change metadata in the entry.
 Here are a couple of functions that might be handy:
 
-@defun org-todo &optional arg
+{{{defun}}} org-todo &optional arg
 Change the TODO state of the entry.  See the docstring of the functions for
 the many possible values for the argument ARG.
-@end defun
+{{{enddefun}}}
 
-@defun org-priority &optional action
+{{{defun}}} org-priority &optional action
 Change the priority of the entry.  See the docstring of this function for the
 possible values for ACTION.
-@end defun
+{{{enddefun}}}
 
-@defun org-toggle-tag tag &optional onoff
+{{{defun}}} org-toggle-tag tag &optional onoff
 Toggle the tag TAG in the current entry.  Setting ONOFF to either ~on~
 or ~off~ will not toggle tag, but ensure that it is either on or off.
-@end defun
+{{{enddefun}}}
 
-@defun org-promote
+{{{defun}}} org-promote
 Promote the current entry.
-@end defun
+{{{enddefun}}}
 
-@defun org-demote
+{{{defun}}} org-demote
 Demote the current entry.
-@end defun
+{{{enddefun}}}
 
-Here is a simple example that will turn all entries in the current file with
-a tag ~TOMORROW~ into TODO entries with the keyword ~UPCOMING~.
+The following simple example will turn all entries in the current file
+with a tag ~TOMORROW~ into TODO entries with the keyword ~UPCOMING~.
 Entries in comment trees and in archive trees will be ignored.
 
+#+header: :eval no
+#+header: :exports code
 #+begin_src emacs-lisp
 (org-map-entries
    '(org-todo "UPCOMING")
@@ -17477,6 +17512,8 @@ Entries in comment trees and in archive trees will be ignored.
 The following example counts the number of entries with TODO keyword
 ~WAITING~, in all agenda files.
 
+#+header: :eval no
+#+header: :exports code
 #+begin_src emacs-lisp
 (length (org-map-entries t "/+WAITING" 'agenda))
 #+end_src
@@ -17536,6 +17573,8 @@ When MobileOrg first connects to your Dropbox, it will create a directory
 /MobileOrg/ inside the Dropbox.  After the directory has been created, tell
 Emacs about it:
 
+#+header: :eval no
+#+header: :exports code
 #+begin_src emacs-lisp
 (setq org-mobile-directory "~/Dropbox/MobileOrg")
 #+end_src
@@ -18636,6 +18675,28 @@ wraps long lines (including headlines) correctly indented.
 
 [fn:167] When you need to specify a level for a property search or
 refile targets, {{{samp(LEVEL=2)}}} will correspond to 3 stars, etc.
+
+[fn:168] The {{{{file(org-R.el)}}} package has been replaced by the
+Org mode functionality described in [[Working With Source Code]] and is
+now obsolete.
+
+[fn:169] By default this works only for @LaTeX{}, HTML, and Texinfo.
+Configure the variable ~orgtbl-radio-tables~ to install templates for
+other modes.
+
+[fn:170] If the {{{samp(#+TBLFM)}}} line contains an odd number of
+dollar characters, this may cause problems with font-lock in @LaTeX{}
+mode. As shown in the example you can fix this by adding an extra line
+inside the ~comment~ environment that is used to balance the dollar
+expressions. If you are using AUC@TeX{} with the font-latex library, a
+much better solution is to add the ~comment~ environment to the
+variable ~LaTeX-verbatim-environments~.
+
+[fn:171] The HTML translator uses the same code that produces tables
+during HTML export.
+
+[fn:172] Note that, when using ~org-odd-levels-only~, a level number
+corresponds to order in the hierarchy, not to the number of stars.
 
 * About orgmanual.org                                              :noexport:
 This document intends to be Org mode source for the Org mode manual
