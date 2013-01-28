@@ -15429,7 +15429,7 @@ emacs -Q --batch \
        (kill-buffer)) '($FILES)))" 2>&1 |grep tangled
 #+end_example
 
-* FIXME Miscellaneous                                              :noexport:
+* FIXED Miscellaneous
   :PROPERTIES:
   :DESCRIPTION: All the rest which did not fit elsewhere
   :END:
@@ -15452,50 +15452,42 @@ emacs -Q --batch \
 {{{cindex(tag completion)}}}
 {{{cindex(link abbreviations\\\, completion of)}}}
 
-Emacs would not be Emacs without completion, and Org mode uses it whenever it
-makes sense.  If you prefer an /iswitchb/- or /ido/-like interface for
-some of the completion prompts, you can specify your preference by setting at
-most one of the variables ~org-completion-use-iswitchb~
-~org-completion-use-ido~.
+Emacs would not be Emacs without completion, and Org mode uses it
+whenever it makes sense. If you prefer an /iswitchb/- or /ido/-like
+interface for some of the completion prompts, you can specify your
+preference by setting at most one of the variables
+~org-completion-use-iswitchb~ or ~org-completion-use-ido~.
 
-Org supports in-buffer completion.  This type of completion does
-not make use of the minibuffer.  You simply type a few letters into
-the buffer and use the key to complete text right there.
+Org supports in-buffer completion. This type of completion does not
+make use of the minibuffer. You simply type a few letters into the
+buffer and use the {{{key(TAB)}}} key to complete text right there.
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
-{{{kindex(M-@key{TAB})}}}
-- M-@key{TAB}
-Complete word at point
-@itemize @bullet
-- 
-At the beginning of a headline, complete TODO keywords.
-- 
-After {{{samp(\)}}}, complete @TeX{} symbols supported by the exporter.
-- 
-After {{{samp(*)}}}, complete headlines in the current buffer so that they
-can be used in search links like {{{samp([[*find this headline]])}}}.
-- 
-After {{{samp(:)}}} in a headline, complete tags.  The list of tags is taken
-from the variable ~org-tag-alist~ (possibly set through the
-{{{samp(#+TAGS)}}} in-buffer option, see [[Setting tags]]), or it is created
-dynamically from all tags used in the current buffer.
-- 
-After {{{samp(:)}}} and not in a headline, complete property keys.  The list
-of keys is constructed dynamically from all keys used in the current
-buffer.
-- 
-After {{{samp([)}}}, complete link abbreviations (see [[Link abbreviations]]).
-- 
-After {{{samp(#+)}}}, complete the special keywords like {{{samp(TYP_TODO)}}} or
-{{{samp(OPTIONS)}}} which set file-specific options for Org mode.  When the
-option keyword is already complete, pressing {{{kbdkey(M-,TAB)}}} again
-will insert example settings for this keyword.
-- 
-In the line after {{{samp(#+STARTUP: )}}}, complete startup keywords,
-i.e.@: valid keys for this line.
-- 
-Elsewhere, complete dictionary words using Ispell.
-@end itemize
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- {{{kbdkey(M-,TAB)}}} ::
+  {{{kindex(M-@key{TAB})}}}
+
+  Complete word at point
+
+  - At the beginning of a headline, complete TODO keywords.
+  - After {{{samp(\)}}}, complete @TeX{} symbols supported by the exporter.
+  - After {{{samp(*)}}}, complete headlines in the current buffer so
+    that they can be used in search links like {{{samp([[*find this headline]])}}}.
+  - After {{{samp(:)}}} in a headline, complete tags. The list of tags
+    is taken from the variable ~org-tag-alist~ (possibly set through
+    the {{{samp(#+TAGS)}}} in-buffer option, see [[Setting tags]]), or it
+    is created dynamically from all tags used in the current buffer.
+  - After {{{samp(:)}}} and not in a headline, complete property keys.
+    The list of keys is constructed dynamically from all keys used in
+    the current buffer.
+  - After {{{samp([)}}}, complete link abbreviations (see [[Link abbreviations]]).
+  - After {{{samp(#+)}}}, complete the special keywords like
+    {{{samp(TYP_TODO)}}} or {{{samp(OPTIONS)}}} which set
+    file-specific options for Org mode. When the option keyword is
+    already complete, pressing {{{kbdkey(M-,TAB)}}} again will insert
+    example settings for this keyword.
+  - In the line after {{{samp(#+STARTUP: )}}}, complete startup
+    keywords, i.e., valid keys for this line.
+  - Elsewhere, complete dictionary words using Ispell.
 
 
 ** Easy templates
@@ -15506,45 +15498,45 @@ Elsewhere, complete dictionary words using Ispell.
 {{{cindex(insertion\\\, of templates)}}}
 
 Org mode supports insertion of empty structural elements (like
-~#+BEGIN_SRC~ and ~#+END_SRC~ pairs) with just a few key
-strokes.  This is achieved through a native template expansion mechanism.
-Note that Emacs has several other template mechanisms which could be used in
-a similar way, for example {{{file(yasnippet)}}}.
+~#+BEGIN_SRC~ and ~#+END_SRC~ pairs) with just a few key strokes. This
+is achieved through a native template expansion mechanism. Note that
+Emacs has several other template mechanisms which could be used in a
+similar way, for example {{{file(yasnippet)}}}.
 
-To insert a structural element, type a {{{samp(<)}}}, followed by a template
-selector and {{{kbdkey(,TAB)}}}.  Completion takes effect only when the above
-keystrokes are typed on a line by itself.
+To insert a structural element, type a {{{samp(<)}}}, followed by a
+template selector and {{{kbdkey(,TAB)}}}. Completion takes effect only
+when the above keystrokes are typed on a line by itself.
 
-The following template selectors are currently supported.
+The following template selectors are currently supported:
+{{{kindex(s)}}}
+{{{kindex(e)}}}
+{{{kindex(q)}}}
+{{{kindex(v)}}}
+{{{kindex(c)}}}
+{{{kindex(l)}}}
+{{{kindex(L)}}}
+{{{kindex(h)}}}
+{{{kindex(H)}}}
+{{{kindex(a)}}}
+{{{kindex(A)}}}
+{{{kindex(i)}}}
+{{{kindex(I)}}}
 
-@multitable @columnfractions 0.1 0.9
-- {{{kbd(s)}}} @tab ~#+BEGIN_SRC     ... #+END_SRC~
-  {{{kindex(s)}}}
-- {{{kbd(e)}}} @tab ~#+BEGIN_EXAMPLE ... #+END_EXAMPLE~
-  {{{kindex(e)}}}
-- {{{kbd(q)}}} @tab ~#+BEGIN_QUOTE   ... #+END_QUOTE~
-  {{{kindex(q)}}}
-- {{{kbd(v)}}} @tab ~#+BEGIN_VERSE   ... #+END_VERSE~
-  {{{kindex(v)}}}
-- {{{kbd(c)}}} @tab ~#+BEGIN_CENTER  ... #+END_CENTER~
-  {{{kindex(c)}}}
-- {{{kbd(l)}}} @tab ~#+BEGIN_LaTeX   ... #+END_LaTeX~
-  {{{kindex(l)}}}
-- {{{kbd(L)}}} @tab ~#+LaTeX:~
-  {{{kindex(L)}}}
-- {{{kbd(h)}}} @tab ~#+BEGIN_HTML    ... #+END_HTML~
-  {{{kindex(h)}}}
-- {{{kbd(H)}}} @tab ~#+HTML:~
-  {{{kindex(H)}}}
-- {{{kbd(a)}}} @tab ~#+BEGIN_ASCII   ... #+END_ASCII~
-  {{{kindex(a)}}}
-- {{{kbd(A)}}} @tab ~#+ASCII:~
-  {{{kindex(A)}}}
-- {{{kbd(i)}}} @tab ~#+INDEX:~ line
-  {{{kindex(i)}}}
-- {{{kbd(I)}}} @tab ~#+INCLUDE:~ line
-  {{{kindex(I)}}}
-@end multitable
+| *Selector*   | *Template*                          |
+|--------------+-------------------------------------|
+| {{{kbd(a)}}} | ~#+BEGIN_ASCII   ... #+END_ASCII~   |
+| {{{kbd(A)}}} | ~#+ASCII:~                          |
+| {{{kbd(c)}}} | ~#+BEGIN_CENTER  ... #+END_CENTER~  |
+| {{{kbd(e)}}} | ~#+BEGIN_EXAMPLE ... #+END_EXAMPLE~ |
+| {{{kbd(h)}}} | ~#+BEGIN_HTML    ... #+END_HTML~    |
+| {{{kbd(H)}}} | ~#+HTML:~                           |
+| {{{kbd(i)}}} | ~#+INDEX:~                          |
+| {{{kbd(I)}}} | ~#+INCLUDE:~                        |
+| {{{kbd(l)}}} | ~#+BEGIN_LaTeX   ... #+END_LaTeX~   |
+| {{{kbd(L)}}} | ~#+LaTeX:~                          |
+| {{{kbd(q)}}} | ~#+BEGIN_QUOTE   ... #+END_QUOTE~   |
+| {{{kbd(s)}}} | ~#+BEGIN_SRC     ... #+END_SRC~     |
+| {{{kbd(v)}}} | ~#+BEGIN_VERSE   ... #+END_VERSE~   |
 
 For example, on an empty line, typing "<e" and then pressing TAB, will expand
 into a complete EXAMPLE template.
@@ -15562,80 +15554,88 @@ additional details.
 {{{vindex(org-speed-commands-user)}}}
 
 Single keys can be made to execute commands when the cursor is at the
-beginning of a headline, i.e.@: before the first star.  Configure the variable
-~org-use-speed-commands~ to activate this feature.  There is a
-pre-defined list of commands, and you can add more such commands using the
-variable ~org-speed-commands-user~.  Speed keys do not only speed up
-navigation and other commands, but they also provide an alternative way to
-execute commands bound to keys that are not or not easily available on a TTY,
-or on a small mobile device with a limited keyboard.
+beginning of a headline, i.e., before the first star. Configure the
+variable ~org-use-speed-commands~ to activate this feature. There is a
+pre-defined list of commands, and you can add more such commands using
+the variable ~org-speed-commands-user~. Speed keys do not only speed
+up navigation and other commands, but they also provide an alternative
+way to execute commands bound to keys that are not or not easily
+available on a TTY, or on a small mobile device with a limited
+keyboard.
 
-To see which commands are available, activate the feature and press {{{kbd(?)}}}
-with the cursor at the beginning of a headline.
+To see which commands are available, activate the feature and press
+{{{kbd(?)}}} with the cursor at the beginning of a headline.
 
 ** Code evaluation security
    :PROPERTIES:
    :DESCRIPTION: Org mode files evaluate in-line code
    :TITLE:    Code evaluation and security issues
    :END:
-Org provides tools to work with the code snippets, including evaluating them.
 
-Running code on your machine always comes with a security risk.  Badly
-written or malicious code can be executed on purpose or by accident.  Org has
-default settings which will only evaluate such code if you give explicit
-permission to do so, and as a casual user of these features you should leave
-these precautions intact.
+Org provides tools to work with the code snippets, including
+evaluating them.
 
-For people who regularly work with such code, the confirmation prompts can
-become annoying, and you might want to turn them off.  This can be done, but
-you must be aware of the risks that are involved.
+Running code on your machine always comes with a security risk. Badly
+written or malicious code can be executed on purpose or by accident.
+Org has default settings that will only evaluate source code if you
+give explicit permission to do so, and as a casual user of these
+features you should leave these precautions intact.
+
+For people who regularly work with source code, the confirmation
+prompts can become annoying, and you might want to turn them off. This
+can be done, but you must be aware of the risks that are involved.
 
 Code evaluation can happen under the following circumstances:
 
-#+attr_texinfo: :table-type "table" :indic "@i"
-- Source code blocks
-Source code blocks can be evaluated during export, or when pressing {{{kbd(C-c
-C-c)}}} in the block.  The most important thing to realize here is that Org mode
-files which contain code snippets are, in a certain sense, like executable
-files.  So you should accept them and load them into Emacs only from trusted
-sources---just like you would do with a program you install on your computer.
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- /Source code blocks/ ::
 
-Make sure you know what you are doing before customizing the variables
-which take off the default security brakes.
+  Source code blocks can be evaluated during export, or when pressing
+  {{{kbd(C-c C-c)}}} in the block. The most important thing to realize
+  here is that Org mode files which contain code snippets are, in a
+  certain sense, like executable files. So you should accept them and
+  load them into Emacs only from trusted sources---just like you would
+  do with a program you install on your computer.
 
-@defopt org-confirm-babel-evaluate
-When t (the default), the user is asked before every code block evaluation.
-When nil, the user is not asked.  When set to a function, it is called with
-two arguments (language and body of the code block) and should return t to
-ask and nil not to ask.
-@end defopt
+  Make sure you know what you are doing before customizing the variables
+  that take off the default security brakes.
 
-For example, here is how to execute "ditaa" code (which is considered safe)
-without asking:
-#+header: :eval no
-#+header: :exports code
-#+begin_src emacs-lisp
-(defun my-org-confirm-babel-evaluate (lang body)
-  (not (string= lang "ditaa")))  ; don't ask for ditaa
-(setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
-#+end_src
+  - ~org-confirm-babel-evaluate~ ::
 
-- Following ~shell~ and ~elisp~ links
+    When ~t~ (the default), the user is asked before every code block
+    evaluation. When ~nil~, the user is not asked. When set to a function,
+    it is called with two arguments (language and body of the code block)
+    and should return ~t~ to ask and ~nil~ not to ask.
+
+  For example, here is how to execute "ditaa" code (which is considered
+  safe) without asking:
+
+  #+header: :eval no
+  #+header: :exports code
+  #+begin_src emacs-lisp
+  (defun my-org-confirm-babel-evaluate (lang body)
+    (not (string= lang "ditaa")))  ; don't ask for ditaa
+  (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
+  #+end_src
+
+- Following ~shell~ and ~elisp~ links ::
+
 Org has two link types that can directly evaluate code (see [[External
-links]]).  These links can be problematic because the code to be evaluated is
-not visible.
+links]]). These links can be problematic because the code to be
+evaluated is not visible.
 
-@defopt org-confirm-shell-link-function
-Function to queries user about shell link execution.
-@end defopt
-@defopt org-confirm-elisp-link-function
-Functions to query user for Emacs Lisp link execution.
-@end defopt
+  - ~org-confirm-shell-link-function~ ::
+    
+    Function to queries user about shell link execution.
 
-- Formulas in tables
-Formulas in tables (see [[The spreadsheet]]) are code that is evaluated
-either by the /calc/ interpreter, or by the /Emacs Lisp/ interpreter.
+  - ~org-confirm-elisp-link-function~ ::
 
+    Function to query user for Emacs Lisp link execution.
+
+- Formulas in tables ::
+
+  Formulas in tables (see [[The spreadsheet]]) are code that is evaluated
+  either by the /calc/ interpreter, or by the /Emacs Lisp/ interpreter.
 
 ** Customization
    :PROPERTIES:
@@ -15645,13 +15645,13 @@ either by the /calc/ interpreter, or by the /Emacs Lisp/ interpreter.
 {{{cindex(options\\\, for customization)}}}
 {{{cindex(variables\\\, for customization)}}}
 
-There are more than 500 variables that can be used to customize
-Org.  For the sake of compactness of the manual, I am not
-describing the variables here.  A structured overview of customization
-variables is available with {{{kbd(M-x org-customize)}}}.  Or select
-~Browse Org Group~ from the ~Org->Customization~ menu.  Many
-settings can also be activated on a per-file basis, by putting special
-lines into the buffer (see [[In-buffer settings]]).
+There are more than 500 variables that can be used to customize Org.
+For the sake of compactness of the manual, I am not describing the
+variables here. A structured overview of customization variables is
+available with {{{kbd(M-x org-customize)}}}. Or select ~Browse Org
+Group~ from the ~Org->Customization~ menu. Many settings can also be
+activated on a per-file basis, by putting special lines into the
+buffer (see [[In-buffer settings]]).
 
 ** In-buffer settings
    :PROPERTIES:
@@ -15662,263 +15662,323 @@ lines into the buffer (see [[In-buffer settings]]).
 {{{cindex(special keywords)}}}
 
 Org mode uses special lines in the buffer to define settings on a
-per-file basis.  These lines start with a {{{samp(#+)}}} followed by a
-keyword, a colon, and then individual words defining a setting.  Several
-setting words can be in the same line, but you can also have multiple
-lines for the keyword.  While these settings are described throughout
-the manual, here is a summary.  After changing any of those lines in the
-buffer, press {{{kbd(C-c C-c)}}} with the cursor still in the line to
-activate the changes immediately.  Otherwise they become effective only
-when the file is visited again in a new Emacs session.
+per-file basis. These lines start with a {{{samp(#+)}}} followed by a
+keyword, a colon, and then individual words defining a setting.
+Several setting words can be in the same line, but you can also have
+multiple lines for the keyword. While these settings are described
+throughout the manual, here is a summary. After changing any of those
+lines in the buffer, press {{{kbd(C-c C-c)}}} with the cursor still in
+the line to activate the changes immediately. Otherwise they become
+effective only when the file is visited again in a new Emacs session.
 
 {{{vindex(org-archive-location)}}}
-#+attr_texinfo: :table-type "table" :indic "@kbd"
-- #+ARCHIVE: %s_done::
-This line sets the archive location for the agenda file.  It applies for
-all subsequent lines until the next {{{samp(#+ARCHIVE)}}} line, or the end
-of the file.  The first such line also applies to any entries before it.
-The corresponding variable is ~org-archive-location~.
-- #+CATEGORY:
-This line sets the category for the agenda file.  The category applies
-for all subsequent lines until the next {{{samp(#+CATEGORY)}}} line, or the
-end of the file.  The first such line also applies to any entries before it.
-- #+COLUMNS: %25ITEM .....
-{{{cindex(property\\\, COLUMNS)}}}
-Set the default format for columns view.  This format applies when
-columns view is invoked in locations where no ~COLUMNS~ property
-applies.
-- #+CONSTANTS: name1=value1 ...
-{{{vindex(org-table-formula-constants)}}}
-{{{vindex(org-table-formula)}}}
-Set file-local values for constants to be used in table formulas.  This
-line sets the local variable ~org-table-formula-constants-local~.
-The global version of this variable is
-~org-table-formula-constants~.
-- #+FILETAGS: :tag1:tag2:tag3:
-Set tags that can be inherited by any entry in the file, including the
-top-level entries.
-- #+DRAWERS: NAME1 .....
-{{{vindex(org-drawers)}}}
-Set the file-local set of additional drawers.  The corresponding global
-variable is ~org-drawers~.
-- #+LINK:  linkword replace
-{{{vindex(org-link-abbrev-alist)}}}
-These lines (several are allowed) specify link abbreviations.
-See [[Link abbreviations]].  The corresponding variable is
-~org-link-abbrev-alist~.
-- #+PRIORITIES: highest lowest default
-{{{vindex(org-highest-priority)}}}
-{{{vindex(org-lowest-priority)}}}
-{{{vindex(org-default-priority)}}}
-This line sets the limits and the default for the priorities.  All three
-must be either letters A-Z or numbers 0-9.  The highest priority must
-have a lower ASCII number than the lowest priority.
-- #+PROPERTY: Property_Name Value
-This line sets a default inheritance value for entries in the current
-buffer, most useful for specifying the allowed values of a property.
-{{{cindex(#+SETUPFILE)}}}
-- #+SETUPFILE: file
-This line defines a file that holds more in-buffer setup.  Normally this is
-entirely ignored.  Only when the buffer is parsed for option-setting lines
-(i.e.@: when starting Org mode for a file, when pressing {{{kbd(C-c C-c)}}} in a
-settings line, or when exporting), then the contents of this file are parsed
-as if they had been included in the buffer.  In particular, the file can be
-any other Org mode file with internal setup.  You can visit the file the
-cursor is in the line with {{{kbd(C-c ')}}}.
-- #+STARTUP:
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- {{{kbd(#+ARCHIVE: %s_done)}}} ::
+
+  This line sets the archive location for the agenda file. It applies to
+  all subsequent lines, until the next {{{samp(#+ARCHIVE)}}} line or the
+  end of the file. The first such line also applies to any entries
+  before it. The corresponding variable is ~org-archive-location~.
+
+- {{{kbd(#+CATEGORY:)}}} ::
+
+  This line sets the category for the agenda file. The category applies
+  to all subsequent lines, until the next {{{samp(#+CATEGORY)}}} line or
+  the end of the file. The first such line also applies to any entries
+  before it.
+
+- {{{kbd(#+COLUMNS: %25ITEM .....)}}} ::
+  {{{cindex(property\\\, COLUMNS)}}}
+
+  Set the default format for columns view. This format applies when
+  columns view is invoked in locations where no ~COLUMNS~ property
+  applies.
+
+- {{{kbd(#+CONSTANTS: name1=value1 ...)}}} ::
+  {{{vindex(org-table-formula-constants)}}}
+  {{{vindex(org-table-formula)}}}
+
+  Set file-local values for constants to be used in table formulas. This
+  line sets the local variable ~org-table-formula-constants-local~. The
+  global version of this variable is ~org-table-formula-constants~.
+
+- {{{kbd(#+FILETAGS: :tag1:tag2:tag3:)}}} ::
+
+  Set tags that can be inherited by any entry in the file, including the
+  top-level entries.
+
+- {{{kbd(#+DRAWERS: NAME1 .....)}}} ::
+  {{{vindex(org-drawers)}}}
+
+  Set the file-local set of additional drawers. The corresponding global
+  variable is ~org-drawers~.
+
+- {{{kbd(#+LINK:  linkword replace)}}} ::
+  {{{vindex(org-link-abbrev-alist)}}}
+
+  These lines (several are allowed) specify link abbreviations. See [[Link
+  abbreviations]]. The corresponding variable is ~org-link-abbrev-alist~.
+
+- {{{kbd(#+PRIORITIES: highest lowest default)}}} ::
+  {{{vindex(org-highest-priority)}}}
+  {{{vindex(org-lowest-priority)}}}
+  {{{vindex(org-default-priority)}}}
+
+  This line sets the limits and the default for the priorities. All
+  three must be either letters A-Z or numbers 0-9. The highest priority
+  must have a lower ASCII number than the lowest priority.
+
+- {{{kbd(#+PROPERTY: Property_Name Value)}}} ::
+
+  This line sets a default inheritance value for entries in the current
+  buffer, most useful for specifying the allowed values of a property.
+
+- {{{kbd(#+SETUPFILE: file)}}} ::
+  {{{cindex(#+SETUPFILE)}}}
+
+  This line defines a file that holds more in-buffer setup. Normally
+  this is entirely ignored. Only when the buffer is parsed for
+  option-setting lines (i.e., when starting Org mode for a file, when
+  pressing {{{kbd(C-c C-c)}}} in a settings line, or when exporting),
+  then the contents of this file are parsed as if they had been included
+  in the buffer. In particular, the file can be any other Org mode file
+  with internal setup. You can visit the file the cursor is in the line
+  with {{{kbd(C-c ')}}}.
+
+- {{{kbd(#+STARTUP:)}}} ::
 {{{cindex(#+STARTUP:)}}}
-This line sets options to be used at startup of Org mode, when an
-Org file is being visited.
 
-The first set of options deals with the initial visibility of the outline
-tree.  The corresponding variable for global default settings is
-~org-startup-folded~, with a default value ~t~, which means
-~overview~.
-{{{vindex(org-startup-folded)}}}
-{{{cindex(@code{overview}, STARTUP keyword)}}}
-{{{cindex(@code{content}, STARTUP keyword)}}}
-{{{cindex(@code{showall}, STARTUP keyword)}}}
-{{{cindex(@code{showeverything}, STARTUP keyword)}}}
-#+begin_example
-overview         @r{top-level headlines only}
-content          @r{all headlines}
-showall          @r{no folding of any entries}
-showeverything   @r{show even drawer contents}
-#+end_example
+  This line sets options to be used at startup of Org mode, when an
+  Org file is being visited.
 
-{{{vindex(org-startup-indented)}}}
-{{{cindex(@code{indent}, STARTUP keyword)}}}
-{{{cindex(@code{noindent}, STARTUP keyword)}}}
-Dynamic virtual indentation is controlled by the variable
-~org-startup-indented~@footnote{Emacs 23 and Org mode 6.29 are required}
-#+begin_example
-indent     @r{start with ~org-indent-mode~ turned on}
-noindent   @r{start with ~org-indent-mode~ turned off}
-#+end_example
+  The first set of options deals with the initial visibility of the
+  outline tree. The corresponding variable for global default settings
+  is ~org-startup-folded~, with a default value ~t~, which means
+  ~overview~.
 
-{{{vindex(org-startup-align-all-tables)}}}
-Then there are options for aligning tables upon visiting a file.  This
-is useful in files containing narrowed table columns.  The corresponding
-variable is ~org-startup-align-all-tables~, with a default value
-~nil~.
-{{{cindex(@code{align}, STARTUP keyword)}}}
-{{{cindex(@code{noalign}, STARTUP keyword)}}}
-#+begin_example
-align      @r{align all tables}
-noalign    @r{don't align tables on startup}
-#+end_example
+  {{{vindex(org-startup-folded)}}}
+  {{{cindex(@code{overview}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{content}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{showall}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{showeverything}\\\, STARTUP keyword)}}}
 
-{{{vindex(org-startup-with-inline-images)}}}
-When visiting a file, inline images can be automatically displayed.  The
-corresponding variable is ~org-startup-with-inline-images~, with a
-default value ~nil~ to avoid delays when visiting a file.
-{{{cindex(@code{inlineimages}, STARTUP keyword)}}}
-{{{cindex(@code{noinlineimages}, STARTUP keyword)}}}
-#+begin_example
-inlineimages   @r{show inline images}
-noinlineimages @r{don't show inline images on startup}
-#+end_example
+  #+begin_example
+  overview         @r{top-level headlines only}
+  content          @r{all headlines}
+  showall          @r{no folding of any entries}
+  showeverything   @r{show even drawer contents}
+  #+end_example
 
-{{{vindex(org-log-done)}}}
-{{{vindex(org-log-note-clock-out)}}}
-{{{vindex(org-log-repeat)}}}
-Logging the closing and reopening of TODO items and clock intervals can be
-configured using these options (see variables ~org-log-done~,
-~org-log-note-clock-out~ and ~org-log-repeat~)
-{{{cindex(@code{logdone}, STARTUP keyword)}}}
-{{{cindex(@code{lognotedone}, STARTUP keyword)}}}
-{{{cindex(@code{nologdone}, STARTUP keyword)}}}
-{{{cindex(@code{lognoteclock-out}, STARTUP keyword)}}}
-{{{cindex(@code{nolognoteclock-out}, STARTUP keyword)}}}
-{{{cindex(@code{logrepeat}, STARTUP keyword)}}}
-{{{cindex(@code{lognoterepeat}, STARTUP keyword)}}}
-{{{cindex(@code{nologrepeat}, STARTUP keyword)}}}
-{{{cindex(@code{logreschedule}, STARTUP keyword)}}}
-{{{cindex(@code{lognotereschedule}, STARTUP keyword)}}}
-{{{cindex(@code{nologreschedule}, STARTUP keyword)}}}
-{{{cindex(@code{logredeadline}, STARTUP keyword)}}}
-{{{cindex(@code{lognoteredeadline}, STARTUP keyword)}}}
-{{{cindex(@code{nologredeadline}, STARTUP keyword)}}}
-{{{cindex(@code{logrefile}, STARTUP keyword)}}}
-{{{cindex(@code{lognoterefile}, STARTUP keyword)}}}
-{{{cindex(@code{nologrefile}, STARTUP keyword)}}}
-#+begin_example
-logdone            @r{record a timestamp when an item is marked DONE}
-lognotedone        @r{record timestamp and a note when DONE}
-nologdone          @r{don't record when items are marked DONE}
-logrepeat          @r{record a time when reinstating a repeating item}
-lognoterepeat      @r{record a note when reinstating a repeating item}
-nologrepeat        @r{do not record when reinstating repeating item}
-lognoteclock-out   @r{record a note when clocking out}
-nolognoteclock-out @r{don't record a note when clocking out}
-logreschedule      @r{record a timestamp when scheduling time changes}
-lognotereschedule  @r{record a note when scheduling time changes}
-nologreschedule    @r{do not record when a scheduling date changes}
-logredeadline      @r{record a timestamp when deadline changes}
-lognoteredeadline  @r{record a note when deadline changes}
-nologredeadline    @r{do not record when a deadline date changes}
-logrefile          @r{record a timestamp when refiling}
-lognoterefile      @r{record a note when refiling}
-nologrefile        @r{do not record when refiling}
-#+end_example
-{{{vindex(org-hide-leading-stars)}}}
-{{{vindex(org-odd-levels-only)}}}
-Here are the options for hiding leading stars in outline headings, and for
-indenting outlines.  The corresponding variables are
-~org-hide-leading-stars~ and ~org-odd-levels-only~, both with a
-default setting ~nil~ (meaning ~showstars~ and ~oddeven~).
-{{{cindex(@code{hidestars}, STARTUP keyword)}}}
-{{{cindex(@code{showstars}, STARTUP keyword)}}}
-{{{cindex(@code{odd}, STARTUP keyword)}}}
-{{{cindex(@code{even}, STARTUP keyword)}}}
-#+begin_example
-hidestars  @r{make all but one of the stars starting a headline invisible.}
-showstars  @r{show all stars starting a headline}
-indent     @r{virtual indentation according to outline level}
-noindent   @r{no virtual indentation according to outline level}
-odd        @r{allow only odd outline levels (1,3,...)}
-oddeven    @r{allow all outline levels}
-#+end_example
-{{{vindex(org-put-time-stamp-overlays)}}}
-{{{vindex(org-time-stamp-overlay-formats)}}}
-To turn on custom format overlays over timestamps (variables
-~org-put-time-stamp-overlays~ and
-~org-time-stamp-overlay-formats~), use
-{{{cindex(@code{customtime}, STARTUP keyword)}}}
-#+begin_example
-customtime @r{overlay custom time format}
-#+end_example
-{{{vindex(constants-unit-system)}}}
-The following options influence the table spreadsheet (variable
-~constants-unit-system~).
-{{{cindex(@code{constcgs}, STARTUP keyword)}}}
-{{{cindex(@code{constSI}, STARTUP keyword)}}}
-#+begin_example
-constcgs   @r{{{{file(constants.el)}}} should use the c-g-s unit system}
-constSI    @r{{{{file(constants.el)}}} should use the SI unit system}
-#+end_example
-{{{vindex(org-footnote-define-inline)}}}
-{{{vindex(org-footnote-auto-label)}}}
-{{{vindex(org-footnote-auto-adjust)}}}
-To influence footnote settings, use the following keywords.  The
-corresponding variables are ~org-footnote-define-inline~,
-~org-footnote-auto-label~, and ~org-footnote-auto-adjust~.
-{{{cindex(@code{fninline}, STARTUP keyword)}}}
-{{{cindex(@code{nofninline}, STARTUP keyword)}}}
-{{{cindex(@code{fnlocal}, STARTUP keyword)}}}
-{{{cindex(@code{fnprompt}, STARTUP keyword)}}}
-{{{cindex(@code{fnauto}, STARTUP keyword)}}}
-{{{cindex(@code{fnconfirm}, STARTUP keyword)}}}
-{{{cindex(@code{fnplain}, STARTUP keyword)}}}
-{{{cindex(@code{fnadjust}, STARTUP keyword)}}}
-{{{cindex(@code{nofnadjust}, STARTUP keyword)}}}
-#+begin_example
-fninline    @r{define footnotes inline}
-fnnoinline  @r{define footnotes in separate section}
-fnlocal     @r{define footnotes near first reference, but not inline}
-fnprompt    @r{prompt for footnote labels}
-fnauto      @r{create ~[fn:1]~-like labels automatically (default)}
-fnconfirm   @r{offer automatic label for editing or confirmation}
-fnplain     @r{create ~[1]~-like labels automatically}
-fnadjust    @r{automatically renumber and sort footnotes}
-nofnadjust  @r{do not renumber and sort automatically}
-#+end_example
-{{{cindex(org-hide-block-startup)}}}
-To hide blocks on startup, use these keywords.  The corresponding variable is
-~org-hide-block-startup~.
-{{{cindex(@code{hideblocks}, STARTUP keyword)}}}
-{{{cindex(@code{nohideblocks}, STARTUP keyword)}}}
-#+begin_example
-hideblocks   @r{Hide all begin/end blocks on startup}
-nohideblocks @r{Do not hide blocks on startup}
-#+end_example
-{{{cindex(org-pretty-entities)}}}
-The display of entities as UTF-8 characters is governed by the variable
-~org-pretty-entities~ and the keywords
-{{{cindex(@code{entitiespretty}, STARTUP keyword)}}}
-{{{cindex(@code{entitiesplain}, STARTUP keyword)}}}
-#+begin_example
-entitiespretty  @r{Show entities as UTF-8 characters where possible}
-entitiesplain   @r{Leave entities plain}
-#+end_example
-- #+TAGS:  TAG1(c1) TAG2(c2)
-{{{vindex(org-tag-alist)}}}
-These lines (several such lines are allowed) specify the valid tags in
-this file, and (potentially) the corresponding /fast tag selection/
-keys.  The corresponding variable is ~org-tag-alist~.
-- #+TBLFM:
-This line contains the formulas for the table directly above the line.
-- #+TITLE:, #+AUTHOR:, #+EMAIL:, #+LANGUAGE:, #+TEXT:, #+DATE:,
-@itemx #+OPTIONS:, #+BIND:, #+XSLT:,
-@itemx #+DESCRIPTION:, #+KEYWORDS:,
-@itemx #+LaTeX_HEADER:, #+STYLE:, #+LINK_UP:, #+LINK_HOME:,
-@itemx #+EXPORT_SELECT_TAGS:, #+EXPORT_EXCLUDE_TAGS:
-These lines provide settings for exporting files.  For more details see
-[[Export options]].
-- #+TODO:    #+SEQ_TODO:   #+TYP_TODO:
-{{{vindex(org-todo-keywords)}}}
-These lines set the TODO keywords and their interpretation in the
-current file.  The corresponding variable is ~org-todo-keywords~.
+  {{{vindex(org-startup-indented)}}}
+  {{{cindex(@code{indent}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{noindent}\\\, STARTUP keyword)}}}
+
+  Dynamic virtual indentation is controlled by the variable
+  ~org-startup-indented~.[fn:161]
+
+  #+begin_example
+  indent     @r{start with ~org-indent-mode~ turned on}
+  noindent   @r{start with ~org-indent-mode~ turned off}
+  #+end_example
+
+  {{{vindex(org-startup-align-all-tables)}}}
+
+  Then there are options for aligning tables upon visiting a file.  This
+  is useful in files containing narrowed table columns.  The corresponding
+  variable is ~org-startup-align-all-tables~, with a default value
+  ~nil~.
+
+  {{{cindex(@code{align}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{noalign}\\\, STARTUP keyword)}}}
+
+  #+begin_example
+  align      @r{align all tables}
+  noalign    @r{don't align tables on startup}
+  #+end_example
+
+  {{{vindex(org-startup-with-inline-images)}}}
+
+  When visiting a file, inline images can be automatically displayed.
+  The corresponding variable is ~org-startup-with-inline-images~, with a
+  default value ~nil~ to avoid delays when visiting a file.
+
+  {{{cindex(@code{inlineimages}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{noinlineimages}\\\, STARTUP keyword)}}}
+
+  #+begin_example
+  inlineimages   @r{show inline images}
+  noinlineimages @r{don't show inline images on startup}
+  #+end_example
+
+  {{{vindex(org-log-done)}}}
+  {{{vindex(org-log-note-clock-out)}}}
+  {{{vindex(org-log-repeat)}}}
+
+  Logging the closing and reopening of TODO items and clock intervals
+  can be configured using these options (see variables ~org-log-done~,
+  ~org-log-note-clock-out~, and ~org-log-repeat~).
+
+  {{{cindex(@code{logdone}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{lognotedone}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{nologdone}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{lognoteclock-out}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{nolognoteclock-out}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{logrepeat}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{lognoterepeat}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{nologrepeat}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{logreschedule}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{lognotereschedule}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{nologreschedule}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{logredeadline}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{lognoteredeadline}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{nologredeadline}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{logrefile}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{lognoterefile}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{nologrefile}\\\, STARTUP keyword)}}}
+  #+begin_example
+  logdone            @r{record a timestamp when an item is marked DONE}
+  lognotedone        @r{record timestamp and a note when DONE}
+  nologdone          @r{don't record when items are marked DONE}
+  logrepeat          @r{record a time when reinstating a repeating item}
+  lognoterepeat      @r{record a note when reinstating a repeating item}
+  nologrepeat        @r{do not record when reinstating repeating item}
+  lognoteclock-out   @r{record a note when clocking out}
+  nolognoteclock-out @r{don't record a note when clocking out}
+  logreschedule      @r{record a timestamp when scheduling time changes}
+  lognotereschedule  @r{record a note when scheduling time changes}
+  nologreschedule    @r{do not record when a scheduling date changes}
+  logredeadline      @r{record a timestamp when deadline changes}
+  lognoteredeadline  @r{record a note when deadline changes}
+  nologredeadline    @r{do not record when a deadline date changes}
+  logrefile          @r{record a timestamp when refiling}
+  lognoterefile      @r{record a note when refiling}
+  nologrefile        @r{do not record when refiling}
+  #+end_example
+
+  {{{vindex(org-hide-leading-stars)}}}
+  {{{vindex(org-odd-levels-only)}}}
+
+  Here are the options for hiding leading stars in outline headings, and
+  for indenting outlines. The corresponding variables are
+  ~org-hide-leading-stars~ and ~org-odd-levels-only~, both with a
+  default setting ~nil~ (meaning ~showstars~ and ~oddeven~).
+
+  {{{cindex(@code{hidestars}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{showstars}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{odd}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{even}\\\, STARTUP keyword)}}}
+  #+begin_example
+  hidestars  @r{make all but one of the stars starting a headline invisible.}
+  showstars  @r{show all stars starting a headline}
+  indent     @r{virtual indentation according to outline level}
+  noindent   @r{no virtual indentation according to outline level}
+  odd        @r{allow only odd outline levels (1,3,...)}
+  oddeven    @r{allow all outline levels}
+  #+end_example
+
+  {{{vindex(org-put-time-stamp-overlays)}}}
+  {{{vindex(org-time-stamp-overlay-formats)}}}
+
+  To turn on custom format overlays over timestamps (variables
+  ~org-put-time-stamp-overlays~ and ~org-time-stamp-overlay-formats~),
+  use:
+
+  {{{cindex(@code{customtime}\\\, STARTUP keyword)}}}
+
+  #+begin_example
+  customtime @r{overlay custom time format}
+  #+end_example
+
+  {{{vindex(constants-unit-system)}}}
+
+  The following options influence the table spreadsheet (variable
+  ~constants-unit-system~).
+
+  {{{cindex(@code{constcgs}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{constSI}\\\, STARTUP keyword)}}}
+
+  #+begin_example
+  constcgs   @r{{{{file(constants.el)}}} should use the c-g-s unit system}
+  constSI    @r{{{{file(constants.el)}}} should use the SI unit system}
+  #+end_example
+
+  {{{vindex(org-footnote-define-inline)}}}
+  {{{vindex(org-footnote-auto-label)}}}
+  {{{vindex(org-footnote-auto-adjust)}}}
+
+  To influence footnote settings, use the following keywords. The
+  corresponding variables are ~org-footnote-define-inline~,
+  ~org-footnote-auto-label~, and ~org-footnote-auto-adjust~.
+
+  {{{cindex(@code{fninline}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{nofninline}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{fnlocal}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{fnprompt}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{fnauto}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{fnconfirm}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{fnplain}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{fnadjust}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{nofnadjust}\\\, STARTUP keyword)}}}
+
+  #+begin_example
+  fninline    @r{define footnotes inline}
+  fnnoinline  @r{define footnotes in separate section}
+  fnlocal     @r{define footnotes near first reference, but not inline}
+  fnprompt    @r{prompt for footnote labels}
+  fnauto      @r{create ~[fn:1]~-like labels automatically (default)}
+  fnconfirm   @r{offer automatic label for editing or confirmation}
+  fnplain     @r{create ~[1]~-like labels automatically}
+  fnadjust    @r{automatically renumber and sort footnotes}
+  nofnadjust  @r{do not renumber and sort automatically}
+  #+end_example
+
+  {{{cindex(org-hide-block-startup)}}}
+
+  To hide blocks on startup, use these keywords. The corresponding
+  variable is ~org-hide-block-startup~.
+
+  {{{cindex(@code{hideblocks}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{nohideblocks}\\\, STARTUP keyword)}}}
+
+  #+begin_example
+  hideblocks   @r{Hide all begin/end blocks on startup}
+  nohideblocks @r{Do not hide blocks on startup}
+  #+end_example
+
+  {{{cindex(org-pretty-entities)}}}
+
+  The display of entities as UTF-8 characters is governed by the
+  variable ~org-pretty-entities~ and the keywords
+
+  {{{cindex(@code{entitiespretty}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{entitiesplain}\\\, STARTUP keyword)}}}
+
+  #+begin_example
+  entitiespretty  @r{Show entities as UTF-8 characters where possible}
+  entitiesplain   @r{Leave entities plain}
+  #+end_example
+
+- {{{kbd(#+TAGS:  TAG1(c1) TAG2(c2))}}} ::
+  {{{vindex(org-tag-alist)}}}
+
+  These lines (several such lines are allowed) specify the valid tags in
+  this file, and (potentially) the corresponding /fast tag selection/
+  keys. The corresponding variable is ~org-tag-alist~.
+
+- {{{kbd(#+TBLFM:)}}} ::
+
+  This line contains the formulas for the table directly above the line.
+
+- {{{kbd(#+TITLE:)}}}, {{{kbd(#+AUTHOR:)}}}, {{{kbd(#+EMAIL:)}}}, {{{kbd(#+LANGUAGE:)}}}, {{{kbd(#+TEXT:)}}}, {{{kbd(#+DATE:)}}}, {{{kbd(#+OPTIONS:)}}}, {{{kbd(#+BIND:)}}}, {{{kbd(#+XSLT:)}}}, {{{kbd(#+DESCRIPTION:)}}}, {{{kbd(#+KEYWORDS:)}}}, {{{kbd(#+LaTeX_HEADER:)}}}, {{{kbd(#+STYLE:)}}}, {{{kbd(#+LINK_UP:)}}}, {{{kbd(#+LINK_HOME:)}}}, {{{kbd(#+EXPORT_SELECT_TAGS:)}}}, {{{kbd(#+EXPORT_EXCLUDE_TAGS:)}}}
+
+  These lines provide settings for exporting files.  For more details see
+  [[Export options]].
+
+- {{{kbd(#+TODO:)}}}, {{{kbd(#+SEQ_TODO:)}}}, {{{kbd(#+TYP_TODO:)}}} ::
+  {{{vindex(org-todo-keywords)}}}
+
+  These lines set the TODO keywords and their interpretation in the
+  current file. The corresponding variable is ~org-todo-keywords~.
 
 
 ** The busy C-c C-c key
@@ -15936,47 +15996,33 @@ other circumstances it means something like /``Hey Org, look
 here and update according to what you see here''/.  Here is a summary of
 what this means in different contexts.
 
-@itemize @minus
-- 
-If there are highlights in the buffer from the creation of a sparse
-tree, or from clock display, remove these highlights.
-- 
-If the cursor is in one of the special ~#+KEYWORD~ lines, this
-triggers scanning the buffer for these lines and updating the
-information.
-- 
-If the cursor is inside a table, realign the table.  This command
-works even if the automatic table editor has been turned off.
-- 
-If the cursor is on a ~#+TBLFM~ line, re-apply the formulas to
-the entire table.
-- 
-If the current buffer is a capture buffer, close the note and file it.
-With a prefix argument, file it, without further interaction, to the
-default location.
-- 
-If the cursor is on a ~<<<target>>>~, update radio targets and
-corresponding links in this buffer.
-- 
-If the cursor is in a property line or at the start or end of a property
-drawer, offer property commands.
-- 
-If the cursor is at a footnote reference, go to the corresponding
-definition, and vice versa.
-- 
-If the cursor is on a statistics cookie, update it.
-- 
-If the cursor is in a plain list item with a checkbox, toggle the status
-of the checkbox.
-- 
-If the cursor is on a numbered item in a plain list, renumber the
-ordered list.
-- 
-If the cursor is on the ~#+BEGIN~ line of a dynamic block, the
-block is updated.
-- 
-If the cursor is at a timestamp, fix the day name in the timestamp.
-@end itemize
+- If there are highlights in the buffer from the creation of a sparse
+  tree, or from clock display, remove these highlights.
+- If the cursor is in one of the special ~#+KEYWORD~ lines, this
+  triggers scanning the buffer for these lines and updating the
+  information.
+- If the cursor is inside a table, realign the table. This command
+  works even if the automatic table editor has been turned off.
+- If the cursor is on a ~#+TBLFM~ line, re-apply the formulas to the
+  entire table.
+- If the current buffer is a capture buffer, close the note and file
+  it. With a prefix argument, file it, without further interaction, to
+  the default location.
+- If the cursor is on a ~<<<target>>>~, update radio targets and
+  corresponding links in this buffer.
+- If the cursor is in a property line or at the start or end of a
+  property drawer, offer property commands.
+- If the cursor is at a footnote reference, go to the corresponding
+  definition, and vice versa.
+-  If the cursor is on a statistics cookie, update it.
+- If the cursor is in a plain list item with a checkbox, toggle the
+  status of the checkbox.
+- If the cursor is on a numbered item in a plain list, renumber the
+  ordered list.
+- If the cursor is on the ~#+BEGIN~ line of a dynamic block, the block
+  is updated.
+- If the cursor is at a timestamp, fix the day name in the timestamp.
+
 
 ** Clean view
    :PROPERTIES:
@@ -15988,11 +16034,12 @@ If the cursor is at a timestamp, fix the day name in the timestamp.
 {{{cindex(odd-levels-only outlines)}}}
 {{{cindex(clean outline view)}}}
 
-Some people find it noisy and distracting that the Org headlines start with a
-potentially large number of stars, and that text below the headlines is not
-indented.  While this is no problem when writing a /book-like/ document
-where the outline headings are really section headings, in a more
-/list-oriented/ outline, indented structure is a lot cleaner:
+Some people find it noisy and distracting that the Org headlines start
+with a potentially large number of stars, and that text below the
+headlines is not indented. While this is no problem when writing a
+/book-like/ document where the outline headings are really section
+headings, in a more /list-oriented/ outline, indented structure is a
+lot cleaner:
 
 #+begin_example
 @group
@@ -16006,144 +16053,139 @@ more text                        |          more text
 @end group
 #+end_example
 
-{{{noindent}}}
-
-If you are using at least Emacs 23.2@footnote{Emacs 23.1 can actually crash
-with ~org-indent-mode~} and version 6.29 of Org, this kind of view can
-be achieved dynamically at display time using ~org-indent-mode~.  In
-this minor mode, all lines are prefixed for display with the necessary amount
-of space@footnote{~org-indent-mode~ also sets the ~wrap-prefix~
-property, such that ~visual-line-mode~ (or purely setting
-~word-wrap~) wraps long lines (including headlines) correctly indented.
-}.  Also headlines are prefixed with additional stars, so that the amount of
-indentation shifts by two@footnote{See the variable
-~org-indent-indentation-per-level~.}  spaces per level.  All headline
-stars but the last one are made invisible using the ~org-hide~
-face@footnote{Turning on ~org-indent-mode~ sets
-~org-hide-leading-stars~ to ~t~ and ~org-adapt-indentation~ to
-~nil~.} - see below under {{{samp(2.)}}} for more information on how this
-works.  You can turn on ~org-indent-mode~ for all files by customizing
-the variable ~org-startup-indented~, or you can turn it on for
-individual files using
+{{{noindent}}} If you are using at least Emacs 23.2 and version 6.29
+of Org, this kind of view can be achieved dynamically at display time
+using ~org-indent-mode~.[fn:162] In this minor mode, all lines are
+prefixed for display with the necessary amount of space.[fn:163] Also
+headlines are prefixed with additional stars, so that the amount of
+indentation shifts by two spaces per level.[fn:164] All headline stars
+but the last one are made invisible using the ~org-hide~ face---see
+below under {{{samp(2.)}}} for more information on how this
+works.[fn:165] You can turn on ~org-indent-mode~ for all files by
+customizing the variable ~org-startup-indented~, or you can turn it on
+for individual files using
 
 #+begin_example
 ,#+STARTUP: indent
 #+end_example
 
-If you want a similar effect in an earlier version of Emacs and/or Org, or if
-you want the indentation to be hard space characters so that the plain text
-file looks as similar as possible to the Emacs display, Org supports you in
-the following way:
+If you want a similar effect in an earlier version of Emacs and/or
+Org, or if you want the indentation to be hard space characters so
+that the plain text file looks as similar as possible to the Emacs
+display, Org supports you in the following way:
 
 @enumerate
-- 
-/Indentation of text below headlines/@*
-You may indent text below each headline to make the left boundary line up
-with the headline, like
+1. /Indentation of text below headlines/
 
-#+begin_example
-,*** 3rd level
-    more text, now indented
-#+end_example
+  You may indent text below each headline to make the left boundary line up
+  with the headline, like
 
-{{{vindex(org-adapt-indentation)}}}
-Org supports this with paragraph filling, line wrapping, and structure
-editing@footnote{See also the variable ~org-adapt-indentation~.},
-preserving or adapting the indentation as appropriate.
+  #+begin_example
+  ,*** 3rd level
+      more text, now indented
+  #+end_example
 
-- 
-{{{vindex(org-hide-leading-stars)}}}
-/Hiding leading stars/@* You can modify the display in such a way that
-all leading stars become invisible.  To do this in a global way, configure
-the variable ~org-hide-leading-stars~ or change this on a per-file basis
-with
+  {{{vindex(org-adapt-indentation)}}}
 
-#+begin_example
-,#+STARTUP: hidestars
-,#+STARTUP: showstars
-#+end_example
+  Org supports this with paragraph filling, line wrapping, and structure
+  editing,
+  preserving or adapting the indentation as appropriate.[fn:166]
 
-With hidden stars, the tree becomes:
+2. /Hiding leading stars/ 
+  {{{vindex(org-hide-leading-stars)}}}
 
-#+begin_example
-@group
-,* Top level headline
-, * Second level
-,  * 3rd level
-  ...
-@end group
-#+end_example
+  You can modify the display in such a way that all leading stars become
+  invisible. To do this in a global way, configure the variable
+  ~org-hide-leading-stars~ or change this on a per-file basis with
 
-{{{noindent}}}
-{{{vindex(org-hide @r{(face)})}}}
-The leading stars are not truly replaced by whitespace, they are only
-fontified with the face ~org-hide~ that uses the background color as
-font color.  If you are not using either white or black background, you may
-have to customize this face to get the wanted effect.  Another possibility is
-to set this font such that the extra stars are /almost/ invisible, for
-example using the color ~grey90~ on a white background.
+  #+begin_example
+  ,#+STARTUP: hidestars
+  ,#+STARTUP: showstars
+  #+end_example
 
-- 
-{{{vindex(org-odd-levels-only)}}}
-Things become cleaner still if you skip all the even levels and use only odd
-levels 1, 3, 5..., effectively adding two stars to go from one outline level
-to the next@footnote{When you need to specify a level for a property search
-or refile targets, {{{samp(LEVEL=2)}}} will correspond to 3 stars, etc@.}.  In this
-way we get the outline view shown at the beginning of this section.  In order
-to make the structure editing and export commands handle this convention
-correctly, configure the variable ~org-odd-levels-only~, or set this on
-a per-file basis with one of the following lines:
+  With hidden stars, the tree becomes:
 
-#+begin_example
-,#+STARTUP: odd
-,#+STARTUP: oddeven
-#+end_example
+  #+begin_example
+  @group
+  ,* Top level headline
+  , * Second level
+  ,  * 3rd level
+    ...
+  @end group
+  #+end_example
 
-You can convert an Org file from single-star-per-level to the
-double-star-per-level convention with {{{kbd(M-x org-convert-to-odd-levels
-RET)}}} in that file.  The reverse operation is {{{kbd(M-x
-org-convert-to-oddeven-levels)}}}.
-@end enumerate
+  {{{vindex(org-hide @r{(face)})}}}
+
+  {{{noindent}}} The leading stars are not truly replaced by whitespace,
+  they are only fontified with the face ~org-hide~ that uses the
+  background color as font color. If you are not using either white or
+  black background, you may have to customize this face to get the
+  wanted effect. Another possibility is to set this font such that the
+  extra stars are /almost/ invisible, for example using the color
+  ~grey90~ on a white background.
+3. /Odd levels/
+  {{{vindex(org-odd-levels-only)}}}
+
+  Things become cleaner still if you skip all the even levels and use
+  only odd levels 1, 3, 5..., effectively adding two stars to go from
+  one outline level to the next.[fn:167] In this way we get the outline
+  view shown at the beginning of this section. In order to make the
+  structure editing and export commands handle this convention
+  correctly, configure the variable ~org-odd-levels-only~, or set this
+  on a per-file basis with one of the following lines:
+
+  #+begin_example
+  ,#+STARTUP: odd
+  ,#+STARTUP: oddeven
+  #+end_example
+
+  You can convert an Org file from single-star-per-level to the
+  double-star-per-level convention with {{{kbdkey(M-x
+  org-convert-to-odd-levels, RET)}}} in that file. The reverse operation
+  is {{{kbd(M-x org-convert-to-oddeven-levels)}}}.
 
 ** TTY keys
    :PROPERTIES:
    :DESCRIPTION: Using Org on a tty
    :TITLE:    Using Org on a tty
    :END:
+
 Because Org contains a large number of commands, by default many of
 Org's core commands are bound to keys that are generally not
-accessible on a tty, such as the cursor keys ({{{key(left)}}}, {{{key(right)}}},
-{{{key(up)}}}, {{{key(down)}}}), {{{key(TAB)}}} and {{{key(RET)}}}, in particular when used
-together with modifiers like {{{key(Meta)}}} and/or {{{key(Shift)}}}.  To access
-these commands on a tty when special keys are unavailable, the following
-alternative bindings can be used.  The tty bindings below will likely be
-more cumbersome; you may find for some of the bindings below that a
-customized workaround suits you better.  For example, changing a timestamp
-is really only fun with {{{kbdkey(S-,cursor)}}} keys, whereas on a
-tty you would rather use {{{kbd(C-c .)}}} to re-insert the timestamp.
+accessible on a tty, such as the cursor keys ({{{key(left)}}},
+{{{key(right)}}}, {{{key(up)}}}, {{{key(down)}}}), {{{key(TAB)}}} and
+{{{key(RET)}}}, in particular when used together with modifiers like
+{{{key(Meta)}}} and/or {{{key(Shift)}}}. To access these commands on a
+tty when special keys are unavailable, the following alternative
+bindings can be used. The tty bindings below will likely be more
+cumbersome; you may find for some of the bindings below that a
+customized workaround suits you better. For example, changing a
+timestamp is really only fun with {{{kbdkey(S-,cursor)}}} keys,
+whereas on a tty you would rather use {{{kbd(C-c .)}}} to re-insert
+the timestamp.
 
 @multitable @columnfractions 0.15 0.2 0.1 0.2
-- *Default* @tab *Alternative 1* @tab *Speed key* @tab *Alternative 2*
-- {{{kbdkey(S-,TAB)}}}     @tab {{{kbdkey(C-u ,TAB)}}}       @tab {{{kbd(C)}}} @tab
-- {{{kbdkey(M-,left)}}}    @tab {{{kbd(C-c C-x l)}}}           @tab {{{kbd(l)}}} @tab @kbd{@key{Esc} @key{left}}
-- {{{kbdkey(M-S-,left)}}}  @tab {{{kbd(C-c C-x L)}}}           @tab {{{kbd(L)}}} @tab
-- {{{kbdkey(M-,right)}}}   @tab {{{kbd(C-c C-x r)}}}           @tab {{{kbd(r)}}} @tab @kbd{@key{Esc} @key{right}}
-- {{{kbdkey(M-S-,right)}}} @tab {{{kbd(C-c C-x R)}}}           @tab {{{kbd(R)}}} @tab
-- {{{kbdkey(M-,up)}}}      @tab {{{kbd(C-c C-x u)}}}           @tab {{{kbd( )}}} @tab @kbd{@key{Esc} @key{up}}
-- {{{kbdkey(M-S-,up)}}}    @tab {{{kbd(C-c C-x U)}}}           @tab {{{kbd(U)}}} @tab
-- {{{kbdkey(M-,down)}}}    @tab {{{kbd(C-c C-x d)}}}           @tab {{{kbd( )}}} @tab @kbd{@key{Esc} @key{down}}
-- {{{kbdkey(M-S-,down)}}}  @tab {{{kbd(C-c C-x D)}}}           @tab {{{kbd(D)}}} @tab
-- {{{kbdkey(S-,RET)}}}     @tab {{{kbd(C-c C-x c)}}}           @tab {{{kbd( )}}} @tab
-- {{{kbdkey(M-,RET)}}}     @tab {{{kbd(C-c C-x m)}}}           @tab {{{kbd( )}}} @tab @kbd{@key{Esc} @key{RET}}
-- {{{kbdkey(M-S-,RET)}}}   @tab {{{kbd(C-c C-x M)}}}           @tab {{{kbd( )}}} @tab
-- {{{kbdkey(S-,left)}}}    @tab {{{kbdkey(C-c ,left)}}}      @tab {{{kbd( )}}} @tab
-- {{{kbdkey(S-,right)}}}   @tab {{{kbdkey(C-c ,right)}}}     @tab {{{kbd( )}}} @tab
-- {{{kbdkey(S-,up)}}}      @tab {{{kbdkey(C-c ,up)}}}        @tab {{{kbd( )}}} @tab
-- {{{kbdkey(S-,down)}}}    @tab {{{kbdkey(C-c ,down)}}}      @tab {{{kbd( )}}} @tab
-- {{{kbdkey(C-S-,left)}}}  @tab {{{kbdkey(C-c C-x ,left)}}}  @tab {{{kbd( )}}} @tab
-- {{{kbdkey(C-S-,right)}}} @tab {{{kbdkey(C-c C-x ,right)}}} @tab {{{kbd( )}}} @tab
+| *Default*                | *Alternative 1*              | *Speed key*  | *Alternative 2*                  |
+|--------------------------+------------------------------+--------------+----------------------------------|
+| {{{kbdkey(S-,TAB)}}}     | {{{kbdkey(C-u ,TAB)}}}       | {{{kbd(C)}}} |                                  |
+| {{{kbdkey(M-,left)}}}    | {{{kbd(C-c C-x l)}}}         | {{{kbd(l)}}} | {{{kbd(@key{Esc} @key{left})}}}  |
+| {{{kbdkey(M-S-,left)}}}  | {{{kbd(C-c C-x L)}}}         | {{{kbd(L)}}} |                                  |
+| {{{kbdkey(M-,right)}}}   | {{{kbd(C-c C-x r)}}}         | {{{kbd(r)}}} | {{{kbd(@key{Esc} @key{right})}}} |
+| {{{kbdkey(M-S-,right)}}} | {{{kbd(C-c C-x R)}}}         | {{{kbd(R)}}} |                                  |
+| {{{kbdkey(M-,up)}}}      | {{{kbd(C-c C-x u)}}}         | {{{kbd( )}}} | {{{kbd(@key{Esc} @key{up})}}}    |
+| {{{kbdkey(M-S-,up)}}}    | {{{kbd(C-c C-x U)}}}         | {{{kbd(U)}}} |                                  |
+| {{{kbdkey(M-,down)}}}    | {{{kbd(C-c C-x d)}}}         | {{{kbd( )}}} | {{{kbd(@key{Esc} @key{down})}}}  |
+| {{{kbdkey(M-S-,down)}}}  | {{{kbd(C-c C-x D)}}}         | {{{kbd(D)}}} |                                  |
+| {{{kbdkey(S-,RET)}}}     | {{{kbd(C-c C-x c)}}}         | {{{kbd( )}}} |                                  |
+| {{{kbdkey(M-,RET)}}}     | {{{kbd(C-c C-x m)}}}         | {{{kbd( )}}} | {{{kbd(@key{Esc} @key{RET})}}}   |
+| {{{kbdkey(M-S-,RET)}}}   | {{{kbd(C-c C-x M)}}}         | {{{kbd( )}}} |                                  |
+| {{{kbdkey(S-,left)}}}    | {{{kbdkey(C-c ,left)}}}      | {{{kbd( )}}} |                                  |
+| {{{kbdkey(S-,right)}}}   | {{{kbdkey(C-c ,right)}}}     | {{{kbd( )}}} |                                  |
+| {{{kbdkey(S-,up)}}}      | {{{kbdkey(C-c ,up)}}}        | {{{kbd( )}}} |                                  |
+| {{{kbdkey(S-,down)}}}    | {{{kbdkey(C-c ,down)}}}      | {{{kbd( )}}} |                                  |
+| {{{kbdkey(C-S-,left)}}}  | {{{kbdkey(C-c C-x ,left)}}}  | {{{kbd( )}}} |                                  |
+| {{{kbdkey(C-S-,right)}}} | {{{kbdkey(C-c C-x ,right)}}} | {{{kbd( )}}} |                                  |
 @end multitable
-
 
 ** Interaction
    :PROPERTIES:
@@ -16161,94 +16203,114 @@ with other code out there.
     :END:
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-{{{cindex(@file{calc.el})}}}
-{{{cindex(Gillespie\\\, Dave)}}}
-- {{{file(calc.el)}}} by Dave Gillespie
-Org uses the Calc package for implementing spreadsheet
-functionality in its tables (see [[The spreadsheet]]).  Org
-checks for the availability of Calc by looking for the function
-~calc-eval~ which will have been autoloaded during setup if Calc has
-been installed properly.  As of Emacs 22, Calc is part of the Emacs
-distribution.  Another possibility for interaction between the two
-packages is using Calc for embedded calculations.  See [[Embedded Mode,
-, Embedded Mode, calc, GNU Emacs Calc Manual]].
-- {{{file(constants.el)}}} by Carsten Dominik
-{{{cindex(@file{constants.el})}}}
-{{{cindex(Dominik\\\, Carsten)}}}
-{{{vindex(org-table-formula-constants)}}}
-In a table formula (see [[The spreadsheet]]), it is possible to use
-names for natural constants or units.  Instead of defining your own
-constants in the variable ~org-table-formula-constants~, install
-the {{{file(constants)}}} package which defines a large number of constants
-and units, and lets you use unit prefixes like {{{samp(M)}}} for
-{{{samp(Mega)}}}, etc@.  You will need version 2.0 of this package, available
-at @url{http://www.astro.uva.nl/~dominik/Tools}.  Org checks for
-the function ~constants-get~, which has to be autoloaded in your
-setup.  See the installation instructions in the file
-{{{file(constants.el)}}}.
-- {{{file(cdlatex.el)}}} by Carsten Dominik
-{{{cindex(@file{cdlatex.el})}}}
-{{{cindex(Dominik\\\, Carsten)}}}
-Org mode can make use of the CD@LaTeX{} package to efficiently enter
-@LaTeX{} fragments into Org files.  See [[CDLaTeX mode]].
-- {{{file(imenu.el)}}} by Ake Stenhoff and Lars Lindberg
-{{{cindex(@file{imenu.el})}}}
-Imenu allows menu access to an index of items in a file.  Org mode
-supports Imenu---all you need to do to get the index is the following:
-#+begin_src emacs-lisp
-(add-hook 'org-mode-hook
-          (lambda () (imenu-add-to-menubar "Imenu")))
-#+end_src
-{{{vindex(org-imenu-depth)}}}
-By default the index is two levels deep---you can modify the depth using
-the option ~org-imenu-depth~.
-- {{{file(remember.el)}}} by John Wiegley
-{{{cindex(@file{remember.el})}}}
-{{{cindex(Wiegley\\\, John)}}}
-Org used to use this package for capture, but no longer does.
-- {{{file(speedbar.el)}}} by Eric M. Ludlam
-{{{cindex(@file{speedbar.el})}}}
-{{{cindex(Ludlam\\\, Eric M.)}}}
-Speedbar is a package that creates a special frame displaying files and
-index items in files.  Org mode supports Speedbar and allows you to
-drill into Org files directly from the Speedbar.  It also allows you to
-restrict the scope of agenda commands to a file or a subtree by using
-the command {{{kbd(<)}}} in the Speedbar frame.
-{{{cindex(@file{table.el})}}}
-- {{{file(table.el)}}} by Takaaki Ota
-{{{kindex(C-c C-c)}}}
-{{{cindex(table editor\\\, @file{table.el})}}}
-{{{cindex(@file{table.el})}}}
-{{{cindex(Ota\\\, Takaaki)}}}
+- {{{file(calc.el)}}} by Dave Gillespie ::
+  {{{cindex(@file{calc.el})}}}
+  {{{cindex(Gillespie\\\, Dave)}}}
 
-Complex ASCII tables with automatic line wrapping, column- and row-spanning,
-and alignment can be created using the Emacs table package by Takaaki Ota
-(@uref{http://sourceforge.net/projects/table}, and also part of Emacs 22).
-Org mode will recognize these tables and export them properly.  Because of
-interference with other Org mode functionality, you unfortunately cannot edit
-these tables directly in the buffer.  Instead, you need to use the command
-{{{kbd(C-c ')}}} to edit them, similar to source code snippets.
+  Org uses the Calc package for implementing spreadsheet functionality
+  in its tables (see [[The spreadsheet]]). Org checks for the availability
+  of Calc by looking for the function ~calc-eval~ which will have been
+  autoloaded during setup if Calc has been installed properly. As of
+  Emacs 22, Calc is part of the Emacs distribution. Another possibility
+  for interaction between the two packages is using Calc for embedded
+  calculations. See [[Embedded Mode, , Embedded Mode, calc, GNU Emacs Calc
+  Manual]].
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
-- {{{kbd(C-c ')}}} ~org-edit-special~ ::
-  {{{kindex(C-c ')}}}
-Edit a {{{file(table.el)}}} table.  Works when the cursor is in a table.el table.
+- {{{file(constants.el)}}} by Carsten Dominik ::
+  {{{cindex(@file{constants.el})}}}
+  {{{cindex(Dominik\\\, Carsten)}}}
+  {{{vindex(org-table-formula-constants)}}}
 
-- {{{kbd(C-c ~)}}} ~org-table-create-with-table.el~ ::
-  {{{kindex(C-c ~)}}}
-Insert a {{{file(table.el)}}} table.  If there is already a table at point, this
-command converts it between the {{{file(table.el)}}} format and the Org mode
-format.  See the documentation string of the command
-~org-convert-table~ for the restrictions under which this is
-possible.
+  In a table formula (see [[The spreadsheet]]), it is possible to use names
+  for natural constants or units. Instead of defining your own constants
+  in the variable ~org-table-formula-constants~, install the
+  {{{file(constants)}}} package which defines a large number of
+  constants and units, and lets you use unit prefixes like {{{samp(M)}}}
+  for {{{samp(Mega)}}}, etc. You will need version 2.0 of this package,
+  available at [[http://www.astro.uva.nl/~dominik/Tools]]. Org checks for
+  the function ~constants-get~, which has to be autoloaded in your
+  setup. See the installation instructions in the file
+  {{{file(constants.el)}}}.
 
-{{{file(table.el)}}} is part of Emacs since Emacs 22.
-- {{{file(footnote.el)}}} by Steven L. Baur
-{{{cindex(@file{footnote.el})}}}
-{{{cindex(Baur\\\, Steven L.)}}}
-Org mode recognizes numerical footnotes as provided by this package.
-However, Org mode also has its own footnote support (see [[Footnotes]]),
-which makes using {{{file(footnote.el)}}} unnecessary.
+- {{{file(cdlatex.el)}}} by Carsten Dominik ::
+  {{{cindex(@file{cdlatex.el})}}}
+  {{{cindex(Dominik\\\, Carsten)}}}
+
+  Org mode can make use of the CD@LaTeX{} package to efficiently enter
+  @LaTeX{} fragments into Org files. See [[CDLaTeX mode]].
+
+- {{{file(imenu.el)}}} by Ake Stenhoff and Lars Lindberg ::
+  {{{cindex(@file{imenu.el})}}}
+  {{{cindex(Stenhoff\\\, Lars)}}}
+  {{{cindex(Lindberg\\\, Ake)}}}
+
+  Imenu allows menu access to an index of items in a file.  Org mode
+  supports Imenu---all you need to do to get the index is the following:
+
+  #+begin_src emacs-lisp
+  (add-hook 'org-mode-hook
+            (lambda () (imenu-add-to-menubar "Imenu")))
+  #+end_src
+
+  {{{vindex(org-imenu-depth)}}}
+
+  By default the index is two levels deep---you can modify the depth
+  using the option ~org-imenu-depth~.
+
+- {{{file(remember.el)}}} by John Wiegley ::
+  {{{cindex(@file{remember.el})}}}
+  {{{cindex(Wiegley\\\, John)}}}
+
+  Org used to use this package for capture, but no longer does.
+
+- {{{file(speedbar.el)}}} by Eric M. Ludlam ::
+  {{{cindex(@file{speedbar.el})}}}
+  {{{cindex(Ludlam\\\, Eric M.)}}}
+
+  Speedbar is a package that creates a special frame displaying files and
+  index items in files.  Org mode supports Speedbar and allows you to
+  drill into Org files directly from the Speedbar.  It also allows you to
+  restrict the scope of agenda commands to a file or a subtree by using
+  the command {{{kbd(<)}}} in the Speedbar frame.
+
+- {{{file(table.el)}}} by Takaaki Ota ::
+  {{{kindex(C-c C-c)}}}
+  {{{cindex(table editor\\\, @file{table.el})}}}
+  {{{cindex(@file{table.el})}}}
+  {{{cindex(Ota\\\, Takaaki)}}}
+
+  Complex ASCII tables with automatic line wrapping, column- and row-spanning,
+  and alignment can be created using the Emacs table package by Takaaki Ota
+  ([[http://sourceforge.net/projects/table]], and also part of Emacs 22).
+  Org mode will recognize these tables and export them properly.  Because of
+  interference with other Org mode functionality, you unfortunately cannot edit
+  these tables directly in the buffer.  Instead, you need to use the command
+  {{{kbd(C-c ')}}} to edit them, similar to source code snippets.
+
+  - {{{kbd(C-c ')}}} ~org-edit-special~ ::
+    {{{kindex(C-c ')}}}
+
+    Edit a {{{file(table.el)}}} table. Works when the cursor is in a
+    table.el table.
+
+  - {{{kbd(C-c ~)}}} ~org-table-create-with-table.el~ ::
+    {{{kindex(C-c ~)}}}
+
+    Insert a {{{file(table.el)}}} table. If there is already a table at
+    point, this command converts it between the {{{file(table.el)}}}
+    format and the Org mode format. See the documentation string of the
+    command ~org-convert-table~ for the restrictions under which this is
+    possible.
+
+  {{{file(table.el)}}} is part of Emacs since Emacs 22.
+
+- {{{file(footnote.el)}}} by Steven L. Baur ::
+  {{{cindex(@file{footnote.el})}}}
+  {{{cindex(Baur\\\, Steven L.)}}}
+
+  Org mode recognizes numerical footnotes as provided by this package.
+  However, Org mode also has its own footnote support (see [[Footnotes]]),
+  which makes using {{{file(footnote.el)}}} unnecessary.
 
 
 *** Conflicts
@@ -16261,115 +16323,125 @@ which makes using {{{file(footnote.el)}}} unnecessary.
 
 {{{cindex(@code{shift-selection-mode})}}}
 {{{vindex(org-support-shift-select)}}}
+
 In Emacs 23, ~shift-selection-mode~ is on by default, meaning that
-cursor motions combined with the shift key should start or enlarge regions.
-This conflicts with the use of {{{kbdkey(S-,cursor)}}} commands in Org to change
-timestamps, TODO keywords, priorities, and item bullet types if the cursor is
-at such a location.  By default, {{{kbdkey(S-,cursor)}}} commands outside
-special contexts don't do anything, but you can customize the variable
-~org-support-shift-select~.  Org mode then tries to accommodate shift
-selection by (i) using it outside of the special contexts where special
-commands apply, and by (ii) extending an existing active region even if the
-cursor moves across a special context.
+cursor motions combined with the shift key should start or enlarge
+regions. This conflicts with the use of {{{kbdkey(S-,cursor)}}}
+commands in Org to change timestamps, TODO keywords, priorities, and
+item bullet types if the cursor is at such a location. By default,
+{{{kbdkey(S-,cursor)}}} commands outside special contexts don't do
+anything, but you can customize the variable
+~org-support-shift-select~. Org mode then tries to accommodate shift
+selection by (i) using it outside of the special contexts where
+special commands apply, and by (ii) extending an existing active
+region even if the cursor moves across a special context.
 
-- {{{file(CUA.el)}}} by Kim. F. Storm
-{{{cindex(@file{CUA.el})}}}
-{{{cindex(Storm\\\, Kim. F.)}}}
-{{{vindex(org-replace-disputed-keys)}}}
-Key bindings in Org conflict with the {{{kbdkey(S-,<cursor>)}}} keys used by CUA mode
-(as well as ~pc-select-mode~ and ~s-region-mode~) to select and extend the
-region.  In fact, Emacs 23 has this built-in in the form of
-~shift-selection-mode~, see previous paragraph.  If you are using Emacs
-23, you probably don't want to use another package for this purpose.  However,
-if you prefer to leave these keys to a different package while working in
-Org mode, configure the variable ~org-replace-disputed-keys~.  When set,
-Org will move the following key bindings in Org files, and in the agenda
-buffer (but not during date selection).
+- {{{file(CUA.el)}}} by Kim. F. Storm ::
+  {{{cindex(@file{CUA.el})}}}
+  {{{cindex(Storm\\\, Kim. F.)}}}
+  {{{vindex(org-replace-disputed-keys)}}}
 
-#+begin_example
-S-UP      @result{}  M-p             S-DOWN     @result{}  M-n
-S-LEFT    @result{}  M--             S-RIGHT    @result{}  M-+
-C-S-LEFT  @result{}  M-S--           C-S-RIGHT  @result{}  M-S-+
-#+end_example
+  Key bindings in Org conflict with the {{{kbdkey(S-,<cursor>)}}} keys
+  used by CUA mode (as well as ~pc-select-mode~ and ~s-region-mode~) to
+  select and extend the region. In fact, Emacs 23 has this built-in in
+  the form of ~shift-selection-mode~, see previous paragraph. If you are
+  using Emacs 23, you probably don't want to use another package for
+  this purpose. However, if you prefer to leave these keys to a
+  different package while working in Org mode, configure the variable
+  ~org-replace-disputed-keys~. When set, Org will move the following key
+  bindings in Org files, and in the agenda buffer (but not during date
+  selection).
 
-{{{vindex(org-disputed-keys)}}}
-Yes, these are unfortunately more difficult to remember.  If you want
-to have other replacement keys, look at the variable
-~org-disputed-keys~.
+  #+begin_example
+  S-UP      @result{}  M-p             S-DOWN     @result{}  M-n
+  S-LEFT    @result{}  M--             S-RIGHT    @result{}  M-+
+  C-S-LEFT  @result{}  M-S--           C-S-RIGHT  @result{}  M-S-+
+  #+end_example
 
-- {{{file(filladapt.el)}}} by Kyle Jones
-{{{cindex(@file{filladapt.el})}}}
+  {{{vindex(org-disputed-keys)}}}
 
-Org mode tries to do the right thing when filling paragraphs, list items and
-other elements.  Many users reported they had problems using both
-{{{file(filladapt.el)}}} and Org mode, so a safe thing to do is to disable it like
-this:
+  Yes, these are unfortunately more difficult to remember. If you want
+  to have other replacement keys, look at the variable
+  ~org-disputed-keys~.
 
-#+begin_src emacs-lisp
-(add-hook 'org-mode-hook 'turn-off-filladapt-mode)
-#+end_src
+- {{{file(filladapt.el)}}} by Kyle Jones ::
+  {{{cindex(@file{filladapt.el})}}}
+  {{{cindex(Jones\\\, Kyle)}}}
 
-- {{{file(yasnippet.el)}}}
-{{{cindex(@file{yasnippet.el})}}}
-The way Org mode binds the TAB key (binding to ~[tab]~ instead of
-~"\t"~) overrules YASnippet's access to this key.  The following code
-fixed this problem:
+  Org mode tries to do the right thing when filling paragraphs, list
+  items and other elements. Many users reported they had problems using
+  both {{{file(filladapt.el)}}} and Org mode, so a safe thing to do is
+  to disable it like this:
 
-#+begin_src emacs-lisp
-(add-hook 'org-mode-hook
-          (lambda ()
-            (org-set-local 'yas/trigger-key [tab])
-            (define-key yas/keymap [tab] 'yas/next-field-or-maybe-expand)))
-#+end_src
+  #+begin_src emacs-lisp
+  (add-hook 'org-mode-hook 'turn-off-filladapt-mode)
+  #+end_src
 
-The latest version of yasnippet doesn't play well with Org mode.  If the
-above code does not fix the conflict, start by defining the following
-function:
+- {{{file(yasnippet.el)}}} ::
+  {{{cindex(@file{yasnippet.el})}}}
 
-#+begin_src emacs-lisp
-(defun yas/org-very-safe-expand ()
-       (let ((yas/fallback-behavior 'return-nil)) (yas/expand)))
-#+end_src
+  The way Org mode binds the {{{key(TAB)}}} key (binding to ~[tab]~
+  instead of ~"\t"~) overrules YASnippet's access to this key. The
+  following code fixed this problem:
 
-Then, tell Org mode what to do with the new function:
+  #+begin_src emacs-lisp
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (org-set-local 'yas/trigger-key [tab])
+              (define-key yas/keymap [tab] 'yas/next-field-or-maybe-expand)))
+  #+end_src
 
-#+begin_src emacs-lisp
-(add-hook 'org-mode-hook
-          (lambda ()
-              (make-variable-buffer-local 'yas/trigger-key)
-              (setq yas/trigger-key [tab])
-              (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
-              (define-key yas/keymap [tab] 'yas/next-field)))
-#+end_src
+  The latest version of yasnippet doesn't play well with Org mode.  If the
+  above code does not fix the conflict, start by defining the following
+  function:
+
+  #+begin_src emacs-lisp
+  (defun yas/org-very-safe-expand ()
+         (let ((yas/fallback-behavior 'return-nil)) (yas/expand)))
+  #+end_src
+
+  Then, tell Org mode what to do with the new function:
+
+  #+begin_src emacs-lisp
+  (add-hook 'org-mode-hook
+            (lambda ()
+                (make-variable-buffer-local 'yas/trigger-key)
+                (setq yas/trigger-key [tab])
+                (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
+                (define-key yas/keymap [tab] 'yas/next-field)))
+  #+end_src
 
 - {{{file(windmove.el)}}} by Hovav Shacham
-{{{cindex(@file{windmove.el})}}}
-This package also uses the {{{kbd(S-<cursor>)}}} keys, so everything written
-in the paragraph above about CUA mode also applies here.  If you want make
-the windmove function active in locations where Org mode does not have
-special functionality on {{{kbdkey(S-,cursor)}}}, add this to your
-configuration:
+  {{{cindex(@file{windmove.el})}}}
+  {{{cindex(Shacham\\\, Hovav)}}}
 
-#+begin_src emacs-lisp
-;; Make windmove work in org-mode:
-(add-hook 'org-shiftup-final-hook 'windmove-up)
-(add-hook 'org-shiftleft-final-hook 'windmove-left)
-(add-hook 'org-shiftdown-final-hook 'windmove-down)
-(add-hook 'org-shiftright-final-hook 'windmove-right)
-#+end_src
+  This package also uses the {{{kbd(S-<cursor>)}}} keys, so everything
+  written in the paragraph above about CUA mode also applies here. If
+  you want make the windmove function active in locations where Org mode
+  does not have special functionality on {{{kbdkey(S-,cursor)}}}, add
+  this to your configuration:
+
+  #+begin_src emacs-lisp
+  ;; Make windmove work in org-mode:
+  (add-hook 'org-shiftup-final-hook 'windmove-up)
+  (add-hook 'org-shiftleft-final-hook 'windmove-left)
+  (add-hook 'org-shiftdown-final-hook 'windmove-down)
+  (add-hook 'org-shiftright-final-hook 'windmove-right)
+  #+end_src
 
 - {{{file(viper.el)}}} by Michael Kifer
-{{{cindex(@file{viper.el})}}}
-{{{kindex(C-c /)}}}
-Viper uses {{{kbd(C-c /)}}} and therefore makes this key not access the
-corresponding Org mode command ~org-sparse-tree~.  You need to find
-another key for this command, or override the key in
-~viper-vi-global-user-map~ with
+  {{{cindex(@file{viper.el})}}}
+  {{{cindex(Kifer\\\, Michael)}}}
+  {{{kindex(C-c /)}}}
 
-#+begin_src emacs-lisp
-(define-key viper-vi-global-user-map "C-c /" 'org-sparse-tree)
-#+end_src
+  Viper uses {{{kbd(C-c /)}}} and therefore makes this key not access the
+  corresponding Org mode command ~org-sparse-tree~.  You need to find
+  another key for this command, or override the key in
+  ~viper-vi-global-user-map~ with
 
+  #+begin_src emacs-lisp
+  (define-key viper-vi-global-user-map "C-c /" 'org-sparse-tree)
+  #+end_src
 
 
 ** org-crypt.el
@@ -16380,12 +16452,12 @@ another key for this command, or override the key in
 {{{cindex(@code{org-decrypt-entry})}}}
 
 Org-crypt will encrypt the text of an entry, but not the headline, or
-properties.  Org-crypt uses the Emacs EasyPG library to encrypt and decrypt
-files.
+properties. Org-crypt uses the Emacs EasyPG library to encrypt and
+decrypt files.
 
-Any text below a headline that has a {{{samp(:crypt:)}}} tag will be automatically
-be encrypted when the file is saved.  If you want to use a different tag just
-customize the ~org-crypt-tag-matcher~ setting.
+Any text below a headline that has a {{{samp(:crypt:)}}} tag will
+automatically be encrypted when the file is saved. If you want to use
+a different tag just customize the ~org-crypt-tag-matcher~ setting.
 
 To use org-crypt it is suggested that you have the following in your
 {{{file(.emacs)}}}:
@@ -18545,6 +18617,25 @@ stream; this is an area for future work.
 [fn:160] The last evaluation performed by the interpreter is obtained
 in a language-specific manner: the value of the variable ~_~ in Python
 and Ruby, and the value of ~.Last.value~ in R.
+
+[fn:161] Emacs 23 and Org mode 6.29 are required.
+
+[fn:162] Note that Emacs 23.1 can actually crash with
+~org-indent-mode~.
+
+[fn:163] Note that ~org-indent-mode~ also sets the ~wrap-prefix~
+property, such that ~visual-line-mode~ (or purely setting ~word-wrap~)
+wraps long lines (including headlines) correctly indented.
+
+[fn:164] See the variable ~org-indent-indentation-per-level~.
+
+[fn:165] Turning on ~org-indent-mode~ sets ~org-hide-leading-stars~ to
+~t~ and ~org-adapt-indentation~ to ~nil~.
+
+[fn:166] See also the variable ~org-adapt-indentation~.
+
+[fn:167] When you need to specify a level for a property search or
+refile targets, {{{samp(LEVEL=2)}}} will correspond to 3 stars, etc.
 
 * About orgmanual.org                                              :noexport:
 This document intends to be Org mode source for the Org mode manual
