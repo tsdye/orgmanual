@@ -3,8 +3,8 @@
 #+EMAIL:     tsd@tsdye.com
 #+DATE:      2012-11-10 Sat
 #+LANGUAGE:  en
-#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
-#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+OPTIONS:   H:5 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:nil pri:nil tags:not-in-toc
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+SELECT_TAGS: export
 #+EXCLUDE_TAGS: noexport
@@ -242,8 +242,9 @@ Installing Info files is system dependent, because of differences in
 the {{{file(install-info)}}} program. The Info documentation is
 installed together with the rest of Org mode. If you don't install Org
 mode, it is possible to install the Info documentation separately if you
-have install-info on your system.[fn:1]  The command to do this is:
+have install-info on your system.[fn:1]  
 
+The command to do this is:
 #+begin_src example
 make install-info
 #+end_src
@@ -325,7 +326,7 @@ default, in Emacs 22 you need to do this yourself with
 
 {{{noindent}}} If you do not like ~transient-mark-mode~, you can
 create an active region by using the mouse to select a region, or
-pressing {{{kbdkey(C-,SPC)}}} twice before moving the cursor.
+pressing {{{kbdkey(C- ,SPC)}}} twice before moving the cursor.
 
 ** Feedback
    :PROPERTIES:
@@ -1031,7 +1032,7 @@ Org knows ordered lists, unordered lists, and description lists.
   - /Ordered/ list items start with a numeral followed by either a
     period or a right parenthesis,[fn:23] such as
     ~1.~ or ~1~.[fn:16] If you want a list to
-    start with a different value (e.g.: 20), start the text of the
+    start with a different value (e.g., 20), start the text of the
     item with ~[@20]~.[fn:17] Those constructs can be used
     in any item of the list in order to enforce a particular
     numbering.
@@ -1149,8 +1150,8 @@ to disable them individually.
   - {{{kbdkey(M-,up)}}} ::
        @@info:@itemx@@ {{{kbdkey(M-,down)}}}
 
-       Move the item including subitems up/down[fn:22] (swap with
-       previous/next item of same indentation).  If the list is
+       Move the item including subitems up/down (swap with
+       previous/next item of same indentation).[fn:22]  If the list is
        ordered, renumbering is automatic.
 
        {{{kindex(M-up)}}}
@@ -1390,7 +1391,7 @@ details.
             (including inline definitions) into a special section, and
             then numbering them in sequence.  The references will then
             also be numbers.  This is meant to be the final step
-            before finishing a document (e.g.: sending off an email).
+            before finishing a document (e.g., sending off an email).
             The exporters do this automatically, and so could
             something like ~message-send-hook~.
     - d ::  Delete the footnote at point, and all definitions of and
@@ -1507,7 +1508,7 @@ typing /immediately after the cursor was moved into a new field with
 automatically made blank.  If this behavior is too unpredictable for
 you, configure the variables ~org-enable-table-editor~ and
 ~code(org-table-auto-blank-field~.
-**** Creation and Conversion
+*** Creation and Conversion
 #+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c |)}}} ~org-table-create-or-convert-from-region~ :: Convert
      the active region to table.  If every line contains at least one
@@ -1524,7 +1525,7 @@ you, configure the variables ~org-enable-table-editor~ and
 
      {{{kindex(C-c |)}}}
      {{{findex(org-table-create-or-convert-from-region)}}}
-**** Re-aligning and field motion
+*** Re-aligning and field motion
 #+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c C-c)}}} ~org-table-align~ :: Re-align the table without
      moving the cursor.
@@ -1558,7 +1559,7 @@ you, configure the variables ~org-enable-table-editor~ and
 
      {{{kindex(M-e)}}}
      {{{findex(org-table-end-of-field)}}}
-**** Column and row editing
+*** Column and row editing
 #+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbdkey(M-,left)}}} ~org-table-move-column-left~ ::
      @@info:@itemx@@ {{{kbdkey(M-,right)}}} ~org-table-move-column-right~ 
@@ -1625,7 +1626,7 @@ you, configure the variables ~org-enable-table-editor~ and
 
      {{{kindex(C-c ^)}}}
      {{{findex(org-table-sort-lines)}}}
-**** Regions
+*** Regions
 #+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c C-x M-w)}}} ~org-table-copy-region~ :: Copy a rectangular
      region from a table to a special clipboard.  Point and mark
@@ -1661,7 +1662,7 @@ you, configure the variables ~org-enable-table-editor~ and
 
      {{{kindex(M-RET)}}}
      {{{findex(org-table-wrap-region)}}}
-**** Calculations
+*** Calculations
 #+attr_texinfo: :table-type "table" :indic "@asis"
 {{{cindex(formula\\\, in tables)}}}
 {{{cindex(calculations\\\, in tables)}}}
@@ -1688,7 +1689,7 @@ you, configure the variables ~org-enable-table-editor~ and
      {{{findex(org-table-copy-down)}}}
      {{{vindex(org-table-copy-increment)}}}
 
-**** Misc
+*** Misc
 #+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c `)}}} ~org-table-edit-field~ :: Edit the current field in
      a separate window.  This is useful for fields that are not fully
@@ -1807,7 +1808,7 @@ this: {{{samp(<l10>)}}}.
 A line that only contains these formatting cookies will be removed
 automatically when exporting the document.
 
-** Column groups                
+** Column groups
    :PROPERTIES:
    :DESCRIPTION: Grouping to trigger vertical lines
    :END:
@@ -2068,9 +2069,7 @@ or range reference as described above for example ~@3$3~ or
 {{{cindex(syntax\\\, of formulas)}}}
 
 A formula can be any algebraic expression understood by the Emacs
-{{{file(Calc)}}} package.  *Note*: {{{file(calc)}}} has the
-non-standard convention that ~/~ has lower precedence than ~*~, so
-that ~a/b*c~ is interpreted as ~a/(b*c)~.  Before evaluation by
+{{{file(Calc)}}} package.[fn:177]  Before evaluation by
 ~calc-eval~ (see [[info:calc:Calling%20Calc%20from%20Your%20Programs][Calling Calc from Your Lisp Programs]]), variable
 substitution takes place according to the rules described above.
 {{{cindex(vectors\\\, in table calculations)}}} The range vectors can
@@ -2323,7 +2322,7 @@ following command:
        result of the formula.  The command prompts for a formula, with
        default taken from the {{{samp(#+TBLFM)}}} line, applies it to
        the current field and stores it.  With a numeric prefix
-       argument(e.g.: {{{kbd(C-5 C-c =)}}}) the command will apply it
+       argument(e.g., {{{kbd(C-5 C-c =)}}}) the command will apply it
        to that many consecutive fields in the current column.
 
        {{{kindex(C-c =)}}}
@@ -2711,7 +2710,7 @@ then call ~org-plot/gnuplot~ on the following table.
   | Leeds     |    165.77 |   19.68 |
   | Sao Paolo |     71.00 |   11.50 |
   | Stockholm |    134.19 |   14.33 |
-  | Morels   |    257.56 |   17.67 |
+  | Morels    |    257.56 |   17.67 |
 #+end_src
 
 Notice that Org Plot is smart enough to apply the table's headers as
@@ -2734,7 +2733,7 @@ information and examples see the [[http://orgmode.org/worg/org-tutorials/org-plo
             ~ind~ column).
   - type :: Specify whether the plot will be ~2d~, ~3d~, or ~grid~.
   - with :: Specify a ~with~ option to be inserted for every col being
-            plotted (e.g.: ~lines~, ~points~, ~boxes~, ~impulses~,
+            plotted (e.g., ~lines~, ~points~, ~boxes~, ~impulses~,
             etc...).  Defaults to ~lines~.
   - file :: If you want to plot to a file, specify
             ~"@var{path/to/desired/output-file}"~.
@@ -3263,7 +3262,7 @@ can define them in the file with
 
 {{{noindent}}} In-buffer completion (see [[Completion]]) can be used after
 {{{samp([)}}} to complete link abbreviations.  You may also define a
-function ~org-PREFIX-complete-link~ that implements special (e.g.:
+function ~org-PREFIX-complete-link~ that implements special (e.g.,
 completion) support for inserting such a link with {{{kbd(C-c C-l)}}}.
 Such a function should not accept any arguments, and return the full
 link with prefix.
@@ -3469,7 +3468,6 @@ files.
 Note that /tags/ are another way to classify headlines in general and
 TODO items in particular (see [[Tags]]).
 
-
 *** Workflow states
     :PROPERTIES:
     :DESCRIPTION: From TODO to DONE in steps
@@ -3596,7 +3594,6 @@ keyword or using completion, you may also apply the following commands:
   from ~DONE~ to ~REPORT~ in the example above.  See also
   [[Conflicts]], for a discussion of the interaction with
   ~shift-selection-mode~.
-
 
 *** Fast access to TODO states
     :PROPERTIES:
@@ -3819,7 +3816,6 @@ In the timeline (see [[Timeline]]) and in the agenda (see [[Weekly/daily
 agenda]]), you can then use the {{{kbd(l)}}} key to display the TODO
 items with a {{{samp(CLOSED)}}} timestamp on each day, giving you an
 overview of what has been done.
-
 
 *** Tracking TODO state changes
     :PROPERTIES:
@@ -4278,7 +4274,7 @@ mode has extensive support for tags.
 
 Every headline can contain a list of tags; they occur at the end of
 the headline. Tags are normal words containing letters, numbers,
-{{{samp(_)}}}, and {{{samp(@@)}}}. Tags must be preceded and followed
+{{{samp(_)}}}, and {{{samp(@)}}}. Tags must be preceded and followed
 by a single colon, e.g., {{{samp(:work:)}}}. Several tags can be
 specified, as in {{{samp(:work:urgent:)}}}. Tags will by default be in
 bold face with the same color as the headline. You may specify special
@@ -4331,7 +4327,6 @@ form) match as well.[fn:62] The list of matches may then become very
 long. If you only want to see the first tags match in a subtree,
 configure the variable ~org-tags-match-list-sublevels~ (not
 recommended).
-
 
 ** Setting tags
    :PROPERTIES:
@@ -4409,7 +4404,7 @@ work well you should assign unique letters to most of your commonly
 used tags. You can do this globally by configuring the variable
 ~org-tag-alist~ in your {{{file(.emacs)}}} file. For example, you may
 find the need to tag many items in different files with
-{{{samp(:@@home:)}}}. In this case you can set something like:
+{{{samp(:@home:)}}}. In this case you can set something like:
 
 #+header: :eval no
 #+header: :exports code
@@ -4447,8 +4442,8 @@ braces, as in:
 ,#+TAGS: @{ @@work(w)  @@home(h)  @@tennisclub(t) @}  laptop(l)  pc(p)
 #+end_example
 
-{{{noindent}}} you indicate that at most one of {{{samp(@@work)}}},
-{{{samp(@@home)}}}, and {{{samp(@@tennisclub)}}} should be selected.
+{{{noindent}}} you indicate that at most one of {{{samp(@work)}}},
+{{{samp(@home)}}}, and {{{samp(@tennisclub)}}} should be selected.
 Multiple such groups are allowed.
 
 {{{noindent}}} Don't forget to press {{{kbd(C-c C-c)}}} with the
@@ -4523,9 +4518,9 @@ keys:
 
 {{{noindent}}} This method lets you assign tags to a headline with
 very few keys. With the above setup, you could clear the current tags
-and set {{{samp(@@home)}}}, {{{samp(laptop)}}} and {{{samp(pc)}}} tags
-with just the following keys: {{{kbd(C-c C-c @key{SPC} h l p @key{RET}})}}}. Switching from {{{samp(@@home)}}} to
-{{{samp(@@work)}}} would be done with {{{kbdkey(C-c C-c w ,RET)}}} or
+and set {{{samp(@home)}}}, {{{samp(laptop)}}} and {{{samp(pc)}}} tags
+with just the following keys: {{{kbd(C-c C-c @key{SPC} h l p @key{RET}})}}}. Switching from {{{samp(@home)}}} to
+{{{samp(@work)}}} would be done with {{{kbdkey(C-c C-c w ,RET)}}} or
 alternatively with {{{kbd(C-c C-c C-c w)}}}. Adding the non-predefined
 tag {{{samp(Sarah)}}} could be done with 
 {{{kbd(C-c C-c @key{TAB} S a r a h @key{RET} @key{RET})}}}.
@@ -4542,7 +4537,6 @@ process (in effect: start selection with {{{kbd(C-c C-c C-c)}}}
 instead of {{{kbd(C-c C-c)}}}). If you set the variable to the value
 ~expert~, the special window is not even shown for single-key tag
 selection, it comes up only when you press an extra {{{kbd(C-c)}}}.
-
 
 ** Tag searches
    :PROPERTIES:
@@ -4757,7 +4751,6 @@ The following commands help to work with properties:
   Compute the property at point, using the operator and scope from the
   nearest column format definition.
 
-
 ** Special properties
    :PROPERTIES:
    :DESCRIPTION: Access to other Org mode features
@@ -4860,7 +4853,6 @@ single property:
   interpreted as a regular expression and matched against the property
   values.
 
-
 ** Property inheritance
    :PROPERTIES:
    :DESCRIPTION: Passing values down a tree
@@ -4914,7 +4906,6 @@ least for the special applications for which they are used:
 
   The LOGGING property may define logging settings for an entry or a
   subtree (see [[Tracking TODO state changes]]).
-
 
 ** Column view
    :PROPERTIES:
@@ -5070,12 +5061,10 @@ all children have been checked. The {{{samp(CLOCKSUM)}}} and
 CLOCK intervals in the subtree, either for all clocks or just for
 today.
 
-
 *** Using column view
     :PROPERTIES:
     :DESCRIPTION: How to create and use column view
     :END:
-
 
 **** Turning column view on and off
 #+attr_texinfo: :table-type "table" :indic "@asis"
@@ -5109,7 +5098,6 @@ today.
   {{{kindex(q)}}}
 
   Exit column view.
-
 
 **** Editing values
 #+attr_texinfo: :table-type "table" :indic "@asis"
@@ -5162,7 +5150,6 @@ today.
   found, the new value is stored in the first entry that is part of the
   current column view.
 
-
 **** Modifying the table structure
 
 - {{{kbd(<)}}} {{{kbd(>)}}} ~org-columns-narrow~ ~org-columns-widen~ ::
@@ -5179,7 +5166,6 @@ today.
   {{{kindex(S-M-@key{left})}}}
   
   Delete the current column.
-
 
 *** Capturing column view
     :PROPERTIES:
@@ -5391,7 +5377,6 @@ presence causes entries to be shown on specific dates in the agenda
     [2006-11-01 Wed]
   #+end_example
 
-
 ** Creating timestamps
    :PROPERTIES:
    :DESCRIPTION: Commands to insert timestamps
@@ -5473,7 +5458,6 @@ format.
   Evaluate a time range by computing the difference between start and
   end. With a prefix argument, insert result after the time range (in a
   table: into the following column).
-
 
 *** The date/time prompt
     :PROPERTIES:
@@ -6802,7 +6786,6 @@ Now lets look at the elements of a template definition.  Each entry in
     If the target file was not yet visited when capture was invoked, kill
     the buffer again after capture is completed.
 
-
 **** Template expansion
      :PROPERTIES:
      :DESCRIPTION: Filling in information about time and context
@@ -6873,12 +6856,9 @@ defined:[fn:89]
 
 {{{noindent}}} To place the cursor after template expansion use:
 
-#+attr_texinfo: :table-type "table" :indic "asis"
-- ~%?~ :: 
-
-   After completing the template, position cursor here.
-
-
+#+begin_example
+%?          @r{After completing the template, position cursor here.}
+#+end_example
 
 **** Templates in contexts
      :PROPERTIES:
@@ -6912,7 +6892,6 @@ template.  In that case, add this command key like this:
 
 See the docstring of the variable ~org-capture-templates-contexts~ for
 more information.
-
 
 ** Attachments
    :PROPERTIES:
@@ -7028,7 +7007,6 @@ subtree uses the same attached directory.
     same directory for attachments as the parent does.
 
 
-
 ** RSS Feeds
    :PROPERTIES:
    :DESCRIPTION: Getting input from RSS feeds
@@ -7083,7 +7061,6 @@ that file:
 For more information, including how to read atom feeds, see
 {{{file(org-feed.el)}}} and the docstring of ~org-feed-alist~.
 
-
 ** Protocols
    :PROPERTIES:
    :DESCRIPTION: External (e.g., browser) access to Emacs and Org
@@ -7102,7 +7079,6 @@ bookmark that will tell Emacs to open the local source file of a
 remote website you are looking at with the browser. See
 [[http://orgmode.org/worg/org-contrib/org-protocol.php]] for detailed
 documentation and setup instructions.
-
 
 ** Refile and copy
    :PROPERTIES:
@@ -7176,7 +7152,6 @@ simplify this process, you can use the following special command:
   targets, you have to clear the cache with this command.
 
 
-
 ** Archiving
    :PROPERTIES:
    :DESCRIPTION: What to do with finished products
@@ -7195,7 +7170,6 @@ global searches like the construction of agenda views fast.
 
   Archive the current entry using the command specified in the variable
   ~org-archive-default-command~.
-
 
 *** Moving subtrees
     :PROPERTIES:
@@ -7257,7 +7231,6 @@ that record context information like the file from where the entry
 came, its outline path the archiving time etc. Configure the variable
 ~org-archive-save-context-info~ to adjust the amount of information
 added.
-
 
 *** Internal archiving
     :PROPERTIES:
@@ -7473,7 +7446,6 @@ the following commands in the Speedbar frame:
   {{{kindex(>)}}}
 
   Lift the restriction.
-
 
 ** Agenda dispatcher
    :PROPERTIES:
@@ -7720,7 +7692,6 @@ done depends on the type of view.
 Sorting can be customized using the variable
 ~org-agenda-sorting-strategy~, and may also include criteria based on
 the estimated effort of an entry (see [[Effort estimates]]).
-
 
 
 ** Agenda commands
@@ -8148,7 +8119,6 @@ the other commands, the cursor needs to be in the desired line.
   the entry. The closing bracket/brace will add a negative search term
   which /must not/ occur/match in the entry for it to be selected.
 
-
 *** Remote editing
 {{{cindex(remote editing\\\, from agenda)}}}
 
@@ -8344,7 +8314,6 @@ the other commands, the cursor needs to be in the desired line.
   the default behavior of ~org-capture~.
 
 
-
 *** Bulk remote editing selected entries
 {{{cindex(remote editing\\\, bulk\\\, from agenda)}}}
 {{{vindex(org-agenda-bulk-persistent-marks)}}}
@@ -8418,7 +8387,6 @@ f  @r{Apply a function@footnote{You can also create persistent custom functions 
 #+end_example
 
 
-
 *** Calendar commands
 {{{cindex(calendar commands\\\, from agenda)}}}
 
@@ -8486,7 +8454,6 @@ f  @r{Apply a function@footnote{You can also create persistent custom functions 
   files. This is a globally available command, and also available in the
   agenda menu.
 
-
 *** Exporting to a file
 #+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-x C-w)}}} ~org-agenda-write~ ::
@@ -8504,7 +8471,6 @@ f  @r{Apply a function@footnote{You can also create persistent custom functions 
   ~org-agenda-exporter-settings~ to set options for {{{file(ps-print)}}}
   and for {{{file(htmlize)}}} to be used during export.
 
-
 *** Quit and Exit
 #+attr_texinfo: :table-type "table" :indic "@asis"
 
@@ -8520,8 +8486,6 @@ f  @r{Apply a function@footnote{You can also create persistent custom functions 
   Exit agenda, remove the agenda buffer and all buffers loaded by Emacs
   for the compilation of the agenda. Buffers created by the user to
   visit Org files will not be removed.
-
-
 
 * FIXED Markup for rich export
   :PROPERTIES:
@@ -8810,7 +8774,6 @@ more information.
 
 See [[Handling links,the discussion of image links]].
 
-
 ** Literal examples
    :PROPERTIES:
    :DESCRIPTION: Source code examples with special formatting
@@ -8921,7 +8884,6 @@ often, shortcuts are provided using the Easy Templates facility (see
   {{{samp((label))}}}, for retrieval with {{{kbd(C-c C-l)}}}.
 
 
-
 ** Include files
    :PROPERTIES:
    :DESCRIPTION: Include additional files into a document
@@ -8970,7 +8932,6 @@ omitted to use the obvious defaults.
   Visit the include file at point.
 
 
-
 ** Index entries
    :PROPERTIES:
    :DESCRIPTION: Making an index
@@ -9013,7 +8974,6 @@ and to the modification time of the file being exported, respectively.
 
 Macro expansion takes place during export, and some people use it to
 construct complex HTML code.
-
 
 ** FIXME Embedded LaTeX
    :PROPERTIES:
@@ -9146,11 +9106,11 @@ snippets will be identified as LaTeX source code:
   ~\begin~ statement appears on a new line, preceded by only whitespace.
 
 - Text within the usual LaTeX math delimiters. To avoid conflicts
-  with currency specifications, single {{{samp($)}}} characters are
+  with currency specifications, single ~$~ characters are
   only recognized as math delimiters if the enclosed text contains at
-  most two line breaks, is directly attached to the {{{samp($)}}}
+  most two line breaks, is directly attached to the ~$~
   characters with no whitespace in between, and if the closing
-  {{{samp($)}}} is followed by whitespace, punctuation or a dash. For
+  ~$~ is followed by whitespace, punctuation or a dash. For
   the other delimiters, there is no such restriction, so when in
   doubt, use ~\(...\)~ as inline math delimiters.
 
@@ -9190,7 +9150,6 @@ per-file basis using one of these lines:
 #+end_example
 
 
-
 *** Previewing LaTeX fragments
     :PROPERTIES:
     :DESCRIPTION: What will this snippet look like?
@@ -9224,7 +9183,6 @@ some aspects of the preview. In particular, the ~:scale~ (and for HTML
 export, ~:html-scale~) property can be used to adjust the size of the
 preview images.
 
-
 *** CDLaTeX mode
     :PROPERTIES:
     :DESCRIPTION: Speed up entering of formulas
@@ -9233,11 +9191,11 @@ preview images.
 {{{cindex(CD@LaTeX{})}}}
 
 CDLaTeX mode is a minor mode that is normally used in combination
-with a major LaTeX mode like AUC@TeX{} in order to speed-up
+with a major LaTeX mode like AUCTeX in order to speed-up
 insertion of environments and math templates. Inside Org mode, you can
 make use of some of the features of CDLaTeX mode. You need to
 install {{{file(cdlatex.el)}}} and {{{file(texmathp.el)}}} (the latter
-comes also with AUC@TeX{}) from
+comes also with AUCTeX) from
 [[http://www.astro.uva.nl/~dominik/Tools/cdlatex]]. Don't use CDLaTeX
 mode itself under Org mode, but use the light version
 ~org-cdlatex-mode~ that comes as part of Org mode. Turn it on for the
@@ -9255,7 +9213,7 @@ details see the documentation of CDLaTeX mode):
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
 
-- {{{kbd(C-c @{)}}} ::
+- {{{kbd(C-c {)}}} ::
   {{{kindex(C-c @{)}}}
 
   Insert an environment template.
@@ -9264,7 +9222,7 @@ details see the documentation of CDLaTeX mode):
   {{{kindex(@key{TAB})}}}
 
   Expand a template if the cursor is inside a LaTeX fragment.[fn:120]
-  For example, {{{key(TAB)}}} will expand ~fr~ to ~\frac@{@ @{@}}~ and
+  For example, {{{key(TAB)}}} will expand ~fr~ to ~\frac{}{}~ and
   position the cursor correctly inside the first brace. Another
   {{{key(TAB)}}} will get you into the second brace. Even outside
   fragments, {{{key(TAB)}}} will expand environment abbreviations at the
@@ -9356,7 +9314,7 @@ The variable ~org-export-with-tasks~ can be configured to select which
 kind of tasks should be included for export.  See the docstring of the
 variable for more information.
 
-** Export options
+** FIXME Export options
    :PROPERTIES:
    :DESCRIPTION: Per-file export settings
    :END:
@@ -9400,26 +9358,28 @@ a separate file which can be included using ~#+SETUPFILE~.
 {{{vindex(user-mail-address)}}}
 {{{vindex(org-export-default-language)}}}
 {{{vindex(org-export-date-timestamp-format)}}}
-#+begin_example
-,#+TITLE:       the title to be shown (default is the buffer name)
-,#+AUTHOR:      the author (default taken from ~user-full-name~)
-,#+DATE:        a date, an Org timestamp@footnote{~org-export-date-timestamp-format~ defines how this timestamp will be exported.}, or a format string for ~format-time-string~
-,#+EMAIL:       his/her email address (default from ~user-mail-address~)
-,#+DESCRIPTION: the page description, e.g.@: for the XHTML meta tag
-,#+KEYWORDS:    the page keywords, e.g.@: for the XHTML meta tag
-,#+LANGUAGE:    language for HTML, e.g.@: {{{samp(en)}}} (~org-export-default-language~)
-,#+TEXT:        Some descriptive text to be inserted at the beginning.
-,#+TEXT:        Several lines may be given.
-,#+OPTIONS:     H:2 num:t toc:t \n:nil @@:t ::t |:t ^:t f:t TeX:t ...
-,#+BIND:        lisp-var lisp-val, e.g.@:: ~org-export-latex-low-levels itemize~
-               @r{You need to confirm using these, or configure ~org-export-allow-BIND~}
-,#+LINK_UP:     the ``up'' link of an exported page
-,#+LINK_HOME:   the ``home'' link of an exported page
-,#+LaTeX_HEADER: extra line(s) for the @LaTeX{} header, like \usepackage@{xyz@}
-,#+EXPORT_SELECT_TAGS:   Tags that select a tree for export
-,#+EXPORT_EXCLUDE_TAGS:  Tags that exclude a tree from export
-,#+XSLT:        the XSLT stylesheet used by DocBook exporter to generate FO file
-#+end_example
+  #+begin_example
+  ,#+TITLE:       the title to be shown (default is the buffer name)
+  ,#+AUTHOR:      the author (default taken from ~user-full-name~)
+  ,#+DATE:        a date, an Org timestamp, or a format string for format-time-string 
+  ,#+EMAIL:       his/her email address (default from user-mail-address)
+  ,#+DESCRIPTION: the page description, e.g., for the XHTML meta tag
+  ,#+KEYWORDS:    the page keywords, e.g., for the XHTML meta tag
+  ,#+LANGUAGE:    language for HTML, e.g., en (org-export-default-language)
+  ,#+TEXT:        Some descriptive text to be inserted at the beginning.
+  ,#+TEXT:        Several lines may be given.
+  ,#+OPTIONS:     H:2 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t ...
+  ,#+BIND:        lisp-var lisp-val, e.g., org-export-latex-low-levels itemize
+                  You need to confirm using these, or configure org-export-allow-BIND
+  ,#+LINK_UP:     the ``up'' link of an exported page
+  ,#+LINK_HOME:   the ``home'' link of an exported page
+  ,#+LaTeX_HEADER: extra line(s) for the LaTeX header, like \usepackage{xyz}
+  ,#+EXPORT_SELECT_TAGS:   Tags that select a tree for export
+  ,#+EXPORT_EXCLUDE_TAGS:  Tags that exclude a tree from export
+  ,#+XSLT:        the XSLT stylesheet used by DocBook exporter to generate FO file
+  #+end_example
+
+  [fn:179]
 
 {{{noindent}}} The ~#+OPTIONS~ line is a compact form to specify
 export settings.[fn:121] Here you can:
@@ -9484,7 +9444,7 @@ keys and also the publishing keys (see [[Project alist]]), see the
 constant ~org-export-plist-vars~.
 
 When exporting only a single subtree by selecting it with
-{{{kbd(C-c@@)}}} before calling an export command, the subtree can
+{{{kbd(C-c @@)}}} before calling an export command, the subtree can
 overrule some of the file's export settings with properties
 ~EXPORT_FILE_NAME~, ~EXPORT_TITLE~, ~EXPORT_TEXT~, ~EXPORT_AUTHOR~,
 ~EXPORT_DATE~, and ~EXPORT_OPTIONS~.
@@ -9747,7 +9707,7 @@ insert any postamble.
 Plain {{{samp(<)}}} and {{{samp(>)}}} are always transformed to
 {{{samp(&lt;)}}} and {{{samp(&gt;)}}} in HTML export. If you want to
 include simple HTML tags which should be interpreted as such, mark
-them with {{{samp(@@)}}} as in {{{samp(@@<b>bold text@@</b>)}}}. Note
+them with {{{samp(@)}}} as in {{{samp(@<b>bold text@</b>)}}}. Note
 that this really works only for simple tags. For more extensive HTML
 that should be copied verbatim to the exported file use either ~#+HTML~:
 
@@ -9780,7 +9740,7 @@ targets]]). Links to external files will still work if the target file
 is on the same /relative/ path as the published Org file. Links to
 other {{{file(.org)}}} files will be translated into HTML links under
 the assumption that a HTML version also exists of the linked file, at
-the same relative path. {{{samp(id:)}}} links can then be used to jump
+the same relative path. ~id:~ links can then be used to jump
 to specific entries across files. For information related to linking
 files while publishing them to a publishing directory see [[Publishing
 links]].
@@ -9859,16 +9819,14 @@ support text viewers and accessibility, and align it to the right.
 {{{cindex(MathJax)}}}
 {{{cindex(dvipng)}}}
 
-LaTeX math snippets (see [[LaTeX fragments]]) can be displayed in
-two different ways on HTML pages. The default is to use the [[http://www.mathjax.org][MathJax
-system]] which should work out of the box with Org mode installation
-because ~http://orgmode.org~ serves {{{file(MathJax)}}} for Org mode
-users for small applications and for testing purposes. *Note:* If you
-plan to use this regularly or on pages with significant page views,
-you should install MathJax on your own server in order to limit the
-load of our server.[fn:128] To configure {{{file(MathJax)}}}, use the
-variable ~org-export-html-mathjax-options~ or insert something like
-the following into the buffer:
+LaTeX math snippets (see [[LaTeX fragments]]) can be displayed in two
+different ways on HTML pages. The default is to use the [[http://www.mathjax.org][MathJax system]]
+which should work out of the box with Org mode installation because
+~http://orgmode.org~ serves {{{file(MathJax)}}} for Org mode users for
+small applications and for testing purposes.[fn:128] To configure
+{{{file(MathJax)}}}, use the variable
+~org-export-html-mathjax-options~ or insert something like the
+following into the buffer:
 
 #+begin_example
 #+MATHJAX: align:"left" mathml:t path:"/MathJax/MathJax.js"
@@ -10075,7 +10033,7 @@ hierarchy of sections.
 
 *** LaTeX/PDF export commands
     :PROPERTIES:
-    :DESCRIPTION: Invoking export to @LaTeX{}/PDF
+    :DESCRIPTION: Invoking export to LaTeX/PDF
     :END:
 {{{cindex(region\\\, active)}}}
 {{{cindex(active region)}}}
@@ -10193,7 +10151,7 @@ information. An example is shown below.
 
 *** Quoting LaTeX code
     :PROPERTIES:
-    :DESCRIPTION: Incorporating literal @LaTeX{} code
+    :DESCRIPTION: Incorporating literal LaTeX code
     :END:
 
 Embedded LaTeX as described in [[Embedded @LaTeX{]]}, will be correctly
@@ -10220,7 +10178,7 @@ All lines between these markers are exported literally
 
 *** Tables in LaTeX export
     :PROPERTIES:
-    :DESCRIPTION: Options for exporting tables to @LaTeX{}
+    :DESCRIPTION: Options for exporting tables to LaTeX
     :END:
 {{{cindex(tables\\\, in @LaTeX{} export)}}}
 
@@ -10259,7 +10217,7 @@ or to specify a multicolumn table with ~tabulary~:
 
 *** Images in LaTeX export
     :PROPERTIES:
-    :DESCRIPTION: How to insert figures into @LaTeX{} output
+    :DESCRIPTION: How to insert figures into LaTeX output
     :END:
 {{{cindex(images\\\, inline in @LaTeX{})}}}
 {{{cindex(inlining images in @LaTeX{})}}}
@@ -10511,7 +10469,6 @@ Currently DocBook exporter only supports DocBook V5.0.
 
   Export only the visible part of the document.
 
-
 *** Quoting DocBook code
     :PROPERTIES:
     :DESCRIPTION: Incorporating DocBook code in Org files
@@ -10638,7 +10595,7 @@ list as long as DocBook supports them.
 {{{vindex(org-export-docbook-doctype)}}}
 {{{vindex(org-entities)}}}
 
-Special characters that are written in @TeX{}-like syntax, such as
+Special characters that are written in TeX-like syntax, such as
 ~\alpha~, ~\Gamma~, and ~\Zeta~, are supported by DocBook exporter.
 These characters are rewritten to XML entities, like ~&alpha;~,
 ~&Gamma;~, and ~&Zeta;~, based on the list saved in variable
@@ -10731,7 +10688,6 @@ further.
   converted file instead.  See [[x-export-to-other-formats, ,
   Automatically exporting to other formats]].
 
-
 *** Extending ODT export
     :PROPERTIES:
     :DESCRIPTION: How to produce {{{samp(doc)}}}, {{{samp(pdf)}}} files
@@ -10783,7 +10739,6 @@ with it using the following command.
 
   Convert an existing document from one format to another. With a prefix
   argument, also open the newly produced file.
-
 
 *** Applying custom styles
     :PROPERTIES:
@@ -10837,7 +10792,6 @@ users alike, and is described here.
    #+begin_example
    ,#+ODT_STYLES_FILE: ("/path/to/file.ott" ("styles.xml" "image/hdr.png"))
    #+end_example
-
 
 
 **** Using third-party styles and templates
@@ -10916,7 +10870,6 @@ and last rows from other rows.
 If you are not satisfied with the above formatting options, you can
 create custom table styles and associate them with a table using the
 ~#+ATTR_ODT~ line. See [[Customizing tables in ODT export]].
-
 
 *** Images in ODT export
     :PROPERTIES:
@@ -11010,7 +10963,6 @@ The examples below illustrate the various possibilities.
   [[./img.png]]
   #+end_example
 
-
 **** Anchoring of images
 {{{cindex(#+ATTR_ODT)}}}
 
@@ -11027,7 +10979,7 @@ To create an image that is anchored to a page, do the following:
 
 *** Math formatting in ODT export
     :PROPERTIES:
-    :DESCRIPTION: How @LaTeX{} fragments are formatted
+    :DESCRIPTION: How LaTeX fragments are formatted
     :END:
 
 The ODT exporter has special support for handling math.
@@ -11101,7 +11053,6 @@ document in one of the following ways:
   the resulting images are embedded in the exported document. This
   method requires that the {{{file(dvipng)}}} program be available on
   your system.
-
 
 **** Working with MathML or OpenDocument formula files
      :PROPERTIES:
@@ -11247,7 +11198,6 @@ like to tweak the default converter settings, proceed as below.
   Select the newly added converter as the preferred one by customizing the
   variable ~org-export-odt-convert-process~.
 
-
 **** Working with OpenDocument style files
      :PROPERTIES:
      :DESCRIPTION: Explore the internals
@@ -11337,7 +11287,6 @@ the exporter.
   Use this variable to specify the blank {{{file(content.xml)}}} that
   will be used in the final output.
 
-
 **** Creating one-off styles
      :PROPERTIES:
      :DESCRIPTION: How to produce custom highlighting, etc.
@@ -11353,7 +11302,7 @@ couple of examples.
 - Embedding ODT tags as part of regular text ::
 
   You can include simple OpenDocument tags by prefixing them with
-  {{{samp(@@)}}}. For example, to highlight a region of text do the
+  {{{samp(@)}}}. For example, to highlight a region of text do the
   following:
 
   #+begin_example
@@ -11407,7 +11356,6 @@ couple of examples.
   </text:p>
   #+END_ODT
   #+end_example
-
 
 **** Customizing tables in ODT export
      :PROPERTIES:
@@ -11547,7 +11495,6 @@ To use this feature proceed as follows:
   | Anna  |  4321 |  25 |
   #+end_example
 
-
 **** Validating OpenDocument XML
      :PROPERTIES:
      :DESCRIPTION: How to debug corrupt OpenDocument files
@@ -11607,7 +11554,6 @@ and the attributes defined in all the nodes.
 
   Export as a TaskJuggler file and then open the file with TaskJugglerUI
   (only for TaskJugglerUI 2.x).
-
 
 *** Tasks
 {{{vindex(org-export-taskjuggler-project-tag)}}}
@@ -11947,7 +11893,6 @@ where to put published files.
   The project property list is scoped into this call as the variable
   ~project-plist~.
 
-
 *** Selecting files
     :PROPERTIES:
     :DESCRIPTION: What files are part of the project?
@@ -11978,7 +11923,6 @@ following properties:
 - ~:recursive~ ::
 
   Non-nil means, check base-directory recursively for files to publish.
-
 
 *** Publishing action
     :PROPERTIES:
@@ -12025,7 +11969,7 @@ folder.
 
 *** Publishing options
     :PROPERTIES:
-    :DESCRIPTION: Tweaking HTML/@LaTeX{} export
+    :DESCRIPTION: Tweaking HTML/LaTeX export
     :END:
 {{{cindex(options\\\, for publishing)}}}
 
@@ -12155,14 +12099,13 @@ options]]), however, override everything.
 {{{cindex(links\\\, publishing)}}}
 
 To create a link from one Org file to another, you would use something
-like {{{samp([[file:foo.org][The foo]])}}} or simply {{{samp(file:foo.org.)}}} (see
-[[Hyperlinks]]). When published, this link becomes a link to
-{{{file(foo.html)}}}. In this way, you can interlink the pages of your
-"org web" project and the links will work as expected when you publish
-them to HTML. If you also publish the Org source file and want to link
-to that, use an ~http:~ link instead of a ~file:~ link, because
-~file:~ links are converted to link to the corresponding
-{{{file(html)}}} file.
+like [[file:foo.org][The foo]] or simply file:foo.org (see [[Hyperlinks]]). When published,
+this link becomes a link to {{{file(foo.html)}}}. In this way, you can
+interlink the pages of your "org web" project and the links will work
+as expected when you publish them to HTML. If you also publish the Org
+source file and want to link to that, use an ~http:~ link instead of a
+~file:~ link, because ~file:~ links are converted to link to the
+corresponding {{{file(html)}}} file.
 
 You may also link to related files, such as images. Provided you are
 careful with relative file names, and provided you have also
@@ -12257,7 +12200,6 @@ a map of files for a given project.
   When non-nil, remove filenames' extensions from the generated sitemap.
   Useful to have cool URIs (see [[http://www.w3.org/Provider/Style/URI]]).
   Defaults to ~nil~.
-
 
 *** Generating an index
     :PROPERTIES:
@@ -12439,7 +12381,6 @@ of the commands above, or by customizing the variable
 ~org-publish-use-timestamps-flag~. This may be necessary in particular
 if files include other files via ~#+SETUPFILE:~ or ~#+INCLUDE:~.
 
-
 * FIXED Working with source code
   :PROPERTIES:
   :DESCRIPTION: Export, evaluate, and tangle code blocks
@@ -12542,7 +12483,6 @@ src_<language>[<header arguments>]@{<body>@}
 
   Source code in the specified language.
 
-
 ** Editing source code
    :PROPERTIES:
    :DESCRIPTION: Language major-mode editing
@@ -12605,7 +12545,7 @@ block bodies, see [[Literal examples]].
 The ~:exports~ header argument can be used to specify export
 behavior:
 
-*** Header arguments 
+*** Header arguments for exporting
 #+attr_texinfo: :table-type "table" :indic "@asis"
 - ~:exports code~ ::
 
@@ -12650,7 +12590,7 @@ programming community. During tangling of code blocks their bodies are
 expanded using ~org-babel-expand-src-block~ which can expand both
 variable and ``noweb'' style references (see [[Noweb reference syntax]]).
 
-*** Header arguments
+*** Header arguments for tangling
 #+attr_texinfo: :table-type "table" :indic "@asis"
 - ~:tangle no~ ::
 
@@ -12667,8 +12607,7 @@ variable and ``noweb'' style references (see [[Noweb reference syntax]]).
   Include the code block in the tangled output to file
   {{{samp(filename)}}}.
 
-
-*** Functions
+*** Functions for tangling
 #+attr_texinfo: :table-type "table" :indic "@asis"
 - ~org-babel-tangle~ ::
   {{{kindex(C-c C-v t)}}}
@@ -12682,15 +12621,13 @@ variable and ``noweb'' style references (see [[Noweb reference syntax]]).
 
   Choose a file to tangle.  Bound to {{{kbd(C-c C-v f)}}}.
 
-
-*** Hooks
+*** Hooks for tangling
 #+attr_texinfo: :table-type "table" :indic "@asis"
 - ~org-babel-post-tangle-hook~ ::
 
   This hook is run from within code files tangled by ~org-babel-tangle~.
   Example applications could include post-processing, compilation or
   evaluation of tangled code files.
-
 
 ** Evaluating code blocks
    :PROPERTIES:
@@ -12779,7 +12716,6 @@ The syntax for inline evaluation of named code blocks is:
 
 For more examples of passing header arguments to ~#+CALL:~ lines see
 [[Header arguments in function calls]].
-
 
 ** Library of Babel
    :PROPERTIES:
@@ -13222,7 +13158,6 @@ Here are examples of passing values by reference:
    : on two lines for you.
   #+end_example
 
-
 ***** Alternate argument syntax
 
 It is also possible to specify arguments in a potentially more natural
@@ -13384,7 +13319,6 @@ per class may be supplied per code block.
   These header arguments specify how the results of evaluating the code
   block should be handled.
 
-
 ***** Collection
 
 The following ~:results~ options are mutually exclusive, and specify
@@ -13405,7 +13339,6 @@ how the results should be collected from the code block.
   The result is the collection of everything printed to STDOUT during
   the execution of the code block. This header argument places the
   evaluation in scripting mode.
-
 
 ***** Type
 
@@ -13478,7 +13411,6 @@ are inserted as either a table or scalar depending on their value.
   The result is wrapped in a RESULTS drawer. This can be useful for
   inserting ~raw~ or ~org~ syntax results in such a way that their
   extent is known and they can be automatically removed or replaced.
-
 
 ***** Handling
 
@@ -13568,7 +13500,6 @@ like the following example:
 matplot(matrix(rnorm(100), 10), type="l")
 #+END_SRC
 #+end_example
-
 
 ***** Remote execution
 A directory on a remote machine can be specified using tramp file
@@ -13815,7 +13746,6 @@ one of the five values: ~no~, ~yes~, ~tangle~, ~no-export~, or
   ``Noweb'' syntax references in the body of the code block will only be
   expanded before the block is evaluated.
 
-
 ***** Noweb prefix lines
 
 Noweb insertions are placed behind the line prefix of the
@@ -14030,7 +13960,6 @@ or hlines. The ~:hlines~ argument to a code block accepts the values
   | g | h | i |
   #+end_example
 
-
 **** colnames
      :PROPERTIES:
      :DESCRIPTION: Handle column names in tables
@@ -14083,7 +14012,6 @@ names may be handled directly in Emacs Lisp.
   does not ``look like'' it has column names (i.e., the second row is
   not an hline).
 
-
 **** rownames
      :PROPERTIES:
      :DESCRIPTION: Handle row names in tables
@@ -14119,7 +14047,6 @@ or ~no~, with a default value of ~no~.
 
   Please note that row names are not removed before the table is indexed
   using variable indexing. See [[var][Indexable variable values]].
-
 
 **** shebang
      :PROPERTIES:
@@ -14197,8 +14124,8 @@ listing of the possible results header arguments, see [[results]].
 | ~:results output~ | contents of STDOUT       | concatenation of interpreter output |
 
 
-*Note:* With ~:results value~, the result in both ~:session~ and
-non-session is returned to Org mode as a table (a one- or
+Please note that with ~:results value~, the result in both ~:session~
+and non-session is returned to Org mode as a table (a one- or
 two-dimensional vector of strings or numbers) when appropriate.
 
 *** Non-session
@@ -14222,7 +14149,6 @@ two-dimensional vector of strings or numbers) when appropriate.
 
   The code is passed to the interpreter as an external process, and the
   contents of the standard output stream are returned as text.[fn:159]
-
 
 *** Session
 
@@ -14315,13 +14241,13 @@ shown below.
 <<code-block-name(optional arguments)>>
 #+end_example
 
-*Note:* the default value, ~:noweb no~, was chosen to ensure that
+Note that the default value, ~:noweb no~, was chosen to ensure that
 correct code is not broken in a language, such as Ruby, where
 ~<<arg>>~ is a syntactically valid construct. If ~<<arg>>~ is not
 syntactically valid in languages that you use, then please consider
 setting the default value.
 
-*Note:* if noweb tangling is slow in large Org mode files consider
+If noweb tangling is slow in large Org mode files, consider
 setting the ~*org-babel-use-quick-and-dirty-noweb-expansion*~ variable
 to true. This will result in faster noweb reference resolution at the
 expense of not correctly resolving inherited values of the
@@ -14480,7 +14406,7 @@ emacs -Q --batch \
   :DESCRIPTION: All the rest which did not fit elsewhere
   :END:
 
-** Completion
+** FIXME Completion
    :PROPERTIES:
    :DESCRIPTION: M-TAB knows what you need
    :END:
@@ -14518,9 +14444,9 @@ buffer and use the {{{key(TAB)}}} key to complete text right there.
 
     Complete TODO keywords.
 
-  - After {{{kbd(\)}}} :: 
-
-    Complete @TeX{} symbols supported by the exporter.
+  - After {{{kbd(XXX)}}} :: 
+    #+comment: Should be \
+    Complete TeX symbols supported by the exporter.
 
   - After {{{samp(*)}}} :: 
 
@@ -14557,7 +14483,6 @@ buffer and use the {{{key(TAB)}}} key to complete text right there.
   - Elsewhere ::
 
     Complete dictionary words using Ispell.
-
 
 ** Easy templates
    :PROPERTIES:
@@ -14657,7 +14582,7 @@ can be done, but you must be aware of the risks that are involved.
 Code evaluation can happen under the following circumstances:
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-- /Source code blocks/ ::
+- *Source code blocks* ::
 
   Source code blocks can be evaluated during export, or when pressing
   {{{kbd(C-c C-c)}}} in the block. The most important thing to realize
@@ -14689,9 +14614,9 @@ Code evaluation can happen under the following circumstances:
 
 - Following ~shell~ and ~elisp~ links ::
 
-Org has two link types that can directly evaluate code (see [[External
-links]]). These links can be problematic because the code to be
-evaluated is not visible.
+  Org has two link types that can directly evaluate code (see [[External
+  links]]). These links can be problematic because the code to be
+  evaluated is not visible.
 
   - ~org-confirm-shell-link-function~ ::
     
@@ -14701,7 +14626,7 @@ evaluated is not visible.
 
     Function to query user for Emacs Lisp link execution.
 
-- Formulas in tables ::
+- *Formulas in tables* ::
 
   Formulas in tables (see [[The spreadsheet]]) are code that is evaluated
   either by the /calc/ interpreter, or by the /Emacs Lisp/ interpreter.
@@ -14815,7 +14740,7 @@ effective only when the file is visited again in a new Emacs session.
   with {{{kbd(C-c ')}}}.
 
 - {{{kbd(#+STARTUP:)}}} ::
-{{{cindex(#+STARTUP:)}}}
+  {{{cindex(#+STARTUP:)}}}
 
   This line sets options to be used at startup of Org mode, when an
   Org file is being visited.
@@ -15049,8 +14974,7 @@ effective only when the file is visited again in a new Emacs session.
   These lines set the TODO keywords and their interpretation in the
   current file. The corresponding variable is ~org-todo-keywords~.
 
-
-** The busy C-c C-c key
+** The very busy C-c C-c key
    :PROPERTIES:
    :DESCRIPTION: When in doubt, press C-c C-c
    :TITLE:    The very busy C-c C-c key
@@ -15092,7 +15016,6 @@ what this means in different contexts.
   is updated.
 - If the cursor is at a timestamp, fix the day name in the timestamp.
 
-
 ** Clean view
    :PROPERTIES:
    :DESCRIPTION: Getting rid of leading stars in the outline
@@ -15111,7 +15034,6 @@ headings, in a more /list-oriented/ outline, indented structure is a
 lot cleaner:
 
 #+begin_example
-@group
 ,* Top level headline             |    * Top level headline
 ,** Second level                  |      * Second level
 ,*** 3rd level                    |        * 3rd level
@@ -15119,7 +15041,6 @@ some text                        |          some text
 ,*** 3rd level                    |        * 3rd level
 more text                        |          more text
 ,* Another top level headline     |    * Another top level headline
-@end group
 #+end_example
 
 {{{noindent}}} If you are using at least Emacs 23.2 and version 6.29
@@ -15143,8 +15064,9 @@ Org, or if you want the indentation to be hard space characters so
 that the plain text file looks as similar as possible to the Emacs
 display, Org supports you in the following way:
 
-@enumerate
-1. /Indentation of text below headlines/
+#+attr_texinfo: :table-type "table" :indic "@asis"
+
+- Indentation of text below headlines ::
 
   You may indent text below each headline to make the left boundary line up
   with the headline, like
@@ -15160,7 +15082,7 @@ display, Org supports you in the following way:
   editing,
   preserving or adapting the indentation as appropriate.[fn:166]
 
-2. /Hiding leading stars/ 
+- Hiding leading stars ::
   {{{vindex(org-hide-leading-stars)}}}
 
   You can modify the display in such a way that all leading stars become
@@ -15192,7 +15114,7 @@ display, Org supports you in the following way:
   wanted effect. Another possibility is to set this font such that the
   extra stars are /almost/ invisible, for example using the color
   ~grey90~ on a white background.
-3. /Odd levels/
+- Odd levels ::
   {{{vindex(org-odd-levels-only)}}}
 
   Things become cleaner still if you skip all the even levels and use
@@ -15209,8 +15131,9 @@ display, Org supports you in the following way:
   #+end_example
 
   You can convert an Org file from single-star-per-level to the
-  double-star-per-level convention with {{{kbdkey(M-x org-convert-to-odd-levels, RET)}}} in that file. The reverse operation
-  is {{{kbd(M-x org-convert-to-oddeven-levels)}}}.
+  double-star-per-level convention with {{{kbdkey(M-x
+  org-convert-to-odd-levels , RET)}}} in that file. The reverse
+  operation is {{{kbd(M-x org-convert-to-oddeven-levels)}}}.
 
 ** TTY keys
    :PROPERTIES:
@@ -15232,7 +15155,7 @@ timestamp is really only fun with {{{kbdkey(S-,cursor)}}} keys,
 whereas on a tty you would rather use {{{kbd(C-c .)}}} to re-insert
 the timestamp.
 
-@multitable @columnfractions 0.15 0.2 0.1 0.2
+
 | *Default*                | *Alternative 1*              | *Speed key*  | *Alternative 2*                  |
 |--------------------------+------------------------------+--------------+----------------------------------|
 | {{{kbdkey(S-,TAB)}}}     | {{{kbdkey(C-u ,TAB)}}}       | {{{kbd(C)}}} |                                  |
@@ -15253,7 +15176,6 @@ the timestamp.
 | {{{kbdkey(S-,down)}}}    | {{{kbdkey(C-c ,down)}}}      | {{{kbd( )}}} |                                  |
 | {{{kbdkey(C-S-,left)}}}  | {{{kbdkey(C-c C-x ,left)}}}  | {{{kbd( )}}} |                                  |
 | {{{kbdkey(C-S-,right)}}} | {{{kbdkey(C-c C-x ,right)}}} | {{{kbd( )}}} |                                  |
-@end multitable
 
 ** Interaction
    :PROPERTIES:
@@ -15264,7 +15186,7 @@ the timestamp.
 Org lives in the world of GNU Emacs and interacts in various ways
 with other code out there.
 
-*** Cooperation
+*** FIXME Cooperation
     :PROPERTIES:
     :DESCRIPTION: Packages Org cooperates with
     :TITLE:    Packages that Org cooperates with
@@ -15361,9 +15283,9 @@ with other code out there.
     Edit a {{{file(table.el)}}} table. Works when the cursor is in a
     table.el table.
 
-  - {{{kbd(C-c ~)}}} ~org-table-create-with-table.el~ ::
+  - {{{kbd(C-c XXX)}}} ~org-table-create-with-table.el~ ::
     {{{kindex(C-c ~)}}}
-
+    #+comment: Should be ~
     Insert a {{{file(table.el)}}} table. If there is already a table at
     point, this command converts it between the {{{file(table.el)}}}
     format and the Org mode format. See the documentation string of the
@@ -15380,14 +15302,11 @@ with other code out there.
   However, Org mode also has its own footnote support (see [[Footnotes]]),
   which makes using {{{file(footnote.el)}}} unnecessary.
 
-
 *** Conflicts
     :PROPERTIES:
     :DESCRIPTION: Packages that lead to conflicts
     :TITLE:    Packages that lead to conflicts with Org mode
     :END:
-
-#+attr_texinfo: :table-type "table" :indic "@asis"
 
 {{{cindex(@code{shift-selection-mode})}}}
 {{{vindex(org-support-shift-select)}}}
@@ -15400,9 +15319,11 @@ item bullet types if the cursor is at such a location. By default,
 {{{kbdkey(S-,cursor)}}} commands outside special contexts don't do
 anything, but you can customize the variable
 ~org-support-shift-select~. Org mode then tries to accommodate shift
-selection by (i) using it outside of the special contexts where
-special commands apply, and by (ii) extending an existing active
+selection by using it outside of the special contexts where
+special commands apply, and by extending an existing active
 region even if the cursor moves across a special context.
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
 
 - {{{file(CUA.el)}}} by Kim. F. Storm ::
   {{{cindex(@file{CUA.el})}}}
@@ -15479,7 +15400,7 @@ region even if the cursor moves across a special context.
                 (define-key yas/keymap [tab] 'yas/next-field)))
   #+end_src
 
-- {{{file(windmove.el)}}} by Hovav Shacham
+- {{{file(windmove.el)}}} by Hovav Shacham ::
   {{{cindex(@file{windmove.el})}}}
   {{{cindex(Shacham\\\, Hovav)}}}
 
@@ -15497,7 +15418,7 @@ region even if the cursor moves across a special context.
   (add-hook 'org-shiftright-final-hook 'windmove-right)
   #+end_src
 
-- {{{file(viper.el)}}} by Michael Kifer
+- {{{file(viper.el)}}} by Michael Kifer ::
   {{{cindex(@file{viper.el})}}}
   {{{cindex(Kifer\\\, Michael)}}}
   {{{kindex(C-c /)}}}
@@ -15510,7 +15431,6 @@ region even if the cursor moves across a special context.
   #+begin_src emacs-lisp
   (define-key viper-vi-global-user-map "C-c /" 'org-sparse-tree)
   #+end_src
-
 
 ** org-crypt.el
    :PROPERTIES:
@@ -15561,8 +15481,8 @@ being encrypted again.
   :END:
 {{{cindex(hacking)}}}
 
-This appendix covers some aspects where users can extend the functionality of
-Org.
+This appendix describes some ways a user can extend the functionality
+of Org.
 
 ** Hooks
    :PROPERTIES:
@@ -15599,8 +15519,13 @@ package, is maintained by the Worg project at
 Org has a large number of hyperlink types built-in (see [[Hyperlinks]]).
 If you would like to add new link types, Org provides an interface for
 doing so. Let's look at an example file, {{{file(org-man.el)}}}, that
-will add support for creating links like 
-{{{samp([[man:printf][The printf manpage]])}}} to show Unix manual pages inside Emacs:
+will add support for creating links like:
+
+#+begin_example
+  [[info:printf][The printf manual]]
+#+end_example
+
+to show Unix manual pages inside Emacs:
 
 #+header: :eval no
 #+header: :exports code
@@ -15830,7 +15755,7 @@ LaTeX file. There are a number of different solutions:
   between {{{samp(/*)}}} and {{{samp(*/)}}} lines.
 
 - Sometimes it is possible to put the table after some kind of /END/
-  statement, for example ~\bye~ in @TeX{} and ~\end{document}~) in
+  statement, for example ~\bye~ in TeX and ~\end{document}~) in
   LaTeX.
 
 - You can just comment the table line-by-line whenever you want to
@@ -15838,7 +15763,6 @@ LaTeX file. There are a number of different solutions:
   table.  This only sounds tedious---the command 
   {{{kbd(M-x orgtbl-toggle-comment)}}} makes this comment-toggling very easy, in
   particular if you bind it to a key.
-
 
 *** A LaTeX example
     :PROPERTIES:
@@ -15938,13 +15862,28 @@ following parameters (see also see [[Translator functions]]):
 - ~:efmt efmt~ ::
 
   Use this format to print numbers with exponentials. The format should
-  have ~%s~ twice for inserting mantissa and exponent, for example
-  ~"%s\\times10^@{%s@~"}. The default is ~"%s\\,(%s)"~. This may also be
-  a property list with column numbers and formats, for example ~:efmt (2
-  "$%s\\times10^@{%s@~$" 4 "$%s\\cdot10^@{%s@}$")}. After ~efmt~ has
-  been applied to a value, ~fmt~ will also be applied. Similar to ~fmt~,
-  functions of two arguments can be supplied instead of strings.
+  have ~%s~ twice for inserting mantissa and exponent, for example:
 
+  #+begin_example
+    "%s\\times10^{%s}"
+  #+end_example
+
+  The default is:
+
+  #+begin_example
+    "%s\\,(%s)"
+  #+end_example
+
+  This may also be a property list with column numbers and formats, for
+  example:
+
+  #+begin_example
+    :efmt (2 "$%s\\times10^{%s}$" 4 "$%s\\cdot10^{%s}$")
+  #+end_example
+
+  After ~efmt~ has been applied to a value, ~fmt~ will also be applied.
+  Similar to ~fmt~, functions of two arguments can be supplied instead
+  of strings.
 
 *** Translator functions
     :PROPERTIES:
@@ -16489,7 +16428,7 @@ does not need to preserve point.  After evaluation, the cursor will be
 moved to the end of the line (presumably of the headline of the
 processed entry) and search continues from there.  Under some
 circumstances, this may not produce the wanted results.  For example,
-if you have removed (e.g.@: archived) the current (sub)tree it could
+if you have removed (e.g., archived) the current (sub)tree it could
 mean that the next entry will be skipped entirely.  In such cases, you
 can specify the position from where search should continue by making
 FUNC set the variable `org-map-continue-from' to the desired buffer
@@ -16582,7 +16521,6 @@ The following example counts the number of entries with TODO keyword
 (length (org-map-entries t "/+WAITING" 'agenda))
 #+end_src
 
-
 * FIXED MobileOrg
   :PROPERTIES:
   :DESCRIPTION: Viewing and capture on a mobile device
@@ -16625,12 +16563,7 @@ encrypt the files that are uploaded to the server. This can be done
 with Org mode 7.02 and with /MobileOrg 1.5/ (iPhone version), and you
 need an {{{file(openssl)}}} installation on your system. To turn on
 encryption, set a password in /MobileOrg/ and, on the Emacs side,
-configure the variable ~org-mobile-use-encryption~@footnote{If you can
-safely store the password in your Emacs setup, you might also want to
-configure ~org-mobile-encryption-password~. Please read the docstring
-of that variable. Note that encryption will apply only to the contents
-of the {{{file(.org)}}} files. The file names themselves will remain
-visible.}.
+configure the variable ~org-mobile-use-encryption~.[fn:178]
 
 The easiest way to create that directory is to use a free [[http://dropbox.com][Dropbox]]
 account.[fn:173] When MobileOrg first connects to your Dropbox, it
@@ -17141,10 +17074,11 @@ license to the document, as described in section 6 of the license.
 [fn:1] The output from install-info (if any) is system dependent. In
 particular, Debian and its derivatives use two different versions of
 install-info. You may safely ignore the message:
-#+begin_src example
+#+begin_example
   This is not dpkg install-info anymore, but GNU install-info
   See the man page for ginstall-info for command line arguments
-#+end_src
+#+end_example
+if you see it.
 
 [fn:2]  If your Emacs distribution does not come with Org,
 the function ~org-version~ will not be defined.
@@ -17182,8 +17116,7 @@ variable ~org-M-RET-may-split-line~.
 [fn:12] This does not work under XEmacs, because XEmacs uses selective
 display for outlining, not text properties.
 
-[fn:13] This depends on the option
-~org-remove-highlights-with-change~.
+[fn:13] This depends on the option ~org-remove-highlights-with-change~.
 
 [fn:14] See also the variables ~org-show-hierarchy-above~,
 ~org-show-following-heading~, ~org-show-siblings~, and
@@ -17205,7 +17138,7 @@ will automatically fall back to numbers.
 
 [fn:17] If there's a checkbox in the item, the cookie must be put
 /before/ the checkbox. If you have activated alphabetical lists, you
-can also use counters like ~[@@b]~.
+can also use counters like ~[@b]~.
 
 [fn:18] See also ~org-empty-line-terminates-plain-lists~.
 
@@ -17233,7 +17166,7 @@ line like ~#+DRAWERS: HIDDEN STATE~.
 or ~#+STARTUP: nofninline~.
 
 [fn:27] To insert a vertical bar into a table field, use ~\\vert~ or,
-inside a word ~abc\\vert@{@}def~.
+inside a word ~abc\\vert{}def~.
 
 [fn:28] This feature does not work on XEmacs.
 
@@ -17443,8 +17376,8 @@ property.
 [fn:81] To add an effort estimate ``on the fly'', hook a function
 doing this to ~org-clock-in-prepare-hook~.
 
-[fn:82] The corresponding in-buffer setting is: ~#+STARTUP:
-lognoteclock-out~.
+[fn:82] The corresponding in-buffer setting is: 
+~#+STARTUP: lognoteclock-out~.
 
 [fn:83] Note that all parameters must be specified in a single
 line---the line is broken here only to fit it into the manual.
@@ -17563,8 +17496,8 @@ information on evaluating code blocks.
 code while using line numbers for the links, which might be useful to
 explain those in an Org mode example code.
 
-[fn:112] Upon exit, lines starting with {{{samp(*)}}}, {{{samp(,*)}}},
-{{{samp(#+)}}} and {{{samp(,#+)}}} will get a comma prepended, to keep
+[fn:112] Upon exit, lines starting with {{{samp(*)}}}, {{{samp(\,*)}}},
+{{{samp(#+)}}} and {{{samp(\,#+)}}} will get a comma prepended, to keep
 them from being interpreted by Org as outline nodes or special syntax.
 These commas will be stripped for editing with {{{kbd(C-c ')}}}, and
 also for export.
@@ -17572,9 +17505,9 @@ also for export.
 [fn:113] You may select a different-mode with the variable
 ~org-edit-fixed-width-region-mode~.
 
-[fn:114] LaTeX is a macro system based on Donald E. Knuth's @TeX{}
-system. Many of the features described here as ``LaTeX'' are really
-from @TeX{}, but for simplicity I am blurring this distinction.
+[fn:114] LaTeX is a macro system based on Donald E. Knuth's TeX
+system. Many of the features described here as LaTeX are really
+from TeX, but for simplicity I am blurring this distinction.
 
 [fn:115] You can turn this on by default by setting the variable
 ~org-pretty-entities~, or on a per-file base with the ~#+STARTUP~
@@ -17612,7 +17545,7 @@ several ~#+OPTIONS~ lines.
 
 [fn:123] This requires ~transient-mark-mode~ be turned on.
 
-[fn:124] To select the current subtree, use {{{kbd(C-c @@)}}}.
+[fn:124] To select the current subtree, use {{{kbd(C-c @)}}}.
 
 [fn:125] This requires ~transient-mark-mode~ be turned on.
 
@@ -17620,8 +17553,11 @@ several ~#+OPTIONS~ lines.
 
 [fn:127] But see the variable ~org-export-html-inline-images~.
 
-[fn:128] Installation instructions can be found on the MathJax
-website, see [[http://www.mathjax.org/resources/docs/?installation.html]].
+[fn:128]  If you plan to use this regularly or on pages with
+significant page views, you should install MathJax on your own server
+in order to limit the load of our server. Installation instructions
+can be found on the MathJax website, see
+[[http://www.mathjax.org/resources/docs/?installation.html]].
 
 [fn:129] If the classes on TODO keywords and tags lead to conflicts,
 use the variables ~org-export-html-todo-kwd-class-prefix~ and
@@ -17640,7 +17576,7 @@ with ~xetex~ and possibly ~luatex~. See the variables
 
 [fn:132] This requires ~transient-mark-mode~ be turned on.
 
-[fn:133] To select the current subtree, use {{{kbd(C-c @@)}}}.
+[fn:133] To select the current subtree, use {{{kbd(C-c @)}}}.
 
 [fn:134] Into which the values of
 ~org-export-latex-default-packages-alist~ and
@@ -17653,7 +17589,7 @@ see the section ``Exporting org files'' in
 
 [fn:136] This requires ~transient-mark-mode~ to be turned on.
 
-[fn:137] To select the current subtree, use {{{kbd(C-c @@)}}}.
+[fn:137] To select the current subtree, use {{{kbd(C-c @)}}}.
 
 [fn:138] See [[http://docs.oasis-open.org/office/v1.2/OpenDocument-v1.2.html][Open Document Format for Office Applications (OpenDocument)
 Version 1.2]].
@@ -17662,7 +17598,7 @@ Version 1.2]].
 
 [fn:140] This requires ~transient-mark-mode~ to be turned on.
 
-[fn:141] To select the current subtree, use {{{kbd(C-c @@)}}}.
+[fn:141] To select the current subtree, use {{{kbd(C-c @)}}}.
 
 [fn:142] The column widths are interpreted as weighted ratios with the
 default weight being 1.
@@ -17688,7 +17624,7 @@ OpenDocument-v1.2 specification.
 ~table:use-banding-rows-styles~, and ~table:use-banding-column-styles~
 of the ~<table:table>~ element in the OpenDocument-v1.2 specification.
 
-[fn:149] Note that {{{{file(.odt)}}} files are {{{samp(zip)}}}
+[fn:149] Note that {{{file(.odt)}}} files are {{{samp(zip)}}}
 archives.
 
 [fn:150] See the variables ~org-icalendar-use-deadline~ and
@@ -17700,7 +17636,7 @@ variable ~org-icalendar-categories~.
 [fn:152] The LOCATION property can be inherited from higher in the
 hierarchy if you configure ~org-use-property-inheritance~ accordingly.
 
-[fn:153] The files {{{{file(file-source.org)}}} and
+[fn:153] The files {{{file(file-source.org)}}} and
 {{{file(file-source.org.html)}}} if source and publishing directories
 are equal. Note that with this kind of setup, you need to add
 ~:exclude "-source\\.org"~ to the project definition in
@@ -17751,10 +17687,10 @@ wraps long lines (including headlines) correctly indented.
 [fn:166] See also the variable ~org-adapt-indentation~.
 
 [fn:167] When you need to specify a level for a property search or
-refile targets, {{{samp(LEVEL=2)}}} will correspond to 3 stars, etc.
+refile targets, ~LEVEL=2~ will correspond to 3 stars, etc.
 
-[fn:168] The {{{{file(org-R.el)}}} package has been replaced by the
-Org mode functionality described in [[Working With Source Code]] and is
+[fn:168] The {{{file(org-R.el)}}} package has been replaced by the
+Org mode functionality described in [[Working with source code]] and is
 now obsolete.
 
 [fn:169] By default this works only for LaTeX, HTML, and Texinfo.
@@ -17765,7 +17701,7 @@ other modes.
 dollar characters, this may cause problems with font-lock in LaTeX
 mode. As shown in the example you can fix this by adding an extra line
 inside the ~comment~ environment that is used to balance the dollar
-expressions. If you are using AUC@TeX{} with the font-latex library, a
+expressions. If you are using AUCTeX with the font-latex library, a
 much better solution is to add the ~comment~ environment to the
 variable ~LaTeX-verbatim-environments~.
 
@@ -17788,7 +17724,7 @@ variable ~org-mobile-force-id-on-agenda-items~ to ~nil~. Org mode will
 then rely on outline paths, in the hope that these will be unique
 enough.
 
-[fn:175] The file {{{{file(mobileorg.org)}}} will be empty after this
+[fn:175] The file {{{file(mobileorg.org)}}} will be empty after this
 operation.
 
 [fn:176] Note, however, that there is a subtle difference. The view
@@ -17797,6 +17733,19 @@ guaranteed to search all files that have been addressed by the last
 pull. This might include a file that is not currently in your list of
 agenda files. If you later use {{{kbd(C-c a ?)}}} to regenerate the
 view, only the current agenda files will be searched.
+
+[fn:177]   The {{{file(calc)}}} package has the non-standard
+convention that ~/~ has lower precedence than ~*~, so that ~a/b*c~ is
+interpreted as ~a/(b*c)~.
+
+[fn:178] If you can safely store the password in your Emacs setup, you
+might also want to configure ~org-mobile-encryption-password~. Please
+read the docstring of that variable. Note that encryption will apply
+only to the contents of the {{{file(.org)}}} files. The file names
+themselves will remain visible.
+
+[fn:179] ~org-export-date-timestamp-format~ defines how this
+timestamp will be exported.
 
 * About orgmanual.org                                              :noexport:
 This document intends to be Org mode source for the Org mode manual
@@ -17809,7 +17758,6 @@ texinfo back-end, written by Jonathan Leech-Pepin.
 
 Configure emacs to edit texinfo, and to add some handy conversion
 functions, by executing the setup-editing source code block.
-
 
 ** Exporting
 
