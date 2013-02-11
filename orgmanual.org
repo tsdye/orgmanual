@@ -3,7 +3,7 @@
 #+EMAIL:     tsd@tsdye.com
 #+DATE:      2012-11-10 Sat
 #+LANGUAGE:  en
-#+OPTIONS:   H:5 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   H:6 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:nil pri:nil tags:not-in-toc
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+SELECT_TAGS: export
@@ -431,11 +431,10 @@ error occurred.  Here is how to produce a useful backtrace:
    :DESCRIPTION: Typesetting conventions in the manual
    :END:
 
-*** TODO keywords, tags, properties, etc.
+*** Three types of keywords
 
 Org mainly uses three types of keywords: TODO keywords, tags and property
 names.  In this manual we use the following conventions:
-
 
   - TODO, WAITING :: TODO keywords are written with all capitals, even if they
     are user-defined.
@@ -661,7 +660,7 @@ buffer:
 {{{cindex(property\\\, VISIBILITY)}}}
 
 {{{noindent}}} Furthermore, any entries with a {{{samp(VISIBILITY)}}}
-property (see [[Properties%20and%20columns][Properties and Columns]]) will get their visibility
+property (see [[Properties and columns]]) will get their visibility
 adapted accordingly.  Allowed values for this property are ~folded~,
 ~children~, ~content~, and ~all~.
 
@@ -982,7 +981,7 @@ commands can be accessed through a dispatcher:
 strings, you can use the variable ~org-agenda-custom-commands~ to
 define fast keyboard access to specific sparse trees. These commands
 will then be accessible through the agenda dispatcher
-(see [[Agenda%20dispatcher][Agenda Dispatcher]]). For example:
+(see [[Agenda dispatcher]]). For example:
 
 #+header: :exports code
 #+header: :eval no
@@ -1204,8 +1203,8 @@ to disable them individually.
        {{{kindex(C-c -)}}}
        {{{vindex(org-plain-list-ordered-item-terminator)}}}
   - {{{kbd(C-c *)}}} :: Turn a plain list item into a headline (so
-       that it becomes a subheading at its location). See [[Structure%20editing][Structure
-       editing]], for a detailed explanation.
+       that it becomes a subheading at its location). See
+       [[Structure editing]], for a detailed explanation.
 
        {{{kindex(C-c *)}}}
   - {{{kbd(C-c C-*)}}} :: Turn the whole plain list into a subtree of
@@ -1266,7 +1265,7 @@ will hide and show the entry, but keep the drawer collapsed to a
 single line. In order to look inside the drawer, you need to move the
 cursor to the drawer line and press {{{key(TAB)}}} there. Org mode
 uses the ~PROPERTIES~ drawer for storing properties
-(see [[Properties%20and%20columns][Properties and Columns]]), and you can also arrange for
+(see [[Properties and columns]]), and you can also arrange for
 state change notes (see [[Tracking TODO state changes]) and
 clock times (see [[Clocking work time]) to be stored in a drawer
 ~LOGBOOK~. If you want to store a quick note in the LOGBOOK
@@ -1325,7 +1324,7 @@ Org mode extends the number-based syntax to /named/ footnotes and
 optional inline definition. Using plain numbers as markers (as
 {{{file(footnote.el)}}} does) is supported for backward compatibility,
 but not encouraged because of possible conflicts with {{{latex}}}
-snippets (see [[Embedded%20LaTeX][Embedded LaTeX]]). Here are
+snippets (see [[Embedded LaTeX]]). Here are
 the valid references:
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
@@ -1508,7 +1507,7 @@ typing /immediately after the cursor was moved into a new field with
 automatically made blank.  If this behavior is too unpredictable for
 you, configure the variables ~org-enable-table-editor~ and
 ~code(org-table-auto-blank-field~.
-*** Creation and Conversion
+*** Creation and conversion
 #+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c |)}}} ~org-table-create-or-convert-from-region~ :: Convert
      the active region to table.  If every line contains at least one
@@ -2027,7 +2026,7 @@ line like
 {{{vindex(constants-unit-system)}}}
 {{{pindex(constants.el)}}} 
 
-Also properties (see [[Properties%20and%20columns][Properties and columns]]) can be used as constants
+Also properties (see [[Properties and columns]]) can be used as constants
 in table formulas: for a property {{{samp(:Xyz:)}}} use the name
 {{{samp($PROP_Xyz)}}}, and the property will be searched in the
 current outline entry and in the hierarchy above it. If you have the
@@ -2070,7 +2069,7 @@ or range reference as described above for example ~@3$3~ or
 
 A formula can be any algebraic expression understood by the Emacs
 {{{file(Calc)}}} package.[fn:177]  Before evaluation by
-~calc-eval~ (see [[info:calc:Calling%20Calc%20from%20Your%20Programs][Calling Calc from Your Lisp Programs]]), variable
+~calc-eval~ (see [[info:calc#Calling Calc from Your Programs][Calling Calc from Your Lisp Programs]]), variable
 substitution takes place according to the rules described above.
 {{{cindex(vectors\\\, in table calculations)}}} The range vectors can
 be directly fed into the Calc vector functions like ~vmean~ and
@@ -2186,7 +2185,6 @@ Compute the sum of columns 1-4, like Calc's ~vsum($1..$4)~}:
   '(apply '+ '($1..$4));N
 #+end_src
 
-
 *** Duration and time values
     :PROPERTIES:
     :DESCRIPTION: How to compute duration and time values
@@ -2276,7 +2274,6 @@ the formula editor (see [[Editing and debugging formulas]]) or edit the
                      assign a formula to some but not all fields in a
                      row.
   - $name= :: Named field, see [[Advanced features]].
-
 
 *** Column formulas
     :PROPERTIES:
@@ -2546,7 +2543,7 @@ a bug, turn on formula debugging in the ~Tbl~ menu and repeat the
 calculation, for example by pressing {{{kbdkey(C-u C-u C-c = ,RET)}}}
 in a field. Detailed information will be displayed.
 
-*** Updating the table    
+*** Updating the table
     :PROPERTIES:
     :DESCRIPTION: Recomputing all dependent fields
     :END:
@@ -2554,7 +2551,7 @@ in a field. Detailed information will be displayed.
 {{{cindex(updating\\\, table)}}}
 
 Recalculation of a table is normally not automatic, but needs to be
-triggered by a command.  See [[Advanced%20features][Advanced Features]], for a way to make
+triggered by a command.  See [[Advanced features]], for a way to make
 recalculation at least semi-automatic.
 
 In order to recalculate a line of a table or the entire table, use the
@@ -2816,8 +2813,13 @@ very good for HTML export (see [[HTML export]]) where they produce pretty
 section links.  You are responsible yourself to make sure these custom
 IDs are unique in a file.
 
-Links such as {{{samp([[My Target]])}}} or {{{samp([[My Target][Find my target]])}}} lead
-to a text search in the current file.
+Links such as the two in the following example:
+
+#+begin_example
+ [[My Target]] or [[My Target][Find my target]]
+#+end_example
+
+{{{noindent}}} lead to a text search in the current file.
 
 The link can be followed with {{{kbd(C-c C-o)}}} when the cursor is on
 the link, or with a mouse click (see [[Handling links]]).  Links to custom
@@ -3276,8 +3278,7 @@ link with prefix.
 
 File links can contain additional information to make Emacs jump to a
 particular location in the file when following a link.  This can be a
-line number or a search option after a double@footnote{For backward
-compatibility, line numbers can also follow a single colon.} colon.
+line number or a search option after a double colon.[fn:182]
 For example, when the command {{{kbd(C-c l)}}} creates a link (see
 [[Handling links]]) to a file, it encodes the words in the current line as
 a search string that can be used to find this line back later when
@@ -3312,7 +3313,7 @@ link, together with an explanation:
                     files in the directory.
 
 As a degenerate case, a file link with an empty file name can be used
-to search the current file.  For example, {{{samp([[file:::find me]])}}} does a
+to search the current file.  For example, ~[[file:::find me]]~ does a
 search for ~find me~ in the current file, just as
 ~[[find me]]~ would.
 
@@ -3403,13 +3404,13 @@ are:
   {{{kindex(S-@key{right})}}}
   {{{kindex(S-@key{left})}}}
 
-- {{{kbdkey(S-,right)}}} {{{kbdkey(S-,left)}}} ::
+- {{{kbdkey(S- ,right)}}} {{{kbdkey(S- ,left)}}} ::
 
   {{{vindex(org-treat-S-cursor-todo-selection-as-state-change)}}}
 
      Select the following/preceding TODO state, similar to cycling.
-     Useful mostly if more than two TODO states are possible (see [[TODO
-     extensions]]). See also [[Conflicts]], for a discussion of the
+     Useful mostly if more than two TODO states are possible 
+     (see [[TODO extensions]]). See also [[Conflicts]], for a discussion of the
      interaction with ~shift-selection-mode~. See also the variable
      ~org-treat-S-cursor-todo-selection-as-state-change~.
 
@@ -3433,7 +3434,7 @@ are:
   {{{kindex(C-c a t)}}}
 
   Show the global TODO list.  Collects the TODO items (with not-DONE states)
-  from all agenda files (see [[Agenda Views]]) into a single buffer.  The new
+  from all agenda files (see [[Agenda views]]) into a single buffer.  The new
   buffer will be in ~agenda-mode~, which provides commands to examine and
   manipulate the TODO entries from the new buffer (see [[Agenda commands]]).
   See [[Global TODO list]], for more information.
@@ -3753,7 +3754,7 @@ example:
 
 If you set the variable ~org-agenda-dim-blocked-tasks~, TODO entries
 that cannot be closed because of such dependencies will be shown in a dimmed
-font or even made invisible in agenda views (see [[Agenda Views]]).
+font or even made invisible in agenda views (see [[Agenda views]]).
 
 {{{cindex(checkboxes and TODO dependencies)}}}
 {{{vindex(org-enforce-todo-dependencies)}}}
@@ -3812,10 +3813,10 @@ the timestamp, use:[fn:52]
 will be stored below the entry with a {{{samp(Closing Note)}}}
 heading.
 
-In the timeline (see [[Timeline]]) and in the agenda (see [[Weekly/daily
-agenda]]), you can then use the {{{kbd(l)}}} key to display the TODO
-items with a {{{samp(CLOSED)}}} timestamp on each day, giving you an
-overview of what has been done.
+In the timeline (see [[Timeline for a single file]]) and in the agenda
+(see [[Weekly/daily agenda]]), you can then use the {{{kbd(l)}}} key to
+display the TODO items with a {{{samp(CLOSED)}}} timestamp on each
+day, giving you an overview of what has been done.
 
 *** Tracking TODO state changes
     :PROPERTIES:
@@ -7006,7 +7007,6 @@ subtree uses the same attached directory.
     Set the ~ATTACH_DIR_INHERIT~ property, so that children will use the
     same directory for attachments as the parent does.
 
-
 ** RSS Feeds
    :PROPERTIES:
    :DESCRIPTION: Getting input from RSS feeds
@@ -7151,7 +7151,6 @@ simplify this process, you can use the following special command:
   setting ~org-refile-use-cache~.  To make the command see new possible
   targets, you have to clear the cache with this command.
 
-
 ** Archiving
    :PROPERTIES:
    :DESCRIPTION: What to do with finished products
@@ -7222,7 +7221,7 @@ example:[fn:93]
 
 {{{noindent}}} If you would like to have a special ARCHIVE location
 for a single entry or a (sub)tree, give the entry an ~:ARCHIVE:~
-property with the location as the value (see [[Properties and Columns]]).
+property with the location as the value (see [[Properties and columns]]).
 
 {{{vindex(org-archive-save-context-info)}}}
 
@@ -7357,6 +7356,7 @@ to edit these files remotely.
 Two variables control how the agenda buffer is displayed and whether
 the window configuration is restored when the agenda exits:
 ~org-agenda-window-setup~ and ~org-agenda-restore-windows-after-quit~.
+
 ** Agenda files
    :PROPERTIES:
    :DESCRIPTION: Files being searched for agenda information
@@ -7484,7 +7484,8 @@ default commands:
 - {{{kbd(L)}}} ::
   {{{kindex(C-c a L)}}}
 
-  Create the timeline view for the current buffer (see [[Timeline]]).
+  Create the timeline view for the current buffer 
+  (see [[Timeline for a single file]]).
 
 - {{{kbd(s)}}} ::
   {{{kindex(C-c a s)}}}
@@ -7549,6 +7550,509 @@ and a number of special tags matches. See [[Custom agenda views]].
    :TITLE: The built-in agenda views
    :END:
 In this section we describe the built-in views.
+
+*** FIXED The weekly/daily agenda
+{{{cindex(agenda)}}}
+{{{cindex(weekly agenda)}}}
+{{{cindex(daily agenda)}}}
+
+The purpose of the weekly/daily /agenda/ is to act like a page of a
+paper agenda, showing all the tasks for the current week or day.
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+
+- {{{kbd(C-c a a)}}} ~org-agenda-list~ ::
+  {{{cindex(org-agenda, command)}}}
+
+  Compile an agenda for the current week from a list of Org files. The
+  agenda shows the entries for each day. With a numeric prefix (like
+  {{{kbd(C-u 2 1 C-c a a)}}}) you may set the number of days to be
+  displayed.[fn:180]
+
+
+{{{vindex(org-agenda-span)}}}
+{{{vindex(org-agenda-ndays)}}}
+The default number of days displayed in the agenda is set by the variable
+~org-agenda-span~ (or the obsolete ~org-agenda-ndays~).  This
+variable can be set to any number of days you want to see by default in the
+agenda, or to a span name, such a ~day~, ~week~, ~month~ or
+~year~.
+
+Remote editing from the agenda buffer means, for example, that you can
+change the dates of deadlines and appointments from the agenda buffer.
+The commands available in the Agenda buffer are listed in @ref{Agenda
+commands}.
+
+**** FIXED Calendar/Diary integration
+{{{cindex(calendar integration)}}}
+{{{cindex(diary integration)}}}
+{{{cindex(Reingold\\\, Edward M.)}}}
+
+Emacs contains the calendar and diary by Edward M. Reingold.  The
+calendar displays a three-month calendar with holidays from different
+countries and cultures.  The diary allows you to keep track of
+anniversaries, lunar phases, sunrise/set, recurrent appointments
+(weekly, monthly) and more.  In this way, it is quite complementary to
+Org.  It can be very useful to combine output from Org with
+the diary.
+
+In order to include entries from the Emacs diary into Org mode's
+agenda, you only need to customize the variable
+
+#+begin_src emacs-lisp
+  (setq org-agenda-include-diary t)
+#+end_src
+
+{{{noindent}}} After that, everything will happen automatically.  All diary
+entries including holidays, anniversaries, etc., will be included in the
+agenda buffer created by Org mode.  {{{key(SPC)}}}, {{{key(TAB)}}}, and
+{{{key(RET)}}} can be used from the agenda buffer to jump to the diary
+file in order to edit existing diary entries.  The {{{kbd(i)}}} command to
+insert new entries for the current date works in the agenda buffer, as
+well as the commands {{{kbd(S)}}}, {{{kbd(M)}}}, and {{{kbd(C)}}} to display
+Sunrise/Sunset times, show lunar phases and to convert to other
+calendars, respectively.  {{{kbd(c)}}} can be used to switch back and forth
+between calendar and agenda.
+
+If you are using the diary only for sexp entries and holidays, it is
+faster to not use the above setting, but instead to copy or even move
+the entries into an Org file.  Org mode evaluates diary-style sexp
+entries, and does it faster because there is no overhead for first
+creating the diary display.  Note that the sexp entries must start at
+the left margin, no whitespace is allowed before them.  For example,
+the following segment of an Org file will be processed and entries
+will be made in the agenda:
+
+#+begin_example
+,* Birthdays and similar stuff
+,#+CATEGORY: Holiday
+%%(org-calendar-holiday)   ; special function for holiday names
+,#+CATEGORY: Ann
+%%(org-anniversary 1956  5 14)@footnote{@code{org-anniversary} is just like @code{diary-anniversary}, but the argument order is always according to ISO and therefore independent of the value of @code{calendar-date-style}.} Arthur Dent is %d years old
+%%(org-anniversary 1869 10  2) Mahatma Gandhi would be %d years old
+#+end_example
+
+**** FIXED Anniversaries from BBDB
+{{{cindex(BBDB, anniversaries)}}}
+{{{cindex(anniversaries, from BBDB)}}}
+
+If you are using the Big Brothers Database to store your contacts, you will
+very likely prefer to store anniversaries in BBDB rather than in a
+separate Org or diary file.  Org supports this and will show BBDB
+anniversaries as part of the agenda.  All you need to do is to add the
+following to one of your agenda files:
+
+#+begin_example
+,* Anniversaries
+  :PROPERTIES:
+  :CATEGORY: Anniv
+  :END:
+%%(org-bbdb-anniversaries)
+#+end_example
+
+You can then go ahead and define anniversaries for a BBDB record.
+Basically, you need to press {{{kbdkey(C-o anniversary ,RET)}}} with
+the cursor in a BBDB record and then add the date in the format
+~YYYY-MM-DD~ or ~MM-DD~, followed by a space and the class of the
+anniversary ({{{samp(birthday)}}} or {{{samp(wedding)}}}, or a format
+string). If you omit the class, it will default to
+{{{samp(birthday)}}}. Here are a few examples, the header for the file
+{{{file(org-bbdb.el)}}} contains more detailed information.
+
+#+begin_example
+1973-06-22
+06-22
+1955-08-02 wedding
+2008-04-14 %s released version 6.01 of org mode, %d years ago
+#+end_example
+
+After a change to BBDB, or for the first agenda display during an
+Emacs session, the agenda display will suffer a short delay as Org
+updates its hash with anniversaries. However, from then on things will
+be very fast---much faster in fact than a long list of
+{{{samp(%%(diary-anniversary))}}} entries in an Org or Diary file.
+
+**** FIXED Appointment reminders
+{{{cindex(@file{appt.el})}}}
+{{{cindex(appointment reminders)}}}
+{{{cindex(appointment)}}}
+{{{cindex(reminders)}}}
+
+Org can interact with Emacs appointments notification facility.  To add the
+appointments of your agenda files, use the command ~org-agenda-to-appt~.
+This command lets you filter through the list of your appointments and add
+only those belonging to a specific category or matching a regular expression.
+It also reads a ~APPT_WARNTIME~ property which will then override the
+value of ~appt-message-warning-time~ for this appointment.  See the
+docstring for details.
+
+*** FIXED The global TODO list
+{{{cindex(global TODO list)}}}
+{{{cindex(TODO list, global)}}}
+
+The global TODO list contains all unfinished TODO items formatted and
+collected into a single place.
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- {{{kbd(C-c a t)}}} ~org-todo-list~ ::
+
+  Show the global TODO list. This collects the TODO items from all
+  agenda files (see [[Agenda Views]]) into a single buffer. By default, this
+  lists items with a state the is not a DONE state. The buffer is in
+  ~agenda-mode~, so there are commands to examine and manipulate the
+  TODO entries directly from that buffer (see [[Agenda commands]]).
+
+- {{{kbd(C-c a T)}}} ~org-todo-list~ ::
+
+  {{{cindex(TODO keyword matching)}}}
+  {{{vindex(org-todo-keywords)}}}
+
+  Like the above, but allows selection of a specific TODO keyword. You
+  can also do this by specifying a prefix argument to {{{kbd(C-c a
+  t)}}}. You are prompted for a keyword, and you may also specify
+  several keywords by separating them with {{{samp(|)}}} as the boolean
+  OR operator. With a numeric prefix, the Nth keyword in
+  ~org-todo-keywords~ is selected.
+
+  {{{kindex(r)}}}
+
+  The {{{kbd(r)}}} key in the agenda buffer regenerates it, and you can give
+  a prefix argument to this command to change the selected TODO keyword,
+  for example {{{kbd(3 r)}}}.  If you often need a search for a specific
+  keyword, define a custom command for it (see [[Agenda dispatcher]]).
+
+  Matching specific TODO keywords can also be done as part of a tags
+  search (see [[Tag searches]]).
+
+
+Remote editing of TODO items means that you can change the state of a
+TODO entry with a single key press.  The commands available in the
+TODO list are described in [[Agenda commands]].
+
+{{{cindex(sublevels, inclusion into TODO list)}}}
+
+Normally the global TODO list simply shows all headlines with TODO
+keywords.  This list can become very long.  There are two ways to keep
+it more compact:
+
+
+- Some people view a TODO item that has been /scheduled/ for execution
+  or have a /deadline/ (see [[Timestamps]]) as no longer /open/. Configure
+  the variables ~org-agenda-todo-ignore-scheduled~,
+  ~org-agenda-todo-ignore-deadlines~,
+  ~org-agenda-todo-ignore-timestamp~ and/or
+  ~org-agenda-todo-ignore-with-date~ to exclude such items from the
+  global TODO list.
+
+  {{{vindex(org-agenda-todo-ignore-scheduled)}}}
+  {{{vindex(org-agenda-todo-ignore-deadlines)}}}
+  {{{vindex(org-agenda-todo-ignore-timestamp)}}}
+  {{{vindex(org-agenda-todo-ignore-with-date)}}}
+
+- TODO items may have sublevels to break up the task into subtasks. In
+  such cases it may be enough to list only the highest level TODO
+  headline and omit the sublevels from the global list. Configure the
+  variable ~org-agenda-todo-list-sublevels~ to get this behavior.
+
+  {{{vindex(org-agenda-todo-list-sublevels)}}}
+
+*** Matching tags and properties
+{{{cindex(matching, of tags)}}}
+{{{cindex(matching, of properties)}}}
+{{{cindex(tags view)}}}
+{{{cindex(match view)}}}
+
+If headlines in the agenda files are marked with /tags/ (see [[Tags]]), or
+have properties (see [[Properties and Columns]]), you can select headlines
+based on this metadata and collect them into an agenda buffer. The
+match syntax described here also applies when creating sparse trees
+with {{{kbd(C-c / m)}}}.
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+
+- {{{kbd(C-c a m)}}} ~org-tags-view~ ::
+
+  Produce a list of all headlines that match a given set of tags. The
+  command prompts for a selection criterion, which is a boolean logic
+  expression with tags, like {{{samp(+work+urgent-withboss)}}} or
+  {{{samp(work|home)}}} (see [[Tags]]). If you often need a specific search,
+  define a custom command for it (see [[Agenda dispatcher]]).
+
+- {{{kbd(C-c a M)}}} ~org-tags-view~ ::
+
+  {{{vindex(org-tags-match-list-sublevels)}}}
+  {{{vindex(org-agenda-tags-todo-honor-ignore-options)}}}
+
+  Like {{{kbd(C-c a m)}}}, but only select headlines that are also TODO
+  items in a not-DONE state and force checking subitems (see the variable
+  ~org-tags-match-list-sublevels~). To exclude scheduled/deadline items,
+  see the variable ~org-agenda-tags-todo-honor-ignore-options~. Matching
+  specific TODO keywords together with a tags match is also possible,
+  see [[Tag searches]].
+
+
+The commands available in the tags list are described in [[Agenda
+commands]].
+
+**** FIXED Match syntax
+
+{{{cindex(Boolean logic\\\, for tag or property searches)}}}
+
+A search string can use Boolean operators {{{samp(&)}}} for AND and
+{{{samp(|)}}} for OR. {{{samp(&)}}} binds more strongly than
+{{{samp(|)}}}. Parentheses are currently not implemented. Each element
+in the search is either a tag, a regular expression matching tags, or
+an expression like ~PROPERTY OPERATOR VALUE~ with a comparison
+operator, accessing a property value. Each element may be preceded by
+{{{samp(-)}}}, to select against it, and {{{samp(+)}}} is syntactic
+sugar for positive selection. The AND operator {{{samp(&)}}} is
+optional when {{{samp(+)}}} or {{{samp(-)}}} is present. Here are some
+examples, using only tags.
+
+#+attr_texinfo: :table-type "table" :indic "@samp"
+
+- +work-boss ::
+
+  Select headlines tagged {{{samp(:work:)}}}, but discard those also
+  tagged {{{samp(:boss:)}}}.
+
+- work|laptop ::
+
+  Selects lines tagged {{{samp(:work:)}}} or {{{samp(:laptop:)}}}.
+
+- work|laptop+night ::
+
+  Like before, but require the {{{samp(:laptop:)}}} lines to be tagged
+  also {{{samp(:night:)}}}.
+
+
+{{{cindex(regular expressions, with tags search)}}}
+
+Instead of a tag, you may also specify a regular expression enclosed
+in curly braces. For example, {{{samp(work+{^boss.*})}}} matches
+headlines that contain the tag {{{samp(:work:)}}} and any tag
+/starting/ with {{{samp(boss)}}}.
+
+{{{cindex(TODO keyword matching, with tags search)}}}
+{{{cindex(level\\\, require for tags/property match)}}}
+{{{cindex(category\\\, require for tags/property match)}}}
+{{{vindex(org-odd-levels-only)}}}
+
+You may also test for properties (see [[Properties and Columns]]) at the
+same time as matching tags. The properties may be real properties, or
+special properties that represent other metadata (see [[Special
+properties]]). For example, the "property" ~TODO~ represents the TODO
+keyword of the entry. Or, the "property" ~LEVEL~ represents the
+level of an entry. So a search {{{samp(+LEVEL=3+boss-TODO="DONE")}}}
+lists all level three headlines that have the tag {{{samp(boss)}}} and
+are /not/ marked with the TODO keyword DONE. In buffers with
+~org-odd-levels-only~ set, {{{samp(LEVEL)}}} does not count the number
+of stars, but {{{samp(LEVEL=2)}}} will correspond to 3 stars etc. The
+ITEM special property cannot currently be used in tags/property
+searches.[fn:181]
+
+Here are more examples:
+
+#+attr_texinfo: :table-type "table" :indic "@samp"
+
+- work+TODO="WAITING" ::
+
+  Select {{{samp(:work:)}}}-tagged TODO lines with the specific TODO
+  keyword {{{samp(WAITING)}}}.
+
+- work+TODO="WAITING"|home+TODO="WAITING" ::
+
+  Waiting tasks both at work and at home.
+
+
+When matching properties, a number of different operators can be used to test
+the value of a property.  Here is a complex example:
+
+#+begin_example
++work-boss+PRIORITY="A"+Coffee="unlimited"+Effort<2         
+         +With={Sarah|Denny}+SCHEDULED>="<2008-10-11>"
+#+end_example
+
+{{{noindent}}} The type of comparison will depend on how the
+comparison value is written:
+
+- If the comparison value is a plain number, a numerical comparison is
+  done, and the allowed operators are {{{samp(<)}}}, {{{samp(=)}}},
+  {{{samp(>)}}}, {{{samp(<=)}}}, {{{samp(>=)}}}, and {{{samp(<>)}}}.
+
+- If the comparison value is enclosed in double-quotes, a string
+  comparison is done, and the same operators are allowed.
+
+- If the comparison value is enclosed in double-quotes /and/ angular
+  brackets (like {{{samp(DEADLINE<="<2008-12-24 18:30>")}}}), both
+  values are assumed to be date/time specifications in the standard
+  Org way, and the comparison will be done accordingly. Special values
+  that will be recognized are ~"<now>"~ for now (including time), and
+  ~"<today>"~, and ~"<tomorrow>"~ for these days at 0:00 hours, i.e.@:
+  without a time specification. Also strings like ~"<+5d>"~ or
+  ~"<-2m>"~ with units ~d~, ~w~, ~m~, and ~y~ for day, week, month,
+  and year, respectively, can be used.
+
+- If the comparison value is enclosed in curly braces, a regexp match
+  is performed, with {{{samp(=)}}} meaning that the regexp matches the
+  property value, and {{{samp(<>)}}} meaning that it does not match.
+
+
+So the search string in the example finds entries tagged
+{{{samp(:work:)}}} but not {{{samp(:boss:)}}}, which also have a
+priority value {{{samp(A)}}}, a {{{samp(:Coffee:)}}} property with the
+value {{{samp(unlimited)}}}, an {{{samp(Effort)}}} property that is
+numerically smaller than 2, a {{{samp(:With:)}}} property that is
+matched by the regular expression {{{samp(Sarah|Denny)}}}, and that
+are scheduled on or after October 11, 2008.
+
+Accessing TODO, LEVEL, and CATEGORY during a search is fast. Accessing
+any other properties will slow down the search. However, once you have
+paid the price by accessing one property, testing additional
+properties is cheap again.
+
+You can configure Org mode to use property inheritance during a
+search, but beware that this can slow down searches considerably. See
+[[Property inheritance]], for details.
+
+For backward compatibility, and also for typing speed, there is also a
+different way to test TODO states in a search. For this, terminate the
+tags/property part of the search string (which may include several
+terms connected with {{{samp(|)}}}) with a {{{samp(/)}}} and then
+specify a Boolean expression just for TODO keywords. The syntax is
+then similar to that for tags, but should be applied with care: for
+example, a positive selection on several TODO keywords cannot
+meaningfully be combined with boolean AND. However, /negative
+selection/ combined with AND can be meaningful. To make sure that only
+lines are checked that actually have any TODO keyword (resulting in a
+speed-up), use {{{kbd(C-c a M)}}}, or equivalently start the TODO part
+after the slash with {{{samp(!)}}}. Using {{{kbd(C-c a M)}}} or
+{{{samp(/!)}}} will not match TODO keywords in a DONE state. Examples:
+
+#+attr_texinfo: :table-type "table" :indic "@samp"
+- work/WAITING ::
+
+  Same as {{{samp(work+TODO="WAITING")}}}
+
+- work/!-WAITING-NEXT ::
+  
+  Select {{{samp(:work:)}}}-tagged TODO lines that are neither {{{samp(WAITING)}}}
+  nor {{{samp(NEXT)}}}
+
+- work/!+WAITING|+NEXT ::
+
+  Select {{{samp(:work:)}}}-tagged TODO lines that are either
+  {{{samp(WAITING)}}} or {{{samp(NEXT)}}}.
+
+*** FIXED Timeline for a single file
+    :PROPERTIES:
+    :DESCRIPTION: Time-sorted view for a single file
+    :END:
+
+{{{cindex(timeline\\\, single file)}}}
+{{{cindex(time-sorted view)}}}
+
+The timeline summarizes all time-stamped items from a single Org mode
+file in a /time-sorted view/.  The main purpose of this command is
+to give an overview over events in a project.
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+
+- {{{kbd(C-c a L)}}} ~org-timeline~ ::
+
+  Show a time-sorted view of the Org file, with all time-stamped items.
+  When called with a {{{kbd(C-u)}}} prefix, all unfinished TODO entries
+  (scheduled or not) are also listed under the current date.
+
+
+{{{noindent}}} The commands available in the timeline buffer are
+listed in [[Agenda commands]].
+
+*** FIXED Search view
+{{{cindex(search view)}}}
+{{{cindex(text search)}}}
+{{{cindex(searching, for text)}}}
+
+This agenda view is a general text search facility for Org mode entries.
+It is particularly useful to find notes.
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+
+- {{{kbd(C-c a s)}}} ~org-search-view~ ::
+
+  This is a special search that lets you select entries by matching a
+  substring or specific words using a boolean logic.
+
+
+For example, the search string {{{samp(computer equipment)}}} will
+find entries that contain {{{samp(computer equipment)}}} as a
+substring. If the two words are separated by more space or a line
+break, the search will still match. Search view can also search for
+specific keywords in the entry, using Boolean logic. The search string
+{{{samp(+computer +wifi -ethernet -{8.11[bg]})}}} will search for
+note entries that contain the keywords ~computer~ and ~wifi~, but not
+the keyword ~ethernet~, and which are also not matched by the regular
+expression ~8.11[bg]~, meaning to exclude both 8.11b and 8.11g. The
+first {{{samp(+)}}} is necessary to turn on word search, other
+{{{samp(+)}}} characters are optional. For more details, see the
+docstring of the command ~org-search-view~.
+
+{{{vindex(org-agenda-text-search-extra-files)}}}
+
+Note that in addition to the agenda files, this command will also
+search the files listed in ~org-agenda-text-search-extra-files~.
+
+*** FIXED Stuck projects
+{{{pindex(GTD\\\, Getting Things Done)}}}
+
+If you are following a system like David Allen's GTD to organize your
+work, one of the "duties" you have is a regular review to make sure
+that all projects move along. A /stuck/ project is a project that has
+no defined next actions, so it will never show up in the TODO lists
+Org mode produces. During the review, you need to identify such
+projects and define next actions for them.
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+
+- {{{kbd(C-c a #)}}} ~org-agenda-list-stuck-projects~ ::
+
+  List projects that are stuck.
+
+- {{{kbd(C-c a !)}}} ::
+
+  {{{vindex(org-stuck-projects)}}}
+  {{{kindex(C-c a !)}}}
+
+  Customize the variable ~org-stuck-projects~ to define what a stuck
+  project is and how to find it.
+
+
+You almost certainly will have to configure this view before it will
+work for you.  The built-in default assumes that all your projects are
+level-2 headlines, and that a project is not stuck if it has at least
+one entry marked with a TODO keyword TODO or NEXT or NEXTACTION.
+
+Let's assume that you, in your own way of using Org mode, identify
+projects with a tag PROJECT, and that you use a TODO keyword MAYBE to
+indicate a project that should not be considered yet. Let's further
+assume that the TODO keyword DONE marks finished projects, and that
+NEXT and TODO indicate next actions. The tag @SHOP indicates shopping
+and is a next action even without the NEXT tag. Finally, if the
+project contains the special word IGNORE anywhere, it should not be
+listed either. In this case you would start by identifying eligible
+projects with a tags/todo match (see [[Tag searches]]).
+{{{samp(+PROJECT/-MAYBE-DONE)}}}, and then check for TODO, NEXT,
+@SHOP, and IGNORE in the subtree to identify projects that are not
+stuck. The correct customization for this is:
+
+#+begin_src emacs-lisp
+(setq org-stuck-projects
+      '("+PROJECT/-MAYBE-DONE" ("NEXT" "TODO") ("@@SHOP")
+                               "\\<IGNORE\\>"))
+#+end_src
+
+Note that if a project is identified as non-stuck, the subtree of this entry
+will still be searched for stuck projects.
 
 ** Presentation and sorting
    :PROPERTIES:
@@ -7692,7 +8196,6 @@ done depends on the type of view.
 Sorting can be customized using the variable
 ~org-agenda-sorting-strategy~, and may also include criteria based on
 the estimated effort of an entry (see [[Effort estimates]]).
-
 
 ** Agenda commands
    :PROPERTIES:
@@ -8313,7 +8816,6 @@ the other commands, the cursor needs to be in the desired line.
   the capture template.  See ~org-capture-use-agenda-date~ to make this
   the default behavior of ~org-capture~.
 
-
 *** Bulk remote editing selected entries
 {{{cindex(remote editing\\\, bulk\\\, from agenda)}}}
 {{{vindex(org-agenda-bulk-persistent-marks)}}}
@@ -8385,7 +8887,6 @@ f  @r{Apply a function@footnote{You can also create persistent custom functions 
    @r{             (org-back-to-heading t)}
    @r{             (org-set-property "CATEGORY" "web"))))))}
 #+end_example
-
 
 *** Calendar commands
 {{{cindex(calendar commands\\\, from agenda)}}}
@@ -8487,6 +8988,436 @@ f  @r{Apply a function@footnote{You can also create persistent custom functions 
   for the compilation of the agenda. Buffers created by the user to
   visit Org files will not be removed.
 
+** Custom agenda views
+{{{cindex(custom agenda views)}}}
+{{{cindex(agenda views\\\, custom)}}}
+
+Custom agenda commands serve two purposes: to store and quickly access
+frequently used TODO and tags searches, and to create special composite
+agenda buffers.  Custom agenda commands will be accessible through the
+dispatcher (see [[Agenda dispatcher]]), just like the default commands.
+
+*** Storing searches
+
+The first application of custom searches is the definition of keyboard
+shortcuts for frequently used searches, either creating an agenda
+buffer, or a sparse tree (the latter covering of course only the
+current buffer).
+
+{{{kindex(C-c a C)}}}
+{{{vindex(org-agenda-custom-commands)}}}
+
+Custom commands are configured in the variable
+~org-agenda-custom-commands~. You can customize this variable, for
+example by pressing {{{kbd(C-c a C)}}}. You can also directly set it
+with Emacs Lisp in {{{file(.emacs)}}}. The following example contains
+all valid search types:
+
+#+header: :eval no
+#+header: :exports code
+#+begin_src emacs-lisp
+(setq org-agenda-custom-commands
+      '(("w" todo "WAITING")
+        ("W" todo-tree "WAITING")
+        ("u" tags "+boss-urgent")
+        ("v" tags-todo "+boss-urgent")
+        ("U" tags-tree "+boss-urgent")
+        ("f" occur-tree "\\<FIXME\\>")
+        ("h" . "HOME+Name tags searches") ; description for "h" prefix
+        ("hl" tags "+home+Lisa")
+        ("hp" tags "+home+Peter")
+        ("hk" tags "+home+Kim")))
+#+end_src
+
+{{{noindent}}} The initial string in each entry defines the keys you
+have to press after the dispatcher command {{{kbd(C-c a)}}} in order
+to access the command. Usually this will be just a single character,
+but if you have many similar commands, you can also define two-letter
+combinations where the first character is the same in several
+combinations and serves as a prefix key.[fn:183] The second parameter
+is the search type, followed by the string or regular expression to be
+used for the matching. The example above will therefore define:
+
+#+attr_texinfo: :table-type "table" :indic "@kbd"
+
+- C-c a w ::
+
+  A global search for TODO entries with {{{samp(WAITING)}}} as the TODO
+  keyword.
+
+- C-c a W ::
+
+  The same search, but only in the current buffer and displaying the
+  results as a sparse tree.
+
+- C-c a u ::
+
+  A global tags search for headlines marked {{{samp(:boss:)}}} but not
+  {{{samp(:urgent:)}}}.
+
+- C-c a v ::
+
+  The same search as {{{kbd(C-c a u)}}}, but limiting the search to
+  headlines that are also TODO items.
+
+- C-c a U ::
+
+  The same search as {{{kbd(C-c a u)}}}, but only in the current buffer and
+  displaying the result as a sparse tree.
+
+- C-c a f ::
+
+  Create a sparse tree (again: current buffer only) with all entries
+  containing the word {{{samp(FIXME)}}}
+
+- C-c a h ::
+
+  A prefix command for a HOME tags search where you have to press an
+  additional key ({{{kbd(l)}}}, {{{kbd(p)}}} or {{{kbd(k)}}}) to select
+  a name (Lisa, Peter, or Kim) as additional tag to match.
+
+
+
+*** Block agenda
+{{{cindex(block agenda)}}}
+{{{cindex(agenda\\\, with block views)}}}
+
+Another possibility is the construction of agenda views that comprise
+the results of /several/ commands, each of which creates a block in
+the agenda buffer. The available commands include ~agenda~ for the
+daily or weekly agenda (as created with {{{kbd(C-c a a)}}}), ~alltodo~
+for the global TODO list (as constructed with {{{kbd(C-c a t)}}}), and
+the matching commands discussed above: ~todo~, ~tags~, and
+~tags-todo~. Here are two examples:
+
+#+header: :eval no
+#+header: :exports code
+#+begin_src emacs-lisp
+(setq org-agenda-custom-commands
+      '(("h" "Agenda and Home-related tasks"
+         ((agenda "")
+          (tags-todo "home")
+          (tags "garden")))
+        ("o" "Agenda and Office-related tasks"
+         ((agenda "")
+          (tags-todo "work")
+          (tags "office")))))
+#+end_src
+
+{{{noindent}}} This will define {{{kbd(C-c a h)}}} to create a
+multi-block view for stuff you need to attend to at home. The
+resulting agenda buffer will contain your agenda for the current week,
+all TODO items that carry the tag {{{samp(home)}}}, and also all lines
+tagged with {{{samp(garden)}}}. Finally the command {{{kbd(C-c a o)}}}
+provides a similar view for office tasks.
+
+
+*** Setting options for custom commands
+{{{cindex(options\\\, for custom agenda views)}}}
+{{{vindex(org-agenda-custom-commands)}}}
+
+Org mode contains a number of variables regulating agenda construction
+and display. The global variables define the behavior for all agenda
+commands, including the custom commands. However, if you want to
+change some settings just for a single custom view, you can do so.
+Setting options requires inserting a list of variable names and values
+at the right spot in ~org-agenda-custom-commands~. For example:
+
+#+header: :eval no
+#+header: :exports code
+#+begin_src emacs-lisp
+(setq org-agenda-custom-commands
+      '(("w" todo "WAITING"
+         ((org-agenda-sorting-strategy '(priority-down))
+          (org-agenda-prefix-format "  Mixed: ")))
+        ("U" tags-tree "+boss-urgent"
+         ((org-show-following-heading nil)
+          (org-show-hierarchy-above nil)))
+        ("N" search ""
+         ((org-agenda-files '("~org/notes.org"))
+          (org-agenda-text-search-extra-files nil)))))
+#+end_src
+
+{{{noindent}}} Now the {{{kbd(C-c a w)}}} command will sort the
+collected entries only by priority, and the prefix format is modified
+to just say {{{samp( Mixed: )}}} instead of giving the category of the
+entry. The sparse tags tree of {{{kbd(C-c a U)}}} will now turn out
+ultra-compact, because neither the headline hierarchy above the match,
+nor the headline following the match will be shown. The command
+{{{kbd(C-c a N)}}} will do a text search limited to only a single
+file.
+
+{{{vindex(org-agenda-custom-commands)}}}
+
+For command sets creating a block agenda, ~org-agenda-custom-commands~
+has two separate spots for setting options. You can add options that
+should be valid for just a single command in the set, and options that
+should be valid for all commands in the set. The former are just added
+to the command entry; the latter must come after the list of command
+entries. Going back to the block agenda example (see [[Block
+agenda]]), let's change the sorting strategy for the {{{kbd(C-c a
+h)}}} commands to ~priority-down~, but let's sort the results for
+GARDEN tags query in the opposite order, ~priority-up~. This would
+look like this:
+
+#+header: :eval no
+#+header: :exports code
+#+begin_src emacs-lisp
+(setq org-agenda-custom-commands
+      '(("h" "Agenda and Home-related tasks"
+         ((agenda)
+          (tags-todo "home")
+          (tags "garden"
+                ((org-agenda-sorting-strategy '(priority-up)))))
+         ((org-agenda-sorting-strategy '(priority-down))))
+        ("o" "Agenda and Office-related tasks"
+         ((agenda)
+          (tags-todo "work")
+          (tags "office")))))
+#+end_src
+
+As you see, the values and parentheses setting is a little complex.
+When in doubt, use the customize interface to set this variable---it
+fully supports its structure. Just one caveat: when setting options in
+this interface, the /values/ are just Lisp expressions. So if the
+value is a string, you need to add the double-quotes around the value
+yourself.
+
+{{{vindex(org-agenda-custom-commands-contexts)}}}
+
+To control whether an agenda command should be accessible from a specific
+context, you can customize @var{org-agenda-custom-commands-contexts}.  Let's
+say for example that you have an agenda commands ~"o"~ displaying a view
+that you only need when reading emails.  Then you would configure this option
+like this:
+
+#+header: :eval no
+#+header: :exports code
+#+begin_src emacs-lisp
+(setq org-agenda-custom-commands-contexts
+      '(("o" (in-mode . "message-mode"))))
+#+end_src
+
+You can also tell that the command key ~"o"~ should refer to another
+command key ~"r"~.  In that case, add this command key like this:
+
+#+header: :eval no
+#+header: :exports code
+#+begin_src emacs-lisp
+(setq org-agenda-custom-commands-contexts
+      '(("o" "r" (in-mode . "message-mode"))))
+#+end_src
+
+See the docstring of the variable for more information.
+
+
+** Exporting Agenda Views
+{{{cindex(agenda views\\\, exporting)}}}
+
+If you are away from your computer, it can be very useful to have a
+printed version of some agenda views to carry around. Org mode can
+export custom agenda views as plain text, HTML, Postscript,
+PDF, and iCalendar files.[fn:184] If you want to
+do this only occasionally, use the following command:
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- {{{kbd(C-x C-w)}}} ~org-agenda-write~ ::
+
+  {{{cindex(exporting agenda views)}}}
+  {{{cindex(agenda views\\\, exporting)}}}
+  {{{vindex(org-agenda-exporter-settings)}}}
+
+  Write the agenda view to a file. Depending on the extension of the
+  selected file name, the view will be exported as HTML (extension
+  {{{file(.html)}}} or {{{file(.htm)}}}), Postscript (extension
+  {{{file(.ps)}}}), iCalendar (extension {{{file(.ics)}}}), or plain
+  text (any other extension). Use the variable
+  ~org-agenda-exporter-settings~ to set options for {{{file(ps-print)}}}
+  and for {{{file(htmlize)}}} to be used during export, for example:
+
+  {{{vindex(org-agenda-add-entry-text-maxlines)}}}
+  {{{vindex(htmlize-output-type)}}}
+  {{{vindex(ps-number-of-columns)}}}
+  {{{vindex(ps-landscape-mode)}}}
+
+  #+header: :eval no
+  #+header: :exports code
+  #+begin_src emacs-lisp
+  (setq org-agenda-exporter-settings
+        '((ps-number-of-columns 2)
+          (ps-landscape-mode t)
+          (org-agenda-add-entry-text-maxlines 5)
+          (htmlize-output-type 'css)))
+  #+end_src
+
+
+If you need to export certain agenda views frequently, you can
+associate any custom agenda command with a list of output file
+names.[fn:185] Here is an example that first defines custom commands
+for the agenda and the global TODO list, together with a number of
+files to which to export them. Then we define two block agenda
+commands and specify file names for them as well. File names can be
+relative to the current working directory, or absolute.
+
+#+header: :eval no
+#+header: :exports code
+#+begin_src emacs-lisp
+(setq org-agenda-custom-commands
+      '(("X" agenda "" nil ("agenda.html" "agenda.ps"))
+        ("Y" alltodo "" nil ("todo.html" "todo.txt" "todo.ps"))
+        ("h" "Agenda and Home-related tasks"
+         ((agenda "")
+          (tags-todo "home")
+          (tags "garden"))
+         nil
+         ("~/views/home.html"))
+        ("o" "Agenda and Office-related tasks"
+         ((agenda)
+          (tags-todo "work")
+          (tags "office"))
+         nil
+         ("~/views/office.ps" "~/calendars/office.ics"))))
+#+end_src
+
+The extension of the file name determines the type of export. If it is
+{{{file(.html)}}}, Org mode will use the {{{file(htmlize.el)}}}
+package to convert the buffer to HTML and save it to this file name.
+If the extension is {{{file(.ps)}}}, ~ps-print-buffer-with-faces~ is
+used to produce Postscript output. If the extension is
+{{{file(.ics)}}}, iCalendar export is run export over all files that
+were used to construct the agenda, and limit the export to entries
+listed in the agenda. Any other extension produces a plain ASCII file.
+
+The export files are /not/ created when you use one of those
+commands interactively because this might use too much overhead.
+Instead, there is a special command to produce /all/ specified
+files in one step:
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- {{{kbd(C-c a e)}}} ~org-store-agenda-views~ ::
+
+  Export all agenda views that have export file names associated with
+  them.
+
+
+You can use the options section of the custom agenda commands to also
+set options for the export commands.  For example:
+
+#+header: :eval no
+#+header: :exports code
+#+begin_src emacs-lisp
+(setq org-agenda-custom-commands
+      '(("X" agenda ""
+         ((ps-number-of-columns 2)
+          (ps-landscape-mode t)
+          (org-agenda-prefix-format " [ ] ")
+          (org-agenda-with-colors nil)
+          (org-agenda-remove-tags t))
+         ("theagenda.ps"))))
+#+end_src
+
+{{{noindent}}} This command sets two options for the Postscript
+exporter, to make it print in two columns in landscape format---the
+resulting page can be cut in two and then used in a paper agenda. The
+remaining settings modify the agenda prefix to omit category and
+scheduling information, and instead include a checkbox to check off
+items. We also remove the tags to make the lines compact, and we don't
+want to use colors for the black-and-white printer. Settings specified
+in ~org-agenda-exporter-settings~ will also apply, but the settings in
+~org-agenda-custom-commands~ take precedence.
+
+{{{noindent}}} From the command line you may also use:
+
+#+begin_example
+emacs -eval (org-batch-store-agenda-views) -kill
+#+end_example
+
+{{{noindent}}} or, if you need to modify some parameters:[fn:186]
+
+#+begin_example
+emacs -eval '(org-batch-store-agenda-views                      \
+              org-agenda-span (quote month)                     \
+              org-agenda-start-day "2007-11-01"                 \
+              org-agenda-include-diary nil                      \
+              org-agenda-files (quote ("~/org/project.org")))'  \
+      -kill
+#+end_example
+
+{{{noindent}}} which will create the agenda views restricted to the
+file {{{file(~/org/project.org)}}}, without diary entries and with a
+30-day extent.
+
+You can also extract agenda information in a way that allows further
+processing by other programs.  See [[Extracting agenda information]], for
+more information.
+
+
+** Using column view in the agenda
+{{{cindex(column view\\\, in agenda)}}}
+{{{cindex(agenda\\\, column view)}}}
+
+Column view (see [[Column view]]) is normally used to view and edit
+properties embedded in the hierarchical structure of an Org file. It
+can be quite useful to use column view also from the agenda, where
+entries are collected by certain criteria.
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+
+- {{{kbd(C-c C-x C-c)}}} ~org-agenda-columns~ ::
+
+  Turn on column view in the agenda.
+
+
+To understand how to use this properly, it is important to realize that the
+entries in the agenda are no longer in their proper outline environment.
+This causes the following issues:
+
+1. Org needs to make a decision which ~COLUMNS~ format to use. Since
+   the entries in the agenda are collected from different files, and
+   different files may have different ~COLUMNS~ formats, this is a
+   non-trivial problem. Org first checks if the variable
+   ~org-agenda-overriding-columns-format~ is currently set, and if so,
+   takes the format from there. Otherwise it takes the format
+   associated with the first item in the agenda, or, if that item does
+   not have a specific format (defined in a property, or in its file),
+   it uses ~org-columns-default-format~.
+
+   {{{vindex(org-columns-default-format)}}}
+   {{{vindex(org-overriding-columns-format)}}}
+
+2. If any of the columns has a summary type defined (see [[Column
+   attributes]]), turning on column view in the agenda will visit all
+   relevant agenda files and make sure that the computations of this
+   property are up to date. This is also true for the special
+   ~CLOCKSUM~ property. Org will then sum the values displayed in the
+   agenda. In the daily/weekly agenda, the sums will cover a single
+   day; in all other views they cover the entire block. It is vital to
+   realize that the agenda may show the same entry /twice/ (for
+   example as scheduled and as a deadline), and it may show two
+   entries from the same hierarchy (for example a /parent/ and its
+   /child/). In these cases, the summation in the agenda will lead to
+   incorrect results because some values will count double.
+
+   {{{cindex(property, special, CLOCKSUM)}}}
+
+3. When the column view in the agenda shows the ~CLOCKSUM~, that is
+   always the entire clocked time for this item. So even in the
+   daily/weekly agenda, the clocksum listed in column view may
+   originate from times outside the current view. This has the
+   advantage that you can compare these values with a column listing
+   the planned total effort for a task---one of the major applications
+   for column view in the agenda. If you want information about
+   clocked time in the displayed period use clock table mode (press
+   {{{kbd(R)}}} in the agenda).
+
+4. When the column view in the agenda shows the ~CLOCKSUM_T~, that is
+   always today's clocked time for this item.  So even in the weekly agenda,
+   the clocksum listed in column view only originates from today.  This lets
+   you compare the time you spent on a task for today, with the time already
+   spent (via ~CLOCKSUM~) and with the planned total effort for it.
+
+   {{{cindex(property, special, CLOCKSUM_T)}}}
+
 * FIXED Markup for rich export
   :PROPERTIES:
   :DESCRIPTION: Prepare text for rich export
@@ -8539,7 +9470,7 @@ subtree has a property ~EXPORT_TITLE~, that will take precedence.
 {{{vindex(org-export-headline-levels)}}}
 
 The outline structure of the document as described in [[Document
-Structure]], forms the basis for defining sections of the exported
+structure]], forms the basis for defining sections of the exported
 document. However, since the outline structure is also used for (for
 example) lists of tasks, only the first three outline levels will be
 used as headings. Deeper levels will become itemized lists. You can
@@ -8772,7 +9703,7 @@ You may also define additional attributes for the figure. As this is
 backend-specific, see the sections about the individual backends for
 more information.
 
-See [[Handling links,the discussion of image links]].
+See [[Handling links][the discussion of image links]].
 
 ** Literal examples
    :PROPERTIES:
@@ -8810,7 +9741,7 @@ other text that can be marked up by font-lock in Emacs, you can ask
 for the example to look like the fontified Emacs buffer.[fn:109] This
 is done with the {{{samp(src)}}} block, where you also need to specify
 the name of the major mode that should be used to fontify the example,
-see [[Easy Templates]] for shortcuts to easily insert code blocks.[fn:110]
+see [[Easy templates]] for shortcuts to easily insert code blocks.[fn:110]
 
 {{{cindex(#+BEGIN_SRC)}}}
 
@@ -8858,7 +9789,7 @@ HTML export also allows examples to be published as text areas
 
 Because the ~#+BEGIN_...~ and ~#+END_...~ patterns need to be added so
 often, shortcuts are provided using the Easy Templates facility (see
-[[Easy Templates]]).
+[[Easy templates]]).
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c ')}}} ::
@@ -8882,7 +9813,6 @@ often, shortcuts are provided using the Easy Templates facility (see
   it with the proper formatting like {{{samp((ref:label))}}} at the end
   of the current line. Then the label is stored as a link
   {{{samp((label))}}}, for retrieval with {{{kbd(C-c C-l)}}}.
-
 
 ** Include files
    :PROPERTIES:
@@ -8930,7 +9860,6 @@ omitted to use the obvious defaults.
   {{{kindex(C-c ')}}}
 
   Visit the include file at point.
-
 
 ** Index entries
    :PROPERTIES:
@@ -9083,7 +10012,7 @@ subscript, but {{{samp(a_@{b@})}}} will.
   In addition to showing entities as UTF-8 characters, this command will
   also format sub- and superscripts in a WYSIWYM way.
 
-*** @LaTeX{} fragments
+*** LaTeX fragments
     :PROPERTIES:
     :DESCRIPTION: Complex formulas made easy
     :END:
@@ -9145,10 +10074,9 @@ per-file basis using one of these lines:
 #+begin_example
 ,#+OPTIONS: LaTeX:t          @r{Do the right thing automatically (MathJax)}
 ,#+OPTIONS: LaTeX:dvipng     @r{Force using dvipng images}
-,#+OPTIONS: LaTeX:nil        @r{Do not process @LaTeX{} fragments at all}
+,#+OPTIONS: LaTeX:nil        @r{Do not process LaTeX fragments at all}
 ,#+OPTIONS: LaTeX:verbatim   @r{Verbatim export, for jsMath or so}
 #+end_example
-
 
 *** Previewing LaTeX fragments
     :PROPERTIES:
@@ -9186,7 +10114,7 @@ preview images.
 *** CDLaTeX mode
     :PROPERTIES:
     :DESCRIPTION: Speed up entering of formulas
-    :TITLE:    Using CD@LaTeX{} to enter math
+    :TITLE:    Using CDLaTeX to enter math
     :END:
 {{{cindex(CD@LaTeX{})}}}
 
@@ -9424,8 +10352,8 @@ pri:       @r{turn on/off priority cookies}
 tags:      @r{turn on/off inclusion of tags, may also be ~not-in-toc~}
 <:         @r{turn on/off inclusion of any time/date stamps like DEADLINES}
 *:         @r{turn on/off emphasized text (bold, italic, underlined)}
-TeX:       @r{turn on/off simple @TeX{} macros in plain text}
-LaTeX:     @r{configure export of @LaTeX{} fragments.  Default ~auto~}
+TeX:       @r{turn on/off simple TeX macros in plain text}
+LaTeX:     @r{configure export of LaTeX fragments.  Default ~auto~}
 skip:      @r{turn on/off skipping the text before the first heading}
 author:    @r{turn on/off inclusion of author name/email into exported file}
 email:     @r{turn on/off inclusion of author email into exported file}
@@ -9752,8 +10680,8 @@ the ~<a>~ or ~<img>~ tags. Here is an example that sets ~title~ and
 
 {{{cindex(#+ATTR_HTML)}}}
 #+begin_example
-#+ATTR_HTML: title="The Org mode homepage" style="color:red;"
-[[http://orgmode.org]]
+,#+ATTR_HTML: title="The Org mode homepage" style="color:red;"
+,[[http://orgmode.org]]
 #+end_example
 
 *** Tables in HTML export
@@ -9829,7 +10757,7 @@ small applications and for testing purposes.[fn:128] To configure
 following into the buffer:
 
 #+begin_example
-#+MATHJAX: align:"left" mathml:t path:"/MathJax/MathJax.js"
+,#+MATHJAX: align:"left" mathml:t path:"/MathJax/MathJax.js"
 #+end_example
 
 {{{noindent}}} See the docstring of the variable
@@ -9960,7 +10888,7 @@ view type is a /folding/ view much like Org provides inside Emacs.  The
 script is available at [[http://orgmode.org/org-info.js]] and you can find
 the documentation for it at [[http://orgmode.org/worg/code/org-info-js/]].
 We host the script at our site, but if you use it a lot, you might
-not want to be dependent on [[orgmode.org]] and prefer to install a local
+not want to be dependent on ~orgmode.org~ and prefer to install a local
 copy on your own web server.
 
 To use the script, you need to make sure that the
@@ -10154,7 +11082,7 @@ information. An example is shown below.
     :DESCRIPTION: Incorporating literal LaTeX code
     :END:
 
-Embedded LaTeX as described in [[Embedded @LaTeX{]]}, will be correctly
+Embedded LaTeX as described in [[Embedded LaTeX]]}, will be correctly
 inserted into the LaTeX file. This includes simple macros like
 ~\ref{LABEL}~ to create a cross reference to a figure. Furthermore,
 you can add special code that should only be present in LaTeX export
@@ -10667,7 +11595,7 @@ further.
 
   If ~org-export-odt-preferred-output-format~ is specified,
   automatically convert the exported file to that format. See
-  [[x-export-to-other-formats, , Automatically exporting to other formats]].
+  [[Automatically exporting to other formats]].
 
   For an Org file {{{file(myfile.org)}}}, the ODT file will be
   {{{file(myfile.odt)}}}. The file will be overwritten without warning.
@@ -10720,7 +11648,7 @@ immediately save the exported document to other formats like
 {{{samp(doc)}}}, {{{samp(docx)}}}, {{{samp(rtf)}}}, {{{samp(pdf)}}}
 etc. In such cases, you can specify your preferred output format by
 customizing the variable ~org-export-odt-preferred-output-format~.
-This way, the export commands (see [[x-export-to-odt,,Exporting to ODT]])
+This way, the export commands (see [[x-export-to-odt][Exporting to ODT]])
 can be extended to export to a format that is of immediate interest to
 you.
 
@@ -10774,7 +11702,7 @@ users alike, and is described here.
 
 3. Customize the variable ~org-export-odt-styles-file~ and point it to
    the newly created file. For additional configuration options see
-   [[x-overriding-factory-styles,,Overriding factory styles]].
+   [[x-overriding-factory-styles][Overriding factory styles]].
 
    {{{cindex(#+ODT_STYLES_FILE)}}}
    {{{vindex(org-export-odt-styles-file)}}}
@@ -10792,7 +11720,6 @@ users alike, and is described here.
    #+begin_example
    ,#+ODT_STYLES_FILE: ("/path/to/file.ott" ("styles.xml" "image/hdr.png"))
    #+end_example
-
 
 **** Using third-party styles and templates
 
@@ -10986,10 +11913,10 @@ The ODT exporter has special support for handling math.
 
 **** Working with LaTeX math snippets
      :PROPERTIES:
-     :DESCRIPTION: How to embed @LaTeX{} math fragments
+     :DESCRIPTION: How to embed LaTeX math fragments
      :END:
 
-LaTeX math snippets (see [[@LaTeX{]] fragments}) can be embedded in the ODT
+LaTeX math snippets (see [[LaTeX fragments]]) can be embedded in the ODT
 document in one of the following ways:
 
 {{{cindex(MathML)}}}
@@ -11312,7 +12239,7 @@ couple of examples.
   #+end_example
 
   *Hint:* To see the above example in action, edit your
-  {{{file(styles.xml)}}} (see [[x-orgodtstyles-xml,,Factory styles]]) and
+  {{{file(styles.xml)}}} (see [[x-orgodtstyles-xml][Factory styles]]) and
   add a custom {{{samp(Highlight)}}} style as shown below.
 
   #+begin_example
@@ -11331,7 +12258,7 @@ couple of examples.
   #+end_example
 
   *Hint:* To see the above example in action, edit your
-  {{{file(styles.xml)}}} (see [[x-orgodtstyles-xml,,Factory styles]]) and
+  {{{file(styles.xml)}}} (see [[x-orgodtstyles-xml][Factory styles]]) and
   add a custom {{{samp(PageBreak)}}} style as shown below.
 
   #+begin_example
@@ -11404,7 +12331,7 @@ OpenDocument styles needed for producing the above template have been
 pre-defined for you. These styles are available under the section
 marked {{{samp(Custom Table Template)}}} in
 {{{file(OrgOdtContentTemplate.xml)}}} (see
-[[x-orgodtcontenttemplate-xml,,Factory styles]]). If you need additional
+[[x-orgodtcontenttemplate-xml][Factory styles]]). If you need additional
 templates you have to define these styles yourself.
 
 ***** Custom table styles - the nitty-gritty
@@ -11451,7 +12378,7 @@ To use this feature proceed as follows:
   To create a table template with the name {{{samp(Custom)}}}, define
   the above styles in the ~<office:automatic-styles>~ ...
   ~</office:automatic-styles>~ element of the content template file (see
-  [[x-orgodtcontenttemplate-xml,,Factory styles]]).
+  [[x-orgodtcontenttemplate-xml][Factory styles]]).
 
 - Define a table style[fn:148] ::
 
@@ -12130,7 +13057,7 @@ link. One option for this function is ~org-publish-validate-link~
 which checks if the given file is part of any project in
 ~org-publish-project-alist~.
 
-*** Sitemap
+*** Site map
     :PROPERTIES:
     :DESCRIPTION: Generating a list of all pages
     :TITLE:    Generating a sitemap
@@ -12629,6 +13556,7 @@ variable and ``noweb'' style references (see [[Noweb reference syntax]]).
   Example applications could include post-processing, compilation or
   evaluation of tangled code files.
 
+
 ** Evaluating code blocks
    :PROPERTIES:
    :DESCRIPTION: Place results in the Org buffer
@@ -13046,14 +13974,14 @@ languages. In every case, variables require a default value when they
 are declared.
 
 The values passed to arguments can either be literal values,
-references, or Emacs Lisp code (see [[var, Emacs Lisp evaluation of
+references, or Emacs Lisp code (see [[Emacs Lisp evaluation of
 variables]]). References include anything in the Org mode file that
 takes a ~#+NAME:~, ~#+TBLNAME:~, or ~#+RESULTS:~ line. This includes
 tables, lists, ~#+BEGIN_EXAMPLE~ blocks, other code blocks, and the
 results of other code blocks.
 
-Argument values can be indexed in a manner similar to arrays (see [[var,
-Indexable variable values]]).
+Argument values can be indexed in a manner similar to arrays (see
+[[Indexable variable values]]).
 
 The following syntax is used to pass arguments to code blocks using the
 ~:var~ header argument:
@@ -14000,7 +14928,7 @@ names may be handled directly in Emacs Lisp.
   #+end_example
 
   Please note that column names are not removed before the table is
-  indexed using variable indexing See [[var, Indexable variable values]].
+  indexed using variable indexing. See [[Indexable variable values]].
 
 - ~no~ ::
 
@@ -14046,7 +14974,7 @@ or ~no~, with a default value of ~no~.
   #+end_example
 
   Please note that row names are not removed before the table is indexed
-  using variable indexing. See [[var][Indexable variable values]].
+  using variable indexing. See [[Indexable variable values]].
 
 **** shebang
      :PROPERTIES:
@@ -14451,7 +15379,11 @@ buffer and use the {{{key(TAB)}}} key to complete text right there.
   - After {{{samp(*)}}} :: 
 
     Complete headlines in the current buffer so that they can be used in
-    search links like {{{samp([[*find this headline]])}}}.
+    search links like:
+    
+    #+begin_example
+     [[*find this headline]]
+    #+end_example
 
   - After {{{samp(:)}}} in a headline :: 
 
@@ -14710,8 +15642,8 @@ effective only when the file is visited again in a new Emacs session.
 - {{{kbd(#+LINK:  linkword replace)}}} ::
   {{{vindex(org-link-abbrev-alist)}}}
 
-  These lines (several are allowed) specify link abbreviations. See [[Link
-  abbreviations]]. The corresponding variable is ~org-link-abbrev-alist~.
+  These lines (several are allowed) specify link abbreviations. See
+  [[Link abbreviations]]. The corresponding variable is ~org-link-abbrev-alist~.
 
 - {{{kbd(#+PRIORITIES: highest lowest default)}}} ::
   {{{vindex(org-highest-priority)}}}
@@ -15203,7 +16135,7 @@ with other code out there.
   autoloaded during setup if Calc has been installed properly. As of
   Emacs 22, Calc is part of the Emacs distribution. Another possibility
   for interaction between the two packages is using Calc for embedded
-  calculations. See [[Embedded Mode, , Embedded Mode, calc, GNU Emacs Calc
+  calculations. See [[info:calc#Embedded Mode][GNU Emacs Calc
   Manual]].
 
 - {{{file(constants.el)}}} by Carsten Dominik ::
@@ -15432,7 +16364,7 @@ region even if the cursor moves across a special context.
   (define-key viper-vi-global-user-map "C-c /" 'org-sparse-tree)
   #+end_src
 
-** org-crypt.el
+** org-crypt
    :PROPERTIES:
    :DESCRIPTION: Encrypting Org files
    :END:
@@ -15767,13 +16699,13 @@ LaTeX file. There are a number of different solutions:
 *** A LaTeX example
     :PROPERTIES:
     :DESCRIPTION: Step by step, almost a tutorial
-    :TITLE:    A @LaTeX{} example of radio tables
+    :TITLE:    A LaTeX example of radio tables
     :END:
 {{{cindex(@LaTeX{}\\\, and Orgtbl mode)}}}
 
 The best way to wrap the source table in LaTeX is to use the
 ~comment~ environment provided by {{{file(comment.sty)}}}. It has to
-be activated by placing ~\usepackage@{comment@~} into the document
+be activated by placing ~\usepackage{comment}~ into the document
 header. Orgtbl mode can insert a radio table skeleton with the command
 {{{kbd(M-x orgtbl-insert-radio-table)}}}.[fn:169] You will be prompted
 for a table name, let's say we use {{{samp(salesfigures)}}}. You will
@@ -16691,7 +17623,7 @@ Before I get to this list, a few special mentions are in order:
   the plain list parser. His support during the early days, when he
   basically acted as co-maintainer, was central to the success of this
   project. Bastien also invented Worg, helped establishing the Web
-  presence of Org, and sponsored hosting costs for the orgmode.org
+  presence of Org, and sponsored hosting costs for the ~orgmode.org~
   website.
 
 - /Eric Schulte and Dan Davison/ ::
@@ -17107,7 +18039,7 @@ that clocking only works with headings indented less than 30 stars.
 be narrowed to the current tree. Editing the indirect buffer will also
 change the original buffer, but without affecting visibility in that
 buffer. For more information about indirect buffers,
-[[info:emacs:Indirect Buffers]].
+[[info:emacs#Indirect Buffers]].
 
 
 [fn:11] If you do not want the line to be split, customize the
@@ -17442,8 +18374,7 @@ restrict to the current region/subtree.
 This feature is deprecated, use the dedicated TODO list, or a block
 agenda instead (see [[Block agenda]]).
 
-[fn:99] But see [[x-agenda-skip-entry-regexp, ,skipping
-entries based on regexp]].
+[fn:99] But see [[x-agenda-skip-entry-regexp][skipping entries based on regexp]].
 
 [fn:100] For backward compatibility, the following also works: if
 there are several such lines in a file, each specifies the category
@@ -17747,6 +18678,31 @@ themselves will remain visible.
 [fn:179] ~org-export-date-timestamp-format~ defines how this
 timestamp will be exported.
 
+[fn:180] For backward compatibility, the universal prefix
+{{{kbd(C-u)}}} causes all TODO entries to be listed before the agenda.
+This feature is deprecated, use the dedicated TODO list, or a block
+agenda instead (see [[Block agenda]]).
+
+[fn:181] But see [[x-agenda-skip-entry-regexp][skipping entries based on regexp]].
+
+[fn:182] For backward compatibility, line numbers can also follow a
+single colon.
+
+[fn:183] You can provide a description for a prefix key by inserting a
+cons cell with the prefix and the description.
+
+[fn:184] For HTML you need to install Hrvoje Niksic's
+{{{file(htmlize.el)}}}. To create PDF output, the ghostscript
+{{{file(ps2pdf)}}} utility must be installed on the system. Selecting
+a PDF file will also create the postscript file.
+
+[fn:185] If you want to store standard views like the weekly agenda or
+the global TODO list as well, you need to define custom commands for
+them in order to be able to specify file names.
+
+[fn:186] Quoting depends on the system you use, please check the FAQ
+for examples.
+
 * About orgmanual.org                                              :noexport:
 This document intends to be Org mode source for the Org mode manual
 and the Org mode guide. It is intended to be a major revision of the
@@ -17978,14 +18934,13 @@ Perhaps shorten to "All the rest"
 > EXPORT_TITLE property is meant to provide a title for a subtree export.
 
 * Org-mode setup                                                   :noexport:
-
 ** Editing setup
 #+name: setup-editing
 #+header: :results silent
 #+header: :noweb yes
 #+header: :eval no-export
 #+begin_src emacs-lisp
-(require 'org-e-texinfo)
+(require 'ox-texinfo)
 (define-key org-mode-map (kbd "C-c e") 'org-export-dispatch)
 (setq org-pretty-entities nil)
 (setq org-src-preserve-indentation t)
@@ -18008,8 +18963,8 @@ Modify accordingly.
 #+header: :eval no-export
 #+begin_src emacs-lisp
 (setq load-path (cons "~/.emacs.d/src/org-mode/lisp" load-path))
-(setq load-path (cons "~/.emacs.d/src/org-mode/contrib/lisp" load-path))
-(require 'org-e-texinfo)
+; (setq load-path (cons "~/.emacs.d/src/org-mode/contrib/lisp" load-path))
+(require 'ox-texinfo)
 (setq org-src-preserve-indentation t)
 (setq org-confirm-babel-evaluate nil)
 (setq org-footnote-section "Footnotes to export")
@@ -18018,7 +18973,7 @@ Modify accordingly.
  '((emacs-lisp . t)
    (makefile . t)
    (sh . t)))
-(add-to-list 'org-export-snippet-translation-alist
+(add-to-list 'ox-snippet-translation-alist
              '("info" . "e-texinfo"))
 #+end_src
 
@@ -18085,3 +19040,257 @@ or export this source code block.
 The correct command is org-e-texinfo-export-to-texinfo
 
 
+** Texi -> Org helpers                                             :noexport:
+This section contains source code blocks that help translate from
+=texinfo= to =Org=.
+
+#+name: tsd-helpers
+#+header: :noweb yes
+#+header: :eval no-export
+#+begin_src emacs-lisp
+<<tsd-index-to-macro>>
+<<tsd-samp-to-macro>>
+<<tsd-kbdkey-to-macro>>
+<<tsd-kbd-to-macro>>
+<<tsd-key-to-macro>>
+<<tsd-command-to-macro>>
+<<tsd-file-to-macro>>
+<<tsd-noindent>>
+<<tsd-example-block-begin>>
+<<tsd-example-block-end>>
+<<tsd-table-begin>>
+<<tsd-table-end>>
+<<tsd-pxref>>
+<<tsd-xref>>
+<<tsd-ref>>
+<<tsd-orgcmd>>
+<<tsd-orgkey>>
+<<tsd-code-to-markup>>
+<<tsd-emph-to-markup>>
+<<tsd-i-to-markup>>
+<<tsd-lisp-begin>>
+<<tsd-lisp-end>>
+#+end_src
+
+#+results: tsd-helpers
+: tsd-lisp-end
+
+#+name: tsd-index-to-macro
+#+header: :results silent
+#+header: :eval no-export
+#+begin_src emacs-lisp
+(defun tsd-index-to-macro ()
+  "Make macros out of @[cpfvk]index commands.  Doesn't handle commas."
+  (interactive)
+  (query-replace-regexp "@\\([cpfvk]\\)index\\ \\(.*\\)$" "{{{\\1index(\\2)}}}" nil))
+#+end_src
+
+#+name: tsd-samp-to-macro
+#+header: :results silent
+#+header: :eval no-export
+#+begin_src emacs-lisp
+(defun tsd-samp-to-macro ()
+  "Make macros out of @samp commands."
+  (interactive)
+  (query-replace-regexp "@samp{\\([^}]*\\)}" "{{{samp(\\1)}}}" nil))
+#+end_src
+
+#+name: tsd-kbdkey-to-macro
+#+header: :results silent
+#+header: :eval no-export
+#+begin_src emacs-lisp
+(defun tsd-kbdkey-to-macro ()
+  "Make macros out of @kbd,@key commands."
+  (interactive)
+  (query-replace-regexp "@kbd{\\([^@]*\\)@key{\\([^}]*\\)}}" "{{{kbdkey(\\1,\\2)}}}" nil))
+#+end_src
+
+#+name: tsd-kbd-to-macro
+#+header: :results silent
+#+header: :eval no-export
+#+begin_src emacs-lisp
+(defun tsd-kbd-to-macro ()
+  "Make macros out of @kbd commands."
+  (interactive)
+  (query-replace-regexp "@kbd{\\([^}]*\\)}" "{{{kbd(\\1)}}}" nil))
+#+end_src
+
+#+name: tsd-key-to-macro
+#+header: :results silent
+#+header: :eval no-export
+#+begin_src emacs-lisp
+(defun tsd-key-to-macro ()
+  "Make macros out of @key commands."
+  (interactive)
+  (query-replace-regexp "@key{\\([^}]*\\)}" "{{{key(\\1)}}}" nil))
+#+end_src
+
+#+name: tsd-command-to-macro
+#+header: :results silent
+#+header: :eval no-export
+#+begin_src emacs-lisp
+(defun tsd-command-to-macro ()
+  "Make macros out of @command commands."
+  (interactive)
+  (query-replace-regexp "@command{\\([^}]*\\)}" "{{{command(\\1)}}}" nil))
+#+end_src
+
+#+name: tsd-file-to-macro
+#+header: :results silent
+#+header: :eval no-export
+#+begin_src emacs-lisp
+(defun tsd-file-to-macro ()
+  "Make macros out of @file commands."
+  (interactive)
+  (query-replace-regexp "@file{\\([^}]*\\)}" "{{{file(\\1)}}}" nil))
+#+end_src
+
+#+name: tsd-noindent
+#+header: :results silent
+#+header: :eval no-export
+#+begin_src emacs-lisp
+(defun tsd-noindent ()
+  "Make macros out of @noindent commands."
+  (interactive)
+  (query-replace "@noindent" "{{{noindent}}}" t))
+#+end_src
+
+#+name: tsd-example-block-begin
+#+header: :results silent
+#+header: :eval no-export
+#+begin_src emacs-lisp
+(defun tsd-example-block-begin ()
+  "Convert example blocks."
+  (interactive)
+  (query-replace "@example" "#+begin_example" t))
+#+end_src
+
+#+name: tsd-example-block-end
+#+header: :results silent
+#+header: :eval no-export
+#+begin_src emacs-lisp
+(defun tsd-example-block-end ()
+  "Convert example blocks."
+  (interactive)
+  (query-replace "@end example" "#+end_example" nil))
+#+end_src
+
+#+name: tsd-table-begin
+#+header: :results silent
+#+header: :eval no-export
+#+begin_src emacs-lisp
+(defun tsd-table-begin ()
+  "Convert table blocks."
+  (interactive)
+  (query-replace-regexp "@table\\ \\([@a-z]*\\)" "#+attr_texinfo: :table-type \"table\" :indic \"\\1\"" t))
+#+end_src
+
+#+name: tsd-table-end
+#+header: :results silent
+#+header: :eval no-export
+#+begin_src emacs-lisp
+(defun tsd-table-end ()
+  "Convert table blocks."
+  (interactive)
+  (query-replace "@end table" "" nil))
+#+end_src
+
+#+name: tsd-pxref
+#+header: :results silent
+#+header: :eval no-export
+#+begin_src emacs-lisp
+(defun tsd-pxref ()
+  "Convert @pxref to links."
+  (interactive)
+  (query-replace-regexp "@pxref{\\([^}]*\\)}" "see \[\[\\1\]\]" nil))
+#+end_src
+
+#+name: tsd-xref
+#+header: :results silent
+#+header: :eval no-export
+#+begin_src emacs-lisp
+(defun tsd-xref ()
+  "Convert @xref to links."
+  (interactive)
+  (query-replace-regexp "@xref{\\([^}]*\\)}" "See \[\[\\1\]\]" nil))
+#+end_src
+
+#+name: tsd-ref
+#+header: :results silent
+#+header: :eval no-export
+#+begin_src emacs-lisp
+(defun tsd-ref ()
+  "Convert @ref to links."
+  (interactive)
+  (query-replace-regexp "@ref{\\([^}]*\\)}" "\[\[\\1\]\]" nil))
+#+end_src
+
+#+name: tsd-orgcmd
+#+header: :results silent
+#+header: :eval no-export
+#+begin_src emacs-lisp
+(defun tsd-orgcmd ()
+  "Convert @orgcmd to list entry."
+  (interactive)
+  (query-replace-regexp "@orgcmd{\\([^,]*\\),\\([^}]*\\)}" "- {{{kbd(\\1)}}} ~\\2~ ::" nil))
+#+end_src
+
+#+name: tsd-orgkey
+#+header: :results silent
+#+header: :eval no-export
+#+begin_src emacs-lisp
+(defun tsd-orgkey ()
+  "Convert @orgkey to list entry."
+  (interactive)
+  (query-replace-regexp "@orgkey{\\([^}]*\\)}" "- {{{kbd(\\1)}}} ::" nil))
+#+end_src
+
+#+name: tsd-code-to-markup
+#+header: :results silent
+#+header: :eval no-export
+#+begin_src emacs-lisp
+(defun tsd-code-to-markup ()
+  "Convert @code to markup."
+  (interactive)
+  (query-replace-regexp "@code{\\([^}]*\\)}" "~\\1~" nil))
+#+end_src
+
+#+name: tsd-emph-to-markup
+#+header: :results silent
+#+header: :eval no-export
+#+begin_src emacs-lisp
+(defun tsd-emph-to-markup ()
+  "Convert @emph to markup."
+  (interactive)
+  (query-replace-regexp "@emph{\\([^}]*\\)}" "/\\1/" nil))
+#+end_src
+
+#+name: tsd-i-to-markup
+#+header: :results silent
+#+header: :eval no-export
+#+begin_src emacs-lisp
+(defun tsd-i-to-markup ()
+  "Convert @i to markup."
+  (interactive)
+  (query-replace-regexp "@i{\\([^}]*\\)}" "/\\1/" nil))
+#+end_src
+
+#+name: tsd-lisp-begin
+#+header: :results silent
+#+header: :eval no-export
+#+begin_src emacs-lisp
+(defun tsd-lisp-begin ()
+  "Convert @lisp blocks."
+  (interactive)
+  (query-replace "@lisp" "#+begin_src emacs-lisp" t))
+#+end_src
+
+#+name: tsd-lisp-end
+#+header: :results silent
+#+header: :eval no-export
+#+begin_src emacs-lisp
+(defun tsd-lisp-end ()
+  "Convert @lisp blocks."
+  (interactive)
+  (query-replace "@end lisp" "#+end_src" nil))
+#+end_src
