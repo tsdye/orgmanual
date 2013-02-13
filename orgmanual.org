@@ -3,7 +3,7 @@
 #+EMAIL:     tsd@tsdye.com
 #+DATE:      2012-11-10 Sat
 #+LANGUAGE:  en
-#+OPTIONS:   H:6 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   H:4 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:nil pri:nil tags:not-in-toc
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+SELECT_TAGS: export
@@ -401,7 +401,11 @@ about:
 
 {{{noindent}}} Thank you for helping to improve this program.
 
-*** How to create a useful backtrace
+** How to create a useful backtrace
+   :PROPERTIES:
+   :DESCRIPTION: The best way to report an error
+   :END:
+
 {{{cindex(backtrace of an error)}}}
 
 If working with Org produces an error with a message you don't
@@ -432,6 +436,9 @@ error occurred.  Here is how to produce a useful backtrace:
    :END:
 
 *** Three types of keywords
+    :PROPERTIES:
+    :DESCRIPTION: TODO, tags, and properties
+    :END:
 
 Org mainly uses three types of keywords: TODO keywords, tags and property
 names.  In this manual we use the following conventions:
@@ -449,6 +456,10 @@ environment). They are written in uppercase in the manual to enhance
 its readability, but you can use lowercase in your Org files.[fn:7]
 
 *** Keybindings and commands
+    :PROPERTIES:
+    :DESCRIPTION: Bind useful commands to keys
+    :END:
+
 {{{kindex(C-c a)}}}
 {{{findex(org-agenda)}}}
 {{{kindex(C-c c)}}}
@@ -1298,7 +1309,7 @@ blocks folded at startup by configuring the variable
   ,#+STARTUP: nohideblocks
 #+end_src
 
-** Creating Footnotes
+** Creating footnotes
    :PROPERTIES:
    :DESCRIPTION: Define footnotes in Org syntax
    :END:
@@ -1508,6 +1519,9 @@ automatically made blank.  If this behavior is too unpredictable for
 you, configure the variables ~org-enable-table-editor~ and
 ~code(org-table-auto-blank-field~.
 *** Creation and conversion
+    :PROPERTIES:
+    :DESCRIPTION: Creating tabular data in Org
+    :END:
 #+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c |)}}} ~org-table-create-or-convert-from-region~ :: Convert
      the active region to table.  If every line contains at least one
@@ -1525,6 +1539,9 @@ you, configure the variables ~org-enable-table-editor~ and
      {{{kindex(C-c |)}}}
      {{{findex(org-table-create-or-convert-from-region)}}}
 *** Re-aligning and field motion
+    :PROPERTIES:
+    :DESCRIPTION: Navigating and tidying
+    :END:
 #+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c C-c)}}} ~org-table-align~ :: Re-align the table without
      moving the cursor.
@@ -1559,6 +1576,9 @@ you, configure the variables ~org-enable-table-editor~ and
      {{{kindex(M-e)}}}
      {{{findex(org-table-end-of-field)}}}
 *** Column and row editing
+    :PROPERTIES:
+    :DESCRIPTION: Insert, kill, or move
+    :END:
 #+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbdkey(M-,left)}}} ~org-table-move-column-left~ ::
      @@info:@itemx@@ {{{kbdkey(M-,right)}}} ~org-table-move-column-right~ 
@@ -1626,6 +1646,9 @@ you, configure the variables ~org-enable-table-editor~ and
      {{{kindex(C-c ^)}}}
      {{{findex(org-table-sort-lines)}}}
 *** Regions
+    :PROPERTIES:
+    :DESCRIPTION: Manipulate parts of a table
+    :END:
 #+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c C-x M-w)}}} ~org-table-copy-region~ :: Copy a rectangular
      region from a table to a special clipboard.  Point and mark
@@ -1662,6 +1685,9 @@ you, configure the variables ~org-enable-table-editor~ and
      {{{kindex(M-RET)}}}
      {{{findex(org-table-wrap-region)}}}
 *** Calculations
+    :PROPERTIES:
+    :DESCRIPTION: Sum and copy
+    :END:
 #+attr_texinfo: :table-type "table" :indic "@asis"
 {{{cindex(formula\\\, in tables)}}}
 {{{cindex(calculations\\\, in tables)}}}
@@ -1689,6 +1715,9 @@ you, configure the variables ~org-enable-table-editor~ and
      {{{vindex(org-table-copy-increment)}}}
 
 *** Misc
+    :PROPERTIES:
+    :DESCRIPTION: Some other useful operations
+    :END:
 #+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c `)}}} ~org-table-edit-field~ :: Edit the current field in
      a separate window.  This is useful for fields that are not fully
@@ -1904,6 +1933,9 @@ that field, or press {{{kbd(C-c @})}}} to toggle the display of a
 grid.
 
 **** Field references
+     :PROPERTIES:
+     :DESCRIPTION: Refer to a particular field
+     :END:
 {{{cindex(field references)}}}
 {{{cindex(references\\\, to fields)}}}
 
@@ -1958,6 +1990,9 @@ Here are a few examples:
   - @>$5 :: field in the last row, in column 5
 
 **** Range references
+     :PROPERTIES:
+     :DESCRIPTION: Refer to a range of fields
+     :END:
 {{{cindex(range references)}}}
 {{{cindex(references\\\, to ranges)}}}
 
@@ -1986,6 +2021,9 @@ see the ~E~ mode switch below).  If there are no non-empty fields,
 {{{samp([0])}}} is returned to avoid syntax errors in formulas.
 
 **** Field coordinates in formulas
+     :PROPERTIES:
+     :DESCRIPTION: Refer to fields in Lisp or Calc
+     :END:
 {{{cindex(field coordinates)}}}
 {{{cindex(coordinates\\\, of field)}}}
 {{{cindex(row\\\, of field coordinates)}}}
@@ -2006,6 +2044,9 @@ many rows as the current table. Note that this is inefficient for
 large number of rows.[fn:30]
 
 **** Named references
+     :PROPERTIES:
+     :DESCRIPTION: Name columns or constants
+     :END:
 {{{cindex(named references)}}}
 {{{cindex(references\\\, named)}}}
 {{{cindex(name\\\, of column or field)}}}
@@ -2038,6 +2079,9 @@ described below, see [[Advanced features]].  All names must start with a
 letter, and further consist of letters and numbers.
 
 **** Remote references
+     :PROPERTIES:
+     :DESCRIPTION: Refer to information in other tables
+     :END:
 {{{cindex(remote references)}}}
 {{{cindex(references\\\, remote)}}}
 {{{cindex(references\\\, to a different table)}}}
@@ -2531,7 +2575,10 @@ You may edit the {{{samp(#+TBLFM)}}} directly and re-apply the changed
 equations with {{{kbd(C-c C-c)}}} in that line or with the normal
 recalculation commands in the table.
 
-**** Debugging formulas
+*** Debugging formulas
+    :PROPERTIES:
+    :DESCRIPTION: Help fixing formulas
+    :END:
 
 {{{cindex(formula debugging)}}}
 {{{cindex(debugging\\\, of table formulas)}}}
@@ -2716,7 +2763,7 @@ of plots can be exercised through the ~#+PLOT:~ lines preceding a
 table. See below for a complete list of Org-plot options. For more
 information and examples see the [[http://orgmode.org/worg/org-tutorials/org-plot.html][Org-plot tutorial]].
 
-*** Plot Options
+Org-Plot recognizes the following options:
 
 #+attr_texinfo: :table-type "table" :indic "@code"
   - set :: Specify any {{{command(gnuplot)}}} option to be set when
@@ -2846,7 +2893,10 @@ return to the previous position with {{{kbd(C-c &)}}}.  Using this
 command several times in direct succession goes back to positions
 recorded earlier.
 
-*** Radio targets
+** Radio targets
+    :PROPERTIES:
+    :DESCRIPTION: Automatically create internal links
+    :END:
 {{{cindex(radio targets)}}}
 {{{cindex(targets\\\, radio)}}}
 {{{cindex(links\\\, radio targets)}}}
@@ -3903,7 +3953,7 @@ settings like ~TODO(!)~.  For example:
   :END:
 #+end_example
 
-*** DONE Tracking your habits
+*** Tracking your habits
     :LOGBOOK:
     - State "DONE"       from "DONE"       [2013-01-07 Mon 14:10]
     - State "DONE"       from ""           [2013-01-07 Mon 14:10]
@@ -4151,7 +4201,7 @@ of) a large number of subtasks (see [[Checkboxes]]).
 
 Every item in a plain list (see [[Plain lists]]) can be made into a
 checkbox by starting it with the string {{{samp([ ])}}}.[fn:58] This
-feature is similar to TODO items (see [[TODO Items]]), but is more
+feature is similar to TODO items (see [[TODO items]]), but is more
 lightweight. Checkboxes are not included into the global TODO list, so
 they are often great to split a task into a number of simple steps. Or
 you can use them in a shopping list. To toggle a checkbox, use
@@ -4925,7 +4975,7 @@ column view is active), but you can still open, read, and edit the
 entry below each headline. Or, you can switch to column view after
 executing a sparse tree command and in this way get a table only for
 the selected items. Column view also works in agenda buffers (see
-[[Agenda Views]]) where queries have collected selected items, possibly
+[[Agenda views]]) where queries have collected selected items, possibly
 from a number of files.
 
 *** Defining columns
@@ -5067,7 +5117,8 @@ today.
     :DESCRIPTION: How to create and use column view
     :END:
 
-**** Turning column view on and off
+The following commands turn column view on or off:
+
 #+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c C-x C-c)}}} ~org-columns~ ::
   {{{kindex(C-c C-x C-c)}}}
@@ -5100,7 +5151,8 @@ today.
 
   Exit column view.
 
-**** Editing values
+The following commands let you edit information in column view:
+
 #+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{key(left)}}} {{{key(right)}}} {{{key(up)}}} {{{key(down)}}} ::
 
@@ -5151,8 +5203,10 @@ today.
   found, the new value is stored in the first entry that is part of the
   current column view.
 
-**** Modifying the table structure
 
+The following commands modify column view on-the-fly:
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(<)}}} {{{kbd(>)}}} ~org-columns-narrow~ ~org-columns-widen~ ::
   {{{kindex(<)}}}
 
@@ -6486,7 +6540,7 @@ a global key for capturing new material.[fn:87]
 
   Call the command ~org-capture~. Note that this keybinding is global
   and not active by default - you need to install it. If you have
-  templates defined (see [[Capture templates)]], it will offer these
+  templates defined (see [[Capture templates]], it will offer these
   templates for selection or use a new Org outline node as the default
   template. It will insert the template into the target file and switch
   to an indirect buffer narrowed to this new node. You may then insert
@@ -6839,21 +6893,21 @@ defined:[fn:89]
 
 {{{vindex(org-from-is-user-regexp)}}}
 
-| Link type                       | Available keywords                | Notes                                  |
-|---------------------------------+-----------------------------------+----------------------------------------|
-| bbdb                            | ~%:name %:company~                |                                        |
-| irc                             | ~%:server %:port %:nick~          |                                        |
-| vm, vm-imap, wl, mh, mew, rmail | ~%:type %:subject %:message-id~   |                                        |
-|                                 | ~%:from %:fromname %:fromaddress~ |                                        |
-|                                 | ~%:to %:toname %:toaddress~       |                                        |
-|                                 | ~%:date~                          | message date header field              |
-|                                 | ~%:date-timestamp~                | date as active timestamp               |
-|                                 | ~%:date-timestamp-inactive~       | date as inactive timestamp             |
-|                                 | ~%:fromto~                        | either "to NAME" or "from NAME"[fn:90] |
-| gnus                            | ~%:group~                         | for messages, also all email fields    |
-| w3, w3m                         | ~%:url~                           |                                        |
-| info                            | ~%:file %:node~                   |                                        |
-| calendar                        | ~%:date~                          |                                        |
+| Link type                       | Available keywords                    |
+|---------------------------------+---------------------------------------|
+| bbdb                            | ~%:name %:company~                    |
+| irc                             | ~%:server %:port %:nick~              |
+| vm vm-imap wl mh mew rmail      | ~%:type %:subject %:message-id~       |
+|                                 | ~%:from %:fromname %:fromaddress~     |
+|                                 | ~%:to %:toname %:toaddress~           |
+|                                 | ~%:date~ [fn:187]                     |
+|                                 | ~%:date-timestamp~ [fn:188]           |
+|                                 | ~%:date-timestamp-inactive~ [fn:189]  |
+|                                 | ~%:fromto~ [fn:190]                   |
+| gnus                            | ~%:group~ [fn:191]                    |
+| w3 w3m                          | ~%:url~                               |
+| info                            | ~%:file %:node~                       |
+| calendar                        | ~%:date~                              |
 
 {{{noindent}}} To place the cursor after template expansion use:
 
@@ -7007,7 +7061,7 @@ subtree uses the same attached directory.
     Set the ~ATTACH_DIR_INHERIT~ property, so that children will use the
     same directory for attachments as the parent does.
 
-** RSS Feeds
+** RSS feeds
    :PROPERTIES:
    :DESCRIPTION: Getting input from RSS feeds
    :END:
@@ -7257,7 +7311,7 @@ its location in the outline tree, but behaves in the following way:
 
   {{{vindex(org-sparse-tree-open-archived-trees)}}}
 
-- During agenda view construction (see [[Agenda Views]]), the content of
+- During agenda view construction (see [[Agenda views]]), the content of
   archived trees is ignored unless you configure the option
   ~org-agenda-skip-archived-trees~, in which case these trees will
   always be included.  In the agenda you can press {{{kbd(v a)}}} to
@@ -7551,7 +7605,10 @@ and a number of special tags matches. See [[Custom agenda views]].
    :END:
 In this section we describe the built-in views.
 
-*** FIXED The weekly/daily agenda
+*** FIXED Weekly/daily agenda
+    :PROPERTIES:
+    :DESCRIPTION: The calendar page with current tasks
+    :END:
 {{{cindex(agenda)}}}
 {{{cindex(weekly agenda)}}}
 {{{cindex(daily agenda)}}}
@@ -7580,10 +7637,13 @@ agenda, or to a span name, such a ~day~, ~week~, ~month~ or
 
 Remote editing from the agenda buffer means, for example, that you can
 change the dates of deadlines and appointments from the agenda buffer.
-The commands available in the Agenda buffer are listed in @ref{Agenda
-commands}.
+The commands available in the Agenda buffer are listed in [[Agenda
+commands]].
 
 **** FIXED Calendar/Diary integration
+     :PROPERTIES:
+     :DESCRIPTION: Integrate the Emacs diary with Org
+     :END:
 {{{cindex(calendar integration)}}}
 {{{cindex(diary integration)}}}
 {{{cindex(Reingold\\\, Edward M.)}}}
@@ -7633,6 +7693,10 @@ will be made in the agenda:
 #+end_example
 
 **** FIXED Anniversaries from BBDB
+     :PROPERTIES:
+     :DESCRIPTION: Integrate Big Brother Database and Org
+     :END:
+
 {{{cindex(BBDB, anniversaries)}}}
 {{{cindex(anniversaries, from BBDB)}}}
 
@@ -7644,10 +7708,10 @@ following to one of your agenda files:
 
 #+begin_example
 ,* Anniversaries
-  :PROPERTIES:
-  :CATEGORY: Anniv
-  :END:
-%%(org-bbdb-anniversaries)
+,  :PROPERTIES:
+,  :CATEGORY: Anniv
+,  :END:
+,%%(org-bbdb-anniversaries)
 #+end_example
 
 You can then go ahead and define anniversaries for a BBDB record.
@@ -7673,6 +7737,9 @@ be very fast---much faster in fact than a long list of
 {{{samp(%%(diary-anniversary))}}} entries in an Org or Diary file.
 
 **** FIXED Appointment reminders
+     :PROPERTIES:
+     :DESCRIPTION: Integrate the Emacs appointment facility and Org
+     :END:
 {{{cindex(@file{appt.el})}}}
 {{{cindex(appointment reminders)}}}
 {{{cindex(appointment)}}}
@@ -7686,7 +7753,10 @@ It also reads a ~APPT_WARNTIME~ property which will then override the
 value of ~appt-message-warning-time~ for this appointment.  See the
 docstring for details.
 
-*** FIXED The global TODO list
+*** FIXED Global TODO list
+    :PROPERTIES:
+    :DESCRIPTION: All unfinished action items
+    :END:
 {{{cindex(global TODO list)}}}
 {{{cindex(TODO list, global)}}}
 
@@ -7697,7 +7767,7 @@ collected into a single place.
 - {{{kbd(C-c a t)}}} ~org-todo-list~ ::
 
   Show the global TODO list. This collects the TODO items from all
-  agenda files (see [[Agenda Views]]) into a single buffer. By default, this
+  agenda files (see [[Agenda views]]) into a single buffer. By default, this
   lists items with a state the is not a DONE state. The buffer is in
   ~agenda-mode~, so there are commands to examine and manipulate the
   TODO entries directly from that buffer (see [[Agenda commands]]).
@@ -7757,13 +7827,16 @@ it more compact:
   {{{vindex(org-agenda-todo-list-sublevels)}}}
 
 *** Matching tags and properties
+    :PROPERTIES:
+    :DESCRIPTION: Structured information with fine-tuned search
+    :END:
 {{{cindex(matching, of tags)}}}
 {{{cindex(matching, of properties)}}}
 {{{cindex(tags view)}}}
 {{{cindex(match view)}}}
 
 If headlines in the agenda files are marked with /tags/ (see [[Tags]]), or
-have properties (see [[Properties and Columns]]), you can select headlines
+have properties (see [[Properties and columns]]), you can select headlines
 based on this metadata and collect them into an agenda buffer. The
 match syntax described here also applies when creating sparse trees
 with {{{kbd(C-c / m)}}}.
@@ -7794,7 +7867,6 @@ with {{{kbd(C-c / m)}}}.
 The commands available in the tags list are described in [[Agenda
 commands]].
 
-**** FIXED Match syntax
 
 {{{cindex(Boolean logic\\\, for tag or property searches)}}}
 
@@ -7838,7 +7910,7 @@ headlines that contain the tag {{{samp(:work:)}}} and any tag
 {{{cindex(category\\\, require for tags/property match)}}}
 {{{vindex(org-odd-levels-only)}}}
 
-You may also test for properties (see [[Properties and Columns]]) at the
+You may also test for properties (see [[Properties and columns]]) at the
 same time as matching tags. The properties may be real properties, or
 special properties that represent other metadata (see [[Special
 properties]]). For example, the "property" ~TODO~ represents the TODO
@@ -7947,6 +8019,7 @@ after the slash with {{{samp(!)}}}. Using {{{kbd(C-c a M)}}} or
 *** FIXED Timeline for a single file
     :PROPERTIES:
     :DESCRIPTION: Time-sorted view for a single file
+    :TEXINFO_MENU_TITLE: Timeline
     :END:
 
 {{{cindex(timeline\\\, single file)}}}
@@ -7969,6 +8042,9 @@ to give an overview over events in a project.
 listed in [[Agenda commands]].
 
 *** FIXED Search view
+    :PROPERTIES:
+    :DESCRIPTION: Find entries by searching for text
+    :END:
 {{{cindex(search view)}}}
 {{{cindex(text search)}}}
 {{{cindex(searching, for text)}}}
@@ -8003,6 +8079,9 @@ Note that in addition to the agenda files, this command will also
 search the files listed in ~org-agenda-text-search-extra-files~.
 
 *** FIXED Stuck projects
+    :PROPERTIES:
+    :DESCRIPTION: Find projects you need to review
+    :END:
 {{{pindex(GTD\\\, Getting Things Done)}}}
 
 If you are following a system like David Allen's GTD to organize your
@@ -8972,7 +9051,7 @@ f  @r{Apply a function@footnote{You can also create persistent custom functions 
   ~org-agenda-exporter-settings~ to set options for {{{file(ps-print)}}}
   and for {{{file(htmlize)}}} to be used during export.
 
-*** Quit and Exit
+*** Quit and exit
 #+attr_texinfo: :table-type "table" :indic "@asis"
 
 - {{{kbd(q)}}} ~org-agenda-quit~ ::
@@ -8989,6 +9068,9 @@ f  @r{Apply a function@footnote{You can also create persistent custom functions 
   visit Org files will not be removed.
 
 ** Custom agenda views
+   :PROPERTIES:
+   :DESCRIPTION: Defining special searches and views
+   :END:
 {{{cindex(custom agenda views)}}}
 {{{cindex(agenda views\\\, custom)}}}
 
@@ -8998,6 +9080,9 @@ agenda buffers.  Custom agenda commands will be accessible through the
 dispatcher (see [[Agenda dispatcher]]), just like the default commands.
 
 *** Storing searches
+    :PROPERTIES:
+    :DESCRIPTION: Type once, use often
+    :END:
 
 The first application of custom searches is the definition of keyboard
 shortcuts for frequently used searches, either creating an agenda
@@ -9079,6 +9164,9 @@ used for the matching. The example above will therefore define:
 
 
 *** Block agenda
+    :PROPERTIES:
+    :DESCRIPTION: All the stuff you need in a single buffer
+    :END:
 {{{cindex(block agenda)}}}
 {{{cindex(agenda\\\, with block views)}}}
 
@@ -9113,6 +9201,9 @@ provides a similar view for office tasks.
 
 
 *** Setting options for custom commands
+    :PROPERTIES:
+    :DESCRIPTION: Changing the rules
+    :END:
 {{{cindex(options\\\, for custom agenda views)}}}
 {{{vindex(org-agenda-custom-commands)}}}
 
@@ -9210,8 +9301,10 @@ command key ~"r"~.  In that case, add this command key like this:
 
 See the docstring of the variable for more information.
 
-
-** Exporting Agenda Views
+** Exporting agenda views
+   :PROPERTIES:
+   :DESCRIPTION: Writing a view to a file
+   :END:
 {{{cindex(agenda views\\\, exporting)}}}
 
 If you are away from your computer, it can be very useful to have a
@@ -9351,10 +9444,14 @@ You can also extract agenda information in a way that allows further
 processing by other programs.  See [[Extracting agenda information]], for
 more information.
 
-
 ** Using column view in the agenda
+   :PROPERTIES:
+   :DESCRIPTION: Using column view for collected entries
+   :TEXINFO_MENU_TITLE: Agenda column view
+   :END:
 {{{cindex(column view\\\, in agenda)}}}
 {{{cindex(agenda\\\, column view)}}}
+<<Agenda column view>>
 
 Column view (see [[Column view]]) is normally used to view and edit
 properties embedded in the hierarchical structure of an Org file. It
@@ -10516,7 +10613,7 @@ Org mode contains a HTML (XHTML 1.0 strict) exporter with extensive
 HTML formatting, in ways similar to John Gruber's /markdown/ language,
 but with additional support for tables.
 
-*** HTML Export commands
+*** HTML export commands
     :PROPERTIES:
     :DESCRIPTION: How to invoke HTML export
     :END:
@@ -11578,8 +11675,7 @@ further.
     :DESCRIPTION: How to invoke ODT export
     :TEXINFO_MENU_TITLE: Exporting to ODT
     :END:
-@subsubheading Exporting to ODT
-# <<x-export-to-odt>>
+<<x-export-to-odt>>
 
 {{{cindex(region\\\, active)}}}
 {{{cindex(active region)}}}
@@ -11613,12 +11709,11 @@ further.
   {{{vindex(org-export-odt-preferred-output-format)}}}
 
   If ~org-export-odt-preferred-output-format~ is specified, open the
-  converted file instead.  See [[x-export-to-other-formats, ,
-  Automatically exporting to other formats]].
+  converted file instead.  See [[x-export-to-other-formats][Automatically exporting to other formats]].
 
 *** Extending ODT export
     :PROPERTIES:
-    :DESCRIPTION: How to produce {{{samp(doc)}}}, {{{samp(pdf)}}} files
+    :DESCRIPTION: How to produce ~doc~, ~pdf~ files
     :END:
 
 The ODT exporter can interface with a variety of document converters
@@ -11639,7 +11734,10 @@ default settings of the {{{file(LibreOffice)}}} and
 {{{samp(unoconv)}}} converters. See [[Configuring a document converter]].
 
 **** Automatically exporting to other formats
-# <<x-export-to-other-formats>>
+     :PROPERTIES:
+     :DESCRIPTION: Automatic conversion to doc, docx, etc.
+     :END:
+<<x-export-to-other-formats>>
 
 {{{vindex(org-export-odt-preferred-output-format)}}} 
 
@@ -11653,6 +11751,9 @@ can be extended to export to a format that is of immediate interest to
 you.
 
 **** Converting between document formats
+     :PROPERTIES:
+     :DESCRIPTION: Interacting with configured converters
+     :END:
 # <<x-convert-to-other-formats>>
 
 There are many document converters in the wild that support
@@ -11683,8 +11784,7 @@ directly, or generate the required styles using an application like
 LibreOffice. The latter method is suitable for expert and non-expert
 users alike, and is described here.
 
-**** Applying custom styles - the easy way
-
+Custom styles can be applied in three easy steps:
 
 1. Create a sample {{{file(example.org)}}} file with the below
    settings and export it to ODT format.
@@ -11721,10 +11821,8 @@ users alike, and is described here.
    ,#+ODT_STYLES_FILE: ("/path/to/file.ott" ("styles.xml" "image/hdr.png"))
    #+end_example
 
-**** Using third-party styles and templates
-
-You can use third-party styles and templates for customizing your
-output. This will produce the desired output only if the template
+Although you can use third-party styles and templates for customizing
+your output, this will produce the desired output only if the template
 provides all style names that the {{{samp(ODT)}}} exporter relies
 upon. Unless this condition is met, the output is going to be less
 than satisfactory. It is highly recommended that you only work with
@@ -11805,7 +11903,6 @@ create custom table styles and associate them with a table using the
 {{{cindex(images\\\, embedding in ODT)}}}
 {{{cindex(embedding images in ODT)}}}
 
-**** Embedding images
 You can embed images within the exported document by providing a link to the
 desired image file with no link description.  For example, to embed
 {{{samp(img.png)}}} do either of the following:
@@ -11818,8 +11915,6 @@ desired image file with no link description.  For example, to embed
 [[./img.png]]
 #+end_example
 
-**** Embedding clickable images
-
 You can create clickable images by providing a link whose description
 is a link to an image file. For example, to embed an image
 {{{file(org-mode-unicorn.png)}}}, which when clicked jumps to
@@ -11829,7 +11924,6 @@ is a link to an image file. For example, to embed an image
 [[http://orgmode.org][./org-mode-unicorn.png]]
 #+end_example
 
-**** Sizing and scaling of embedded images
 {{{cindex(#+ATTR_ODT)}}}
 
 You can control the size and scale of the embedded images using the
@@ -11890,7 +11984,6 @@ The examples below illustrate the various possibilities.
   [[./img.png]]
   #+end_example
 
-**** Anchoring of images
 {{{cindex(#+ATTR_ODT)}}}
 
 You can control the manner in which an image is anchored by setting
@@ -12138,7 +12231,6 @@ interested in exploring the automatic and custom OpenDocument styles
 used by the exporter.
 
 # <<x-factory-styles>>
-***** Factory styles
 
 The ODT exporter relies on two files for generating its output.
 These files are bundled with the distribution under the directory pointed to
@@ -12147,7 +12239,7 @@ by the variable ~org-odt-styles-dir~.  The two files are:
 #+attr_texinfo: :table-type "table" :indic "@asis"
 
 - {{{file(OrgOdtStyles.xml)}}} ::
-  # <<x-orgodtstyles-xml>>
+  <<x-orgodtstyles-xml>>
 
   This file contributes to the {{{file(styles.xml)}}} file of the final
   {{{samp(ODT)}}} document. This file is modified to control outline
@@ -12155,7 +12247,7 @@ by the variable ~org-odt-styles-dir~.  The two files are:
   {{{file(htmlfontify.el)}}} for fontification of code blocks.
 
 - {{{file(OrgOdtContentTemplate.xml)}}} ::
-  # <<x-orgodtcontenttemplate-xml>>
+  <<x-orgodtcontenttemplate-xml>>
 
   This file contributes to the {{{file(content.xml)}}} file of the final
   {{{samp(ODT)}}} document. The contents of the Org outline are inserted
@@ -12170,8 +12262,7 @@ by the variable ~org-odt-styles-dir~.  The two files are:
   equations, etc.---are numbered.
 
 
-# <<x-overriding-factory-styles>>
-***** Overriding factory styles
+<<x-overriding-factory-styles>>
 
 The following two variables control the location from which the ODT
 exporter picks up the custom styles and content template files. You
@@ -12181,7 +12272,7 @@ the exporter.
 #+attr_texinfo: :table-type "table" :indic "@asis"
 
 - ~org-export-odt-styles-file~ ::
-  # <<x-org-export-odt-styles-file>>
+  <<x-org-export-odt-styles-file>>
 
   Use this variable to specify the {{{file(styles.xml)}}} that will be
   used in the final output. You can specify one of the following values:
@@ -12209,7 +12300,7 @@ the exporter.
     Use the default {{{file(styles.xml)}}}
 
 - ~org-export-odt-content-template-file~ ::
-  # <<x-org-export-odt-content-template-file>>
+  <<x-org-export-odt-content-template-file>>
 
   Use this variable to specify the blank {{{file(content.xml)}}} that
   will be used in the final output.
@@ -12298,8 +12389,6 @@ default formatting of tables see [[Tables in ODT export]].
 This feature closely mimics the way table templates are defined in the
 OpenDocument-v1.2 specification.[fn:146]
 
-***** Custom table styles - an illustration
-
 To have a quick preview of this feature, install the following setting and
 export the example table.
 
@@ -12334,7 +12423,7 @@ marked {{{samp(Custom Table Template)}}} in
 [[x-orgodtcontenttemplate-xml][Factory styles]]). If you need additional
 templates you have to define these styles yourself.
 
-***** Custom table styles - the nitty-gritty
+
 To use this feature proceed as follows:
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
@@ -12469,6 +12558,9 @@ this project. It then creates a TaskJuggler file based on these trees
 and the attributes defined in all the nodes.
 
 *** TaskJuggler export commands
+    :PROPERTIES:
+    :DESCRIPTION: Key bindings for TaskJuggler export
+    :END:
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c C-e j)}}} ~org-export-as-taskjuggler~ ::
@@ -12483,6 +12575,9 @@ and the attributes defined in all the nodes.
   (only for TaskJugglerUI 2.x).
 
 *** Tasks
+    :PROPERTIES:
+    :DESCRIPTION: Marking tasks for TaskJuggler export
+    :END:
 {{{vindex(org-export-taskjuggler-project-tag)}}}
 
 Create your tasks as you usually do with Org mode. Assign efforts to
@@ -12497,6 +12592,9 @@ the project plan with {{{kbd(C-c C-e J)}}} which will export the
 project plan and open a gantt chart in TaskJugglerUI.
 
 *** Resources
+    :PROPERTIES:
+    :DESCRIPTION: Define TaskJuggler resources
+    :END:
 {{{vindex(org-export-taskjuggler-resource-tag)}}}
 
 Next you can define resources and assign those to work on specific
@@ -12519,6 +12617,9 @@ check in the Resource Allocation Graph which person is working on what
 task at what time.
 
 *** Export of properties
+    :PROPERTIES:
+    :DESCRIPTION: Which properties will be exported?
+    :END:
 
 The exporter also takes TODO state information into consideration,
 i.e., if a task is marked as done it will have the corresponding
@@ -12537,6 +12638,9 @@ resource node which is known to TaskJuggler, such as
 {{{samp(scheduling)}}}, etc for tasks.
 
 *** Dependencies
+    :PROPERTIES:
+    :DESCRIPTION: How the exporter handles dependencies
+    :END:
 
 The exporter will handle dependencies that are defined in the tasks
 either with the {{{samp(ORDERED)}}} attribute (see [[TODO dependencies]]),
@@ -12552,31 +12656,34 @@ appending it. The following examples should illustrate this:
 
 #+begin_example
 ,* Preparation
-  :PROPERTIES:
-  :task_id:  preparation
-  :ORDERED:  t
-  :END:
+,  :PROPERTIES:
+,  :task_id:  preparation
+,  :ORDERED:  t
+,  :END:
 ,* Training material
-  :PROPERTIES:
-  :task_id:  training_material
-  :ORDERED:  t
-  :END:
+,  :PROPERTIES:
+,  :task_id:  training_material
+,  :ORDERED:  t
+,  :END:
 ,** Markup Guidelines
-   :PROPERTIES:
-   :Effort:   2d
-   :END:
+,   :PROPERTIES:
+,   :Effort:   2d
+,   :END:
 ,** Workflow Guidelines
-   :PROPERTIES:
-   :Effort:   2d
-   :END:
+,   :PROPERTIES:
+,   :Effort:   2d
+,   :END:
 ,* Presentation
-  :PROPERTIES:
-  :Effort:   2d
-  :BLOCKER:  training_material @{ gapduration 1d @} preparation
-  :END:
+,  :PROPERTIES:
+,  :Effort:   2d
+,  :BLOCKER:  training_material { gapduration 1d } preparation
+,  :END:
 #+end_example
 
 *** Reports
+    :PROPERTIES:
+    :DESCRIPTION: Gantt charts, etc.
+    :END:
 {{{vindex(org-export-taskjuggler-default-reports)}}}
 
 TaskJuggler can produce many kinds of reports (e.g., gantt chart,
@@ -13556,7 +13663,6 @@ variable and ``noweb'' style references (see [[Noweb reference syntax]]).
   Example applications could include post-processing, compilation or
   evaluation of tangled code files.
 
-
 ** Evaluating code blocks
    :PROPERTIES:
    :DESCRIPTION: Place results in the Org buffer
@@ -14087,6 +14193,7 @@ Here are examples of passing values by reference:
   #+end_example
 
 ***** Alternate argument syntax
+<<Alternate argument syntax>>
 
 It is also possible to specify arguments in a potentially more natural
 way using the ~#+NAME:~ line of a code block. As in the following
@@ -14101,6 +14208,7 @@ commas, following the source name.
 #+end_example
 
 ***** Indexable variable values
+<<Indexable variable values>>
 
 It is possible to reference portions of variable values by
 /indexing/ into the variables. Indexes are 0 based with negative
@@ -14191,6 +14299,7 @@ example:
 #+end_example
 
 ***** Emacs Lisp evaluation of variables
+<<Emacs Lisp evaluation of variables>>
 
 Emacs lisp code can be used to initialize variable values. When a
 variable value starts with ~(~, ~[~, ~'~ or ~`~ it will be evaluated
@@ -14248,6 +14357,7 @@ per class may be supplied per code block.
   block should be handled.
 
 ***** Collection
+<<Collection>>
 
 The following ~:results~ options are mutually exclusive, and specify
 how the results should be collected from the code block.
@@ -14269,6 +14379,7 @@ how the results should be collected from the code block.
   evaluation in scripting mode.
 
 ***** Type
+<<Type>>
 
 The following ~:results~ options are mutually exclusive and specify
 what type of results the code block will return. By default, results
@@ -14341,7 +14452,7 @@ are inserted as either a table or scalar depending on their value.
   extent is known and they can be automatically removed or replaced.
 
 ***** Handling
-
+<<Handling>>
 The following ~:results~ options indicate what happens with the
 results once they are collected.
 
@@ -14430,6 +14541,8 @@ matplot(matrix(rnorm(100), 10), type="l")
 #+end_example
 
 ***** Remote execution
+<<Remote execution>>
+
 A directory on a remote machine can be specified using tramp file
 syntax, in which case the code will be evaluated on the remote
 machine. An example is:
@@ -14459,6 +14572,7 @@ may need to install tramp separately in order for these features to
 work correctly.
 
 ***** Further points
+<<Further points>>
 
 - If ~:dir~ is used in conjunction with ~:session~, although it will
   determine the starting directory for a new session as expected, no
@@ -14675,6 +14789,7 @@ one of the five values: ~no~, ~yes~, ~tangle~, ~no-export~, or
   expanded before the block is evaluated.
 
 ***** Noweb prefix lines
+<<Noweb prefix lines>>
 
 Noweb insertions are placed behind the line prefix of the
 ~<<reference>>~. Because the ~<<example>>~ noweb reference appears
@@ -17112,7 +17227,7 @@ and ~org-agenda-skip-subtree-if~ in this form, for example:
 - {{{samp('(org-agenda-skip-entry-if 'timestamp))}}} ::
 
   Skip current entry if it has any timestamp, may also be deadline or scheduled.
-  # <<x-agenda-skip-entry-regexp>>
+  <<x-agenda-skip-entry-regexp>>
 
 - {{{samp('(org-agenda-skip-entry-if 'regexp "regular expression"))}}} ::
   
@@ -17581,7 +17696,7 @@ entries. Here is how it works:
 If you are not able to process all flagged entries directly, you can always
 return to this agenda view using {{{kbd(C-c a ?)}}}.[fn:176]
 
-* FIXED History and acknowledgments                                :noexport:
+* FIXED History and acknowledgments
   :PROPERTIES:
   :DESCRIPTION: How Org came into being
   :TEXINFO_MENU_TITLE: History and Acknowledgments
@@ -17981,7 +18096,7 @@ the tree.
 
 This manual is for Org version @@info:@value{VERSION}@@.
 
-Copyright © 2004-2012  Free Software Foundation, Inc.
+Copyright (C) 2004-2012  Free Software Foundation, Inc.
 
 #+BEGIN_QUOTE
 Permission is granted to copy, distribute and/or modify this document
@@ -18337,9 +18452,6 @@ suggestion.
 types]]), any property you store with ~org-store-link-props~ can be
 accessed in capture templates in a similar way.
 
-[fn:90] This will always be the other, not the user. See the variable
-~org-from-is-user-regexp~.
-
 [fn:91] If you move entries or Org files from one directory to
 another, you may want to configure ~org-attach-directory~ to contain
 an absolute path.
@@ -18420,7 +18532,7 @@ achieved using either the listings package or the [[http://code.google.com/p/min
 Refer to ~org-export-latex-listings~ documentation for details.
 
 [fn:110] Code in {{{samp(src)}}} blocks may also be evaluated either
-interactively or on export. See see [[Working With Source Code]] for more
+interactively or on export. See see [[Working with source code]] for more
 information on evaluating code blocks.
 
 [fn:111] Adding ~-k~ to ~-n -r~ will /keep/ the labels in the source
@@ -18576,7 +18688,7 @@ being considered as new org files the next time the project is
 published.
 
 [fn:154] Note that {{{samp(src)}}} blocks may be inserted using Org
-mode's [[Easy Templates]] system.
+mode's [[Easy templates]] system.
 
 [fn:155] Whenever code is evaluated there is a potential for that code
 to do harm. Org mode provides safeguards to ensure that code is only
@@ -18702,6 +18814,18 @@ them in order to be able to specify file names.
 
 [fn:186] Quoting depends on the system you use, please check the FAQ
 for examples.
+
+[fn:187] This refers to the message date header field.
+
+[fn:188]  This refers to the date as an active timestamp.
+
+[fn:189] This refers to the date as inactive timestamp.
+
+[fn:190] This refers either "to NAME" or "from NAME". This will always
+be the other, not the user. See the variable
+~org-from-is-user-regexp~.
+
+[fn:191] This is for messages, also all email fields.
 
 * About orgmanual.org                                              :noexport:
 This document intends to be Org mode source for the Org mode manual
@@ -18942,6 +19066,9 @@ Perhaps shorten to "All the rest"
 #+begin_src emacs-lisp
 (require 'ox-texinfo)
 (define-key org-mode-map (kbd "C-c e") 'org-export-dispatch)
+(setq org-export-in-background t)
+(setq org-export-async-debug t)
+(setq org-export-async-init-file (expand-file-name "init.el"))
 (setq org-pretty-entities nil)
 (setq org-src-preserve-indentation t)
 (setq org-confirm-babel-evaluate nil)
@@ -18950,7 +19077,7 @@ Perhaps shorten to "All the rest"
  '((emacs-lisp . t)
    (sh . t)))
 (add-to-list 'org-export-snippet-translation-alist
-             '("info" . "e-texinfo"))
+             '("info" . "texinfo"))
 #+end_src
 
 ** init.el file
@@ -18967,14 +19094,13 @@ Modify accordingly.
 (require 'ox-texinfo)
 (setq org-src-preserve-indentation t)
 (setq org-confirm-babel-evaluate nil)
-(setq org-footnote-section "Footnotes to export")
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
    (makefile . t)
    (sh . t)))
-(add-to-list 'ox-snippet-translation-alist
-             '("info" . "e-texinfo"))
+(add-to-list 'org-export-snippet-translation-alist
+             '("info" . "texinfo"))
 #+end_src
 
 ** Makefile
