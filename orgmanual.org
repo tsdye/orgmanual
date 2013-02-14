@@ -62,6 +62,7 @@
 #+MACRO: enddefun @@info:@end defun@@
 #+MACRO: defopt @@info:@defopt@@
 #+MACRO: enddefopt @@info:@end defopt@@
+#+MACRO: result @@info:@result{}@@
 
 * FIXED Introduction
   :PROPERTIES:
@@ -1142,7 +1143,7 @@ to disable them individually.
   - {{{kbdkey(M-S-,RET)}}} :: 
     {{{kindex(M-S-RET)}}}
 
-    Insert a new item with a checkbox (see Checkboxes).
+    Insert a new item with a checkbox (see [[Checkboxes]]).
   
   - {{{kbdkey(S-,up)}}} :: 
     @@info:@itemx@@ {{{kbdkey(S-,down)}}}
@@ -1688,12 +1689,13 @@ you, configure the variables ~org-enable-table-editor~ and
     :PROPERTIES:
     :DESCRIPTION: Sum and copy
     :END:
-#+attr_texinfo: :table-type "table" :indic "@asis"
 {{{cindex(formula\\\, in tables)}}}
 {{{cindex(calculations\\\, in tables)}}}
 {{{cindex(region\\\, active)}}}
 {{{cindex(active region)}}}
 {{{cindex(transient mark mode)}}}
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c +)}}} ~org-table-sum~ :: Sum the numbers in the current
      column, or in the rectangle defined by the active region.  The
      result is shown in the echo area and can be inserted with
@@ -3623,10 +3625,10 @@ of which subsequence should be used for a given entry.  In this setup,
 select the correct sequence.  Besides the obvious ways like typing a
 keyword or using completion, you may also apply the following commands:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
 {{{kindex(C-S-@key{right})}}}
 {{{kindex(C-S-@key{left})}}}
 {{{kindex(C-u C-u C-c C-t)}}}
+#+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-u C-u C-c C-t)}}} {{{kbdkey(C-S-,right)}}} {{{kbdkey(C-S-,left)}}} ::
 
   These keys jump from one TODO subset to the next. In the above
@@ -4423,7 +4425,7 @@ given file with lines like
 
 {{{cindex(#+TAGS)}}}
 #+begin_example
-,#+TAGS: @@work @@home @@tennisclub
+,#+TAGS: @work @home @tennisclub
 ,#+TAGS: laptop car pc sailboat
 #+end_example
 
@@ -4467,7 +4469,7 @@ find the need to tag many items in different files with
 on, then you can instead set the TAGS option line as:
 
 #+begin_example
-,#+TAGS: @@work(w)  @@home(h)  @@tennisclub(t)  laptop(l)  pc(p)
+,  #+TAGS: @work(w)  @home(h)  @tennisclub(t)  laptop(l)  pc(p)
 #+end_example
 
 {{{noindent}}} The tags interface will show the available tags in a splash
@@ -4475,13 +4477,13 @@ window.  If you want to start a new line after a specific tag, insert
 ~\n~ into the tag list, like this:
 
 #+begin_example
-,#+TAGS: @@work(w)  @@home(h)  @@tennisclub(t) \n laptop(l)  pc(p)
+,#+TAGS: @work(w)  @home(h)  @tennisclub(t) \n laptop(l)  pc(p)
 #+end_example
 
 {{{noindent}}} or write them in two lines:
 
 #+begin_example
-,#+TAGS: @@work(w)  @@home(h)  @@tennisclub(t)
+,#+TAGS: @work(w)  @home(h)  @tennisclub(t)
 ,#+TAGS: laptop(l)  pc(p)
 #+end_example
 
@@ -4490,7 +4492,7 @@ You can also group together tags that are mutually exclusive by using
 braces, as in:
 
 #+begin_example
-,#+TAGS: @{ @@work(w)  @@home(h)  @@tennisclub(t) @}  laptop(l)  pc(p)
+,#+TAGS: {@work(w)  @home(h)  @tennisclub(t)}  laptop(l)  pc(p)
 #+end_example
 
 {{{noindent}}} you indicate that at most one of {{{samp(@work)}}},
@@ -4671,13 +4673,13 @@ value after it. Here is an example:
 ,* CD collection
 ,** Classic
 ,*** Goldberg Variations
-    :PROPERTIES:
-    :Title:     Goldberg Variations
-    :Composer:  J.S. Bach
-    :Artist:    Glen Gould
-    :Publisher: Deutsche Grammophon
-    :NDisks:    1
-    :END:
+,    :PROPERTIES:
+,    :Title:     Goldberg Variations
+,    :Composer:  J.S. Bach
+,    :Artist:    Glen Gould
+,    :Publisher: Deutsche Grammophon
+,    :NDisks:    1
+,    :END:
 #+end_example
 
 Depending on the value of ~org-use-property-inheritance~, a property
@@ -4694,10 +4696,10 @@ predefine publishers and the number of disks in a box like this:
 
 #+begin_example
 ,* CD collection
-  :PROPERTIES:
-  :NDisks_ALL:  1 2 3 4
-  :Publisher_ALL: "Deutsche Grammophon" Philips EMI
-  :END:
+,  :PROPERTIES:
+,  :NDisks_ALL:  1 2 3 4
+,  :Publisher_ALL: "Deutsche Grammophon" Philips EMI
+,  :END:
 #+end_example
 
 If you want to set properties that can be inherited by any entry in a
@@ -4727,18 +4729,18 @@ Baroque'' under the ~Goldberg Variations~ subtree.
 #+begin_example
 ,* CD collection
 ,** Classic
-    :PROPERTIES:
-    :GENRES: Classic
-    :END:
+,    :PROPERTIES:
+,    :GENRES: Classic
+,    :END:
 ,*** Goldberg Variations
-    :PROPERTIES:
-    :Title:     Goldberg Variations
-    :Composer:  J.S. Bach
-    :Artist:    Glen Gould
-    :Publisher: Deutsche Grammophon
-    :NDisks:    1
-    :GENRES+:   Baroque
-    :END:
+,    :PROPERTIES:
+,    :Title:     Goldberg Variations
+,    :Composer:  J.S. Bach
+,    :Artist:    Glen Gould
+,    :Publisher: Deutsche Grammophon
+,    :NDisks:    1
+,    :GENRES+:   Baroque
+,    :END:
 #+end_example
 Note that a property can only have one entry per Drawer.
 
@@ -4832,28 +4834,28 @@ for ~:CATEGORY:~) should not be used as keys in the properties drawer:
 #+comment  guessing that ITEM is needed in this area; also, should this list be sorted?
 {{{cindex(property\\\, special\\\, ITEM)}}}
 {{{cindex(property\\\, special\\\, FILE)}}}
-#+begin_example
-ID           @r{A globally unique ID used for synchronization during}
-             @r{iCalendar or MobileOrg export.}
-TODO         @r{The TODO keyword of the entry.}
-TAGS         @r{The tags defined directly in the headline.}
-ALLTAGS      @r{All tags, including inherited ones.}
-CATEGORY     @r{The category of an entry.}
-PRIORITY     @r{The priority of the entry, a string with a single letter.}
-DEADLINE     @r{The deadline time string, without the angular brackets.}
-SCHEDULED    @r{The scheduling timestamp, without the angular brackets.}
-CLOSED       @r{When was this entry closed?}
-TIMESTAMP    @r{The first keyword-less timestamp in the entry.}
-TIMESTAMP_IA @r{The first inactive timestamp in the entry.}
-CLOCKSUM     @r{The sum of CLOCK intervals in the subtree.  ~org-clock-sum~}
-             @r{must be run first to compute the values in the current buffer.}
-CLOCKSUM_T   @r{The sum of CLOCK intervals in the subtree for today.}
-             @r{~org-clock-sum-today~ must be run first to compute the}
-             @r{values in the current buffer.}
-BLOCKED      @r{"t" if task is currently blocked by children or siblings}
-ITEM         @r{The headline of the entry.}
-FILE         @r{The filename the entry is located in.}
-#+end_example
+
+| ID           | A globally unique ID used for synchronization during           |
+|              | iCalendar or MobileOrg export.                                 |
+| TODO         | The TODO keyword of the entry.                                 |
+| TAGS         | The tags defined directly in the headline.                     |
+| ALLTAGS      | All tags, including inherited ones.                            |
+| CATEGORY     | The category of an entry.                                      |
+| PRIORITY     | The priority of the entry, a string with a single letter.      |
+| DEADLINE     | The deadline time string, without the angular brackets.        |
+| SCHEDULED    | The scheduling timestamp, without the angular brackets.        |
+| CLOSED       | When was this entry closed?                                    |
+| TIMESTAMP    | The first keyword-less timestamp in the entry.                 |
+| TIMESTAMP_IA | The first inactive timestamp in the entry.                     |
+| CLOCKSUM     | The sum of CLOCK intervals in the subtree.  ~org-clock-sum~    |
+|              | must be run first to compute the values in the current buffer. |
+| CLOCKSUM_T   | The sum of CLOCK intervals in the subtree for today.           |
+|              | ~org-clock-sum-today~ must be run first to compute the         |
+|              | values in the current buffer.                                  |
+| BLOCKED      | "t" if task is currently blocked by children or siblings       |
+| ITEM         | The headline of the entry.                                     |
+| FILE         | The filename the entry is located in.                          |
+
 
 ** Property searches
    :PROPERTIES:
@@ -5005,9 +5007,9 @@ To specify a format that only applies to a specific tree, add a
 
 #+begin_example
 ,** Top node for columns view
-   :PROPERTIES:
-   :COLUMNS: %25ITEM %TAGS %PRIORITY %TODO
-   :END:
+,   :PROPERTIES:
+,   :COLUMNS: %25ITEM %TAGS %PRIORITY %TODO
+,   :END:
 #+end_example
 
 If a ~:COLUMNS:~ property is present in an entry, it defines columns
@@ -5025,41 +5027,47 @@ A column definition sets the attributes of a column.  The general
 definition looks like this:
 
 #+begin_example
- %[@var{width}]@var{property}[(@var{title})][@{@var{summary-type}@}]
+ %[@var{width}]@var{property}[(@var{title})][{@var{summary-type}}]
 #+end_example
 
 {{{noindent}}} Except for the percent sign and the property name, all
 items are optional. The individual parts have the following meaning:
 
-#+begin_example
-@var{width}           @r{An integer specifying the width of the column in characters.}
-                @r{If omitted, the width will be determined automatically.}
-@var{property}        @r{The property that should be edited in this column.}
-                @r{Special properties representing meta data are allowed here}
-                @r{as well (see [[Special properties]])}
-@var{title}           @r{The header text for the column.  If omitted, the property}
-                @r{name is used.}
-@{@var{summary-type}@}  @r{The summary type.  If specified, the column values for}
-                @r{parent nodes are computed from the children.}
-                @r{Supported summary types are:}
-                @{+@}       @r{Sum numbers in this column.}
-                @{+;%.1f@}  @r{Like {{{samp(+)}}}, but format result with {{{samp(%.1f)}}}.}
-                @{$@}       @r{Currency, short for {{{samp(+;%.2f)}}}.}
-                @{:@}       @r{Sum times, HH:MM, plain numbers are hours.}
-                @{X@}       @r{Checkbox status, {{{samp([X])}}} if all children are {{{samp([X])}}}.}
-                @{X/@}      @r{Checkbox status, {{{samp([n/m])}}}.}
-                @{X%@}      @r{Checkbox status, {{{samp([n%])}}}.}
-                @{min@}     @r{Smallest number in column.}
-                @{max@}     @r{Largest number.}
-                @{mean@}    @r{Arithmetic mean of numbers.}
-                @{:min@}    @r{Smallest time value in column.}
-                @{:max@}    @r{Largest time value.}
-                @{:mean@}   @r{Arithmetic mean of time values.}
-                @{@@min@}    @r{Minimum age (in days/hours/mins/seconds).}
-                @{@@max@}    @r{Maximum age (in days/hours/mins/seconds).}
-                @{@@mean@}   @r{Arithmetic mean of ages (in days/hours/mins/seconds).}
-                @{est+@}    @r{Add low-high estimates.}
-#+end_example
+
+| Variable                | Meaning                                                      |
+|-------------------------+--------------------------------------------------------------|
+| {{{var(width)}}}        | An integer specifying the width of the column in characters. |
+|                         | If omitted, the width will be determined automatically.      |
+| {{{var(property)}}}     | The property that should be edited in this column.           |
+|                         | Special properties representing meta data are allowed here   |
+|                         | as well (see [[Special properties]])                         |
+| {{{var(title)}}}        | The header text for the column.  If omitted, the property    |
+|                         | name is used.                                                |
+| {{{var(summary-type)}}} | The summary type.  If specified, the column values for       |
+|                         | parent nodes are computed from the children.                 |
+
+Supported summary types are:
+
+| Type     | Meaning                                                               |
+|----------+-----------------------------------------------------------------------|
+| {+}      | Sum numbers in this column.                                           |
+| {+;%.1f} | Like {{{samp(+)}}, but format result with {{{samp(%.1f)}}}.}          |
+| {$}      | Currency, short for {{{samp(+;%.2f)}}.}                               |
+| {:}      | Sum times, HH:MM, plain numbers are hours.                            |
+| {X}      | Checkbox status, {{{samp([X])}} if all children are {{{samp([X])}}}.} |
+| {X/}     | Checkbox status, {{{samp([n/m])}}.}                                   |
+| {X%}     | Checkbox status, {{{samp([n%])}}.}                                    |
+| {min}    | Smallest number in column.                                            |
+| {max}    | Largest number.                                                       |
+| {mean}   | Arithmetic mean of numbers.                                           |
+| {:min}   | Smallest time value in column.                                        |
+| {:max}   | Largest time value.                                                   |
+| {:mean}  | Arithmetic mean of time values.                                       |
+| {@min}   | Minimum age (in days/hours/mins/seconds).                             |
+| {@max}   | Maximum age (in days/hours/mins/seconds).                             |
+| {@mean}  | Arithmetic mean of ages (in days/hours/mins/seconds).                 |
+| {est+}   | Add low-high estimates.                                               |
+
 
 {{{noindent}}} Be aware that you can only have one summary type for
 any property you include. Subsequent columns referencing the same
@@ -5242,7 +5250,7 @@ this block looks like this:
 
 {{{noindent}}} This dynamic block has the following parameters:
 
-#+attr_texinfo: :table-type "table" :indic "@code"
+#+attr_texinfo: :table-type "table" :indic "@asis"
 - ~:id~ ::
 
   This is the most important parameter. Column view is a feature that is
@@ -5251,16 +5259,35 @@ this block looks like this:
   to capture, you can use 4 values:
 
   {{{cindex(property\\\, ID)}}}
-  #+begin_example
-  local     @r{use the tree in which the capture block is located}
-  global    @r{make a global view, including all headings in the file}
-  "file:@var{path-to-file}"
-            @r{run column view at the top of this file}
-  "@var{ID}"      @r{call column view in the tree that has an ~:ID:~}
-            @r{property with the value /label/.  You can use}
-            @r{{{{kbd(M-x org-id-copy)}}} to create a globally unique ID for}
-            @r{the current entry and copy it to the kill-ring.}
-  #+end_example
+  #+attr_texinfo: :columns "0.3 0.7"
+  | Value               | Meaning                                                       |
+  |---------------------+---------------------------------------------------------------|
+  | local               | use the tree in which the capture block is located            |
+  | global              | make a global view, including all headings in the file        |
+  | "file:PATH-TO-FILE" | run column view at the top of this file                       |
+  | "ID"                | call column view in the tree that has an ~:ID:~               |
+  |                     | property with the value /label/.  You can use                 |
+  |                     | {{{kbd(M-x org-id-copy)}}} to create a globally unique ID for |
+  |                     | the current entry and copy it to the kill-ring.               |
+
+  - local ::
+    
+    Use the tree in which the capture block is located.
+
+  - global :: 
+
+    Make a global view, including all headings in the file.
+
+  - "file:PATH-TO-FILE" ::
+    
+    Run column view at the top of this file.
+
+  - "ID" :: 
+    
+    Call column view in the tree that has an ~:ID:~ property with the
+    value /label/. You can use {{{kbd(M-x org-id-copy)}}} to
+    create a globally unique ID for the current entry and copy
+    it to the kill-ring.
 
 - ~:hlines~ ::
 
@@ -5542,22 +5569,23 @@ For example, let's assume that today is *June 13, 2006*. Here is how
 various inputs will be interpreted, the items filled in by Org mode
 are in *bold*.
 
-#+begin_example
-3-2-5         @result{} 2003-02-05
-2/5/3         @result{} 2003-02-05
-14            @result{} @b{2006}-@b{06}-14
-12            @result{} @b{2006}-@b{07}-12
-2/5           @result{} @b{2007}-02-05
-Fri           @result{} nearest Friday (default date or later)
-sep 15        @result{} @b{2006}-09-15
-feb 15        @result{} @b{2007}-02-15
-sep 12 9      @result{} 2009-09-12
-12:45         @result{} @b{2006}-@b{06}-@b{13} 12:45
-22 sept 0:34  @result{} @b{2006}-09-22 0:34
-w4            @result{} ISO week for of the current year @b{2006}
-2012 w4 fri   @result{} Friday of ISO week 4 in 2012
-2012-w04-5    @result{} Same as above
-#+end_example
+| Input        | Interpretation                                       |
+|--------------+------------------------------------------------------|
+| 3-2-5        | {{{result}}} 2003-02-05                              |
+| 2/5/3        | {{{result}}} 2003-02-05                              |
+| 14           | {{{result}}} *2006*-*06*-14                          |
+| 12           | {{{result}}} *2006*-*07*-12                          |
+| 2/5          | {{{result}}} *2007*-02-05                            |
+| Fri          | {{{result}}} nearest Friday (default date or later)  |
+| sep 15       | {{{result}}} *2006*-09-15                            |
+| feb 15       | {{{result}}} *2007*-02-15                            |
+| sep 12 9     | {{{result}}} 2009-09-12                              |
+| 12:45        | {{{result}}} *2006*-*06*-*13* 12:45                  |
+| 22 sept 0:34 | {{{result}}} *2006*-09-22 0:34                       |
+| w4           | {{{result}}} ISO week for of the current year *2006* |
+| 2012 w4 fri  | {{{result}}} Friday of ISO week 4 in 2012            |
+| 2012-w04-5   | {{{result}}} Same as above                           |
+
 
 Furthermore you can specify a relative date by giving, as the /first/
 thing in the input: a plus/minus sign, a number and a letter ([dwmy])
@@ -5567,15 +5595,16 @@ plus or minus, it is relative to the default date. If instead of a
 single letter, you use the abbreviation of day name, the date will be
 the Nth such day, e.g.:
 
-#+begin_example
-+0            @result{} today
-.             @result{} today
-+4d           @result{} four days from today
-+4            @result{} same as above
-+2w           @result{} two weeks from today
-++5           @result{} five days from default date
-+2tue         @result{} second Tuesday from now.
-#+end_example
+| Input | Interpretation                           |
+|-------+------------------------------------------|
+|    +0 | {{{result}}} today                       |
+|     . | {{{result}}} today                       |
+|   +4d | {{{result}}} four days from today        |
+|    +4 | {{{result}}} same as +4d                 |
+|   +2w | {{{result}}} two weeks from today        |
+|   ++5 | {{{result}}} five days from default date |
+| +2tue | {{{result}}} second Tuesday from now     |
+
 
 {{{vindex(parse-time-months)}}}
 {{{vindex(parse-time-weekdays)}}}
@@ -5597,11 +5626,11 @@ giving a start time and a duration (in HH:MM format). Use one or two
 dash(es) as the separator in the former case and use '+' as the
 separator in the latter case, e.g.:
 
-#+begin_example
-11am-1:15pm    @result{} 11:00-13:15
-11am--1:15pm   @result{} same as above
-11am+2:15      @result{} same as above
-#+end_example
+| Range        | Result                     |
+|--------------+----------------------------|
+| 11am-1:15pm  | {{{result}}} 11:00-13:15   |
+| 11am--1:15pm | {{{result}}} same as above |
+| 11am+2:15    | {{{result}}} same as above |
 
 {{{cindex(calendar\\\, for selecting date)}}}
 {{{vindex(org-popup-calendar-for-date-prompt)}}}
@@ -5624,15 +5653,22 @@ You can control the calendar fully from the minibuffer:
 {{{kindex(M-S-@key{right})}}}
 {{{kindex(M-S-@key{left})}}}
 {{{kindex(@key{RET})}}}
-#+begin_example
-@key{RET}           @r{Choose date at cursor in calendar.}
-mouse-1        @r{Select date by clicking on it.}
-S-@key{right}/@key{left}     @r{One day forward/backward.}
-S-@key{down}/@key{up}     @r{One week forward/backward.}
-M-S-@key{right}/@key{left}   @r{One month forward/backward.}
-> / <          @r{Scroll calendar forward/backward by one month.}
-M-v / C-v      @r{Scroll calendar forward/backward by 3 months.}
-#+end_example
+
+| Key binding               | Meaning                                |
+|---------------------------+----------------------------------------|
+| {{{key(RET)}}}            | Choose date at cursor in calendar.     |
+| {{{key(mouse-1)}}}        | Select date by clicking on it.         |
+| {{{kbdkey(S- ,right)}}}   | One day forward.                       |
+| {{{kbdkey(S- ,left)}}}    | One day backward.                      |
+| {{{kbdkey(S- ,down)}}}    | One week forward.                      |
+| {{{kbdkey(S- ,up)}}}      | One week backward.                     |
+| {{{kbdkey(M-S- ,right)}}} | One month forward.                     |
+| {{{kbdkey(M-S- ,left)}}}  | One month backward.                    |
+| {{{kbd(>)}}}              | Scroll calendar forward by one month.  |
+| {{{kbd(<)}}}              | Scroll calendar backward by one month. |
+| {{{kbd(M-v)}}}            | Scroll calendar forward by 3 months.   |
+| {{{kbd(C-v)}}}            | Scroll calendar backward by 3 months.  |
+
 
 {{{vindex(org-read-date-display-live)}}}
 
@@ -5776,7 +5812,6 @@ The following commands allow you to quickly insert a deadline or to schedule
 an item:[fn:72]
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - {{{kbd(C-c C-d)}}} ~org-deadline~ ::
   {{{kindex(C-c C-d)}}}
 
@@ -6130,89 +6165,164 @@ be configured in the variable ~org-clocktable-defaults~.
 
 {{{noindent}}} First there are options that determine which clock entries are to
 be selected:
-#+begin_example
-:maxlevel    @r{Maximum level depth to which times are listed in the table.}
-             @r{Clocks at deeper levels will be summed into the upper level.}
-:scope       @r{The scope to consider.  This can be any of the following:}
-             nil        @r{the current buffer or narrowed region}
-             file       @r{the full current buffer}
-             subtree    @r{the subtree where the clocktable is located}
-             tree@var{N}      @r{the surrounding level @var{N} tree, for example ~tree3~}
-             tree       @r{the surrounding level 1 tree}
-             agenda     @r{all agenda files}
-             ("file"..) @r{scan these files}
-             file-with-archives    @r{current file and its archives}
-             agenda-with-archives  @r{all agenda files, including archives}
-:block       @r{The time block to consider.  This block is specified either}
-             @r{absolute, or relative to the current time and may be any of}
-             @r{these formats:}
-             2007-12-31    @r{New year eve 2007}
-             2007-12       @r{December 2007}
-             2007-W50      @r{ISO-week 50 in 2007}
-             2007-Q2       @r{2nd quarter in 2007}
-             2007          @r{the year 2007}
-             today, yesterday, today-@var{N}          @r{a relative day}
-             thisweek, lastweek, thisweek-@var{N}     @r{a relative week}
-             thismonth, lastmonth, thismonth-@var{N}  @r{a relative month}
-             thisyear, lastyear, thisyear-@var{N}     @r{a relative year}
-             @r{Use @kbd{S-@key{left}/@key{right}} keys to shift the time interval.}
-:tstart      @r{A time string specifying when to start considering times.}
-:tend        @r{A time string specifying when to stop considering times.}
-:step        @r{~week~ or ~day~, to split the table into chunks.}
-             @r{To use this, ~:block~ or ~:tstart~, ~:tend~ are needed.}
-:stepskip0   @r{Do not show steps that have zero time.}
-:fileskip0   @r{Do not show table sections from files which did not contribute.}
-:tags        @r{A tags match to select entries that should contribute.  See}
-             @r{[[Matching tags and properties]] for the match syntax.}
-#+end_example
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- :maxlevel ::    
+
+  Maximum level depth to which times are listed in the table. Clocks at
+  deeper levels will be summed into the upper level.
+
+- :scope ::      
+
+  The scope to consider.  This can be any of the following:
+
+  - nil ::        the current buffer or narrowed region
+  - file ::      the full current buffer
+  - subtree ::   the subtree where the clocktable is located
+  - tree {{{var(N)}}} ::      the surrounding level @var{N tree, for example ~tree3~}
+  - tree ::      the surrounding level 1 tree
+  - agenda ::    all agenda files
+  - ("file"..) :: scan these files
+  - file-with-archives ::    current file and its archives
+  - agenda-with-archives ::  all agenda files, including archives
+
+- :block ::       
+
+  The time block to consider. This block is specified either absolute,
+  or relative to the current time and may be any of these formats:
+
+  - 2007-12-31 ::   New year eve 2007
+  - 2007-12 ::      December 2007
+  - 2007-W50 ::     ISO-week 50 in 2007
+  - 2007-Q2 ::      2nd quarter in 2007
+  - 2007 ::         the year 2007
+  - today, yesterday, today-{{{var(N)}}} ::          a relative day
+  - thisweek, lastweek, thisweek-{{{var(N)}}} ::     a relative week
+  - thismonth, lastmonth, thismonth-{{{var(N)}}} ::  a relative month
+  - thisyear, lastyear, thisyear-{{{var(N)}}} ::     a relative year
+
+  Use {{{kbdkey{S- ,left)}} or {{{kbdkey(S- ,right)}}} to shift the time interval.}
+
+- :tstart ::     
+
+  A time string specifying when to start considering times.
+
+- :tend  ::       
+
+  A time string specifying when to stop considering times.
+
+- :step  ::  
+
+  Set to ~week~ or ~day~ to split the table into chunks. To use this,
+  ~:block~ or ~:tstart~, ~:tend~ are needed.
+
+- :stepskip0 ::   
+
+  Do not show steps that have zero time.
+
+- :fileskip0 ::  
+
+  Do not show table sections from files which did not contribute.
+
+- :tags ::        
+
+  A tags match to select entries that should contribute. See [[Matching
+  tags and properties]] for the match syntax.
+
 
 Then there are options which determine the formatting of the table.  There
 options are interpreted by the function ~org-clocktable-write-default~,
 but you can specify your own function using the ~:formatter~ parameter.
-#+begin_example
-:emphasize   @r{When ~t~, emphasize level one and level two items.}
-:lang        @r{Language@footnote{Language terms can be set through the variable ~org-clock-clocktable-language-setup~.} to use for descriptive cells like "Task".}
-:link        @r{Link the item headlines in the table to their origins.}
-:narrow      @r{An integer to limit the width of the headline column in}
-             @r{the org table.  If you write it like {{{samp(50!)}}}, then the}
-             @r{headline will also be shortened in export.}
-:indent      @r{Indent each headline field according to its level.}
-:tcolumns    @r{Number of columns to be used for times.  If this is smaller}
-             @r{than ~:maxlevel~, lower levels will be lumped into one column.}
-:level       @r{Should a level number column be included?}
-:compact     @r{Abbreviation for ~:level nil :indent t :narrow 40! :tcolumns 1~}
-             @r{All are overwritten except if there is an explicit ~:narrow~}
-:timestamp   @r{A timestamp for the entry, when available.  Look for SCHEDULED,}
-             @r{DEADLINE, TIMESTAMP and TIMESTAMP_IA, in this order.}
-:properties  @r{List of properties that should be shown in the table.  Each}
-             @r{property will get its own column.}
-:inherit-props @r{When this flag is ~t~, the values for ~:properties~ will be inherited.}
-:formula     @r{Content of a ~#+TBLFM~ line to be added and evaluated.}
-             @r{As a special case, {{{samp(:formula %)}}} adds a column with % time.}
-             @r{If you do not specify a formula here, any existing formula}
-             @r{below the clock table will survive updates and be evaluated.}
-:formatter   @r{A function to format clock data and insert it into the buffer.}
-#+end_example
+
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- :emphasize ::   
+
+  When ~t~, emphasize level one and level two items.
+
+- :lang ::        
+
+  Language to use for descriptive cells like "Task".[fn:90]
+
+- :link ::       
+
+  Link the item headlines in the table to their origins.
+
+- :narrow ::     
+
+  An integer to limit the width of the headline column in the org table.
+  If you write it like {{{samp(50!)}}}, then the headline will also be
+  shortened in export.
+
+- :indent  ::    
+
+  Indent each headline field according to its level.
+
+- :tcolumns ::   
+
+  Number of columns to be used for times. If this is smaller than
+  ~:maxlevel~, lower levels will be lumped into one column.
+
+- :level ::      
+
+  Should a level number column be included?
+
+- :compact ::    
+
+  Abbreviation for ~:level nil :indent t :narrow 40! :tcolumns 1~. All
+  are overwritten except if there is an explicit ~:narrow~.
+
+- :timestamp ::  
+
+  A timestamp for the entry, when available. Look for SCHEDULED,
+  DEADLINE, TIMESTAMP and TIMESTAMP_IA, in this order.
+
+- :properties :: 
+
+  List of properties that should be shown in the table. Each property
+  will get its own column.
+
+- :inherit-props :: 
+
+  When this flag is ~t~, the values for ~:properties~ will be inherited.
+
+- :formula  ::   
+
+  Content of a ~#+TBLFM~ line to be added and evaluated. As a special
+  case, {{{samp(:formula %)}}} adds a column with % time. If you do not
+  specify a formula here, any existing formula below the clock table
+  will survive updates and be evaluated.
+
+- :formatter ::  
+
+  A function to format clock data and insert it into the buffer.
+
+
 To get a clock summary of the current level 1 tree, for the current
-day, you could write
+day, you could write:
+
 #+begin_example
 ,#+BEGIN: clocktable :maxlevel 2 :block today :scope tree1 :link t
 ,#+END: clocktable
 #+end_example
-{{{noindent}}}
-and to use a specific time range you could write:[fn:83]
+
+{{{noindent}}} To use a specific time range you could write:[fn:83]
+
 #+begin_example
 ,#+BEGIN: clocktable :tstart "<2006-08-10 Thu 10:00>"
                     :tend "<2006-08-10 Thu 12:00>"
 ,#+END: clocktable
 #+end_example
+
 A summary of the current subtree with % times would be:
+
 #+begin_example
 ,#+BEGIN: clocktable :scope subtree :link t :formula %
 ,#+END: clocktable
 #+end_example
-A horizontally compact representation of everything clocked during last week
-would be:
+
+A horizontally compact representation of everything clocked during
+last week would be:
+
 #+begin_example
 ,#+BEGIN: clocktable :scope agenda :block lastweek :compact t
 ,#+END: clocktable
@@ -6242,7 +6352,7 @@ when you get back, indicating how much idle time has passed
 (constantly updated with the current amount), as well as a set of
 choices to correct the discrepancy:
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
+#+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(k)}}} ::
   {{{kindex(k)}}}
 
@@ -6361,7 +6471,7 @@ a specific buffer you can use:
 
 #+begin_example
 ,#+PROPERTY: Effort_ALL 0 0:10 0:30 1:00 2:00 3:00 4:00 5:00 6:00 7:00
-,#+COLUMNS: %40ITEM(Task) %17Effort(Estimated Effort)@{:@} %CLOCKSUM
+,#+COLUMNS: %40ITEM(Task) %17Effort(Estimated Effort){:} %CLOCKSUM
 #+end_example
 
 {{{vindex(org-global-properties)}}}
@@ -6424,15 +6534,12 @@ such a relative timer and make it easy to create timed notes.
   Once the timer list is started, you can also use {{{kbdkey(M-,RET)}}}
   to insert new timer items.
 
-#+comment  for key sequences with a comma, command name macros fail :(
-
 - {{{kbd(C-c C-x ,)}}} ::
   {{{kindex(C-c C-x ,)}}}
   {{{kindex(C-c C-x ,)}}}
 
   Pause the timer, or continue it if it is already paused
   ({{{command(org-timer-pause-or-continue)}}}).
-#+comment  removed the sentence because it is redundant to the following item
 
 - {{{kbd(C-u C-c C-x ,)}}} ::
   {{{kindex(C-u C-c C-x ,)}}}
@@ -6850,43 +6957,122 @@ In the template itself, special {{{kbd(%)}}}-escapes allow dynamic
 insertion of content.[fn:88] The templates are expanded in the order given
 here:
 
-#+begin_example
-%[@var{file}]     @r{Insert the contents of the file given by @var{file}.}
-%(@var{sexp})     @r{Evaluate Elisp @var{sexp} and replace with the result.}
-            @r{The sexp must return a string.}
-%<...>      @r{The result of format-time-string on the ... format specification.}
-%t          @r{Timestamp, date only.}
-%T          @r{Timestamp, with date and time.}
-%u, %U      @r{Like the above, but inactive timestamps.}
-%i          @r{Initial content, the region when capture is called while the}
-            @r{region is active.}
-            @r{The entire text will be indented like ~%i~ itself.}
-%a          @r{Annotation, normally the link created with ~org-store-link~.}
-%A          @r{Like ~%a~, but prompt for the description part.}
-%l          @r{Like %a, but only insert the literal link.}
-%c          @r{Current kill ring head.}
-%x          @r{Content of the X clipboard.}
-%k          @r{Title of the currently clocked task.}
-%K          @r{Link to the currently clocked task.}
-%n          @r{User name (taken from ~user-full-name~).}
-%f          @r{File visited by current buffer when org-capture was called.}
-%F          @r{Full path of the file or directory visited by current buffer.}
-%:keyword   @r{Specific information for certain link types, see below.}
-%^g         @r{Prompt for tags, with completion on tags in target file.}
-%^G         @r{Prompt for tags, with completion all tags in all agenda files.}
-%^t         @r{Like ~%t~, but prompt for date.  Similarly ~%^T~, ~%^u~, ~%^U~.}
-            @r{You may define a prompt like ~%^@{Birthday@~t}.}
-%^C         @r{Interactive selection of which kill or clip to use.}
-%^L         @r{Like ~%^C~, but insert as link.}
-%^@{@var{prop}@}p   @r{Prompt the user for a value for property @var{prop}.}
-%^@{@var{prompt}@}  @r{prompt the user for a string and replace this sequence with it.}
-            @r{You may specify a default value and a completion table with}
-            @r{%^@{prompt|default|completion2|completion3...@}.}
-            @r{The arrow keys access a prompt-specific history.}
-%\n         @r{Insert the text entered at the nth %^@{@var{prompt}@}, where ~n~ is}
-            @r{a number, starting from 1.}
-%?          @r{After completing the template, position cursor here.}
-#+end_example
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- %[{{{var(file)}}}] ::    
+
+  Insert the contents of the file given by {{{var(file)}}}.
+
+- %({{{var(sexp)}}}) ::    
+
+  Evaluate Elisp {{{var(sexp)}}} and replace with the result. The
+  {{{var(sexp)}}} must return a string.
+
+- %<...> ::     
+
+  The result of format-time-string on the ... format specification.
+
+- %t ::         
+
+  Timestamp, date only.
+
+- %T ::         
+
+  Timestamp, with date and time.
+
+- %u, %U ::     
+
+  Like ~%t~, ~%T~ above, but inactive timestamps.
+
+- %i ::         
+
+  Initial content, the region when capture is called while the region is
+  active. The entire text will be indented like ~%i~ itself.
+
+- %a ::         
+
+  Annotation, normally the link created with ~org-store-link~.
+
+- %A ::         
+
+  Like ~%a~, but prompt for the description part.
+
+- %l ::         
+
+  Like ~%a~, but only insert the literal link.
+
+- %c ::         
+
+  Current kill ring head.
+
+- %x ::         
+
+  Content of the X clipboard.
+
+- %k ::         
+
+  Title of the currently clocked task.
+
+- %K ::         
+
+  Link to the currently clocked task.
+
+- %n ::         
+
+  User name (taken from ~user-full-name~).
+
+- %f ::         
+
+  File visited by current buffer when org-capture was called.
+
+- %F ::         
+
+  Full path of the file or directory visited by current buffer.
+
+- %:keyword ::   
+
+  Specific information for certain link types, see below.
+
+- %^g  ::       
+
+  Prompt for tags, with completion on tags in target file.
+
+- %^G  ::       
+
+  Prompt for tags, with completion all tags in all agenda files.
+
+- %^t  ::       
+
+  Like ~%t~, but prompt for date. Similarly ~%^T~, ~%^u~, ~%^U~. You may
+  define a prompt like ~%^{Birthday}t~.
+
+- %^C  ::       
+
+  Interactive selection of which kill or clip to use.
+
+- %^L  ::       
+
+  Like ~%^C~, but insert as link.
+
+- %^{{{{var(prop)}}}}p ::  
+
+  Prompt the user for a value for property {{{var(prop)}}}.
+
+- %^{{{{var(prompt)}}}} ::  
+
+  Prompt the user for a string and replace this sequence with it. You
+  may specify a default value and a completion table with
+  ~%^{prompt|default|completion2|completion3...}~. The arrow keys access
+  a prompt-specific history.
+
+- %\n ::        
+
+  Insert the text entered at the nth %^{{{{var(prompt)}}}}, where ~n~ is
+  a number, starting from 1.
+
+- %? ::          
+
+  After completing the template, position cursor here.
+
 
 {{{noindent}}} For specific link types, the following keywords will be
 defined:[fn:89]
@@ -6976,7 +7162,6 @@ subtree uses the same attached directory.
 {{{noindent}}} The following commands deal with attachments:
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - {{{kbd(C-c C-a)}}} ~org-attach~ ::
   {{{kindex(C-c C-a)}}}
 
@@ -7617,7 +7802,6 @@ The purpose of the weekly/daily /agenda/ is to act like a page of a
 paper agenda, showing all the tasks for the current week or day.
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - {{{kbd(C-c a a)}}} ~org-agenda-list~ ::
   {{{cindex(org-agenda, command)}}}
 
@@ -7842,7 +8026,6 @@ match syntax described here also applies when creating sparse trees
 with {{{kbd(C-c / m)}}}.
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - {{{kbd(C-c a m)}}} ~org-tags-view~ ::
 
   Produce a list of all headlines that match a given set of tags. The
@@ -8030,7 +8213,6 @@ file in a /time-sorted view/.  The main purpose of this command is
 to give an overview over events in a project.
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - {{{kbd(C-c a L)}}} ~org-timeline~ ::
 
   Show a time-sorted view of the Org file, with all time-stamped items.
@@ -8053,7 +8235,6 @@ This agenda view is a general text search facility for Org mode entries.
 It is particularly useful to find notes.
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - {{{kbd(C-c a s)}}} ~org-search-view~ ::
 
   This is a special search that lets you select entries by matching a
@@ -8092,7 +8273,6 @@ Org mode produces. During the review, you need to identify such
 projects and define next actions for them.
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - {{{kbd(C-c a #)}}} ~org-agenda-list-stuck-projects~ ::
 
   List projects that are stuck.
@@ -8297,7 +8477,6 @@ the other commands, the cursor needs to be in the desired line.
 {{{cindex(motion commands in agenda)}}}
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - {{{kbd(n)}}} ~org-agenda-next-line~ ::
   {{{kindex(n)}}}
  
@@ -8312,7 +8491,6 @@ the other commands, the cursor needs to be in the desired line.
 {{{cindex(view file commands in agenda)}}}
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - {{{key(SPC)}}} {{{key(mouse-3)}}} ~org-agenda-show-and-scroll-up~ ::
   {{{kindex(@key{SPC})}}}
   {{{kindex(mouse-3)}}}
@@ -8705,7 +8883,6 @@ the other commands, the cursor needs to be in the desired line.
 {{{cindex(remote editing\\\, from agenda)}}}
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - {{{kbd(0--9)}}} ::
 
   Digit argument.
@@ -8933,45 +9110,80 @@ the other commands, the cursor needs to be in the desired line.
   persist, set ~org-agenda-bulk-persistent-marks~ to ~t~ or hit
   {{{kbd(p)}}} at the prompt.
 
-#+begin_example
-,*  @r{Toggle persistent marks.}
-$  @r{Archive all selected entries.}
-A  @r{Archive entries by moving them to their respective archive siblings.}
-t  @r{Change TODO state.  This prompts for a single TODO keyword and}
-   @r{changes the state of all selected entries, bypassing blocking and}
-   @r{suppressing logging notes (but not timestamps).}
-+  @r{Add a tag to all selected entries.}
--  @r{Remove a tag from all selected entries.}
-s  @r{Schedule all items to a new date.  To shift existing schedule dates}
-   @r{by a fixed number of days, use something starting with double plus}
-   @r{at the prompt, for example {{{samp(++8d)}}} or {{{samp(++2w)}}}.}
-d  @r{Set deadline to a specific date.}
-r  @r{Prompt for a single refile target and move all entries.  The entries}
-   @r{will no longer be in the agenda; refresh ({{{kbd(g)}}}) to bring them back.}
-S  @r{Reschedule randomly into the coming N days.  N will be prompted for.}
-   @r{With prefix arg ({{{kbd(C-u B S)}}}), scatter only across weekdays.}
-f  @r{Apply a function@footnote{You can also create persistent custom functions through~org-agenda-bulk-custom-functions~.} to marked entries.}
-   @r{For example, the function below sets the CATEGORY property of the}
-   @r{entries to web.}
-   @r{(defun set-category ()}
-   @r{  (interactive "P")}
-   @r{  (let* ((marker (or (org-get-at-bol 'org-hd-marker)}
-   @r{                     (org-agenda-error)))}
-   @r{            (buffer (marker-buffer marker)))}
-   @r{       (with-current-buffer buffer}
-   @r{         (save-excursion}
-   @r{           (save-restriction}
-   @r{             (widen)}
-   @r{             (goto-char marker)}
-   @r{             (org-back-to-heading t)}
-   @r{             (org-set-property "CATEGORY" "web"))))))}
-#+end_example
+#+attr_texinfo: :table-type "table" :indic "@kbd"
+- * ::  
+
+  Toggle persistent marks.
+
+- $ :: 
+
+  Archive all selected entries.
+
+- A :: 
+
+  Archive entries by moving them to their respective archive siblings.
+
+- t :: 
+
+  Change TODO state. This prompts for a single TODO keyword and changes
+  the state of all selected entries, bypassing blocking and suppressing
+  logging notes (but not timestamps).
+
+- +  :: 
+
+  Add a tag to all selected entries.
+- -  :: 
+
+  Remove a tag from all selected entries.
+
+- s  :: 
+
+  Schedule all items to a new date. To shift existing schedule dates by
+  a fixed number of days, use something starting with double plus at the
+  prompt, for example {{{samp(++8d)}}} or {{{samp(++2w)}}}.
+
+- d  :: 
+
+  Set deadline to a specific date.
+
+- r  :: 
+
+  Prompt for a single refile target and move all entries. The entries
+  will no longer be in the agenda; refresh ({{{kbd(g)}}}) to bring them
+  back.
+
+- S  :: 
+
+  Reschedule randomly into the coming N days. N will be prompted for.
+  With prefix arg ({{{kbd(C-u B S)}}}), scatter only across weekdays.
+
+- f  :: 
+
+  Apply a function to marked entries.[fn:192] For example, the function
+  below sets the CATEGORY property of the entries to web.
+
+  #+header: :eval no
+  #+header: :exports code
+  #+begin_src emacs-lisp
+  (defun set-category ()
+    (interactive "P")
+    (let* ((marker (or (org-get-at-bol 'org-hd-marker)
+                       (org-agenda-error)))
+           (buffer (marker-buffer marker)))
+      (with-current-buffer buffer
+        (save-excursion
+          (save-restriction
+            (widen)
+            (goto-char marker)
+            (org-back-to-heading t)
+            (org-set-property "CATEGORY" "web"))))))
+  #+end_src
+
 
 *** Calendar commands
 {{{cindex(calendar commands\\\, from agenda)}}}
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - {{{kbd(c)}}} ~org-agenda-goto-calendar~ ::
   {{{kindex(c)}}}
 
@@ -9053,7 +9265,6 @@ f  @r{Apply a function@footnote{You can also create persistent custom functions 
 
 *** Quit and exit
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - {{{kbd(q)}}} ~org-agenda-quit~ ::
   {{{kindex(q)}}}
 
@@ -9124,7 +9335,6 @@ is the search type, followed by the string or regular expression to be
 used for the matching. The example above will therefore define:
 
 #+attr_texinfo: :table-type "table" :indic "@kbd"
-
 - C-c a w ::
 
   A global search for TODO entries with {{{samp(WAITING)}}} as the TODO
@@ -9421,9 +9631,9 @@ in ~org-agenda-exporter-settings~ will also apply, but the settings in
 
 {{{noindent}}} From the command line you may also use:
 
-#+begin_example
-emacs -eval (org-batch-store-agenda-views) -kill
-#+end_example
+#+begin_src sh
+  emacs -eval (org-batch-store-agenda-views) -kill
+#+end_src
 
 {{{noindent}}} or, if you need to modify some parameters:[fn:186]
 
@@ -9459,7 +9669,6 @@ can be quite useful to use column view also from the agenda, where
 entries are collected by certain criteria.
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - {{{kbd(C-c C-x C-c)}}} ~org-agenda-columns~ ::
 
   Turn on column view in the agenda.
@@ -9746,8 +9955,8 @@ surrounded by {{{samp(#+BEGIN_COMMENT)}}} ...
 {{{samp(#+END_COMMENT)}}} will not be exported.
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-{{{kindex(C-c ;)}}}
 - {{{kbd(C-c ;)}}} ::
+  {{{kindex(C-c ;)}}}
 
   Toggle the COMMENT keyword at the beginning of an entry.
 
@@ -9766,7 +9975,7 @@ mode tables, the lines before the first horizontal separator line will
 become table header lines. You can use the following lines somewhere
 before the table to assign a caption and a label for cross references,
 and in the text you can refer to the object with
-~\ref@{tab:basic-data@~}:
+~\ref{tab:basic-data}~:
 
 #+begin_example
 #+CAPTION: This is the caption for the next table (or link)
@@ -9777,7 +9986,7 @@ and in the text you can refer to the object with
 
 Optionally, the caption can take the form:
 #+begin_example
-#+CAPTION: [Caption for list of figures]@{Caption for table (or link).@}
+#+CAPTION: [Caption for list of figures]{Caption for table (or link).}
 #+end_example
 
 {{{cindex(inlined images\\\, markup rules)}}}
@@ -9946,11 +10155,19 @@ using the ~:lines~ parameter. The line at the upper end of the range
 will not be included. The start and/or the end of the range may be
 omitted to use the obvious defaults.
 
-#+begin_example
-,#+INCLUDE: "~/.emacs" :lines "5-10"   @r{Include lines 5 to 10, 10 excluded}
-,#+INCLUDE: "~/.emacs" :lines "-10"    @r{Include lines 1 to 10, 10 excluded}
-,#+INCLUDE: "~/.emacs" :lines "10-"    @r{Include lines from 10 to EOF}
-#+end_example
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- #+INCLUDE: "~/.emacs" :lines "5-10" ::  
+
+  Include lines 5 to 10, 10 excluded.
+
+- #+INCLUDE: "~/.emacs" :lines "-10"  ::  
+
+  Include lines 1 to 10, 10 excluded.
+
+- #+INCLUDE: "~/.emacs" :lines "10-"  ::  
+
+  Include lines from 10 to EOF.
+
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c ')}}}
@@ -10096,7 +10313,7 @@ get in your way. Configure the variable
 or use, on a per-file basis:
 
 #+begin_example
-,#+OPTIONS: ^:@{@}
+,#+OPTIONS: ^:{}
 #+end_example
 
 {{{noindent}}} With this setting, {{{samp(a_b)}}} will not be interpreted as a
@@ -10144,12 +10361,12 @@ snippets will be identified as LaTeX source code:
 {{{noindent}}} For example:
 
 #+begin_example
-\begin@{equation@}                          % arbitrary environments,
-x=\sqrt@{b@}                                % even tables, figures
-\end@{equation@}                            % etc
+\begin{equation}                          % arbitrary environments,
+x=\sqrt{b}                                % even tables, figures
+\end{equation}                            % etc
 
 If $a^2=b$ and \( b=2 \), then the solution must be
-either $$ a=+\sqrt@{2@} $$ or \[ a=-\sqrt@{2@} \].
+either $$ a=+\sqrt{2} $$ or \[ a=-\sqrt{2} \].
 #+end_example
 
 {{{noindent}}}
@@ -10168,12 +10385,23 @@ means {{{file(MathJax)}}} for HTML, and no processing for DocBook,
 ASCII and LaTeX backends. You can also set this variable on a
 per-file basis using one of these lines:
 
-#+begin_example
-,#+OPTIONS: LaTeX:t          @r{Do the right thing automatically (MathJax)}
-,#+OPTIONS: LaTeX:dvipng     @r{Force using dvipng images}
-,#+OPTIONS: LaTeX:nil        @r{Do not process LaTeX fragments at all}
-,#+OPTIONS: LaTeX:verbatim   @r{Verbatim export, for jsMath or so}
-#+end_example
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- #+OPTIONS: LaTeX:t ::          
+
+  Do the right thing automatically (MathJax).
+
+- #+OPTIONS: LaTeX:dvipng ::    
+
+  Force using dvipng images.
+
+- #+OPTIONS: LaTeX:nil ::        
+
+  Do not process LaTeX fragments at all
+
+- #+OPTIONS: LaTeX:verbatim ::  
+
+  Verbatim export, for jsMath or so.
+
 
 *** Previewing LaTeX fragments
     :PROPERTIES:
@@ -10237,7 +10465,6 @@ When this mode is enabled, the following features are present (for more
 details see the documentation of CDLaTeX mode):
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - {{{kbd(C-c {)}}} ::
   {{{kindex(C-c @{)}}}
 
@@ -10383,28 +10610,78 @@ a separate file which can be included using ~#+SETUPFILE~.
 {{{vindex(user-mail-address)}}}
 {{{vindex(org-export-default-language)}}}
 {{{vindex(org-export-date-timestamp-format)}}}
-  #+begin_example
-  ,#+TITLE:       the title to be shown (default is the buffer name)
-  ,#+AUTHOR:      the author (default taken from ~user-full-name~)
-  ,#+DATE:        a date, an Org timestamp, or a format string for format-time-string 
-  ,#+EMAIL:       his/her email address (default from user-mail-address)
-  ,#+DESCRIPTION: the page description, e.g., for the XHTML meta tag
-  ,#+KEYWORDS:    the page keywords, e.g., for the XHTML meta tag
-  ,#+LANGUAGE:    language for HTML, e.g., en (org-export-default-language)
-  ,#+TEXT:        Some descriptive text to be inserted at the beginning.
-  ,#+TEXT:        Several lines may be given.
-  ,#+OPTIONS:     H:2 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t ...
-  ,#+BIND:        lisp-var lisp-val, e.g., org-export-latex-low-levels itemize
-                  You need to confirm using these, or configure org-export-allow-BIND
-  ,#+LINK_UP:     the ``up'' link of an exported page
-  ,#+LINK_HOME:   the ``home'' link of an exported page
-  ,#+LaTeX_HEADER: extra line(s) for the LaTeX header, like \usepackage{xyz}
-  ,#+EXPORT_SELECT_TAGS:   Tags that select a tree for export
-  ,#+EXPORT_EXCLUDE_TAGS:  Tags that exclude a tree from export
-  ,#+XSLT:        the XSLT stylesheet used by DocBook exporter to generate FO file
-  #+end_example
 
-  [fn:179]
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- #+TITLE: ::      
+
+  The title to be shown (default is the buffer name).
+
+- #+AUTHOR: ::     
+
+  The author (default taken from ~user-full-name~).
+
+- #+DATE: ::       
+
+  A date, an Org timestamp, or a format string for ~format-time-string~.[fn:179]
+
+- #+EMAIL: ::      
+
+  His/her email address (default from ~user-mail-address~).
+
+- #+DESCRIPTION: :: 
+
+  The page description, e.g., for the XHTML meta tag.
+
+- #+KEYWORDS: ::   
+
+  The page keywords, e.g., for the XHTML meta tag.
+
+- #+LANGUAGE: ::   
+
+  Language for HTML, e.g., en (~org-export-default-language~).
+
+- #+TEXT: ::       
+
+  Some descriptive text to be inserted at the beginning.
+
+- #+TEXT: ::       
+
+  Several lines may be given.
+
+- #+OPTIONS: ::    
+
+  H:2 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t ...
+
+- #+BIND: ::       
+
+  Lisp-var lisp-val, e.g., org-export-latex-low-levels itemize. You need
+  to confirm using these, or configure ~org-export-allow-BIND~.
+
+- #+LINK_UP: ::    
+
+  The ``up'' link of an exported page.
+
+- #+LINK_HOME: ::  
+
+  The ``home'' link of an exported page.
+
+- #+LaTeX_HEADER: :: 
+
+  Extra line(s) for the LaTeX header, like ~\usepackage{xyz}~.
+
+- #+EXPORT_SELECT_TAGS: ::  
+
+  Tags that select a tree for export.
+
+- #+EXPORT_EXCLUDE_TAGS: :: 
+
+  Tags that exclude a tree from export.
+
+- #+XSLT: ::       
+
+  The XSLT stylesheet used by DocBook exporter to generate FO file.
+
+
 
 {{{noindent}}} The ~#+OPTIONS~ line is a compact form to specify
 export settings.[fn:121] Here you can:
@@ -10429,35 +10706,107 @@ export settings.[fn:121] Here you can:
 {{{vindex(org-export-creator-info)}}}
 {{{vindex(org-export-email-info)}}}
 {{{vindex(org-export-time-stamp-file)}}}
-#+begin_example
-H:         @r{set the number of headline levels for export}
-num:       @r{turn on/off section-numbers}
-toc:       @r{turn on/off table of contents, or set level limit (integer)}
-\n:        @r{turn on/off line-break-preservation (DOES NOT WORK)}
-@@:         @r{turn on/off quoted HTML tags}
-::         @r{turn on/off fixed-width sections}
-|:         @r{turn on/off tables}
-^:         @r{turn on/off @TeX{}-like syntax for sub- and superscripts.  If}
-           @r{you write "^:@{@}", ~a_@{b@~} will be interpreted, but}
-           @r{the simple ~a_b~ will be left as it is.}
--:         @r{turn on/off conversion of special strings.}
-f:         @r{turn on/off footnotes like this[1].}
-todo:      @r{turn on/off inclusion of TODO keywords into exported text}
-tasks:     @r{turn on/off inclusion of tasks (TODO items), can be nil to remove}
-           @r{all tasks, ~todo~ to remove DONE tasks, or list of kwds to keep}
-pri:       @r{turn on/off priority cookies}
-tags:      @r{turn on/off inclusion of tags, may also be ~not-in-toc~}
-<:         @r{turn on/off inclusion of any time/date stamps like DEADLINES}
-*:         @r{turn on/off emphasized text (bold, italic, underlined)}
-TeX:       @r{turn on/off simple TeX macros in plain text}
-LaTeX:     @r{configure export of LaTeX fragments.  Default ~auto~}
-skip:      @r{turn on/off skipping the text before the first heading}
-author:    @r{turn on/off inclusion of author name/email into exported file}
-email:     @r{turn on/off inclusion of author email into exported file}
-creator:   @r{turn on/off inclusion of creator info into exported file}
-timestamp: @r{turn on/off inclusion creation time into exported file}
-d:         @r{turn on/off inclusion of drawers, or list drawers to include}
-#+end_example
+
+#+attr_texinfo: :table-type "table" :indic "@code"
+- H: ::        
+
+  Set the number of headline levels for export.
+
+- num: ::      
+
+  Turn on/off section-numbers.
+
+- toc: ::      
+
+  Turn on/off table of contents, or set level limit (integer).
+
+- \n: ::       
+
+  Turn on/off line-break-preservation (DOES NOT WORK).
+
+- @: ::        
+
+  Turn on/off quoted HTML tags.
+
+- :: ::        
+
+  Turn on/off fixed-width sections.
+
+- |: ::        
+
+  Turn on/off tables,
+
+- ^: ::        
+
+  Turn on/off TeX-like syntax for sub- and superscripts. If you write
+  "^:{}", ~a_{b}~ will be interpreted, but the simple ~a_b~ will be left
+  as it is.
+
+- : ::        
+
+  Turn on/off conversion of special strings.
+
+- f: ::         
+
+  Turn on/off footnotes like this: ~[1]~.
+
+- todo: ::      
+
+  Turn on/off inclusion of TODO keywords into exported text.
+
+- tasks: ::     
+
+  Turn on/off inclusion of tasks (TODO items), can be nil to remove all
+  tasks, ~todo~ to remove DONE tasks, or list of keywords to keep.
+
+- pri: ::       
+
+  Turn on/off priority cookies.
+
+- tags: ::     
+
+  Turn on/off inclusion of tags, may also be ~not-in-toc~.
+
+- <: ::         
+
+  Turn on/off inclusion of any time/date stamps like DEADLINES.
+
+- *: ::        
+
+  Turn on/off emphasized text (bold, italic, underlined).
+
+- TeX: ::      
+
+  Turn on/off simple TeX macros in plain text.
+
+- LaTeX: ::     
+
+  Configure export of LaTeX fragments.  Default ~auto~.
+
+- skip: ::      
+
+  Turn on/off skipping the text before the first heading.
+
+- author: ::    
+
+  Turn on/off inclusion of author name/email into exported file.
+
+- email: ::     
+
+  Turn on/off inclusion of author email into exported file.
+
+- creator: ::  
+
+  Turn on/off inclusion of creator info into exported file.
+
+- timestamp: :: 
+
+  Turn on/off inclusion creation time into exported file.
+
+- d: ::        
+
+  Turn on/off inclusion of drawers, or list drawers to include.
+
 
 {{{noindent}}} These options take effect in both the HTML and LaTeX
 export, except for ~TeX~ and ~LaTeX~ options, which are respectively
@@ -10469,7 +10818,7 @@ keys and also the publishing keys (see [[Project alist]]), see the
 constant ~org-export-plist-vars~.
 
 When exporting only a single subtree by selecting it with
-{{{kbd(C-c @@)}}} before calling an export command, the subtree can
+{{{kbd(C-c @)}}} before calling an export command, the subtree can
 overrule some of the file's export settings with properties
 ~EXPORT_FILE_NAME~, ~EXPORT_TITLE~, ~EXPORT_TEXT~, ~EXPORT_AUTHOR~,
 ~EXPORT_DATE~, and ~EXPORT_OPTIONS~.
@@ -10510,6 +10859,7 @@ used as document title and the subtrees are exported.
   Call the exporter, but reverse the setting of
   ~org-export-run-in-background~, i.e., request background processing if
   not set, or force processing in the current Emacs process if set.
+
 
 ** ASCII/Latin-1/UTF-8 export
    :PROPERTIES:
@@ -10583,7 +10933,7 @@ will be exported as itemized lists. If you want that transition to
 occur at a different level, specify it with a prefix argument, e.g.:
 
 #+begin_example
-{{{kbd(C-1 C-c C-e a)}}}
+  C-1 C-c C-e a
 #+end_example
 
 {{{noindent}}} This setting creates only top level headlines and
@@ -10681,7 +11031,7 @@ occur at a different level, specify it with a numeric prefix argument,
 e.g.:
 
 #+begin_example
-{{{kbd(C-2 C-c C-e b)}}}
+C-2 C-c C-e b
 #+end_example
 
 {{{noindent}}} This setting creates two levels of headings and exports
@@ -10797,8 +11147,8 @@ table:
 {{{cindex(#+CAPTION)}}}
 {{{cindex(#+ATTR_HTML)}}}
 #+begin_example
-#+CAPTION: This is a table with lines around and between cells
-#+ATTR_HTML: border="2" rules="all" frame="border"
+,#+CAPTION: This is a table with lines around and between cells
+,#+ATTR_HTML: border="2" rules="all" frame="border"
 #+end_example
 
 *** Images in HTML export
@@ -10830,8 +11180,8 @@ support text viewers and accessibility, and align it to the right.
 {{{cindex(#+CAPTION)}}}
 {{{cindex(#+ATTR_HTML)}}}
 #+begin_example
-#+CAPTION: A black cat stalking a spider
-#+ATTR_HTML: alt="cat/spider image" title="Action!" align="right"
+,#+CAPTION: A black cat stalking a spider
+,#+ATTR_HTML: alt="cat/spider image" title="Action!" align="right"
 [[./img/a.jpg]]
 #+end_example
 
@@ -10910,34 +11260,34 @@ parts of the document---your style specifications may change these, in
 addition to any of the standard classes like for headlines, tables,
 etc.[fn:129]
 
-#+begin_example
-p.author            @r{author information, including email}
-p.date              @r{publishing date}
-p.creator           @r{creator info, about org mode version}
-.title              @r{document title}
-.todo               @r{TODO keywords, all not-done states}
-.done               @r{the DONE keywords, all states that count as done}
-.WAITING            @r{each TODO keyword also uses a class named after itself}
-.timestamp          @r{timestamp}
-.timestamp-kwd      @r{keyword associated with a timestamp, like SCHEDULED}
-.timestamp-wrapper  @r{span around keyword plus timestamp}
-.tag                @r{tag in a headline}
-._HOME              @r{each tag uses itself as a class, "@@" replaced by "_"}
-.target             @r{target for links}
-.linenr             @r{the line number in a code example}
-.code-highlighted   @r{for highlighting referenced code lines}
-div.outline-N       @r{div for outline level N (headline plus text))}
-div.outline-text-N  @r{extra div for text at outline level N}
-.section-number-N   @r{section number in headlines, different for each level}
-div.figure          @r{how to format an inlined image}
-pre.src             @r{formatted source code}
-pre.example         @r{normal example}
-p.verse             @r{verse paragraph}
-div.footnotes       @r{footnote section headline}
-p.footnote          @r{footnote definition paragraph, containing a footnote}
-.footref            @r{a footnote reference number (always a <sup>)}
-.footnum            @r{footnote number in footnote definition (always <sup>)}
-#+end_example
+#+attr_texinfo: :table-type "table" :indic "@code"
+- p.author ::           author information, including email
+- p.date ::             publishing date
+- p.creator ::           creator info, about org mode version
+- .title ::             document title
+- .todo ::              TODO keywords, all not-done states
+- .done ::              the DONE keywords, all states that count as done
+- .WAITING ::           each TODO keyword also uses a class named after itself
+- .timestamp ::         timestamp
+- .timestamp-kwd ::     keyword associated with a timestamp, like SCHEDULED
+- .timestamp-wrapper ::  span around keyword plus timestamp
+- .tag ::               tag in a headline
+- ._HOME ::             each tag uses itself as a class, "@" replaced by "_"
+- .target ::            target for links
+- .linenr ::            the line number in a code example
+- .code-highlighted ::  for highlighting referenced code lines
+- div.outline-N ::      div for outline level N (headline plus text))
+- div.outline-text-N :: extra div for text at outline level N
+- .section-number-N ::  section number in headlines, different for each level
+- div.figure ::         how to format an inlined image
+- pre.src ::            formatted source code
+- pre.example ::         normal example
+- p.verse ::            verse paragraph
+- div.footnotes ::      footnote section headline
+- p.footnote ::         footnote definition paragraph, containing a footnote
+- .footref ::           a footnote reference number (always a <sup>)
+- .footnum ::           footnote number in footnote definition (always <sup>)
+
 
 {{{vindex(org-export-html-style-default)}}}
 {{{vindex(org-export-html-style-include-default)}}}
@@ -10966,8 +11316,8 @@ property to assign a class to the tree. In order to specify CSS styles
 for a particular headline, you can use the id specified in a
 ~:CUSTOM_ID:~ property.
 
-#+comment  FIXME: More about header and footer styles
-#+comment  FIXME: Talk about links and targets.
+#+comment:  FIXME: More about header and footer styles
+#+comment:  FIXME: Talk about links and targets.
 
 *** JavaScript support
     :PROPERTIES:
@@ -11004,33 +11354,61 @@ line to the Org file:
 automatically contain the code needed to invoke the script. Using the
 line above, you can set the following viewing options:
 
-#+begin_example
-path:    @r{The path to the script.  The default is to grab the script from}
-         @r{@url{http://orgmode.org/org-info.js}, but you might want to have}
-         @r{a local copy and use a path like {{{samp(../scripts/org-info.js)}}}.}
-view:    @r{Initial view when the website is first shown.  Possible values are:}
-         info      @r{Info-like interface with one section per page.}
-         overview  @r{Folding interface, initially showing only top-level.}
-         content   @r{Folding interface, starting with all headlines visible.}
-         showall   @r{Folding interface, all headlines and text visible.}
-sdepth:  @r{Maximum headline level that will still become an independent}
-         @r{section for info and folding modes.  The default is taken from}
-         @r{~org-export-headline-levels~ (= the ~H~ switch in ~#+OPTIONS~).}
-         @r{If this is smaller than in ~org-export-headline-levels~, each}
-         @r{info/folding section can still contain child headlines.}
-toc:     @r{Should the table of contents /initially/ be visible?}
-         @r{Even when ~nil~, you can always get to the "toc" with {{{kbd(i)}}}.}
-tdepth:  @r{The depth of the table of contents.  The defaults are taken from}
-         @r{the variables ~org-export-headline-levels~ and ~org-export-with-toc~.}
-ftoc:    @r{Does the CSS of the page specify a fixed position for the "toc"?}
-         @r{If yes, the toc will never be displayed as a section.}
-ltoc:    @r{Should there be short contents (children) in each section?}
-         @r{Make this ~above~ if the section should be above initial text.}
-mouse:   @r{Headings are highlighted when the mouse is over them.  Should be}
-         @r{{{{samp(underline)}}} (default) or a background color like {{{samp(#cccccc)}}}.}
-buttons: @r{Should view-toggle buttons be everywhere?  When ~nil~ (the}
-         @r{default), only one such button will be present.}
-#+end_example
+#+attr_texinfo: :table-type "table" :indic "@code"
+- path: ::   
+
+  The path to the script.  The default is to grab the script from
+  [[http://orgmode.org/org-info.js]], but you might want to have
+  a local copy and use a path like {{{samp(../scripts/org-info.js)}}}.
+
+- view: ::   
+
+  Initial view when the website is first shown.  Possible values are:
+  
+  - info ::     Info-like interface with one section per page.
+  - overview :: Folding interface, initially showing only top-level.
+  - content ::  Folding interface, starting with all headlines visible.
+  - showall ::  Folding interface, all headlines and text visible.
+
+- sdepth: :: 
+
+  Maximum headline level that will still become an independent section
+  for info and folding modes. The default is taken from
+  ~org-export-headline-levels~ (= the ~H~ switch in ~#+OPTIONS~). If
+  this is smaller than in ~org-export-headline-levels~, each
+  info/folding section can still contain child headlines.
+
+- toc: ::    
+
+  Should the table of contents /initially/ be visible? Even when ~nil~,
+  you can always get to the "toc" with {{{kbd(i)}}}.
+
+- tdepth: :: 
+
+  The depth of the table of contents. The defaults are taken from the
+  variables ~org-export-headline-levels~ and ~org-export-with-toc~.
+
+- ftoc: ::   
+
+  Does the CSS of the page specify a fixed position for the "toc"? If
+  yes, the toc will never be displayed as a section.
+
+- ltoc: ::   
+
+  Should there be short contents (children) in each section? Make this
+  ~above~ if the section should be above initial text.
+
+- mouse: ::  
+
+  Headings are highlighted when the mouse is over them. Should be
+  {{{samp(underline)}}} (default) or a background color like
+  {{{samp(#cccccc)}}}.
+
+- buttons: :: 
+
+  Should view-toggle buttons be everywhere? When ~nil~ (the default),
+  only one such button will be present.
+
 
 {{{vindex(org-infojs-options)}}}
 {{{vindex(org-export-html-use-infojs)}}}
@@ -11067,15 +11445,15 @@ hierarchy of sections.
 #+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c C-e l)}}} ~org-export-as-latex~ ::
   {{{kindex(C-c C-e l)}}}
-{{{cindex(property EXPORT_FILE_NAME)}}}
+  {{{cindex(property EXPORT_FILE_NAME)}}}
 
-Export as a LaTeX file. For an Org file {{{file(myfile.org)}}}, the
-LaTeX file will be {{{file(myfile.tex)}}}. The file will be
-overwritten without warning. If there is an active region, only the
-active region will be exported.[fn:132] If the selected region is a
-single tree, the tree head will become the document title.[fn:133] If
-the tree head entry has or inherits an ~EXPORT_FILE_NAME~ property,
-that name will be used for the export.
+  Export as a LaTeX file. For an Org file {{{file(myfile.org)}}}, the
+  LaTeX file will be {{{file(myfile.tex)}}}. The file will be
+  overwritten without warning. If there is an active region, only the
+  active region will be exported.[fn:132] If the selected region is a
+  single tree, the tree head will become the document title.[fn:133] If
+  the tree head entry has or inherits an ~EXPORT_FILE_NAME~ property,
+  that name will be used for the export.
 
 - {{{kbd(C-c C-e L)}}} ~org-export-as-latex-to-buffer~ ::
   {{{kindex(C-c C-e L)}}}
@@ -11121,7 +11499,7 @@ If you want that transition to occur at a different level, specify it
 with a numeric prefix argument, e.g.:
 
 #+begin_example
-{{{kbd(C-2 C-c C-e l)}}}
+C-2 C-c C-e l
 #+end_example
 
 {{{noindent}}} The example setting creates two levels of headings and
@@ -11188,7 +11566,7 @@ with the following constructs:
 {{{cindex(#+LaTeX)}}}
 {{{cindex(#+BEGIN_LaTeX)}}}
 #+begin_example
-#+LaTeX: Literal LaTeX code for export
+,#+LaTeX: Literal LaTeX code for export
 #+end_example
 
 {{{noindent}}} or
@@ -11220,9 +11598,9 @@ width:
 {{{cindex(#+LABEL)}}}
 {{{cindex(#+ATTR_LaTeX)}}}
 #+begin_example
-#+CAPTION: A long table
-#+LABEL: tbl:long
-#+ATTR_LaTeX: longtable align=l|lp@{3cm@}r|l
+,#+CAPTION: A long table
+,#+LABEL: tbl:long
+,#+ATTR_LaTeX: longtable align=l|lp@{3cm@}r|l
 | ..... | ..... |
 | ..... | ..... |
 #+end_example
@@ -11233,9 +11611,9 @@ or to specify a multicolumn table with ~tabulary~:
 {{{cindex(#+LABEL)}}}
 {{{cindex(#+ATTR_LaTeX)}}}
 #+begin_example
-#+CAPTION: A wide table with tabulary
-#+LABEL: tbl:wide
-#+ATTR_LaTeX: table* tabulary width=\textwidth
+,#+CAPTION: A wide table with tabulary
+,#+LABEL: tbl:wide
+,#+ATTR_LaTeX: table* tabulary width=\textwidth
 | ..... | ..... |
 | ..... | ..... |
 #+end_example
@@ -11274,12 +11652,12 @@ image, you need to use compatible settings for ~\includegraphics~ and
 {{{cindex(#+LABEL)}}}
 {{{cindex(#+ATTR_LaTeX)}}}
 #+begin_example
-#+CAPTION:    The black-body emission of the disk around HR 4049
-#+LABEL:      fig:SED-HR4049
-#+ATTR_LaTeX: width=5cm,angle=90
+,#+CAPTION:    The black-body emission of the disk around HR 4049
+,#+LABEL:      fig:SED-HR4049
+,#+ATTR_LaTeX: width=5cm,angle=90
 [[./img/sed-hr4049.pdf]]
 
-#+ATTR_LaTeX: width=0.38\textwidth wrap placement=@{r@}@{0.4\textwidth@}
+,#+ATTR_LaTeX: width=0.38\textwidth wrap placement=@{r@}@{0.4\textwidth@}
 [[./img/hst.png]]
 #+end_example
 
@@ -11453,6 +11831,7 @@ Currently DocBook exporter only supports DocBook V5.0.
 {{{cindex(region\\\, active)}}}
 {{{cindex(active region)}}}
 {{{cindex(transient-mark-mode)}}}
+
 #+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c C-e D)}}} ~org-export-as-docbook~ ::
   {{{kindex(C-c C-e D)}}}
@@ -11680,6 +12059,7 @@ further.
 {{{cindex(region\\\, active)}}}
 {{{cindex(active region)}}}
 {{{cindex(transient-mark-mode)}}}
+
 #+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c C-e o)}}} ~org-export-as-odt~ ::
   {{{kindex(C-c C-e o)}}}
@@ -12189,7 +12569,6 @@ are using a converter that is not supported by default or if you would
 like to tweak the default converter settings, proceed as below.
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - Register the converter ::
 
   {{{vindex(org-export-odt-convert-processes)}}}
@@ -12237,7 +12616,6 @@ These files are bundled with the distribution under the directory pointed to
 by the variable ~org-odt-styles-dir~.  The two files are:
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - {{{file(OrgOdtStyles.xml)}}} ::
   <<x-orgodtstyles-xml>>
 
@@ -12270,7 +12648,6 @@ can customize these variables to override the factory styles used by
 the exporter.
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - ~org-export-odt-styles-file~ ::
   <<x-org-export-odt-styles-file>>
 
@@ -12315,7 +12692,6 @@ document. You can achieve this by embedding raw OpenDocument XML in
 the Org file. The use of this feature is better illustrated with
 couple of examples.
 
-@enumerate
 #+attr_texinfo: :table-type "table" :indic "@asis"
 - Embedding ODT tags as part of regular text ::
 
@@ -12324,8 +12700,8 @@ couple of examples.
   following:
 
   #+begin_example
-  @@<text:span text:style-name="Highlight">This is a
-  highlighted text@@</text:span>.  But this is a
+  @<text:span text:style-name="Highlight">This is a
+  highlighted text@</text:span>.  But this is a
   regular text.
   #+end_example
 
@@ -12406,7 +12782,7 @@ export the example table.
 #+end_src
 
 #+begin_example
-#+ATTR_ODT: :style "TableWithHeaderRowAndColumn"
+,#+ATTR_ODT: :style "TableWithHeaderRowAndColumn"
 | Name  | Phone | Age |
 | Peter |  1234 |  17 |
 | Anna  |  4321 |  25 |
@@ -12427,7 +12803,6 @@ templates you have to define these styles yourself.
 To use this feature proceed as follows:
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - Create a table template[fn:147] ::
 
   A table template is nothing but a set of {{{samp(table-cell)}}} and
@@ -12505,7 +12880,7 @@ To use this feature proceed as follows:
   the ~ATTR_ODT~ line as shown below.
 
   #+begin_example
-  #+ATTR_ODT: :style "TableWithHeaderRowAndColumn"
+  ,#+ATTR_ODT: :style "TableWithHeaderRowAndColumn"
   | Name  | Phone | Age |
   | Peter |  1234 |  17 |
   | Anna  |  4321 |  25 |
@@ -13459,10 +13834,10 @@ inline.[fn:154] The structure of a {{{samp(src)}}} block is shown in
 the following example:
 
 #+begin_example
-#+NAME: <name>
-#+BEGIN_SRC <language> <switches> <header arguments>
+,#+NAME: <name>
+,#+BEGIN_SRC <language> <switches> <header arguments>
   <body>
-#+END_SRC
+,#+END_SRC
 #+end_example
 
 The ~#+NAME:~ line is optional, and can be used to name the code
@@ -13474,13 +13849,13 @@ Live code blocks can also be specified inline using the following
 syntax:
 
 #+begin_example
-src_<language>@{<body>@}
+src_<language>{<body>}
 #+end_example
 
 or
 
 #+begin_example
-src_<language>[<header arguments>]@{<body>@}
+src_<language>[<header arguments>]{<body>}
 #+end_example
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
@@ -13704,8 +14079,8 @@ separate ~#+CALL:~ line or inline within a block of text.
 The syntax of the ~#+CALL:~ line is:
 
 #+begin_example
-#+CALL: <name>(<arguments>)
-#+CALL: <name>[<inside header arguments>](<arguments>) <end header arguments>
+,#+CALL: <name>(<arguments>)
+,#+CALL: <name>[<inside header arguments>](<arguments>) <end header arguments>
 #+end_example
 
 The syntax for inline evaluation of named code blocks is:
@@ -14048,14 +14423,14 @@ The following example will apply the ~:exports results~ header
 argument to the evaluation of the ~#+CALL:~ line:
 
 #+begin_example
-#+CALL: factorial(n=5) :exports results
+,#+CALL: factorial(n=5) :exports results
 #+end_example
 
 The following example will apply the ~:session special~ header
 argument to the evaluation of the ~factorial~ code block:
 
 #+begin_example
-#+CALL: factorial[:session special](n=5)
+,#+CALL: factorial[:session special](n=5)
 #+end_example
 
 *** Specific header arguments
@@ -14104,7 +14479,6 @@ without arguments), or the results of evaluating another code block.
 Here are examples of passing values by reference:
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - a table named with either ~#+NAME:~ or ~#+TBLNAME:~ ::
 
   #+begin_example
@@ -14339,7 +14713,6 @@ There are three classes of ~:results~ header argument.  Only one option
 per class may be supplied per code block.
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - Collection ::
 
   These header arguments specify how the results should be collected
@@ -14363,7 +14736,6 @@ The following ~:results~ options are mutually exclusive, and specify
 how the results should be collected from the code block.
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - ~value~ ::
 
   This is the default. The result is the value of the last statement in
@@ -14386,7 +14758,6 @@ what type of results the code block will return. By default, results
 are inserted as either a table or scalar depending on their value.
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - ~table~, ~vector~ ::
 
   The results should be interpreted as an Org mode table. If a single
@@ -14457,7 +14828,6 @@ The following ~:results~ options indicate what happens with the
 results once they are collected.
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - ~replace~ ::
 
   The default value. Any existing results will be removed, and the new
@@ -14548,7 +14918,7 @@ syntax, in which case the code will be evaluated on the remote
 machine. An example is:
 
 #+begin_example
-#+BEGIN_SRC R :file plot.png :dir /dand@@yakuba.princeton.edu:
+#+BEGIN_SRC R :file plot.png :dir /dand@yakuba.princeton.edu:
 plot(1:10, main=system("hostname", intern=TRUE))
 #+END_SRC
 #+end_example
@@ -14562,7 +14932,7 @@ So, in the above example a plot will be created on the remote machine,
 and a link of the following form will be inserted in the org buffer:
 
 #+begin_example
-[[file:/scp:dand@@yakuba.princeton.edu:/home/dand/plot.png][plot.png]]
+[[file:/scp:dand@yakuba.princeton.edu:/home/dand/plot.png][plot.png]]
 #+end_example
 
 Most of this functionality follows immediately from the fact that
@@ -14595,7 +14965,6 @@ The ~:exports~ header argument specifies what should be included in HTML
 or LaTeX exports of the Org mode file.
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - ~code~ ::
 
   The default. The body of code is included into the exported file.
@@ -14624,7 +14993,6 @@ The ~:tangle~ header argument specifies whether or not the code
 block should be included in tangled extraction of source code files.
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - ~tangle~ ::
 
   The code block is exported to a source code file named after the full
@@ -14664,7 +15032,6 @@ follows to control the insertion of extra comments into the tangled
 code file.
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - ~no~ ::
 
   The default.  No extra comments are inserted during tangling.
@@ -14704,7 +15071,6 @@ newlines before and after each tangled code block.  The following arguments
 are accepted:
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - ~yes~ ::
 
   Insert newlines before and after each code block body in tangled code
@@ -14751,7 +15117,6 @@ one of the five values: ~no~, ~yes~, ~tangle~, ~no-export~, or
 ~strip-export~.
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - ~no~ ::
 
   The default. ``Noweb'' syntax references in the body of the code block
@@ -14886,7 +15251,6 @@ be stored in the session outside of the Org mode buffer. The ~:cache~
 header argument can have one of two values: ~yes~ or ~no~.
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - ~no~ ::
 
   The default. No caching takes place, and the code block will be
@@ -14951,7 +15315,6 @@ or hlines. The ~:hlines~ argument to a code block accepts the values
 ~yes~ or ~no~, with a default value of ~no~.
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - ~no~ ::
 
   Strips horizontal lines from the input table. In most languages this
@@ -15016,7 +15379,6 @@ header argument entirely given the ease with which tables with column
 names may be handled directly in Emacs Lisp.
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - ~nil~ ::
 
   If an input table looks like it has column names (because its second
@@ -15063,7 +15425,6 @@ The ~:rownames~ header argument can take on the values ~yes~
 or ~no~, with a default value of ~no~.
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - ~no~ ::
 
   No row name pre-processing will take place.
@@ -15174,7 +15535,6 @@ two-dimensional vector of strings or numbers) when appropriate.
 *** Non-session
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - ~:results value~ ::
 
   This is the default. Internally, the value is obtained by wrapping the
@@ -15312,7 +15672,8 @@ are active:
 {{{kindex(C-up)}}}
 {{{kindex(M-down)}}}
 
-| *Keybinding*          | *Function*                        |
+#+attr_texinfo: :columns "0.2 0.55"
+| Key binding           | Function                          |
 |-----------------------+-----------------------------------|
 | {{{kbd(C-c C-c)}}}    | ~org-babel-execute-src-block~     |
 | {{{kbd(C-c C-o)}}}    | ~org-babel-open-src-block-result~ |
@@ -15367,7 +15728,8 @@ In an Org mode buffer, the following key bindings are active:
 {{{kindex(C-c C-v x)}}}
 {{{kindex(C-c C-v C-x)}}}
 
-| *Keybinding*                                   | *Function*                                 |
+#+attr_texinfo: :columns "0.4 0.6"
+| Key binding                                    | Function                                   |
 |------------------------------------------------+--------------------------------------------|
 | {{{kbd(C-c C-v p)}}} or {{{kbd(C-c C-v C-p)}}} | ~org-babel-previous-src-block~             |
 | {{{kbd(C-c C-v n)}}} or {{{kbd(C-c C-v C-n)}}} | ~org-babel-next-src-block~                 |
@@ -15803,12 +16165,11 @@ effective only when the file is visited again in a new Emacs session.
   {{{cindex(@code{showall}\\\, STARTUP keyword)}}}
   {{{cindex(@code{showeverything}\\\, STARTUP keyword)}}}
 
-  #+begin_example
-  overview         @r{top-level headlines only}
-  content          @r{all headlines}
-  showall          @r{no folding of any entries}
-  showeverything   @r{show even drawer contents}
-  #+end_example
+  #+attr_texinfo: :table-type "table" :indic "@asis"
+  - ~overview~ ::         top-level headlines only
+  - ~content~ ::         all headlines
+  - ~showall~ ::         no folding of any entries
+  - ~showeverything~ ::  show even drawer contents
 
   {{{vindex(org-startup-indented)}}}
   {{{cindex(@code{indent}\\\, STARTUP keyword)}}}
@@ -15817,10 +16178,9 @@ effective only when the file is visited again in a new Emacs session.
   Dynamic virtual indentation is controlled by the variable
   ~org-startup-indented~.[fn:161]
 
-  #+begin_example
-  indent     @r{start with ~org-indent-mode~ turned on}
-  noindent   @r{start with ~org-indent-mode~ turned off}
-  #+end_example
+  #+attr_texinfo: :table-type "table" :indic "@asis"
+  - ~indent~ ::     start with ~org-indent-mode~ turned on
+  - ~noindent~ ::   start with ~org-indent-mode~ turned off
 
   {{{vindex(org-startup-align-all-tables)}}}
 
@@ -15832,10 +16192,9 @@ effective only when the file is visited again in a new Emacs session.
   {{{cindex(@code{align}\\\, STARTUP keyword)}}}
   {{{cindex(@code{noalign}\\\, STARTUP keyword)}}}
 
-  #+begin_example
-  align      @r{align all tables}
-  noalign    @r{don't align tables on startup}
-  #+end_example
+  #+attr_texinfo: :table-type "table" :indic "@asis"
+  - ~align~ ::      align all tables
+  - ~noalign~ ::    don't align tables on startup
 
   {{{vindex(org-startup-with-inline-images)}}}
 
@@ -15846,10 +16205,9 @@ effective only when the file is visited again in a new Emacs session.
   {{{cindex(@code{inlineimages}\\\, STARTUP keyword)}}}
   {{{cindex(@code{noinlineimages}\\\, STARTUP keyword)}}}
 
-  #+begin_example
-  inlineimages   @r{show inline images}
-  noinlineimages @r{don't show inline images on startup}
-  #+end_example
+  #+attr_texinfo: :table-type "table" :indic "@asis"
+  - ~inlineimages~   show inline images
+  - ~noinlineimages~ don't show inline images on startup
 
   {{{vindex(org-log-done)}}}
   {{{vindex(org-log-note-clock-out)}}}
@@ -15876,25 +16234,25 @@ effective only when the file is visited again in a new Emacs session.
   {{{cindex(@code{logrefile}\\\, STARTUP keyword)}}}
   {{{cindex(@code{lognoterefile}\\\, STARTUP keyword)}}}
   {{{cindex(@code{nologrefile}\\\, STARTUP keyword)}}}
-  #+begin_example
-  logdone            @r{record a timestamp when an item is marked DONE}
-  lognotedone        @r{record timestamp and a note when DONE}
-  nologdone          @r{don't record when items are marked DONE}
-  logrepeat          @r{record a time when reinstating a repeating item}
-  lognoterepeat      @r{record a note when reinstating a repeating item}
-  nologrepeat        @r{do not record when reinstating repeating item}
-  lognoteclock-out   @r{record a note when clocking out}
-  nolognoteclock-out @r{don't record a note when clocking out}
-  logreschedule      @r{record a timestamp when scheduling time changes}
-  lognotereschedule  @r{record a note when scheduling time changes}
-  nologreschedule    @r{do not record when a scheduling date changes}
-  logredeadline      @r{record a timestamp when deadline changes}
-  lognoteredeadline  @r{record a note when deadline changes}
-  nologredeadline    @r{do not record when a deadline date changes}
-  logrefile          @r{record a timestamp when refiling}
-  lognoterefile      @r{record a note when refiling}
-  nologrefile        @r{do not record when refiling}
-  #+end_example
+
+  #+attr_texinfo: :table-type "table" :indic "@asis"
+  - ~logdone~ ::            record a timestamp when an item is marked DONE
+  - ~lognotedone~ ::        record timestamp and a note when DONE
+  - ~nologdone~ ::          don't record when items are marked DONE
+  - ~logrepeat~ ::          record a time when reinstating a repeating item
+  - ~lognoterepeat~ ::      record a note when reinstating a repeating item
+  - ~nologrepeat~ ::        do not record when reinstating repeating item
+  - ~lognoteclock-out~ ::   record a note when clocking out
+  - ~nolognoteclock-out~ :: don't record a note when clocking out
+  - ~logreschedule~ ::      record a timestamp when scheduling time changes
+  - ~lognotereschedule~ ::  record a note when scheduling time changes
+  - ~nologreschedule~ ::    do not record when a scheduling date changes
+  - ~logredeadline~ ::      record a timestamp when deadline changes
+  - ~lognoteredeadline~ ::  record a note when deadline changes
+  - ~nologredeadline~ ::    do not record when a deadline date changes
+  - ~logrefile~ ::          record a timestamp when refiling
+  - ~lognoterefile~ ::      record a note when refiling
+  - ~nologrefile~ ::        do not record when refiling
 
   {{{vindex(org-hide-leading-stars)}}}
   {{{vindex(org-odd-levels-only)}}}
@@ -15908,14 +16266,14 @@ effective only when the file is visited again in a new Emacs session.
   {{{cindex(@code{showstars}\\\, STARTUP keyword)}}}
   {{{cindex(@code{odd}\\\, STARTUP keyword)}}}
   {{{cindex(@code{even}\\\, STARTUP keyword)}}}
-  #+begin_example
-  hidestars  @r{make all but one of the stars starting a headline invisible.}
-  showstars  @r{show all stars starting a headline}
-  indent     @r{virtual indentation according to outline level}
-  noindent   @r{no virtual indentation according to outline level}
-  odd        @r{allow only odd outline levels (1,3,...)}
-  oddeven    @r{allow all outline levels}
-  #+end_example
+
+  #+attr_texinfo: :table-type "table" :indic "@asis"
+  - ~hidestars~ ::  make all but one of the stars starting a headline invisible.
+  - ~showstars~ ::  show all stars starting a headline
+  - ~indent~ ::     virtual indentation according to outline level
+  - ~noindent~ ::   no virtual indentation according to outline level
+  - ~odd~ ::        allow only odd outline levels (1,3,...)
+  - ~oddeven~ ::    allow all outline levels
 
   {{{vindex(org-put-time-stamp-overlays)}}}
   {{{vindex(org-time-stamp-overlay-formats)}}}
@@ -15926,9 +16284,8 @@ effective only when the file is visited again in a new Emacs session.
 
   {{{cindex(@code{customtime}\\\, STARTUP keyword)}}}
 
-  #+begin_example
-  customtime @r{overlay custom time format}
-  #+end_example
+  #+attr_texinfo: :table-type "table" :indic "@asis"
+  - ~customtime~ :: overlay custom time format
 
   {{{vindex(constants-unit-system)}}}
 
@@ -15938,11 +16295,10 @@ effective only when the file is visited again in a new Emacs session.
   {{{cindex(@code{constcgs}\\\, STARTUP keyword)}}}
   {{{cindex(@code{constSI}\\\, STARTUP keyword)}}}
 
-  #+begin_example
-  constcgs   @r{{{{file(constants.el)}}} should use the c-g-s unit system}
-  constSI    @r{{{{file(constants.el)}}} should use the SI unit system}
-  #+end_example
-
+  #+attr_texinfo: :table-type "table" :indic "@asis"
+  - ~constcgs~ ::   {{{file(constants.el)}}} should use the c-g-s unit system
+  - ~constSI~ ::    {{{file(constants.el)}}} should use the SI unit system
+  
   {{{vindex(org-footnote-define-inline)}}}
   {{{vindex(org-footnote-auto-label)}}}
   {{{vindex(org-footnote-auto-adjust)}}}
@@ -15961,17 +16317,16 @@ effective only when the file is visited again in a new Emacs session.
   {{{cindex(@code{fnadjust}\\\, STARTUP keyword)}}}
   {{{cindex(@code{nofnadjust}\\\, STARTUP keyword)}}}
 
-  #+begin_example
-  fninline    @r{define footnotes inline}
-  fnnoinline  @r{define footnotes in separate section}
-  fnlocal     @r{define footnotes near first reference, but not inline}
-  fnprompt    @r{prompt for footnote labels}
-  fnauto      @r{create ~[fn:1]~-like labels automatically (default)}
-  fnconfirm   @r{offer automatic label for editing or confirmation}
-  fnplain     @r{create ~[1]~-like labels automatically}
-  fnadjust    @r{automatically renumber and sort footnotes}
-  nofnadjust  @r{do not renumber and sort automatically}
-  #+end_example
+  #+attr_texinfo: :table-type "table" :indic "@asis"
+  - ~fninline~ ::    define footnotes inline
+  - ~fnnoinline~ ::  define footnotes in separate section
+  - ~fnlocal~ ::     define footnotes near first reference, but not inline
+  - ~fnprompt~ ::    prompt for footnote labels
+  - ~fnauto~ ::      create ~[fn:1]~-like labels automatically (default)
+  - ~fnconfirm~ ::   offer automatic label for editing or confirmation
+  - ~fnplain~ ::     create ~[1]~-like labels automatically
+  - ~fnadjust~ ::    automatically renumber and sort footnotes
+  - ~nofnadjust~ ::  do not renumber and sort automatically
 
   {{{cindex(org-hide-block-startup)}}}
 
@@ -15981,11 +16336,10 @@ effective only when the file is visited again in a new Emacs session.
   {{{cindex(@code{hideblocks}\\\, STARTUP keyword)}}}
   {{{cindex(@code{nohideblocks}\\\, STARTUP keyword)}}}
 
-  #+begin_example
-  hideblocks   @r{Hide all begin/end blocks on startup}
-  nohideblocks @r{Do not hide blocks on startup}
-  #+end_example
-
+  #+attr_texinfo: :table-type "table" :indic "@asis"
+  - ~hideblocks~ ::   Hide all begin/end blocks on startup
+  - ~nohideblocks~ :: Do not hide blocks on startup
+  
   {{{cindex(org-pretty-entities)}}}
 
   The display of entities as UTF-8 characters is governed by the
@@ -15994,10 +16348,9 @@ effective only when the file is visited again in a new Emacs session.
   {{{cindex(@code{entitiespretty}\\\, STARTUP keyword)}}}
   {{{cindex(@code{entitiesplain}\\\, STARTUP keyword)}}}
 
-  #+begin_example
-  entitiespretty  @r{Show entities as UTF-8 characters where possible}
-  entitiesplain   @r{Leave entities plain}
-  #+end_example
+  #+attr_texinfo: :table-type "table" :indic "@asis"
+  - ~entitiespretty~ ::  Show entities as UTF-8 characters where possible
+  - ~entitiesplain~ ::   Leave entities plain
 
 - {{{kbd(#+TAGS:  TAG1(c1) TAG2(c2))}}} ::
   {{{vindex(org-tag-alist)}}}
@@ -16112,7 +16465,6 @@ that the plain text file looks as similar as possible to the Emacs
 display, Org supports you in the following way:
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - Indentation of text below headlines ::
 
   You may indent text below each headline to make the left boundary line up
@@ -16371,7 +16723,6 @@ special commands apply, and by extending an existing active
 region even if the cursor moves across a special context.
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-
 - {{{file(CUA.el)}}} by Kim. F. Storm ::
   {{{cindex(@file{CUA.el})}}}
   {{{cindex(Storm\\\, Kim. F.)}}}
@@ -16388,11 +16739,9 @@ region even if the cursor moves across a special context.
   bindings in Org files, and in the agenda buffer (but not during date
   selection).
 
-  #+begin_example
-  S-UP      @result{}  M-p             S-DOWN     @result{}  M-n
-  S-LEFT    @result{}  M--             S-RIGHT    @result{}  M-+
-  C-S-LEFT  @result{}  M-S--           C-S-RIGHT  @result{}  M-S-+
-  #+end_example
+  | S-UP      {{{result}}}  M-p   | S-DOWN     {{{result}}}  M-n   |
+  | S-LEFT    {{{result}}}  M--   | S-RIGHT    {{{result}}}  M-+   |
+  | C-S-LEFT  {{{result}}}  M-S-- | C-S-RIGHT  {{{result}}}  M-S-+ |
 
   {{{vindex(org-disputed-keys)}}}
 
@@ -16761,7 +17110,7 @@ For example:
 
 {{{cindex(#+ORGTBL)}}}
 #+begin_example
-#+ORGTBL: SEND table_name translation_function arguments....
+,#+ORGTBL: SEND table_name translation_function arguments....
 #+end_example
 
 {{{noindent}}} Here, ~table_name~ is the reference name for the table
@@ -16830,10 +17179,10 @@ then get the following template:
 #+begin_example
 % BEGIN RECEIVE ORGTBL salesfigures
 % END RECEIVE ORGTBL salesfigures
-\begin@{comment@}
+\begin{comment}
 #+ORGTBL: SEND salesfigures orgtbl-to-latex
 | | |
-\end@{comment@}
+\end{comment}
 #+end_example
 
 {{{vindex(@LaTeX{}-verbatim-environments)}}}
@@ -16846,7 +17195,7 @@ now fill in the table---feel free to use the spreadsheet features:[fn:170]
 #+begin_example
 % BEGIN RECEIVE ORGTBL salesfigures
 % END RECEIVE ORGTBL salesfigures
-\begin@{comment@}
+\begin{comment}
 #+ORGTBL: SEND salesfigures orgtbl-to-latex
 | Month | Days | Nr sold | per day |
 |-------+------+---------+---------|
@@ -16855,7 +17204,7 @@ now fill in the table---feel free to use the spreadsheet features:[fn:170]
 | March |   22 |     278 |    12.6 |
 #+TBLFM: $4=$3/$2;%.1f
 % $ (optional extra dollar to keep font-lock happy, see footnote)
-\end@{comment@}
+\end{comment}
 #+end_example
 
 {{{noindent}}} When you are done, press {{{kbd(C-c C-c)}}} in the
@@ -16869,13 +17218,13 @@ table, and tell the command to work as a /splice/, i.e., to not
 produce header and footer commands of the target table:
 
 #+begin_example
-\begin@{tabular@}@{lrrr@}
-Month & \multicolumn@{1@}@{c@}@{Days@} & Nr.\ sold & per day\\
+\begin{tabular}{lrrr}
+Month & \multicolumn{1}{c}{Days} & Nr.\ sold & per day\\
 % BEGIN RECEIVE ORGTBL salesfigures
 % END RECEIVE ORGTBL salesfigures
-\end@{tabular@}
+\end{tabular}
 %
-\begin@{comment@}
+\begin{comment}
 #+ORGTBL: SEND salesfigures orgtbl-to-latex :splice t :skip 2
 | Month | Days | Nr sold | per day |
 |-------+------+---------+---------|
@@ -16883,7 +17232,7 @@ Month & \multicolumn@{1@}@{c@}@{Days@} & Nr.\ sold & per day\\
 | Feb   |   21 |      16 |     0.8 |
 | March |   22 |     278 |    12.6 |
 #+TBLFM: $4=$3/$2;%.1f
-\end@{comment@}
+\end{comment}
 #+end_example
 
 The LaTeX translator function ~orgtbl-to-latex~ is already part of
@@ -16891,7 +17240,7 @@ Orgtbl mode. It uses a ~tabular~ environment to typeset the table and
 marks horizontal lines with ~\hline~. Furthermore, it interprets the
 following parameters (see also see [[Translator functions]]):
 
-#+attr_texinfo: :table-type "table" :indic "@code"
+#+attr_texinfo: :table-type "table" :indic "@asis"
 - ~:splice nil/t~ ::
 
   When set to ~t~, return only table body lines, don't wrap them into a
@@ -16974,7 +17323,7 @@ endings to be ~\\[2mm]~ instead of the default ~\\~, you could just
 overrule the default with:
 
 #+begin_example
-#+ORGTBL: SEND test orgtbl-to-latex :lend " \\\\[2mm]"
+,#+ORGTBL: SEND test orgtbl-to-latex :lend " \\\\[2mm]"
 #+end_example
 
 For a new language, you can either write your own converter function
@@ -16986,7 +17335,7 @@ where table lines are started with {{{samp(!BL!)}}}, ended with
 call the generic translator like this (on a single line!):
 
 #+begin_example
-#+ORGTBL: SEND test orgtbl-to-generic :tstart "!BTBL!" :tend "!ETBL!"
+,#+ORGTBL: SEND test orgtbl-to-generic :tstart "!BTBL!" :tend "!ETBL!"
                               :lstart "!BL! " :lend " !EL!" :sep "\t"
 #+end_example
 
@@ -17038,14 +17387,14 @@ LaTeX file:
 #+begin_example
 % BEGIN RECEIVE ORGLST to-buy
 % END RECEIVE ORGLST to-buy
-\begin@{comment@}
+\begin{comment}
 #+ORGLST: SEND to-buy org-list-to-latex
 - a new house
 - a new computer
   + a new keyboard
   + a new mouse
 - a new life
-\end@{comment@}
+\end{comment}
 #+end_example
 
 Pressing `C-c C-c' on ~a new house~ and will insert the converted
@@ -17068,9 +17417,9 @@ producing the content of the block.
 
 {{{cindex(#+BEGIN:dynamic block)}}}
 #+begin_example
-#+BEGIN: myblock :parameter1 value1 :parameter2 value2 ...
+,#+BEGIN: myblock :parameter1 value1 :parameter2 value2 ...
 
-#+END:
+,#+END:
 #+end_example
 
 Dynamic blocks are updated with the following commands
@@ -17100,9 +17449,9 @@ of a block that keeps track of when the block update function was last
 run:
 
 #+begin_example
-#+BEGIN: block-update-time :format "on %m/%d/%Y at %H:%M"
+,#+BEGIN: block-update-time :format "on %m/%d/%Y at %H:%M"
 
-#+END:
+,#+END:
 #+end_example
 
 {{{noindent}}} The corresponding block writer function could look like
@@ -17315,28 +17664,27 @@ list of values for each agenda item.  Each line in the output will
 contain a number of fields separated by commas.  The fields in a line
 are:
 
-#+begin_example
-category     @r{The category of the item}
-head         @r{The headline, without TODO keyword, TAGS and PRIORITY}
-type         @r{The type of the agenda entry, can be}
-                todo               @r{selected in TODO match}
-                tagsmatch          @r{selected in tags match}
-                diary              @r{imported from diary}
-                deadline           @r{a deadline}
-                scheduled          @r{scheduled}
-                timestamp          @r{appointment, selected by timestamp}
-                closed             @r{entry was closed on date}
-                upcoming-deadline  @r{warning about nearing deadline}
-                past-scheduled     @r{forwarded scheduled item}
-                block              @r{entry has date block including date}
-todo         @r{The TODO keyword, if any}
-tags         @r{All tags including inherited ones, separated by colons}
-date         @r{The relevant date, like 2007-2-14}
-time         @r{The time, like 15:00-16:50}
-extra        @r{String with extra planning info}
-priority-l   @r{The priority letter if any was given}
-priority-n   @r{The computed numerical priority}
-#+end_example
+#+attr_texinfo: :table-type "table" :indic "@code"
+- category ::     The category of the item
+- head ::        The headline, without TODO keyword, TAGS and PRIORITY
+- type ::        The type of the agenda entry, can be
+  - todo ::               selected in TODO match
+  - tagsmatch ::          selected in tags match
+  - diary ::              imported from diary
+  - deadline ::           a deadline
+  - scheduled ::         scheduled
+  - timestamp ::         appointment, selected by timestamp
+  - closed ::            entry was closed on date
+  - upcoming-deadline ::  warning about nearing deadline
+  - past-scheduled ::     forwarded scheduled item
+  - block ::              entry has date block including date
+- todo ::         The TODO keyword, if any
+- tags ::        All tags including inherited ones, separated by colons
+- date ::        The relevant date, like 2007-2-14
+- time ::        The time, like 15:00-16:50
+- extra ::       String with extra planning info
+- priority-l ::   The priority letter if any was given
+- priority-n ::  The computed numerical priority
 
 {{{noindent}}} Time and date will only be given if a timestamp (or
 deadline/scheduled) led to the selection of the item.
@@ -17488,19 +17836,39 @@ visited by the iteration.
 
 SCOPE determines the scope of this command.  It can be any of:
 
-#+begin_example
-nil     @r{the current buffer, respecting the restriction if any}
-tree    @r{the subtree started with the entry at point}
-region  @r{The entries within the active region, if any}
-file    @r{the current buffer, without restriction}
-file-with-archives
-        @r{the current buffer, and any archives associated with it}
-agenda  @r{all agenda files}
-agenda-with-archives
-        @r{all agenda files with any archive files associated with them}
-(file1 file2 ...)
-        @r{if this is a list, all files in the list will be scanned}
-#+end_example
+#+attr_texinfo: :table-type "table" :indic "@code"
+- nil ::     
+
+  The current buffer, respecting the restriction, if any.
+
+- tree ::    
+
+  The subtree started with the entry at point.
+
+- region ::  
+
+  The entries within the active region, if any.
+
+- file ::    
+
+  The current buffer, without restriction.
+
+- file-with-archives ::
+        
+  The current buffer, and any archives associated with it.
+
+- agenda ::  
+
+  All agenda files.
+
+- agenda-with-archives ::
+        
+  All agenda files with any archive files associated with them.
+
+- (file1 file2 ...) ::
+        
+  If this is a list, all files in the list will be scanned.
+
 
 {{{noindent}}} The remaining args are treated as settings for the
 skipping facilities of the scanner. The following items can be given
@@ -17508,15 +17876,21 @@ here:
 
 {{{vindex(org-agenda-skip-function)}}}
 
-#+begin_example
-archive   @r{skip trees with the archive tag}
-comment   @r{skip trees with the COMMENT keyword}
-function or Lisp form
-          @r{will be used as value for ~org-agenda-skip-function~,}
-          @r{so whenever the function returns t, FUNC}
-          @r{will not be called for that entry and search will}
-          @r{continue from the point where the function leaves it}
-#+end_example
+#+attr_texinfo: :table-type "table" :indic "@asis"
+- ~archive~ ::   
+
+  Skip trees with the archive tag.
+
+- ~comment~ ::   
+
+  Skip trees with the COMMENT keyword.
+
+- function or Lisp form ::
+
+  Will be used as value for ~org-agenda-skip-function~, so whenever the
+  function returns t, FUNC will not be called for that entry and search
+  will continue from the point where the function leaves it.
+
 {{{enddefun}}}
 
 The function given to that mapping routine can really do anything you like.
@@ -18116,717 +18490,6 @@ separately from the collection, you can do so by adding a copy of the
 license to the document, as described in section 6 of the license.
 #+END_QUOTE
 
-* Footnotes
-
-[fn:1] The output from install-info (if any) is system dependent. In
-particular, Debian and its derivatives use two different versions of
-install-info. You may safely ignore the message:
-#+begin_example
-  This is not dpkg install-info anymore, but GNU install-info
-  See the man page for ginstall-info for command line arguments
-#+end_example
-if you see it.
-
-[fn:2]  If your Emacs distribution does not come with Org,
-the function ~org-version~ will not be defined.
-
-[fn:3]  The ~master~ branch is where development takes place.
-
-[fn:4] Export to iCalendar supports TODO and agenda items only.
-
-[fn:5] If you don't use font-lock globally, turn it on in an Org
-buffer with ~(add-hook 'org-mode-hook 'turn-on-font-lock)~.
-
-[fn:6] Please consider subscribing to the mailing list in order to
-minimize the work the mailing list moderators have to do.
-
-[fn:7] Easy templates insert lowercase keywords and Babel dynamically
-inserts ~#+results~.
-
-[fn:8] See the variables ~org-special-ctrl-a/e~, ~org-special-ctrl-k~,
-and ~org-ctrl-k-protect-subtree~ to configure special behavior of
-{{{kbd(C-a)}}}, {{{kbd(C-e)}}}, and {{{kbd(C-k)}}} in headlines. Note
-that clocking only works with headings indented less than 30 stars.
-
-[fn:9]  See the option ~org-cycle-global-at-bob~.
-
-[fn:10] The indirect buffer will contain the entire buffer, but will
-be narrowed to the current tree. Editing the indirect buffer will also
-change the original buffer, but without affecting visibility in that
-buffer. For more information about indirect buffers,
-[[info:emacs#Indirect Buffers]].
-
-
-[fn:11] If you do not want the line to be split, customize the
-variable ~org-M-RET-may-split-line~.
-
-[fn:12] This does not work under XEmacs, because XEmacs uses selective
-display for outlining, not text properties.
-
-[fn:13] This depends on the option ~org-remove-highlights-with-change~.
-
-[fn:14] See also the variables ~org-show-hierarchy-above~,
-~org-show-following-heading~, ~org-show-siblings~, and
-~org-show-entry-below~ for detailed control on how much context is
-shown around each match.
-
-[fn:15] When using ~*~ as a bullet, lines must be indented or they
-will be seen as top-level headlines. Also, when you are hiding leading
-stars to get a clean outline view, plain list items starting with a
-star may be hard to distinguish from true headlines. In short: even
-though ~*~ is supported, it may be better to not use it for plain list
-items.
-
-[fn:16] You can also get {{{samp(a.)}}}, {{{samp(A.)}}},
-{{{samp(a))}}} and {{{samp(A))}}} by configuring
-~org-alphabetical-lists~. To minimize confusion with normal text,
-those are limited to one character only. Beyond that limit, bullets
-will automatically fall back to numbers.
-
-[fn:17] If there's a checkbox in the item, the cookie must be put
-/before/ the checkbox. If you have activated alphabetical lists, you
-can also use counters like ~[@b]~.
-
-[fn:18] See also ~org-empty-line-terminates-plain-lists~.
-
-[fn:19] Org only changes the filling settings for Emacs. For XEmacs,
-you should use Kyle E. Jones' {{{file(filladapt.el)}}}.
-
-[fn:20] If you do not want the item to be split, customize the
-variable ~org-M-RET-may-split-line~.
-
-[fn:21] If you want to cycle around items that way, you may customize
-~org-list-use-circular-motion~.
-
-[fn:22] See ~org-list-use-circular-motion~ for a cyclic behavior.
-
-[fn:23] You can filter out any of them by configuring
-~org-plain-list-ordered-item-terminator~.
-
-[fn:24] You can define additional drawers on a per-file basis with a
-line like ~#+DRAWERS: HIDDEN STATE~.
-
-[fn:25] The corresponding in-buffer options are ~fnadjust~ and
-~nofnadjust~.
-
-[fn:26] The corresponding in-buffer setting is: ~#+STARTUP: fninline~
-or ~#+STARTUP: nofninline~.
-
-[fn:27] To insert a vertical bar into a table field, use ~\\vert~ or,
-inside a word ~abc\\vert{}def~.
-
-[fn:28] This feature does not work on XEmacs.
-
-[fn:29] Centering does not work inside Emacs, but it does have an
-effect when exporting to HTML.
-
-[fn:30] The computation time scales as O(N^2) because table FOO is
-parsed for each field to be copied.
-
-[fn:31] Org will understand references typed by the user as
-{{{samp(B4)}}}, but it will not use this syntax when offering a
-formula for editing. You can customize this behavior using the
-variable ~org-table-use-standard-references~.
-
-[fn:32] The ~printf~ reformatting is limited in precision because the
-value passed to it is converted into an ~integer~ or ~double~. The
-~integer~ is limited in size by truncating the signed value to 32
-bits. The ~double~ is limited in precision to 64 bits overall which
-leaves approximately 16 significant decimal digits.
-
-[fn:33] Such names must start with an alphabetic character and use
-only alphanumeric/underscore characters.
-
-[fn:34] For backward compatibility you can also use special names like
-~$LR5~ and ~$LR12~ to refer in a stable way to the fifth and twelfth
-field in the last row of the table. However, this syntax is
-deprecated, it should not be used for new documents. Use ~@>$~
-instead.
-
-[fn:35] The file {{{file(constants.el)}}} can supply the values of
-constants in two different unit systems, ~SI~ and ~cgs~. Which one is
-used depends on the value of the variable ~constants-unit-system~. You
-can use the ~#+STARTUP~ options ~constSI~ and ~constcgs~ to set this
-value for the current buffer.
-
-[fn:36] Note that text before the first headline is usually not
-exported, so the first such target should be after the first headline,
-or in the line directly before the first headline.
-
-[fn:37] To insert a link targeting a headline, in-buffer completion
-can be used. Just type a star followed by a few optional letters into
-the buffer and press {{{kbdkey(M-,TAB)}}}. All headlines in the
-current buffer will be offered as completions.
-
-[fn:38] The actual behavior of the search will depend on the value of
-the variable ~org-link-search-must-match-exact-headline~. If its value
-is ~nil~, then a fuzzy text search will be done. If it is ~t~, then
-only the exact headline will be matched. If the value is
-{{{samp('query-to-create)}}}, then an exact headline will be searched;
-if it is not found, then the user will be queried to create it.
-
-[fn:39] If the headline contains a timestamp, it will be removed from
-the link and result in a wrong link -- you should avoid putting a
-timestamp in the headline.
-
-[fn:40] Note that you don't have to use this command to insert a link.
-Links in Org are plain text, and you can type or paste them straight
-into the buffer. By using this command, the links are automatically
-enclosed in double brackets, and you will be asked for the optional
-descriptive text.
-
-[fn:41] After insertion of a stored link, the link will be removed
-from the list of stored links. To keep it in the list later use, use a
-triple {{{kbd(C-u)}}} prefix argument to {{{kbd(C-c C-l)}}}, or
-configure the option ~org-keep-stored-link-after-insertion~.
-
-[fn:42] This works by calling a special function
-~org-PREFIX-complete-link~.
-
-[fn:43] See the variable ~org-display-internal-link-with-indirect-buffer~.
-
-[fn:44] with corresponding ~#+STARTUP~ keywords ~inlineimages~ and
-~noinlineimages~.
-
-[fn:45] Of course, you can make a document that contains only long
-lists of TODO items, but this is not required.
-
-[fn:46] This is also true for the {{{kbd(t)}}} command in the timeline
-and agenda buffers.
-
-[fn:47] All characters are allowed except ~@^!~, which have a special
-meaning here.
-
-[fn:48] Check also the variable ~org-fast-tag-selection-include-todo~,
-it allows you to change the TODO state through the tags interface
-([[Setting tags]]), in case you like to mingle the two concepts. Note that
-this means you need to come up with unique keys across both sets of
-keywords.
-
-[fn:49] Org mode parses these lines only when Org mode is activated
-after visiting a file. {{{kbd(C-c C-c)}}} with the cursor in a line
-starting with {{{samp(#+)}}} is simply restarting Org mode for the
-current buffer.
-
-[fn:50] Changing the variable ~org-todo-keywords~ only becomes
-effective after restarting Org mode in a buffer.
-
-[fn:51] The corresponding in-buffer setting is: ~#+STARTUP: logdone~.
-
-[fn:52] The corresponding in-buffer setting is: ~#+STARTUP: lognotedone~.
-
-[fn:53] See the variable ~org-log-states-order-reversed~.
-
-[fn:54] Note that the ~LOGBOOK~ drawer is unfolded when pressing
-{{{key(SPC)}}} in the agenda to show an entry---use {{{key(C-u SPC)}}}
-to keep it folded here.
-
-[fn:55] It is possible that Org mode will record two timestamps when
-you are using both ~org-log-done~ and state change logging. However,
-it will never prompt for two notes---if you have configured both, the
-state change recording note will take precedence and cancel the
-{{{samp(Closing Note)}}}.
-
-[fn:56] See also the option ~org-priority-start-cycle-with-default~.
-
-[fn:57] To keep subtasks out of the global TODO list, see the
-~org-agenda-todo-list-sublevels~.
-
-[fn:58] With the exception of description lists. But you can allow it
-by modifying ~org-list-automatic-rules~ accordingly.
-
-[fn:59] Set the variable ~org-hierarchical-checkbox-statistics~ if you
-want such cookies to count all checkboxes below the cookie, not just
-those belonging to direct children.
-
-[fn:60] {{{kbd(C-u C-c C-c)}}} on the /first/ item of a list with no
-checkbox will add checkboxes to the rest of the list.
-
-[fn:61] As with all these in-buffer settings, pressing 
-{{{kbd(C-c C-c)}}} activates any changes in the line.
-
-[fn:62] This is only true if the search does not involve more complex
-tests including properties (see [[Property searches]]).
-
-[fn:63] Keys will automatically be assigned to tags that have no
-configured keys.
-
-[fn:64] Contributed packages are not part of Emacs, but are
-distributed with the main distribution of Org (visit
-[[http://orgmode.org]]).
-
-[fn:65] In this simplest form, the day name is optional when you type
-the date yourself. However, any dates inserted or modified by Org will
-add that day name, for reading convenience.
-
-[fn:66] This is inspired by the standard ISO 8601 date/time format. To
-use an alternative format, see [[Custom time format]].
-
-[fn:67] When working with the standard diary sexp functions, you need
-to be very careful with the order of the arguments. That order depends
-evilly on the variable ~calendar-date-style~ (or, for older Emacs
-versions, ~european-calendar-style~). For example, to specify a date
-December 12, 2005, the call might look like ~(diary-date 12 1 2005)~
-or ~(diary-date 1 12 2005)~ or ~(diary-date 2005 12 1)~, depending on
-the settings. This has been the source of much confusion. Org mode
-users can resort to special versions of these functions like
-~org-date~ or ~org-anniversary~. These work just like the
-corresponding ~diary-~ functions, but with stable ISO order of
-arguments (year, month, day) wherever applicable, independent of the
-value of ~calendar-date-style~.
-
-[fn:68] See the variable ~org-read-date-prefer-future~. You may
-set that variable to the symbol ~time~ to even make a time before now
-shift the date to tomorrow.
-
-[fn:69] If you don't need/want the calendar, configure the variable
-~org-popup-calendar-for-date-prompt~.
-
-[fn:70] If you find this distracting, turn off the display with
-~org-read-date-display-live~.
-
-[fn:71] It will still be listed on that date after it has been marked
-DONE. If you don't like this, set the variable
-~org-agenda-skip-scheduled-if-done~.
-
-[fn:72] The {{{samp(SCHEDULED)}}} and {{{samp(DEADLINE)}}} dates are
-inserted on the line right below the headline. Don't put any text
-between this line and the headline.
-
-[fn:73] Note the corresponding ~#+STARTUP~ keywords ~logredeadline~,
-~lognoteredeadline~, and ~nologredeadline~.
-
-[fn:74] Note the corresponding ~#+STARTUP~ keywords ~logreschedule~,
-~lognotereschedule~, and ~nologreschedule~.
-
-[fn:75] In fact, the target state is taken from, in this sequence, the
-~REPEAT_TO_STATE~ property or the variable ~org-todo-repeat-to-state~.
-If neither of these is specified, the target state defaults to the
-first state of the TODO state sequence.
-
-[fn:76] You can change this using the option ~org-log-repeat~, or the
-~#+STARTUP~ options ~logrepeat~, ~lognoterepeat~, and ~nologrepeat~.
-With ~lognoterepeat~, you will also be prompted for a note.
-
-[fn:77] Clocking only works if all headings are indented with less
-than 30 stars. This is a hardcoded limitation of ~lmax~ in
-~org-clock-sum~.
-
-[fn:78] To resume the clock under the assumption that you have worked
-on this task while outside Emacs, use ~(setq org-clock-persist t)~.
-
-[fn:79] The last reset of the task is recorded by the ~LAST_REPEAT~
-property.
-
-[fn:80] See also the variable ~org-clock-modeline-total~.
-
-[fn:81] To add an effort estimate ``on the fly'', hook a function
-doing this to ~org-clock-in-prepare-hook~.
-
-[fn:82] The corresponding in-buffer setting is: 
-~#+STARTUP: lognoteclock-out~.
-
-[fn:83] Note that all parameters must be specified in a single
-line---the line is broken here only to fit it into the manual.
-
-[fn:84] On computers using Mac OS X, idleness is based on actual user
-idleness, not just Emacs' idle time. For X11, you can install a
-utility program {{{file(x11idle.c)}}}, available in the
-~contrib/scripts~ directory of the Org git distribution, to get the
-same general treatment of idleness. On other systems, idle time refers
-to Emacs idle time only.
-
-[fn:85] You may change the property being used with the variable
-~org-effort-property~.
-
-[fn:86] Please note the pitfalls of summing hierarchical data in a
-flat list (see [[Agenda column view]]).
-
-[fn:87] Please select your own key, {{{kbd(C-c c)}}} is only a
-suggestion.
-
-[fn:88] If you need one of these sequences literally, escape the
-{{{kbd(%)}}} with a backslash.
-
-[fn:89] If you define your own link types (see [[Adding hyperlink
-types]]), any property you store with ~org-store-link-props~ can be
-accessed in capture templates in a similar way.
-
-[fn:91] If you move entries or Org files from one directory to
-another, you may want to configure ~org-attach-directory~ to contain
-an absolute path.
-
-[fn:92] Note the corresponding ~#+STARTUP~ keywords ~logrefile~,
-~lognoterefile~, and ~nologrefile~.
-
-[fn:93] For backward compatibility, the following also works: If there
-are several such lines in a file, each specifies the archive location
-for the text below it. The first such line also applies to any text
-before its definition. However, using this method is /strongly/
-deprecated as it is incompatible with the outline structure of the
-document. The correct method for setting multiple archive locations in
-a buffer is using properties.
-
-[fn:94] If the value of that variable is not a list, but a single file
-name, then the list of agenda files will be maintained in that
-external file.
-
-[fn:95] When using the dispatcher, pressing {{{kbd(<)}}} before
-selecting a command will actually limit the command to the current
-file, and ignore ~org-agenda-files~ until the next dispatcher command.
-
-[fn:96] For backward compatibility, you can also press {{{kbd(1)}}} to
-restrict to the current buffer.
-
-[fn:97] For backward compatibility, you can also press {{{kbd(0)}}} to
-restrict to the current region/subtree.
-
-[fn:98] For backward compatibility, the universal prefix
-{{{kbd(C-u)}}} causes all TODO entries to be listed before the agenda.
-This feature is deprecated, use the dedicated TODO list, or a block
-agenda instead (see [[Block agenda]]).
-
-[fn:99] But see [[x-agenda-skip-entry-regexp][skipping entries based on regexp]].
-
-[fn:100] For backward compatibility, the following also works: if
-there are several such lines in a file, each specifies the category
-for the text below it. The first category also applies to any text
-before the first CATEGORY line. However, using this method is
-/strongly/ deprecated as it is incompatible with the outline structure
-of the document. The correct method for setting multiple categories in
-a buffer is using a property.
-
-[fn:101] Only tags filtering will be respected here, effort filtering
-is ignored.
-
-[fn:102] Custom commands can preset a filter by binding the variable
-~org-agenda-tag-filter-preset~ as an option. This filter will then be
-applied to the view and persist as a basic filter through refreshes
-and more secondary filtering. The filter is a global property of the
-entire agenda view---in a block agenda, you should only set this in
-the global options section, not in the section of an individual block.
-
-[fn:103] The Emacs diary file is parsed for the agenda when
-~org-agenda-include-diary~ is set.
-
-[fn:104] You can provide a description for a prefix key by inserting a
-cons cell with the prefix and the description.
-
-[fn:105] You need to install Hrvoje Niksic's {{{file(htmlize.el)}}}.
-
-[fn:106] To create PDF output, the ghostscript {{{file(ps2pdf)}}}
-utility must be installed on the system. Selecting a PDF file will
-also create the postscript file.
-
-[fn:107] If you want to store standard views like the weekly agenda or
-the global TODO list as well, you need to define custom commands for
-them in order to be able to specify file names.
-
-[fn:108] Quoting depends on the system you use, please check the FAQ
-for examples.
-
-[fn:109] This works automatically for the HTML backend (it requires
-version 1.34 of the {{{file(htmlize.el)}}} package, which is
-distributed with Org). Fontified code chunks in LaTeX can be
-achieved using either the listings package or the [[http://code.google.com/p/minted][minted]] package.
-Refer to ~org-export-latex-listings~ documentation for details.
-
-[fn:110] Code in {{{samp(src)}}} blocks may also be evaluated either
-interactively or on export. See see [[Working with source code]] for more
-information on evaluating code blocks.
-
-[fn:111] Adding ~-k~ to ~-n -r~ will /keep/ the labels in the source
-code while using line numbers for the links, which might be useful to
-explain those in an Org mode example code.
-
-[fn:112] Upon exit, lines starting with {{{samp(*)}}}, {{{samp(\,*)}}},
-{{{samp(#+)}}} and {{{samp(\,#+)}}} will get a comma prepended, to keep
-them from being interpreted by Org as outline nodes or special syntax.
-These commas will be stripped for editing with {{{kbd(C-c ')}}}, and
-also for export.
-
-[fn:113] You may select a different-mode with the variable
-~org-edit-fixed-width-region-mode~.
-
-[fn:114] LaTeX is a macro system based on Donald E. Knuth's TeX
-system. Many of the features described here as LaTeX are really
-from TeX, but for simplicity I am blurring this distinction.
-
-[fn:115] You can turn this on by default by setting the variable
-~org-pretty-entities~, or on a per-file base with the ~#+STARTUP~
-option ~entitiespretty~.
-
-[fn:116] Checksums are stored automatically in the file
-{{{file(checksums.dat)}}}.
-
-[fn:117] If you plan to use this regularly or on pages with
-significant page views, you should install {{{file(MathJax)}}} on your
-own server in order to limit the load of our server.
-
-[fn:118] For this to work you need to be on a system with a working
-LaTeX installation. You also need the {{{file(dvipng)}}} program or
-the {{{file(convert)}}}, respectively available at
-[[http://sourceforge.net/projects/dvipng/]] and from the
-{{{file(ImageMagick)}}} suite. The LaTeX header that will be used
-when processing a fragment can be configured with the variable
-~org-format-latex-header~.
-
-[fn:119] When {{{file(MathJax)}}} is used, only the environment
-recognized by {{{file(MathJax)}}} will be processed. When
-{{{file(dvipng)}}} is used to create images, any LaTeX environments
-will be handled.
-
-[fn:120] Org mode has a method to test if the cursor is inside such a
-fragment, see the documentation of the function
-~org-inside-LaTeX-fragment-p~.
-
-[fn:121] If you want to configure many options this way, you can use
-several ~#+OPTIONS~ lines.
-
-[fn:122] To make this behavior the default, customize the variable
-~org-export-run-in-background~.
-
-[fn:123] This requires ~transient-mark-mode~ be turned on.
-
-[fn:124] To select the current subtree, use {{{kbd(C-c @)}}}.
-
-[fn:125] This requires ~transient-mark-mode~ be turned on.
-
-[fn:126] To select the current subtree, use {{{kbd(C-c @@)}}}.
-
-[fn:127] But see the variable ~org-export-html-inline-images~.
-
-[fn:128]  If you plan to use this regularly or on pages with
-significant page views, you should install MathJax on your own server
-in order to limit the load of our server. Installation instructions
-can be found on the MathJax website, see
-[[http://www.mathjax.org/resources/docs/?installation.html]].
-
-[fn:129] If the classes on TODO keywords and tags lead to conflicts,
-use the variables ~org-export-html-todo-kwd-class-prefix~ and
-~org-export-html-tag-class-prefix~ to make them unique.
-
-[fn:130] This style is defined in the constant
-~org-export-html-style-default~, which you should not modify. To turn
-inclusion of these defaults off, customize
-~org-export-html-style-include-default~.
-
-[fn:131] The default LaTeX output is designed for processing with
-~pdftex~ or LaTeX. It includes packages that are not compatible
-with ~xetex~ and possibly ~luatex~. See the variables
-~org-export-latex-default-packages-alist~ and
-~org-export-latex-packages-alist~.
-
-[fn:132] This requires ~transient-mark-mode~ be turned on.
-
-[fn:133] To select the current subtree, use {{{kbd(C-c @)}}}.
-
-[fn:134] Into which the values of
-~org-export-latex-default-packages-alist~ and
-~org-export-latex-packages-alist~ are spliced.
-
-[fn:135] One can also take advantage of this option to pass other,
-unrelated options into the figure or table environment. For an example
-see the section ``Exporting org files'' in
-[[http://orgmode.org/worg/org-hacks.html]].
-
-[fn:136] This requires ~transient-mark-mode~ to be turned on.
-
-[fn:137] To select the current subtree, use {{{kbd(C-c @)}}}.
-
-[fn:138] See [[http://docs.oasis-open.org/office/v1.2/OpenDocument-v1.2.html][Open Document Format for Office Applications (OpenDocument)
-Version 1.2]].
-
-[fn:139] ODT export was added in Org mode version 7.8.
-
-[fn:140] This requires ~transient-mark-mode~ to be turned on.
-
-[fn:141] To select the current subtree, use {{{kbd(C-c @)}}}.
-
-[fn:142] The column widths are interpreted as weighted ratios with the
-default weight being 1.
-
-[fn:143] Use of {{{file(ImageMagick)}}} is only desirable. However, if
-you routinely produce documents that have large images or you export
-your Org files that has images using a Emacs batch script, then the
-use of {{{file(ImageMagick)}}} is mandatory.
-
-[fn:144] See [[http://www.mathtoweb.com/cgi-bin/mathtoweb_home.pl][MathToWeb]].
-
-[fn:145] Your {{{file(htmlfontify.el)}}} library must at least be at
-Emacs 24.1 levels for fontification to be turned on.
-
-[fn:146] See [[http://docs.oasis-open.org/office/v1.2/OpenDocument-v1.2.html][OpenDocument-v1.2 Specification]].
-
-[fn:147] See the ~<table:table-template>~ element of the
-OpenDocument-v1.2 specification.
-
-[fn:148] See the attributes ~table:template-name~,
-~table:use-first-row-styles~, ~table:use-last-row-styles~,
-~table:use-first-column-styles~, ~table:use-last-column-styles~,
-~table:use-banding-rows-styles~, and ~table:use-banding-column-styles~
-of the ~<table:table>~ element in the OpenDocument-v1.2 specification.
-
-[fn:149] Note that {{{file(.odt)}}} files are {{{samp(zip)}}}
-archives.
-
-[fn:150] See the variables ~org-icalendar-use-deadline~ and
-~org-icalendar-use-scheduled~.
-
-[fn:151] To add inherited tags or the TODO state, configure the
-variable ~org-icalendar-categories~.
-
-[fn:152] The LOCATION property can be inherited from higher in the
-hierarchy if you configure ~org-use-property-inheritance~ accordingly.
-
-[fn:153] The files {{{file(file-source.org)}}} and
-{{{file(file-source.org.html)}}} if source and publishing directories
-are equal. Note that with this kind of setup, you need to add
-~:exclude "-source\\.org"~ to the project definition in
-~org-publish-project-alist~ to prevent the published source files from
-being considered as new org files the next time the project is
-published.
-
-[fn:154] Note that {{{samp(src)}}} blocks may be inserted using Org
-mode's [[Easy templates]] system.
-
-[fn:155] Whenever code is evaluated there is a potential for that code
-to do harm. Org mode provides safeguards to ensure that code is only
-evaluated after explicit confirmation from the user. For information
-on these safeguards (and on how to disable them) see [[Code evaluation
-security]].
-
-[fn:156] The ~org-babel-no-eval-on-ctrl-c-ctrl-c~ variable can be used
-to remove code evaluation from the {{{kbd(C-c C-c)}}} key binding.
-
-[fn:157] Note that evaluation of header arguments is guaranteed to
-take place in the original Org mode file, while there is no such
-guarantee for evaluation of the code block body.
-
-[fn:158] The example requires that property inheritance be turned on
-for the ~noweb-ref~ property, see [[Property inheritance]].
-
-[fn:159]  In certain languages this also contains the error output
-stream; this is an area for future work.
-
-[fn:160] The last evaluation performed by the interpreter is obtained
-in a language-specific manner: the value of the variable ~_~ in Python
-and Ruby, and the value of ~.Last.value~ in R.
-
-[fn:161] Emacs 23 and Org mode 6.29 are required.
-
-[fn:162] Note that Emacs 23.1 can actually crash with
-~org-indent-mode~.
-
-[fn:163] Note that ~org-indent-mode~ also sets the ~wrap-prefix~
-property, such that ~visual-line-mode~ (or purely setting ~word-wrap~)
-wraps long lines (including headlines) correctly indented.
-
-[fn:164] See the variable ~org-indent-indentation-per-level~.
-
-[fn:165] Turning on ~org-indent-mode~ sets ~org-hide-leading-stars~ to
-~t~ and ~org-adapt-indentation~ to ~nil~.
-
-[fn:166] See also the variable ~org-adapt-indentation~.
-
-[fn:167] When you need to specify a level for a property search or
-refile targets, ~LEVEL=2~ will correspond to 3 stars, etc.
-
-[fn:168] The {{{file(org-R.el)}}} package has been replaced by the
-Org mode functionality described in [[Working with source code]] and is
-now obsolete.
-
-[fn:169] By default this works only for LaTeX, HTML, and Texinfo.
-Configure the variable ~orgtbl-radio-tables~ to install templates for
-other modes.
-
-[fn:170] If the {{{samp(#+TBLFM)}}} line contains an odd number of
-dollar characters, this may cause problems with font-lock in LaTeX
-mode. As shown in the example you can fix this by adding an extra line
-inside the ~comment~ environment that is used to balance the dollar
-expressions. If you are using AUCTeX with the font-latex library, a
-much better solution is to add the ~comment~ environment to the
-variable ~LaTeX-verbatim-environments~.
-
-[fn:171] The HTML translator uses the same code that produces tables
-during HTML export.
-
-[fn:172] Note that, when using ~org-odd-levels-only~, a level number
-corresponds to order in the hierarchy, not to the number of stars.
-
-[fn:173] If you cannot use Dropbox, or if your version of MobileOrg
-does not support it, you can use a webdav server. For more
-information, check out the documentation of MobileOrg and also this
-[[http://orgmode.org/worg/org-faq.html#mobileorg_webdav][FAQ entry]].
-
-[fn:174] While creating the agendas, Org mode will force ID properties
-on all referenced entries, so that these entries can be uniquely
-identified if /MobileOrg/ flags them for further action. If you do not
-want to get these properties in so many entries, you can set the
-variable ~org-mobile-force-id-on-agenda-items~ to ~nil~. Org mode will
-then rely on outline paths, in the hope that these will be unique
-enough.
-
-[fn:175] The file {{{file(mobileorg.org)}}} will be empty after this
-operation.
-
-[fn:176] Note, however, that there is a subtle difference. The view
-created automatically by {{{kbdkey(M-x org-mobile-pull ,RET)}}} is
-guaranteed to search all files that have been addressed by the last
-pull. This might include a file that is not currently in your list of
-agenda files. If you later use {{{kbd(C-c a ?)}}} to regenerate the
-view, only the current agenda files will be searched.
-
-[fn:177]   The {{{file(calc)}}} package has the non-standard
-convention that ~/~ has lower precedence than ~*~, so that ~a/b*c~ is
-interpreted as ~a/(b*c)~.
-
-[fn:178] If you can safely store the password in your Emacs setup, you
-might also want to configure ~org-mobile-encryption-password~. Please
-read the docstring of that variable. Note that encryption will apply
-only to the contents of the {{{file(.org)}}} files. The file names
-themselves will remain visible.
-
-[fn:179] ~org-export-date-timestamp-format~ defines how this
-timestamp will be exported.
-
-[fn:180] For backward compatibility, the universal prefix
-{{{kbd(C-u)}}} causes all TODO entries to be listed before the agenda.
-This feature is deprecated, use the dedicated TODO list, or a block
-agenda instead (see [[Block agenda]]).
-
-[fn:181] But see [[x-agenda-skip-entry-regexp][skipping entries based on regexp]].
-
-[fn:182] For backward compatibility, line numbers can also follow a
-single colon.
-
-[fn:183] You can provide a description for a prefix key by inserting a
-cons cell with the prefix and the description.
-
-[fn:184] For HTML you need to install Hrvoje Niksic's
-{{{file(htmlize.el)}}}. To create PDF output, the ghostscript
-{{{file(ps2pdf)}}} utility must be installed on the system. Selecting
-a PDF file will also create the postscript file.
-
-[fn:185] If you want to store standard views like the weekly agenda or
-the global TODO list as well, you need to define custom commands for
-them in order to be able to specify file names.
-
-[fn:186] Quoting depends on the system you use, please check the FAQ
-for examples.
-
-[fn:187] This refers to the message date header field.
-
-[fn:188]  This refers to the date as an active timestamp.
-
-[fn:189] This refers to the date as inactive timestamp.
-
-[fn:190] This refers either "to NAME" or "from NAME". This will always
-be the other, not the user. See the variable
-~org-from-is-user-regexp~.
-
-[fn:191] This is for messages, also all email fields.
-
 * About orgmanual.org                                              :noexport:
 This document intends to be Org mode source for the Org mode manual
 and the Org mode guide. It is intended to be a major revision of the
@@ -19401,6 +19064,16 @@ This section contains source code blocks that help translate from
   (query-replace-regexp "@i{\\([^}]*\\)}" "/\\1/" nil))
 #+end_src
 
+#+name: tsd-b-to-markup
+#+header: :results silent
+#+header: :eval no-export
+#+begin_src emacs-lisp
+(defun tsd-b-to-markup ()
+  "Convert @b to markup."
+  (interactive)
+  (query-replace-regexp "@b{\\([^}]*\\)}" "*\\1*" nil))
+#+end_src
+
 #+name: tsd-lisp-begin
 #+header: :results silent
 #+header: :eval no-export
@@ -19420,3 +19093,687 @@ This section contains source code blocks that help translate from
   (interactive)
   (query-replace "@end lisp" "#+end_src" nil))
 #+end_src
+
+* Footnotes
+
+[fn:4] Export to iCalendar supports TODO and agenda items only.
+
+[fn:2] If your Emacs distribution does not come with Org,
+the function ~org-version~ will not be defined.
+
+[fn:3] The ~master~ branch is where development takes place.
+
+[fn:1] DEFINITION NOT FOUND: fn:1
+
+[fn:5] If you don't use font-lock globally, turn it on in an Org
+buffer with ~(add-hook 'org-mode-hook 'turn-on-font-lock)~.
+
+[fn:6] Please consider subscribing to the mailing list in order to
+minimize the work the mailing list moderators have to do.
+
+[fn:7] Easy templates insert lowercase keywords and Babel dynamically
+inserts ~#+results~.
+
+[fn:8] See the variables ~org-special-ctrl-a/e~, ~org-special-ctrl-k~,
+and ~org-ctrl-k-protect-subtree~ to configure special behavior of
+{{{kbd(C-a)}}}, {{{kbd(C-e)}}}, and {{{kbd(C-k)}}} in headlines. Note
+that clocking only works with headings indented less than 30 stars.
+
+[fn:9] See the option ~org-cycle-global-at-bob~.
+
+[fn:10] The indirect buffer will contain the entire buffer, but will
+be narrowed to the current tree. Editing the indirect buffer will also
+change the original buffer, but without affecting visibility in that
+buffer. For more information about indirect buffers,
+[[info:emacs#Indirect Buffers]].
+
+[fn:11] If you do not want the line to be split, customize the
+variable ~org-M-RET-may-split-line~.
+
+[fn:14] See also the variables ~org-show-hierarchy-above~,
+~org-show-following-heading~, ~org-show-siblings~, and
+~org-show-entry-below~ for detailed control on how much context is
+shown around each match.
+
+[fn:13] This depends on the option ~org-remove-highlights-with-change~.
+
+[fn:12] This does not work under XEmacs, because XEmacs uses selective
+display for outlining, not text properties.
+
+[fn:15] When using ~*~ as a bullet, lines must be indented or they
+will be seen as top-level headlines. Also, when you are hiding leading
+stars to get a clean outline view, plain list items starting with a
+star may be hard to distinguish from true headlines. In short: even
+though ~*~ is supported, it may be better to not use it for plain list
+items.
+
+[fn:23] You can filter out any of them by configuring
+~org-plain-list-ordered-item-terminator~.
+
+[fn:16] You can also get {{{samp(a.)}}}, {{{samp(A.)}}},
+{{{samp(a))}}} and {{{samp(A))}}} by configuring
+~org-alphabetical-lists~. To minimize confusion with normal text,
+those are limited to one character only. Beyond that limit, bullets
+will automatically fall back to numbers.
+
+[fn:17] If there's a checkbox in the item, the cookie must be put
+/before/ the checkbox. If you have activated alphabetical lists, you
+can also use counters like ~[@b]~.
+
+[fn:18] See also ~org-empty-line-terminates-plain-lists~.
+
+[fn:19] Org only changes the filling settings for Emacs. For XEmacs,
+you should use Kyle E. Jones' {{{file(filladapt.el)}}}.
+
+[fn:20] If you do not want the item to be split, customize the
+variable ~org-M-RET-may-split-line~.
+
+[fn:21] If you want to cycle around items that way, you may customize
+~org-list-use-circular-motion~.
+
+[fn:22] See ~org-list-use-circular-motion~ for a cyclic behavior.
+
+[fn:24] You can define additional drawers on a per-file basis with a
+line like ~#+DRAWERS: HIDDEN STATE~.
+
+[1] DEFINITION NOT FOUND: 1
+
+[fn:26] The corresponding in-buffer setting is: ~#+STARTUP: fninline~
+or ~#+STARTUP: nofninline~.
+
+[fn:25] The corresponding in-buffer options are ~fnadjust~ and
+~nofnadjust~.
+
+[fn:27] To insert a vertical bar into a table field, use ~\\vert~ or,
+inside a word ~abc\\vert{}def~.
+
+[fn:28] This feature does not work on XEmacs.
+
+[fn:29] Centering does not work inside Emacs, but it does have an
+effect when exporting to HTML.
+
+[fn:31] Org will understand references typed by the user as
+{{{samp(B4)}}}, but it will not use this syntax when offering a
+formula for editing. You can customize this behavior using the
+variable ~org-table-use-standard-references~.
+
+[fn:34] For backward compatibility you can also use special names like
+~$LR5~ and ~$LR12~ to refer in a stable way to the fifth and twelfth
+field in the last row of the table. However, this syntax is
+deprecated, it should not be used for new documents. Use ~@>$~
+instead.
+
+[0] DEFINITION NOT FOUND: 0
+
+[fn:30] The computation time scales as O(N^2) because table FOO is
+parsed for each field to be copied.
+
+[fn:177] The {{{file(calc)}}} package has the non-standard
+convention that ~/~ has lower precedence than ~*~, so that ~a/b*c~ is
+interpreted as ~a/(b*c)~.
+
+[fn:32] The ~printf~ reformatting is limited in precision because the
+value passed to it is converted into an ~integer~ or ~double~. The
+~integer~ is limited in size by truncating the signed value to 32
+bits. The ~double~ is limited in precision to 64 bits overall which
+leaves approximately 16 significant decimal digits.
+
+[fn:33] Such names must start with an alphabetic character and use
+only alphanumeric/underscore characters.
+
+[fn:36] Note that text before the first headline is usually not
+exported, so the first such target should be after the first headline,
+or in the line directly before the first headline.
+
+[fn:37] To insert a link targeting a headline, in-buffer completion
+can be used. Just type a star followed by a few optional letters into
+the buffer and press {{{kbdkey(M-,TAB)}}}. All headlines in the
+current buffer will be offered as completions.
+
+[fn:38] The actual behavior of the search will depend on the value of
+the variable ~org-link-search-must-match-exact-headline~. If its value
+is ~nil~, then a fuzzy text search will be done. If it is ~t~, then
+only the exact headline will be matched. If the value is
+{{{samp('query-to-create)}}}, then an exact headline will be searched;
+if it is not found, then the user will be queried to create it.
+
+[fn:39] If the headline contains a timestamp, it will be removed from
+the link and result in a wrong link -- you should avoid putting a
+timestamp in the headline.
+
+[fn:40] Note that you don't have to use this command to insert a link.
+Links in Org are plain text, and you can type or paste them straight
+into the buffer. By using this command, the links are automatically
+enclosed in double brackets, and you will be asked for the optional
+descriptive text.
+
+[fn:41] After insertion of a stored link, the link will be removed
+from the list of stored links. To keep it in the list later use, use a
+triple {{{kbd(C-u)}}} prefix argument to {{{kbd(C-c C-l)}}}, or
+configure the option ~org-keep-stored-link-after-insertion~.
+
+[fn:42] This works by calling a special function
+~org-PREFIX-complete-link~.
+
+[fn:43] See the variable ~org-display-internal-link-with-indirect-buffer~.
+
+[fn:44] with corresponding ~#+STARTUP~ keywords ~inlineimages~ and
+~noinlineimages~.
+
+[fn:182] For backward compatibility, line numbers can also follow a
+single colon.
+
+[fn:45] Of course, you can make a document that contains only long
+lists of TODO items, but this is not required.
+
+[fn:50] Changing the variable ~org-todo-keywords~ only becomes
+effective after restarting Org mode in a buffer.
+
+[fn:46] This is also true for the {{{kbd(t)}}} command in the timeline
+and agenda buffers.
+
+[fn:47] All characters are allowed except ~@^!~, which have a special
+meaning here.
+
+[fn:48] Check also the variable ~org-fast-tag-selection-include-todo~,
+it allows you to change the TODO state through the tags interface
+([[Setting tags]]), in case you like to mingle the two concepts. Note that
+this means you need to come up with unique keys across both sets of
+keywords.
+
+[fn:49] Org mode parses these lines only when Org mode is activated
+after visiting a file. {{{kbd(C-c C-c)}}} with the cursor in a line
+starting with {{{samp(#+)}}} is simply restarting Org mode for the
+current buffer.
+
+[fn:51] The corresponding in-buffer setting is: ~#+STARTUP: logdone~.
+
+[fn:52] The corresponding in-buffer setting is: ~#+STARTUP: lognotedone~.
+
+[fn:53] See the variable ~org-log-states-order-reversed~.
+
+[fn:54] Note that the ~LOGBOOK~ drawer is unfolded when pressing
+{{{key(SPC)}}} in the agenda to show an entry---use {{{key(C-u SPC)}}}
+to keep it folded here.
+
+[fn:55] It is possible that Org mode will record two timestamps when
+you are using both ~org-log-done~ and state change logging. However,
+it will never prompt for two notes---if you have configured both, the
+state change recording note will take precedence and cancel the
+{{{samp(Closing Note)}}}.
+
+[fn:56] See also the option ~org-priority-start-cycle-with-default~.
+
+[fn:57] To keep subtasks out of the global TODO list, see the
+~org-agenda-todo-list-sublevels~.
+
+[fn:58] With the exception of description lists. But you can allow it
+by modifying ~org-list-automatic-rules~ accordingly.
+
+[fn:59] Set the variable ~org-hierarchical-checkbox-statistics~ if you
+want such cookies to count all checkboxes below the cookie, not just
+those belonging to direct children.
+
+[fn:60] {{{kbd(C-u C-c C-c)}}} on the /first/ item of a list with no
+checkbox will add checkboxes to the rest of the list.
+
+[fn:61] As with all these in-buffer settings, pressing 
+{{{kbd(C-c C-c)}}} activates any changes in the line.
+
+[fn:62] This is only true if the search does not involve more complex
+tests including properties (see [[Property searches]]).
+
+[fn:63] Keys will automatically be assigned to tags that have no
+configured keys.
+
+[fn:64] Contributed packages are not part of Emacs, but are
+distributed with the main distribution of Org (visit
+[[http://orgmode.org]]).
+
+[fn:65] In this simplest form, the day name is optional when you type
+the date yourself. However, any dates inserted or modified by Org will
+add that day name, for reading convenience.
+
+[fn:66] This is inspired by the standard ISO 8601 date/time format. To
+use an alternative format, see [[Custom time format]].
+
+[fn:67] When working with the standard diary sexp functions, you need
+to be very careful with the order of the arguments. That order depends
+evilly on the variable ~calendar-date-style~ (or, for older Emacs
+versions, ~european-calendar-style~). For example, to specify a date
+December 12, 2005, the call might look like ~(diary-date 12 1 2005)~
+or ~(diary-date 1 12 2005)~ or ~(diary-date 2005 12 1)~, depending on
+the settings. This has been the source of much confusion. Org mode
+users can resort to special versions of these functions like
+~org-date~ or ~org-anniversary~. These work just like the
+corresponding ~diary-~ functions, but with stable ISO order of
+arguments (year, month, day) wherever applicable, independent of the
+value of ~calendar-date-style~.
+
+[fn:68] See the variable ~org-read-date-prefer-future~. You may
+set that variable to the symbol ~time~ to even make a time before now
+shift the date to tomorrow.
+
+[fn:69] If you don't need/want the calendar, configure the variable
+~org-popup-calendar-for-date-prompt~.
+
+[fn:70] If you find this distracting, turn off the display with
+~org-read-date-display-live~.
+
+[fn:71] It will still be listed on that date after it has been marked
+DONE. If you don't like this, set the variable
+~org-agenda-skip-scheduled-if-done~.
+
+[fn:72] The {{{samp(SCHEDULED)}}} and {{{samp(DEADLINE)}}} dates are
+inserted on the line right below the headline. Don't put any text
+between this line and the headline.
+
+[fn:73] Note the corresponding ~#+STARTUP~ keywords ~logredeadline~,
+~lognoteredeadline~, and ~nologredeadline~.
+
+[fn:74] Note the corresponding ~#+STARTUP~ keywords ~logreschedule~,
+~lognotereschedule~, and ~nologreschedule~.
+
+[fn:75] In fact, the target state is taken from, in this sequence, the
+~REPEAT_TO_STATE~ property or the variable ~org-todo-repeat-to-state~.
+If neither of these is specified, the target state defaults to the
+first state of the TODO state sequence.
+
+[fn:76] You can change this using the option ~org-log-repeat~, or the
+~#+STARTUP~ options ~logrepeat~, ~lognoterepeat~, and ~nologrepeat~.
+With ~lognoterepeat~, you will also be prompted for a note.
+
+[fn:77] Clocking only works if all headings are indented with less
+than 30 stars. This is a hardcoded limitation of ~lmax~ in
+~org-clock-sum~.
+
+[fn:78] To resume the clock under the assumption that you have worked
+on this task while outside Emacs, use ~(setq org-clock-persist t)~.
+
+[fn:81] To add an effort estimate ``on the fly'', hook a function
+doing this to ~org-clock-in-prepare-hook~.
+
+[fn:79] The last reset of the task is recorded by the ~LAST_REPEAT~
+property.
+
+[fn:80] See also the variable ~org-clock-modeline-total~.
+
+[fn:82] The corresponding in-buffer setting is: 
+~#+STARTUP: lognoteclock-out~.
+
+[fn:90] Language terms can be set through the variable
+~org-clock-clocktable-language-setup~.
+
+[fn:83] Note that all parameters must be specified in a single
+line---the line is broken here only to fit it into the manual.
+
+[fn:84] On computers using Mac OS X, idleness is based on actual user
+idleness, not just Emacs' idle time. For X11, you can install a
+utility program {{{file(x11idle.c)}}}, available in the
+~contrib/scripts~ directory of the Org git distribution, to get the
+same general treatment of idleness. On other systems, idle time refers
+to Emacs idle time only.
+
+[fn:85] You may change the property being used with the variable
+~org-effort-property~.
+
+[fn:86] Please note the pitfalls of summing hierarchical data in a
+flat list (see [[Agenda column view]]).
+
+[fn:87] Please select your own key, {{{kbd(C-c c)}}} is only a
+suggestion.
+
+[fn:88] If you need one of these sequences literally, escape the
+{{{kbd(%)}}} with a backslash.
+
+[fn:89] If you define your own link types (see [[Adding hyperlink
+types]]), any property you store with ~org-store-link-props~ can be
+accessed in capture templates in a similar way.
+
+[fn:187] This refers to the message date header field.
+
+[fn:188] This refers to the date as an active timestamp.
+
+[fn:189] This refers to the date as inactive timestamp.
+
+[fn:190] This refers either "to NAME" or "from NAME". This will always
+be the other, not the user. See the variable
+~org-from-is-user-regexp~.
+
+[fn:191] This is for messages, also all email fields.
+
+[fn:91] If you move entries or Org files from one directory to
+another, you may want to configure ~org-attach-directory~ to contain
+an absolute path.
+
+[fn:92] Note the corresponding ~#+STARTUP~ keywords ~logrefile~,
+~lognoterefile~, and ~nologrefile~.
+
+[fn:93] For backward compatibility, the following also works: If there
+are several such lines in a file, each specifies the archive location
+for the text below it. The first such line also applies to any text
+before its definition. However, using this method is /strongly/
+deprecated as it is incompatible with the outline structure of the
+document. The correct method for setting multiple archive locations in
+a buffer is using properties.
+
+[fn:94] If the value of that variable is not a list, but a single file
+name, then the list of agenda files will be maintained in that
+external file.
+
+[fn:95] When using the dispatcher, pressing {{{kbd(<)}}} before
+selecting a command will actually limit the command to the current
+file, and ignore ~org-agenda-files~ until the next dispatcher command.
+
+[fn:96] For backward compatibility, you can also press {{{kbd(1)}}} to
+restrict to the current buffer.
+
+[fn:97] For backward compatibility, you can also press {{{kbd(0)}}} to
+restrict to the current region/subtree.
+
+[fn:180] For backward compatibility, the universal prefix
+{{{kbd(C-u)}}} causes all TODO entries to be listed before the agenda.
+This feature is deprecated, use the dedicated TODO list, or a block
+agenda instead (see [[Block agenda]]).
+
+[fn:181] But see [[x-agenda-skip-entry-regexp][skipping entries based on regexp]].
+
+[fn:100] For backward compatibility, the following also works: if
+there are several such lines in a file, each specifies the category
+for the text below it. The first category also applies to any text
+before the first CATEGORY line. However, using this method is
+/strongly/ deprecated as it is incompatible with the outline structure
+of the document. The correct method for setting multiple categories in
+a buffer is using a property.
+
+[fn:101] Only tags filtering will be respected here, effort filtering
+is ignored.
+
+[fn:102] Custom commands can preset a filter by binding the variable
+~org-agenda-tag-filter-preset~ as an option. This filter will then be
+applied to the view and persist as a basic filter through refreshes
+and more secondary filtering. The filter is a global property of the
+entire agenda view---in a block agenda, you should only set this in
+the global options section, not in the section of an individual block.
+
+[fn:192] You can also create persistent custom functions through
+~org-agenda-bulk-custom-functions~.
+
+[fn:103] The Emacs diary file is parsed for the agenda when
+~org-agenda-include-diary~ is set.
+
+[fn:183] You can provide a description for a prefix key by inserting a
+cons cell with the prefix and the description.
+
+[fn:184] For HTML you need to install Hrvoje Niksic's
+{{{file(htmlize.el)}}}. To create PDF output, the ghostscript
+{{{file(ps2pdf)}}} utility must be installed on the system. Selecting
+a PDF file will also create the postscript file.
+
+[fn:185] If you want to store standard views like the weekly agenda or
+the global TODO list as well, you need to define custom commands for
+them in order to be able to specify file names.
+
+[fn:186] Quoting depends on the system you use, please check the FAQ
+for examples.
+
+[fn:109] This works automatically for the HTML backend (it requires
+version 1.34 of the {{{file(htmlize.el)}}} package, which is
+distributed with Org). Fontified code chunks in LaTeX can be
+achieved using either the listings package or the [[http://code.google.com/p/minted][minted]] package.
+Refer to ~org-export-latex-listings~ documentation for details.
+
+[fn:110] Code in {{{samp(src)}}} blocks may also be evaluated either
+interactively or on export. See see [[Working with source code]] for more
+information on evaluating code blocks.
+
+[fn:111] Adding ~-k~ to ~-n -r~ will /keep/ the labels in the source
+code while using line numbers for the links, which might be useful to
+explain those in an Org mode example code.
+
+[fn:112] Upon exit, lines starting with {{{samp(*)}}}, {{{samp(\,*)}}},
+{{{samp(#+)}}} and {{{samp(\,#+)}}} will get a comma prepended, to keep
+them from being interpreted by Org as outline nodes or special syntax.
+These commas will be stripped for editing with {{{kbd(C-c ')}}}, and
+also for export.
+
+[fn:113] You may select a different-mode with the variable
+~org-edit-fixed-width-region-mode~.
+
+[fn:114] LaTeX is a macro system based on Donald E. Knuth's TeX
+system. Many of the features described here as LaTeX are really
+from TeX, but for simplicity I am blurring this distinction.
+
+[fn:115] You can turn this on by default by setting the variable
+~org-pretty-entities~, or on a per-file base with the ~#+STARTUP~
+option ~entitiespretty~.
+
+[fn:117] If you plan to use this regularly or on pages with
+significant page views, you should install {{{file(MathJax)}}} on your
+own server in order to limit the load of our server.
+
+[fn:118] For this to work you need to be on a system with a working
+LaTeX installation. You also need the {{{file(dvipng)}}} program or
+the {{{file(convert)}}}, respectively available at
+[[http://sourceforge.net/projects/dvipng/]] and from the
+{{{file(ImageMagick)}}} suite. The LaTeX header that will be used
+when processing a fragment can be configured with the variable
+~org-format-latex-header~.
+
+[fn:119] When {{{file(MathJax)}}} is used, only the environment
+recognized by {{{file(MathJax)}}} will be processed. When
+{{{file(dvipng)}}} is used to create images, any LaTeX environments
+will be handled.
+
+[fn:120] Org mode has a method to test if the cursor is inside such a
+fragment, see the documentation of the function
+~org-inside-LaTeX-fragment-p~.
+
+[fn:179] ~org-export-date-timestamp-format~ defines how this
+timestamp will be exported.
+
+[fn:121] If you want to configure many options this way, you can use
+several ~#+OPTIONS~ lines.
+
+[fn:122] To make this behavior the default, customize the variable
+~org-export-run-in-background~.
+
+[fn:123] This requires ~transient-mark-mode~ be turned on.
+
+[fn:124] To select the current subtree, use {{{kbd(C-c @)}}}.
+
+[fn:125] This requires ~transient-mark-mode~ be turned on.
+
+[fn:126] To select the current subtree, use {{{kbd(C-c @@)}}}.
+
+[fn:127] But see the variable ~org-export-html-inline-images~.
+
+[fn:128] If you plan to use this regularly or on pages with
+significant page views, you should install MathJax on your own server
+in order to limit the load of our server. Installation instructions
+can be found on the MathJax website, see
+[[http://www.mathjax.org/resources/docs/?installation.html]].
+
+[fn:129] If the classes on TODO keywords and tags lead to conflicts,
+use the variables ~org-export-html-todo-kwd-class-prefix~ and
+~org-export-html-tag-class-prefix~ to make them unique.
+
+[fn:130] This style is defined in the constant
+~org-export-html-style-default~, which you should not modify. To turn
+inclusion of these defaults off, customize
+~org-export-html-style-include-default~.
+
+[fn:131] The default LaTeX output is designed for processing with
+~pdftex~ or LaTeX. It includes packages that are not compatible
+with ~xetex~ and possibly ~luatex~. See the variables
+~org-export-latex-default-packages-alist~ and
+~org-export-latex-packages-alist~.
+
+[fn:132] This requires ~transient-mark-mode~ be turned on.
+
+[fn:133] To select the current subtree, use {{{kbd(C-c @)}}}.
+
+[fn:134] Into which the values of
+~org-export-latex-default-packages-alist~ and
+~org-export-latex-packages-alist~ are spliced.
+
+[fn:135] One can also take advantage of this option to pass other,
+unrelated options into the figure or table environment. For an example
+see the section ``Exporting org files'' in
+[[http://orgmode.org/worg/org-hacks.html]].
+
+[fn:136] This requires ~transient-mark-mode~ to be turned on.
+
+[fn:137] To select the current subtree, use {{{kbd(C-c @)}}}.
+
+[fn:139] ODT export was added in Org mode version 7.8.
+
+[fn:138] See [[http://docs.oasis-open.org/office/v1.2/OpenDocument-v1.2.html][Open Document Format for Office Applications (OpenDocument)
+Version 1.2]].
+
+[fn:140] This requires ~transient-mark-mode~ to be turned on.
+
+[fn:141] To select the current subtree, use {{{kbd(C-c @)}}}.
+
+[fn:142] The column widths are interpreted as weighted ratios with the
+default weight being 1.
+
+[fn:143] Use of {{{file(ImageMagick)}}} is only desirable. However, if
+you routinely produce documents that have large images or you export
+your Org files that has images using a Emacs batch script, then the
+use of {{{file(ImageMagick)}}} is mandatory.
+
+[fn:144] See [[http://www.mathtoweb.com/cgi-bin/mathtoweb_home.pl][MathToWeb]].
+
+[fn:145] Your {{{file(htmlfontify.el)}}} library must at least be at
+Emacs 24.1 levels for fontification to be turned on.
+
+[fn:146] See [[http://docs.oasis-open.org/office/v1.2/OpenDocument-v1.2.html][OpenDocument-v1.2 Specification]].
+
+[fn:147] See the ~<table:table-template>~ element of the
+OpenDocument-v1.2 specification.
+
+[fn:148] See the attributes ~table:template-name~,
+~table:use-first-row-styles~, ~table:use-last-row-styles~,
+~table:use-first-column-styles~, ~table:use-last-column-styles~,
+~table:use-banding-rows-styles~, and ~table:use-banding-column-styles~
+of the ~<table:table>~ element in the OpenDocument-v1.2 specification.
+
+[fn:149] Note that {{{file(.odt)}}} files are {{{samp(zip)}}}
+archives.
+
+[fn:150] See the variables ~org-icalendar-use-deadline~ and
+~org-icalendar-use-scheduled~.
+
+[fn:151] To add inherited tags or the TODO state, configure the
+variable ~org-icalendar-categories~.
+
+[fn:152] The LOCATION property can be inherited from higher in the
+hierarchy if you configure ~org-use-property-inheritance~ accordingly.
+
+[fn:153] The files {{{file(file-source.org)}}} and
+{{{file(file-source.org.html)}}} if source and publishing directories
+are equal. Note that with this kind of setup, you need to add
+~:exclude "-source\\.org"~ to the project definition in
+~org-publish-project-alist~ to prevent the published source files from
+being considered as new org files the next time the project is
+published.
+
+[fn:154] Note that {{{samp(src)}}} blocks may be inserted using Org
+mode's [[Easy templates]] system.
+
+[fn:155] Whenever code is evaluated there is a potential for that code
+to do harm. Org mode provides safeguards to ensure that code is only
+evaluated after explicit confirmation from the user. For information
+on these safeguards (and on how to disable them) see [[Code evaluation
+security]].
+
+[fn:156] The ~org-babel-no-eval-on-ctrl-c-ctrl-c~ variable can be used
+to remove code evaluation from the {{{kbd(C-c C-c)}}} key binding.
+
+[fn:157] Note that evaluation of header arguments is guaranteed to
+take place in the original Org mode file, while there is no such
+guarantee for evaluation of the code block body.
+
+[fn:158] The example requires that property inheritance be turned on
+for the ~noweb-ref~ property, see [[Property inheritance]].
+
+[fn:159] In certain languages this also contains the error output
+stream; this is an area for future work.
+
+[fn:160] The last evaluation performed by the interpreter is obtained
+in a language-specific manner: the value of the variable ~_~ in Python
+and Ruby, and the value of ~.Last.value~ in R.
+
+[fn:161] Emacs 23 and Org mode 6.29 are required.
+
+[fn:162] Note that Emacs 23.1 can actually crash with
+~org-indent-mode~.
+
+[fn:163] Note that ~org-indent-mode~ also sets the ~wrap-prefix~
+property, such that ~visual-line-mode~ (or purely setting ~word-wrap~)
+wraps long lines (including headlines) correctly indented.
+
+[fn:164] See the variable ~org-indent-indentation-per-level~.
+
+[fn:165] Turning on ~org-indent-mode~ sets ~org-hide-leading-stars~ to
+~t~ and ~org-adapt-indentation~ to ~nil~.
+
+[fn:166] See also the variable ~org-adapt-indentation~.
+
+[fn:167] When you need to specify a level for a property search or
+refile targets, ~LEVEL=2~ will correspond to 3 stars, etc.
+
+[fn:168] The {{{file(org-R.el)}}} package has been replaced by the
+Org mode functionality described in [[Working with source code]] and is
+now obsolete.
+
+[fn:169] By default this works only for LaTeX, HTML, and Texinfo.
+Configure the variable ~orgtbl-radio-tables~ to install templates for
+other modes.
+
+[fn:170] If the {{{samp(#+TBLFM)}}} line contains an odd number of
+dollar characters, this may cause problems with font-lock in LaTeX
+mode. As shown in the example you can fix this by adding an extra line
+inside the ~comment~ environment that is used to balance the dollar
+expressions. If you are using AUCTeX with the font-latex library, a
+much better solution is to add the ~comment~ environment to the
+variable ~LaTeX-verbatim-environments~.
+
+[fn:171] The HTML translator uses the same code that produces tables
+during HTML export.
+
+[fn:172] Note that, when using ~org-odd-levels-only~, a level number
+corresponds to order in the hierarchy, not to the number of stars.
+
+[fn:178] If you can safely store the password in your Emacs setup, you
+might also want to configure ~org-mobile-encryption-password~. Please
+read the docstring of that variable. Note that encryption will apply
+only to the contents of the {{{file(.org)}}} files. The file names
+themselves will remain visible.
+
+[fn:173] If you cannot use Dropbox, or if your version of MobileOrg
+does not support it, you can use a webdav server. For more
+information, check out the documentation of MobileOrg and also this
+[[http://orgmode.org/worg/org-faq.html#mobileorg_webdav][FAQ entry]].
+
+[fn:174] While creating the agendas, Org mode will force ID properties
+on all referenced entries, so that these entries can be uniquely
+identified if /MobileOrg/ flags them for further action. If you do not
+want to get these properties in so many entries, you can set the
+variable ~org-mobile-force-id-on-agenda-items~ to ~nil~. Org mode will
+then rely on outline paths, in the hope that these will be unique
+enough.
+
+[fn:116] Checksums are stored automatically in the file
+{{{file(checksums.dat)}}}.
+
+[fn:175] The file {{{file(mobileorg.org)}}} will be empty after this
+operation.
+
+[fn:176] Note, however, that there is a subtle difference. The view
+created automatically by {{{kbdkey(M-x org-mobile-pull ,RET)}}} is
+guaranteed to search all files that have been addressed by the last
+pull. This might include a file that is not currently in your list of
+agenda files. If you later use {{{kbd(C-c a ?)}}} to regenerate the
+view, only the current agenda files will be searched.
