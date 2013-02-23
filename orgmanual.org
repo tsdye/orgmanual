@@ -52,13 +52,17 @@
 #+MACRO: markup @@info:@$1{@@$2@@info:}@@
 #+MACRO: kbd {{{markup(kbd,$1)}}}
 #+MACRO: key {{{markup(key,$1)}}}
-#+MACRO: kbdkey {{{kbd($1{{{key($2)}}})}}}
 #+MACRO: samp {{{markup(samp,$1)}}}
 #+MACRO: command {{{markup(command,$1)}}}
 #+MACRO: file {{{markup(file,$1)}}}
 #+MACRO: var {{{markup(var,$1)}}}
 #+MACRO: cite {{{markup(cite,$1)}}}
 #+MACRO: value {{{markup(value,$1)}}}
+
+#+MACRO: printindex @@info:@printindex $1@@
+
+#+MACRO: kbdkey {{{kbd($1{{{key($2)}}})}}}
+#+MACRO: kbdkeys {{{kbd($1{{{key($2)}}}{{{key($3)}}})}}}
 
 # Plain macros.
 #+MACRO: noindent @@info:@noindent@@
@@ -1339,9 +1343,9 @@ footnote, use the LaTeX idiom ~\par~. The footnote reference is simply
 the marker in square brackets, inside text. For example:
 
 #+begin_example
-,The Org homepage[fn:1] now looks a lot better than it used to.
-,...
-,[fn:1] The link is: http://orgmode.org
+  ,The Org homepage[fn:1] now looks a lot better than it used to.
+  ,...
+  ,[fn:1] The link is: http://orgmode.org
 #+end_example
 
 Org mode extends the number-based syntax to /named/ footnotes and
@@ -1975,7 +1979,7 @@ prefers[fn:24] to use another, more general representation that looks
 like this:
 
 #+begin_example
- @ROW$COLUMN
+  @ROW$COLUMN
 #+end_example
 
 Column specifications can be absolute like ~$1~, ~$2~ ,... ~$N~, or
@@ -2122,7 +2126,7 @@ table, either in the current file or even in a different file.  The
 syntax is
 
 #+begin_example
-remote(NAME-OR-ID,REF)
+  remote(NAME-OR-ID,REF)
 #+end_example
 
 {{{noindent}}} where NAME can be the name of a table in the current
@@ -2892,7 +2896,7 @@ IDs are unique in a file.
 Links such as the two in the following example:
 
 #+begin_example
- [[My Target]] or [[My Target][Find my target]]
+  [[My Target]] or [[My Target][Find my target]]
 #+end_example
 
 {{{noindent}}} lead to a text search in the current file.
@@ -3464,8 +3468,8 @@ are:
   Rotate the TODO state of the current item among
 
   #+begin_example
-   ,-> (unmarked) -> TODO -> DONE --.
-   '--------------------------------'
+    ,-> (unmarked) -> TODO -> DONE --.
+    '--------------------------------'
   #+end_example
 
  The same rotation can also be done ``remotely'' from the timeline and
@@ -3717,22 +3721,22 @@ need one of the following lines, starting in column zero anywhere in the
 file:
 
 #+begin_example
-,#+TODO: TODO FEEDBACK VERIFY | DONE CANCELED
+  ,#+TODO: TODO FEEDBACK VERIFY | DONE CANCELED
 #+end_example
 
 {{{noindent}}} (you may also write ~#+SEQ_TODO~ to be explicit about the
 interpretation, but it means the same as ~#+TODO~), or
 
 #+begin_example
-,#+TYP_TODO: Fred Sara Lucy Mike | DONE
+  ,#+TYP_TODO: Fred Sara Lucy Mike | DONE
 #+end_example
 
 A setup for using several sets in parallel would be:
 
 #+begin_example
-,#+TODO: TODO | DONE
-,#+TODO: REPORT BUG KNOWNCAUSE | FIXED
-,#+TODO: | CANCELED
+  ,#+TODO: TODO | DONE
+  ,#+TODO: REPORT BUG KNOWNCAUSE | FIXED
+  ,#+TODO: | CANCELED
 #+end_example
 
 {{{cindex(completion\\\, of option keywords)}}}
@@ -3954,7 +3958,7 @@ You can use the exact same syntax for setting logging preferences local
 to a buffer:
 
 #+begin_example
-,#+TODO: TODO(t) WAIT(w@/!) | DONE(d!) CANCELED(c@)
+  ,#+TODO: TODO(t) WAIT(w@/!) | DONE(d!) CANCELED(c@)
 #+end_example
 
 {{{cindex(property\\\, LOGGING)}}}
@@ -3967,18 +3971,18 @@ on logging for this specific tree using STARTUP keywords like
 settings like ~TODO(!)~.  For example:
 
 #+begin_example
-,* TODO Log each state with only a time
-  :PROPERTIES:
-  :LOGGING: TODO(!) WAIT(!) DONE(!) CANCELED(!)
-  :END:
-,* TODO Only log when switching to WAIT, and when repeating
-  :PROPERTIES:
-  :LOGGING: WAIT(@) logrepeat
-  :END:
-,* TODO No logging at all
-  :PROPERTIES:
-  :LOGGING: nil
-  :END:
+  ,* TODO Log each state with only a time
+    :PROPERTIES:
+    :LOGGING: TODO(!) WAIT(!) DONE(!) CANCELED(!)
+    :END:
+  ,* TODO Only log when switching to WAIT, and when repeating
+    :PROPERTIES:
+    :LOGGING: WAIT(@) logrepeat
+    :END:
+  ,* TODO No logging at all
+    :PROPERTIES:
+    :LOGGING: nil
+    :END:
 #+end_example
 
 *** Tracking your habits
@@ -4023,22 +4027,22 @@ To give you an idea of what the above rules look like in action, here's an
 actual habit with some history:
 
 #+begin_example
-,** TODO Shave
-   SCHEDULED: <2009-10-17 Sat .+2d/4d>
-   - State "DONE"       from "TODO"       [2009-10-15 Thu]
-   - State "DONE"       from "TODO"       [2009-10-12 Mon]
-   - State "DONE"       from "TODO"       [2009-10-10 Sat]
-   - State "DONE"       from "TODO"       [2009-10-04 Sun]
-   - State "DONE"       from "TODO"       [2009-10-02 Fri]
-   - State "DONE"       from "TODO"       [2009-09-29 Tue]
-   - State "DONE"       from "TODO"       [2009-09-25 Fri]
-   - State "DONE"       from "TODO"       [2009-09-19 Sat]
-   - State "DONE"       from "TODO"       [2009-09-16 Wed]
-   - State "DONE"       from "TODO"       [2009-09-12 Sat]
-   :PROPERTIES:
-   :STYLE:    habit
-   :LAST_REPEAT: [2009-10-19 Mon 00:36]
-   :END:
+  ,** TODO Shave
+     SCHEDULED: <2009-10-17 Sat .+2d/4d>
+     - State "DONE"       from "TODO"       [2009-10-15 Thu]
+     - State "DONE"       from "TODO"       [2009-10-12 Mon]
+     - State "DONE"       from "TODO"       [2009-10-10 Sat]
+     - State "DONE"       from "TODO"       [2009-10-04 Sun]
+     - State "DONE"       from "TODO"       [2009-10-02 Fri]
+     - State "DONE"       from "TODO"       [2009-09-29 Tue]
+     - State "DONE"       from "TODO"       [2009-09-25 Fri]
+     - State "DONE"       from "TODO"       [2009-09-19 Sat]
+     - State "DONE"       from "TODO"       [2009-09-16 Wed]
+     - State "DONE"       from "TODO"       [2009-09-12 Sat]
+     :PROPERTIES:
+     :STYLE:    habit
+     :LAST_REPEAT: [2009-10-19 Mon 00:36]
+     :END:
 #+end_example
 
 What this habit says is: I want to shave at most every 2 days (given
@@ -4100,7 +4104,7 @@ it starts to make sense to prioritize them.  Prioritizing can be done by
 placing a /priority cookie/ into the headline of a TODO item, like this:
 
 #+begin_example
-,*** TODO [#A] Write letter to Sam Fortune
+  ,*** TODO [#A] Write letter to Sam Fortune
 #+end_example
 
 {{{noindent}}}
@@ -4151,7 +4155,7 @@ highest priority is earlier in the alphabet than the lowest priority):
 {{{cindex(#+PRIORITIES)}}}
 
 #+begin_example
-,#+PRIORITIES: A C B
+  ,#+PRIORITIES: A C B
 #+end_example
 
 ** Breaking down tasks
@@ -4172,12 +4176,12 @@ child changes, or when pressing {{{kbd(C-c C-c)}}} on the cookie. For
 example:
 
 #+begin_example
-,* Organize Party [33%]
-,** TODO Call people [1/2]
-,*** TODO Peter
-,*** DONE Sarah
-,** TODO Buy food
-,** DONE Talk to neighbor
+  ,* Organize Party [33%]
+  ,** TODO Call people [1/2]
+  ,*** TODO Peter
+  ,*** DONE Sarah
+  ,** TODO Buy food
+  ,** DONE Talk to neighbor
 #+end_example
 
 {{{cindex(property\\\, COOKIE_DATA)}}}
@@ -4196,10 +4200,10 @@ include the word {{{samp(recursive)}}} into the value of the
 ~COOKIE_DATA~ property.
 
 #+begin_example
-,* Parent capturing statistics [2/20]
-  :PROPERTIES:
-  :COOKIE_DATA: todo recursive
-  :END:
+  ,* Parent capturing statistics [2/20]
+    :PROPERTIES:
+    :COOKIE_DATA: todo recursive
+    :END:
 #+end_example
 
 If you would like a TODO entry to automatically change to DONE
@@ -4239,14 +4243,14 @@ you can use them in a shopping list. To toggle a checkbox, use
 Here is an example of a checkbox list.
 
 #+begin_example
-,* TODO Organize party [2/4]
-  - [-] call people [1/3]
-    - [ ] Peter
-    - [X] Sarah
-    - [ ] Sam
-  - [X] order food
-  - [ ] think about what music to play
-  - [X] talk to the neighbors
+  ,* TODO Organize party [2/4]
+    - [-] call people [1/3]
+      - [ ] Peter
+      - [X] Sarah
+      - [ ] Sam
+    - [X] order food
+    - [ ] think about what music to play
+    - [X] talk to the neighbors
 #+end_example
 
 Checkboxes work hierarchically, so if a checkbox item has children
@@ -4373,9 +4377,9 @@ heading has a certain tag, all subheadings will inherit the tag as
 well. For example, in the list
 
 #+begin_example
-,* Meeting with the French group      :work:
-,** Summary by Frank                  :boss:notes:
-,*** TODO Prepare slides for him      :action:
+  ,* Meeting with the French group      :work:
+  ,** Summary by Frank                  :boss:notes:
+  ,*** TODO Prepare slides for him      :action:
 #+end_example
 
 {{{noindent}}} the final heading will have the tags
@@ -4388,7 +4392,7 @@ like this:[fn:54]
 
 {{{cindex(#+FILETAGS)}}}
 #+begin_example
-,#+FILETAGS: :Peter:Boss:Secret:
+  ,#+FILETAGS: :Peter:Boss:Secret:
 #+end_example
 
 {{{vindex(org-use-tag-inheritance)}}}
@@ -4451,8 +4455,8 @@ given file with lines like
 
 {{{cindex(#+TAGS)}}}
 #+begin_example
-,#+TAGS: @work @home @tennisclub
-,#+TAGS: laptop car pc sailboat
+  ,#+TAGS: @work @home @tennisclub
+  ,#+TAGS: laptop car pc sailboat
 #+end_example
 
 If you have globally defined your preferred set of tags using the
@@ -4460,7 +4464,7 @@ variable ~org-tag-alist~, but would like to use a dynamic tag list
 in a specific file, add an empty TAGS option line to that file:
 
 #+begin_example
-,#+TAGS:
+  ,#+TAGS:
 #+end_example
 
 {{{vindex(org-tag-persistent-alist)}}}
@@ -4472,7 +4476,7 @@ option lines, then you may specify a list of tags with the variable
 by adding a STARTUP option line to that file:
 
 #+begin_example
-,#+STARTUP: noptag
+  ,#+STARTUP: noptag
 #+end_example
 
 By default Org mode uses the standard minibuffer completion facilities
@@ -4495,7 +4499,7 @@ find the need to tag many items in different files with
 on, then you can instead set the TAGS option line as:
 
 #+begin_example
-,#+TAGS: @work(w)  @home(h)  @tennisclub(t)  laptop(l)  pc(p)
+  ,#+TAGS: @work(w)  @home(h)  @tennisclub(t)  laptop(l)  pc(p)
 #+end_example
 
 {{{noindent}}} The tags interface will show the available tags in a splash
@@ -4503,14 +4507,14 @@ window.  If you want to start a new line after a specific tag, insert
 ~\n~ into the tag list, like this:
 
 #+begin_example
-,#+TAGS: @work(w)  @home(h)  @tennisclub(t) \n laptop(l)  pc(p)
+  ,#+TAGS: @work(w)  @home(h)  @tennisclub(t) \n laptop(l)  pc(p)
 #+end_example
 
 {{{noindent}}} or write them in two lines:
 
 #+begin_example
-,#+TAGS: @work(w)  @home(h)  @tennisclub(t)
-,#+TAGS: laptop(l)  pc(p)
+  ,#+TAGS: @work(w)  @home(h)  @tennisclub(t)
+  ,#+TAGS: laptop(l)  pc(p)
 #+end_example
 
 {{{noindent}}}
@@ -4518,7 +4522,7 @@ You can also group together tags that are mutually exclusive by using
 braces, as in:
 
 #+begin_example
-,#+TAGS: {@work(w)  @home(h)  @tennisclub(t)}  laptop(l)  pc(p)
+  ,#+TAGS: {@work(w)  @home(h)  @tennisclub(t)}  laptop(l)  pc(p)
 #+end_example
 
 {{{noindent}}} you indicate that at most one of {{{samp(@work)}}},
@@ -4696,16 +4700,16 @@ on a single line, with the key (surrounded by colons) first, and the
 value after it. Here is an example:
 
 #+begin_example
-,* CD collection
-,** Classic
-,*** Goldberg Variations
-,    :PROPERTIES:
-,    :Title:     Goldberg Variations
-,    :Composer:  J.S. Bach
-,    :Artist:    Glen Gould
-,    :Publisher: Deutsche Grammophon
-,    :NDisks:    1
-,    :END:
+  ,* CD collection
+  ,** Classic
+  ,*** Goldberg Variations
+  ,    :PROPERTIES:
+  ,    :Title:     Goldberg Variations
+  ,    :Composer:  J.S. Bach
+  ,    :Artist:    Glen Gould
+  ,    :Publisher: Deutsche Grammophon
+  ,    :NDisks:    1
+  ,    :END:
 #+end_example
 
 Depending on the value of ~org-use-property-inheritance~, a property
@@ -4721,11 +4725,11 @@ typing errors. For the example with the CD collection, we can
 predefine publishers and the number of disks in a box like this:
 
 #+begin_example
-,* CD collection
-,  :PROPERTIES:
-,  :NDisks_ALL:  1 2 3 4
-,  :Publisher_ALL: "Deutsche Grammophon" Philips EMI
-,  :END:
+  ,* CD collection
+  ,  :PROPERTIES:
+  ,  :NDisks_ALL:  1 2 3 4
+  ,  :Publisher_ALL: "Deutsche Grammophon" Philips EMI
+  ,  :END:
 #+end_example
 
 If you want to set properties that can be inherited by any entry in a
@@ -4734,7 +4738,7 @@ file, use a line like:
 {{{cindex(property\\\, _ALL)}}}
 {{{cindex(#+PROPERTY)}}}
 #+begin_example
-,#+PROPERTY: NDisks_ALL 1 2 3 4
+  ,#+PROPERTY: NDisks_ALL 1 2 3 4
 #+end_example
 
 If you want to add to the value of an existing property, append a ~+~
@@ -4743,8 +4747,8 @@ having the value ``foo=1 bar=2''.
 
 {{{cindex(property\\\, +)}}}
 #+begin_example
-,#+PROPERTY: var  foo=1
-,#+PROPERTY: var+ bar=2
+  ,#+PROPERTY: var  foo=1
+  ,#+PROPERTY: var+ bar=2
 #+end_example
 
 It is also possible to add to the values of inherited properties. The
@@ -4753,20 +4757,20 @@ Baroque'' under the ~Goldberg Variations~ subtree.
 
 {{{cindex(property\\\, +)}}}
 #+begin_example
-,* CD collection
-,** Classic
-,    :PROPERTIES:
-,    :GENRES: Classic
-,    :END:
-,*** Goldberg Variations
-,    :PROPERTIES:
-,    :Title:     Goldberg Variations
-,    :Composer:  J.S. Bach
-,    :Artist:    Glen Gould
-,    :Publisher: Deutsche Grammophon
-,    :NDisks:    1
-,    :GENRES+:   Baroque
-,    :END:
+  ,* CD collection
+  ,** Classic
+  ,    :PROPERTIES:
+  ,    :GENRES: Classic
+  ,    :END:
+  ,*** Goldberg Variations
+  ,    :PROPERTIES:
+  ,    :Title:     Goldberg Variations
+  ,    :Composer:  J.S. Bach
+  ,    :Artist:    Glen Gould
+  ,    :Publisher: Deutsche Grammophon
+  ,    :NDisks:    1
+  ,    :GENRES+:   Baroque
+  ,    :END:
 #+end_example
 Note that a property can only have one entry per Drawer.
 
@@ -5025,17 +5029,17 @@ To define a column format for an entire file, use a line like:
 
 {{{cindex(#+COLUMNS)}}}
 #+begin_example
-,#+COLUMNS: %25ITEM %TAGS %PRIORITY %TODO
+  ,#+COLUMNS: %25ITEM %TAGS %PRIORITY %TODO
 #+end_example
 
 To specify a format that only applies to a specific tree, add a
 ~:COLUMNS:~ property to the top node of that tree, for example:
 
 #+begin_example
-,** Top node for columns view
-,   :PROPERTIES:
-,   :COLUMNS: %25ITEM %TAGS %PRIORITY %TODO
-,   :END:
+  ,** Top node for columns view
+  ,   :PROPERTIES:
+  ,   :COLUMNS: %25ITEM %TAGS %PRIORITY %TODO
+  ,   :END:
 #+end_example
 
 If a ~:COLUMNS:~ property is present in an entry, it defines columns
@@ -5053,7 +5057,7 @@ A column definition sets the attributes of a column.  The general
 definition looks like this:
 
 #+begin_example
- %[@var{width}]@var{property}[(@var{title})][{@var{summary-type}}]
+  %[@var{width}]@var{property}[(@var{title})][{@var{summary-type}}]
 #+end_example
 
 {{{noindent}}} Except for the percent sign and the property name, all
@@ -5121,11 +5125,11 @@ Here is an example for a complete columns definition, along with allowed
 values.
 
 #+begin_example
-:COLUMNS:  %25ITEM %9Approved(Approved?)@{X@} %Owner %11Status \@footnote{Please note that the COLUMNS definition must be on a single line---it is wrapped here only because of formatting constraints.}
-                   %10Time_Estimate@{:@} %CLOCKSUM %CLOCKSUM_T
-:Owner_ALL:    Tammy Mark Karl Lisa Don
-:Status_ALL:   "In progress" "Not started yet" "Finished" ""
-:Approved_ALL: "[ ]" "[X]"
+  :COLUMNS:  %25ITEM %9Approved(Approved?)@{X@} %Owner %11Status \@footnote{Please note that the COLUMNS definition must be on a single line---it is wrapped here only because of formatting constraints.}
+                     %10Time_Estimate@{:@} %CLOCKSUM %CLOCKSUM_T
+  :Owner_ALL:    Tammy Mark Karl Lisa Don
+  :Status_ALL:   "In progress" "Not started yet" "Finished" ""
+  :Approved_ALL: "[ ]" "[X]"
 #+end_example
 
 {{{noindent}}} The first column, {{{samp(%25ITEM)}}}, means the first
@@ -5268,10 +5272,10 @@ this block looks like this:
 
 {{{cindex(#+BEGIN\\\, columnview)}}}
 #+begin_example
-,* FIXME The column view
-,#+BEGIN: columnview :hlines 1 :id "label"
+  ,* FIXME The column view
+  ,#+BEGIN: columnview :hlines 1 :id "label"
 
-,#+END:
+  ,#+END:
 #+end_example
 
 {{{noindent}}} This dynamic block has the following parameters:
@@ -5429,10 +5433,10 @@ presence causes entries to be shown on specific dates in the agenda
   a plain timestamp will be shown exactly on that date.
 
   #+begin_example
-  ,* Meet Peter at the movies
-    <2006-11-01 Wed 19:15>
-  ,* Discussion on climate change
-    <2006-11-02 Thu 20:00-22:00>
+    ,* Meet Peter at the movies
+      <2006-11-01 Wed 19:15>
+    ,* Discussion on climate change
+      <2006-11-02 Thu 20:00-22:00>
   #+end_example
 
 - Timestamp with repeater interval ::
@@ -5444,8 +5448,8 @@ presence causes entries to be shown on specific dates in the agenda
   The following will show up in the agenda every Wednesday:
 
   #+begin_example
-  ,* Pick up Sam at school
-    <2007-05-16 Wed 12:30 +1w>
+    ,* Pick up Sam at school
+      <2007-05-16 Wed 12:30 +1w>
   #+end_example
 
 - Diary-style sexp entries ::
@@ -5455,8 +5459,8 @@ presence causes entries to be shown on specific dates in the agenda
   package.[fn:60] For example, with optional time:
 
   #+begin_example
-  ,* 22:00-23:00 The nerd meeting on every 2nd Thursday of the month
-    <%%(org-float t 4 2)>
+    ,* 22:00-23:00 The nerd meeting on every 2nd Thursday of the month
+      <%%(org-float t 4 2)>
   #+end_example
 
 - Time/Date range ::
@@ -5468,8 +5472,8 @@ presence causes entries to be shown on specific dates in the agenda
   that are displayed and fall in the range.  Here is an example:
 
   #+begin_example
-  ,** Meeting in Amsterdam
-     <2004-08-23 Mon>--<2004-08-26 Thu>
+    ,** Meeting in Amsterdam
+       <2004-08-23 Mon>--<2004-08-26 Thu>
   #+end_example
 
 - Inactive timestamp ::
@@ -5481,8 +5485,8 @@ presence causes entries to be shown on specific dates in the agenda
   /not/ trigger an entry to show up in the agenda.
 
   #+begin_example
-  ,* Gillian comes late for the fifth time
-    [2006-11-01 Wed]
+    ,* Gillian comes late for the fifth time
+      [2006-11-01 Wed]
   #+end_example
 
 ** Creating timestamps
@@ -5780,9 +5784,9 @@ A timestamp may be preceded by special keywords to facilitate planning:
   example:
 
   #+begin_example
-  ,*** TODO write article about the Earth for the Guide
-      DEADLINE: <2004-02-29 Sun>
-      The editor in charge is [[bbdb:Ford Prefect]]
+    ,*** TODO write article about the Earth for the Guide
+        DEADLINE: <2004-02-29 Sun>
+        The editor in charge is [[bbdb:Ford Prefect]]
   #+end_example
 
   You can specify a different lead time for warnings for a specific
@@ -5803,8 +5807,8 @@ A timestamp may be preceded by special keywords to facilitate planning:
   task will automatically be forwarded until completed.
 
   #+begin_example
-  ,*** TODO Call Trillian for a date on New Years Eve.
-      SCHEDULED: <2004-12-25 Sat>
+    ,*** TODO Call Trillian for a date on New Years Eve.
+        SCHEDULED: <2004-12-25 Sat>
   #+end_example
 
   {{{noindent}}}
@@ -5905,11 +5909,13 @@ before any current timestamp.
 
 Some tasks need to be repeated again and again.  Org mode helps to
 organize such tasks using a so-called repeater in a DEADLINE, SCHEDULED,
-or plain timestamp.  In the following example
+or plain timestamp.  In the following example:
+
 #+begin_example
-,** TODO Pay the rent
-   DEADLINE: <2005-10-01 Sat +1m>
+  ,** TODO Pay the rent
+     DEADLINE: <2005-10-01 Sat +1m>
 #+end_example
+
 {{{noindent}}} the ~+1m~ is a repeater; the intended interpretation is
 that the task has a deadline on <2005-10-01> and repeats itself every
 (one) month starting from that time. You can use yearly, monthly,
@@ -5933,8 +5939,8 @@ the entry state back to TODO.[fn:68] In the example above, setting the
 state to DONE would actually switch the date like this:
 
 #+begin_example
-,** TODO Pay the rent
-   DEADLINE: <2005-11-01 Tue +1m>
+  ,** TODO Pay the rent
+     DEADLINE: <2005-11-01 Tue +1m>
 #+end_example
 
 {{{vindex(org-log-repeat)}}} 
@@ -5957,16 +5963,16 @@ like changing batteries which should always repeat a certain time
 special repeaters  {{{samp(++)}}} and {{{samp(.+)}}}.  For example:
 
 #+begin_example
-,** TODO Call Father
-   DEADLINE: <2008-02-10 Sun ++1w>
-   Marking this DONE will shift the date by at least one week,
-   but also by as many weeks as it takes to get this date into
-   the future.  However, it stays on a Sunday, even if you called
-   and marked it done on Saturday.
-,** TODO Check the batteries in the smoke detectors
-   DEADLINE: <2005-11-01 Tue .+1m>
-   Marking this DONE will shift the date to one month after
-   today.
+  ,** TODO Call Father
+     DEADLINE: <2008-02-10 Sun ++1w>
+     Marking this DONE will shift the date by at least one week,
+     but also by as many weeks as it takes to get this date into
+     the future.  However, it stays on a Sunday, even if you called
+     and marked it done on Saturday.
+  ,** TODO Check the batteries in the smoke detectors
+     DEADLINE: <2005-11-01 Tue .+1m>
+     Marking this DONE will shift the date to one month after
+     today.
 #+end_example
 
 You may have both scheduling and deadline information for a specific
@@ -6181,8 +6187,8 @@ into the buffer with the {{{kbd(C-c C-x C-r)}}} command:
 
 {{{cindex(#+BEGIN\\\, clocktable)}}}
 #+begin_example
-,#+BEGIN: clocktable :maxlevel 2 :emphasize nil :scope file
-,#+END: clocktable
+  ,#+BEGIN: clocktable :maxlevel 2 :emphasize nil :scope file
+  ,#+END: clocktable
 #+end_example
 {{{noindent}}}
 {{{vindex(org-clocktable-defaults)}}}
@@ -6328,31 +6334,31 @@ To get a clock summary of the current level 1 tree, for the current
 day, you could write:
 
 #+begin_example
-,#+BEGIN: clocktable :maxlevel 2 :block today :scope tree1 :link t
-,#+END: clocktable
+  ,#+BEGIN: clocktable :maxlevel 2 :block today :scope tree1 :link t
+  ,#+END: clocktable
 #+end_example
 
 {{{noindent}}} To use a specific time range you could write:[fn:77]
 
 #+begin_example
-,#+BEGIN: clocktable :tstart "<2006-08-10 Thu 10:00>"
-                    :tend "<2006-08-10 Thu 12:00>"
-,#+END: clocktable
+  ,#+BEGIN: clocktable :tstart "<2006-08-10 Thu 10:00>"
+                      :tend "<2006-08-10 Thu 12:00>"
+  ,#+END: clocktable
 #+end_example
 
 A summary of the current subtree with % times would be:
 
 #+begin_example
-,#+BEGIN: clocktable :scope subtree :link t :formula %
-,#+END: clocktable
+  ,#+BEGIN: clocktable :scope subtree :link t :formula %
+  ,#+END: clocktable
 #+end_example
 
 A horizontally compact representation of everything clocked during
 last week would be:
 
 #+begin_example
-,#+BEGIN: clocktable :scope agenda :block lastweek :compact t
-,#+END: clocktable
+  ,#+BEGIN: clocktable :scope agenda :block lastweek :compact t
+  ,#+END: clocktable
 #+end_example
 
 *** Resolving idle time
@@ -6497,8 +6503,8 @@ values together with clock sums (if you want to clock your time). For
 a specific buffer you can use:
 
 #+begin_example
-,#+PROPERTY: Effort_ALL 0 0:10 0:30 1:00 2:00 3:00 4:00 5:00 6:00 7:00
-,#+COLUMNS: %40ITEM(Task) %17Effort(Estimated Effort){:} %CLOCKSUM
+  ,#+PROPERTY: Effort_ALL 0 0:10 0:30 1:00 2:00 3:00 4:00 5:00 6:00 7:00
+  ,#+COLUMNS: %40ITEM(Task) %17Effort(Estimated Effort){:} %CLOCKSUM
 #+end_example
 
 {{{vindex(org-global-properties)}}}
@@ -6775,8 +6781,8 @@ journal entries. A possible configuration would look like:
 the template for you like this:
 
 #+begin_example
-,* TODO
-  [[file:@var{link to where you initiated capture}]]
+  ,* TODO
+    [[file:@var{link to where you initiated capture}]]
 #+end_example
 
 {{{noindent}}} During expansion of the template, ~%a~ has been
@@ -7125,7 +7131,7 @@ defined:[fn:82]
 {{{noindent}}} To place the cursor after template expansion use:
 
 #+begin_example
-%?          @r{After completing the template, position cursor here.}
+  %?          After completing the template, position cursor here.
 #+end_example
 
 **** Templates in contexts
@@ -7321,7 +7327,7 @@ times. You should add {{{samp(FEEDSTATUS)}}} to the list of drawers in
 that file:
 
 #+begin_example
-,#+DRAWERS: LOGBOOK PROPERTIES FEEDSTATUS
+  ,#+DRAWERS: LOGBOOK PROPERTIES FEEDSTATUS
 #+end_example
 
 For more information, including how to read atom feeds, see
@@ -7480,7 +7486,7 @@ example:[fn:86]
 
 {{{cindex(#+ARCHIVE)}}}
 #+begin_example
-,#+ARCHIVE: %s_done::
+  ,#+ARCHIVE: %s_done::
 #+end_example
 
 {{{cindex(property\\\, ARCHIVE)}}}
@@ -7895,12 +7901,12 @@ the following segment of an Org file will be processed and entries
 will be made in the agenda:
 
 #+begin_example
-,* Birthdays and similar stuff
-,#+CATEGORY: Holiday
-%%(org-calendar-holiday)   ; special function for holiday names
-,#+CATEGORY: Ann
-%%(org-anniversary 1956  5 14)@footnote{@code{org-anniversary} is just like @code{diary-anniversary}, but the argument order is always according to ISO and therefore independent of the value of @code{calendar-date-style}.} Arthur Dent is %d years old
-%%(org-anniversary 1869 10  2) Mahatma Gandhi would be %d years old
+  ,* Birthdays and similar stuff
+  ,#+CATEGORY: Holiday
+  %%(org-calendar-holiday)   ; special function for holiday names
+  ,#+CATEGORY: Ann
+  %%(org-anniversary 1956  5 14)@footnote{@code{org-anniversary} is just like @code{diary-anniversary}, but the argument order is always according to ISO and therefore independent of the value of @code{calendar-date-style}.} Arthur Dent is %d years old
+  %%(org-anniversary 1869 10  2) Mahatma Gandhi would be %d years old
 #+end_example
 
 **** FIXED Anniversaries from BBDB
@@ -7918,11 +7924,11 @@ anniversaries as part of the agenda.  All you need to do is to add the
 following to one of your agenda files:
 
 #+begin_example
-,* Anniversaries
-,  :PROPERTIES:
-,  :CATEGORY: Anniv
-,  :END:
-,%%(org-bbdb-anniversaries)
+  ,* Anniversaries
+  ,  :PROPERTIES:
+  ,  :CATEGORY: Anniv
+  ,  :END:
+  ,%%(org-bbdb-anniversaries)
 #+end_example
 
 You can then go ahead and define anniversaries for a BBDB record.
@@ -7935,10 +7941,10 @@ string). If you omit the class, it will default to
 {{{file(org-bbdb.el)}}} contains more detailed information.
 
 #+begin_example
-1973-06-22
-06-22
-1955-08-02 wedding
-2008-04-14 %s released version 6.01 of org mode, %d years ago
+  1973-06-22
+  06-22
+  1955-08-02 wedding
+  2008-04-14 %s released version 6.01 of org mode, %d years ago
 #+end_example
 
 After a change to BBDB, or for the first agenda display during an
@@ -8151,8 +8157,8 @@ When matching properties, a number of different operators can be used to test
 the value of a property.  Here is a complex example:
 
 #+begin_example
-+work-boss+PRIORITY="A"+Coffee="unlimited"+Effort<2         
-         +With={Sarah|Denny}+SCHEDULED>="<2008-10-11>"
+  +work-boss+PRIORITY="A"+Coffee="unlimited"+Effort<2         
+           +With={Sarah|Denny}+SCHEDULED>="<2008-10-11>"
 #+end_example
 
 {{{noindent}}} The type of comparison will depend on how the
@@ -8371,7 +8377,7 @@ can also specify it with a special line in the buffer, like
 this:[fn:92]
 
 #+begin_example
-,#+CATEGORY: Thesis
+  ,#+CATEGORY: Thesis
 #+end_example
 
 {{{noindent}}}
@@ -8400,7 +8406,7 @@ agenda, for example as in {{{samp(<2005-05-10 Tue 19:00>)}}}.  Time
 ranges can be specified with two timestamps, like:
 
 #+begin_example
-{{{samp(<2005-05-10 Tue 20:30>--<2005-05-10 Tue 22:15>)}}}.
+  {{{samp(<2005-05-10 Tue 20:30>--<2005-05-10 Tue 22:15>)}}}.
 #+end_example
 
 In the headline of the entry itself, a time(range) may also appear as
@@ -8413,10 +8419,10 @@ standard 24 hour format as part of the prefix.  The example times in
 the previous paragraphs would end up in the agenda like this:
 
 #+begin_example
-    8:30-13:00 Arthur Dent lies in front of the bulldozer
-   12:45...... Ford Prefect arrives and takes Arthur to the pub
-   19:00...... The Vogon reads his poem
-   20:30-22:15 Marvin escorts the Hitchhikers to the bridge
+   8:30-13:00 Arthur Dent lies in front of the bulldozer
+  12:45...... Ford Prefect arrives and takes Arthur to the pub
+  19:00...... The Vogon reads his poem
+  20:30-22:15 Marvin escorts the Hitchhikers to the bridge
 #+end_example
 
 {{{cindex(time grid)}}}
@@ -8425,17 +8431,17 @@ If the agenda is in single-day mode, or for the display of today, the
 timed entries are embedded in a time grid, like
 
 #+begin_example
-    8:00...... ------------------
-    8:30-13:00 Arthur Dent lies in front of the bulldozer
-   10:00...... ------------------
-   12:00...... ------------------
-   12:45...... Ford Prefect arrives and takes Arthur to the pub
-   14:00...... ------------------
-   16:00...... ------------------
-   18:00...... ------------------
-   19:00...... The Vogon reads his poem
-   20:00...... ------------------
-   20:30-22:15 Marvin escorts the Hitchhikers to the bridge
+   8:00...... ------------------
+   8:30-13:00 Arthur Dent lies in front of the bulldozer
+  10:00...... ------------------
+  12:00...... ------------------
+  12:45...... Ford Prefect arrives and takes Arthur to the pub
+  14:00...... ------------------
+  16:00...... ------------------
+  18:00...... ------------------
+  19:00...... The Vogon reads his poem
+  20:00...... ------------------
+  20:30-22:15 Marvin escorts the Hitchhikers to the bridge
 #+end_example
 
 {{{vindex(org-agenda-use-time-grid)}}}
@@ -8808,8 +8814,8 @@ the other commands, the cursor needs to be in the desired line.
   {{{vindex(org-agenda-category-filter-preset)}}}
 
   Filter the current agenda view with respect to the category of the
-  item at point. Pressing ~<~ another time will remove this filter. You
-  can add a filter preset through the option
+  item at point. Pressing {{{kbd(<)}}} another time will remove this
+  filter. You can add a filter preset through the option
   ~org-agenda-category-filter-preset~ (see below).
 
 - {{{kbd(/)}}} ~org-agenda-filter-by-tag~ ::
@@ -8896,8 +8902,8 @@ the other commands, the cursor needs to be in the desired line.
 - {{{kbd([)}}} {{{kbd(])}}} {{{kbd({)}}} {{{kbd(})}}} in search view ::
   {{{kindex([)}}}
   {{{kindex(])}}}
-  {{{kindex({)}}}
-  {{{kindex(})}}}
+  {{{kindex(@{)}}}
+  {{{kindex(@})}}}
 
   Add new search words ({{{kbd([)}}} and {{{kbd(])}}}) or new regular
   expressions ({{{kbd({)}}} and {{{kbd(})}}}) to the query string. The
@@ -9666,12 +9672,12 @@ in ~org-agenda-exporter-settings~ will also apply, but the settings in
 {{{noindent}}} or, if you need to modify some parameters:[fn:100]
 
 #+begin_example
-emacs -eval '(org-batch-store-agenda-views                      \
-              org-agenda-span (quote month)                     \
-              org-agenda-start-day "2007-11-01"                 \
-              org-agenda-include-diary nil                      \
-              org-agenda-files (quote ("~/org/project.org")))'  \
-      -kill
+  emacs -eval '(org-batch-store-agenda-views                      \
+                org-agenda-span (quote month)                     \
+                org-agenda-start-day "2007-11-01"                 \
+                org-agenda-include-diary nil                      \
+                org-agenda-files (quote ("~/org/project.org")))'  \
+        -kill
 #+end_example
 
 {{{noindent}}} which will create the agenda views restricted to the
@@ -9780,7 +9786,7 @@ special line:
 
 {{{cindex(#+TITLE)}}}
 #+begin_example
-,#+TITLE: This is the title of the document
+  ,#+TITLE: This is the title of the document
 #+end_example
 
 {{{noindent}}} If this line does not exist, the title is derived from
@@ -9813,7 +9819,7 @@ change the location of this switch globally by setting the variable
 
 {{{cindex(#+OPTIONS)}}}
 #+begin_example
-,#+OPTIONS: H:4
+  ,#+OPTIONS: H:4
 #+end_example
 
 *** Table of contents
@@ -9834,8 +9840,8 @@ configuring the variable ~org-export-with-toc~, or on a per-file basis
 with the ~toc~ option:
 
 #+begin_example
-,#+OPTIONS: toc:2          (only to two levels in TOC)
-,#+OPTIONS: toc:nil        (no TOC at all)
+  ,#+OPTIONS: toc:2          (only to two levels in TOC)
+  ,#+OPTIONS: toc:nil        (no TOC at all)
 #+end_example
 
 *** Initial text
@@ -9866,10 +9872,10 @@ If you still want to have some text before the first headline, use the
 ~#+TEXT~ construct:
 
 #+begin_example
-,#+OPTIONS: skip:t
-,#+TEXT: This text will go before the *first* headline.
-,#+TEXT: [TABLE-OF-CONTENTS]
-,#+TEXT: This goes between the table of contents and the *first* headline
+  ,#+OPTIONS: skip:t
+  ,#+TEXT: This text will go before the *first* headline.
+  ,#+TEXT: [TABLE-OF-CONTENTS]
+  ,#+TEXT: This goes between the table of contents and the *first* headline
 #+end_example
 
 *** Lists
@@ -9898,13 +9904,13 @@ format poetry:
 
 {{{cindex(#+BEGIN_VERSE)}}}
 #+begin_example
-#+BEGIN_VERSE
- Great clouds overhead
- Tiny black birds rise and fall
- Snow covers Emacs
+  #+BEGIN_VERSE
+   Great clouds overhead
+   Tiny black birds rise and fall
+   Snow covers Emacs
 
-     -- AlexSchroeder
-#+END_VERSE
+       -- AlexSchroeder
+  #+END_VERSE
 #+end_example
 
 When quoting a passage from another document, it is customary to
@@ -9914,19 +9920,19 @@ this:
 
 {{{cindex(#+BEGIN_QUOTE)}}}
 #+begin_example
-#+BEGIN_QUOTE
-Everything should be made as simple as possible,
-but not any simpler -- Albert Einstein
-#+END_QUOTE
+  #+BEGIN_QUOTE
+  Everything should be made as simple as possible,
+  but not any simpler -- Albert Einstein
+  #+END_QUOTE
 #+end_example
 
 If you would like to center some text, do it like this:
 {{{cindex(#+BEGIN_CENTER)}}}
 #+begin_example
-#+BEGIN_CENTER
-Everything should be made as simple as possible, \\
-but not any simpler
-#+END_CENTER
+  #+BEGIN_CENTER
+  Everything should be made as simple as possible, \\
+  but not any simpler
+  #+END_CENTER
 #+end_example
 
 *** Footnote markup
@@ -10006,15 +10012,15 @@ and in the text you can refer to the object with
 ~\ref{tab:basic-data}~:
 
 #+begin_example
-#+CAPTION: This is the caption for the next table (or link)
-#+LABEL:   tab:basic-data
-   | ... | ...|
-   |-----|----|
+  #+CAPTION: This is the caption for the next table (or link)
+  #+LABEL:   tab:basic-data
+     | ... | ...|
+     |-----|----|
 #+end_example
 
 Optionally, the caption can take the form:
 #+begin_example
-#+CAPTION: [Caption for list of figures]{Caption for table (or link).}
+  #+CAPTION: [Caption for list of figures]{Caption for table (or link).}
 #+end_example
 
 {{{cindex(inlined images\\\, markup rules)}}}
@@ -10028,9 +10034,9 @@ line by itself and precede it with ~#+CAPTION~ and ~#+LABEL~ as
 follows:
 
 #+begin_example
-#+CAPTION: This is the caption for the next figure link (or table)
-#+LABEL:   fig:SED-HR4049
-[[./img/a.jpg]]
+  #+CAPTION: This is the caption for the next figure link (or table)
+  #+LABEL:   fig:SED-HR4049
+  [[./img/a.jpg]]
 #+end_example
 
 You may also define additional attributes for the figure. As this is
@@ -10052,9 +10058,9 @@ suited for source code and similar examples.
 {{{cindex(#+BEGIN_EXAMPLE)}}}
 
 #+begin_example
-,#+BEGIN_EXAMPLE
-Some example from a text file.
-,#+END_EXAMPLE
+  ,#+BEGIN_EXAMPLE
+  Some example from a text file.
+  ,#+END_EXAMPLE
 #+end_example
 
 Note that such blocks may be /indented/ in order to align nicely with
@@ -10064,8 +10070,8 @@ the example lines with a colon followed by a space. There may also be
 additional whitespace before the colon:
 
 #+begin_example
-Here is an example
-   : Some example from a text file.
+  Here is an example
+     : Some example from a text file.
 #+end_example
 
 {{{cindex(formatting source code\\\, markup rules)}}}
@@ -10080,11 +10086,11 @@ see [[Easy templates]] for shortcuts to easily insert code blocks.[fn:102]
 {{{cindex(#+BEGIN_SRC)}}}
 
 #+begin_example
-#+BEGIN_SRC emacs-lisp
-  (defun org-xor (a b)
-     "Exclusive or."
-     (if a (not b) b))
-#+END_SRC
+  #+BEGIN_SRC emacs-lisp
+    (defun org-xor (a b)
+       "Exclusive or."
+       (if a (not b) b))
+  #+END_SRC
 #+end_example
 
 Both in ~example~ and in ~src~ snippets, you can add a ~-n~ switch to
@@ -10103,12 +10109,12 @@ will be labeled by the line numbers from the code listing, otherwise
 links will use the labels with no parentheses. Here is an example:
 
 #+begin_example
-#+BEGIN_SRC emacs-lisp -n -r
-(save-excursion                  (ref:sc)
-   (goto-char (point-min))       (ref:jump)
-#+END_SRC
-In line [[(sc)]] we remember the current position.  [[(jump)][Line (jump)]]
-jumps to point-min.
+  #+BEGIN_SRC emacs-lisp -n -r
+  (save-excursion                  (ref:sc)
+     (goto-char (point-min))       (ref:jump)
+  #+END_SRC
+  In line [[(sc)]] we remember the current position.  [[(jump)][Line (jump)]]
+  jumps to point-min.
 #+end_example
 
 {{{vindex(org-coderef-label-format)}}}
@@ -10160,7 +10166,7 @@ example, to include your {{{file(.emacs)}}} file, you could use:
 {{{cindex(#+INCLUDE)}}}
 
 #+begin_example
-,#+INCLUDE: "~/.emacs" src emacs-lisp
+  ,#+INCLUDE: "~/.emacs" src emacs-lisp
 #+end_example
 
 {{{noindent}}} The optional second and third parameter are the markup
@@ -10175,7 +10181,7 @@ to a specified level, as well as any options accepted by the selected
 markup. For example, to include a file as an item, use:
 
 #+begin_example
-,#+INCLUDE: "~/snippets/xx" :prefix1 "   + " :prefix "     "
+  ,#+INCLUDE: "~/snippets/xx" :prefix1 "   + " :prefix "     "
 #+end_example
 
 You can also include a portion of a file by specifying a lines range
@@ -10215,9 +10221,9 @@ entry the contains an exclamation mark will create a sub item. See
 [[Generating an index]] for more information.
 
 #+begin_example
-,* Curriculum Vitae
-#+INDEX: CV
-#+INDEX: Application!CV
+  ,* Curriculum Vitae
+  #+INDEX: CV
+  #+INDEX: Application!CV
 #+end_example
 
 ** Macro replacement
@@ -10230,7 +10236,7 @@ entry the contains an exclamation mark will create a sub item. See
 You can define text snippets with a macro:
 
 #+begin_example
-,#+MACRO: name   replacement text $1, $2 are arguments
+  ,#+MACRO: name   replacement text $1, $2 are arguments
 #+end_example
 
 {{{noindent}}} which can be referenced anywhere in the document (even in
@@ -10282,7 +10288,7 @@ these macros to be present without surrounding math delimiters, for
 example:
 
 #+begin_example
-Angles are written as Greek letters \alpha, \beta and \gamma.
+  Angles are written as Greek letters \alpha, \beta and \gamma.
 #+end_example
 
 {{{vindex(org-entities)}}}
@@ -10326,8 +10332,8 @@ ASCII text, it is not necessary (but OK) to surround multi-character
 sub- and superscripts with curly braces. For example
 
 #+begin_example
-The mass of the sun is M_sun = 1.989 x 10^30 kg.  The radius of
-the sun is R_{sun} = 6.96 x 10^8 m.
+  The mass of the sun is M_sun = 1.989 x 10^30 kg.  The radius of
+  the sun is R_{sun} = 6.96 x 10^8 m.
 #+end_example
 
 {{{vindex(org-export-with-sub-superscripts)}}}
@@ -10341,7 +10347,7 @@ get in your way. Configure the variable
 or use, on a per-file basis:
 
 #+begin_example
-,#+OPTIONS: ^:{}
+  ,#+OPTIONS: ^:{}
 #+end_example
 
 {{{noindent}}} With this setting, {{{samp(a_b)}}} will not be interpreted as a
@@ -10389,12 +10395,12 @@ snippets will be identified as LaTeX source code:
 {{{noindent}}} For example:
 
 #+begin_example
-\begin{equation}                          % arbitrary environments,
-x=\sqrt{b}                                % even tables, figures
-\end{equation}                            % etc
+  \begin{equation}                          % arbitrary environments,
+  x=\sqrt{b}                                % even tables, figures
+  \end{equation}                            % etc
 
-If $a^2=b$ and \( b=2 \), then the solution must be
-either $$ a=+\sqrt{2} $$ or \[ a=-\sqrt{2} \].
+  If $a^2=b$ and \( b=2 \), then the solution must be
+  either $$ a=+\sqrt{2} $$ or \[ a=-\sqrt{2} \].
 #+end_example
 
 {{{noindent}}}
@@ -11060,7 +11066,7 @@ occur at a different level, specify it with a numeric prefix argument,
 e.g.:
 
 #+begin_example
-C-2 C-c C-e b
+  C-2 C-c C-e b
 #+end_example
 
 {{{noindent}}} This setting creates two levels of headings and exports
@@ -11118,16 +11124,16 @@ that should be copied verbatim to the exported file use either ~#+HTML~:
 {{{cindex(#+HTML)}}}
 {{{cindex(#+BEGIN_HTML)}}}
 #+begin_example
-,#+HTML: Literal HTML code for export
+  ,#+HTML: Literal HTML code for export
 #+end_example
 
 {{{noindent}}} or an HTML block:
 {{{cindex(#+BEGIN_HTML)}}}
 
 #+begin_example
-#+BEGIN_HTML
-All lines between these markers are exported literally
-#+END_HTML
+  #+BEGIN_HTML
+  All lines between these markers are exported literally
+  #+END_HTML
 #+end_example
 
 *** Links in HTML export
@@ -11156,8 +11162,8 @@ the ~<a>~ or ~<img>~ tags. Here is an example that sets ~title~ and
 
 {{{cindex(#+ATTR_HTML)}}}
 #+begin_example
-,#+ATTR_HTML: title="The Org mode homepage" style="color:red;"
-,[[http://orgmode.org]]
+  ,#+ATTR_HTML: title="The Org mode homepage" style="color:red;"
+  ,[[http://orgmode.org]]
 #+end_example
 
 *** Tables in HTML export
@@ -11176,8 +11182,8 @@ table:
 {{{cindex(#+CAPTION)}}}
 {{{cindex(#+ATTR_HTML)}}}
 #+begin_example
-,#+CAPTION: This is a table with lines around and between cells
-,#+ATTR_HTML: border="2" rules="all" frame="border"
+  ,#+CAPTION: This is a table with lines around and between cells
+  ,#+ATTR_HTML: border="2" rules="all" frame="border"
 #+end_example
 
 *** Images in HTML export
@@ -11199,7 +11205,7 @@ example, to include a thumbnail that will link to a high resolution
 version of the image, you could use:
 
 #+begin_example
-[[file:highres.jpg][file:thumb.jpg]]
+  [[file:highres.jpg][file:thumb.jpg]]
 #+end_example
 
 If you need to add attributes to an inlined image, use a ~#+ATTR_HTML~.
@@ -11209,9 +11215,9 @@ support text viewers and accessibility, and align it to the right.
 {{{cindex(#+CAPTION)}}}
 {{{cindex(#+ATTR_HTML)}}}
 #+begin_example
-,#+CAPTION: A black cat stalking a spider
-,#+ATTR_HTML: alt="cat/spider image" title="Action!" align="right"
-[[./img/a.jpg]]
+  ,#+CAPTION: A black cat stalking a spider
+  ,#+ATTR_HTML: alt="cat/spider image" title="Action!" align="right"
+  [[./img/a.jpg]]
 #+end_example
 
 {{{noindent}}} You could use ~http~ addresses just as well.
@@ -11233,7 +11239,7 @@ small applications and for testing purposes.[fn:120] To configure
 following into the buffer:
 
 #+begin_example
-,#+MATHJAX: align:"left" mathml:t path:"/MathJax/MathJax.js"
+  ,#+MATHJAX: align:"left" mathml:t path:"/MathJax/MathJax.js"
 #+end_example
 
 {{{noindent}}} See the docstring of the variable
@@ -11248,7 +11254,7 @@ program is available on your system. You can still get this processing
 with the following option:
 
 #+begin_example
-,#+OPTIONS: LaTeX:dvipng
+  ,#+OPTIONS: LaTeX:dvipng
 #+end_example
 
 *** Text areas in HTML export
@@ -11267,11 +11273,11 @@ text area, which default to the number of lines in the example, and
 80, respectively. For example
 
 #+begin_example
-,#+BEGIN_EXAMPLE -t -w 40
-  (defun org-xor (a b)
-     "Exclusive or."
-     (if a (not b) b))
-,#+END_EXAMPLE
+  ,#+BEGIN_EXAMPLE -t -w 40
+    (defun org-xor (a b)
+       "Exclusive or."
+       (if a (not b) b))
+  ,#+END_EXAMPLE
 #+end_example
 
 *** CSS support
@@ -11333,7 +11339,7 @@ individually for each file, you can use a ~#+STYLE:~ line:
 
 {{{cindex(#+STYLE)}}}
 #+begin_example
-,#+STYLE: <link rel="stylesheet" type="text/css" href="stylesheet.css" />
+  ,#+STYLE: <link rel="stylesheet" type="text/css" href="stylesheet.css" />
 #+end_example
 
 {{{noindent}}} For longer style definitions, you can use several such
@@ -11376,7 +11382,7 @@ line to the Org file:
 
 {{{cindex(#+INFOJS_OPT)}}}
 #+begin_example
-,#+INFOJS_OPT: view:info toc:nil
+  ,#+INFOJS_OPT: view:info toc:nil
 #+end_example
 
 {{{noindent}}} If this line is found, the HTML header will
@@ -11528,7 +11534,7 @@ If you want that transition to occur at a different level, specify it
 with a numeric prefix argument, e.g.:
 
 #+begin_example
-C-2 C-c C-e l
+  C-2 C-c C-e l
 #+end_example
 
 {{{noindent}}} The example setting creates two levels of headings and
@@ -11681,13 +11687,13 @@ image, you need to use compatible settings for ~\includegraphics~ and
 {{{cindex(#+LABEL)}}}
 {{{cindex(#+ATTR_LaTeX)}}}
 #+begin_example
-,#+CAPTION:    The black-body emission of the disk around HR 4049
-,#+LABEL:      fig:SED-HR4049
-,#+ATTR_LaTeX: width=5cm,angle=90
-[[./img/sed-hr4049.pdf]]
+  ,#+CAPTION:    The black-body emission of the disk around HR 4049
+  ,#+LABEL:      fig:SED-HR4049
+  ,#+ATTR_LaTeX: width=5cm,angle=90
+  [[./img/sed-hr4049.pdf]]
 
-,#+ATTR_LaTeX: width=0.38\textwidth wrap placement=@{r@}@{0.4\textwidth@}
-[[./img/hst.png]]
+  ,#+ATTR_LaTeX: width=0.38\textwidth wrap placement=@{r@}@{0.4\textwidth@}
+  [[./img/hst.png]]
 #+end_example
 
 If you wish to include an image which spans multiple columns in a page, you
@@ -11783,7 +11789,7 @@ You can turn on a special minor mode ~org-beamer-mode~ for editing
 support with the following line:
 
 #+begin_example
-,#+STARTUP: beamer
+  ,#+STARTUP: beamer
 #+end_example
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
@@ -11802,38 +11808,38 @@ that is geared toward this special purpose. The command
 Here is a simple example Org document that is intended for beamer export.
 
 #+begin_example
-,#+LaTeX_CLASS: beamer
-,#+TITLE: Example Presentation
-,#+AUTHOR: Carsten Dominik
-,#+LaTeX_CLASS_OPTIONS: [presentation]
-,#+BEAMER_FRAME_LEVEL: 2
-,#+BEAMER_HEADER_EXTRA: \usetheme@{Madrid@}\usecolortheme@{default@}
-,#+COLUMNS: %35ITEM %10BEAMER_env(Env) %10BEAMER_envargs(Args) %4BEAMER_col(Col) %8BEAMER_extra(Ex)
+  ,#+LaTeX_CLASS: beamer
+  ,#+TITLE: Example Presentation
+  ,#+AUTHOR: Carsten Dominik
+  ,#+LaTeX_CLASS_OPTIONS: [presentation]
+  ,#+BEAMER_FRAME_LEVEL: 2
+  ,#+BEAMER_HEADER_EXTRA: \usetheme@{Madrid@}\usecolortheme@{default@}
+  ,#+COLUMNS: %35ITEM %10BEAMER_env(Env) %10BEAMER_envargs(Args) %4BEAMER_col(Col) %8BEAMER_extra(Ex)
 
-,* This is the first structural section
+  ,* This is the first structural section
 
-,** Frame 1 \\ with a subtitle
-,*** Thanks to Eric Fraga                                      :BMCOL:B_block:
-    :PROPERTIES:
-    :BEAMER_env: block
-    :BEAMER_envargs: C[t]
-    :BEAMER_col: 0.5
-    :END:
-    for the first viable beamer setup in Org
-,*** Thanks to everyone else                                   :BMCOL:B_block:
-    :PROPERTIES:
-    :BEAMER_col: 0.5
-    :BEAMER_env: block
-    :BEAMER_envargs: <2->
-    :END:
-    for contributing to the discussion
-,**** This will be formatted as a beamer note                  :B_note:
-,** Frame 2 \\ where we will not use columns
-,*** Request                                                   :B_block:
-    Please test this stuff!
-    :PROPERTIES:
-    :BEAMER_env: block
-    :END:
+  ,** Frame 1 \\ with a subtitle
+  ,*** Thanks to Eric Fraga                                      :BMCOL:B_block:
+      :PROPERTIES:
+      :BEAMER_env: block
+      :BEAMER_envargs: C[t]
+      :BEAMER_col: 0.5
+      :END:
+      for the first viable beamer setup in Org
+  ,*** Thanks to everyone else                                   :BMCOL:B_block:
+      :PROPERTIES:
+      :BEAMER_col: 0.5
+      :BEAMER_env: block
+      :BEAMER_envargs: <2->
+      :END:
+      for contributing to the discussion
+  ,**** This will be formatted as a beamer note                  :B_note:
+  ,** Frame 2 \\ where we will not use columns
+  ,*** Request                                                   :B_block:
+      Please test this stuff!
+      :PROPERTIES:
+      :BEAMER_env: block
+      :END:
 #+end_example
 
 For more information, see the documentation on Worg.
@@ -11912,17 +11918,17 @@ DocBook file with the following constructs:
 {{{cindex(#+DOCBOOK)}}}
 {{{cindex(#+BEGIN_DOCBOOK)}}}
 #+begin_example
-,#+DOCBOOK: Literal DocBook code for export
+  ,#+DOCBOOK: Literal DocBook code for export
 #+end_example
 
 {{{noindent}}} or
 {{{cindex(#+BEGIN_DOCBOOK)}}}
 
 #+begin_example
-,#+BEGIN_DOCBOOK
-All lines between these markers are exported by DocBook exporter
-literally.
-,#+END_DOCBOOK
+  ,#+BEGIN_DOCBOOK
+  All lines between these markers are exported by DocBook exporter
+  literally.
+  ,#+END_DOCBOOK
 #+end_example
 
 For example, you can use the following lines to include a DocBook warning
@@ -11931,13 +11937,13 @@ document context when quoting DocBook code in Org files.  You may make
 exported DocBook XML files invalid by not quoting DocBook code correctly.
 
 #+begin_example
-,#+BEGIN_DOCBOOK
-<warning>
-  <para>You should know what you are doing when quoting DocBook XML code
-  in your Org file.  Invalid DocBook XML may be generated by
-  DocBook exporter if you are not careful!</para>
-</warning>
-,#+END_DOCBOOK
+  ,#+BEGIN_DOCBOOK
+  <warning>
+    <para>You should know what you are doing when quoting DocBook XML code
+    in your Org file.  Invalid DocBook XML may be generated by
+    DocBook exporter if you are not careful!</para>
+  </warning>
+  ,#+END_DOCBOOK
 #+end_example
 
 *** Recursive sections
@@ -12006,10 +12012,10 @@ set:
 {{{cindex(#+LABEL)}}}
 {{{cindex(#+ATTR_DOCBOOK)}}}
 #+begin_example
-,#+CAPTION:    The logo of Org mode
-,#+LABEL:      unicorn-svg
-,#+ATTR_DOCBOOK: scalefit="1" width="100%" depth="100%"
-[[./img/org-mode-unicorn.svg]]
+  ,#+CAPTION:    The logo of Org mode
+  ,#+LABEL:      unicorn-svg
+  ,#+ATTR_DOCBOOK: scalefit="1" width="100%" depth="100%"
+  [[./img/org-mode-unicorn.svg]]
 #+end_example
 
 {{{vindex(org-export-docbook-inline-image-extensions)}}}
@@ -12041,14 +12047,14 @@ entities you need. For example, you can set variable
 special characters included in XHTML entities:
 
 #+begin_example
-"<!DOCTYPE article [
-<!ENTITY % xhtml1-symbol PUBLIC
-\"-//W3C//ENTITIES Symbol for HTML//EN//XML\"
-\"http://www.w3.org/2003/entities/2007/xhtml1-symbol.ent\"
->
-%xhtml1-symbol;
-]>
-"
+  "<!DOCTYPE article [
+  <!ENTITY % xhtml1-symbol PUBLIC
+  \"-//W3C//ENTITIES Symbol for HTML//EN//XML\"
+  \"http://www.w3.org/2003/entities/2007/xhtml1-symbol.ent\"
+  >
+  %xhtml1-symbol;
+  ]>
+  "
 #+end_example
 
 ** OpenDocument Text export
@@ -12199,7 +12205,7 @@ Custom styles can be applied in three easy steps:
    settings and export it to ODT format.
 
    #+begin_example
-   ,#+OPTIONS: H:10 num:t
+     ,#+OPTIONS: H:10 num:t
    #+end_example
 
 2. Open the above {{{file(example.odt)}}} using LibreOffice. Use the
@@ -12221,13 +12227,13 @@ Custom styles can be applied in three easy steps:
    one of these two examples:
 
    #+begin_example
-   ,#+ODT_STYLES_FILE: "/path/to/example.ott"
+     ,#+ODT_STYLES_FILE: "/path/to/example.ott"
    #+end_example
 
    or
 
    #+begin_example
-   ,#+ODT_STYLES_FILE: ("/path/to/file.ott" ("styles.xml" "image/hdr.png"))
+     ,#+ODT_STYLES_FILE: ("/path/to/file.ott" ("styles.xml" "image/hdr.png"))
    #+end_example
 
 Although you can use third-party styles and templates for customizing
@@ -12282,16 +12288,16 @@ For example, consider the following table which makes use of all the
 rules mentioned above.
 
 #+begin_example
-#+ATTR_ODT: :rel-width 50
-| Area/Month    |   Jan |   Feb |   Mar |   Sum |
-|---------------+-------+-------+-------+-------|
-| /             |     < |       |       |     < |
-| <l13>         |  <r5> |  <r5> |  <r5> |  <r6> |
-| North America |     1 |    21 |   926 |   948 |
-| Middle East   |     6 |    75 |   844 |   925 |
-| Asia Pacific  |     9 |    27 |   790 |   826 |
-|---------------+-------+-------+-------+-------|
-| Sum           |    16 |   123 |  2560 |  2699 |
+  #+ATTR_ODT: :rel-width 50
+  | Area/Month    |   Jan |   Feb |   Mar |   Sum |
+  |---------------+-------+-------+-------+-------|
+  | /             |     < |       |       |     < |
+  | <l13>         |  <r5> |  <r5> |  <r5> |  <r6> |
+  | North America |     1 |    21 |   926 |   948 |
+  | Middle East   |     6 |    75 |   844 |   925 |
+  | Asia Pacific  |     9 |    27 |   790 |   826 |
+  |---------------+-------+-------+-------+-------|
+  | Sum           |    16 |   123 |  2560 |  2699 |
 #+end_example
 
 On export, the table will occupy 50% of text area. The columns will be
@@ -12317,11 +12323,11 @@ desired image file with no link description.  For example, to embed
 {{{samp(img.png)}}} do either of the following:
 
 #+begin_example
-[[file:img.png]]
+  [[file:img.png]]
 #+end_example
 
 #+begin_example
-[[./img.png]]
+  [[./img.png]]
 #+end_example
 
 You can create clickable images by providing a link whose description
@@ -12330,7 +12336,7 @@ is a link to an image file. For example, to embed an image
 [[http://Orgmode.org]] website, do the following:
 
 #+begin_example
-[[http://orgmode.org][./org-mode-unicorn.png]]
+  [[http://orgmode.org][./org-mode-unicorn.png]]
 #+end_example
 
 {{{cindex(#+ATTR_ODT)}}}
@@ -12360,8 +12366,8 @@ The examples below illustrate the various possibilities.
   following:
 
   #+begin_example
-  #+ATTR_ODT: :width 10 :height 10
-  [[./img.png]]
+    #+ATTR_ODT: :width 10 :height 10
+    [[./img.png]]
   #+end_example
 
 - Scale the image ::
@@ -12369,8 +12375,8 @@ The examples below illustrate the various possibilities.
   To embed {{{file(img.png)}}} at half its size, do the following:
 
   #+begin_example
-  #+ATTR_ODT: :scale 0.5
-  [[./img.png]]
+    #+ATTR_ODT: :scale 0.5
+    [[./img.png]]
   #+end_example
 
 - Scale the image to a specific width ::
@@ -12379,18 +12385,18 @@ The examples below illustrate the various possibilities.
   original height:width ratio, do the following:
 
   #+begin_example
-  #+ATTR_ODT: :width 10
-  [[./img.png]]
+    #+ATTR_ODT: :width 10
+    [[./img.png]]
   #+end_example
 
 - Scale the image to a specific height ::
 
   To embed {{{file(img.png)}}} with a height of 10 cm while retaining
-  the original height:width ratio, do the following
+  the original height:width ratio, do the following:
 
   #+begin_example
-  #+ATTR_ODT: :height 10
-  [[./img.png]]
+    #+ATTR_ODT: :height 10
+    [[./img.png]]
   #+end_example
 
 {{{cindex(#+ATTR_ODT)}}}
@@ -12401,9 +12407,10 @@ of the the following three values for the ~:anchor~ property -
 {{{samp("as-char")}}}, {{{samp("paragraph")}}} and {{{samp("page")}}}.
 
 To create an image that is anchored to a page, do the following:
+
 #+begin_example
-#+ATTR_ODT: :anchor "page"
-[[./img.png]]
+  #+ATTR_ODT: :anchor "page"
+  [[./img.png]]
 #+end_example
 
 *** Math formatting in ODT export
@@ -12428,7 +12435,7 @@ document in one of the following ways:
   This option is activated on a per-file basis with the following option:
 
   #+begin_example
-  ,#+OPTIONS: LaTeX:t
+    ,#+OPTIONS: LaTeX:t
   #+end_example
 
   With this option, LaTeX fragments are first converted into MathML
@@ -12475,7 +12482,7 @@ document in one of the following ways:
   This option is activated on a per-file basis with
 
   #+begin_example
-  ,#+OPTIONS: LaTeX:dvipng
+    ,#+OPTIONS: LaTeX:dvipng
   #+end_example
 
   With this option, LaTeX fragments are processed into PNG images and
@@ -12494,13 +12501,13 @@ equation by linking to its MathML ({{{file(.mml)}}}) source or its
 OpenDocument formula ({{{file(.odf)}}}) file as shown below:
 
 #+begin_example
-[[./equation.mml]]
+  [[./equation.mml]]
 #+end_example
 
 or
 
 #+begin_example
-[[./equation.odf]]
+  [[./equation.odf]]
 #+end_example
 
 *** Labels and captions in ODT export
@@ -12520,15 +12527,15 @@ the category and sequence number. Consider the following inline image
 in an Org file:
 
 #+begin_example
-,#+CAPTION: Bell curve
-,#+LABEL:   fig:SED-HR4049
-[[./img/a.png]]
+  ,#+CAPTION: Bell curve
+  ,#+LABEL:   fig:SED-HR4049
+  [[./img/a.png]]
 #+end_example
 
 It could be rendered as shown below in the exported document.
 
 #+begin_example
-Figure 2: Bell curve
+  Figure 2: Bell curve
 #+end_example
 
 {{{vindex(org-export-odt-category-strings)}}}
@@ -12549,7 +12556,7 @@ With this, previous image will be captioned as below in the exported
 document.
 
 #+begin_example
-Illustration 2: Bell curve
+  Illustration 2: Bell curve
 #+end_example
 
 *** Literal examples in ODT export
@@ -12729,9 +12736,9 @@ couple of examples.
   following:
 
   #+begin_example
-  @<text:span text:style-name="Highlight">This is a
-  highlighted text@</text:span>.  But this is a
-  regular text.
+    @<text:span text:style-name="Highlight">This is a
+    highlighted text@</text:span>.  But this is a
+    regular text.
   #+end_example
 
   *Hint:* To see the above example in action, edit your
@@ -12739,9 +12746,9 @@ couple of examples.
   add a custom {{{samp(Highlight)}}} style as shown below.
 
   #+begin_example
-  <style:style style:name="Highlight" style:family="text">
-    <style:text-properties fo:background-color="#ff0000"/>
-  </style:style>
+    <style:style style:name="Highlight" style:family="text">
+      <style:text-properties fo:background-color="#ff0000"/>
+    </style:style>
   #+end_example
 
 - Embedding a one-line OpenDocument XML ::
@@ -12750,7 +12757,7 @@ couple of examples.
   directive.  For example, to force a page break do the following:
 
   #+begin_example
-  #+ODT: <text:p text:style-name="PageBreak"/>
+    #+ODT: <text:p text:style-name="PageBreak"/>
   #+end_example
 
   *Hint:* To see the above example in action, edit your
@@ -12758,10 +12765,10 @@ couple of examples.
   add a custom {{{samp(PageBreak)}}} style as shown below.
 
   #+begin_example
-  <style:style style:name="PageBreak" style:family="paragraph"
-               style:parent-style-name="Text_20_body">
-    <style:paragraph-properties fo:break-before="page"/>
-  </style:style>
+    <style:style style:name="PageBreak" style:family="paragraph"
+                 style:parent-style-name="Text_20_body">
+      <style:paragraph-properties fo:break-before="page"/>
+    </style:style>
   #+end_example
 
 - Embedding a block of OpenDocument XML ::
@@ -12773,11 +12780,11 @@ couple of examples.
   following:
 
   #+begin_example
-  #+BEGIN_ODT
-  <text:p text:style-name="Text_20_body_20_bold">
-  This paragraph is specially formatted and uses bold text.
-  </text:p>
-  #+END_ODT
+    #+BEGIN_ODT
+    <text:p text:style-name="Text_20_body_20_bold">
+    This paragraph is specially formatted and uses bold text.
+    </text:p>
+    #+END_ODT
   #+end_example
 
 **** Customizing tables in ODT export
@@ -12811,10 +12818,10 @@ export the example table.
 #+end_src
 
 #+begin_example
-,#+ATTR_ODT: :style "TableWithHeaderRowAndColumn"
-| Name  | Phone | Age |
-| Peter |  1234 |  17 |
-| Anna  |  4321 |  25 |
+  ,#+ATTR_ODT: :style "TableWithHeaderRowAndColumn"
+  | Name  | Phone | Age |
+  | Peter |  1234 |  17 |
+  | Anna  |  4321 |  25 |
 #+end_example
 
 In the above example, you used a template named {{{samp(Custom)}}} and
@@ -12909,10 +12916,10 @@ To use this feature proceed as follows:
   the ~ATTR_ODT~ line as shown below.
 
   #+begin_example
-  ,#+ATTR_ODT: :style "TableWithHeaderRowAndColumn"
-  | Name  | Phone | Age |
-  | Peter |  1234 |  17 |
-  | Anna  |  4321 |  25 |
+    ,#+ATTR_ODT: :style "TableWithHeaderRowAndColumn"
+    | Name  | Phone | Age |
+    | Peter |  1234 |  17 |
+    | Anna  |  4321 |  25 |
   #+end_example
 
 **** Validating OpenDocument XML
@@ -13057,29 +13064,29 @@ can also specify optional attributes on the dependency by simply
 appending it. The following examples should illustrate this:
 
 #+begin_example
-,* Preparation
-,  :PROPERTIES:
-,  :task_id:  preparation
-,  :ORDERED:  t
-,  :END:
-,* Training material
-,  :PROPERTIES:
-,  :task_id:  training_material
-,  :ORDERED:  t
-,  :END:
-,** Markup Guidelines
-,   :PROPERTIES:
-,   :Effort:   2d
-,   :END:
-,** Workflow Guidelines
-,   :PROPERTIES:
-,   :Effort:   2d
-,   :END:
-,* Presentation
-,  :PROPERTIES:
-,  :Effort:   2d
-,  :BLOCKER:  training_material { gapduration 1d } preparation
-,  :END:
+  ,* Preparation
+  ,  :PROPERTIES:
+  ,  :task_id:  preparation
+  ,  :ORDERED:  t
+  ,  :END:
+  ,* Training material
+  ,  :PROPERTIES:
+  ,  :task_id:  training_material
+  ,  :ORDERED:  t
+  ,  :END:
+  ,** Markup Guidelines
+  ,   :PROPERTIES:
+  ,   :Effort:   2d
+  ,   :END:
+  ,** Workflow Guidelines
+  ,   :PROPERTIES:
+  ,   :Effort:   2d
+  ,   :END:
+  ,* Presentation
+  ,  :PROPERTIES:
+  ,  :Effort:   2d
+  ,  :BLOCKER:  training_material { gapduration 1d } preparation
+  ,  :END:
 #+end_example
 
 *** Reports
@@ -14509,36 +14516,36 @@ Here are examples of passing values by reference:
 - a table named with either ~#+NAME:~ or ~#+TBLNAME:~ ::
 
   #+begin_example
-  #+TBLNAME: example-table
-  | 1 |
-  | 2 |
-  | 3 |
-  | 4 |
+    #+TBLNAME: example-table
+    | 1 |
+    | 2 |
+    | 3 |
+    | 4 |
 
-  #+NAME: table-length
-  #+BEGIN_SRC emacs-lisp :var table=example-table
-  (length table)
-  #+END_SRC
+    #+NAME: table-length
+    #+BEGIN_SRC emacs-lisp :var table=example-table
+    (length table)
+    #+END_SRC
 
-  #+RESULTS: table-length
-  : 4
+    #+RESULTS: table-length
+    : 4
   #+end_example
 
 - a simple list named with ~#+NAME:~ :: 
 
   #+begin_example
-  #+NAME: example-list
-    - simple
-      - not
-      - nested
-    - list
+    #+NAME: example-list
+      - simple
+        - not
+        - nested
+      - list
 
-  #+BEGIN_SRC emacs-lisp :var x=example-list
-    (print x)
-  #+END_SRC
+    #+BEGIN_SRC emacs-lisp :var x=example-list
+      (print x)
+    #+END_SRC
 
-  #+RESULTS:
-  | simple | list |
+    #+RESULTS:
+    | simple | list |
   #+end_example
 
   Note that nesting is not carried through to the source code block.
@@ -14546,51 +14553,51 @@ Here are examples of passing values by reference:
 - a named code block without arguments, optionally followed by parentheses ::
 
   #+begin_example
-  #+BEGIN_SRC emacs-lisp :var length=table-length()
-  (* 2 length)
-  #+END_SRC
+    #+BEGIN_SRC emacs-lisp :var length=table-length()
+    (* 2 length)
+    #+END_SRC
 
-  #+RESULTS:
-  : 8
+    #+RESULTS:
+    : 8
   #+end_example
 
 - a named code block with arguments ::
 
   #+begin_example
-  #+NAME: double
-  #+BEGIN_SRC emacs-lisp :var input=8
-  (* 2 input)
-  #+END_SRC
+    #+NAME: double
+    #+BEGIN_SRC emacs-lisp :var input=8
+    (* 2 input)
+    #+END_SRC
 
-  #+RESULTS: double
-  : 16
+    #+RESULTS: double
+    : 16
 
-  #+NAME: squared
-  #+BEGIN_SRC emacs-lisp :var input=double(input=1)
-  (* input input)
-  #+END_SRC
+    #+NAME: squared
+    #+BEGIN_SRC emacs-lisp :var input=double(input=1)
+    (* input input)
+    #+END_SRC
 
-  #+RESULTS: squared
-  : 4
+    #+RESULTS: squared
+    : 4
   #+end_example
 
 - a literal example block ::
 
   #+begin_example
-  ,#+NAME: literal-example
-  ,#+BEGIN_EXAMPLE
-  A literal example
-  on two lines
-  ,#+END_EXAMPLE
+    ,#+NAME: literal-example
+    ,#+BEGIN_EXAMPLE
+    A literal example
+    on two lines
+    ,#+END_EXAMPLE
 
-  ,#+NAME: read-literal-example
-  ,#+BEGIN_SRC emacs-lisp :var x=literal-example
-    (concatenate 'string x " for you.")
-  ,#+END_SRC
+    ,#+NAME: read-literal-example
+    ,#+BEGIN_SRC emacs-lisp :var x=literal-example
+      (concatenate 'string x " for you.")
+    ,#+END_SRC
 
-  ,#+RESULTS: read-literal-example
-   : A literal example
-   : on two lines for you.
+    ,#+RESULTS: read-literal-example
+     : A literal example
+     : on two lines for you.
   #+end_example
 
 #+comment: ***** Alternate argument syntax
@@ -15488,7 +15495,7 @@ or ~no~, with a default value of ~no~.
 :END:
 
 Setting the ~:shebang~ header argument to a string value (e.g.,
-~:shebang "#!/bin/bash"~) causes the string to be inserted as the
+{{{samp(:shebang "#!/bin/bash")}}}) causes the string to be inserted as the
 first line of any tangled file holding the code block, and the file
 permissions of the tangled file are set to make it executable.
 
@@ -15612,30 +15619,30 @@ two-dimensional vector of strings or numbers) when appropriate.
   examples:
 
   #+begin_example
-  #+BEGIN_SRC python :results output
-   print "hello"
-   2
-   print "bye"
-  #+END_SRC
+    #+BEGIN_SRC python :results output
+     print "hello"
+     2
+     print "bye"
+    #+END_SRC
 
-  #+RESULTS:
-  : hello
-  : bye
+    #+RESULTS:
+    : hello
+    : bye
   #+end_example
 
   In non-session mode, the `2' is not printed and does not appear.
 
   #+begin_example
-  #+BEGIN_SRC python :results output :session
-   print "hello"
-   2
-   print "bye"
-  #+END_SRC
+    #+BEGIN_SRC python :results output :session
+     print "hello"
+     2
+     print "bye"
+    #+END_SRC
 
-  #+RESULTS:
-  : hello
-  : 2
-  : bye
+    #+RESULTS:
+    : hello
+    : 2
+    : bye
   #+end_example
 
   But in ~:session~ mode, the interactive interpreter receives input `2'
@@ -15655,7 +15662,7 @@ Programming system allows named blocks of code to be referenced using
 the familiar Noweb syntax:
 
 #+begin_example
-<<code-block-name>>
+  <<code-block-name>>
 #+end_example
 
 When a code block is tangled or evaluated, whether or not ``noweb''
@@ -15671,7 +15678,7 @@ name, which may optionally contain arguments to the code block as
 shown below.
 
 #+begin_example
-<<code-block-name(optional arguments)>>
+  <<code-block-name(optional arguments)>>
 #+end_example
 
 Note that the default value, ~:noweb no~, was chosen to ensure that
@@ -15812,28 +15819,28 @@ script calls ~org-babel-tangle~ on every one of its arguments.
 Be sure to adjust the paths to fit your system.
 
 #+begin_example
-#!/bin/sh
-# -*- mode: shell-script -*-
-#
-# tangle files with org-mode
-#
-DIR=`pwd`
-FILES=""
+  #!/bin/sh
+  # -*- mode: shell-script -*-
+  #
+  # tangle files with org-mode
+  #
+  DIR=`pwd`
+  FILES=""
 
-# wrap each argument in the code required to call tangle on it
-for i in $@@; do
-    FILES="$FILES \"$i\""
-done
+  # wrap each argument in the code required to call tangle on it
+  for i in $@; do
+      FILES="$FILES \"$i\""
+  done
 
-emacs -Q --batch \
---eval "(progn
-(add-to-list 'load-path (expand-file-name \"~/src/org/lisp/\"))
-(add-to-list 'load-path (expand-file-name \"~/src/org/contrib/lisp/\" t))
-(require 'org)(require 'org-exp)(require 'ob)(require 'ob-tangle)
-(mapc (lambda (file)
-       (find-file (expand-file-name file \"$DIR\"))
-       (org-babel-tangle)
-       (kill-buffer)) '($FILES)))" 2>&1 |grep tangled
+  emacs -Q --batch \
+  --eval "(progn
+  (add-to-list 'load-path (expand-file-name \"~/src/org/lisp/\"))
+  (add-to-list 'load-path (expand-file-name \"~/src/org/contrib/lisp/\" t))
+  (require 'org)(require 'org-exp)(require 'ob)(require 'ob-tangle)
+  (mapc (lambda (file)
+         (find-file (expand-file-name file \"$DIR\"))
+         (org-babel-tangle)
+         (kill-buffer)) '($FILES)))" 2>&1 |grep tangled
 #+end_example
 
 * FIXED Miscellaneous
@@ -15860,7 +15867,7 @@ emacs -Q --batch \
 {{{cindex(link abbreviations\\\, completion of)}}}
 
 Emacs would not be Emacs without completion, and Org mode uses it
-whenever it makes sense. If you prefer an /iswitchb/- or /ido/-like
+whenever it makes sense. If you prefer an iswitchb- or ido-like
 interface for some of the completion prompts, you can specify your
 preference by setting at most one of the variables
 ~org-completion-use-iswitchb~ or ~org-completion-use-ido~.
@@ -15889,7 +15896,7 @@ buffer and use the {{{key(TAB)}}} key to complete text right there.
     search links like:
     
     #+begin_example
-     [[*find this headline]]
+      [[*find this headline]]
     #+end_example
 
   - After {{{samp(:)}}} in a headline :: 
@@ -15955,7 +15962,8 @@ The following template selectors are currently supported:
 {{{kindex(i)}}}
 {{{kindex(I)}}}
 
-| *Selector*   | *Template*                          |
+#+attr_texinfo: :columns "0.1 0.7"
+| Selector     | Template                            |
 |--------------+-------------------------------------|
 | {{{kbd(a)}}} | ~#+BEGIN_ASCII   ... #+END_ASCII~   |
 | {{{kbd(A)}}} | ~#+ASCII:~                          |
@@ -16021,7 +16029,7 @@ can be done, but you must be aware of the risks that are involved.
 Code evaluation can happen under the following circumstances:
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-- *Source code blocks* ::
+- Source code blocks ::
 
   Source code blocks can be evaluated during export, or when pressing
   {{{kbd(C-c C-c)}}} in the block. The most important thing to realize
@@ -16065,7 +16073,7 @@ Code evaluation can happen under the following circumstances:
 
     Function to query user for Emacs Lisp link execution.
 
-- *Formulas in tables* ::
+- Formulas in tables ::
 
   Formulas in tables (see [[The spreadsheet]]) are code that is evaluated
   either by the /calc/ interpreter, or by the /Emacs Lisp/ interpreter.
@@ -16415,8 +16423,8 @@ effective only when the file is visited again in a new Emacs session.
 The key {{{kbd(C-c C-c)}}} has many purposes in Org, which are all
 mentioned scattered throughout this manual.  One specific function of
 this key is to add /tags/ to a headline (see [[Tags]]).  In many
-other circumstances it means something like /``Hey Org, look
-here and update according to what you see here''/.  Here is a summary of
+other circumstances it means something like "Hey Org, look
+here and update according to what you see here."  Here is a summary of
 what this means in different contexts.
 
 - If there are highlights in the buffer from the creation of a sparse
@@ -16464,13 +16472,13 @@ headings, in a more /list-oriented/ outline, indented structure is a
 lot cleaner:
 
 #+begin_example
-,* Top level headline             |    * Top level headline
-,** Second level                  |      * Second level
-,*** 3rd level                    |        * 3rd level
-some text                        |          some text
-,*** 3rd level                    |        * 3rd level
-more text                        |          more text
-,* Another top level headline     |    * Another top level headline
+  ,* Top level headline             |    * Top level headline
+  ,** Second level                  |      * Second level
+  ,*** 3rd level                    |        * 3rd level
+  some text                        |          some text
+  ,*** 3rd level                    |        * 3rd level
+  more text                        |          more text
+  ,* Another top level headline     |    * Another top level headline
 #+end_example
 
 {{{noindent}}} If you are using at least Emacs 23.2 and version 6.29
@@ -16486,7 +16494,7 @@ customizing the variable ~org-startup-indented~, or you can turn it on
 for individual files using
 
 #+begin_example
-,#+STARTUP: indent
+  ,#+STARTUP: indent
 #+end_example
 
 If you want a similar effect in an earlier version of Emacs and/or
@@ -16501,8 +16509,8 @@ display, Org supports you in the following way:
   with the headline, like
 
   #+begin_example
-  ,*** 3rd level
-      more text, now indented
+    ,*** 3rd level
+        more text, now indented
   #+end_example
 
   {{{vindex(org-adapt-indentation)}}}
@@ -16519,19 +16527,17 @@ display, Org supports you in the following way:
   ~org-hide-leading-stars~ or change this on a per-file basis with
 
   #+begin_example
-  ,#+STARTUP: hidestars
-  ,#+STARTUP: showstars
+    ,#+STARTUP: hidestars
+    ,#+STARTUP: showstars
   #+end_example
 
   With hidden stars, the tree becomes:
 
   #+begin_example
-  @group
-  ,* Top level headline
-  , * Second level
-  ,  * 3rd level
-    ...
-  @end group
+    ,* Top level headline
+    , * Second level
+    ,  * 3rd level
+      ...
   #+end_example
 
   {{{vindex(org-hide @r{(face)})}}}
@@ -16555,8 +16561,8 @@ display, Org supports you in the following way:
   on a per-file basis with one of the following lines:
 
   #+begin_example
-  ,#+STARTUP: odd
-  ,#+STARTUP: oddeven
+    ,#+STARTUP: odd
+    ,#+STARTUP: oddeven
   #+end_example
 
   You can convert an Org file from single-star-per-level to the
@@ -16584,27 +16590,27 @@ timestamp is really only fun with {{{kbdkey(S-,cursor)}}} keys,
 whereas on a tty you would rather use {{{kbd(C-c .)}}} to re-insert
 the timestamp.
 
-
-| *Default*                | *Alternative 1*              | *Speed key*  | *Alternative 2*                  |
-|--------------------------+------------------------------+--------------+----------------------------------|
-| {{{kbdkey(S-,TAB)}}}     | {{{kbdkey(C-u ,TAB)}}}       | {{{kbd(C)}}} |                                  |
-| {{{kbdkey(M-,left)}}}    | {{{kbd(C-c C-x l)}}}         | {{{kbd(l)}}} | {{{kbd(@key{Esc} @key{left})}}}  |
-| {{{kbdkey(M-S-,left)}}}  | {{{kbd(C-c C-x L)}}}         | {{{kbd(L)}}} |                                  |
-| {{{kbdkey(M-,right)}}}   | {{{kbd(C-c C-x r)}}}         | {{{kbd(r)}}} | {{{kbd(@key{Esc} @key{right})}}} |
-| {{{kbdkey(M-S-,right)}}} | {{{kbd(C-c C-x R)}}}         | {{{kbd(R)}}} |                                  |
-| {{{kbdkey(M-,up)}}}      | {{{kbd(C-c C-x u)}}}         | {{{kbd( )}}} | {{{kbd(@key{Esc} @key{up})}}}    |
-| {{{kbdkey(M-S-,up)}}}    | {{{kbd(C-c C-x U)}}}         | {{{kbd(U)}}} |                                  |
-| {{{kbdkey(M-,down)}}}    | {{{kbd(C-c C-x d)}}}         | {{{kbd( )}}} | {{{kbd(@key{Esc} @key{down})}}}  |
-| {{{kbdkey(M-S-,down)}}}  | {{{kbd(C-c C-x D)}}}         | {{{kbd(D)}}} |                                  |
-| {{{kbdkey(S-,RET)}}}     | {{{kbd(C-c C-x c)}}}         | {{{kbd( )}}} |                                  |
-| {{{kbdkey(M-,RET)}}}     | {{{kbd(C-c C-x m)}}}         | {{{kbd( )}}} | {{{kbd(@key{Esc} @key{RET})}}}   |
-| {{{kbdkey(M-S-,RET)}}}   | {{{kbd(C-c C-x M)}}}         | {{{kbd( )}}} |                                  |
-| {{{kbdkey(S-,left)}}}    | {{{kbdkey(C-c ,left)}}}      | {{{kbd( )}}} |                                  |
-| {{{kbdkey(S-,right)}}}   | {{{kbdkey(C-c ,right)}}}     | {{{kbd( )}}} |                                  |
-| {{{kbdkey(S-,up)}}}      | {{{kbdkey(C-c ,up)}}}        | {{{kbd( )}}} |                                  |
-| {{{kbdkey(S-,down)}}}    | {{{kbdkey(C-c ,down)}}}      | {{{kbd( )}}} |                                  |
-| {{{kbdkey(C-S-,left)}}}  | {{{kbdkey(C-c C-x ,left)}}}  | {{{kbd( )}}} |                                  |
-| {{{kbdkey(C-S-,right)}}} | {{{kbdkey(C-c C-x ,right)}}} | {{{kbd( )}}} |                                  |
+#+attr_texinfo: :columns "0.2 0.3 0.1 0.4"
+| Default                  | Alternative 1                | Speed key    | Alternative 2             |
+|--------------------------+------------------------------+--------------+---------------------------|
+| {{{kbdkey(S-,TAB)}}}     | {{{kbdkey(C-u ,TAB)}}}       | {{{kbd(C)}}} |                           |
+| {{{kbdkey(M-,left)}}}    | {{{kbd(C-c C-x l)}}}         | {{{kbd(l)}}} | {{{kbdkeys(,Esc,left)}}}  |
+| {{{kbdkey(M-S-,left)}}}  | {{{kbd(C-c C-x L)}}}         | {{{kbd(L)}}} |                           |
+| {{{kbdkey(M-,right)}}}   | {{{kbd(C-c C-x r)}}}         | {{{kbd(r)}}} | {{{kbdkeys(,Esc,right)}}} |
+| {{{kbdkey(M-S-,right)}}} | {{{kbd(C-c C-x R)}}}         | {{{kbd(R)}}} |                           |
+| {{{kbdkey(M-,up)}}}      | {{{kbd(C-c C-x u)}}}         | {{{kbd( )}}} | {{{kbdkeys(,Esc,up)}}}    |
+| {{{kbdkey(M-S-,up)}}}    | {{{kbd(C-c C-x U)}}}         | {{{kbd(U)}}} |                           |
+| {{{kbdkey(M-,down)}}}    | {{{kbd(C-c C-x d)}}}         | {{{kbd( )}}} | {{{kbdkeys(,Esc,down)}}}  |
+| {{{kbdkey(M-S-,down)}}}  | {{{kbd(C-c C-x D)}}}         | {{{kbd(D)}}} |                           |
+| {{{kbdkey(S-,RET)}}}     | {{{kbd(C-c C-x c)}}}         | {{{kbd( )}}} |                           |
+| {{{kbdkey(M-,RET)}}}     | {{{kbd(C-c C-x m)}}}         | {{{kbd( )}}} | {{{kbdkeys(,Esc,RET)}}}   |
+| {{{kbdkey(M-S-,RET)}}}   | {{{kbd(C-c C-x M)}}}         | {{{kbd( )}}} |                           |
+| {{{kbdkey(S-,left)}}}    | {{{kbdkey(C-c ,left)}}}      | {{{kbd( )}}} |                           |
+| {{{kbdkey(S-,right)}}}   | {{{kbdkey(C-c ,right)}}}     | {{{kbd( )}}} |                           |
+| {{{kbdkey(S-,up)}}}      | {{{kbdkey(C-c ,up)}}}        | {{{kbd( )}}} |                           |
+| {{{kbdkey(S-,down)}}}    | {{{kbdkey(C-c ,down)}}}      | {{{kbd( )}}} |                           |
+| {{{kbdkey(C-S-,left)}}}  | {{{kbdkey(C-c C-x ,left)}}}  | {{{kbd( )}}} |                           |
+| {{{kbdkey(C-S-,right)}}} | {{{kbdkey(C-c C-x ,right)}}} | {{{kbd( )}}} |                           |
 
 ** Interaction
    :PROPERTIES:
@@ -16632,7 +16638,7 @@ with other code out there.
   autoloaded during setup if Calc has been installed properly. As of
   Emacs 22, Calc is part of the Emacs distribution. Another possibility
   for interaction between the two packages is using Calc for embedded
-  calculations. See [[info:calc#Embedded Mode][GNU Emacs Calc
+  calculations. See [[info:calc:Embedded Mode][GNU Emacs Calc
   Manual]].
 
 - {{{file(constants.el)}}} by Carsten Dominik ::
@@ -16660,8 +16666,8 @@ with other code out there.
 
 - {{{file(imenu.el)}}} by Ake Stenhoff and Lars Lindberg ::
   {{{cindex(@file{imenu.el})}}}
-  {{{cindex(Stenhoff\\\, Lars)}}}
-  {{{cindex(Lindberg\\\, Ake)}}}
+  {{{cindex(Stenhoff\\\, Ake)}}}
+  {{{cindex(Lindberg\\\, Lars)}}}
 
   Imenu allows menu access to an index of items in a file.  Org mode
   supports Imenu---all you need to do to get the index is the following:
@@ -16904,6 +16910,7 @@ being encrypted again.
 * FIXED Hacking
   :PROPERTIES:
   :DESCRIPTION: How to hack your way around
+  :INDEX:    appendix
   :END:
 {{{cindex(hacking)}}}
 
@@ -16948,7 +16955,7 @@ doing so. Let's look at an example file, {{{file(org-man.el)}}}, that
 will add support for creating links like:
 
 #+begin_example
-  [[info:printf][The printf manual]]
+  [[man:printf][The printf manual]]
 #+end_example
 
 to show Unix manual pages inside Emacs:
@@ -17106,9 +17113,9 @@ nightmare, and would take away much of the simplicity of the Orgtbl
 mode table editor.
 
 This appendix describes a different approach.  We keep the Orgtbl mode
-table in its native format (the /source table/), and use a custom
+table in its native format (the source table), and use a custom
 function to /translate/ the table to the correct syntax, and to
-/install/ it in the right location (the /target table/).  This puts
+/install/ it in the right location (the target table).  This puts
 the burden of writing conversion functions on the user, but it allows
 for a very flexible system.
 
@@ -17130,8 +17137,8 @@ table between these lines, replacing whatever was there before. For
 example:
 
 #+begin_example
-/* BEGIN RECEIVE ORGTBL table_name */
-/* END RECEIVE ORGTBL table_name */
+  /* BEGIN RECEIVE ORGTBL table_name */
+  /* END RECEIVE ORGTBL table_name */
 #+end_example
 
 {{{noindent}}} Just above the source table, we put a special line that
@@ -17140,7 +17147,7 @@ For example:
 
 {{{cindex(#+ORGTBL)}}}
 #+begin_example
-,#+ORGTBL: SEND table_name translation_function arguments....
+  ,#+ORGTBL: SEND table_name translation_function arguments....
 #+end_example
 
 {{{noindent}}} Here, ~table_name~ is the reference name for the table
@@ -17180,14 +17187,14 @@ LaTeX file. There are a number of different solutions:
   the language.  For example, in C mode you could wrap the table
   between {{{samp(/*)}}} and {{{samp(*/)}}} lines.
 
-- Sometimes it is possible to put the table after some kind of /END/
-  statement, for example ~\bye~ in TeX and ~\end{document}~) in
+- Sometimes it is possible to put the table after some kind of END
+  statement, for example ~\bye~ in TeX and ~\end{document}~ in
   LaTeX.
 
 - You can just comment the table line-by-line whenever you want to
   process the file, and uncomment it whenever you need to edit the
-  table.  This only sounds tedious---the command 
-  {{{kbd(M-x orgtbl-toggle-comment)}}} makes this comment-toggling very easy, in
+  table. This only sounds tedious---the command {{{kbd(M-x
+  orgtbl-toggle-comment)}}} makes this comment-toggling very easy, in
   particular if you bind it to a key.
 
 *** A LaTeX example
@@ -17207,12 +17214,12 @@ then get the following template:
 
 {{{cindex(#+ORGTBL\\\, SEND)}}}
 #+begin_example
-% BEGIN RECEIVE ORGTBL salesfigures
-% END RECEIVE ORGTBL salesfigures
-\begin{comment}
-#+ORGTBL: SEND salesfigures orgtbl-to-latex
-| | |
-\end{comment}
+  % BEGIN RECEIVE ORGTBL salesfigures
+  % END RECEIVE ORGTBL salesfigures
+  \begin{comment}
+  #+ORGTBL: SEND salesfigures orgtbl-to-latex
+  | | |
+  \end{comment}
 #+end_example
 
 {{{vindex(@LaTeX{}-verbatim-environments)}}}
@@ -17223,18 +17230,18 @@ put it into the receiver location with name ~salesfigures~. You may
 now fill in the table---feel free to use the spreadsheet features:[fn:160]
 
 #+begin_example
-% BEGIN RECEIVE ORGTBL salesfigures
-% END RECEIVE ORGTBL salesfigures
-\begin{comment}
-#+ORGTBL: SEND salesfigures orgtbl-to-latex
-| Month | Days | Nr sold | per day |
-|-------+------+---------+---------|
-| Jan   |   23 |      55 |     2.4 |
-| Feb   |   21 |      16 |     0.8 |
-| March |   22 |     278 |    12.6 |
-#+TBLFM: $4=$3/$2;%.1f
-% $ (optional extra dollar to keep font-lock happy, see footnote)
-\end{comment}
+  % BEGIN RECEIVE ORGTBL salesfigures
+  % END RECEIVE ORGTBL salesfigures
+  \begin{comment}
+  #+ORGTBL: SEND salesfigures orgtbl-to-latex
+  | Month | Days | Nr sold | per day |
+  |-------+------+---------+---------|
+  | Jan   |   23 |      55 |     2.4 |
+  | Feb   |   21 |      16 |     0.8 |
+  | March |   22 |     278 |    12.6 |
+  #+TBLFM: $4=$3/$2;%.1f
+  % $ (optional extra dollar to keep font-lock happy, see footnote)
+  \end{comment}
 #+end_example
 
 {{{noindent}}} When you are done, press {{{kbd(C-c C-c)}}} in the
@@ -17244,25 +17251,25 @@ lines.
 Now let's assume you want to make the table header by hand, because
 you want to control how columns are aligned, etc. In this case we make
 sure that the table translator skips the first 2 lines of the source
-table, and tell the command to work as a /splice/, i.e., to not
+table, and tell the command to work as a splice, i.e., to not
 produce header and footer commands of the target table:
 
 #+begin_example
-\begin{tabular}{lrrr}
-Month & \multicolumn{1}{c}{Days} & Nr.\ sold & per day\\
-% BEGIN RECEIVE ORGTBL salesfigures
-% END RECEIVE ORGTBL salesfigures
-\end{tabular}
-%
-\begin{comment}
-#+ORGTBL: SEND salesfigures orgtbl-to-latex :splice t :skip 2
-| Month | Days | Nr sold | per day |
-|-------+------+---------+---------|
-| Jan   |   23 |      55 |     2.4 |
-| Feb   |   21 |      16 |     0.8 |
-| March |   22 |     278 |    12.6 |
-#+TBLFM: $4=$3/$2;%.1f
-\end{comment}
+  \begin{tabular}{lrrr}
+  Month & \multicolumn{1}{c}{Days} & Nr.\ sold & per day\\
+  % BEGIN RECEIVE ORGTBL salesfigures
+  % END RECEIVE ORGTBL salesfigures
+  \end{tabular}
+  %
+  \begin{comment}
+  #+ORGTBL: SEND salesfigures orgtbl-to-latex :splice t :skip 2
+  | Month | Days | Nr sold | per day |
+  |-------+------+---------+---------|
+  | Jan   |   23 |      55 |     2.4 |
+  | Feb   |   21 |      16 |     0.8 |
+  | March |   22 |     278 |    12.6 |
+  #+TBLFM: $4=$3/$2;%.1f
+  \end{comment}
 #+end_example
 
 The LaTeX translator function ~orgtbl-to-latex~ is already part of
@@ -17353,7 +17360,7 @@ endings to be ~\\[2mm]~ instead of the default ~\\~, you could just
 overrule the default with:
 
 #+begin_example
-,#+ORGTBL: SEND test orgtbl-to-latex :lend " \\\\[2mm]"
+  ,#+ORGTBL: SEND test orgtbl-to-latex :lend " \\\\[2mm]"
 #+end_example
 
 For a new language, you can either write your own converter function
@@ -17365,8 +17372,8 @@ where table lines are started with {{{samp(!BL!)}}}, ended with
 call the generic translator like this (on a single line!):
 
 #+begin_example
-,#+ORGTBL: SEND test orgtbl-to-generic :tstart "!BTBL!" :tend "!ETBL!"
-                              :lstart "!BL! " :lend " !EL!" :sep "\t"
+  ,#+ORGTBL: SEND test orgtbl-to-generic :tstart "!BTBL!" :tend "!ETBL!"
+                                :lstart "!BL! " :lend " !EL!" :sep "\t"
 #+end_example
 
 {{{noindent}}} Please check the documentation string of the function
@@ -17415,19 +17422,19 @@ LaTeX file:
 
 {{{cindex(#+ORGLST)}}}
 #+begin_example
-% BEGIN RECEIVE ORGLST to-buy
-% END RECEIVE ORGLST to-buy
-\begin{comment}
-#+ORGLST: SEND to-buy org-list-to-latex
-- a new house
-- a new computer
-  + a new keyboard
-  + a new mouse
-- a new life
-\end{comment}
+  % BEGIN RECEIVE ORGLST to-buy
+  % END RECEIVE ORGLST to-buy
+  \begin{comment}
+  #+ORGLST: SEND to-buy org-list-to-latex
+  - a new house
+  - a new computer
+    + a new keyboard
+    + a new mouse
+  - a new life
+  \end{comment}
 #+end_example
 
-Pressing `C-c C-c' on ~a new house~ and will insert the converted
+Pressing `C-c C-c' on ~a new house~ will insert the converted
 LaTeX list between the two marker lines.
 
 ** Dynamic blocks
@@ -17447,12 +17454,12 @@ producing the content of the block.
 
 {{{cindex(#+BEGIN:dynamic block)}}}
 #+begin_example
-,#+BEGIN: myblock :parameter1 value1 :parameter2 value2 ...
+  ,#+BEGIN: myblock :parameter1 value1 :parameter2 value2 ...
 
-,#+END:
+  ,#+END:
 #+end_example
 
-Dynamic blocks are updated with the following commands
+Dynamic blocks are updated with the following commands:
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c C-x C-u)}}} ~org-dblock-update~ ::
@@ -17479,9 +17486,9 @@ of a block that keeps track of when the block update function was last
 run:
 
 #+begin_example
-,#+BEGIN: block-update-time :format "on %m/%d/%Y at %H:%M"
+  ,#+BEGIN: block-update-time :format "on %m/%d/%Y at %H:%M"
 
-,#+END:
+  ,#+END:
 #+end_example
 
 {{{noindent}}} The corresponding block writer function could look like
@@ -17579,44 +17586,44 @@ particular, you may use the functions ~org-agenda-skip-entry-if~
 and ~org-agenda-skip-subtree-if~ in this form, for example:
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-- {{{samp('(org-agenda-skip-entry-if 'scheduled))}}} ::
+- {{{samp((org-agenda-skip-entry-if 'scheduled))}}} ::
 
   Skip current entry if it has been scheduled.
 
-- {{{samp('(org-agenda-skip-entry-if 'notscheduled))}}} ::
+- {{{samp((org-agenda-skip-entry-if 'notscheduled))}}} ::
 
   Skip current entry if it has not been scheduled.
 
-- {{{samp('(org-agenda-skip-entry-if 'deadline))}}} ::
+- {{{samp((org-agenda-skip-entry-if 'deadline))}}} ::
 
   Skip current entry if it has a deadline.
 
-- {{{samp('(org-agenda-skip-entry-if 'scheduled 'deadline))}}} ::
+- {{{samp((org-agenda-skip-entry-if 'scheduled 'deadline))}}} ::
 
   Skip current entry if it has a deadline, or if it is scheduled.
 
-- {{{samp('(org-agenda-skip-entry-if 'todo '("TODO" "WAITING")))}}} ::
+- {{{samp((org-agenda-skip-entry-if 'todo '("TODO" "WAITING")))}}} ::
 
   Skip current entry if the TODO keyword is TODO or WAITING.
 
-- {{{samp('(org-agenda-skip-entry-if 'todo 'done))}}} ::
+- {{{samp((org-agenda-skip-entry-if 'todo 'done))}}} ::
 
   Skip current entry if the TODO keyword marks a DONE state.
 
-- {{{samp('(org-agenda-skip-entry-if 'timestamp))}}} ::
+- {{{samp((org-agenda-skip-entry-if 'timestamp))}}} ::
 
   Skip current entry if it has any timestamp, may also be deadline or scheduled.
   <<x-agenda-skip-entry-regexp>>
 
-- {{{samp('(org-agenda-skip-entry-if 'regexp "regular expression"))}}} ::
+- {{{samp((org-agenda-skip-entry-if 'regexp "regular expression"))}}} ::
   
   Skip current entry if the regular expression matches in the entry.
 
-- {{{samp('(org-agenda-skip-entry-if 'notregexp "regular expression"))}}} ::
+- {{{samp((org-agenda-skip-entry-if 'notregexp "regular expression"))}}} ::
 
   Skip current entry unless the regular expression matches.
 
-- {{{samp('(org-agenda-skip-subtree-if 'regexp "regular expression"))}}} ::
+- {{{samp((org-agenda-skip-subtree-if 'regexp "regular expression"))}}} ::
 
   Same as above, but check and skip the entire subtree.
 
@@ -17697,7 +17704,7 @@ are:
 #+attr_texinfo: :table-type "table" :indic "@code"
 - category ::     The category of the item
 - head ::        The headline, without TODO keyword, TAGS and PRIORITY
-- type ::        The type of the agenda entry, can be
+- type ::        The type of the agenda entry, can be:
   - todo ::               selected in TODO match
   - tagsmatch ::          selected in tags match
   - diary ::              imported from diary
@@ -17755,7 +17762,7 @@ Here is a description of the functions that can be used to work with
 properties.
 
 {{{defun}}} org-entry-properties &optional pom which
-Get all properties of the entry at point-or-marker POM.@*
+Get all properties of the entry at point-or-marker POM.
 This includes the TODO keyword, the tags, time strings for deadline,
 scheduled, and clocking, and any additional properties defined in the
 entry.  The return value is an alist.  Keys may occur multiple times
@@ -17926,7 +17933,7 @@ here:
 The function given to that mapping routine can really do anything you like.
 It can use the property API (see [[Using the property API]]) to gather more
 information about the entry, or in order to change metadata in the entry.
-Here are a couple of functions that might be handy:
+Here are a few functions that might be handy:
 
 {{{defun}}} org-todo &optional arg
 Change the TODO state of the entry.  See the docstring of the functions for
@@ -17975,24 +17982,25 @@ The following example counts the number of entries with TODO keyword
 * FIXED MobileOrg
   :PROPERTIES:
   :DESCRIPTION: Viewing and capture on a mobile device
+  :INDEX:    appendix
   :END:
 {{{cindex(iPhone)}}}
 {{{cindex(MobileOrg)}}}
 {{{cindex(Moreland\\\, Richard)}}}
 {{{cindex(Jones\\\, Matt)}}}
 
-/MobileOrg/ is the name of the mobile companion app for Org mode,
-currently available for iOS and for Android. /MobileOrg/ offers
+MobileOrg is the name of the mobile companion app for Org mode,
+currently available for iOS and for Android. MobileOrg offers
 offline viewing and capture support for an Org mode system rooted on a
 ``real'' computer. It does also allow you to record changes to
-existing entries. The [[http://mobileorg.ncogni.to/][iOS implementation]] for the /iPhone/iPod
-Touch/iPad/ series of devices, was developed by Richard Moreland.
+existing entries. The [[http://mobileorg.ncogni.to/][iOS implementation]] for the iPhone/iPod
+Touch/iPad series of devices, was developed by Richard Moreland.
 Android users should check out [[http://wiki.github.com/matburt/mobileorg-android/][MobileOrg Android]] by Matt Jones. The
 two implementations are not identical but offer similar features.
 
 This appendix describes the support Org has for creating agenda views
-in a format that can be displayed by /MobileOrg/, and for integrating
-notes captured and changes made by /MobileOrg/ into the main system.
+in a format that can be displayed by MobileOrg, and for integrating
+notes captured and changes made by MobileOrg into the main system.
 
 For changing tags and TODO states in MobileOrg, you should have set up
 the customization variables ~org-todo-keywords~ and ~org-tags-alist~
@@ -18011,14 +18019,14 @@ variables.
 MobileOrg needs to interact with Emacs through a directory on a
 server. If you are using a public server, you should consider to
 encrypt the files that are uploaded to the server. This can be done
-with Org mode 7.02 and with /MobileOrg 1.5/ (iPhone version), and you
+with Org mode 7.02 and with MobileOrg 1.5 (iPhone version), and you
 need an {{{file(openssl)}}} installation on your system. To turn on
-encryption, set a password in /MobileOrg/ and, on the Emacs side,
+encryption, set a password in MobileOrg and, on the Emacs side,
 configure the variable ~org-mobile-use-encryption~. [fn:163]
 
 The easiest way to create that directory is to use a free [[http://dropbox.com][Dropbox]]
 account.[fn:164] When MobileOrg first connects to your Dropbox, it
-will create a directory /MobileOrg/ inside the Dropbox. After the
+will create a directory MobileOrg inside the Dropbox. After the
 directory has been created, tell Emacs about it:
 
 #+header: :eval no
@@ -18027,7 +18035,7 @@ directory has been created, tell Emacs about it:
 (setq org-mobile-directory "~/Dropbox/MobileOrg")
 #+end_src
 
-Org mode has commands to put files for /MobileOrg/ into that
+Org mode has commands to put files for MobileOrg into that
 directory, and to read captured notes from there.
 
 ** Pushing to MobileOrg
@@ -18044,7 +18052,7 @@ should be inside this directory. The push operation also creates a
 special Org file {{{file(agendas.org)}}} with all custom agenda view
 defined by the user.[fn:165] Finally, Org writes the file
 {{{file(index.org)}}}, containing links to all other files.
-/MobileOrg/ first reads this file from the server, and then downloads
+MobileOrg first reads this file from the server, and then downloads
 all agendas and Org files listed in it. To speed up the download,
 MobileOrg will only read files whose checksums have changed.[fn:166]
 
@@ -18053,7 +18061,7 @@ MobileOrg will only read files whose checksums have changed.[fn:166]
    :DESCRIPTION: Integrating captured and flagged items
    :END:
 
-When /MobileOrg/ synchronizes with the server, it not only pulls the
+When MobileOrg synchronizes with the server, it not only pulls the
 Org files for viewing. It also appends captured entries and pointers
 to flagged and changed entries to the file {{{file(mobileorg.org)}}}
 on the server. Org has a /pull/ operation that integrates this
@@ -18066,7 +18074,7 @@ entries. Here is how it works:
    editing event will be a top-level entry in the inbox file.
 
 2. After moving the entries, Org will attempt to implement the changes
-   made in /MobileOrg/. Some changes are applied directly and without
+   made in MobileOrg. Some changes are applied directly and without
    user interaction. Examples are all changes to tags, TODO state,
    headline and body text that can be cleanly applied. Entries that
    have been flagged for further action will receive a tag
@@ -18078,10 +18086,10 @@ entries. Here is how it works:
 3. Org will then generate an agenda view with all flagged entries. The
    user should then go through these entries and do whatever actions
    are necessary. If a note has been stored while flagging an entry in
-   /MobileOrg/, that note will be displayed in the echo area when the
+   MobileOrg, that note will be displayed in the echo area when the
    cursor is on the corresponding agenda line.
 
-   #+attr_texinfo: :table-type "table" :indic "@kbd"
+   #+attr_texinfo: :table-type "table" :indic "@asis"
    - {{{kbd(?)}}} ::
      {{{kindex(?)}}}
 
@@ -18104,6 +18112,7 @@ return to this agenda view using {{{kbd(C-c a ?)}}}.[fn:168]
   :PROPERTIES:
   :DESCRIPTION: How Org came into being
   :TEXINFO_MENU_TITLE: History and Acknowledgments
+  :INDEX:    appendix
   :END:
 ** From Carsten
 
@@ -18457,32 +18466,37 @@ complete if the ones above were not mentioned in this manual.
 - Piotr Zielinski wrote {{{file(org-mouse.el)}}}, proposed agenda
   blocks and contributed various ideas and code snippets.
 
-* Concept index                                                    :noexport:
+* Concept index
 :PROPERTIES:
 :TEXINFO_MENU_TITLE: Concept Index
+:INDEX:    cp
 :END:
 
-@printindex cp
+{{{printindex(cp)}}}
 
-* Key index                                                        :noexport:
+* Key index
   :PROPERTIES:
   :DESCRIPTION: Key bindings and where they are described
   :TEXINFO_MENU_TITLE: Key Index
+  :INDEX:    ky
   :END:
 
-@printindex ky
+{{{printindex(ky)}}}
 
-* Command and function index                                       :noexport:
+* Command and function index
   :PROPERTIES:
   :DESCRIPTION: Command names and some internal functions
   :TEXINFO_MENU_TITLE: Command and Function Index
+  :INDEX:    fn
   :END:
-@printindex fn
 
-* Variable index                                                   :noexport:
+{{{printindex(fn)}}}
+
+* Variable index
   :PROPERTIES:
   :DESCRIPTION: Variables mentioned in the manual
   :TEXINFO_MENU_TITLE: Variable Index
+  :INDEX:    vr
   :END:
 
 This is not a complete index of variables and faces, only the ones
@@ -18490,7 +18504,7 @@ that are mentioned in the manual. For a more complete list, use
 {{{kbdkey(M-x org-customize ,RET)}}} and then click yourself through
 the tree.
 
-@printindex vr
+{{{printindex(vr)}}}
 
 * Copying
    :PROPERTIES:
