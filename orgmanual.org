@@ -4093,7 +4093,7 @@ to temporarily be disabled and they won't appear at all. Press
 filtering, if you have habits which should only be done in certain
 contexts, for example.
 
-** Priorities
+** FIXME Priorities
    :PROPERTIES:
    :DESCRIPTION: Some things are more important than others
    :END:
@@ -4107,10 +4107,9 @@ placing a /priority cookie/ into the headline of a TODO item, like this:
   ,*** TODO [#A] Write letter to Sam Fortune
 #+end_example
 
-{{{noindent}}}
 {{{vindex(org-priority-faces)}}}
 
-By default, Org mode supports three priorities: {{{samp(A)}}},
+{{{noindent}}} By default, Org mode supports three priorities: {{{samp(A)}}},
 {{{samp(B)}}}, and {{{samp(C)}}}. {{{samp(A)}}} is the highest
 priority. An entry without a cookie is treated just like priority
 {{{samp(B)}}}. Priorities make a difference only for sorting in the
@@ -4122,16 +4121,17 @@ Priorities can be attached to any outline node; they do not need to be TODO
 items.
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
-  - {{{kbd(C-c ,)}}} ::
+  - {{{kbd(C-c XXX)}}} ::
     {{{kindex(C-c ,)}}}
     {{{kindex(@kbd{C-c ,})}}}
     {{{findex(org-priority)}}}
-
-     Set the priority of the current headline (@command{org-priority}).  The
-     command prompts for a priority character {{{samp(A)}}}, {{{samp(B)}}} or {{{samp(C)}}}.
-     When you press @key{SPC} instead, the priority cookie is removed from the
-     headline.  The priorities can also be changed ``remotely'' from the timeline
-     and agenda buffer with the {{{kbd(,)}}} command (see [[Agenda commands]]).
+    #+comment: Should be C-c ,
+    Set the priority of the current headline (~org-priority~). The
+    command prompts for a priority character {{{samp(A)}}}, {{{samp(B)}}}
+    or {{{samp(C)}}}. When you press {{{key(SPC)}}}} instead, the priority
+    cookie is removed from the headline. The priorities can also be
+    changed ``remotely'' from the timeline and agenda buffer with the
+    {{{kbd(,)}}} command (see [[Agenda commands]]).
   
   - {{{kbdkey(S-,up)}}}, {{{kbdkey(S-,down)}}}, {{{command(org-priority-up)}}}, {{{command(org-priority-down)}}} ::
     {{{vindex(org-priority-start-cycle-with-default)}}}
@@ -4613,7 +4613,7 @@ tag {{{samp(Sarah)}}} could be done with
 If you find that most of the time you need only a single key press to
 modify your list of tags, set the variable
 ~org-fast-tag-selection-single-key~. Then you no longer have to press
-@key{RET} to exit fast tag selection---it will immediately exit after
+{{{key(RET)}}} to exit fast tag selection---it will immediately exit after
 the first change. If you then occasionally need more keys, press
 {{{kbd(C-c)}}} to turn off auto-exit for the current tag selection
 process (in effect: start selection with {{{kbd(C-c C-c C-c)}}}
@@ -5001,7 +5001,7 @@ mode implements columns by overlaying a tabular structure over the
 headline of each item. While the headlines have been turned into a
 table row, you can still change the visibility of the outline tree.
 For example, you get a compact table by switching to CONTENTS view
-({{{kbd(S-@key{TAB} S-@key{TAB})}}}, or simply {{{kbd(c)}}} while
+({{{kbdkey(S-,TAB)}}}} {{{kbdkey(S-,TAB)}}}), or simply {{{kbd(c)}}} while
 column view is active), but you can still open, read, and edit the
 entry below each headline. Or, you can switch to column view after
 executing a sparse tree command and in this way get a table only for
@@ -9003,8 +9003,8 @@ the other commands, the cursor needs to be in the desired line.
   {{{kindex(,)}}}
 
   Set the priority for the current item (~org-agenda-priority~). Org
-  mode prompts for the priority character. If you reply with @key{SPC},
-  the priority cookie is removed from the entry.
+  mode prompts for the priority character. If you reply with
+  {{{key(SPC)}}}, the priority cookie is removed from the entry.
 
 - {{{kbd(P)}}} ~org-agenda-show-priority~ ::
   {{{kindex(P)}}}
@@ -11369,10 +11369,9 @@ copy on your own web server.
 
 To use the script, you need to make sure that the
 {{{file(org-jsinfo.el)}}} module gets loaded. It should be loaded by
-default, but you can try 
-{{{kbd(M-x customize-variable @key{RET} org-modules @key{RET})}}} to convince yourself that this is indeed the
-case. All it then takes to make use of the program is adding a single
-line to the Org file:
+default, but you can try {{{ksksksk(M-x customize-variable,RET,org-modules,RET)}}} 
+to convince yourself that this is indeed the case. All it then takes to make use of the program
+is adding a single line to the Org file:
 
 {{{cindex(#+INFOJS_OPT)}}}
 #+begin_example
@@ -13097,7 +13096,7 @@ file. These defaults are defined in
 ~org-export-taskjuggler-default-reports~. They can be modified using
 customize along with a number of other options. For a more complete
 list, see 
-{{{kbd(M-x customize-group @key{RET} org-export-taskjuggler @key{RET})}}}.
+{{{ksksksk(M-x customize-group,RET,org-export-taskjuggler,RET)}}}.
 
 Alternately, the user can tag a tree with
 ~org-export-taskjuggler-report-tag~, and define reports in sub-nodes,
@@ -18536,7 +18535,7 @@ license to the document, as described in section 6 of the license.
 - [ ] Execute [[Editing setup][this source code block]]
 - [ ] Asynchronously generate the info file, `C-e i i'
 
-* Improvements and fixes [2/10]                                    :noexport:
+* Improvements and fixes [2/12]                                    :noexport:
 - [ ] Jon will fix detailed node listing
 - [ ] Jon will fix :INDEX: property
 - [ ] New link type to generate pxref?
@@ -18547,6 +18546,8 @@ license to the document, as described in section 6 of the license.
 - [ ] How to include GNU Free Documentation License?
 - [X] Straighten out footnotes
 - [ ] Truncated footnote
+- [ ] Resolve macros with XXX arguments
+- [ ] Get @appendix instead of @chapter?
 
 * Nicolas Goaziou's instructions for v.8                           :noexport:
 
