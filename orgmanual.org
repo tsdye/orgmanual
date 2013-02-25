@@ -980,8 +980,8 @@ commands can be accessed through a dispatcher:
        minimal context, also the full hierarchy of headlines above the
        match is shown, as well as the headline following the
        match. Each match is also highlighted; the highlights disappear
-       when the buffer is changed by an editing command,[fn:13] or by
-       pressing {{{kbd(C-c C-c)}}}. When called with a {{{kbd(C-u)}}}
+       when the buffer is changed by an editing command, or by
+       pressing {{{kbd(C-c C-c)}}}.[fn:13] When called with a {{{kbd(C-u)}}}
        prefix argument, previous highlights are kept, so several calls
        to this command can be stacked.
 
@@ -1059,7 +1059,7 @@ Org knows ordered lists, unordered lists, and description lists.
 
   - /Ordered/ list items start with a numeral followed by either a
     period or a right parenthesis,[fn:16] such as
-    ~1.~ or ~1~. [fn:170] If you want a list to
+    ~1.~ or ~1~.[fn:170] If you want a list to
     start with a different value (e.g., 20), start the text of the
     item with ~[@20]~.[fn:17] Those constructs can be used
     in any item of the list in order to enforce a particular
@@ -1165,8 +1165,8 @@ to disable them individually.
   - {{{kbdkey(S-,up)}}} :: 
     @@info:@itemx@@ {{{kbdkey(S-,down)}}}
 
-       Jump to the previous/next item in the current list,[fn:20] but
-       only if ~org-support-shift-select~ is off.  If not, you can
+       Jump to the previous/next item in the current list, but
+       only if ~org-support-shift-select~ is off.[fn:20]  If not, you can
        still use paragraph jumping commands like {{{kbdkey(C-,up)}}}
        and {{{kbdkey(C-,down)}}} to quite similar effect.
        
@@ -1268,7 +1268,7 @@ to disable them individually.
 Sometimes you want to keep information associated with an entry, but you
 normally don't want to see it.  For this, Org mode has /drawers/.
 Drawers need to be configured with the variable
-~org-drawers~. [fn:172] Drawers
+~org-drawers~.[fn:172] Drawers
 look like this:
 
 #+begin_src org
@@ -1400,7 +1400,7 @@ details.
                  variable ~org-footnote-define-inline~, the
                  definition will be placed right into the text as part
                  of the reference, or separately into the location
-                 determined by the variable ~org-footnote-section~. [fn:173]
+                 determined by the variable ~org-footnote-section~.[fn:173]
 
                  When this command is called with a prefix argument, a
                  menu of additional options is offered:
@@ -1975,8 +1975,8 @@ Formulas can reference the value of another field in two ways.  Like
 in any other spreadsheet, you may reference fields with a
 letter/number combination like ~B3~, meaning the 2nd field in the 3rd
 row.  {{{vindex(org-table-use-standard-references)}}} However, Org
-prefers[fn:25] to use another, more general representation that looks
-like this:
+prefers to use another, more general representation that looks
+like this:[fn:25]
 
 #+begin_example
   @ROW$COLUMN
@@ -2676,9 +2676,9 @@ following commands:
     :DESCRIPTION: Field and column names, parameters, and automatic recalc
     :END:
 If you want the recalculation of fields to happen automatically, or if
-you want to be able to assign /names/ [fn:30] to fields and columns,
+you want to be able to assign /names/ to fields and columns,
 you need to reserve the first column of the table for special marking
-characters.
+characters.[fn:30]
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
   - {{{kbd(C-#)}}} ~org-table-rotate-recalc-marks~ :: Rotate the
@@ -3115,8 +3115,8 @@ insert it into an Org file, and to follow the link.
        prompts for a link to be inserted into the buffer. You can just
        type a link, using text for an internal link, or one of the
        link type prefixes mentioned in the examples above. The link
-       will be inserted into the buffer,[fn:36] along with a
-       descriptive text. If some text was selected when this command
+       will be inserted into the buffer, along with a
+       descriptive text.[fn:36] If some text was selected when this command
        is called, the selected text becomes the default description.
 
        {{{cindex(link completion)}}} 
@@ -3221,7 +3221,7 @@ insert it into an Org file, and to follow the link.
          When called with a prefix argument, also display images that
          do have a link description.  You can ask for inline images to
          be displayed at startup by configuring the variable
-         ~org-startup-with-inline-images~. [fn:177]
+         ~org-startup-with-inline-images~.[fn:177]
 
     - {{{kbd(C-c %)}}} ~org-mark-ring-push~ ::
          {{{kindex(C-c %)}}}
@@ -3917,7 +3917,7 @@ inserted after the headline as an itemized list, newest first.[fn:48]
 When taking a lot of notes, you might want to get the notes out of the
 way into a drawer (see [[Drawers]]). Customize the variable
 ~org-log-into-drawer~ to get this behavior---the recommended drawer
-for this is called ~LOGBOOK~. [fn:178] You can also overrule the setting
+for this is called ~LOGBOOK~.[fn:178] You can also overrule the setting
 of this variable for a subtree by setting a ~LOG_INTO_DRAWER~
 property.
 
@@ -3939,8 +3939,8 @@ keyword. For example, with the setting:
 
 you not only define global TODO keywords and fast access keys, but
 also request that a time is recorded when the entry is set to
-DONE,[fn:49] and that a note is recorded when switching to WAIT or
-CANCELED. The setting for WAIT is even more special: the {{{samp(!)}}}
+DONE, and that a note is recorded when switching to WAIT or
+CANCELED.[fn:49] The setting for WAIT is even more special: the {{{samp(!)}}}
 after the slash means that in addition to the note taken when entering
 the state, a timestamp should be recorded when /leaving/ the WAIT
 state, if and only if the /target/ state does not configure logging
@@ -5415,7 +5415,7 @@ is used in a much wider sense.
 
 A timestamp is a specification of a date (possibly with a time or a
 range of times) in a special format, either ~<2003-09-16 Tue>~ or
-~<2003-09-16 Tue 09:39>~ or ~<2003-09-16 Tue 12:00-12:30>~. [fn:60] A
+~<2003-09-16 Tue 09:39>~ or ~<2003-09-16 Tue 12:00-12:30>~.[fn:60] A
 timestamp can appear anywhere in the headline or body of an Org tree
 entry. Its presence causes entries to be shown on specific dates in
 the agenda (see [[Weekly/daily agenda]]). We distinguish:
@@ -6527,7 +6527,7 @@ any clocked time will be displayed.
 If you switch to column view in the daily/weekly agenda, the effort column
 will summarize the estimated work effort for each day, and you can use this to find space in your schedule.  To get
 an overview of the entire part of the day that is committed, you can set the
-option ~org-agenda-columns-add-appointments-to-effort-sum~. [fn:179] The
+option ~org-agenda-columns-add-appointments-to-effort-sum~.[fn:179] The
 appointments on a day that take place over a specified time interval will
 then also be added to the load estimate of the day.
 
@@ -7123,7 +7123,7 @@ defined:[fn:83]
   ~%:date~ (message date header field)                   
   ~%:date-timestamp~ (date as active timestamp)          
   ~%:date-timestamp-inactive~ (date as inactive timestamp)
-  ~%:fromto~ (either "to NAME" or "from NAME") [fn:84]
+  ~%:fromto~ (either "to NAME" or "from NAME")[fn:84]
 - gnus :: ~%:group~, for messages also all email fields            
 - w3 w3m :: ~%:url~                               
 - info :: ~%:file %:node~                       
@@ -7639,7 +7639,7 @@ the window configuration is restored when the agenda exits:
 {{{vindex(org-agenda-files)}}}
 
 The information to be shown is normally collected from all /agenda
-files/, the files listed in the variable ~org-agenda-files~. [fn:180] If
+files/, the files listed in the variable ~org-agenda-files~.[fn:180] If
 a directory is part of this list, all files with the extension
 {{{file(.org)}}} in this directory will be part of the list.
 
@@ -10652,7 +10652,7 @@ a separate file which can be included using ~#+SETUPFILE~.
 - #+DATE: ::       
 
   A date, an Org timestamp, or a format string for
-  ~format-time-string~. [fn:113]
+  ~format-time-string~.[fn:113]
 
 - #+EMAIL: ::      
 
@@ -16207,7 +16207,7 @@ effective only when the file is visited again in a new Emacs session.
   {{{cindex(@code{noindent}\\\, STARTUP keyword)}}}
 
   Dynamic virtual indentation is controlled by the variable
-  ~org-startup-indented~. [fn:182]
+  ~org-startup-indented~.[fn:182]
 
   #+attr_texinfo: :table-type "table" :indic "@asis"
   - ~indent~ ::     start with ~org-indent-mode~ turned on
@@ -16476,7 +16476,7 @@ lot cleaner:
 
 {{{noindent}}} If you are using at least Emacs 23.2 and version 6.29
 of Org, this kind of view can be achieved dynamically at display time
-using ~org-indent-mode~. [fn:183] In this minor mode, all lines are
+using ~org-indent-mode~.[fn:183] In this minor mode, all lines are
 prefixed for display with the necessary amount of space.[fn:154] Also
 headlines are prefixed with additional stars, so that the amount of
 indentation shifts by two spaces per level.[fn:155] All headline stars
@@ -17321,7 +17321,7 @@ Orgtbl mode has several translator functions built-in: ~orgtbl-to-csv~
 (comma-separated values), ~orgtbl-to-tsv~ (TAB-separated values)
 ~orgtbl-to-latex~, ~orgtbl-to-html~, and ~orgtbl-to-texinfo~. Except
 for ~orgtbl-to-html~, these all use a generic translator,
-~orgtbl-to-generic~. [fn:162] For example, ~orgtbl-to-latex~ itself is
+~orgtbl-to-generic~.[fn:162] For example, ~orgtbl-to-latex~ itself is
 a very short function that computes the column definitions for the
 ~tabular~ environment, defines a few field and line separators and
 then hands processing over to the generic translator. Here is the
@@ -18014,7 +18014,7 @@ encrypt the files that are uploaded to the server. This can be done
 with Org mode 7.02 and with MobileOrg 1.5 (iPhone version), and you
 need an {{{file(openssl)}}} installation on your system. To turn on
 encryption, set a password in MobileOrg and, on the Emacs side,
-configure the variable ~org-mobile-use-encryption~. [fn:164]
+configure the variable ~org-mobile-use-encryption~.[fn:164]
 
 The easiest way to create that directory is to use a free [[http://dropbox.com][Dropbox]]
 account.[fn:165] When MobileOrg first connects to your Dropbox, it
@@ -18066,7 +18066,7 @@ entries. Here is how it works:
 
 1. Org moves all entries found in {{{file(mobileorg.org)}}} and
    appends them to the file pointed to by the variable
-   ~org-mobile-inbox-for-pull~. [fn:168] Each captured entry and each
+   ~org-mobile-inbox-for-pull~.[fn:168] Each captured entry and each
    editing event will be a top-level entry in the inbox file.
 
 2. After moving the entries, Org will attempt to implement the changes
@@ -18722,6 +18722,7 @@ There should be a section about smart-quotes too.
 #+begin_src emacs-lisp
 (require 'ox-texinfo)
 (define-key org-mode-map (kbd "C-c e") 'org-export-dispatch)
+(setq org-src-preserve-indentation t)
 (setq org-export-in-background t)
 (setq org-export-async-debug t)
 (setq org-export-async-init-file (expand-file-name "init.el"))
@@ -18750,6 +18751,7 @@ Modify accordingly.
 (require 'ox-texinfo)
 (setq org-src-preserve-indentation t)
 (setq org-confirm-babel-evaluate nil)
+(setq org-footnote-auto-adjust nil)
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
