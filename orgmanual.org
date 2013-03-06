@@ -74,7 +74,7 @@
 #+MACRO: enddefopt @@info:@end defopt@@
 #+MACRO: result @@info:@result{}@@
 #+MACRO: page @@info:@page@@
-#+MACRO: dots @@info:@dots{}@@
+
 
 * Introduction
   :PROPERTIES:
@@ -1102,7 +1102,7 @@ deal with them correctly.[fn:18] To turn this on, put into
 {{{file(.emacs)}}}: ~(require 'filladapt)~}, and by exporting them
 properly (see [[Exporting]]). Since indentation is
 what governs the structure of these lists, many structural constructs
-like ~#+BEGIN_...~ blocks can be indented to signal that they belong
+like ~#+BEGIN_ ...~ blocks can be indented to signal that they belong
 to a particular item.
 
 {{{vindex(org-list-demote-modify-bullet)}}}
@@ -1310,9 +1310,9 @@ drawer, in a similar way to state changes, use
 {{{vindex(org-hide-block-startup)}}} 
 {{{cindex(blocks\\\, folding)}}}
 
-Org mode uses begin...end blocks for various purposes from including
+Org mode uses ~begin~ ... ~end~ blocks for various purposes from including
 source code examples (see [[Literal examples]]) to capturing time logging
-information (see [[Clocking work time]).  These blocks can be folded
+information (see [[Clocking work time]]).  These blocks can be folded
 and unfolded by pressing TAB in the begin line.  You can also get all
 blocks folded at startup by configuring the variable
 ~org-hide-block-startup~ or on a per-file basis by using
@@ -1978,7 +1978,7 @@ like this:[fn:25]
    @ROW$COLUMN
 #+end_example
 
-Column specifications can be absolute like ~$1~, ~$2~ ,... ~$N~, or
+Column specifications can be absolute like ~$1~, ~$2~, ..., ~$N~, or
 relative to the current column (i.e., the column of the field which is
 being computed) like ~$+1~ or ~$-2~. ~$<~ and ~$>~ are immutable
 references to the first and last column, respectively, and you can use
@@ -1986,11 +1986,11 @@ references to the first and last column, respectively, and you can use
 
 The row specification only counts data lines and ignores horizontal
 separator lines (hlines). Like with columns, you can use absolute row
-numbers ~@1~, ~@2~ ,... ~@N~, and row numbers relative to the current
+numbers ~@1~, ~@2~, ..., ~@N~, and row numbers relative to the current
 row like ~@+3~ or ~@-1~. ~@<~ and ~@>~ are immutable references the
 first and last row in the table, respectively.[fn:26] You may also
 specify the row relative to one of the hlines: ~@I~ refers to the
-first hline, ~@II~ to the second, etc@. ~@-I~ refers to the first such
+first hline, ~@II~ to the second, etc. ~@-I~ refers to the first such
 line above the current line, ~@+I~ to the first such line below the
 current line. You can also write ~@III+2~ which is the second data
 line after the third hline in the table.
@@ -2721,7 +2721,7 @@ The marking characters have the following meaning:
          With such a definition, any formula in the table may use
          {{{samp($m1)}}} to refer to the value {{{samp(10)}}}.  Also,
          if you assign a formula to a names field, it will be stored
-         as {{{samp($name=...)}}}.
+         as ~$name= ...~.
   - _ :: Similar to {{{samp(^)}}}, but defines names for the fields in
          the row /below/.
   - $ :: Fields in this row can define /parameters/ for formulas.  For
@@ -2807,7 +2807,7 @@ Org-Plot recognizes the following options:
   - type :: Specify whether the plot will be ~2d~, ~3d~, or ~grid~.
   - with :: Specify a ~with~ option to be inserted for every col being
             plotted (e.g., ~lines~, ~points~, ~boxes~, ~impulses~,
-            etc...).  Defaults to ~lines~.
+            etc.).  Defaults to ~lines~.
   - file :: If you want to plot to a file, specify
             ~"{path/to/desired/output-file}"~.
   - labels :: List of labels to be used for the ~deps~ (defaults to
@@ -6933,7 +6933,7 @@ Now lets look at the elements of a template definition.  Each entry in
   - ~:prepend~ ::
 
     Normally new captured information will be appended at the target
-    location (last child, last table line, last list item...). Setting
+    location (last child, last table line, last list item, ...). Setting
     this property will change that.
 
   - ~:immediate-finish~ ::
@@ -10343,8 +10343,8 @@ or use, on a per-file basis:
    ,#+OPTIONS: ^:{}
 #+end_example
 
-{{{noindent}}} With this setting, {{{samp(a_b)}}} will not be interpreted as a
-subscript, but {{{samp(a_{b})}}} will.
+{{{noindent}}} With this setting, ~a_b~ will not be interpreted as a
+subscript, but ~a_{b}~ will.
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
 - {{{kbd(C-c C-x XXX)}}} ::
@@ -11763,13 +11763,13 @@ properties:
 Frames will automatically receive a ~fragile~ option if they contain
 source code that uses the verbatim environment.  Special {{{file(beamer)}}}
 specific code can be inserted using ~#+BEAMER:~ and
-~#+BEGIN_BEAMER...#+END_BEAMER~ constructs, similar to other export
+~#+BEGIN_BEAMER~ ... ~#+END_BEAMER~ constructs, similar to other export
 backends, but with the difference that ~#+LaTeX:~ stuff will be included
 in the presentation as well.
 
 Outline nodes with ~BEAMER_env~ property value {{{samp(note)}}} or
 {{{samp(noteNH)}}} will be formatted as beamer notes, i,e, they will be wrapped
-into ~\note@{...@}~.  The former will include the heading as part of the
+into ~\note{...}~.  The former will include the heading as part of the
 note text, the latter will ignore the heading of that node.  To simplify note
 generation, it is actually enough to mark the note with a /tag/ (either
 ~:B_note:~ or ~:B_noteNH:~) instead of creating the
@@ -12661,7 +12661,7 @@ by the variable ~org-odt-styles-dir~.  The two files are:
   In addition to serving as a template file for the final
   {{{file(content.xml)}}}, the file also contains automatic styles for
   formatting of tables which are referenced by the exporter, and
-  ~<text:sequence-decl>~ {{{dots}}} ~</text:sequence-decl>~
+  ~<text:sequence-decl>~ ... ~</text:sequence-decl>~
   elements that control how various entities---tables, images,
   equations, etc.---are numbered.
 
@@ -12764,7 +12764,7 @@ couple of examples.
 - Embedding a block of OpenDocument XML ::
 
   You can add a large block of OpenDocument XML using the
-  ~#+BEGIN_ODT~@dots{}~#+END_ODT~ construct.
+  ~#+BEGIN_ODT~ ... ~#+END_ODT~ construct.
 
   For example, to create a one-off paragraph that uses bold text, do the
   following:
@@ -15952,22 +15952,22 @@ The following template selectors are currently supported:
 {{{kindex(i)}}}
 {{{kindex(I)}}}
 
-#+attr_texinfo: :columns "0.1 0.7"
-| Selector     | Template                            |
-|--------------+-------------------------------------|
-| {{{kbd(a)}}} | ~#+BEGIN_ASCII   ... #+END_ASCII~   |
-| {{{kbd(A)}}} | ~#+ASCII:~                          |
-| {{{kbd(c)}}} | ~#+BEGIN_CENTER  ... #+END_CENTER~  |
-| {{{kbd(e)}}} | ~#+BEGIN_EXAMPLE ... #+END_EXAMPLE~ |
-| {{{kbd(h)}}} | ~#+BEGIN_HTML    ... #+END_HTML~    |
-| {{{kbd(H)}}} | ~#+HTML:~                           |
-| {{{kbd(i)}}} | ~#+INDEX:~                          |
-| {{{kbd(I)}}} | ~#+INCLUDE:~                        |
-| {{{kbd(l)}}} | ~#+BEGIN_LaTeX   ... #+END_LaTeX~   |
-| {{{kbd(L)}}} | ~#+LaTeX:~                          |
-| {{{kbd(q)}}} | ~#+BEGIN_QUOTE   ... #+END_QUOTE~   |
-| {{{kbd(s)}}} | ~#+BEGIN_SRC     ... #+END_SRC~     |
-| {{{kbd(v)}}} | ~#+BEGIN_VERSE   ... #+END_VERSE~   |
+#+attr_texinfo: :columns "0.2 0.7"
+| Selector     | Template                              |
+|--------------+---------------------------------------|
+| {{{kbd(a)}}} | ~#+BEGIN_ASCII~ ...~ #+END_ASCII~     |
+| {{{kbd(A)}}} | ~#+ASCII:~                            |
+| {{{kbd(c)}}} | ~#+BEGIN_CENTER~ ... ~#+END_CENTER~   |
+| {{{kbd(e)}}} | ~#+BEGIN_EXAMPLE~ ... ~#+END_EXAMPLE~ |
+| {{{kbd(h)}}} | ~#+BEGIN_HTML~ ... ~#+END_HTML~       |
+| {{{kbd(H)}}} | ~#+HTML:~                             |
+| {{{kbd(i)}}} | ~#+INDEX:~                            |
+| {{{kbd(I)}}} | ~#+INCLUDE:~                          |
+| {{{kbd(l)}}} | ~#+BEGIN_LaTeX~ ... ~#+END_LaTeX~     |
+| {{{kbd(L)}}} | ~#+LaTeX:~                            |
+| {{{kbd(q)}}} | ~#+BEGIN_QUOTE~ ... ~#+END_QUOTE~     |
+| {{{kbd(s)}}} | ~#+BEGIN_SRC~ ... ~#+END_SRC~         |
+| {{{kbd(v)}}} | ~#+BEGIN_VERSE~ ... ~#+END_VERSE~     |
 
 For example, on an empty line, typing "<e" and then pressing TAB, will expand
 into a complete EXAMPLE template.
@@ -16118,7 +16118,7 @@ effective only when the file is visited again in a new Emacs session.
   the end of the file. The first such line also applies to any entries
   before it.
 
-- {{{kbd(#+COLUMNS: %25ITEM .....)}}} ::
+- {{{kbd(#+COLUMNS: %25ITEM ...)}}} ::
   {{{cindex(property\\\, COLUMNS)}}}
 
   Set the default format for columns view. This format applies when
@@ -16138,7 +16138,7 @@ effective only when the file is visited again in a new Emacs session.
   Set tags that can be inherited by any entry in the file, including the
   top-level entries.
 
-- {{{kbd(#+DRAWERS: NAME1 .....)}}} ::
+- {{{kbd(#+DRAWERS: NAME1 ...)}}} ::
   {{{vindex(org-drawers)}}}
 
   Set the file-local set of additional drawers. The corresponding global
@@ -16300,7 +16300,7 @@ effective only when the file is visited again in a new Emacs session.
   - ~showstars~ ::  show all stars starting a headline
   - ~indent~ ::     virtual indentation according to outline level
   - ~noindent~ ::   no virtual indentation according to outline level
-  - ~odd~ ::        allow only odd outline levels (1,3,...)
+  - ~odd~ ::        allow only odd outline levels (1, 3, ...)
   - ~oddeven~ ::    allow all outline levels
 
   {{{vindex(org-put-time-stamp-overlays)}}}
@@ -16543,7 +16543,7 @@ display, Org supports you in the following way:
   {{{vindex(org-odd-levels-only)}}}
 
   Things become cleaner still if you skip all the even levels and use
-  only odd levels 1, 3, 5..., effectively adding two stars to go from
+  only odd levels 1, 3, 5, ..., effectively adding two stars to go from
   one outline level to the next.[fn:158] In this way we get the outline
   view shown at the beginning of this section. In order to make the
   structure editing and export commands handle this convention
@@ -17136,7 +17136,7 @@ For example:
 
 {{{cindex(#+ORGTBL)}}}
 #+begin_example
-   ,#+ORGTBL: SEND table_name translation_function arguments....
+   ,#+ORGTBL: SEND table_name translation_function arguments ...
 #+end_example
 
 {{{noindent}}} Here, ~table_name~ is the reference name for the table
