@@ -5315,8 +5315,9 @@ this block looks like this:
 
 - ~:hlines~ ::
 
-  When ~t~, insert an hline after every line. When a number
-  ~N~, insert an hline before each headline with level ~<= @var{N}~.
+  When ~t~, insert an hline after every line. When a number ~N~,
+              insert an hline before each headline with level ~<=~
+              {{{var(N)}}}.
 
 - ~:vlines~ ::
 
@@ -6208,7 +6209,7 @@ be selected:
   - nil ::        the current buffer or narrowed region
   - file ::      the full current buffer
   - subtree ::   the subtree where the clocktable is located
-  - tree {{{var(N)}}} ::      the surrounding level @var{N tree, for example ~tree3~}
+  - tree {{{var(N)}}} :: the surrounding level {{{var(N)}}} tree, for example ~tree3~
   - tree ::      the surrounding level 1 tree
   - agenda ::    all agenda files
   - ("file"..) :: scan these files
@@ -6779,7 +6780,7 @@ the template for you like this:
 
 #+begin_example
    ,* TODO
-     [[file:@var{link to where you initiated capture}]]
+     [[file:link to where you initiated capture]]
 #+end_example
 
 {{{noindent}}} During expansion of the template, ~%a~ has been
@@ -10232,11 +10233,11 @@ You can define text snippets with a macro:
 #+end_example
 
 {{{noindent}}} which can be referenced anywhere in the document (even in
-code examples) with ~@{@{@{name(arg1,arg2)@~@}@}}.  In addition to
-defined macros, ~@{@{@{title@~@}@}}, ~@{@{@{author@~@}@}}, etc.,
+code examples) with ~{{{name(arg1,arg2)}}}~.  In addition to
+defined macros, ~{{{title}}}~, ~{{{author}}}~, etc.,
 will reference information set by the ~#+TITLE:~, ~#+AUTHOR:~, and
-similar lines.  Also, ~@{@{@{date(@var{FORMAT~)@}@}@}} and
-~@{@{@{modification-time(@var{FORMAT~)@}@}@}} refer to current date time
+similar lines.  Also, ~{{{date(FORMAT)}}}~ and
+~{{{modification-time(FORMAT)}}}~ refer to current date time
 and to the modification time of the file being exported, respectively.
 ~FORMAT~ should be a format string understood by
 ~format-time-string~.
