@@ -4119,7 +4119,8 @@ items.
 #+attr_texinfo: :table-type "table" :indic "@asis"
   - {{{kbd(C-c XXX)}}} ::
     {{{kindex(C-c ,)}}}
-    {{{kindex(@kbd{C-c ,})}}}
+    #+comment:    {{{kindex(@kbd{C-c ,})}}}
+    #+comment: Preceding line won't export to pdf
     {{{findex(org-priority)}}}
     #+comment: Should be C-c ,
     Set the priority of the current headline (~org-priority~). The
@@ -7084,11 +7085,11 @@ here:
 
   Like ~%^C~, but insert as link.
 
-- %^{{{{var(prop)}}}}p ::  
+- %^{PROP}p ::  
 
   Prompt the user for a value for property {{{var(prop)}}}.
 
-- %^{{{{var(prompt)}}}} ::  
+- %^{PROMPT} ::  
 
   Prompt the user for a string and replace this sequence with it. You
   may specify a default value and a completion table with
@@ -7097,7 +7098,7 @@ here:
 
 - %\n ::        
 
-  Insert the text entered at the nth %^{{{{var(prompt)}}}}, where ~n~ is
+  Insert the text entered at the nth %^{PROMPT}, where ~n~ is
   a number, starting from 1.
 
 - %? ::          
