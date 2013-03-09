@@ -2489,7 +2489,7 @@ the variable ~org-table-use-standard-references~.
        {{{kindex(C-c ?)}}}
        {{{findex(org-table-field-info)}}}
 
-  - {{{kbd(C-c @})}}} ~org-table-toggle-coordinate-overlays~ :: Toggle
+  - {{{kbd(C-c })}}} ~org-table-toggle-coordinate-overlays~ :: Toggle
        the display of row and column numbers for a table, using
        overlays ({{{command(org-table-toggle-coordinate-overlays)}}}).
        These are updated each time the table is aligned; you can force
@@ -2498,7 +2498,7 @@ the variable ~org-table-use-standard-references~.
        {{{kindex(C-c @})}}}
        {{{findex(org-table-toggle-coordinate-overlays)}}}
 
-  - {{{kbd(C-c @{)}}} ~org-table-toggle-formula-debugger~ :: Toggle
+  - {{{kbd(C-c {)}}} ~org-table-toggle-formula-debugger~ :: Toggle
        the formula debugger on and off.  See below.
 
        {{{kindex(C-c @{)}}}
@@ -2586,7 +2586,7 @@ the variable ~org-table-use-standard-references~.
        {{{findex(org-table-fedit-scroll-up)}}}
        {{{kindex(M-down)}}}
        {{{findex(org-table-fedit-scroll-down)}}}
-  - {{{kbd(C-c @})}}} :: Turn the coordinate grid in the table on and
+  - {{{kbd(C-c })}}} :: Turn the coordinate grid in the table on and
        off.
 
        {{{kindex(C-c @})}}}
@@ -7111,6 +7111,7 @@ defined:[fn:83]
 
 {{{vindex(org-from-is-user-regexp)}}}
 
+
 #+attr_texinfo: :table-type "table" :indic "@asis"
 - bbdb :: ~%:name %:company~ 
 - irc ::   ~%:server %:port %:nick~              
@@ -8486,7 +8487,7 @@ Sorting can be customized using the variable
 ~org-agenda-sorting-strategy~, and may also include criteria based on
 the estimated effort of an entry (see [[Effort estimates]]).
 
-** Agenda commands
+** FIXME Agenda commands
    :PROPERTIES:
    :DESCRIPTION: Remote editing of Org trees
    :TITLE:    Commands in the agenda buffer
@@ -8909,7 +8910,7 @@ the other commands, the cursor needs to be in the desired line.
   the entry. The closing bracket/brace will add a negative search term
   which /must not/ occur/match in the entry for it to be selected.
 
-*** Remote editing
+*** FIXME Remote editing
 {{{cindex(remote editing\\\, from agenda)}}}
 
 #+attr_texinfo: :table-type "table" :indic "@asis"
@@ -8998,8 +8999,8 @@ the other commands, the cursor needs to be in the desired line.
   agenda, change a tag for all headings in the region.
 
 - {{{kbd(,)}}} ::
-  {{{kindex(,)}}}
-
+  {{{kindex(XXX)}}}
+  #+comment: Should be a comma
   Set the priority for the current item (~org-agenda-priority~). Org
   mode prompts for the priority character. If you reply with
   {{{key(SPC)}}}, the priority cookie is removed from the entry.
@@ -18440,7 +18441,7 @@ complete if the ones above were not mentioned in this manual.
   Max-Planck-Institute for Neurology.  He also inspired the creation
   of a concept index for HTML export.
 
-- J@"urgen Vollmer contributed code generating the table of contents
+- J\"urgen Vollmer contributed code generating the table of contents
   in HTML output.
 
 - Samuel Wales has provided important feedback and bug reports.
