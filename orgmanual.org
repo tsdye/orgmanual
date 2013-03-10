@@ -1467,6 +1467,7 @@ silently in the shadows.  When you use ~orgstruct++-mode~, Org will
 also export indentation and autofill settings into that mode, and
 detect item context after the first line of an item.
 
+
 * Tables
   :PROPERTIES:
   :DESCRIPTION: Pure magic for quick formatting
@@ -6051,7 +6052,7 @@ about what to do with it.[fn:72]
   the values ~current~ to show only the current clocking instance,
   ~today~ to show all time clocked on this tasks today (see also the
   variable ~org-extend-today-until~), ~all~ to include all time, or
-  ~auto~ which is the default.[fn:75]@* Clicking with {{{kbd(mouse-1)}}}
+  ~auto~ which is the default.[fn:75]  Clicking with {{{kbd(mouse-1)}}}
   onto the mode line entry will pop up a menu with clocking options.
 
 - {{{kbd(C-c C-x C-o)}}}, ~org-clock-out~ ::
@@ -6067,12 +6068,12 @@ about what to do with it.[fn:72]
 
 - {{{kbd(C-c C-x C-x)}}}, ~org-clock-in-last~ ::
   {{{kindex(C-c C-x C-x)}}}
-{{{vindex(org-clock-continuously)}}}
+  {{{vindex(org-clock-continuously)}}}
 
-Reclock the last clocked task. With one {{{kbd(C-u)}}} prefix
-argument, select the task from the clock history. With two
-{{{kbd(C-u)}}} prefixes, force continuous clocking by starting the
-clock when the last clock stopped.
+  Reclock the last clocked task. With one {{{kbd(C-u)}}} prefix
+  argument, select the task from the clock history. With two
+  {{{kbd(C-u)}}} prefixes, force continuous clocking by starting the
+  clock when the last clock stopped.
 
 - {{{kbd(C-c C-x C-e)}}}, ~org-clock-modify-effort-estimate~ ::
   {{{kindex(C-c C-x C-e)}}}
