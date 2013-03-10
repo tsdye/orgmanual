@@ -1467,7 +1467,6 @@ silently in the shadows.  When you use ~orgstruct++-mode~, Org will
 also export indentation and autofill settings into that mode, and
 detect item context after the first line of an item.
 
-
 * Tables
   :PROPERTIES:
   :DESCRIPTION: Pure magic for quick formatting
