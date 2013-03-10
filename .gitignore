@@ -1,10 +1,8 @@
 *.*~
 *.texi
 *.info
-Makefile
 init.el
 export-test.org
-org-version.inc
 *.aux
 *.cp
 *.fn
@@ -18,3 +16,6 @@ org-version.inc
 *.cps
 *.pgs
 .DS_Store
+/orgmanual.html
+/orgmanual.t2d/
+/orgmanual/
