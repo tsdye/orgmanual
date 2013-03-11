@@ -984,16 +984,14 @@ commands can be accessed through a dispatcher:
        {{{kindex(C-c / r)}}}
        {{{findex(org-occur)}}}
        {{{vindex(org-remove-highlights-with-change)}}}
-  - {{{kbd(M-g n)}}}, ~next-error~ ::
-       @@info:@itemx@@ {{{kbd(M-g M-n)}}}
+  - {{{kbd(M-g n)}}} or {{{kbd(M-g M-n)}}}, ~next-error~ ::
        
        Jump to the next sparse tree match in this buffer.
 
        {{{kindex(M-g n)}}}
        {{{kindex(M-g M-n)}}}
        {{{findex(next-error)}}}
-  - {{{kbd(M-g p)}}}, ~previous-error~ ::
-       @@info:@itemx@@ {{{kbd(M-g M-p)}}}
+  - {{{kbd(M-g p)}}} or {{{kbd(M-g M-p)}}}, ~previous-error~ ::
 
        Jump to the previous sparse tree match in this buffer.
 
@@ -1158,8 +1156,7 @@ to disable them individually.
 
     Insert a new item with a checkbox (see [[Checkboxes]]).
   
-  - {{{kbdkey(S-,up)}}} :: 
-    @@info:@itemx@@ {{{kbdkey(S-,down)}}}
+  - {{{kbdkey(S-,up)}}} and {{{kbdkey(S-,down)}}} :: 
 
        Jump to the previous/next item in the current list, but
        only if ~org-support-shift-select~ is off.[fn:20]  If not, you can
@@ -1171,8 +1168,7 @@ to disable them individually.
        {{{cindex(shift-selection-mode)}}}
        {{{vindex(org-support-shift-select)}}}
        {{{vindex(org-list-use-circular-motion)}}}
-  - {{{kbdkey(M-,up)}}} ::
-       @@info:@itemx@@ {{{kbdkey(M-,down)}}}
+  - {{{kbdkey(M-,up)}}} and {{{kbdkey(M-,down)}}} ::
 
        Move the item including subitems up/down (swap with
        previous/next item of same indentation).[fn:21]  If the list is
@@ -1180,16 +1176,14 @@ to disable them individually.
 
        {{{kindex(M-up)}}}
        {{{kindex(M-down)}}}
-  - {{{kbdkey(M-,left)}}} :: 
-       @@info:@itemx@@ {{{kbdkey(M-,right)}}}
+  - {{{kbdkey(M-,left)}}} and {{{kbdkey(M-,right)}}} :: 
 
        Decrease/increase the indentation of an item, leaving children
        alone.
 
        {{{kindex(M-left)}}}
        {{{kindex(M-right)}}}
-  - {{{kbdkey(M-S-,left)}}} :: 
-       @@info:@itemx@@ {{{kbdkey(M-S-,right)}}}
+  - {{{kbdkey(M-S-,left)}}} and {{{kbdkey(M-S-,right)}}} :: 
 
        Decrease/increase the indentation of the item, including
        subitems.  Initially, the item tree is selected based on
@@ -3242,15 +3236,31 @@ insert it into an Org file, and to follow the link.
          moves through a ring of previously recorded positions.
 
   - {{{kbd(C-c C-x C-n)}}}, ~org-next-link~ ::
-       @@info:@itemx@@ {{{kbd(C-c C-x C-p)}}}, ~org-previous-link~
-       {{{cindex(links\\\, finding next/previous)}}}
+       {{{cindex(links\\\, finding next)}}}
        
-       {{{kindex(C-c C-x C-p)}}}
-       {{{findex(org-previous-link)}}}
        {{{kindex(C-c C-x C-n)}}}
        {{{findex(org-next-link)}}}
 
-       Move forward/backward to the next link in the buffer. At the
+       Move forward to the next link in the buffer. At the
+       limit of the buffer, the search fails once, and then wraps
+       around. The key bindings for this are really too long; you
+       might want to bind this also to {{{kbd(C-n)}}}, as follows:
+
+       #+header: :exports code
+       #+header: :eval no
+       #+begin_src emacs-lisp
+         (add-hook 'org-load-hook
+                   (lambda ()
+                     (define-key org-mode-map "\C-n" 'org-next-link)))
+       #+end_src
+
+  - {{{kbd(C-c C-x C-p)}}}, ~org-previous-link~ ::
+       {{{cindex(links\\\, finding previous)}}}
+       
+       {{{kindex(C-c C-x C-p)}}}
+       {{{findex(org-previous-link)}}}
+
+       Move backward to the previous link in the buffer. At the
        limit of the buffer, the search fails once, and then wraps
        around. The key bindings for this are really too long; you
        might want to bind this also to {{{kbd(C-n)}}} and
@@ -3261,7 +3271,6 @@ insert it into an Org file, and to follow the link.
        #+begin_src emacs-lisp
          (add-hook 'org-load-hook
                    (lambda ()
-                     (define-key org-mode-map "\C-n" 'org-next-link)
                      (define-key org-mode-map "\C-p" 'org-previous-link)))
        #+end_src
 
