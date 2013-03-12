@@ -22,9 +22,9 @@
 #+TEXINFO_HEADER: @c
 #+TEXINFO_HEADER: @c Version and Contact Info
 #+TEXINFO_HEADER: @set MAINTAINERSITE @uref{http://orgmode.org,maintainers webpage}
-#+TEXINFO_HEADER: @set MAINTAINER Carsten Dominik
-#+TEXINFO_HEADER: @set MAINTAINEREMAIL @email{carsten at orgmode dot org}
-#+TEXINFO_HEADER: @set MAINTAINERCONTACT @uref{mailto:carsten at orgmode dot org,contact the maintainer}
+#+TEXINFO_HEADER: @set MAINTAINER Bastien Guerry
+#+TEXINFO_HEADER: @set MAINTAINEREMAIL @email{bzg at gnu dot org}
+#+TEXINFO_HEADER: @set MAINTAINERCONTACT @uref{mailto:bzg at gnu dot org,contact the maintainer}
 #+SUBTITLE: Release @value{VERSION}
 #+SUBAUTHOR:  with contributions by David O'Toole, Bastien Guerry, Philip Rooke, Dan Davison, Eric Schulte, Thomas Dye and Jambunathan K.
 #+TEXINFO_DIR_CATEGORY: Emacs editing modes
@@ -101,7 +101,7 @@ scheduling. It dynamically compiles entries into an agenda that
 utilizes and smoothly integrates much of the Emacs calendar and diary.
 Plain text URL-like links connect to websites, emails, Usenet
 messages, BBDB entries, and any files related to the projects. For
-printing and sharing of notes, an Org file can be exported as a
+printing and sharing notes, an Org file can be exported as a
 structured ASCII file, as HTML, or as an iCalendar file.[fn:1]  It can
 also serve as a publishing tool for a set of linked web pages.
 
@@ -151,119 +151,82 @@ Network Theory Ltd.]]
 
 ** Installation
    :PROPERTIES:
-   :DESCRIPTION: How to install a downloaded version of Org-mode
+   :DESCRIPTION: Installing Org
    :END:
 
 {{{cindex(installation)}}}
 {{{cindex(XEmacs)}}}
 
-*Important:* If you have the version of Org that comes with Emacs or
-as a XEmacs package, please skip this section and go directly to
-[[Activation]]. If you downloaded Org as an ELPA package, please read the
-instructions on the [[http://orgmode.org/elpa.html][Org ELPA page]]. To see what version of Org (if any)
-is part of your Emacs distribution, type {{{kbd(M-x org-version)}}}.[fn:2]
+Org is part of recent distributions of GNU Emacs, so you normally don't need
+to install it.  If, for one reason or another, you want to install Org on top
+of this pre-packaged version, there are three ways to do it:
 
-Installation of Org mode uses a build system, which is described in more
-detail on [[http://orgmode.org/worg/dev/org-build-system.html][Worg]].
+- use Emacs package system;
+- download Org as an archive; or
+- use the Org git repository.
 
-If you have downloaded Org from the Web as a distribution {{{file(.zip)}}} or
-{{{file(.tar.gz)}}} archive, take the following steps to install it:
+We *strongly recommend* that you stick to a single installation
+method.
 
-  - Unpack the distribution archive
-  - Change into (~cd~) the Org directory
-  - Run ~make help config~ and then check and edit the file
-    {{{file(local.mk)}}} if the default configuration does not match
-    your system
+*** Install from Emacs package system
 
-    - Set the name of the Emacs binary (likely either
-      {{{file(emacs)}}} or {{{file(xemacs)}}}), and the paths to the
-      directories where local Lisp and Info files will be installed
-    - If the Emacs binary is not in your path, give the full path to
-      the executable
-    - Avoid spaces in any path names
+Recent Emacs distributions include a packaging system which lets you
+install Elisp libraries.  You can install Org with {{{kbd(M-x
+package-install RET org)}}}.  You need to do this in a session where
+no {{{file(.org)}}} file has been visited.  Then, to make sure your
+Org configuration is taken into account, initialize the package system
+with ~(package-initialize)~ in your {{{file(.emacs)}}} before setting any Org
+option.  If you want to use Org's package repository, check out the
+[[http://orgmode.org/elpa.html][Org ELPA page]].
 
-  - Run ~make config~ again to check the configuration
-  - Run ~make install~ or ~sudo make install~ to build and install Org
-    mode on your system
+*** Download Org as an archive
 
-If you use a cloned Git repository, then the procedure is slightly
-different. The following description assumes that you are using the
-~master~ branch.[fn:3] You could also use the ~maint~ branch instead,
-where the release versions are published, just replace ~master~ with
-~maint~ in the description below.
-
-  - Change into (~cd~) the Org repository
-  - Run ~git checkout master~ to switch to the ~master~ branch of the
-    Org repository
-  - Run ~make help~ and then check and edit the file {{{file(local.mk)}}}
-
-    - You must set the name of the Emacs binary
-      (likely either {{{file(emacs)}}} or {{{file(xemacs)}}}), and the
-      paths to the directories where local Lisp and Info files will be
-      installed
-    - If the Emacs binary is not in your path, you must give
-      the full path to the executable
-    - Avoid spaces in any path names
-
-  - Run ~make config~ to check the configuration
-  - Optionally run ~make test~ to build Org mode and then run the full
-    test suite
-  - Run ~make update2~ or ~make up2~ to update the Git repository and
-    build and install Org mode. The latter invocation runs the
-    complete test suite before installation and installs only if the
-    build passes all tests
-
-If you don't have access to the system-wide directories and you don't
-want to install somewhere into your home directory, you can run Org
-directly from the distribution directory or Org repository by
-compiling Org mode in place:
-
-  - Change into (~cd~) the Org repository
-  - Run ~git checkout master~ to switch to the ~master~ branch of the
-    Org repository
-  - Run ~make compile~
-
-Last but not least you can also run Org mode directly from an Org repository
-without any compilation.  Simply replace the last step in the recipe above
-with ~make uncompiled~.
-
-Then add the following line to {{{file(.emacs)}}}:
-
-#+header: :exports code
-#+header: :eval no
-#+begin_src emacs-lisp
-(add-to-list 'load-path "~/path/to/orgdir/lisp")
-#+end_src
-
-{{{noindent}}}
-If you plan to use code files from the {{{file(contrib)}}} subdirectory without
-compiling them, do a similar step for this directory:
-
-#+header: :exports code
-#+header: :eval no
-#+begin_src emacs-lisp
-(add-to-list 'load-path "~/path/to/orgdir/contrib/lisp" t)
-#+end_src
-
-If you want to include those files with the build and install, please
-customize the variable ~ORG_ADD_CONTRIB~ instead in your
-~local.mk~ file. For more details please see this
-[[http://orgmode.org/worg/dev/org-build-system.html#sec-4-1-2][description on Worg]].
-
-Installing Info files is system dependent, because of differences in
-the {{{file(install-info)}}} program. The Info documentation is
-installed together with the rest of Org mode. If you don't install Org
-mode, it is possible to install the Info documentation separately if you
-have install-info on your system.[fn:4]  
-
-The command to do this is:
+You can download Org latest release from [[http://orgmode.org/][Org's website]].  In this case,
+make sure you set the load-path correctly in your {{{file(.emacs)}}}:
 
 #+begin_example
-   make install-info
+     (add-to-list 'load-path "~/path/to/orgdir/lisp")
 #+end_example
 
-Do not forget to activate Org as described in the following section.
-{{{page}}}
+The downloaded archive contains contributed libraries that are not
+included in Emacs.  If you want to use them, add the {{{file(contrib)}}}
+directory to your load-path:
+
+#+begin_example
+     (add-to-list 'load-path "~/path/to/orgdir/contrib/lisp" t)
+#+end_example
+
+   Optionally, you can compile the files and/or install them in your
+system.  Run ~make help~ to list compilation and installation options.
+
+** Use the Org git repository
+
+You can clone Org's repository and install Org like this:
+
+#+begin_example
+     $ cd ~/src/
+     $ git clone git://orgmode.org/org-mode.git
+     $ make autoloads
+#+end_example
+
+Note that in this case, ~make autoloads~ is mandatory: it defines
+Org's version in {{{file(org-version.el)}}} and Org's autoloads in
+{{{file(org-loaddefs.el)}}}.
+
+
+Set the load-path correctly in your {{{file(.emacs)}}}:
+
+#+begin_example
+     (add-to-list 'load-path "~/path/to/orgdir/lisp")
+#+end_example
+
+You can also compile with ~make~, generate the documentation with
+~make doc~, create a local configuration with ~make config~ and
+install Org with ~make install~.  Please run ~make help~ to get the
+list of compilation/installation options.
+
+For more detailed explanations on Org's build system, please check the
+[[http://orgmode.org/worg/dev/org-build-system.html][Org Build System page on Worg]].
 
 ** Activation
    :PROPERTIES:
@@ -577,7 +540,7 @@ Org uses just two commands, bound to {{{key(TAB)}}} and
 {{{cindex(children\\\, subtree visibility state)}}}
 {{{cindex(subtree\\\, subtree visibility state)}}}
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{key(TAB)}}}, ~org-cycle~ :: Subtrees can be cycled through three
      states:
      {{{kindex(TAB)}}}
@@ -599,9 +562,7 @@ Org uses just two commands, bound to {{{key(TAB)}}} and
      below).[fn:9] Also, when called with a prefix argument
      ({{{kbdspckey(C-u,TAB)}}}), global cycling is invoked.
 
-- {{{kbdkey(S-,TAB)}}} or {{{kbdspckey(C-u,TAB)}}}, ~org-global-cycle~ :: 
-     Global cycling: Rotate the entire buffer among the states
-
+- {{{kbdkey(S-,TAB)}}} or {{{kbdspckey(C-u,TAB)}}}, ~org-global-cycle~ :: 
      {{{cindex(global visibility states)}}}
      {{{cindex(global cycling)}}}
      {{{cindex(overview\\\, global visibility state)}}}
@@ -610,6 +571,8 @@ Org uses just two commands, bound to {{{key(TAB)}}} and
      {{{kindex(C-u TAB)}}}
      {{{kindex(S-TAB)}}}
      {{{findex(org-global-cycle)}}}
+
+     Global cycling rotates the entire buffer among the states:
 
      #+begin_example
         ,-> OVERVIEW -> CONTENTS -> SHOW ALL --.
@@ -689,7 +652,7 @@ property (see [[Properties and columns]]) will get their visibility
 adapted accordingly.  Allowed values for this property are ~folded~,
 ~children~, ~content~, and ~all~.
 
-#+attr_texinfo: :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbdspckey(C-u C-u,TAB)}}}, ~org-set-startup-visibility~ :: Switch
      back to the startup visibility of the buffer, i.e., whatever is
      requested by startup options and {{{samp(VISIBILITY)}}}
@@ -704,7 +667,7 @@ adapted accordingly.  Allowed values for this property are ~folded~,
 {{{cindex(headline navigation)}}}
 The following commands jump to other headlines in the buffer.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
   - {{{kbd(C-c C-n)}}}, ~outline-next-visible-heading~ :: Next heading.
        {{{kindex(C-c C-n)}}}
        {{{findex(outline-next-visible-heading)}}}
@@ -758,7 +721,7 @@ The following commands jump to other headlines in the buffer.
 {{{cindex(sorting\\\, of subtrees)}}}
 {{{cindex(subtrees\\\, cut and paste)}}}
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
   - {{{kbdkey(M-,RET)}}}, ~org-insert-heading~ :: Insert new heading
        with same level as current. If the cursor is in a plain list
        item, a new item is created (see [[Plain lists]]). To force
@@ -963,7 +926,7 @@ Just try it out and you will see immediately how it works.
 Org mode contains several commands creating such trees, all these
 commands can be accessed through a dispatcher:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
   - {{{kbd(C-c /)}}}, ~org-sparse-tree~ :: This prompts for an extra
        key to select a sparse-tree creating command.
 
@@ -1048,7 +1011,7 @@ can parse and format them.
 
 Org knows ordered lists, unordered lists, and description lists.
 
-#+attr_texinfo: :table-type "table" :indic "@bullet"
+#+attr_texinfo: :table-type table :indic @bullet
   - /Unordered/ list items start with ~-~, ~+~, or ~*~ as bullets.[fn:15]
 
   - /Ordered/ list items start with a numeral followed by either a
@@ -1118,7 +1081,7 @@ these actions get in your way, configure ~org-list-automatic-rules~
 to disable them individually.
 
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
   - {{{key(TAB)}}}, ~org-cycle~ :: 
     {{{cindex(cycling\\\, in plain lists)}}}
     {{{kindex(TAB)}}}
@@ -1290,7 +1253,7 @@ clock times (see [[Clocking work time]) to be stored in a drawer
 ~LOGBOOK~. If you want to store a quick note in the LOGBOOK
 drawer, in a similar way to state changes, use
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
  - {{{kbd(C-c C-z)}}} :: Add a time-stamped note to the LOGBOOK
       drawer.
 
@@ -1346,7 +1309,7 @@ but not encouraged because of possible conflicts with LaTeX
 snippets (see [[Embedded LaTeX]]). Here are
 the valid references:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
   - ~[1]~ :: A plain numeric footnote marker. Compatible with
            {{{file(footnote.el)}}}, but not recommended because
            something like ~[1]~ could easily be part of a
@@ -1373,7 +1336,7 @@ details.
 
 {{{noindent}}} The following command handles footnotes:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
   - {{{kbd(C-c C-x f)}}} :: The footnote action command.
                  {{{kindex(C-c C-x f)}}}
 
@@ -1529,7 +1492,7 @@ you, configure the variables ~org-enable-table-editor~ and
     :PROPERTIES:
     :DESCRIPTION: Creating tabular data in Org
     :END:
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c |)}}}, ~org-table-create-or-convert-from-region~ :: Convert
      the active region to table. If every line contains at least one
      {{{key(TAB)}}} character, the function assumes that the material
@@ -1551,7 +1514,7 @@ you, configure the variables ~org-enable-table-editor~ and
     :PROPERTIES:
     :DESCRIPTION: Navigating and tidying
     :END:
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-c)}}}, ~org-table-align~ :: Re-align the table without
      moving the cursor.
 
@@ -1589,7 +1552,7 @@ you, configure the variables ~org-enable-table-editor~ and
     :PROPERTIES:
     :DESCRIPTION: Insert, kill, or move
     :END:
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbdkey(M-,left)}}}, ~org-table-move-column-left~ ::
   {{{kindex(M-left)}}}
   {{{findex(org-table-move-column-left)}}}
@@ -1620,7 +1583,7 @@ you, configure the variables ~org-enable-table-editor~ and
 
   Move the current row up.
 
-- {{{kbdkey(M-,down)}}}, ~org-table-move-row-down~
+- {{{kbdkey(M-,down)}}}, ~org-table-move-row-down~ ::
   {{{kindex(M-down)}}}
   {{{findex(org-table-move-row-down)}}}
      
@@ -1671,7 +1634,7 @@ you, configure the variables ~org-enable-table-editor~ and
     :PROPERTIES:
     :DESCRIPTION: Manipulate parts of a table
     :END:
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x M-w)}}}, ~org-table-copy-region~ :: Copy a rectangular
      region from a table to a special clipboard.  Point and mark
      determine edge fields of the rectangle.  If there is no active
@@ -1716,7 +1679,7 @@ you, configure the variables ~org-enable-table-editor~ and
 {{{cindex(active region)}}}
 {{{cindex(transient mark mode)}}}
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c +)}}}, ~org-table-sum~ :: Sum the numbers in the current
      column, or in the rectangle defined by the active region.  The
      result is shown in the echo area and can be inserted with
@@ -1741,7 +1704,7 @@ you, configure the variables ~org-enable-table-editor~ and
     :PROPERTIES:
     :DESCRIPTION: Some other useful operations
     :END:
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c `)}}}, ~org-table-edit-field~ :: Edit the current field in
      a separate window.  This is useful for fields that are not fully
      visible (see [[Column width and alignment]]).  When called with a
@@ -2002,7 +1965,7 @@ the field being calculated by the formula.
 
 Here are a few examples:
 
-#+attr_texinfo: :table-type "table" :indic "@code"
+#+attr_texinfo: :table-type table :indic @code
   - @2$3 :: 2nd row, 3rd column (same as ~C2~)
   - $5 :: column 5 in the current row (same as ~E&~)
   - @2 :: current column, row 2
@@ -2024,7 +1987,7 @@ field is in a different row, you need to use the general ~@row$column~
 format at least for the first field (i.e., the reference must start
 with ~@~ in order to be interpreted correctly).  Examples:
 
-#+attr_texinfo: :table-type "table" :indic "@code"
+#+attr_texinfo: :table-type table :indic @code
   - $1..$3      :: first three fields in the current row
   - $P..$Q      :: range, using column names (see under Advanced)
   - $<<<..$>>   :: start in third column, continue to the one but last
@@ -2055,7 +2018,7 @@ the row or column number of the field where the formula result goes.
 The traditional Lisp formula equivalents are ~org-table-current-dline~
 and ~org-table-current-column~.  Examples:
 
-#+attr_texinfo: :table-type "table" :indic "@code"
+#+attr_texinfo: :table-type table :indic @code
   - if(@# % 2, $#, string("")) :: column number on odd lines only
   - $3 = remote(FOO, @#$2)    :: copy column 2 from table FOO into
        column 3 of the current table
@@ -2152,7 +2115,7 @@ display format, however, has been changed to ~(float 8)~ to keep
 tables compact.  The default settings can be configured using the
 variable ~org-calc-default-modes~.
 
-#+attr_texinfo: :table-type "table" :indic "@code"
+#+attr_texinfo: :table-type table :indic @code
   - p20 :: set the internal Calc calculation precision to 20 digits
   - n3 s3 e2 f4 :: normal, scientific, engineering, or fixed format of
                    the result of Calc passed back to Org. Calc
@@ -2170,7 +2133,7 @@ may alternatively provide a ~printf~ format specifier to reformat the
 Calc result after it has been passed back to Org instead of letting
 Calc already do the formatting.[fn:29] A few examples:
 
-#+attr_texinfo: :table-type "table" :indic "@code"
+#+attr_texinfo: :table-type table :indic @code
   - $1+$2            :: Sum of first and second field
   - $1+$2;%.2f       :: Same, format result to two decimals
   - exp($2)+exp($1)  :: Math functions can be used
@@ -2187,7 +2150,7 @@ Calc already do the formatting.[fn:29] A few examples:
 
 Calc also contains a complete set of logical operations.  For example
 
-#+attr_texinfo: :table-type "table" :indic "@code"
+#+attr_texinfo: :table-type table :indic @code
   - if($1<20,teen,string("")) ::  "teen" if age $1 less than 20, else empty
 
 
@@ -2314,7 +2277,7 @@ the equations yourself.
 Instead of typing an equation into the field, you may also use the
 following command
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
   - {{{kbd(C-u C-c =)}}}, ~org-table-eval-formula~ :: Install a new
        formula for the current field.  The command prompts for a
        formula with default taken from the {{{samp(#+TBLFM:)}}} line,
@@ -2328,7 +2291,7 @@ no keyboard shortcut to enter such range formulas. To add them, use
 the formula editor (see [[Editing and debugging formulas]]) or edit the
 ~#+TBLFM:~ line directly.
 
-#+attr_texinfo: :table-type "table" :indic "@code"
+#+attr_texinfo: :table-type table :indic @code
   - $2= :: Column formula, valid for the entire column.  This is so
            common that Org treats these formulas in a special way, see
            [[Column formulas]].
@@ -2379,7 +2342,7 @@ be the name of column, it must be the numeric column reference or
 Instead of typing an equation into the field, you may also use the
 following command:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
   - {{{kbd(C-c =)}}}, ~org-table-eval-formula~ :: Install a new formula
        for the current column and replace current field with the
        result of the formula.  The command prompts for a formula, with
@@ -2399,7 +2362,7 @@ following command:
 
 Org has three predefined Emacs Lisp functions for lookups in tables.
 
-#+attr_texinfo: :table-type "table" :indic "@code"
+#+attr_texinfo: :table-type table :indic @code
   - (org-lookup-first VAL S-LIST R-LIST &optional PREDICATE) :: Searches
        for the first element ~S~ in list ~S-LIST~ for which
 
@@ -2456,7 +2419,7 @@ standard format (like ~B3~ or ~D&~) if possible.  If you prefer to
 only work with the internal format (like ~@3$2~ or ~$4~), configure
 the variable ~org-table-use-standard-references~.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
   - {{{kbd(C-c =)}}} or {{{kbd(C-u C-c =)}}}, ~org-table-eval-formula~ ::
 
        Edit the formula associated with the current column/field in the
@@ -2508,7 +2471,7 @@ the variable ~org-table-use-standard-references~.
        {{{kindex(C-c ')}}}
        {{{findex(org-table-edit-formulas)}}}
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
   - {{{kbd(C-c C-c)}}} or {{{kbd(C-x C-s)}}}, ~org-table-fedit-finish~ :: 
 
        Exit the formula editor and store the modified formulas.  With
@@ -2632,7 +2595,7 @@ recalculation at least semi-automatic.
 In order to recalculate a line of a table or the entire table, use the
 following commands:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
   - {{{kbd(C-c *)}}}, ~org-table-recalculate~ :: Recalculate the
        current row by first applying the stored column formulas from
        left to right, and all field/range formulas in the current row.
@@ -2674,7 +2637,7 @@ you want to be able to assign /names/ to fields and columns,
 you need to reserve the first column of the table for special marking
 characters.[fn:30]
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
   - {{{kbd(C-#)}}}, ~org-table-rotate-recalc-marks~ :: Rotate the
        calculation mark in first column through the states {{{samp( )}}}, {{{samp(#)}}}, {{{samp(*)}}}, {{{samp(!)}}},
        {{{samp($)}}}.  When there is an active region, change all
@@ -2711,7 +2674,7 @@ not applied in rows with empty first field.
 
 {{{cindex(marking characters\\\, tables)}}}
 The marking characters have the following meaning:
-#+attr_texinfo: :table-type "table" :indic "@samp"
+#+attr_texinfo: :table-type table :indic @samp
   - ! :: The fields in this line define names for the columns, so that
          you may refer to a column as {{{samp($Tot)}}} instead of
          {{{samp($6)}}}.
@@ -2792,7 +2755,7 @@ information and examples see the [[http://orgmode.org/worg/org-tutorials/org-plo
 
 Org-Plot recognizes the following options:
 
-#+attr_texinfo: :table-type "table" :indic "@code"
+#+attr_texinfo: :table-type table :indic @code
   - set :: Specify any {{{command(gnuplot)}}} option to be set when
            graphing.
   - title :: Specify the title of the plot.
@@ -2846,9 +2809,9 @@ other files, Usenet articles, emails, and much more.
 Org will recognize plain URL-like links and activate them as clickable
 links.  The general link format, however, looks like this:
 
-#+begin_src org
+#+begin_example
   [[link][description]] or  [[link]]
-#+end_src
+#+end_example
 
 
 {{{noindent}}} Once a link in the buffer is complete (all brackets
@@ -2965,7 +2928,7 @@ External links are URL-like locators.  They start with a short
 identifying string followed by a colon.  There can be no space after
 the colon.  The following list shows examples for each link type.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
  - ~http://www.astro.uva.nl/~dominik~          :: on the web
  - ~doi:10.1000/182~                           :: DOI for an electronic resource
  - ~file:/home/dominik/images/jupiter.jpg~     :: file, absolute path
@@ -3039,7 +3002,7 @@ brackets.
 Org provides methods to create a link in the correct syntax, to
 insert it into an Org file, and to follow the link.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
   - {{{kbd(C-c l)}}}, ~org-store-link~ :: Store a link to the current
        location.  This is a /global/ command (you must create the key
        binding yourself) which can be used in any buffer to create a
@@ -3386,7 +3349,7 @@ link, together with an explanation:
   [[file:~/xx.org::/regexp/]]
 #+end_src
 
-#+attr_texinfo: :indic "@code"
+#+attr_texinfo: :indic @code
 - 255 :: Jump to line 255.
 - My Target :: Search for a link target ~<<My Target>>~, or do a text search for {{{samp(my target)}}},
      similar to the search in internal links, see [[Internal links]].
@@ -3469,7 +3432,7 @@ Any headline becomes a TODO item when it starts with the word
 {{{noindent}}} The most important commands to work with TODO entries
 are:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-t)}}}, ~org-todo~ ::
   {{{kindex(C-c C-t)}}}
   {{{cindex(cycling\\\, of TODO states)}}}
@@ -3667,7 +3630,7 @@ keyword or using completion, you may also apply the following commands:
 {{{kindex(C-S-@key{right})}}}
 {{{kindex(C-S-@key{left})}}}
 {{{kindex(C-u C-u C-c C-t)}}}
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-u C-u C-c C-t)}}} {{{kbdkey(C-S-,right)}}} {{{kbdkey(C-S-,left)}}} ::
 
   These keys jump from one TODO subset to the next. In the above
@@ -3824,7 +3787,7 @@ example:
   ,** TODO c, needs to wait for (a) and (b)
 #+end_src
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x o)}}}, ~org-toggle-ordered-property~ ::
   {{{kindex(C-c C-x o)}}}
   {{{vindex(org-track-ordered-property-with-tag)}}}
@@ -4066,7 +4029,7 @@ getting that task done in the past. This graph shows every day that
 the task was done over the past three weeks, with colors for each day.
 The colors used are:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
   - ~Blue~ :: If the task wasn't to be done yet on that day.
   - ~Green~ :: If the task could have been done on that day.
   - ~Yellow~ :: If the task was going to be overdue the next day.
@@ -4080,7 +4043,7 @@ mark to show where the current day falls in the graph.
 There are several configuration variables that can be used to change
 the way habits are displayed in the agenda.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
   - ~org-habit-graph-column~ :: The buffer column at which the
        consistency graph should be drawn. This will overwrite any text
        in that column, so it is a good idea to keep your habits'
@@ -4129,7 +4092,7 @@ special faces by customizing the variable ~org-priority-faces~.
 Priorities can be attached to any outline node; they do not need to be TODO
 items.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
   - {{{kbd(C-c XXX)}}} ::
     {{{kindex(C-c ,)}}}
     #+comment:    {{{kindex(@kbd{C-c ,})}}}
@@ -4301,7 +4264,7 @@ check off a box while there are unchecked boxes above it.
 
 {{{noindent}}} The following commands work with checkboxes:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-c)}}}, ~org-toggle-checkbox~ :: Toggle checkbox status
      or (with prefix arg) checkbox presence at point. With a single
      prefix argument, add an empty checkbox or remove the current
@@ -4434,7 +4397,7 @@ Tags can simply be typed into the buffer at the end of a headline.
 After a colon, {{{kbdkey(M-,TAB)}}} offers completion on tags.  There is
 also a special command for inserting tags:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-q)}}}, ~org-set-tags-command~ ::
   {{{kindex(C-c C-q)}}}
 
@@ -4564,7 +4527,7 @@ the tags of the current headline, and a list of all valid tags with
 corresponding keys.[fn:57]  In this interface, you can use the following
 keys:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(a-z...)}}} ::
   {{{kindex(a-z...)}}}
 
@@ -4641,7 +4604,7 @@ selection, it comes up only when you press an extra {{{kbd(C-c)}}}.
 Once a system of tags has been set up, it can be used to collect related
 information into special lists.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c / m)}}}, ~C-c \~ ~org-match-sparse-tree~ ::
 
   Create a sparse tree with all headlines matching a tags search. With a
@@ -4792,7 +4755,7 @@ can be inherited by all entries in all Org files.
 {{{noindent}}}
 The following commands help to work with properties:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbdkey(M-,TAB)}}}, ~pcomplete~ ::
   {{{kindex(M-@key{TAB})}}}
 
@@ -4875,7 +4838,7 @@ for ~:CATEGORY:~) should not be used as keys in the properties drawer:
 {{{cindex(property\\\, special\\\, ITEM)}}}
 {{{cindex(property\\\, special\\\, FILE)}}}
 
-#+attr_texinfo: :columns "0.3 0.7"
+#+attr_texinfo: :columns 0.3 0.7
 | ID           | A globally unique ID used for synchronization during           |
 |              | iCalendar or MobileOrg export.                                 |
 | TODO         | The TODO keyword of the entry.                                 |
@@ -4907,7 +4870,7 @@ for ~:CATEGORY:~) should not be used as keys in the properties drawer:
 To create sparse trees and special lists with selection based on properties,
 the same commands are used as for tag searches (see [[Tag searches]]).
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c / m)}}}, ~C-c \~ ~org-match-sparse-tree~ ::
   {{{kindex(C-c / m)}}}
 
@@ -4935,7 +4898,7 @@ properties]].
 There is also a special command for creating sparse trees based on a
 single property:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c / p)}}} ::
   {{{kindex(C-c / p)}}}
 
@@ -4972,7 +4935,7 @@ Org mode has a few properties for which inheritance is hard-coded, at
 least for the special applications for which they are used:
 
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~COLUMNS~ ::
   {{{cindex(property\\\, COLUMNS)}}}
 
@@ -5071,7 +5034,7 @@ definition looks like this:
 {{{noindent}}} Except for the percent sign and the property name, all
 items are optional. The individual parts have the following meaning:
 
-#+attr_texinfo: :columns "0.2 0.8"
+#+attr_texinfo: :columns 0.2 0.8
 | Variable                | Meaning                                                      |
 |-------------------------+--------------------------------------------------------------|
 | {{{var(width)}}}        | An integer specifying the width of the column in characters. |
@@ -5086,7 +5049,7 @@ items are optional. The individual parts have the following meaning:
 
 {{{noindent}}} Supported summary types are:
 
-#+attr_texinfo: :columns "0.2 0.8"
+#+attr_texinfo: :columns 0.2 0.8
 | Type     | Meaning                                                               |
 |----------+-----------------------------------------------------------------------|
 | ~+~      | Sum numbers in this column.                                           |
@@ -5166,7 +5129,7 @@ today.
 
 The following commands turn column view on or off:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x C-c)}}}, ~org-columns~ ::
   {{{kindex(C-c C-x C-c)}}}
   {{{vindex(org-columns-default-format)}}}
@@ -5200,7 +5163,7 @@ The following commands turn column view on or off:
 
 The following commands let you edit information in column view:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{key(left)}}} {{{key(right)}}} {{{key(up)}}} {{{key(down)}}} ::
 
   Move through the column view from field to field.
@@ -5253,7 +5216,7 @@ The following commands let you edit information in column view:
 
 The following commands modify column view on-the-fly:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(<)}}} {{{kbd(>)}}}, ~org-columns-narrow~ ~org-columns-widen~ ::
   {{{kindex(<)}}}
 
@@ -5289,7 +5252,7 @@ this block looks like this:
 
 {{{noindent}}} This dynamic block has the following parameters:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~:id~ ::
 
   This is the most important parameter. Column view is a feature that is
@@ -5298,7 +5261,7 @@ this block looks like this:
   to capture, you can use 4 values:
 
   {{{cindex(property\\\, ID)}}}
-  #+attr_texinfo: :columns "0.35 0.65"
+  #+attr_texinfo: :columns 0.35 0.65
   | Value               | Meaning                                                       |
   |---------------------+---------------------------------------------------------------|
   | local               | Use the tree in which the capture block is located.           |
@@ -5352,7 +5315,7 @@ this block looks like this:
 {{{noindent}}} The following commands insert or update the dynamic
 block:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x i)}}}, ~org-insert-columns-dblock~ ::
   {{{kindex(C-c C-x i)}}}
 
@@ -5432,7 +5395,7 @@ timestamp can appear anywhere in the headline or body of an Org tree
 entry. Its presence causes entries to be shown on specific dates in
 the agenda (see [[Weekly/daily agenda]]). We distinguish:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - Plain timestamp; Event; Appointment ::
   {{{cindex(timestamp)}}}
   {{{cindex(appointment)}}}
@@ -5507,7 +5470,7 @@ For Org mode to recognize timestamps, they need to be in the specific
 format. All commands listed below produce timestamps in the correct
 format.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c .)}}}, ~org-time-stamp~ ::
   {{{kindex(C-c .)}}}
 
@@ -5694,7 +5657,7 @@ You can control the calendar fully from the minibuffer:
 {{{kindex(M-S-@key{left})}}}
 {{{kindex(@key{RET})}}}
 
-#+attr_texinfo: :columns "0.3 0.7"
+#+attr_texinfo: :columns 0.3 0.7
 | Key binding               | Meaning                                |
 |---------------------------+----------------------------------------|
 | {{{key(RET)}}}            | Choose date at cursor in calendar.     |
@@ -5736,7 +5699,7 @@ another representation of date and time to keep you happy, you can get
 it by customizing the variables ~org-display-custom-times~ and
 ~org-time-stamp-custom-formats~.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x C-t)}}}, ~org-toggle-time-stamp-overlays~ ::
   {{{kindex(C-c C-x C-t)}}}
 
@@ -5778,7 +5741,7 @@ following consequences:
 
 A timestamp may be preceded by special keywords to facilitate planning:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~DEADLINE~ ::
   {{{cindex(DEADLINE keyword)}}}
 
@@ -5852,7 +5815,7 @@ sexp entry matches.
 The following commands allow you to quickly insert a deadline or to schedule
 an item:[fn:66]
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-d)}}}, ~org-deadline~ ::
   {{{kindex(C-c C-d)}}}
 
@@ -6027,7 +5990,7 @@ about what to do with it.[fn:72]
     :DESCRIPTION: Starting and stopping a clock
     :END:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x C-i)}}}, ~org-clock-in~ ::
   {{{kindex(C-c C-x C-i)}}}
   {{{vindex(org-clock-into-drawer)}}}
@@ -6164,7 +6127,7 @@ Org mode can produce quite complex reports based on the time clocking
 information.  Such a report is called a /clock table/, because it is
 formatted as one or several Org tables.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x C-r)}}}, ~org-clock-report~ ::
   {{{kindex(C-c C-x C-r)}}}
 
@@ -6211,7 +6174,7 @@ be configured in the variable ~org-clocktable-defaults~.
 {{{noindent}}} First there are options that determine which clock entries are to
 be selected:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - :maxlevel ::    
 
   Maximum level depth to which times are listed in the table. Clocks at
@@ -6280,7 +6243,7 @@ Then there are options which determine the formatting of the table.  There
 options are interpreted by the function ~org-clocktable-write-default~,
 but you can specify your own function using the ~:formatter~ parameter.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - :emphasize ::   
 
   When ~t~, emphasize level one and level two items.
@@ -6398,7 +6361,7 @@ when you get back, indicating how much idle time has passed
 (constantly updated with the current amount), as well as a set of
 choices to correct the discrepancy:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(k)}}} ::
   {{{kindex(k)}}}
 
@@ -6495,7 +6458,7 @@ estimates. Effort estimates are stored in a special property
 {{{samp(Effort)}}}.[fn:80] You can set the effort for an entry with
 the following commands:
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
+#+attr_texinfo: :table-type table :indic @kbd
 - {{{kbd(C-c C-x e)}}}, ~org-set-effort~ ::
   {{{kindex(C-c C-x e)}}}
 
@@ -6560,7 +6523,7 @@ When taking notes during, for example, a meeting or a video viewing, it can
 be useful to have access to times relative to a starting time.  Org provides
 such a relative timer and make it easy to create timed notes.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x .)}}}, ~org-timer~ ::
   {{{kindex(C-c C-x .)}}}
 
@@ -6686,7 +6649,7 @@ a global key for capturing new material.[fn:81]
     :DESCRIPTION: Commands to invoke and terminate capture
     :END:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c c)}}}, ~org-capture~ ::
   {{{kindex(C-c c)}}}
   {{{cindex(date tree)}}}
@@ -6733,7 +6696,7 @@ date in the agenda, rather than to the current date.
 To find the locations of the last stored capture, use ~org-capture~ with
 prefix commands:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-u C-c c)}}} ::
   {{{kindex(C-u C-c c)}}}
 
@@ -6766,7 +6729,7 @@ You can use templates for different types of capture items, and for
 different target locations. The easiest way to create such templates
 is through the customize interface.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c c C)}}} ::
   {{{kindex(C-c c C)}}}
 
@@ -6823,7 +6786,7 @@ key binding like this:
 Now lets look at the elements of a template definition.  Each entry in
 ~org-capture-templates~ is a list with the following items:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~keys~ ::
 
   The keys that will select the template, as a string, characters
@@ -7003,7 +6966,7 @@ In the template itself, special {{{kbd(%)}}}-escapes allow dynamic
 insertion of content.[fn:82] The templates are expanded in the order given
 here:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - %[{{{var(file)}}}] ::    
 
   Insert the contents of the file given by {{{var(file)}}}.
@@ -7126,7 +7089,7 @@ defined:[fn:83]
 {{{vindex(org-from-is-user-regexp)}}}
 
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - bbdb :: ~%:name %:company~ 
 - irc ::   ~%:server %:port %:nick~              
 - vm vm-imap wl mh mew rmail ::   
@@ -7208,7 +7171,7 @@ subtree uses the same attached directory.
 
 {{{noindent}}} The following commands deal with attachments:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-a)}}}, ~org-attach~ ::
   {{{kindex(C-c C-a)}}}
 
@@ -7321,7 +7284,7 @@ information.  Here is an example:
 {{{file(~/org/feeds.org)}}} under the heading ~Slashdot Entries~,
 whenever the following command is used:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x g)}}}, ~org-feed-update-all~ ::
   {{{kindex(C-c C-x g)}}}
 
@@ -7378,7 +7341,7 @@ the entries into a different list, for example into a project.  Cutting,
 finding the right location, and then pasting the note is cumbersome.  To
 simplify this process, you can use the following special command:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c M-w)}}}, ~org-copy~ ::
   {{{kindex(C-c M-w)}}}
   {{{findex(org-copy)}}}
@@ -7448,7 +7411,7 @@ move the tree out of the way and to stop it from contributing to the
 agenda. Archiving is important to keep your working files compact and
 global searches like the construction of agenda views fast.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x C-a)}}}, ~org-archive-subtree-default~ ::
   {{{kindex(C-c C-x C-a)}}}
   {{{vindex(org-archive-default-command)}}}
@@ -7466,7 +7429,7 @@ global searches like the construction of agenda views fast.
 The most common archiving action is to move a project tree to another file,
 the archive file.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x C-s)}}} or short {{{kbd(C-c $)}}}, ~org-archive-subtree~ ::
   {{{kindex(C-c C-x C-s)}}}
   {{{kindex(C-c $)}}}
@@ -7565,7 +7528,7 @@ its location in the outline tree, but behaves in the following way:
 
 The following commands help manage the ARCHIVE tag:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x a)}}}, ~org-toggle-archive-tag~ ::
   {{{kindex(C-c C-x a)}}}
 
@@ -7661,7 +7624,7 @@ be put into the list.[fn:88]  You can customize ~org-agenda-files~, but
 the easiest way to maintain it is through the following commands
 
 {{{cindex(files\\\, adding to agenda list)}}}
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c [)}}}, ~org-agenda-file-to-front~ ::
   {{{kindex(C-c [)}}}
 
@@ -7698,7 +7661,7 @@ agenda command, you may press {{{kbd(<)}}} once or several times in
 the dispatcher (see [[Agenda dispatcher]]). To restrict the agenda scope
 for an extended period, use the following commands:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x <)}}}, ~org-agenda-set-restriction-lock~ ::
   {{{kindex(C-c C-x <)}}}
 
@@ -7719,7 +7682,7 @@ for an extended period, use the following commands:
 {{{noindent}}} When working with {{{file(speedbar.el)}}}, you can use
 the following commands in the Speedbar frame:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(<)}}} in the speedbar frame ~org-speedbar-set-agenda-restriction~ ::
   {{{kindex(<)}}}
 
@@ -7749,7 +7712,7 @@ accordingly. After pressing {{{kbd(C-c a)}}}, an additional letter is
 required to execute a command. The dispatcher offers the following
 default commands:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(a)}}} ::
   {{{kindex(C-c a a)}}}
 
@@ -7848,7 +7811,7 @@ In this section we describe the built-in views.
 The purpose of the weekly/daily /agenda/ is to act like a page of a
 paper agenda, showing all the tasks for the current week or day.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c a a)}}}, ~org-agenda-list~ ::
   {{{cindex(org-agenda, command)}}}
 
@@ -7994,7 +7957,7 @@ docstring for details.
 The global TODO list contains all unfinished TODO items formatted and
 collected into a single place.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c a t)}}}, ~org-todo-list~ ::
 
   Show the global TODO list. This collects the TODO items from all
@@ -8072,7 +8035,7 @@ based on this metadata and collect them into an agenda buffer. The
 match syntax described here also applies when creating sparse trees
 with {{{kbd(C-c / m)}}}.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c a m)}}}, ~org-tags-view~ ::
 
   Produce a list of all headlines that match a given set of tags. The
@@ -8111,7 +8074,7 @@ sugar for positive selection. The AND operator {{{samp(&)}}} is
 optional when {{{samp(+)}}} or {{{samp(-)}}} is present. Here are some
 examples, using only tags.
 
-#+attr_texinfo: :table-type "table" :indic "@samp"
+#+attr_texinfo: :table-type table :indic @samp
 
 - +work-boss ::
 
@@ -8155,7 +8118,7 @@ searches.[fn:92]
 
 Here are more examples:
 
-#+attr_texinfo: :table-type "table" :indic "@samp"
+#+attr_texinfo: :table-type table :indic @samp
 
 - work+TODO="WAITING" ::
 
@@ -8231,7 +8194,7 @@ speed-up), use {{{kbd(C-c a M)}}}, or equivalently start the TODO part
 after the slash with {{{samp(!)}}}. Using {{{kbd(C-c a M)}}} or
 {{{samp(/!)}}} will not match TODO keywords in a DONE state. Examples:
 
-#+attr_texinfo: :table-type "table" :indic "@samp"
+#+attr_texinfo: :table-type table :indic @samp
 - work/WAITING ::
 
   Same as {{{samp(work+TODO="WAITING")}}}
@@ -8259,7 +8222,7 @@ The timeline summarizes all time-stamped items from a single Org mode
 file in a /time-sorted view/.  The main purpose of this command is
 to give an overview over events in a project.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c a L)}}}, ~org-timeline~ ::
 
   Show a time-sorted view of the Org file, with all time-stamped items.
@@ -8281,7 +8244,7 @@ listed in [[Agenda commands]].
 This agenda view is a general text search facility for Org mode entries.
 It is particularly useful to find notes.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c a s)}}}, ~org-search-view~ ::
 
   This is a special search that lets you select entries by matching a
@@ -8319,7 +8282,7 @@ no defined next actions, so it will never show up in the TODO lists
 Org mode produces. During the review, you need to identify such
 projects and define next actions for them.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c a #)}}}, ~org-agenda-list-stuck-projects~ ::
 
   List projects that are stuck.
@@ -8521,7 +8484,7 @@ the other commands, the cursor needs to be in the desired line.
 *** FIXME Motion2
 {{{cindex(motion commands in agenda)}}}
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(n)}}}, ~org-agenda-next-line~ ::
   {{{kindex(n)}}}
  
@@ -8535,7 +8498,7 @@ the other commands, the cursor needs to be in the desired line.
 *** View/Go to Org file
 {{{cindex(view file commands in agenda)}}}
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{key(SPC)}}} or {{{key(mouse-3)}}}, ~org-agenda-show-and-scroll-up~ ::
   {{{kindex(@key{SPC})}}}
   {{{kindex(mouse-3)}}}
@@ -8588,7 +8551,7 @@ the other commands, the cursor needs to be in the desired line.
 *** Change display
 {{{cindex(change agenda display)}}}
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(A)}}} ::
   {{{kindex(A)}}}
   {{{cindex(display changing\\\, in agenda)}}}
@@ -8820,7 +8783,7 @@ the other commands, the cursor needs to be in the desired line.
 {{{cindex(effort filtering\\\, in agenda)}}}
 {{{cindex(query editing\\\, in agenda)}}}
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(<)}}}, ~org-agenda-filter-by-category~ ::
   {{{kindex(<)}}}
   {{{vindex(org-agenda-category-filter-preset)}}}
@@ -8927,7 +8890,7 @@ the other commands, the cursor needs to be in the desired line.
 *** FIXME Remote editing
 {{{cindex(remote editing\\\, from agenda)}}}
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(0--9)}}} ::
 
   Digit argument.
@@ -9122,7 +9085,7 @@ the other commands, the cursor needs to be in the desired line.
 {{{vindex(org-agenda-bulk-persistent-marks)}}}
 {{{vindex(org-agenda-bulk-custom-functions)}}}
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(m)}}}, ~org-agenda-bulk-mark~ ::
   {{{kindex(m)}}}
 
@@ -9227,7 +9190,7 @@ the other commands, the cursor needs to be in the desired line.
 *** Calendar commands
 {{{cindex(calendar commands\\\, from agenda)}}}
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(c)}}}, ~org-agenda-goto-calendar~ ::
   {{{kindex(c)}}}
 
@@ -9291,7 +9254,7 @@ the other commands, the cursor needs to be in the desired line.
   agenda menu.
 
 *** Exporting to a file
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-x C-w)}}}, ~org-agenda-write~ ::
   {{{kindex(C-x C-w)}}}
   {{{cindex(exporting agenda views)}}}
@@ -9308,7 +9271,7 @@ the other commands, the cursor needs to be in the desired line.
   and for {{{file(htmlize)}}} to be used during export.
 
 *** Quit and exit
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(q)}}}, ~org-agenda-quit~ ::
   {{{kindex(q)}}}
 
@@ -9378,7 +9341,7 @@ combinations and serves as a prefix key.[fn:98] The second parameter
 is the search type, followed by the string or regular expression to be
 used for the matching. The example above will therefore define:
 
-#+attr_texinfo: :table-type "table" :indic "@kbd"
+#+attr_texinfo: :table-type table :indic @kbd
 - C-c a w ::
 
   A global search for TODO entries with {{{samp(WAITING)}}} as the TODO
@@ -9566,7 +9529,7 @@ export custom agenda views as plain text, HTML, Postscript,
 PDF, and iCalendar files.[fn:99] If you want to
 do this only occasionally, use the following command:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-x C-w)}}}, ~org-agenda-write~ ::
 
   {{{cindex(exporting agenda views)}}}
@@ -9639,7 +9602,7 @@ commands interactively because this might use too much overhead.
 Instead, there is a special command to produce /all/ specified
 files in one step:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c a e)}}}, ~org-store-agenda-views~ ::
 
   Export all agenda views that have export file names associated with
@@ -9711,7 +9674,7 @@ properties embedded in the hierarchical structure of an Org file. It
 can be quite useful to use column view also from the agenda, where
 entries are collected by certain criteria.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x C-c)}}}, ~org-agenda-columns~ ::
 
   Turn on column view in the agenda.
@@ -9997,7 +9960,7 @@ be exported. Also entire subtrees starting with the word
 surrounded by {{{samp(#+BEGIN_COMMENT)}}} ...
 {{{samp(#+END_COMMENT)}}} will not be exported.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c ;)}}} ::
   {{{kindex(C-c ;)}}}
 
@@ -10140,7 +10103,7 @@ Because the ~#+BEGIN_...~ and ~#+END_...~ patterns need to be added so
 often, shortcuts are provided using the Easy Templates facility (see
 [[Easy templates]]).
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c ')}}} ::
   {{{kindex(C-c ')}}}
 
@@ -10198,7 +10161,7 @@ using the ~:lines~ parameter. The line at the upper end of the range
 will not be included. The start and/or the end of the range may be
 omitted to use the obvious defaults.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - #+INCLUDE: "~/.emacs" :lines "5-10" ::  
 
   Include lines 5 to 10, 10 excluded.
@@ -10212,7 +10175,7 @@ omitted to use the obvious defaults.
   Include lines from 10 to EOF.
 
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c ')}}}
   {{{kindex(C-c ')}}}
 
@@ -10319,7 +10282,7 @@ dots.
 If you would like to see entities displayed as UTF8 characters, use the
 following command:[fn:108]
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x XXX)}}} ::
   {{{kindex(C-c C-x XXX)}}}
 #+comment: Should be \
@@ -10362,7 +10325,7 @@ or use, on a per-file basis:
 {{{noindent}}} With this setting, ~a_b~ will not be interpreted as a
 subscript, but ~a_{b}~ will.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x XXX)}}} ::
   {{{kindex(C-c C-x XXX)}}}
 #+comment: Should be \
@@ -10428,7 +10391,7 @@ means {{{file(MathJax)}}} for HTML, and no processing for DocBook,
 ASCII and LaTeX backends. You can also set this variable on a
 per-file basis using one of these lines:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - #+OPTIONS: LaTeX:t ::          
 
   Do the right thing automatically (MathJax).
@@ -10454,7 +10417,7 @@ per-file basis using one of these lines:
 If you have {{{file(dvipng)}}} installed, LaTeX fragments can be
 processed to produce preview images of the typeset expressions:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x C-l)}}} ::
   {{{kindex(C-c C-x C-l)}}}
 
@@ -10506,7 +10469,7 @@ this hook:
 When this mode is enabled, the following features are present (for more
 details see the documentation of CDLaTeX mode):
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c {)}}} ::
   {{{kindex(C-c @{)}}}
 
@@ -10625,7 +10588,7 @@ not specifically related to export, see [[In-buffer settings]]. In
 particular, note that you can place commonly-used (export) options in
 a separate file which can be included using ~#+SETUPFILE~.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-e t)}}}, ~org-insert-export-options-template~ ::
   {{{kindex(C-c C-e t)}}}
 
@@ -10653,7 +10616,7 @@ a separate file which can be included using ~#+SETUPFILE~.
 {{{vindex(org-export-default-language)}}}
 {{{vindex(org-export-date-timestamp-format)}}}
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - #+TITLE: ::      
 
   The title to be shown (default is the buffer name).
@@ -10750,7 +10713,7 @@ export settings.[fn:114] Here you can:
 {{{vindex(org-export-email-info)}}}
 {{{vindex(org-export-time-stamp-file)}}}
 
-#+attr_texinfo: :table-type "table" :indic "@code"
+#+attr_texinfo: :table-type table :indic @code
 - H: ::        
 
   Set the number of headline levels for export.
@@ -10878,7 +10841,7 @@ command. Normally the entire file is exported, but if there is an
 active region that contains one outline tree, the first heading is
 used as document title and the subtrees are exported.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-e)}}}, ~org-export~ ::
   {{{kindex(C-c C-e)}}}
   {{{vindex(org-export-run-in-background)}}}
@@ -10920,7 +10883,7 @@ these encodings.
 {{{cindex(active region)}}}
 {{{cindex(transient-mark-mode)}}}
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-e a)}}}, ~org-export-as-ascii~ ::
   {{{kindex(C-c C-e a)}}}
   {{{cindex(property\\\, EXPORT_FILE_NAME)}}}
@@ -11013,7 +10976,7 @@ but with additional support for tables.
 {{{cindex(active region)}}}
 {{{cindex(transient-mark-mode)}}}
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-e h)}}}, ~org-export-as-html~ ::
   {{{kindex(C-c C-e h)}}}
   {{{cindex(property\\\, EXPORT_FILE_NAME)}}}
@@ -11302,7 +11265,7 @@ parts of the document---your style specifications may change these, in
 addition to any of the standard classes like for headlines, tables,
 etc.[fn:122]
 
-#+attr_texinfo: :table-type "table" :indic "@code"
+#+attr_texinfo: :table-type table :indic @code
 - p.author ::           author information, including email
 - p.date ::             publishing date
 - p.creator ::           creator info, about org mode version
@@ -11395,7 +11358,7 @@ is adding a single line to the Org file:
 automatically contain the code needed to invoke the script. Using the
 line above, you can set the following viewing options:
 
-#+attr_texinfo: :table-type "table" :indic "@code"
+#+attr_texinfo: :table-type table :indic @code
 - path: ::   
 
   The path to the script.  The default is to grab the script from
@@ -11483,7 +11446,7 @@ hierarchy of sections.
 {{{cindex(active region)}}}
 {{{cindex(transient-mark-mode)}}}
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-e l)}}}, ~org-export-as-latex~ ::
   {{{kindex(C-c C-e l)}}}
   {{{cindex(property EXPORT_FILE_NAME)}}}
@@ -11739,7 +11702,7 @@ properties used by beamer.
 You can influence the structure of the presentation using the following
 properties:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~BEAMER_env~ ::
 
   The environment that should be used to format this entry. Valid
@@ -11798,7 +11761,7 @@ support with the following line:
    ,#+STARTUP: beamer
 #+end_example
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-b)}}}, ~org-beamer-select-environment~ ::
   {{{kindex(C-c C-b)}}}
 
@@ -11873,7 +11836,7 @@ Currently DocBook exporter only supports DocBook V5.0.
 {{{cindex(active region)}}}
 {{{cindex(transient-mark-mode)}}}
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-e D)}}}, ~org-export-as-docbook~ ::
   {{{kindex(C-c C-e D)}}}
   {{{cindex(property EXPORT_FILE_NAME)}}}
@@ -12101,7 +12064,7 @@ further.
 {{{cindex(active region)}}}
 {{{cindex(transient-mark-mode)}}}
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-e o)}}}, ~org-export-as-odt~ ::
   {{{kindex(C-c C-e o)}}}
   {{{cindex(property EXPORT_FILE_NAME)}}}
@@ -12183,7 +12146,7 @@ limited to the ODT format. LibreOffice converter, mentioned above, is
 one such converter. Once a converter is configured, you can interact
 with it using the following command.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(M-x org-export-odt-convert)}}} ::
   {{{vindex(org-export-odt-convert)}}}
 
@@ -12365,7 +12328,7 @@ achieve the best results.
 
 The examples below illustrate the various possibilities.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - Explicitly size the image ::
 
   To embed {{{file(img.png)}}} as a 10 cm x 10 cm image, do the
@@ -12435,7 +12398,7 @@ LaTeX math snippets (see [[LaTeX fragments]]) can be embedded in the ODT
 document in one of the following ways:
 
 {{{cindex(MathML)}}}
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - MathML ::
 
   This option is activated on a per-file basis with the following option:
@@ -12555,7 +12518,7 @@ of the default {{{samp(Figure)}}}) use the following setting.
 #+header: :exports code
 #+begin_src emacs-lisp
 (setq org-export-odt-category-strings
-      '(("en" "Table" "Illustration" "Equation" "Equation")))
+      '(("en" table "Illustration" "Equation" "Equation")))
 #+end_src
 
 With this, previous image will be captioned as below in the exported
@@ -12610,7 +12573,7 @@ extra configuration from your side. See [[Extending ODT export]]. If you
 are using a converter that is not supported by default or if you would
 like to tweak the default converter settings, proceed as below.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - Register the converter ::
 
   {{{vindex(org-export-odt-convert-processes)}}}
@@ -12657,7 +12620,7 @@ The ODT exporter relies on two files for generating its output.
 These files are bundled with the distribution under the directory pointed to
 by the variable ~org-odt-styles-dir~.  The two files are:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{file(OrgOdtStyles.xml)}}} ::
   <<x-orgodtstyles-xml>>
 
@@ -12689,7 +12652,7 @@ exporter picks up the custom styles and content template files. You
 can customize these variables to override the factory styles used by
 the exporter.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~org-export-odt-styles-file~ ::
   <<x-org-export-odt-styles-file>>
 
@@ -12734,7 +12697,7 @@ document. You can achieve this by embedding raw OpenDocument XML in
 the Org file. The use of this feature is better illustrated with
 couple of examples.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - Embedding ODT tags as part of regular text ::
 
   You can include simple OpenDocument tags by prefixing them with
@@ -12844,7 +12807,7 @@ templates you have to define these styles yourself.
 
 To use this feature proceed as follows:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - Create a table template[fn:140] ::
 
   A table template is nothing but a set of {{{samp(table-cell)}}} and
@@ -12977,7 +12940,7 @@ and the attributes defined in all the nodes.
     :DESCRIPTION: Key bindings for TaskJuggler export
     :END:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-e j)}}}, ~org-export-as-taskjuggler~ ::
   {{{kindex(C-c C-e j)}}}
 
@@ -13132,7 +13095,7 @@ For more information and examples see the Org-taskjuggler tutorial at
 
 The Freemind exporter was written by Lennart Borgman.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-e m)}}}, ~org-export-as-freemind~ ::
   {{{kindex(C-c C-e m)}}}
 
@@ -13149,7 +13112,7 @@ Org mode contains an exporter that produces XOXO-style output.
 Currently, this exporter only handles the general outline structure
 and does not interpret any additional Org mode features.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-e x)}}}, ~org-export-as-xoxo~ ::
   {{{kindex(C-c C-e x)}}}
 
@@ -13202,7 +13165,7 @@ inclusion of the entry. In this way the UID remains unique, but a
 synchronization program can still figure out from which entry all the
 different instances originate.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-e i)}}}, ~org-export-icalendar-this-file~ ::
   {{{kindex(C-c C-e i)}}}
 
@@ -13315,7 +13278,7 @@ Most properties are optional, but some should always be set. In
 particular, Org needs to know where to look for source files, and
 where to put published files.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~:base-directory~ ::
  
   Directory containing publishing source files
@@ -13352,7 +13315,7 @@ By default, all files with extension {{{file(.org)}}} in the base directory
 are considered part of the project.  This can be modified by setting the
 following properties:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~:base-extension~ ::
 
   Extension (without the dot!) of source files. This actually is a
@@ -13394,7 +13357,7 @@ directory.[fn:146]  Other files like images only need to be copied to the
 publishing destination; for this you may use ~org-publish-attachment~.
 For non-Org files, you always need to specify the publishing function:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~:publishing-function~ ::
 
   Function executing the publication of a file. This may also be a list
@@ -13477,7 +13440,7 @@ respective variable for details.
 {{{vindex(org-export-select-tags)}}}
 {{{vindex(org-export-exclude-tags)}}}
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~:link-up~ :: ~org-export-html-link-up~
 - ~:link-home~ :: ~org-export-html-link-home~
 - ~:language~ :: ~org-export-default-language~
@@ -13567,7 +13530,7 @@ valid in your production environment, but not in the publishing
 location. In this case, use the following property to define a
 function for checking link validity:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~:link-validation-function~ ::
   Function to validate links
 
@@ -13590,7 +13553,7 @@ which checks if the given file is part of any project in
 The following properties may be used to control publishing of
 a map of files for a given project.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~:auto-sitemap~ ::
 
   When non-nil, publish a sitemap during ~org-publish-current-project~
@@ -13659,7 +13622,7 @@ a map of files for a given project.
 
 Org mode can generate an index across the files of a publishing project.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~:makeindex~ ::
 
   When non-nil, generate in index in the file {{{file(theindex.org)}}}
@@ -13800,7 +13763,7 @@ right place on the web server, and publishing images to it.
    :END:
 Once properly configured, Org can publish with the following commands:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-e X)}}}, ~org-publish~ ::
   {{{kindex(C-c C-e X)}}}
   
@@ -13899,7 +13862,7 @@ or
    src_<language>[<header arguments>]{<body>}
 #+end_example
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~<#+NAME: name>~ ::
   {{{cindex(#+NAME)}}}
 
@@ -13951,7 +13914,7 @@ following variables can be used to configure the behavior of the edit
 buffer. See also the customization group ~org-edit-structure~ for
 further configuration options.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~org-src-lang-modes~ ::
 
   If an Emacs major-mode named ~<lang>-mode~ exists, where
@@ -13995,7 +13958,7 @@ block bodies, see [[Literal examples]].
 The ~:exports~ header argument can be used to specify export
 behavior with the following arguments:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~:exports code~ ::
 
   The default in most languages.  The body of the code block is exported, as
@@ -14040,7 +14003,7 @@ expanded using ~org-babel-expand-src-block~ which can expand both
 variable and ``noweb'' style references (see [[Noweb reference syntax]]).
 
 *** Header arguments for tangling
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~:tangle no~ ::
 
   The default.  The code block is not included in the tangled output.
@@ -14056,7 +14019,7 @@ variable and ``noweb'' style references (see [[Noweb reference syntax]]).
   Include the code block in the tangled output to file {{{samp(filename)}}}.
 
 *** Functions for tangling
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~org-babel-tangle~ ::
   {{{kindex(C-c C-v t)}}}
 
@@ -14070,7 +14033,7 @@ variable and ``noweb'' style references (see [[Noweb reference syntax]]).
   Choose a file to tangle.  Bound to {{{kbd(C-c C-v f)}}}.
 
 *** Hooks for tangling
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~org-babel-post-tangle-hook~ ::
 
   This hook is run from within code files tangled by ~org-babel-tangle~.
@@ -14129,7 +14092,7 @@ The syntax for inline evaluation of named code blocks is:
    ... call_<name>[<inside header arguments>](<arguments>)[<end header arguments>] ...
 #+end_example
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~<name>~ ::
 
   The name of the code block to be evaluated (see [[Structure of code
@@ -14204,7 +14167,7 @@ to {{{kbd(C-c C-v i)}}}.
 
 Code blocks in the following languages are supported.
 
-#+attr_texinfo: :columns "0.24 0.24 0.04 0.24 0.24"
+#+attr_texinfo: :columns 0.24 0.24 0.04 0.24 0.24
 | Language   | Identifier   |   | Language       | Identifier   |
 |------------+--------------+---+----------------+--------------|
 | Asymptote  | asymptote    |   | Awk            | awk          |
@@ -14518,7 +14481,7 @@ without arguments), or the results of evaluating another code block.
 
 Here are examples of passing values by reference:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - a table named with either ~#+NAME:~ or ~#+TBLNAME:~ ::
 
   #+begin_example
@@ -14752,7 +14715,7 @@ list as the sole table element:
 There are three classes of ~:results~ header argument.  Only one option
 per class may be supplied per code block.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - Collection ::
 
   These header arguments specify how the results should be collected
@@ -14775,7 +14738,7 @@ per class may be supplied per code block.
 The following ~:results~ options are mutually exclusive, and specify
 how the results should be collected from the code block.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~value~ ::
 
   This is the default. The result is the value of the last statement in
@@ -14797,7 +14760,7 @@ The following ~:results~ options are mutually exclusive and specify
 what type of results the code block will return. By default, results
 are inserted as either a table or scalar depending on their value.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~table~, ~vector~ ::
 
   The results should be interpreted as an Org mode table. If a single
@@ -14867,7 +14830,7 @@ are inserted as either a table or scalar depending on their value.
 The following ~:results~ options indicate what happens with the
 results once they are collected.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~replace~ ::
 
   The default value. Any existing results will be removed, and the new
@@ -15005,7 +14968,7 @@ Please be aware of these further points:
 The ~:exports~ header argument specifies what should be included in HTML
 or LaTeX exports of the Org mode file.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~code~ ::
 
   The default. The body of code is included into the exported file.
@@ -15033,7 +14996,7 @@ or LaTeX exports of the Org mode file.
 The ~:tangle~ header argument specifies whether or not the code
 block should be included in tangled extraction of source code files.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~tangle~ ::
 
   The code block is exported to a source code file named after the full
@@ -15072,7 +15035,7 @@ of the code block. The ~:comments~ header argument can be set as
 follows to control the insertion of extra comments into the tangled
 code file.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~no~ ::
 
   The default.  No extra comments are inserted during tangling.
@@ -15112,7 +15075,7 @@ code files.  The default value is ~yes~ which results in insertion of
 newlines before and after each tangled code block.  The following arguments
 are accepted:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~yes~ ::
 
   Insert newlines before and after each code block body in tangled code
@@ -15158,7 +15121,7 @@ evaluated, tangled, or exported. The ~:noweb~ header argument can have
 one of the five values: ~no~, ~yes~, ~tangle~, ~no-export~, or
 ~strip-export~.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~no~ ::
 
   The default. ``Noweb'' syntax references in the body of the code block
@@ -15292,7 +15255,7 @@ argument is used, because the results of the code block execution may
 be stored in the session outside of the Org mode buffer. The ~:cache~
 header argument can have one of two values: ~yes~ or ~no~.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~no~ ::
 
   The default. No caching takes place, and the code block will be
@@ -15356,7 +15319,7 @@ Tables are frequently represented with one or more horizontal lines,
 or hlines. The ~:hlines~ argument to a code block accepts the values
 ~yes~ or ~no~, with a default value of ~no~.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~no~ ::
 
   Strips horizontal lines from the input table. In most languages this
@@ -15420,7 +15383,7 @@ languages. For example Emacs Lisp code blocks ignore the ~:colnames~
 header argument entirely given the ease with which tables with column
 names may be handled directly in Emacs Lisp.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~nil~ ::
 
   If an input table looks like it has column names (because its second
@@ -15467,7 +15430,7 @@ names may be handled directly in Emacs Lisp.
 The ~:rownames~ header argument can take on the values ~yes~
 or ~no~, with a default value of ~no~.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~no~ ::
 
   No row name pre-processing will take place.
@@ -15517,7 +15480,7 @@ ensure that evaluation will require a query regardless of the value of
 the ~org-confirm-babel-evaluate~ variable. The possible values of
 ~:eval~ and their effects are shown below.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~never~ or ~no~ ::
 
   The code block will not be evaluated under any circumstances.
@@ -15577,7 +15540,7 @@ two-dimensional vector of strings or numbers) when appropriate.
 
 *** Non-session
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~:results value~ ::
 
   This is the default. Internally, the value is obtained by wrapping the
@@ -15598,7 +15561,7 @@ two-dimensional vector of strings or numbers) when appropriate.
 
 *** Session
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~:results value~ ::
 
   The code is passed to an interpreter running as an interactive Emacs
@@ -15715,7 +15678,7 @@ are active:
 {{{kindex(C-up)}}}
 {{{kindex(M-down)}}}
 
-#+attr_texinfo: :columns "0.2 0.55"
+#+attr_texinfo: :columns 0.2 0.55
 | Key binding           | Function                          |
 |-----------------------+-----------------------------------|
 | {{{kbd(C-c C-c)}}}    | ~org-babel-execute-src-block~     |
@@ -15771,7 +15734,7 @@ In an Org mode buffer, the following key bindings are active:
 {{{kindex(C-c C-v x)}}}
 {{{kindex(C-c C-v C-x)}}}
 
-#+attr_texinfo: :columns "0.4 0.6"
+#+attr_texinfo: :columns 0.4 0.6
 | Key binding                                    | Function                                   |
 |------------------------------------------------+--------------------------------------------|
 | {{{kbd(C-c C-v p)}}} or {{{kbd(C-c C-v C-p)}}} | ~org-babel-previous-src-block~             |
@@ -15882,7 +15845,7 @@ Org supports in-buffer completion. This type of completion does not
 make use of the minibuffer. You simply type a few letters into the
 buffer and use the {{{key(TAB)}}} key to complete text right there.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbdkey(M-,TAB)}}} ::
   {{{kindex(M-@key{TAB})}}}
 
@@ -15968,7 +15931,7 @@ The following template selectors are currently supported:
 {{{kindex(i)}}}
 {{{kindex(I)}}}
 
-#+attr_texinfo: :columns "0.2 0.7"
+#+attr_texinfo: :columns 0.2 0.7
 | Selector     | Template                              |
 |--------------+---------------------------------------|
 | {{{kbd(a)}}} | ~#+BEGIN_ASCII~ ...~ #+END_ASCII~     |
@@ -16034,7 +15997,7 @@ can be done, but you must be aware of the risks that are involved.
 
 Code evaluation can happen under the following circumstances:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - Source code blocks ::
 
   Source code blocks can be evaluated during export, or when pressing
@@ -16119,7 +16082,7 @@ the line to activate the changes immediately. Otherwise they become
 effective only when the file is visited again in a new Emacs session.
 
 {{{vindex(org-archive-location)}}}
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(#+ARCHIVE: %s_done)}}} ::
 
   This line sets the archive location for the agenda file. It applies to
@@ -16209,7 +16172,7 @@ effective only when the file is visited again in a new Emacs session.
   {{{cindex(@code{showall}\\\, STARTUP keyword)}}}
   {{{cindex(@code{showeverything}\\\, STARTUP keyword)}}}
 
-  #+attr_texinfo: :table-type "table" :indic "@asis"
+  #+attr_texinfo: :table-type table :indic @asis
   - ~overview~ ::         top-level headlines only
   - ~content~ ::         all headlines
   - ~showall~ ::         no folding of any entries
@@ -16222,7 +16185,7 @@ effective only when the file is visited again in a new Emacs session.
   Dynamic virtual indentation is controlled by the variable
   ~org-startup-indented~.[fn:182]
 
-  #+attr_texinfo: :table-type "table" :indic "@asis"
+  #+attr_texinfo: :table-type table :indic @asis
   - ~indent~ ::     start with ~org-indent-mode~ turned on
   - ~noindent~ ::   start with ~org-indent-mode~ turned off
 
@@ -16236,7 +16199,7 @@ effective only when the file is visited again in a new Emacs session.
   {{{cindex(@code{align}\\\, STARTUP keyword)}}}
   {{{cindex(@code{noalign}\\\, STARTUP keyword)}}}
 
-  #+attr_texinfo: :table-type "table" :indic "@asis"
+  #+attr_texinfo: :table-type table :indic @asis
   - ~align~ ::      align all tables
   - ~noalign~ ::    don't align tables on startup
 
@@ -16249,7 +16212,7 @@ effective only when the file is visited again in a new Emacs session.
   {{{cindex(@code{inlineimages}\\\, STARTUP keyword)}}}
   {{{cindex(@code{noinlineimages}\\\, STARTUP keyword)}}}
 
-  #+attr_texinfo: :table-type "table" :indic "@asis"
+  #+attr_texinfo: :table-type table :indic @asis
   - ~inlineimages~   show inline images
   - ~noinlineimages~ don't show inline images on startup
 
@@ -16279,7 +16242,7 @@ effective only when the file is visited again in a new Emacs session.
   {{{cindex(@code{lognoterefile}\\\, STARTUP keyword)}}}
   {{{cindex(@code{nologrefile}\\\, STARTUP keyword)}}}
 
-  #+attr_texinfo: :table-type "table" :indic "@asis"
+  #+attr_texinfo: :table-type table :indic @asis
   - ~logdone~ ::            record a timestamp when an item is marked DONE
   - ~lognotedone~ ::        record timestamp and a note when DONE
   - ~nologdone~ ::          don't record when items are marked DONE
@@ -16311,7 +16274,7 @@ effective only when the file is visited again in a new Emacs session.
   {{{cindex(@code{odd}\\\, STARTUP keyword)}}}
   {{{cindex(@code{even}\\\, STARTUP keyword)}}}
 
-  #+attr_texinfo: :table-type "table" :indic "@asis"
+  #+attr_texinfo: :table-type table :indic @asis
   - ~hidestars~ ::  make all but one of the stars starting a headline invisible.
   - ~showstars~ ::  show all stars starting a headline
   - ~indent~ ::     virtual indentation according to outline level
@@ -16328,7 +16291,7 @@ effective only when the file is visited again in a new Emacs session.
 
   {{{cindex(@code{customtime}\\\, STARTUP keyword)}}}
      
-  #+attr_texinfo: :table-type "table" :indic "@asis"
+  #+attr_texinfo: :table-type table :indic @asis
   - ~customtime~ :: overlay custom time format
 
   {{{vindex(constants-unit-system)}}}
@@ -16339,7 +16302,7 @@ effective only when the file is visited again in a new Emacs session.
   {{{cindex(@code{constcgs}\\\, STARTUP keyword)}}}
   {{{cindex(@code{constSI}\\\, STARTUP keyword)}}}
 
-  #+attr_texinfo: :table-type "table" :indic "@asis"
+  #+attr_texinfo: :table-type table :indic @asis
   - ~constcgs~ ::   {{{file(constants.el)}}} should use the c-g-s unit system
   - ~constSI~ ::    {{{file(constants.el)}}} should use the SI unit system
   
@@ -16361,7 +16324,7 @@ effective only when the file is visited again in a new Emacs session.
   {{{cindex(@code{fnadjust}\\\, STARTUP keyword)}}}
   {{{cindex(@code{nofnadjust}\\\, STARTUP keyword)}}}
 
-  #+attr_texinfo: :table-type "table" :indic "@asis"
+  #+attr_texinfo: :table-type table :indic @asis
   - ~fninline~ ::    define footnotes inline
   - ~fnnoinline~ ::  define footnotes in separate section
   - ~fnlocal~ ::     define footnotes near first reference, but not inline
@@ -16380,7 +16343,7 @@ effective only when the file is visited again in a new Emacs session.
   {{{cindex(@code{hideblocks}\\\, STARTUP keyword)}}}
   {{{cindex(@code{nohideblocks}\\\, STARTUP keyword)}}}
 
-  #+attr_texinfo: :table-type "table" :indic "@asis"
+  #+attr_texinfo: :table-type table :indic @asis
   - ~hideblocks~ ::   Hide all begin/end blocks on startup
   - ~nohideblocks~ :: Do not hide blocks on startup
   
@@ -16392,7 +16355,7 @@ effective only when the file is visited again in a new Emacs session.
   {{{cindex(@code{entitiespretty}\\\, STARTUP keyword)}}}
   {{{cindex(@code{entitiesplain}\\\, STARTUP keyword)}}}
 
-  #+attr_texinfo: :table-type "table" :indic "@asis"
+  #+attr_texinfo: :table-type table :indic @asis
   - ~entitiespretty~ ::  Show entities as UTF-8 characters where possible
   - ~entitiesplain~ ::   Leave entities plain
 
@@ -16508,7 +16471,7 @@ Org, or if you want the indentation to be hard space characters so
 that the plain text file looks as similar as possible to the Emacs
 display, Org supports you in the following way:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - Indentation of text below headlines ::
 
   You may indent text below each headline to make the left boundary line up
@@ -16596,7 +16559,7 @@ timestamp is really only fun with {{{kbdkey(S-,cursor)}}} keys,
 whereas on a tty you would rather use {{{kbd(C-c .)}}} to re-insert
 the timestamp.
 
-#+attr_texinfo: :columns "0.2 0.3 0.1 0.4"
+#+attr_texinfo: :columns 0.2 0.3 0.1 0.4
 | Default                  | Alternative 1                | Speed key    | Alternative 2             |
 |--------------------------+------------------------------+--------------+---------------------------|
 | {{{kbdkey(S-,TAB)}}}     | {{{kbdspckey(C-u,TAB)}}}     | {{{kbd(C)}}} |                           |
@@ -16633,7 +16596,7 @@ with other code out there.
     :TITLE:    Packages that Org cooperates with
     :END:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{file(calc.el)}}} by Dave Gillespie ::
   {{{cindex(@file{calc.el})}}}
   {{{cindex(Gillespie\\\, Dave)}}}
@@ -16763,7 +16726,7 @@ selection by using it outside of the special contexts where
 special commands apply, and by extending an existing active
 region even if the cursor moves across a special context.
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{file(CUA.el)}}} by Kim. F. Storm ::
   {{{cindex(@file{CUA.el})}}}
   {{{cindex(Storm\\\, Kim. F.)}}}
@@ -17163,7 +17126,7 @@ The arguments will be passed as a property list to the translation
 function for interpretation. A few standard parameters are already
 recognized and acted upon before the translation function is called:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~:skip N~ ::
 
   Skip the first N lines of the table. Hlines do count as separate lines
@@ -17282,7 +17245,7 @@ Orgtbl mode. It uses a ~tabular~ environment to typeset the table and
 marks horizontal lines with ~\hline~. Furthermore, it interprets the
 following parameters (see also see [[Translator functions]]):
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~:splice nil/t~ ::
 
   When set to ~t~, return only table body lines, don't wrap them into a
@@ -17466,7 +17429,7 @@ producing the content of the block.
 
 Dynamic blocks are updated with the following commands:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x C-u)}}}, ~org-dblock-update~ ::
   {{{kindex(C-c C-x C-u)}}}
 
@@ -17590,7 +17553,7 @@ You may also put a Lisp form into ~org-agenda-skip-function~.  In
 particular, you may use the functions ~org-agenda-skip-entry-if~
 and ~org-agenda-skip-subtree-if~ in this form, for example:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - {{{samp((org-agenda-skip-entry-if 'scheduled))}}} ::
 
   Skip current entry if it has been scheduled.
@@ -17706,7 +17669,7 @@ list of values for each agenda item.  Each line in the output will
 contain a number of fields separated by commas.  The fields in a line
 are:
 
-#+attr_texinfo: :table-type "table" :indic "@code"
+#+attr_texinfo: :table-type table :indic @code
 - category ::     The category of the item
 - head ::        The headline, without TODO keyword, TAGS and PRIORITY
 - type ::        The type of the agenda entry, can be:
@@ -17878,7 +17841,7 @@ visited by the iteration.
 
 SCOPE determines the scope of this command.  It can be any of:
 
-#+attr_texinfo: :table-type "table" :indic "@code"
+#+attr_texinfo: :table-type table :indic @code
 - nil ::     
 
   The current buffer, respecting the restriction, if any.
@@ -17918,7 +17881,7 @@ here:
 
 {{{vindex(org-agenda-skip-function)}}}
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - ~archive~ ::   
 
   Skip trees with the archive tag.
@@ -18098,7 +18061,7 @@ entries. Here is how it works:
    MobileOrg, that note will be displayed in the echo area when the
    cursor is on the corresponding agenda line.
 
-   #+attr_texinfo: :table-type "table" :indic "@asis"
+   #+attr_texinfo: :table-type table :indic @asis
    - {{{kbd(?)}}} ::
      {{{kindex(?)}}}
 
@@ -18117,7 +18080,7 @@ entries. Here is how it works:
 If you are not able to process all flagged entries directly, you can always
 return to this agenda view using {{{kbd(C-c a ?)}}}.[fn:169]
 
-* History and acknowledgments
+* Acknowledgments
   :PROPERTIES:
   :DESCRIPTION: How Org came into being
   :OPTIONAL_TITLE: History and Acknowledgments
@@ -18152,7 +18115,7 @@ forgotten someone, please accept my apologies and let me know.
 
 Before I get to this list, a few special mentions are in order:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - Bastien Guerry ::
 
   Bastien has written a large number of extensions to Org (most of them
@@ -18207,7 +18170,7 @@ more knowledgeable than I am on many parts of the code. Here is a list
 of the persons I could rely on, they should really be considered
 co-maintainers, either of the code or the community:
 
-#+attr_texinfo: :table-type "table" :indic "@asis"
+#+attr_texinfo: :table-type table :indic @asis
 - Eric Schulte ::
 
   Eric is maintaining the Babel parts of Org. His reactivity here kept
