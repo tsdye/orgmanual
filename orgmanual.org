@@ -158,31 +158,37 @@ Network Theory Ltd.]]
 {{{cindex(XEmacs)}}}
 
 Org is part of recent distributions of GNU Emacs, so you normally don't need
-to install it.  If, for one reason or another, you want to install Org on top
-of this pre-packaged version, there are three ways to do it:
+to install it.  If, for one reason or another, you want to install a
+different version of Org, there are three ways to do it:
 
-- use Emacs package system;
+- use the Emacs package system;
 - download Org as an archive; or
 - use the Org git repository.
 
-We *strongly recommend* that you stick to a single installation
-method.
+We *strongly recommend* that you use only one of these installation
+methods.
 
-*** Install from Emacs package system
+*** Install from the Emacs package system
 
 Recent Emacs distributions include a packaging system which lets you
-install Elisp libraries.  You can install Org with {{{kbd(M-x
-package-install RET org)}}}.  You need to do this in a session where
-no {{{file(.org)}}} file has been visited.  Then, to make sure your
-Org configuration is taken into account, initialize the package system
-with ~(package-initialize)~ in your {{{file(.emacs)}}} before setting any Org
-option.  If you want to use Org's package repository, check out the
-[[http://orgmode.org/elpa.html][Org ELPA page]].
+install Elisp libraries.  You can install the development version of
+Org with {{{kbd(M-x package-install RET org)}}}.  You need to do this
+in a session where no {{{file(.org)}}} file has been visited.  Then,
+to make sure your Org configuration is taken into account, initialize
+the package system with ~(package-initialize)~ in your
+{{{file(.emacs)}}} before setting any Org option.  If you want to use
+Org's package repository, check out the [[http://orgmode.org/elpa.html][Org ELPA page]].
 
 *** Download Org as an archive
 
-You can download Org latest release from [[http://orgmode.org/][Org's website]].  In this case,
-make sure you set the load-path correctly in your {{{file(.emacs)}}}:
+You can download the latest Org release from the [[http://orgmode.org/][Org mode website]],
+typically to a location under your home directory.  Optionally, you
+can compile the files and/or install them in your system.  Run ~make
+help~ to list compilation and installation options.
+
+It is possible to use the latest Org release from the download
+location without installing it in your system files.  In this case,
+make sure you set the load-path correctly in {{{file(.emacs)}}}:
 
 #+begin_example
      (add-to-list 'load-path "~/path/to/orgdir/lisp")
@@ -196,37 +202,41 @@ directory to your load-path:
      (add-to-list 'load-path "~/path/to/orgdir/contrib/lisp" t)
 #+end_example
 
-   Optionally, you can compile the files and/or install them in your
-system.  Run ~make help~ to list compilation and installation options.
+*** Use the Org git repository
 
-** Use the Org git repository
-
-You can clone Org's repository and install Org like this:
-
-#+begin_example
-     $ cd ~/src/
-     $ git clone git://orgmode.org/org-mode.git
-     $ make autoloads
-#+end_example
-
-Note that in this case, ~make autoloads~ is mandatory: it defines
-Org's version in {{{file(org-version.el)}}} and Org's autoloads in
-{{{file(org-loaddefs.el)}}}.
-
-
-Set the load-path correctly in your {{{file(.emacs)}}}:
+You can clone the development version of the Org git repository,
+typically to a location under your home directory.  The example in
+this section assumes this location is ~src/~ in your home directory:
 
 #+begin_example
-     (add-to-list 'load-path "~/path/to/orgdir/lisp")
+   $ cd ~/src/
+   $ git clone git://orgmode.org/org-mode.git
+   $ cd org-mode
 #+end_example
 
-You can also compile with ~make~, generate the documentation with
-~make doc~, create a local configuration with ~make config~ and
-install Org with ~make install~.  Please run ~make help~ to get the
-list of compilation/installation options.
+In most cases where you have permission to write to system locations,
+you will probably want to install Org with the Emacs system files.
+This is a system-specific operation that is guided by a file,
+{{{file(local.mk)}}}, which you must ensure is configured properly.
+First, generate a {{{file(local.mk)}}} template with the command ~make
+local.mk~.  Edit {{{file(local.mk)}}} following the instructions in
+the file, and save it.[fn:185] Check to be sure the build system sees
+your changes by running ~make config~.  If all is well, run ~make
+install~ to build Org and install it.  The command ~make help~
+provides a list of options for the build system.
 
-For more detailed explanations on Org's build system, please check the
-[[http://orgmode.org/worg/dev/org-build-system.html][Org Build System page on Worg]].
+If you would like to run Org from the clone location, instead of
+installing it with the Emacs system files, you can simply run ~make
+autoloads~ and set the load-path in your {{{file(.emacs)}}}.
+Using the example location, add this to {{{file(.emacs)}}}:
+
+#+begin_example
+     (add-to-list 'load-path "~/src/org-mode/lisp")
+#+end_example
+
+If your installation has special requirements, please refer to the
+detailed description of the capable build system at the [[http://orgmode.org/worg/dev/org-build-system.html][Org Build
+System page]].
 
 ** Activation
    :PROPERTIES:
@@ -541,10 +551,12 @@ Org uses just two commands, bound to {{{key(TAB)}}} and
 {{{cindex(subtree\\\, subtree visibility state)}}}
 
 #+attr_texinfo: :table-type table :indic @asis
-- {{{key(TAB)}}}, ~org-cycle~ :: Subtrees can be cycled through three
-     states:
-     {{{kindex(TAB)}}}
-     {{{findex(org-cycle)}}}
+- {{{key(TAB)}}}, ~org-cycle~ :: 
+
+  {{{kindex(TAB)}}}
+  {{{findex(org-cycle)}}}
+
+  Subtrees can be cycled through three states:
      
      #+begin_src example
        ,-> FOLDED -> CHILDREN -> SUBTREE --.
@@ -563,33 +575,35 @@ Org uses just two commands, bound to {{{key(TAB)}}} and
      ({{{kbdspckey(C-u,TAB)}}}), global cycling is invoked.
 
 - {{{kbdkey(S-,TAB)}}} or {{{kbdspckey(C-u,TAB)}}}, ~org-global-cycle~ :: 
-     {{{cindex(global visibility states)}}}
-     {{{cindex(global cycling)}}}
-     {{{cindex(overview\\\, global visibility state)}}}
-     {{{cindex(contents\\\, global visibility state)}}}
-     {{{cindex(show all\\\, global visibility state)}}}
-     {{{kindex(C-u TAB)}}}
-     {{{kindex(S-TAB)}}}
-     {{{findex(org-global-cycle)}}}
 
-     Global cycling rotates the entire buffer among the states:
+  {{{cindex(global visibility states)}}}
+  {{{cindex(global cycling)}}}
+  {{{cindex(overview\\\, global visibility state)}}}
+  {{{cindex(contents\\\, global visibility state)}}}
+  {{{cindex(show all\\\, global visibility state)}}}
+  {{{kindex(C-u TAB)}}}
+  {{{kindex(S-TAB)}}}
+  {{{findex(org-global-cycle)}}}
 
-     #+begin_example
-        ,-> OVERVIEW -> CONTENTS -> SHOW ALL --.
-        '--------------------------------------'
-     #+end_example
+  Global cycling rotates the entire buffer among the states:
 
-     When {{{kbdkey(S-,TAB)}}} is called with a numeric prefix
-     argument, ~N~, the CONTENTS view up to headlines of level N will
-     be shown. Note that inside tables, {{{kbdkey(S-,TAB)}}} jumps
-     to the previous field.
+  #+begin_example
+     ,-> OVERVIEW -> CONTENTS -> SHOW ALL --.
+     '--------------------------------------'
+  #+end_example
+
+  When {{{kbdkey(S-,TAB)}}} is called with a numeric prefix
+  argument, ~N~, the CONTENTS view up to headlines of level N will
+  be shown. Note that inside tables, {{{kbdkey(S-,TAB)}}} jumps
+  to the previous field.
 
 - {{{kbdspckey(C-u C-u C-u,TAB)}}}, ~show-all~ :: Show all, including
      drawers.
 
-     {{{kindex(C-u C-u C-u TAB)}}}
-     {{{findex(show-all)}}}
-     {{{cindex(show all\\\, command)}}}
+  {{{kindex(C-u C-u C-u TAB)}}}
+  {{{findex(show-all)}}}
+  {{{cindex(show all\\\, command)}}}
+
 - {{{kbd(C-c C-r)}}}, ~org-reveal~ :: Reveal context around point,
      showing the current entry, the following heading and the
      hierarchy above.  Useful for working near a location that has
@@ -601,12 +615,14 @@ Org uses just two commands, bound to {{{key(TAB)}}} and
      {{{cindex(revealing context)}}}
      {{{kindex(C-c C-r)}}}
      {{{findex(org-reveal)}}}
+
 - {{{kbd(C-c C-k)}}}, ~show-branches~ :: Expose all the headings of
      the subtree, CONTENT view for just one subtree.
 
      {{{kindex(C-c C-k)}}}
      {{{findex(show-branches)}}}
      {{{cindex(show branches\\\, command)}}}
+
 - {{{kbdspckey(C-c,TAB)}}}, ~show-children~ :: Expose all direct
      children of the subtree.  With a numeric prefix argument, ~N~,
      expose all children down to level N.
@@ -614,6 +630,7 @@ Org uses just two commands, bound to {{{key(TAB)}}} and
      {{{kindex(C-c TAB)}}}
      {{{findex(show-children)}}}
      {{{cindex(show children\\\, command)}}}
+
 - {{{kbd(C-c C-x b)}}}, ~org-tree-to-indirect-buffer~ :: Show the
      current subtree in an indirect buffer.[fn:10] With a numeric
      prefix argument, ~N~, go up to level N and then take that tree.
@@ -623,6 +640,7 @@ Org uses just two commands, bound to {{{key(TAB)}}} and
 
      {{{kindex(C-c C-x b)}}}
      {{{findex(org-tree-to-indirect-buffer)}}}
+
 - {{{kbd(C-c C-x v)}}}, ~org-copy-visible~ :: Copy the /visible/ text
      in the region into the kill ring.
 
@@ -669,20 +687,30 @@ The following commands jump to other headlines in the buffer.
 
 #+attr_texinfo: :table-type table :indic @asis
   - {{{kbd(C-c C-n)}}}, ~outline-next-visible-heading~ :: Next heading.
+
        {{{kindex(C-c C-n)}}}
        {{{findex(outline-next-visible-heading)}}}
+
   - {{{kbd(C-c C-p)}}}, ~outline-previous-visible-heading~ :: Previous heading.
+
        {{{kindex(C-c C-p)}}}
        {{{findex(outline-previous-visible-heading)}}}
+
   - {{{kbd(C-c C-f)}}}, ~org-forward-same-level~ :: Next heading same level.
+
        {{{kindex(C-c C-f)}}}
        {{{findex(org-forward-same-level)}}}
+
   - {{{kbd(C-c C-b)}}}, ~org-backward-same-level~ :: Previous heading same level.
+
        {{{kindex(C-c C-b)}}}
        {{{findex(org-backward-same-level)}}}
+
   - {{{kbd(C-c C-u)}}}, ~outline-up-heading~ :: Backward to higher level heading.
+
        {{{kindex(C-c C-u)}}}
        {{{findex(outline-up-heading)}}}
+
   - {{{kbd(C-c C-j)}}}, ~org-goto~ :: Jump to a different place without
        changing the current outline visibility.  Shows the document
        structure in a temporary buffer, where you can use the
@@ -691,6 +719,7 @@ The following commands jump to other headlines in the buffer.
        {{{kindex(C-c C-j)}}}
        {{{findex(org-goto)}}}
        {{{vindex(org-goto-auto-isearch)}}}
+
     - {{{key(TAB)}}} ::  Cycle visibility.
     - {{{key(down)}}} / {{{key(up)}}} ::   Next/previous visible headline.
     - {{{key(RET)}}} :: Select this location.
@@ -703,6 +732,7 @@ The following commands jump to other headlines in the buffer.
     - q :: Quit.
 
 {{{vindex(org-goto-interface)}}}
+
 {{{noindent}}} See also the variable ~org-goto-interface~.
 
 ** Structure editing
@@ -739,6 +769,7 @@ The following commands jump to other headlines in the buffer.
        {{{kindex(M-RET)}}}
        {{{findex(org-insert-heading)}}}
        {{{vindex(org-M-RET-may-split-line )}}}
+
   - {{{kbdkey(C-,RET)}}}, ~org-insert-heading-respect-content~ :: Just
        like {{{kbdkey(M-,RET)}}}, except when adding a new heading
        below the current heading, the new heading is placed after the
@@ -747,6 +778,7 @@ The following commands jump to other headlines in the buffer.
 
        {{{kindex(C-RET)}}}
        {{{findex(org-insert-heading-respect-content)}}}
+
   - {{{kbdkey(M-S-,RET)}}}, ~org-insert-todo-heading~ :: Insert new
        TODO entry with same level as current heading.  See also the
        variable ~org-treat-insert-todo-heading-as-state-change~.
@@ -754,6 +786,7 @@ The following commands jump to other headlines in the buffer.
        {{{kindex(M-S-RET)}}}
        {{{findex(org-insert-todo-heading)}}}
        {{{vindex(org-treat-insert-todo-heading-as-state-change)}}}
+
   - {{{kbdkey(C-S-,RET)}}}, ~org-insert-todo-heading-respect-content~ :: Insert
        new TODO entry with same level as current heading. Like
        {{{kbdkey(C-,RET)}}}, the new headline will be inserted after
@@ -761,6 +794,7 @@ The following commands jump to other headlines in the buffer.
 
        {{{kindex(C-S-RET)}}}
        {{{findex(org-insert-todo-heading-respect-content)}}}
+
   - {{{key(TAB)}}}, ~org-cycle~ :: In a new entry with no text
        yet, the first {{{key(TAB)}}} demotes the entry to become a
        child of the previous one. The next {{{key(TAB)}}} makes it a
@@ -769,48 +803,57 @@ The following commands jump to other headlines in the buffer.
 
        {{{kindex(@key{TAB})}}}
        {{{findex(org-cycle)}}}
+
   - {{{kbdkey(M-,left)}}}, ~org-do-promote~ :: Promote current heading
        by one level.
 
        {{{kindex(M-,left)}}}
        {{{findex(org-do-promote)}}}
+
   - {{{kbdkey(M-,right)}}}, ~org-do-demote~ :: Demote current heading
        by one level.
 
        {{{kindex(M-,right)}}}
        {{{findex(org-do-demote)}}}
+
   - {{{kbdkey(M-S-,left)}}}, ~org-promote-subtree~ :: Promote the
        current subtree by one level.
 
        {{{kindex(M-S-,left)}}}
        {{{findex(org-promote-subtree)}}}
+
   - {{{kbdkey(M-S-,right)}}}, ~org-demote-subtree~ :: Demote the
        current subtree by one level.
 
        {{{kindex(M-S-,right)}}}
        {{{findex(org-demote-subtree)}}}
+
   - {{{kbdkey(M-S-,up)}}}, ~org-move-subtree-up~ :: Move subtree up
        (swap with previous subtree of same level).
 
        {{{kindex(M-S-,up)}}}
        {{{findex(org-move-subtree-up)}}}
+
   - {{{kbdkey(M-S-,down)}}}, ~org-move-subtree-down~ :: Move subtree
        down (swap with next subtree of same level).
 
        {{{kindex(M-S-,down)}}}
        {{{findex(org-move-subtree-down)}}}
+
   - {{{kbd(C-c C-x C-w)}}}, ~org-cut-subtree~ :: Kill subtree, i.e.,
        remove it from buffer but save in kill ring. With a numeric
        prefix argument N, kill N sequential subtrees.
 
        {{{kindex(C-c C-x C-w)}}}
        {{{findex(org-cut-subtree)}}}
+
   - {{{kbd(C-c C-x M-w)}}}, ~org-copy-subtree~ :: Copy subtree to kill
        ring.  With a numeric prefix argument N, copy the N sequential
        subtrees.
 
        {{{kindex(C-c C-x M-w)}}}
        {{{findex(org-copy-subtree)}}}
+
   - {{{kbd(C-c C-x C-y)}}}, ~org-paste-subtree~ :: Yank subtree from
        kill ring. This does modify the level of the subtree to make
        sure the tree fits in nicely at the yank position. The yank
@@ -819,6 +862,7 @@ The following commands jump to other headlines in the buffer.
 
        {{{kindex(C-c C-x C-y)}}}
        {{{findex(org-paste-subtree)}}}
+
   - {{{kbd(C-y)}}}, ~org-yank~ :: Depending on the variables
        ~org-yank-adjusted-subtrees~ and ~org-yank-folded-subtrees~,
        Org's internal ~yank~ command will paste subtrees folded and in
@@ -836,6 +880,7 @@ The following commands jump to other headlines in the buffer.
        {{{findex(org-yank)}}}
        {{{vindex(org-yank-adjusted-subtrees)}}}
        {{{vindex(org-yank-folded-subtrees)}}} 
+
   - {{{kbd(C-c C-x c)}}}, ~org-clone-subtree-with-time-shift~ :: Clone
        a subtree by making a number of sibling copies of it. You will
        be prompted for the number of copies to make, and you can also
@@ -846,11 +891,13 @@ The following commands jump to other headlines in the buffer.
 
        {{{kindex(C-c C-x c)}}}
        {{{findex(org-clone-subtree-with-time-shift)}}}
+
   - {{{kbd(C-c C-w)}}}, ~org-refile~ :: Refile entry or region to a
        different location. See [[Refile and copy]].
 
        {{{kindex(C-c C-w)}}}
        {{{findex(org-refile)}}}
+
   - {{{kbd(C-c ^)}}}, ~org-sort~ :: Sort same-level entries.  When
        there is an active region, all entries in the region will be
        sorted.  Otherwise the children of the current headline are
@@ -865,20 +912,24 @@ The following commands jump to other headlines in the buffer.
 
        {{{kindex(C-c ^)}}}
        {{{findex(org-sort)}}}
+
   - {{{kbd(C-x n s)}}}, ~org-narrow-to-subtree~ :: Narrow buffer to
        current subtree.
 
        {{{kindex(C-x n s)}}}
        {{{findex(org-narrow-to-subtree)}}}
+
   - {{{kbd(C-x n b)}}}, ~org-narrow-to-block~ :: Narrow buffer to
        current block.
 
        {{{kindex(C-x n b)}}}
        {{{findex(org-narrow-to-block)}}}
+
   - {{{kbd(C-x n w)}}}, ~widen~ :: Widen buffer to remove narrowing.
 
        {{{kindex(C-x n w)}}}
        {{{findex(widen)}}}
+
   - {{{kbd(C-c *)}}}, ~org-toggle-heading~ :: Turn a normal line or
        plain list item into a headline (so that it becomes a
        subheading at its location). Also turn a headline into a normal
@@ -932,6 +983,7 @@ commands can be accessed through a dispatcher:
 
        {{{kindex(C-c /)}}}
        {{{findex(org-sparse-tree)}}}
+
   - {{{kbd(C-c / r)}}}, ~org-occur~ :: Prompts for a regexp and shows a
        sparse tree with all matches. If the match is in a headline,
        the headline is made visible. If the match is in the body of an
@@ -947,6 +999,7 @@ commands can be accessed through a dispatcher:
        {{{kindex(C-c / r)}}}
        {{{findex(org-occur)}}}
        {{{vindex(org-remove-highlights-with-change)}}}
+
   - {{{kbd(M-g n)}}} or {{{kbd(M-g M-n)}}}, ~next-error~ ::
        
        Jump to the next sparse tree match in this buffer.
@@ -954,6 +1007,7 @@ commands can be accessed through a dispatcher:
        {{{kindex(M-g n)}}}
        {{{kindex(M-g M-n)}}}
        {{{findex(next-error)}}}
+
   - {{{kbd(M-g p)}}} or {{{kbd(M-g M-p)}}}, ~previous-error~ ::
 
        Jump to the previous sparse tree match in this buffer.
@@ -961,6 +1015,7 @@ commands can be accessed through a dispatcher:
        {{{kindex(M-g p)}}}
        {{{kindex(M-g M-p)}}}
        {{{findex(previous-error)}}}
+
 {{{vindex(org-agenda-custom-commands)}}} 
 
 {{{noindent}}} For frequently used sparse trees of specific search
@@ -1083,6 +1138,7 @@ to disable them individually.
 
 #+attr_texinfo: :table-type table :indic @asis
   - {{{key(TAB)}}}, ~org-cycle~ :: 
+
     {{{cindex(cycling\\\, in plain lists)}}}
     {{{kindex(TAB)}}}
     {{{findex(org-cycle)}}}
@@ -1102,6 +1158,7 @@ to disable them individually.
     initial position.
 
   - {{{kbdkey(M-,RET)}}}, ~org-insert-heading~ :: 
+
     {{{kindex(M-RET)}}}
     {{{findex(org-insert-heading)}}}
     {{{vindex(org-M-RET-may-split-line)}}}
@@ -1115,6 +1172,7 @@ to disable them individually.
     the current one.
 
   - {{{kbdkey(M-S-,RET)}}} :: 
+
     {{{kindex(M-S-RET)}}}
 
     Insert a new item with a checkbox (see [[Checkboxes]]).
@@ -1131,6 +1189,7 @@ to disable them individually.
        {{{cindex(shift-selection-mode)}}}
        {{{vindex(org-support-shift-select)}}}
        {{{vindex(org-list-use-circular-motion)}}}
+
   - {{{kbdkey(M-,up)}}} and {{{kbdkey(M-,down)}}} ::
 
        Move the item including subitems up/down (swap with
@@ -1139,6 +1198,7 @@ to disable them individually.
 
        {{{kindex(M-up)}}}
        {{{kindex(M-down)}}}
+
   - {{{kbdkey(M-,left)}}} and {{{kbdkey(M-,right)}}} :: 
 
        Decrease/increase the indentation of an item, leaving children
@@ -1146,6 +1206,7 @@ to disable them individually.
 
        {{{kindex(M-left)}}}
        {{{kindex(M-right)}}}
+
   - {{{kbdkey(M-S-,left)}}} and {{{kbdkey(M-S-,right)}}} :: 
 
        Decrease/increase the indentation of the item, including
@@ -1164,11 +1225,13 @@ to disable them individually.
        by configuring ~org-list-automatic-rules~.  The global
        indentation of a list has no influence on the text /after/ the
        list.
+
   - {{{kbd(C-c C-c)}}} :: If there is a checkbox (see [[Checkboxes]]) in
        the item line, toggle the state of the checkbox.  In any case,
        verify bullets and indentation consistency in the whole list.
 
        {{{kindex(C-c C-c)}}}
+
   - {{{kbd(C-c -)}}} :: Cycle the entire list level through the
        different itemize/enumerate bullets ({{{samp(-)}}},
        {{{samp(+)}}}, {{{samp(*)}}}, {{{samp(1.)}}}, {{{samp(1))}}})
@@ -1184,16 +1247,19 @@ to disable them individually.
 
        {{{kindex(C-c -)}}}
        {{{vindex(org-plain-list-ordered-item-terminator)}}}
+
   - {{{kbd(C-c *)}}} :: Turn a plain list item into a headline (so
        that it becomes a subheading at its location). See
        [[Structure editing]], for a detailed explanation.
 
        {{{kindex(C-c *)}}}
+
   - {{{kbd(C-c C-*)}}} :: Turn the whole plain list into a subtree of
        the current heading.  Checkboxes (see [[Checkboxes]]) will become
        TODO (resp. DONE) keywords when unchecked (resp. checked).
 
        {{{kindex(C-c C-*)}}}
+
   - {{{kbd(S-left/right)}}} :: This command also cycles bullet styles
        when the cursor in on the bullet or anywhere in an item line,
        details depending on ~org-support-shift-select~.
@@ -1201,6 +1267,7 @@ to disable them individually.
        {{{vindex(org-support-shift-select)}}}
        {{{kindex(S-left)}}}
        {{{kindex(S-right)}}}
+
   - {{{kbd(C-c ^)}}} :: Sort the plain list.  You will be prompted for
        the sorting method: numerically, alphabetically, by time, or by
        custom function.
@@ -1214,10 +1281,10 @@ to disable them individually.
 {{{cindex(drawers)}}}
 {{{cindex(#+DRAWERS)}}}
 {{{cindex(visibility cycling\\\, drawers)}}}
-
 {{{vindex(org-drawers)}}}
 {{{cindex(org-insert-drawer)}}}
 {{{kindex(C-c C-x d)}}}
+
 Sometimes you want to keep information associated with an entry, but you
 normally don't want to see it.  For this, Org mode has /drawers/.
 Drawers need to be configured with the variable
@@ -1232,7 +1299,6 @@ look like this:
      :END:
      After the drawer.
 #+end_src
-
 
 You can interactively insert drawers at point by calling
 ~org-insert-drawer~, which is bound to {{{kbd(C-c C-x d)}}}.
@@ -1338,24 +1404,25 @@ details.
 
 #+attr_texinfo: :table-type table :indic @asis
   - {{{kbd(C-c C-x f)}}} :: The footnote action command.
-                 {{{kindex(C-c C-x f)}}}
 
-                 When the cursor is on a footnote reference, jump to the
-                 definition.  When it is at a definition, jump to the
-                 (first) reference.
+       {{{kindex(C-c C-x f)}}}
 
-                 {{{vindex(org-footnote-define-inline)}}}
-                 {{{vindex(org-footnote-section)}}}
-                 {{{vindex(org-footnote-auto-adjust)}}}
+       When the cursor is on a footnote reference, jump to the
+       definition.  When it is at a definition, jump to the
+       (first) reference.
 
-                 Otherwise, create a new footnote.  Depending on the
-                 variable ~org-footnote-define-inline~, the
-                 definition will be placed right into the text as part
-                 of the reference, or separately into the location
-                 determined by the variable ~org-footnote-section~.[fn:173]
+       {{{vindex(org-footnote-define-inline)}}}
+       {{{vindex(org-footnote-section)}}}
+       {{{vindex(org-footnote-auto-adjust)}}}
 
-                 When this command is called with a prefix argument, a
-                 menu of additional options is offered:
+       Otherwise, create a new footnote.  Depending on the
+       variable ~org-footnote-define-inline~, the
+       definition will be placed right into the text as part
+       of the reference, or separately into the location
+       determined by the variable ~org-footnote-section~.[fn:173]
+
+       When this command is called with a prefix argument, a
+       menu of additional options is offered:
 
     - {{{kbd(s)}}} ::  Sort the footnote definitions by reference sequence.
             During editing, Org makes no effort to sort footnote
@@ -1364,10 +1431,13 @@ details.
             according to ~org-footnote-section~.  Automatic sorting
             after each insertion/deletion can be configured using the
             variable ~org-footnote-auto-adjust~.
+
     - {{{kbd(r)}}} ::  Renumber the simple ~fn:N~ footnotes.  Automatic
             renumbering after each insertion/deletion can be
             configured using the variable ~org-footnote-auto-adjust~.
+
     - {{{kbd(S)}}} ::  Short for first ~r~, then ~s~ action.
+
     - {{{kbd(n)}}} ::  Normalize the footnotes by collecting all definitions
             (including inline definitions) into a special section, and
             then numbering them in sequence.  The references will then
@@ -1375,6 +1445,7 @@ details.
             before finishing a document (e.g., sending off an email).
             The exporters do this automatically, and so could
             something like ~message-send-hook~.
+
     - {{{kbd(d)}}} ::  Delete the footnote at point, and all definitions of and
             references to it.
 
@@ -1520,16 +1591,19 @@ you, configure the variables ~org-enable-table-editor~ and
 
      {{{kindex(C-c C-c)}}}
      {{{findex(org-table-align)}}}
+
 - {{{kbd(<TAB>)}}}, ~org-table-next-field~ :: Re-align the table, move
      to the next field.  Creates a new row if necessary.
 
      {{{kindex(<TAB>)}}}
      {{{findex(org-table-next-field)}}}
+
 - {{{kbdkey(S-,TAB)}}}, ~org-table-previous-field~ :: Re-align, move to
      previous field.
 
      {{{kindex(S-TAB)}}}
      {{{findex(org-table-previous-field)}}}
+
 - {{{key(RET)}}}, ~org-table-next-row~ :: Re-align the table and move
      down to next row.  Creates a new row if necessary.  At the
      beginning or end of a line, {{{key(RET)}}} still does NEWLINE, so
@@ -1537,11 +1611,13 @@ you, configure the variables ~org-enable-table-editor~ and
 
      {{{kindex(RET)}}}
      {{{findex(org-table-next-row)}}}
+
 - {{{kbd(M-a)}}}, ~org-table-beginning-of-field~ :: Move to beginning
      of the current table field, or on to the previous field.
 
      {{{kindex(M-a)}}}
      {{{findex(org-table-beginning-of-field)}}}
+
 - {{{kbd(M-e)}}}, ~org-table-end-of-field~ :: Move to end of the
      current table field, or on to the next field.
 
@@ -1554,36 +1630,42 @@ you, configure the variables ~org-enable-table-editor~ and
     :END:
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbdkey(M-,left)}}}, ~org-table-move-column-left~ ::
+
   {{{kindex(M-left)}}}
   {{{findex(org-table-move-column-left)}}}
      
   Move the current column left.
 
 - {{{kbdkey(M-,right)}}}, ~org-table-move-column-right~ ::
+
   {{{kindex(M-right)}}}
   {{{findex(org-table-move-column-right)}}}
 
   Move the current column right.
 
 - {{{kbdkey(M-S-,left)}}}, ~org-table-delete-column~ :: 
+
   {{{kindex(M-S-left)}}}
   {{{findex(org-table-delete-column)}}}
 
   Kill the current column.
 
 - {{{kbdkey(M-S-,right)}}}, ~org-table-insert-column~ :: 
+
   {{{kindex(M-S-right)}}}
   {{{findex(org-table-insert-column)}}}
 
   Insert a new column to the left of the cursor position.
 
 - {{{kbdkey(M-,up)}}}, ~org-table-move-row-up~ ::
+
   {{{kindex(M-up)}}}
   {{{findex(org-table-move-row-up)}}}
 
   Move the current row up.
 
 - {{{kbdkey(M-,down)}}}, ~org-table-move-row-down~ ::
+
   {{{kindex(M-down)}}}
   {{{findex(org-table-move-row-down)}}}
      
@@ -1643,12 +1725,14 @@ you, configure the variables ~org-enable-table-editor~ and
 
      {{{kindex(C-c C-x M-w)}}}
      {{{findex(org-table-copy-region)}}}
+
 - {{{kbd(C-c C-x C-w)}}}, ~org-table-cut-region~ :: Copy a rectangular
      region from a table to a special clipboard, and blank all fields
      in the rectangle.  So this is the ``cut'' operation.
 
      {{{kindex(C-c C-x C-w)}}}
      {{{findex(org-table-cut-region)}}}
+
 - {{{kbd(C-c C-x C-y)}}}, ~org-table-paste-rectangle~ :: Paste a
      rectangular region into a table.  The upper left corner ends up
      in the current field.  All involved fields will be overwritten.
@@ -1658,6 +1742,7 @@ you, configure the variables ~org-enable-table-editor~ and
 
      {{{kindex(C-c C-x C-y)}}}
      {{{findex(org-table-paste-rectangle)}}}
+
 - {{{kbdkey(M-,RET)}}}, ~org-table-wrap-region~ :: Split the current
      field at the cursor position and move the rest to the line below.
      If there is an active region, and both point and mark are in the
@@ -1669,6 +1754,7 @@ you, configure the variables ~org-enable-table-editor~ and
 
      {{{kindex(M-RET)}}}
      {{{findex(org-table-wrap-region)}}}
+
 *** Calculations
     :PROPERTIES:
     :DESCRIPTION: Sum and copy
@@ -1687,6 +1773,7 @@ you, configure the variables ~org-enable-table-editor~ and
 
   {{{kindex(C-c +)}}}
   {{{findex(org-table-sum)}}}
+
 - {{{kbdkey(S-,RET)}}}, ~org-table-copy-down~ :: When current field is
      empty, copy from first non-empty field above.  When not empty,
      copy current field down to next row and move cursor along with
@@ -1717,6 +1804,7 @@ you, configure the variables ~org-enable-table-editor~ and
 
      {{{kindex(C-c `)}}}
      {{{findex(org-table-edit-field)}}}
+
 - {{{kbd(M-x org-table-import)}}} :: Import a file as a table.  The
      table should be TAB or whitespace separated.  Use, for example,
      to import a spreadsheet table or data from a database, because
@@ -1732,6 +1820,7 @@ you, configure the variables ~org-enable-table-editor~ and
 
      {{{kindex(C-c |)}}}
      {{{findex(org-table-create-or-convert-from-region)}}}
+
 - {{{kbd(M-x org-table-export)}}} :: Export the table, by default as a
      TAB-separated file.  Use for data exchange with, for example,
      spreadsheet or database programs.  The format used to export the
@@ -2285,6 +2374,7 @@ following command
 
        {{{kindex(C-u C-c =)}}}
        {{{findex(org-table-eval-formula)}}}
+
 The left-hand side of a formula can also be a special expression in
 order to assign the formula to a number of different fields. There is
 no keyboard shortcut to enter such range formulas. To add them, use
@@ -2353,6 +2443,7 @@ following command:
 
        {{{kindex(C-c =)}}}
        {{{findex(org-table-eval-formula)}}}
+
 *** Lookup functions
     :PROPERTIES:
     :DESCRIPTION: Lookup functions for searching tables
@@ -2379,11 +2470,13 @@ Org has three predefined Emacs Lisp functions for lookups in tables.
        same order as the correspoding parameters are in the call to
        ~org-lookup-first~, where ~VAL~ precedes ~S-LIST~.  If ~R-LIST~
        is ~nil~, the matching element ~S~ of ~S-LIST~ is returned.
+
   - (org-lookup-last VAL S-LIST R-LIST &optional PREDICATE) :: Similar
        to ~org-lookup-first~ above, but searches for the /last/
        element for which ~PREDICATE~ is ~t~.
 
        {{{findex(org-lookup-last)}}}
+
   - (org-lookup-all VAL S-LIST R-LIST &optional PREDICATE) :: Similar
        to ~org-lookup-first~, but searches for /all/ elements for
        which ~PREDICATE~ is ~t~, and returns /all/ corresponding
@@ -2428,6 +2521,7 @@ the variable ~org-table-use-standard-references~.
        {{{kindex(C-c =)}}}
        {{{kindex(C-u C-c =)}}}
        {{{findex(org-table-eval-formula)}}}
+
   - {{{kbd(C-u C-u C-c =)}}}, ~org-table-eval-formula~ :: Re-insert the
        active formula (either a field formula, or a column formula)
        into the current field, so that you can edit it directly in the
@@ -2481,17 +2575,20 @@ the variable ~org-table-use-standard-references~.
        {{{kindex(C-x C-s)}}}
        {{{kindex(C-c C-c)}}}
        {{{findex(org-table-fedit-finish)}}}
+
   - {{{kbd(C-c C-q)}}}, ~org-table-fedit-abort~ :: Exit the formula
        editor without installing changes.
 
        {{{kindex(C-c C-q)}}}
        {{{findex(org-table-fedit-abort)}}}
+
   - {{{kbd(C-c C-r)}}}, ~org-table-fedit-toggle-ref-type~ :: Toggle all
        references in the formula editor between standard (like ~B3~)
        and internal (like ~@3$2~).
 
        {{{kindex(C-c C-r)}}}
        {{{findex(org-table-fedit-toggle-ref-type)}}}
+
   - {{{key(TAB)}}}, ~org-table-fedit-lisp-indent~ :: Pretty-print or
        indent Lisp formula at point.  When in a line containing a Lisp
        formula, format the formula according to Emacs Lisp rules.
@@ -2501,11 +2598,13 @@ the variable ~org-table-use-standard-references~.
 
        {{{kindex(TAB)}}}
        {{{findex(org-table-fedit-lisp-indent)}}}
+
   - {{{kbdkey(M-,TAB)}}}, ~lisp-complete-symbol~ :: Complete Lisp
        symbols, just like in Emacs Lisp mode.
 
        {{{kindex(M-TAB)}}}
        {{{findex(lisp-complete-symbol)}}}
+
   - {{{kbdkey(S-,up)}}}/{{{key(down)}}}/{{{key(left)}}}/{{{key(right)}}} :: Shift
        the reference at point.  For example, if the reference is ~B3~
        and you press {{{kbdkey(S-,right)}}}, it will become ~C3~.
@@ -2520,6 +2619,7 @@ the variable ~org-table-use-standard-references~.
        {{{findex(org-table-fedit-ref-down)}}}
        {{{findex(org-table-fedit-ref-left)}}}
        {{{findex(org-table-fedit-ref-right)}}}
+
   - {{{kbdkey(M-S-,up)}}}, ~org-table-fedit-line-up~ ::
 
        Move the test line for column formulas up in the Org buffer.
@@ -2602,6 +2702,7 @@ following commands:
 
        {{{kindex(C-c *)}}}
        {{{findex(org-table-recalculate)}}}
+
   - {{{kbd(C-u C-c *)}}} or {{{kbd(C-u C-c C-c)}}} :: Recompute the
        entire table, line by line.  Any lines before the first hline
        are left alone, assuming that these are part of the table
@@ -2609,6 +2710,7 @@ following commands:
 
        {{{kindex(C-u C-c *)}}}
        {{{kindex(C-u C-c C-c)}}}
+
   - {{{kbd(C-u C-u C-c *)}}} or {{{kbd(C-u C-u C-c C-c)}}}, ~org-table-iterate~ ::
        
        Iterate the table by recomputing it until no further changes
@@ -2619,15 +2721,18 @@ following commands:
        {{{kindex(C-u C-u C-c *)}}}
        {{{kindex(C-u C-u C-c C-c)}}}
        {{{findex(org-table-iterate)}}}
+
   - {{{kbd(M-x org-table-recalculate-buffer-tables)}}} :: Recompute
        all tables in the current buffer.
 
        {{{findex(org-table-recalculate-buffer-tables)}}}
+
   - {{{kbd(M-x org-table-iterate-buffer-tables)}}} :: Iterate all
        tables in the current buffer, in order to converge
        table-to-table dependencies.
 
        {{{findex(org-table-iterate-buffer-tables)}}}
+
 *** Advanced features
     :PROPERTIES:
     :DESCRIPTION: Field and column names, parameters, and automatic recalc
@@ -2645,6 +2750,7 @@ characters.[fn:30]
 
        {{{kindex(C-#)}}}
        {{{findex(org-table-rotate-recalc-marks)}}}
+
 Here is an example of a table that collects exam results of students
 and makes use of these features:
 
@@ -3013,6 +3119,7 @@ insert it into an Org file, and to follow the link.
        {{{cindex(storing links)}}}
        {{{kindex(C-c l)}}}
        {{{findex(org-store-link)}}}
+
     - Org mode buffers :: For Org files, if there is a
          ~<<target>>~ at the cursor, the link points to the
          target.  Otherwise it points to the current headline, which
@@ -3082,6 +3189,7 @@ insert it into an Org file, and to follow the link.
        {{{vindex(org-keep-stored-link-after-insertion)}}}
        {{{kindex(C-c C-l)}}}
        {{{findex(org-insert-link)}}}
+
     - Inserting stored links :: All links stored during the current
          session are part of the history for this prompt, so you can
          access them with {{{key(up)}}} and {{{key(down)}}} (or
@@ -3145,24 +3253,28 @@ insert it into an Org file, and to follow the link.
          {{{vindex(org-link-frame-setup)}}} 
          {{{kindex(C-c C-o)}}}
          {{{findex(org-open-at-point)}}}
+
     - {{{key(RET)}}} :: When ~org-return-follows-link~ is set,
                         {{{key(RET)}}} will also follow the link at
                         point.
 
                         {{{vindex(org-return-follows-link)}}}
                         {{{kindex(RET)}}}
+
     - {{{key(mouse-2)}}} or {{{key(mouse-1)}}} :: On links,
          {{{kbd(mouse-2)}}} will open the link just as {{{kbd(C-c C-o)}}} would. Under Emacs 22 and later, {{{kbd(mouse-1)}}}
          will also follow a link.
 
          {{{kindex(mouse-2)}}}
          {{{kindex(mouse-1)}}}
+
     - {{{key(mouse-3)}}} :: Like {{{kbd(mouse-2)}}}, but force file
          links to be opened with Emacs, and internal links to be
          displayed in another window.[fn:38]
 
          {{{vindex(org-display-internal-link-with-indirect-buffer)}}}
          {{{kindex(mouse-3)}}}
+
     - {{{kbd(C-c C-x C-v)}}}, ~org-toggle-inline-images~ ::
          {{{cindex(inlining images)}}}
          {{{cindex(images\\\, inlining)}}}
@@ -3181,6 +3293,7 @@ insert it into an Org file, and to follow the link.
          ~org-startup-with-inline-images~.[fn:177]
 
     - {{{kbd(C-c %)}}}, ~org-mark-ring-push~ ::
+
          {{{kindex(C-c %)}}}
          {{{findex(org-mark-ring-push)}}}
          {{{cindex(mark ring)}}}
@@ -3190,6 +3303,7 @@ insert it into an Org file, and to follow the link.
          automatically.
 
     - {{{kbd(C-c &)}}}, ~org-mark-ring-goto~ ::
+
          {{{kindex(C-c &)}}}
          {{{findex(org-mark-ring-goto)}}}
          {{{cindex(links\\\, returning to)}}}
@@ -3199,8 +3313,8 @@ insert it into an Org file, and to follow the link.
          moves through a ring of previously recorded positions.
 
   - {{{kbd(C-c C-x C-n)}}}, ~org-next-link~ ::
+
        {{{cindex(links\\\, finding next)}}}
-       
        {{{kindex(C-c C-x C-n)}}}
        {{{findex(org-next-link)}}}
 
@@ -3218,8 +3332,8 @@ insert it into an Org file, and to follow the link.
        #+end_src
 
   - {{{kbd(C-c C-x C-p)}}}, ~org-previous-link~ ::
+
        {{{cindex(links\\\, finding previous)}}}
-       
        {{{kindex(C-c C-x C-p)}}}
        {{{findex(org-previous-link)}}}
 
@@ -3434,6 +3548,7 @@ are:
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-t)}}}, ~org-todo~ ::
+
   {{{kindex(C-c C-t)}}}
   {{{cindex(cycling\\\, of TODO states)}}}
 
@@ -3448,6 +3563,7 @@ are:
  agenda buffers with the {{{kbd(t)}}} command key (see [[Agenda commands]]).
 
 - {{{kbd(C-u C-c C-t)}}} ::
+
   {{{kindex(C-u C-c C-t)}}}
 
   Select a specific keyword using completion or (if it has been set up)
@@ -3462,15 +3578,15 @@ are:
 
   {{{vindex(org-treat-S-cursor-todo-selection-as-state-change)}}}
 
-     Select the following/preceding TODO state, similar to cycling.
-     Useful mostly if more than two TODO states are possible 
-     (see [[TODO extensions]]). See also [[Conflicts]], for a discussion of the
-     interaction with ~shift-selection-mode~. See also the variable
-     ~org-treat-S-cursor-todo-selection-as-state-change~.
+  Select the following/preceding TODO state, similar to cycling.
+  Useful mostly if more than two TODO states are possible 
+  (see [[TODO extensions]]). See also [[Conflicts]], for a discussion of the
+  interaction with ~shift-selection-mode~. See also the variable
+  ~org-treat-S-cursor-todo-selection-as-state-change~.
 
 - {{{kbd(C-c / t)}}}, ~org-show-todo-tree~ ::
-  {{{kindex(C-c / t)}}}
 
+  {{{kindex(C-c / t)}}}
   {{{cindex(sparse tree\\\, for TODO)}}}
   {{{vindex(org-todo-keywords)}}}
 
@@ -3485,6 +3601,7 @@ are:
   arguments, find all TODO states, both un-done and done.
 
 - {{{kbd(C-c a t)}}}, ~org-todo-list~ ::
+
   {{{kindex(C-c a t)}}}
 
   Show the global TODO list.  Collects the TODO items (with not-DONE states)
@@ -3494,6 +3611,7 @@ are:
   See [[Global TODO list]], for more information.
 
 - {{{kbdkey(S-M-,RET)}}}, ~org-insert-todo-heading~ ::
+
   {{{kindex(S-M-@key{RET})}}}
 
    Insert a new TODO entry below the current one.
@@ -3627,11 +3745,12 @@ of which subsequence should be used for a given entry.  In this setup,
 select the correct sequence.  Besides the obvious ways like typing a
 keyword or using completion, you may also apply the following commands:
 
-{{{kindex(C-S-@key{right})}}}
-{{{kindex(C-S-@key{left})}}}
-{{{kindex(C-u C-u C-c C-t)}}}
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-u C-u C-c C-t)}}} {{{kbdkey(C-S-,right)}}} {{{kbdkey(C-S-,left)}}} ::
+
+  {{{kindex(C-S-@key{right})}}}
+  {{{kindex(C-S-@key{left})}}}
+  {{{kindex(C-u C-u C-c C-t)}}}
 
   These keys jump from one TODO subset to the next. In the above
   example, {{{kbd(C-u C-u C-c C-t)}}} or {{{kbdkey(C-S-,right)}}}
@@ -3641,6 +3760,7 @@ keyword or using completion, you may also apply the following commands:
   (see [[Conflicts]]).
 
 - {{{kbdkey(S-,right)}}} {{{kbdkey(S-,left)}}} ::
+
   {{{kindex(S-@key{right})}}}
   {{{kindex(S-@key{left})}}}
 
@@ -3789,6 +3909,7 @@ example:
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x o)}}}, ~org-toggle-ordered-property~ ::
+
   {{{kindex(C-c C-x o)}}}
   {{{vindex(org-track-ordered-property-with-tag)}}}
   {{{cindex(property\\\, ORDERED)}}}
@@ -3798,7 +3919,9 @@ example:
   inherited like a tag.  However, if you would like to /track/ the value of
   this property with a tag for better visibility, customize the variable
   ~org-track-ordered-property-with-tag~.
+
 - {{{kbd(C-u C-u C-u C-c C-t)}}} ::
+
   {{{kindex(C-u C-u C-u C-c C-t)}}}
 
   Change TODO state, circumventing any state blocking.
@@ -4094,11 +4217,13 @@ items.
 
 #+attr_texinfo: :table-type table :indic @asis
   - {{{kbd(C-c XXX)}}} ::
+
     {{{kindex(C-c ,)}}}
     #+comment:    {{{kindex(@kbd{C-c ,})}}}
     #+comment: Preceding line won't export to pdf
     {{{findex(org-priority)}}}
     #+comment: Should be C-c ,
+
     Set the priority of the current headline (~org-priority~). The
     command prompts for a priority character {{{samp(A)}}}, {{{samp(B)}}}
     or {{{samp(C)}}}. When you press {{{key(SPC)}}}} instead, the priority
@@ -4107,6 +4232,7 @@ items.
     {{{kbd(,)}}} command (see [[Agenda commands]]).
   
   - {{{kbdkey(S-,up)}}}, {{{kbdkey(S-,down)}}}, {{{command(org-priority-up)}}}, {{{command(org-priority-down)}}} ::
+
     {{{vindex(org-priority-start-cycle-with-default)}}}
     
     Increase/decrease priority of current headline.[fn:50] Note
@@ -4291,6 +4417,7 @@ check off a box while there are unchecked boxes above it.
      a plain list item (see [[Plain lists]]).
 
 - {{{kbd(C-c C-x o)}}}, ~org-toggle-ordered-property~ ::
+
   {{{kindex(C-c C-x o)}}}
   {{{vindex(org-track-ordered-property-with-tag)}}}
   {{{cindex(property\\\, ORDERED)}}}
@@ -4303,6 +4430,7 @@ check off a box while there are unchecked boxes above it.
   customize the variable ~org-track-ordered-property-with-tag~.
 
 - {{{kbd(C-c #)}}}, ~org-update-statistics-cookies~ ::
+
   {{{kindex(C-c #)}}}
 
   Update the statistics cookie in the current outline entry. When
@@ -4399,8 +4527,8 @@ also a special command for inserting tags:
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-q)}}}, ~org-set-tags-command~ ::
-  {{{kindex(C-c C-q)}}}
 
+  {{{kindex(C-c C-q)}}}
   {{{cindex(completion\\\, of tags)}}}
   {{{vindex(org-tags-column)}}}
 
@@ -4413,6 +4541,7 @@ also a special command for inserting tags:
   demotion, and TODO state changes (see [[TODO basics]]).
 
 - {{{kbd(C-c C-c)}}}, ~org-set-tags-command~ ::
+
   {{{kindex(C-c C-c)}}}
 
   When the cursor is in a headline, this does the same as {{{kbd(C-c C-q)}}}.
@@ -4529,6 +4658,7 @@ keys:
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(a-z...)}}} ::
+
   {{{kindex(a-z...)}}}
 
   Pressing keys assigned to tags will add or remove them from the list of
@@ -4536,6 +4666,7 @@ keys:
   exclusive tags will turn off any other tags from that group.
 
 - {{{key(TAB)}}} ::
+
   {{{kindex(@key{TAB})}}}
 
   Enter a tag in the minibuffer, even if the tag is not in the predefined
@@ -4543,11 +4674,13 @@ keys:
   You can also add several tags: just separate them with a comma.
 
 - {{{key(SPC)}}} ::
+
   {{{kindex(@key{SPC})}}}
 
   Clear all tags for this line.
 
 - {{{key(RET)}}} ::
+
   {{{kindex(@key{RET})}}}
 
   Accept the modified set.
@@ -4612,12 +4745,14 @@ information into special lists.
   line.
 
 - {{{kbd(C-c a m)}}}, ~org-tags-view~ ::
+
   {{{kindex(C-c a m)}}}
 
   Create a global list of tag matches from all agenda files.
   See [[Matching tags and properties]].
 
 - {{{kbd(C-c a M)}}}, ~org-tags-view~ ::
+
   {{{kindex(C-c a M)}}}
   {{{vindex(org-tags-match-list-sublevels)}}}
 
@@ -4757,18 +4892,21 @@ The following commands help to work with properties:
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbdkey(M-,TAB)}}}, ~pcomplete~ ::
+
   {{{kindex(M-@key{TAB})}}}
 
   After an initial colon in a line, complete property keys. All keys
   used in the current file will be offered as possible completions.
 
 - {{{kbd(C-c C-x p)}}}, ~org-set-property~ ::
+
   {{{kindex(C-c C-x p)}}}
 
   Set a property. This prompts for a property name and a value. If
   necessary, the property drawer is created as well.
 
-- C-u M-x org-insert-drawer
+- ~C-u M-x org-insert-drawer~ ::
+
   {{{cindex(org-insert-drawer)}}}
 
   Insert a property drawer into the current entry. The drawer will be
@@ -4776,32 +4914,38 @@ The following commands help to work with properties:
   information like deadlines.
 
 - {{{kbd(C-c C-c)}}}, ~org-property-action~ ::
+
   {{{kindex(C-c C-c)}}}
 
   With the cursor in a property drawer, this executes property commands.
 
 - {{{kbd(C-c C-c s)}}}, ~org-set-property~ ::
+
   {{{kindex(C-c C-c s)}}}
 
   Set a property in the current entry.  Both the property and the value
   can be inserted using completion.
 
 - {{{kbdkey(S-,right)}}} {{{kbdkey(S-,left)}}}, ~org-property-next-allowed-value~ ~org-property-previous-allowed-value~ ::
+
   {{{kindex(S-@key{right})}}}
 
   Switch property at point to the next/previous allowed value.
 
 - {{{kbd(C-c C-c d)}}}, ~org-delete-property~ ::
+
   {{{kindex(C-c C-c d)}}}
 
   Remove a property from the current entry.
 
 - {{{kbd(C-c C-c D)}}}, ~org-delete-property-globally~ ::
+
   {{{kindex(C-c C-c D)}}}
 
   Globally remove a property, from all entries in the current file.
 
 - {{{kbd(C-c C-c c)}}}, ~org-compute-property-at-point~ ::
+
   {{{kindex(C-c C-c c)}}}
 
   Compute the property at point, using the operator and scope from the
@@ -4872,18 +5016,21 @@ the same commands are used as for tag searches (see [[Tag searches]]).
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c / m)}}}, ~C-c \~ ~org-match-sparse-tree~ ::
+
   {{{kindex(C-c / m)}}}
 
   Create a sparse tree with all matching entries. With a {{{kbd(C-u)}}}
   prefix argument, ignore headlines that are not a TODO line.
 
 - {{{kbd(C-c a m)}}}, ~org-tags-view~ ::
+
   {{{kindex(C-c a m)}}}
 
   Create a global list of tag/property matches from all agenda files.
   See [[Matching tags and properties]].
 
 - {{{kbd(C-c a M)}}}, ~org-tags-view~ ::
+
   {{{kindex(C-c a M)}}}
   {{{vindex(org-tags-match-list-sublevels)}}}
 
@@ -4900,6 +5047,7 @@ single property:
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c / p)}}} ::
+
   {{{kindex(C-c / p)}}}
 
   Create a sparse tree based on the value of a property. This first
@@ -4937,6 +5085,7 @@ least for the special applications for which they are used:
 
 #+attr_texinfo: :table-type table :indic @asis
 - ~COLUMNS~ ::
+
   {{{cindex(property\\\, COLUMNS)}}}
 
   The ~:COLUMNS:~ property defines the format of column view (see [[Column
@@ -4946,18 +5095,21 @@ least for the special applications for which they are used:
   view is turned on.
 
 - ~CATEGORY~ ::
+
   {{{cindex(property\\\, CATEGORY)}}}
 
   For agenda view, a category set through a ~:CATEGORY:~ property
   applies to the entire subtree.
 
 - ~ARCHIVE~ ::
+
   {{{cindex(property\\\, ARCHIVE)}}}
 
   For archiving, the ~:ARCHIVE:~ property may define the archive
   location for the entire subtree (see [[Moving subtrees]]).
 
 - ~LOGGING~ ::
+
   {{{cindex(property\\\, LOGGING)}}}
 
   The LOGGING property may define logging settings for an entry or a
@@ -5131,6 +5283,7 @@ The following commands turn column view on or off:
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x C-c)}}}, ~org-columns~ ::
+
   {{{kindex(C-c C-x C-c)}}}
   {{{vindex(org-columns-default-format)}}}
 
@@ -5146,6 +5299,7 @@ The following commands turn column view on or off:
   current entry and its subtree.
 
 - {{{kbd(r)}}}, ~org-columns-redo~ ::
+
   {{{kindex(r)}}}
 
   Recreate the column view, to include recent changes made in the
@@ -5168,7 +5322,8 @@ The following commands let you edit information in column view:
 
   Move through the column view from field to field.
 
--  {{{kbdkey(S-,left)}}} {{{kbdkey(S-,right)}}} ::
+- {{{kbdkey(S-,left)}}} {{{kbdkey(S-,right)}}} ::
+
   {{{kindex(S-@key{left})}}}
   {{{kindex(S-@key{right})}}}
 
@@ -5176,17 +5331,20 @@ The following commands let you edit information in column view:
   have to have specified allowed values for a property.
 
 - {{{kbd(1..9,0)}}} ::
+
   {{{kindex(1..9,0)}}}
 
   Directly select the Nth allowed value, {{{kbd(0)}}} selects the 10th
   value.
 
 - {{{kbd(n)}}} {{{kbd(p)}}}, ~org-columns-next-allowed-value~ ~org-columns-previous-allowed-value~ ::
+
   {{{kindex(n)}}}
 
   Same as {{{kbdkey(S-,left)}}} {{{kbdkey(S-,right)}}}
 
 - {{{kbd(e)}}}, ~org-columns-edit-value~ ::
+
   {{{kindex(e)}}}
 
   Edit the property at point. For the special properties, this will
@@ -5195,17 +5353,20 @@ The following commands let you edit information in column view:
   completion or fast selection interface will pop up.
 
 - {{{kbd(C-c C-c)}}}, ~org-columns-set-tags-or-toggle~ ::
+
   {{{kindex(C-c C-c)}}}
 
   When there is a checkbox at point, toggle it.
 
 - {{{kbd(v)}}}, ~org-columns-show-value~ ::
+
   {{{kindex(v)}}}
 
   View the full value of this property. This is useful if the width of
   the column is smaller than that of the value.
 
 - {{{kbd(a)}}}, ~org-columns-edit-allowed~ ::
+
   {{{kindex(a)}}}
 
   Edit the list of allowed values for this property.  If the list is found
@@ -5218,16 +5379,19 @@ The following commands modify column view on-the-fly:
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(<)}}} {{{kbd(>)}}}, ~org-columns-narrow~ ~org-columns-widen~ ::
+
   {{{kindex(<)}}}
 
   Make the column narrower/wider by one character.
 
 - {{{kbdkey(S-M-,right)}}}, ~org-columns-new~ ::
+
   {{{kindex(S-M-@key{right})}}}
 
   Insert a new column, to the left of the current column.
 
 - {{{kbdkey(S-M-,left)}}}, ~org-columns-delete~ ::
+
   {{{kindex(S-M-@key{left})}}}
   
   Delete the current column.
@@ -5317,18 +5481,21 @@ block:
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x i)}}}, ~org-insert-columns-dblock~ ::
+
   {{{kindex(C-c C-x i)}}}
 
   Insert a dynamic block capturing a column view. You will be prompted
   for the scope or ID of the view.
 
 - {{{kbd(C-c C-c)}}} {{{kbd(C-c C-x C-u)}}}, ~org-dblock-update~ ::
+
   {{{kindex(C-c C-c)}}}
 
   Update dynamic block at point. The cursor needs to be in the ~#+BEGIN~
   line of the dynamic block.
 
 - {{{kbd(C-u C-c C-x C-u)}}}, ~org-update-all-dblocks~ ::
+
   {{{kindex(C-u C-c C-x C-u)}}}
 
   Update all dynamic blocks (see [[Dynamic blocks]]). This is useful if you
@@ -5397,6 +5564,7 @@ the agenda (see [[Weekly/daily agenda]]). We distinguish:
 
 #+attr_texinfo: :table-type table :indic @asis
 - Plain timestamp; Event; Appointment ::
+
   {{{cindex(timestamp)}}}
   {{{cindex(appointment)}}}
 
@@ -5413,6 +5581,7 @@ the agenda (see [[Weekly/daily agenda]]). We distinguish:
   #+end_example
 
 - Timestamp with repeater interval ::
+
   {{{cindex(timestamp\\\, with repeater interval)}}}
 
   A timestamp may contain a /repeater interval/, indicating that it
@@ -5437,6 +5606,7 @@ the agenda (see [[Weekly/daily agenda]]). We distinguish:
   #+end_example
 
 - Time/Date range ::
+
   {{{cindex(timerange)}}}
   {{{cindex(date range)}}}
 
@@ -5450,6 +5620,7 @@ the agenda (see [[Weekly/daily agenda]]). We distinguish:
   #+end_example
 
 - Inactive timestamp ::
+
   {{{cindex(timestamp\\\, inactive)}}}
   {{{cindex(inactive timestamp)}}}
 
@@ -5472,6 +5643,7 @@ format.
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c .)}}}, ~org-time-stamp~ ::
+
   {{{kindex(C-c .)}}}
 
   Prompt for a date and insert a corresponding timestamp. When the
@@ -5480,12 +5652,14 @@ format.
   command is used twice in succession, a time range is inserted.
 
 - {{{kbd(C-c !)}}}, ~org-time-stamp-inactive~ ::
+
   {{{kindex(C-c !)}}}
 
   Like {{{kbd(C-c .)}}}, but insert an inactive timestamp that will not
   cause an agenda entry.
 
 - {{{kbd(C-u C-c .)}}} {{{kbd(C-u C-c !)}}}
+
   {{{kindex(C-u C-c .)}}}
   {{{kindex(C-u C-c .)}}}
   {{{kindex(C-u C-c !)}}}
@@ -5497,34 +5671,40 @@ format.
   ~org-time-stamp-rounding-minutes~.
 
 - {{{kbd(C-c C-c)}}} ::
+
   {{{kindex(C-c C-c)}}}
 
   Normalize timestamp, insert/fix day name if missing or wrong.
 
 - {{{kbd(C-c <)}}}, ~org-date-from-calendar~ ::
+
   {{{kindex(C-c <)}}}
 
   Insert a timestamp corresponding to the cursor date in the Calendar.
 
 - {{{kbd(C-c >)}}}, ~org-goto-calendar~ ::
+
   {{{kindex(C-c >)}}}
 
   Access the Emacs calendar for the current date. If there is a
   timestamp in the current line, go to the corresponding date instead.
 
 - {{{kbd(C-c C-o)}}}, ~org-open-at-point~ ::
+
   {{{kindex(C-c C-o)}}}
 
   Access the agenda for the date given by the timestamp or -range at
   point (see [[Weekly/daily agenda]]).
 
 - {{{kbdkey(S-,left)}}} {{{kbdkey(S-,right)}}}, ~org-timestamp-down-day~ ~org-timestamp-up-day~ ::
+
   {{{kindex(S-@key{left})}}}
 
   Change date at cursor by one day.  These key bindings conflict with
   shift-selection and related modes (see [[Conflicts]]).
 
 - {{{kbdkey(S-,up)}}} {{{kbdkey(S-,down)}}}, ~org-timestamp-up~ ~org-timestamp-down-down~ ::
+
   {{{kindex(S-@key{up})}}}
 
   Change the item under the cursor in a timestamp. The cursor can be on
@@ -5537,6 +5717,7 @@ format.
   with shift-selection and related modes (see [[Conflicts]]).
 
 - {{{kbd(C-c C-y)}}}, ~org-evaluate-time-range~ ::
+
   {{{kindex(C-c C-y)}}}
   {{{cindex(evaluate time range)}}}
 
@@ -5701,6 +5882,7 @@ it by customizing the variables ~org-display-custom-times~ and
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x C-t)}}}, ~org-toggle-time-stamp-overlays~ ::
+
   {{{kindex(C-c C-x C-t)}}}
 
   Toggle the display of custom formats for dates and times.
@@ -5743,6 +5925,7 @@ A timestamp may be preceded by special keywords to facilitate planning:
 
 #+attr_texinfo: :table-type table :indic @asis
 - ~DEADLINE~ ::
+
   {{{cindex(DEADLINE keyword)}}}
 
   Meaning: the task (most likely a TODO item, though not necessarily) is
@@ -5817,6 +6000,7 @@ an item:[fn:66]
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-d)}}}, ~org-deadline~ ::
+
   {{{kindex(C-c C-d)}}}
 
   Insert {{{samp(DEADLINE)}}} keyword along with a stamp. The insertion
@@ -5827,6 +6011,7 @@ an item:[fn:66]
   deadline.[fn:67]
 
 - {{{kbd(C-c C-s)}}}, ~org-schedule~ ::
+
   {{{kindex(C-c C-s)}}}
 
   Insert {{{samp(SCHEDULED)}}} keyword along with a stamp. The insertion
@@ -5837,6 +6022,7 @@ an item:[fn:66]
   changing an existing scheduling time.[fn:68]
 
 - {{{kbd(C-c C-x C-k)}}}, ~org-mark-entry-for-agenda-action~ ::
+
   {{{kindex(C-c C-x C-k)}}}
   {{{kindex(k a)}}}
   {{{kindex(k s)}}}
@@ -5847,6 +6033,7 @@ an item:[fn:66]
   {{{kbd(k s)}}} or {{{kbd(k d)}}} to schedule the marked item.
 
 - {{{kbd(C-c / d)}}}, ~org-check-deadlines~ ::
+
   {{{kindex(C-c / d)}}}
   {{{cindex(sparse tree\\\, for deadlines)}}}
   {{{vindex(org-deadline-warning-days)}}}
@@ -5858,11 +6045,13 @@ an item:[fn:66]
   shows all deadlines due tomorrow.
 
 - {{{kbd(C-c / b)}}}, ~org-check-before-date~ ::
+
   {{{kindex(C-c / b)}}}
 
   Sparse tree for deadlines and scheduled items before a given date.
 
 - {{{kbd(C-c / a)}}}, ~org-check-after-date~ ::
+
   {{{kindex(C-c / a)}}}
   
   Sparse tree for deadlines and scheduled items after a given date.
@@ -5992,6 +6181,7 @@ about what to do with it.[fn:72]
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x C-i)}}}, ~org-clock-in~ ::
+
   {{{kindex(C-c C-x C-i)}}}
   {{{vindex(org-clock-into-drawer)}}}
   {{{vindex(org-clock-continuously)}}}
@@ -6129,6 +6319,7 @@ formatted as one or several Org tables.
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x C-r)}}}, ~org-clock-report~ ::
+
   {{{kindex(C-c C-x C-r)}}}
 
   Insert a dynamic block (see [[Dynamic blocks]]) containing a clock report
@@ -6139,12 +6330,14 @@ formatted as one or several Org tables.
   tag.
 
 - {{{kbd(C-c C-c)}}} {{{kbd(C-c C-x C-u)}}}, ~org-dblock-update~ ::
+
   {{{kindex(C-c C-c)}}}
 
   Update dynamic block at point.  The cursor needs to be in the
   ~#+BEGIN~ line of the dynamic block.
 
 - {{{kbd(C-u C-c C-x C-u)}}} ::
+
   {{{kindex(C-u C-c C-x C-u)}}}
 
   Update all dynamic blocks (see [[Dynamic blocks]]). This is useful if you
@@ -6363,6 +6556,7 @@ choices to correct the discrepancy:
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(k)}}} ::
+
   {{{kindex(k)}}}
 
   To keep some or all of the minutes and stay clocked in, press
@@ -6371,6 +6565,7 @@ choices to correct the discrepancy:
   enter a number to keep that many minutes.
 
 - {{{kbd(K)}}} ::
+
   {{{kindex(K)}}}
 
   If you use the shift key and press {{{kbd(K)}}}, it will keep however
@@ -6379,6 +6574,7 @@ choices to correct the discrepancy:
   of the current task.
 
 - {{{kbd(s)}}} ::
+
   {{{kindex(s)}}}
 
   To keep none of the minutes, use {{{kbd(s)}}} to subtract all the away
@@ -6386,6 +6582,7 @@ choices to correct the discrepancy:
   returned.
 
 - {{{kbd(S)}}} ::
+
   {{{kindex(S)}}}
 
   To keep none of the minutes and just clock out at the start of the
@@ -6394,6 +6591,7 @@ choices to correct the discrepancy:
   you choose.
 
 - {{{kbd(C)}}} ::
+
   {{{kindex(C)}}}
 
   To cancel the clock altogether, use {{{kbd(C)}}}. Note that if instead
@@ -6460,6 +6658,7 @@ the following commands:
 
 #+attr_texinfo: :table-type table :indic @kbd
 - {{{kbd(C-c C-x e)}}}, ~org-set-effort~ ::
+
   {{{kindex(C-c C-x e)}}}
 
   Set the effort estimate for the current entry. With a numeric prefix
@@ -6467,6 +6666,7 @@ the following commands:
   also accessible from the agenda with the {{{kbd(e)}}} key.
 
 - {{{kbd(C-c C-x C-e)}}}, ~org-clock-modify-effort-estimate~ ::
+
   {{{kindex(C-c C-x C-e)}}}
 
   Modify the effort estimate of the item currently being clocked.
@@ -6525,6 +6725,7 @@ such a relative timer and make it easy to create timed notes.
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x .)}}}, ~org-timer~ ::
+
   {{{kindex(C-c C-x .)}}}
 
   Insert a relative time into the buffer.  The first time you use this, the
@@ -6532,18 +6733,21 @@ such a relative timer and make it easy to create timed notes.
   restarted.
 
 - {{{kbd(C-c C-x -)}}}, ~org-timer-item~ ::
+
   {{{kindex(C-c C-x -)}}}
 
   Insert a description list item with the current relative time.  With a prefix
   argument, first reset the timer to 0.
 
 - {{{kbdkey(M-,RET)}}}, ~org-insert-heading~ ::
+
   {{{kindex(M-@key{RET})}}}
 
   Once the timer list is started, you can also use {{{kbdkey(M-,RET)}}}
   to insert new timer items.
 
 - {{{kbd(C-c C-x ,)}}} ::
+
   {{{kindex(C-c C-x ,)}}}
   {{{kindex(C-c C-x ,)}}}
 
@@ -6551,6 +6755,7 @@ such a relative timer and make it easy to create timed notes.
   ({{{command(org-timer-pause-or-continue)}}}).
 
 - {{{kbd(C-u C-c C-x ,)}}} ::
+
   {{{kindex(C-u C-c C-x ,)}}}
   {{{kindex(C-u C-c C-x ,)}}}
 
@@ -6559,6 +6764,7 @@ such a relative timer and make it easy to create timed notes.
   mode line.
 
 - {{{kbd(C-c C-x 0)}}}, ~org-timer-start~ ::
+
   {{{kindex(C-c C-x 0)}}}
 
   Reset the timer without inserting anything into the buffer. By
@@ -6651,6 +6857,7 @@ a global key for capturing new material.[fn:81]
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c c)}}}, ~org-capture~ ::
+
   {{{kindex(C-c c)}}}
   {{{cindex(date tree)}}}
 
@@ -6663,6 +6870,7 @@ a global key for capturing new material.[fn:81]
   the information you want.
 
 - {{{kbd(C-c C-c)}}}, ~org-capture-finalize~ ::
+
   {{{kindex(C-c C-c)}}}
 
   Once you have finished entering information into the capture buffer,
@@ -6672,6 +6880,7 @@ a global key for capturing new material.[fn:81]
   jump to the captured item.
 
 - {{{kbd(C-c C-w)}}}, ~org-capture-refile~ ::
+
   {{{kindex(C-c C-w)}}}
 
   Finalize the capture process by refiling the note to a different place
@@ -6683,6 +6892,7 @@ a global key for capturing new material.[fn:81]
   ~org-refile~ command.
 
 - {{{kbd(C-c C-k)}}}, ~org-capture-kill~ ::
+
   {{{kindex(C-c C-k)}}}
 
   Abort the capture process and return to the previous state.
@@ -6698,12 +6908,14 @@ prefix commands:
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-u C-c c)}}} ::
+
   {{{kindex(C-u C-c c)}}}
 
   Visit the target location of a capture template. You get to select the
   template in the usual way.
 
 - {{{kbd(C-u C-u C-c c)}}} ::
+
   {{{kindex(C-u C-u C-c c)}}}
 
   Visit the last stored capture item in its buffer.
@@ -6731,6 +6943,7 @@ is through the customize interface.
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c c C)}}} ::
+
   {{{kindex(C-c c C)}}}
 
   Customize the variable ~org-capture-templates~.
@@ -6842,6 +7055,7 @@ Now lets look at the elements of a template definition.  Each entry in
     Text to be inserted as it is.
 
 - target ::
+
   {{{vindex(org-default-notes-file)}}}
 
   Specification of where the captured item should be placed.  In Org mode
@@ -7173,6 +7387,7 @@ subtree uses the same attached directory.
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-a)}}}, ~org-attach~ ::
+
   {{{kindex(C-c C-a)}}}
 
   The dispatcher for commands related to the attachment system. After
@@ -7180,6 +7395,7 @@ subtree uses the same attached directory.
   additional key to select a command:
 
   - {{{kbd(a)}}}, ~org-attach-attach~ ::
+
     {{{kindex(C-c C-a a)}}}
     {{{vindex(org-attach-method)}}}
 
@@ -7189,6 +7405,7 @@ subtree uses the same attached directory.
     systems.
 
   - {{{kbd(c)}}}/{{{kbd(m)}}}/{{{kbd(l)}}} ::
+
     {{{kindex(C-c C-a c)}}}
     {{{kindex(C-c C-a m)}}}
     {{{kindex(C-c C-a l)}}}
@@ -7197,17 +7414,20 @@ subtree uses the same attached directory.
     are not supported on all systems.
 
   - {{{kbd(n)}}}, ~org-attach-new~ ::
+
     {{{kindex(C-c C-a n)}}}
 
     Create a new attachment as an Emacs buffer.
 
   - {{{kbd(z)}}}, ~org-attach-sync~ ::
+
     {{{kindex(C-c C-a z)}}}
 
     Synchronize the current task with its attachment directory, in case
     you added attachments yourself.
 
   - {{{kbd(o)}}}, ~org-attach-open~ ::
+
     {{{kindex(C-c C-a o)}}}
     {{{vindex(org-file-apps)}}}
 
@@ -7217,32 +7437,38 @@ subtree uses the same attached directory.
     hyperlinks (see [[Handling links]]).
 
   - {{{kbd(O)}}}, ~org-attach-open-in-emacs~ ::
+
     {{{kindex(C-c C-a O)}}}
 
     Also open the attachment, but force opening the file in Emacs.
 
   - {{{kbd(f)}}}, ~org-attach-reveal~ ::
+
     {{{kindex(C-c C-a f)}}}
 
     Open the current task's attachment directory.
 
   - {{{kbd(F)}}}, ~org-attach-reveal-in-emacs~ ::
+
     {{{kindex(C-c C-a F)}}}
 
     Also open the directory, but force using @command{dired} in Emacs.
 
   - {{{kbd(d)}}}, ~org-attach-delete-one~ ::
+
     {{{kindex(C-c C-a d)}}}
 
     Select and delete a single attachment.
 
   - {{{kbd(D)}}}, ~org-attach-delete-all~ ::
+
     {{{kindex(C-c C-a D)}}}
 
     Delete all of a task's attachments. A safer way is to open the
     directory in {{{command(dired)}}} and delete from there.
 
   - {{{kbd(s)}}}, ~org-attach-set-directory~ ::
+
     {{{kindex(C-c C-a s)}}}
     {{{cindex(property\\\, ATTACH_DIR)}}}
 
@@ -7250,6 +7476,7 @@ subtree uses the same attached directory.
     works by putting the directory path into the ~ATTACH_DIR~ property.
 
   - {{{kbd(i)}}}, ~org-attach-set-inherit~ ::
+
     {{{kindex(C-c C-a i)}}}
     {{{cindex(property\\\, ATTACH_DIR_INHERIT)}}}
 
@@ -7286,12 +7513,14 @@ whenever the following command is used:
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x g)}}}, ~org-feed-update-all~ ::
+
   {{{kindex(C-c C-x g)}}}
 
   Collect items from the feeds configured in ~org-feed-alist~ and act
   upon them.
 
 - {{{kbd(C-c C-x G)}}}, ~org-feed-goto-inbox~ ::
+
   {{{kindex(C-c C-x G)}}}
 
   Prompt for a feed name and go to the inbox configured for this feed.
@@ -7343,12 +7572,14 @@ simplify this process, you can use the following special command:
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c M-w)}}}, ~org-copy~ ::
+
   {{{kindex(C-c M-w)}}}
   {{{findex(org-copy)}}}
 
   Copying works like refiling, except that the original note is not deleted.
 
 - {{{kbd(C-c C-w)}}}, ~org-refile~ ::
+
   {{{kindex(C-c C-w)}}}
   {{{findex(org-refile)}}}
   {{{vindex(org-reverse-note-order)}}}
@@ -7378,21 +7609,25 @@ simplify this process, you can use the following special command:
   an entry has been refiled.[fn:86]
 
 - {{{kbd(C-u C-c C-w)}}} ::
+
   {{{kindex(C-u C-c C-w)}}}
 
   Use the refile interface to jump to a heading.
 
 - {{{kbd(C-u C-u C-c C-w)}}}, ~org-refile-goto-last-stored~ ::
+
   {{{kindex(C-u C-u C-c C-w)}}}
 
   Jump to the location where ~org-refile~ last moved a tree to.
 
 - {{{kbd(C-2 C-c C-w)}}} ::
+
   {{{kindex(C-2 C-c C-w)}}}
 
   Refile as the child of the item currently being clocked.
 
 - {{{kbd(C-0 C-c C-w)}}} or {{{kbd(C-u C-u C-u C-c C-w)}}}, ~org-refile-cache-clear~ ::
+
   {{{kindex(C-u C-u C-u C-c C-w)}}}
   {{{kindex(C-0 C-c C-w)}}}
 
@@ -7413,6 +7648,7 @@ global searches like the construction of agenda views fast.
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x C-a)}}}, ~org-archive-subtree-default~ ::
+
   {{{kindex(C-c C-x C-a)}}}
   {{{vindex(org-archive-default-command)}}}
 
@@ -7431,6 +7667,7 @@ the archive file.
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x C-s)}}} or short {{{kbd(C-c $)}}}, ~org-archive-subtree~ ::
+
   {{{kindex(C-c C-x C-s)}}}
   {{{kindex(C-c $)}}}
   {{{vindex(org-archive-location)}}}
@@ -7438,7 +7675,8 @@ the archive file.
   Archive the subtree starting at the cursor position to the location
   given by ~org-archive-location~.
 
-- {{{Kbd(C-u C-c C-x C-s)}}} ::
+- {{{kbd(C-u C-c C-x C-s)}}} ::
+
   {{{kindex(C-u C-c C-x C-s)}}}
 
   Check if any direct children of the current headline could be moved to
@@ -7530,6 +7768,7 @@ The following commands help manage the ARCHIVE tag:
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x a)}}}, ~org-toggle-archive-tag~ ::
+
   {{{kindex(C-c C-x a)}}}
 
   Toggle the ARCHIVE tag for the current headline. When the tag is set,
@@ -7537,6 +7776,7 @@ The following commands help manage the ARCHIVE tag:
   hidden.
 
 - {{{kbd(C-u C-c C-x a)}}} ::
+
   {{{kindex(C-u C-c C-x a)}}}
 
   Check if any direct children of the current headline should be
@@ -7550,6 +7790,7 @@ The following commands help manage the ARCHIVE tag:
   Cycle a tree even if it is tagged with ARCHIVE.
 
 - {{{kbd(C-c C-x A)}}}, ~org-archive-to-archive-sibling~ ::
+
   {{{kindex(C-c C-x A)}}}
 
   Move the current entry to the /Archive Sibling/. This is a sibling of
@@ -7626,6 +7867,7 @@ the easiest way to maintain it is through the following commands
 {{{cindex(files\\\, adding to agenda list)}}}
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c [)}}}, ~org-agenda-file-to-front~ ::
+
   {{{kindex(C-c [)}}}
 
   Add current file to the list of agenda files. The file is added to the
@@ -7633,11 +7875,13 @@ the easiest way to maintain it is through the following commands
   front. With a prefix argument, file is added/moved to the end.
 
 - {{{kbd(C-c ])}}}, ~org-remove-file~ ::
+
   {{{kindex(C-c ])}}}
 
   Remove current file from the list of agenda files.
 
 - {{{kbd(C-')}}} {{{kbd(C-)}}}, ~org-cycle-agenda-files~ ::
+
   {{{kindex(C-')}}}
   {{{kindex(C-,)}}}
   {{{cindex(cycling\\\, of agenda files)}}}
@@ -7645,6 +7889,7 @@ the easiest way to maintain it is through the following commands
   Cycle through agenda file list, visiting one file after the other.
 
 - {{{kbd(M-x org-iswitchb)}}} ::
+
   {{{findex(org-iswitchb)}}}
 
   Command to use an ~iswitchb~-like interface to switch to and between
@@ -7663,6 +7908,7 @@ for an extended period, use the following commands:
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x <)}}}, ~org-agenda-set-restriction-lock~ ::
+
   {{{kindex(C-c C-x <)}}}
 
   Permanently restrict the agenda to the current subtree. When with a
@@ -7674,6 +7920,7 @@ for an extended period, use the following commands:
   takes effect immediately.
 
 - {{{kbd(C-c C-x >)}}}, ~org-agenda-remove-restriction-lock~ ::
+
   {{{kindex(C-c C-x >)}}}
 
   Remove the permanent restriction created by {{{kbd(C-c C-x <)}}}.
@@ -7684,6 +7931,7 @@ the following commands in the Speedbar frame:
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(<)}}} in the speedbar frame ~org-speedbar-set-agenda-restriction~ ::
+
   {{{kindex(<)}}}
 
   Permanently restrict the agenda to the item---either an Org file or a
@@ -7692,6 +7940,7 @@ the following commands in the Speedbar frame:
   effect immediately.
 
 - {{{kbd(>)}}} in the speedbar frame ~org-agenda-remove-restriction-lock~ ::
+
   {{{kindex(>)}}}
 
   Lift the restriction.
@@ -7714,35 +7963,41 @@ default commands:
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(a)}}} ::
+
   {{{kindex(C-c a a)}}}
 
   Create the calendar-like agenda (see [[Weekly/daily agenda]]).
 
 - {{{kbd(t)}}} or {{{kbd(T)}}} ::
+
   {{{kindex(C-c a t)}}}
   {{{kindex(C-c a T)}}}
 
   Create a list of all TODO items (see [[Global TODO list]]).
 
 - {{{kbd(m)}}} or {{{kbd(M)}}} ::
+
   {{{kindex(C-c a m)}}}
   {{{kindex(C-c a M)}}}
 
   Create a list of headlines matching a TAGS expression (see [[Matching tags and properties]]).
 
 - {{{kbd(L)}}} ::
+
   {{{kindex(C-c a L)}}}
 
   Create the timeline view for the current buffer 
   (see [[Timeline for a single file]]).
 
 - {{{kbd(s)}}} ::
+
   {{{kindex(C-c a s)}}}
 
   Create a list of entries selected by a boolean expression of keywords
   and/or regular expressions that must or must not occur in the entry.
 
 - {{{kbd(/)}}} ::
+
   {{{kindex(C-c a /)}}}
   {{{vindex(org-agenda-text-search-extra-files)}}}
 
@@ -7753,11 +8008,14 @@ default commands:
   1.
 
 - {{{kbd(#)}}} or {{{kbd(!)}}} ::
+
   {{{kindex(C-c a #)}}}
   {{{kindex(C-c a !)}}}
+
   Create a list of stuck projects (see [[Stuck projects]]).
 
 - {{{kbd(<)}}} ::
+
   {{{kindex(C-c a <)}}}
 
   Restrict an agenda command to the current buffer.[fn:89] After
@@ -7765,6 +8023,7 @@ default commands:
   the command.
 
 - {{{kbd(< <)}}} ::
+
   {{{kindex(C-c a < <)}}}
 
   If there is an active region, restrict the following agenda command to
@@ -7773,6 +8032,7 @@ default commands:
   selecting the command.
 
 - {{{kbd(*)}}} ::
+
   {{{kindex(C-c a *)}}}
   {{{vindex(org-agenda-sticky)}}}
 
@@ -7813,6 +8073,7 @@ paper agenda, showing all the tasks for the current week or day.
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c a a)}}}, ~org-agenda-list~ ::
+
   {{{cindex(org-agenda, command)}}}
 
   Compile an agenda for the current week from a list of Org files. The
@@ -8486,11 +8747,13 @@ the other commands, the cursor needs to be in the desired line.
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(n)}}}, ~org-agenda-next-line~ ::
+
   {{{kindex(n)}}}
  
   Next line (same as {{{key(down)}}} and {{{kbd(C-n)}}}).
 
 - {{{kbd(p)}}}, ~org-agenda-previous-line~ ::
+
   {{{kindex(p)}}}
 
   Previous line (same as {{{key(up)}}} and {{{kbd(C-p)}}}).
@@ -8500,6 +8763,7 @@ the other commands, the cursor needs to be in the desired line.
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{key(SPC)}}} or {{{key(mouse-3)}}}, ~org-agenda-show-and-scroll-up~ ::
+
   {{{kindex(@key{SPC})}}}
   {{{kindex(mouse-3)}}}
 
@@ -8508,22 +8772,26 @@ the other commands, the cursor needs to be in the desired line.
   outline, not only the heading.
 
 - {{{kbd(L)}}}, ~org-agenda-recenter~ ::
+
   {{{kindex(L)}}}
 
   Display original location and recenter that window.
 
 - {{{key(TAB)}}} or {{{key(mouse-2)}}}, ~org-agenda-goto~ ::
+
   {{{kindex(@key{TAB})}}}
   {{{kindex(mouse-2)}}}
 
   Go to the original location of the item in another window.
 
 - {{{key(RET)}}}, ~org-agenda-switch-to~ ::
+
   {{{kindex(@key{RET})}}}
 
   Go to the original location of the item and delete other windows.
 
 - {{{kbd(F)}}}, ~org-agenda-follow-mode~ ::
+
   {{{kindex(F)}}}
   {{{vindex(org-agenda-start-with-follow-mode)}}}
 
@@ -8534,6 +8802,7 @@ the other commands, the cursor needs to be in the desired line.
   ~org-agenda-start-with-follow-mode~.
 
 - {{{kbd(C-c C-x b)}}}, ~org-agenda-tree-to-indirect-buffer~ ::
+
   {{{kindex(C-c C-x b)}}}
 
   Display the entire subtree of the current item in an indirect buffer.
@@ -8542,6 +8811,7 @@ the other commands, the cursor needs to be in the desired line.
   prefix, do not remove the previously used indirect buffer.
 
 - {{{kbd(C-c C-o)}}}, ~org-agenda-open-link~ ::
+
   {{{kindex(C-c C-o)}}}
 
   Follow a link in the entry. This will offer a selection of any links
@@ -8553,6 +8823,7 @@ the other commands, the cursor needs to be in the desired line.
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(A)}}} ::
+
   {{{kindex(A)}}}
   {{{cindex(display changing\\\, in agenda)}}}
 
@@ -8560,11 +8831,13 @@ the other commands, the cursor needs to be in the desired line.
   view.
 
 - {{{kbd(o)}}} ::
+
   {{{kindex(o)}}}
 
   Delete other windows.
 
 - {{{kbd(v d)}}} or short {{{kbd(d)}}}, ~org-agenda-day-view~ ::
+
   {{{kindex(v d)}}}
   {{{kindex(d)}}}
   {{{vindex(org-agenda-span)}}}
@@ -8579,6 +8852,7 @@ the other commands, the cursor needs to be in the desired line.
   interval 1938-2037.
 
 - {{{kbd(v w)}}} or short {{{kbd(w)}}}, ~org-agenda-week-view~ ::
+
   {{{kindex(v w)}}}
   {{{kindex(w)}}}
   {{{vindex(org-agenda-span)}}}
@@ -8593,6 +8867,7 @@ the other commands, the cursor needs to be in the desired line.
   interval 1938-2037.
 
 - {{{kbd(v m)}}}, ~org-agenda-month-view~ ::
+
   {{{kindex(v m)}}}
   {{{vindex(org-agenda-span)}}}
 
@@ -8605,6 +8880,7 @@ the other commands, the cursor needs to be in the desired line.
   digits, it will be mapped to the interval 1938-2037.
 
 - {{{kbd(v y)}}}, ~org-agenda-year-view~ ::
+
   {{{kindex(v y)}}}
   {{{vindex(org-agenda-span)}}}
 
@@ -8614,12 +8890,14 @@ the other commands, the cursor needs to be in the desired line.
   year.
 
 - {{{kbdspckey(v,SPC)}}}, ~org-agenda-reset-view~ ::
+
   {{{kindex(v @key{SPC})}}}
   {{{vindex(org-agenda-span)}}}
 
   Reset ~org-agenda-span~ to the current span.
 
 - {{{kbd(f)}}}, ~org-agenda-later~ ::
+
   {{{kindex(f)}}}
 
   Go forward in time to display the following ~org-agenda-current-span~
@@ -8628,31 +8906,37 @@ the other commands, the cursor needs to be in the desired line.
   ~org-agenda-current-span~ days.
 
 - {{{kbd(b)}}}, ~org-agenda-earlier~ ::
+
   {{{kindex(b)}}}
 
   Go backward in time to display earlier dates.
 
 - {{{kbd(.)}}}, ~org-agenda-goto-today~ ::
+
   {{{kindex(.)}}}
 
   Go to today.
 
 - {{{kbd(j)}}}, ~org-agenda-goto-date~ ::
+
   {{{kindex(j)}}}
   
   Prompt for a date and go there.
 
 - {{{kbd(J)}}}, ~org-agenda-clock-goto~ ::
+
   {{{kindex(J)}}}
 
    Go to the currently clocked-in task /in the agenda buffer/.
 
 - {{{kbd(D)}}}, ~org-agenda-toggle-diary~ ::
+
   {{{kindex(D)}}}
 
    Toggle the inclusion of diary entries.  See [[Weekly/daily agenda]].
 
 - {{{kbd(v l)}}} or {{{kbd(v L)}}} or short {{{kbd(l)}}}, ~org-agenda-log-mode~ ::
+
   {{{kindex(v l)}}}
   {{{kindex(l)}}}
   {{{kindex(v L)}}}
@@ -8670,6 +8954,7 @@ the other commands, the cursor needs to be in the desired line.
   equivalent to {{{kbd(C-u v l)}}}.
 
 - {{{kbd(v [)}}} or short {{{kbd([)}}}, ~org-agenda-manipulate-query-add~ ::
+
   {{{kindex(v [)}}}
   {{{kindex([)}}}
 
@@ -8677,6 +8962,7 @@ the other commands, the cursor needs to be in the desired line.
   weekly/daily agenda and timeline views.
 
 - {{{kbd(v a)}}}, ~org-agenda-archives-mode~ ::
+
   {{{kindex(v a)}}}
 
   Toggle Archives mode. In Archives mode, trees that are marked
@@ -8690,6 +8976,7 @@ the other commands, the cursor needs to be in the desired line.
   archive files. To exit archives mode, press {{{kbd(v a)}}}.
 
 - {{{kbd(v R)}}} or short {{{kbd(R)}}}, ~org-agenda-clockreport-mode~ ::
+
   {{{kindex(v R)}}}
   {{{kindex(R)}}}
   {{{vindex(org-agenda-start-with-clockreport-mode)}}}
@@ -8706,6 +8993,7 @@ the other commands, the cursor needs to be in the desired line.
   ~org-clock-report-include-clocking-task~.
 
 - {{{kbd(v c)}}} ::
+
   {{{kindex(v c)}}}
   {{{vindex(org-agenda-clock-consistency-checks)}}}
 
@@ -8718,6 +9006,7 @@ the other commands, the cursor needs to be in the desired line.
   mode.
 
 - {{{kbd(v E)}}} or short {{{kbd(E)}}}, ~org-agenda-entry-text-mode~ ::
+
   {{{kindex(v E)}}}
   {{{kindex(E)}}}
   {{{vindex(org-agenda-start-with-entry-text-mode)}}}
@@ -8731,6 +9020,7 @@ the other commands, the cursor needs to be in the desired line.
   value.
 
 - {{{kbd(G)}}}, ~org-agenda-toggle-time-grid~ ::
+
   {{{kindex(G)}}}
   {{{vindex(org-agenda-use-time-grid)}}}
   {{{vindex(org-agenda-time-grid)}}}
@@ -8739,6 +9029,7 @@ the other commands, the cursor needs to be in the desired line.
   ~org-agenda-use-time-grid~ and ~org-agenda-time-grid~.
 
 - {{{kbd(r)}}}, ~org-agenda-redo~ ::
+
   {{{kindex(r)}}}
 
   Recreate the agenda buffer, for example to reflect the changes after
@@ -8748,11 +9039,13 @@ the other commands, the cursor needs to be in the desired line.
   keyword.
 
 - {{{kbd(g)}}}, ~org-agenda-redo~ ::
+
   {{{kindex(g)}}}
 
   Same as {{{kbd(r)}}}.
 
 - {{{kbd(C-x C-s)}}} or short {{{kbd(s)}}}, ~org-save-all-org-buffers~ ::
+
   {{{kindex(C-x C-s)}}}
   {{{kindex(s)}}}
 
@@ -8760,6 +9053,7 @@ the other commands, the cursor needs to be in the desired line.
   locations of IDs.
 
 - {{{kbd(C-c C-x C-c)}}}, ~org-agenda-columns~ ::
+
   {{{kindex(C-c C-x C-c)}}}
   {{{vindex(org-columns-default-format)}}}
 
@@ -8771,6 +9065,7 @@ the other commands, the cursor needs to be in the desired line.
   ~org-columns-default-format~), will be used in the agenda.
 
 - {{{kbd(C-c C-x >)}}}, ~org-agenda-remove-restriction-lock~ ::
+
   {{{kindex(C-c C-x >)}}}
 
   Remove the restriction lock on the agenda, if it is currently
@@ -8785,6 +9080,7 @@ the other commands, the cursor needs to be in the desired line.
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(<)}}}, ~org-agenda-filter-by-category~ ::
+
   {{{kindex(<)}}}
   {{{vindex(org-agenda-category-filter-preset)}}}
 
@@ -8794,6 +9090,7 @@ the other commands, the cursor needs to be in the desired line.
   ~org-agenda-category-filter-preset~ (see below).
 
 - {{{kbd(/)}}}, ~org-agenda-filter-by-tag~ ::
+
   {{{kindex(/)}}}
   {{{vindex(org-agenda-tag-filter-preset)}}}
 
@@ -8866,8 +9163,10 @@ the other commands, the cursor needs to be in the desired line.
   #+end_src
 
 - ~\~ ~org-agenda-filter-by-tag-refine~ ::
+
   {{{kindex(XXX)}}}
   #+comment: Should be \
+
   Narrow the current agenda filter by an additional condition. When
   called with prefix arg, remove the entries that /do/ have the tag, or
   that do match the effort criterion. You can achieve the same effect by
@@ -8875,6 +9174,7 @@ the other commands, the cursor needs to be in the desired line.
   {{{kbd(/)}}} command.
 
 - {{{kbd([)}}} {{{kbd(])}}} {{{kbd({)}}} {{{kbd(})}}} in search view ::
+
   {{{kindex([)}}}
   {{{kindex(])}}}
   {{{kindex(@{)}}}
@@ -8896,6 +9196,7 @@ the other commands, the cursor needs to be in the desired line.
   Digit argument.
 
 - {{{kbd(C-_)}}}, ~org-agenda-undo~ ::
+
   {{{kindex(C-_)}}}
   {{{cindex(undoing remote-editing events)}}}
   {{{cindex(remote editing\\\, undo)}}}
@@ -8904,22 +9205,26 @@ the other commands, the cursor needs to be in the desired line.
   both in the agenda buffer and in the remote buffer.
 
 - {{{kbd(t)}}}, ~org-agenda-todo~ ::
+
   {{{kindex(t)}}}
 
   Change the TODO state of the item, both in the agenda and in the
   original org file.
 
 - {{{kbdkey(C-S-,right)}}}, ~org-agenda-todo-nextset~ ::
+
   {{{kindex(C-S-@key{right})}}}
 
   Switch to the next set of TODO keywords.
 
 - {{{kbdkey(C-S-,left)}}}, ~org-agenda-todo-previousset~ ::
+
   {{{kindex(C-S-@key{left})}}}
 
   Switch to the previous set of TODO keywords.
 
 - {{{kbd(C-k)}}}, ~org-agenda-kill~ ::
+
   {{{kindex(C-k)}}}
   {{{vindex(org-agenda-confirm-kill)}}}
 
@@ -8929,11 +9234,13 @@ the other commands, the cursor needs to be in the desired line.
   variable ~org-agenda-confirm-kill~.
 
 - {{{kbd(C-c C-w)}}}, ~org-agenda-refile~ ::
+
   {{{kindex(C-c C-w)}}}
 
   Refile the entry at point.
 
 - {{{kbd(C-c C-x C-a)}}} or short {{{kbd(a)}}}, ~org-agenda-archive-default-with-confirmation~ ::
+
   {{{kindex(C-c C-x C-a)}}}
   {{{kindex(a)}}}
   {{{vindex(org-archive-default-command)}}}
@@ -8943,17 +9250,20 @@ the other commands, the cursor needs to be in the desired line.
   using the ~a~ key, confirmation will be required.
 
 - {{{kbd(C-c C-x a)}}}, ~org-agenda-toggle-archive-tag~ ::
+
   {{{kindex(C-c C-x a)}}}
 
   Toggle the ARCHIVE tag for the current headline.
 
 - {{{kbd(C-c C-x A)}}}, ~org-agenda-archive-to-archive-sibling~ ::
+
   {{{kindex(C-c C-x A)}}}
 
   Move the subtree corresponding to the current entry to its /archive
   sibling/.
 
 - {{{kbd(C-c C-x C-s)}}} or short {{{kbd($)}}}, ~org-agenda-archive~ ::
+
   {{{kindex(C-c C-x C-s)}}}
   {{{kindex($)}}}
 
@@ -8962,6 +9272,7 @@ the other commands, the cursor needs to be in the desired line.
   likely a different file.
 
 - {{{kbd(T)}}}, ~org-agenda-show-tags~ ::
+
   {{{kindex(T)}}}
   {{{vindex(org-agenda-show-inherited-tags)}}}
 
@@ -8970,24 +9281,29 @@ the other commands, the cursor needs to be in the desired line.
   see all tags of a headline occasionally.
 
 - {{{kbd(:)}}}, ~org-agenda-set-tags~ ::
+
   {{{kindex(:)}}}
 
   Set tags for the current headline. If there is an active region in the
   agenda, change a tag for all headings in the region.
 
 - {{{kbd(,)}}} ::
+
   {{{kindex(XXX)}}}
   #+comment: Should be a comma
+
   Set the priority for the current item (~org-agenda-priority~). Org
   mode prompts for the priority character. If you reply with
   {{{key(SPC)}}}, the priority cookie is removed from the entry.
 
 - {{{kbd(P)}}}, ~org-agenda-show-priority~ ::
+
   {{{kindex(P)}}}
 
   Display weighted priority of current item.
 
 - {{{kbd(+)}}} {{{kbdkey(S-,up)}}}, ~org-agenda-priority-up~ ::
+
   {{{kindex(+)}}}
 
   Increase the priority of the current item. The priority is changed in
@@ -8995,11 +9311,13 @@ the other commands, the cursor needs to be in the desired line.
   {{{kbd(r)}}} key for this.
 
 - {{{kbd(-)}}} {{{kbdkey(S-,down)}}}, ~org-agenda-priority-down~ ::
+
   {{{kindex(-)}}}
 
   Decrease the priority of the current item.
 
 - {{{kbd(z)}}} {{{kbd(C-c C-z)}}}, ~org-agenda-add-note~ ::
+
   {{{kindex(z)}}}
   {{{vindex(org-log-into-drawer)}}}
 
@@ -9008,21 +9326,25 @@ the other commands, the cursor needs to be in the desired line.
   ~org-log-into-drawer~, this may be inside a drawer.
 
 - {{{kbd(C-c C-a)}}}, ~org-attach~ ::
+
   {{{kindex(C-c C-a)}}}
 
   Dispatcher for all command related to attachments.
 
 - {{{kbd(C-c C-s)}}}, ~org-agenda-schedule~ ::
+
   {{{kindex(C-c C-s)}}}
 
   Schedule this item.  With prefix arg remove the scheduling timestamp
 
 - {{{kbd(C-c C-d)}}}, ~org-agenda-deadline~ ::
+
   {{{kindex(C-c C-d)}}}
   
   Set a deadline for this item.  With prefix arg remove the deadline.
 
 - {{{kbdkey(S-,right)}}}, ~org-agenda-do-date-later~ ::
+
   {{{kindex(S-@key{right})}}}
 
   Change the timestamp associated with the current line by one day into
@@ -9038,12 +9360,14 @@ the other commands, the cursor needs to be in the desired line.
   buffer.
 
 - {{{kbdkey(S-,left)}}}, ~org-agenda-do-date-earlier~ ::
+
   {{{kindex(S-@key{left})}}}
 
   Change the timestamp associated with the current line by one day
   into the past.
 
 - {{{kbd(>)}}}, ~org-agenda-date-prompt~ ::
+
   {{{kindex(>)}}}
 
   Change the timestamp associated with the current line. The key
@@ -9051,27 +9375,32 @@ the other commands, the cursor needs to be in the desired line.
   on my keyboard.
 
 - {{{kbd(I)}}}, ~org-agenda-clock-in~ ::
+
   {{{kindex(I)}}}
 
   Start the clock on the current item. If a clock is running already, it
   is stopped first.
 
 - {{{kbd(O)}}}, ~org-agenda-clock-out~ ::
+
   {{{kindex(O)}}}
 
   Stop the previously started clock.
 
 - {{{kbd(X)}}}, ~org-agenda-clock-cancel~ ::
+
   {{{kindex(X)}}}
 
   Cancel the currently running clock.
 
 - {{{kbd(J)}}}, ~org-agenda-clock-goto~ ::
+
   {{{kindex(J)}}}
 
   Jump to the running clock in another window.
 
 - {{{kbd(k)}}}, ~org-agenda-capture~ ::
+
   {{{kindex(k)}}}
   {{{cindex(capturing\\\, from agenda)}}}
   {{{vindex(org-capture-use-agenda-date)}}}
@@ -9087,27 +9416,32 @@ the other commands, the cursor needs to be in the desired line.
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(m)}}}, ~org-agenda-bulk-mark~ ::
+
   {{{kindex(m)}}}
 
   Mark the entry at point for bulk action. With prefix arg, mark that
   many successive entries.
 
 - {{{kbd(%)}}}, ~org-agenda-bulk-mark-regexp~ ::
+
   {{{kindex(%)}}}
 
   Mark entries matching a regular expression for bulk action.
 
 - {{{kbd(u)}}}, ~org-agenda-bulk-unmark~ ::
+
   {{{kindex(u)}}}
 
   Unmark entry for bulk action.
 
 - {{{kbd(U)}}}, ~org-agenda-bulk-remove-all-marks~ ::
+
   {{{kindex(U)}}}
 
   Unmark all marked entries for bulk action.
 
 - {{{kbd(B)}}}, ~org-agenda-bulk-action~ ::
+
   {{{kindex(B)}}}
 
   Bulk action: act on all marked entries in the agenda. This will prompt
@@ -9192,17 +9526,20 @@ the other commands, the cursor needs to be in the desired line.
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(c)}}}, ~org-agenda-goto-calendar~ ::
+
   {{{kindex(c)}}}
 
   Open the Emacs calendar and move to the date at the agenda cursor.
 
 - {{{kbd(c)}}}, ~org-calendar-goto-agenda~ ::
+
   {{{kindex(c)}}}
 
   When in the calendar, compute and show the Org mode agenda for the
   date at the cursor.
 
 - {{{kbd(i)}}}, ~org-agenda-diary-entry~ ::
+
   {{{kindex(i)}}}
   {{{vindex(org-agenda-diary-file)}}}
   {{{cindex(diary entries\\\, creating from agenda)}}}
@@ -9226,23 +9563,27 @@ the other commands, the cursor needs to be in the desired line.
   there. See also the {{{kbd(k r)}}} command.
 
 - {{{kbd(M)}}}, ~org-agenda-phases-of-moon~ ::
+
   {{{kindex(M)}}}
 
   Show the phases of the moon for the three months around current date.
 
 - {{{kbd(S)}}}, ~org-agenda-sunrise-sunset~ ::
+
   {{{kindex(S)}}}
 
   Show sunrise and sunset times. The geographical location must be set
   with calendar variables, see the documentation for the Emacs calendar.
 
 - {{{kbd(C)}}}, ~org-agenda-convert-date~ ::
+
   {{{kindex(C)}}}
 
   Convert the date at cursor into many other cultural and historic
   calendars.
 
 - {{{kbd(H)}}}, ~org-agenda-holidays~ ::
+
   {{{kindex(H)}}}
 
   Show holidays for three months around the cursor date.
@@ -9256,6 +9597,7 @@ the other commands, the cursor needs to be in the desired line.
 *** Exporting to a file
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-x C-w)}}}, ~org-agenda-write~ ::
+
   {{{kindex(C-x C-w)}}}
   {{{cindex(exporting agenda views)}}}
   {{{cindex(agenda views\\\, exporting)}}}
@@ -9273,11 +9615,13 @@ the other commands, the cursor needs to be in the desired line.
 *** Quit and exit
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(q)}}}, ~org-agenda-quit~ ::
+
   {{{kindex(q)}}}
 
   Quit agenda, remove the agenda buffer.
 
 - {{{kbd(x)}}}, ~org-agenda-exit~ ::
+
   {{{kindex(x)}}}
   {{{cindex(agenda files\\\, removing buffers)}}}
 
@@ -9962,6 +10306,7 @@ surrounded by {{{samp(#+BEGIN_COMMENT)}}} ...
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c ;)}}} ::
+
   {{{kindex(C-c ;)}}}
 
   Toggle the COMMENT keyword at the beginning of an entry.
@@ -10105,6 +10450,7 @@ often, shortcuts are provided using the Easy Templates facility (see
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c ')}}} ::
+
   {{{kindex(C-c ')}}}
 
   Edit the source code example at point in its native mode. This works
@@ -10117,6 +10463,7 @@ often, shortcuts are provided using the Easy Templates facility (see
   fixed-width region. 
 
 - {{{kbd(C-c l)}}} ::
+
   {{{kindex(C-c l)}}}
 
   Calling ~org-store-link~ while editing a source code example in a
@@ -10177,6 +10524,7 @@ omitted to use the obvious defaults.
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c ')}}}
+
   {{{kindex(C-c ')}}}
 
   Visit the include file at point.
@@ -10284,8 +10632,10 @@ following command:[fn:108]
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x XXX)}}} ::
+
   {{{kindex(C-c C-x XXX)}}}
-#+comment: Should be \
+  #+comment: Should be \
+  
   Toggle display of entities as UTF-8 characters. This does not change
   the buffer content which remains plain ASCII, but it overlays the
   UTF-8 character for display purposes only.
@@ -10327,8 +10677,10 @@ subscript, but ~a_{b}~ will.
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x XXX)}}} ::
+
   {{{kindex(C-c C-x XXX)}}}
-#+comment: Should be \
+  #+comment: Should be \
+
   In addition to showing entities as UTF-8 characters, this command will
   also format sub- and superscripts in a WYSIWYM way.
 
@@ -10419,6 +10771,7 @@ processed to produce preview images of the typeset expressions:
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x C-l)}}} ::
+
   {{{kindex(C-c C-x C-l)}}}
 
   Produce a preview image of the LaTeX fragment at point and overlay
@@ -10429,6 +10782,7 @@ processed to produce preview images of the typeset expressions:
   process the entire buffer.
 
 - {{{kbd(C-c C-c)}}} ::
+
   {{{kindex(C-c C-c)}}}
 
   Remove the overlay preview images.
@@ -10471,11 +10825,13 @@ details see the documentation of CDLaTeX mode):
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c {)}}} ::
+
   {{{kindex(C-c @{)}}}
 
   Insert an environment template.
 
 - {{{key(TAB)}}} ::
+
   {{{kindex(@key{TAB})}}}
 
   Expand a template if the cursor is inside a LaTeX fragment.[fn:112]
@@ -10489,6 +10845,7 @@ details see the documentation of CDLaTeX mode):
   abbreviations, type {{{kbd(M-x cdlatex-command-help)}}}.
 
 - {{{kbd(_)}}} {{{kbd(^)}}} ::
+
   {{{kindex(_)}}}
   {{{kindex(^)}}}
   {{{vindex(cdlatex-simplify-sub-super-scripts)}}}
@@ -10500,6 +10857,7 @@ details see the documentation of CDLaTeX mode):
   the variable ~cdlatex-simplify-sub-super-scripts~).
 
 - {{{kbd(`)}}} ::
+
   {{{kindex(`)}}}
 
   Pressing the backquote followed by a character inserts math macros,
@@ -10507,6 +10865,7 @@ details see the documentation of CDLaTeX mode):
   after the backquote, a help window will pop up.
 
 - {{{kbd(')}}} ::
+
   {{{kindex(')}}}
 
   Pressing the single-quote followed by another character modifies the
@@ -10590,6 +10949,7 @@ a separate file which can be included using ~#+SETUPFILE~.
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-e t)}}}, ~org-insert-export-options-template~ ::
+
   {{{kindex(C-c C-e t)}}}
 
   Insert template with export options, see example below.
@@ -10843,6 +11203,7 @@ used as document title and the subtrees are exported.
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-e)}}}, ~org-export~ ::
+
   {{{kindex(C-c C-e)}}}
   {{{vindex(org-export-run-in-background)}}}
 
@@ -10853,12 +11214,14 @@ used as document title and the subtrees are exported.
   background, in a separate Emacs process.[fn:115]
 
 - {{{kbd(C-c C-e v)}}}, ~org-export-visible~ ::
+
   {{{kindex(C-c C-e v)}}}
 
   Like {{{kbd(C-c C-e)}}}, but only export the text that is currently visible
   (i.e., not hidden by outline visibility).
 
 - {{{kbd(C-u C-u C-c C-e)}}}, ~org-export~ ::
+
   {{{kindex(C-u C-u C-c C-e)}}}
   {{{vindex(org-export-run-in-background)}}}
 
@@ -10885,6 +11248,7 @@ these encodings.
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-e a)}}}, ~org-export-as-ascii~ ::
+
   {{{kindex(C-c C-e a)}}}
   {{{cindex(property\\\, EXPORT_FILE_NAME)}}}
 
@@ -10897,32 +11261,38 @@ these encodings.
   name will be used for the export.
 
 - {{{kbd(C-c C-e A)}}}, ~org-export-as-ascii-to-buffer~ ::
+
   {{{kindex(C-c C-e A)}}}
 
   Export to a temporary buffer.  Do not create a file.
 
 - {{{kbd(C-c C-e n)}}}, ~org-export-as-latin1~ ::
+
   {{{kindex(C-c C-e n)}}}
 
   Like {{{kbd(C-c C-e a)}}}, but use Latin-1 encoding.
 
 - {{{kbd(C-c C-e N)}}}, ~org-export-as-latin1-to-buffer~ ::
+
   {{{kindex(C-c C-e N)}}}
 
   Like {{{kbd(C-c C-e A)}}}, but use Latin-1 encoding.
 
 - {{{kbd(C-c C-e u)}}}, ~org-export-as-utf8~ ::
+
   {{{kindex(C-c C-e u)}}}
 
   Like {{{kbd(C-c C-e a)}}}, but use UTF-8 encoding.
 
 - {{{kbd(C-c C-e U)}}}, ~org-export-as-utf8-to-buffer~ ::
+
   {{{kindex(C-c C-e U)}}}
 
   Like {{{kbd(C-c C-e A)}}}, but use UTF-8 encoding.
 
 
 - {{{kbd(C-c C-e v a/n/u)}}} ::
+
   {{{kindex(C-c C-e v a)}}}
   {{{kindex(C-c C-e v n)}}}
   {{{kindex(C-c C-e v u)}}}
@@ -10978,6 +11348,7 @@ but with additional support for tables.
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-e h)}}}, ~org-export-as-html~ ::
+
   {{{kindex(C-c C-e h)}}}
   {{{cindex(property\\\, EXPORT_FILE_NAME)}}}
 
@@ -10990,16 +11361,19 @@ but with additional support for tables.
   that name will be used for the export.
 
 - {{{kbd(C-c C-e b)}}}, ~org-export-as-html-and-open~ ::
+
   {{{kindex(C-c C-e b)}}}
 
   Export as a HTML file and immediately open it with a browser.
 
 - {{{kbd(C-c C-e H)}}}, ~org-export-as-html-to-buffer~ ::
+
   {{{kindex(C-c C-e H)}}}
 
   Export to a temporary buffer.  Do not create a file.
 
 - {{{kbd(C-c C-e R)}}}, ~org-export-region-as-html~ ::
+
   {{{kindex(C-c C-e R)}}}
 
   Export the active region to a temporary buffer. With a prefix
@@ -11008,6 +11382,7 @@ but with additional support for tables.
   operations.
 
 - {{{kbd(C-c C-e v h/b/H/R)}}} ::
+
   {{{kindex(C-c C-e v h)}}}
   {{{kindex(C-c C-e v b)}}}
   {{{kindex(C-c C-e v H)}}}
@@ -11448,6 +11823,7 @@ hierarchy of sections.
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-e l)}}}, ~org-export-as-latex~ ::
+
   {{{kindex(C-c C-e l)}}}
   {{{cindex(property EXPORT_FILE_NAME)}}}
 
@@ -11460,6 +11836,7 @@ hierarchy of sections.
   that name will be used for the export.
 
 - {{{kbd(C-c C-e L)}}}, ~org-export-as-latex-to-buffer~ ::
+
   {{{kindex(C-c C-e L)}}}
 
   Export to a temporary buffer.  Do not create a file.
@@ -11480,11 +11857,13 @@ hierarchy of sections.
   LaTeX code.
 
 - {{{kbd(C-c C-e p)}}}, ~org-export-as-pdf~ ::
+
   {{{kindex(C-c C-e p)}}}
 
   Export as LaTeX and then process to PDF.
 
 - {{{kbd(C-c C-e d)}}}, ~org-export-as-pdf-and-open~ ::
+
   {{{kindex(C-c C-e d)}}}
 
   Export as LaTeX and then process to PDF, then open the resulting
@@ -11763,6 +12142,7 @@ support with the following line:
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-b)}}}, ~org-beamer-select-environment~ ::
+
   {{{kindex(C-c C-b)}}}
 
   In ~org-beamer-mode~, this key offers fast selection of a beamer
@@ -11838,6 +12218,7 @@ Currently DocBook exporter only supports DocBook V5.0.
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-e D)}}}, ~org-export-as-docbook~ ::
+
   {{{kindex(C-c C-e D)}}}
   {{{cindex(property EXPORT_FILE_NAME)}}}
 
@@ -11850,6 +12231,7 @@ Currently DocBook exporter only supports DocBook V5.0.
   name will be used for the export.
 
 - {{{kbd(C-c C-e V)}}}, ~org-export-as-docbook-pdf-and-open~ ::
+
   {{{kindex(C-c C-e V)}}}
 
   Export as a DocBook file, process to PDF, then open the resulting PDF
@@ -11873,6 +12255,7 @@ Currently DocBook exporter only supports DocBook V5.0.
   adding an in-buffer setting ~#+XSLT:~ to the Org file.
 
 - {{{kbd(C-c C-e v D)}}} ::
+
   {{{kindex(C-c C-e v D)}}}
 
   Export only the visible part of the document.
@@ -12066,6 +12449,7 @@ further.
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-e o)}}}, ~org-export-as-odt~ ::
+
   {{{kindex(C-c C-e o)}}}
   {{{cindex(property EXPORT_FILE_NAME)}}}
 
@@ -12086,6 +12470,7 @@ further.
   used for the export.
 
 - {{{kbd(C-c C-e O)}}}, ~org-export-as-odt-and-open~ ::
+
   {{{kindex(C-c C-e O)}}}
 
   Export as an OpenDocument Text file and open the resulting file.
@@ -12148,6 +12533,7 @@ with it using the following command.
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(M-x org-export-odt-convert)}}} ::
+
   {{{vindex(org-export-odt-convert)}}}
 
   Convert an existing document from one format to another. With a prefix
@@ -12446,6 +12832,7 @@ document in one of the following ways:
     system-registered application.
 
 - PNG images ::
+
   {{{cindex(dvipng)}}}
 
   This option is activated on a per-file basis with
@@ -12622,6 +13009,7 @@ by the variable ~org-odt-styles-dir~.  The two files are:
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{file(OrgOdtStyles.xml)}}} ::
+
   <<x-orgodtstyles-xml>>
 
   This file contributes to the {{{file(styles.xml)}}} file of the final
@@ -12630,6 +13018,7 @@ by the variable ~org-odt-styles-dir~.  The two files are:
   {{{file(htmlfontify.el)}}} for fontification of code blocks.
 
 - {{{file(OrgOdtContentTemplate.xml)}}} ::
+
   <<x-orgodtcontenttemplate-xml>>
 
   This file contributes to the {{{file(content.xml)}}} file of the final
@@ -12654,6 +13043,7 @@ the exporter.
 
 #+attr_texinfo: :table-type table :indic @asis
 - ~org-export-odt-styles-file~ ::
+
   <<x-org-export-odt-styles-file>>
 
   Use this variable to specify the {{{file(styles.xml)}}} that will be
@@ -12682,6 +13072,7 @@ the exporter.
     Use the default {{{file(styles.xml)}}}
 
 - ~org-export-odt-content-template-file~ ::
+
   <<x-org-export-odt-content-template-file>>
 
   Use this variable to specify the blank {{{file(content.xml)}}} that
@@ -12942,11 +13333,13 @@ and the attributes defined in all the nodes.
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-e j)}}}, ~org-export-as-taskjuggler~ ::
+
   {{{kindex(C-c C-e j)}}}
 
   Export as a TaskJuggler file.
 
 - {{{kbd(C-c C-e J)}}}, ~org-export-as-taskjuggler-and-open~ ::
+
   {{{kindex(C-c C-e J)}}}
 
   Export as a TaskJuggler file and then open the file with TaskJugglerUI
@@ -13097,6 +13490,7 @@ The Freemind exporter was written by Lennart Borgman.
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-e m)}}}, ~org-export-as-freemind~ ::
+
   {{{kindex(C-c C-e m)}}}
 
   Export as a Freemind mind map. For an Org file {{{file(myfile.org)}}},
@@ -13114,12 +13508,14 @@ and does not interpret any additional Org mode features.
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-e x)}}}, ~org-export-as-xoxo~ ::
+
   {{{kindex(C-c C-e x)}}}
 
   Export as an XOXO file. For an Org file {{{file(myfile.org)}}}, the
   XOXO file will be {{{file(myfile.html)}}}.
 
 - {{{kbd(C-c C-e v x)}}} ::
+
   {{{kindex(C-c C-e v x)}}}
 
   Export only the visible part of the document.
@@ -13167,12 +13563,14 @@ different instances originate.
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-e i)}}}, ~org-export-icalendar-this-file~ ::
+
   {{{kindex(C-c C-e i)}}}
 
   Create iCalendar entries for the current file and store them in the
   same directory, using a file extension {{{file(.ics)}}}.
 
 - {{{kbd(C-c C-e I)}}}, ~ org-export-icalendar-all-agenda-files~ ::
+
   {{{kindex(C-c C-e I)}}}
   {{{vindex(org-agenda-files)}}}
 
@@ -13181,6 +13579,7 @@ different instances originate.
   will be written.
 
 - {{{kbd(C-c C-e c)}}}, ~org-export-icalendar-combine-agenda-files~ ::
+
   {{{kindex(C-c C-e c)}}}
   {{{vindex(org-combined-agenda-icalendar-file)}}}
 
@@ -13532,6 +13931,7 @@ function for checking link validity:
 
 #+attr_texinfo: :table-type table :indic @asis
 - ~:link-validation-function~ ::
+
   Function to validate links
 
 
@@ -13765,21 +14165,25 @@ Once properly configured, Org can publish with the following commands:
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-e X)}}}, ~org-publish~ ::
+
   {{{kindex(C-c C-e X)}}}
   
   Prompt for a specific project and publish all files that belong to it.
 
 - {{{kbd(C-c C-e P)}}}, ~org-publish-current-project~ ::
+
   {{{kindex(C-c C-e P)}}}
 
   Publish the project containing the current file.
 
 - {{{kbd(C-c C-e F)}}}, ~org-publish-current-file~ ::
+
   {{{kindex(C-c C-e F)}}}
 
   Publish only the current file.
 
 - {{{kbd(C-c C-e E)}}}, ~org-publish-all~ ::
+
   {{{kindex(C-c C-e E)}}}
 
   Publish every project.
@@ -13864,6 +14268,7 @@ or
 
 #+attr_texinfo: :table-type table :indic @asis
 - ~<#+NAME: name>~ ::
+
   {{{cindex(#+NAME)}}}
 
   This line associates a name with the code block. This is similar to
@@ -13875,17 +14280,20 @@ or
   share the same name is undefined.
 
 - ~<language>~ ::
+
   {{{cindex(source code\\\, language)}}}
 
   The language of the code in the block (see [[Languages]]).
 
 - ~<switches>~ ::
+
   {{{cindex(source code\\\, switches)}}}
 
   Optional switches control code block export (see the discussion of
   switches in [[Literal examples]]).
 
 - ~<header arguments>~ ::
+
   {{{cindex(source code\\\, header arguments)}}}
 
   Optional header arguments control many aspects of evaluation, export
@@ -14021,6 +14429,7 @@ variable and ``noweb'' style references (see [[Noweb reference syntax]]).
 *** Functions for tangling
 #+attr_texinfo: :table-type table :indic @asis
 - ~org-babel-tangle~ ::
+
   {{{kindex(C-c C-v t)}}}
 
   Tangle the current file.  Bound to {{{kbd(C-c C-v t)}}}.
@@ -14028,6 +14437,7 @@ variable and ``noweb'' style references (see [[Noweb reference syntax]]).
   With a prefix argument only tangle the current code block.
 
 - ~org-babel-tangle-file~ ::
+
   {{{kindex(C-c C-v f)}}}
 
   Choose a file to tangle.  Bound to {{{kbd(C-c C-v f)}}}.
@@ -15847,6 +16257,7 @@ buffer and use the {{{key(TAB)}}} key to complete text right there.
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbdkey(M-,TAB)}}} ::
+
   {{{kindex(M-@key{TAB})}}}
 
   Complete word at point.
@@ -15857,6 +16268,7 @@ buffer and use the {{{key(TAB)}}} key to complete text right there.
 
   - After {{{kbd(XXX)}}} :: 
     #+comment: Should be \
+
     Complete TeX symbols supported by the exporter.
 
   - After {{{samp(*)}}} :: 
@@ -16098,6 +16510,7 @@ effective only when the file is visited again in a new Emacs session.
   before it.
 
 - {{{kbd(#+COLUMNS: %25ITEM ...)}}} ::
+
   {{{cindex(property\\\, COLUMNS)}}}
 
   Set the default format for columns view. This format applies when
@@ -16105,6 +16518,7 @@ effective only when the file is visited again in a new Emacs session.
   applies.
 
 - {{{kbd(#+CONSTANTS: name1=value1 ...)}}} ::
+
   {{{vindex(org-table-formula-constants)}}}
   {{{vindex(org-table-formula)}}}
 
@@ -16118,18 +16532,21 @@ effective only when the file is visited again in a new Emacs session.
   top-level entries.
 
 - {{{kbd(#+DRAWERS: NAME1 ...)}}} ::
+
   {{{vindex(org-drawers)}}}
 
   Set the file-local set of additional drawers. The corresponding global
   variable is ~org-drawers~.
 
 - {{{kbd(#+LINK:  linkword replace)}}} ::
+
   {{{vindex(org-link-abbrev-alist)}}}
 
   These lines (several are allowed) specify link abbreviations. See
   [[Link abbreviations]]. The corresponding variable is ~org-link-abbrev-alist~.
 
 - {{{kbd(#+PRIORITIES: highest lowest default)}}} ::
+
   {{{vindex(org-highest-priority)}}}
   {{{vindex(org-lowest-priority)}}}
   {{{vindex(org-default-priority)}}}
@@ -16144,6 +16561,7 @@ effective only when the file is visited again in a new Emacs session.
   buffer, most useful for specifying the allowed values of a property.
 
 - {{{kbd(#+SETUPFILE: file)}}} ::
+
   {{{cindex(#+SETUPFILE)}}}
 
   This line defines a file that holds more in-buffer setup. Normally
@@ -16156,6 +16574,7 @@ effective only when the file is visited again in a new Emacs session.
   with {{{kbd(C-c ')}}}.
 
 - {{{kbd(#+STARTUP:)}}} ::
+
   {{{cindex(#+STARTUP:)}}}
 
   This line sets options to be used at startup of Org mode, when an
@@ -16489,6 +16908,7 @@ display, Org supports you in the following way:
   preserving or adapting the indentation as appropriate.[fn:157]
 
 - Hiding leading stars ::
+
   {{{vindex(org-hide-leading-stars)}}}
 
   You can modify the display in such a way that all leading stars become
@@ -16518,7 +16938,9 @@ display, Org supports you in the following way:
   wanted effect. Another possibility is to set this font such that the
   extra stars are /almost/ invisible, for example using the color
   ~grey90~ on a white background.
+
 - Odd levels ::
+
   {{{vindex(org-odd-levels-only)}}}
 
   Things become cleaner still if you skip all the even levels and use
@@ -16598,6 +17020,7 @@ with other code out there.
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{file(calc.el)}}} by Dave Gillespie ::
+
   {{{cindex(@file{calc.el})}}}
   {{{cindex(Gillespie\\\, Dave)}}}
 
@@ -16610,6 +17033,7 @@ with other code out there.
   calculations. See [[info:calc:Embedded Mode][GNU Emacs Calc Manual]].
 
 - {{{file(constants.el)}}} by Carsten Dominik ::
+
   {{{cindex(@file{constants.el})}}}
   {{{cindex(Dominik\\\, Carsten)}}}
   {{{vindex(org-table-formula-constants)}}}
@@ -16633,6 +17057,7 @@ with other code out there.
   LaTeX fragments into Org files. See [[CDLaTeX mode]].
 
 - {{{file(imenu.el)}}} by Ake Stenhoff and Lars Lindberg ::
+
   {{{cindex(@file{imenu.el})}}}
   {{{cindex(Stenhoff\\\, Ake)}}}
   {{{cindex(Lindberg\\\, Lars)}}}
@@ -16651,12 +17076,14 @@ with other code out there.
   using the option ~org-imenu-depth~.
 
 - {{{file(remember.el)}}} by John Wiegley ::
+
   {{{cindex(@file{remember.el})}}}
   {{{cindex(Wiegley\\\, John)}}}
 
   Org used to use this package for capture, but no longer does.
 
 - {{{file(speedbar.el)}}} by Eric M. Ludlam ::
+
   {{{cindex(@file{speedbar.el})}}}
   {{{cindex(Ludlam\\\, Eric M.)}}}
 
@@ -16667,6 +17094,7 @@ with other code out there.
   the command {{{kbd(<)}}} in the Speedbar frame.
 
 - {{{file(table.el)}}} by Takaaki Ota ::
+
   {{{kindex(C-c C-c)}}}
   {{{cindex(table editor\\\, @file{table.el})}}}
   {{{cindex(@file{table.el})}}}
@@ -16681,14 +17109,17 @@ with other code out there.
   {{{kbd(C-c ')}}} to edit them, similar to source code snippets.
 
   - {{{kbd(C-c ')}}}, ~org-edit-special~ ::
+
     {{{kindex(C-c ')}}}
 
     Edit a {{{file(table.el)}}} table. Works when the cursor is in a
     table.el table.
 
   - {{{kbd(C-c XXX)}}}, ~org-table-create-with-table.el~ ::
+
     {{{kindex(C-c ~)}}}
     #+comment: Should be ~
+
     Insert a {{{file(table.el)}}} table. If there is already a table at
     point, this command converts it between the {{{file(table.el)}}}
     format and the Org mode format. See the documentation string of the
@@ -16698,6 +17129,7 @@ with other code out there.
   {{{file(table.el)}}} is part of Emacs since Emacs 22.
 
 - {{{file(footnote.el)}}} by Steven L. Baur ::
+
   {{{cindex(@file{footnote.el})}}}
   {{{cindex(Baur\\\, Steven L.)}}}
 
@@ -16728,6 +17160,7 @@ region even if the cursor moves across a special context.
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{file(CUA.el)}}} by Kim. F. Storm ::
+
   {{{cindex(@file{CUA.el})}}}
   {{{cindex(Storm\\\, Kim. F.)}}}
   {{{vindex(org-replace-disputed-keys)}}}
@@ -17431,11 +17864,13 @@ Dynamic blocks are updated with the following commands:
 
 #+attr_texinfo: :table-type table :indic @asis
 - {{{kbd(C-c C-x C-u)}}}, ~org-dblock-update~ ::
+
   {{{kindex(C-c C-x C-u)}}}
 
   Update dynamic block at point.
 
 - {{{kbd(C-u C-c C-x C-u)}}} ::
+
   {{{kindex(C-u C-c C-x C-u)}}}
 
   Update all dynamic blocks in the current file.
@@ -18063,6 +18498,7 @@ entries. Here is how it works:
 
    #+attr_texinfo: :table-type table :indic @asis
    - {{{kbd(?)}}} ::
+
      {{{kindex(?)}}}
 
      Pressing {{{kbd(?)}}} in that special agenda will display the full
@@ -18507,21 +18943,20 @@ license to the document, as described in section 6 of the license.
 #+END_QUOTE
 
 * Instructions for use                                             :noexport:
-- [ ] Tangle the makefile, `C-c C-v t'
 - [ ] Execute [[Editing setup][this source code block]]
 - [ ] Asynchronously generate the info file, `C-e i i'
 
-* Improvements and fixes [6/12]                                    :noexport:
+* Improvements and fixes [8/12] 				   :noexport:
 - [X] Jon will fix detailed node listing
 - [X] Jon will fix :INDEX: property
-- [ ] New link type to generate pxref? (asked on ML)
+- [X] New link type to generate pxref? (asked on ML)
 - [X] New macro for kbdkey that preserves space, e.g., `C-c <RET>'
 - [X] Indent examples one more space to match indentation of footnotes
 - [ ] How to generate @kbd{\}?
 - [ ] How to generate @kbd{~}?
 - [ ] How to include GNU Free Documentation License as Appendix D?
 - [X] Straighten out footnotes
-- [ ] Truncated footnote (asked on ML)
+- [X] Truncated footnote (asked on ML)
 - [ ] Resolve macros with XXX arguments
 - [X] Get @appendix instead of @chapter?
 
@@ -19709,5 +20144,8 @@ always according to ISO and therefore independent of the value of
 
 [fn:184] Symbolic links in ~org-directory~ need to have the same name
 as their targets.
+
+[fn:185] The {{{file(local.mk)}}} template is designed to work out of
+the box with GNU systems.
 
 
