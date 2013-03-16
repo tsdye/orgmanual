@@ -262,7 +262,7 @@ default.  If you are using an earlier version of Emacs, add this line to your
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 #+end_src
 
-Org mode buffers need font-lock to be turned on - this is the default in
+Org mode buffers need font-lock to be turned on: this is the default in
 Emacs.[fn:5]
 
 There are compatibility issues between Org mode and some other Elisp
@@ -645,6 +645,7 @@ Org uses just two commands, bound to {{{key(TAB)}}} and
      in the region into the kill ring.
 
 {{{vindex(org-startup-folded)}}}
+{{{vindex(org-agenda-inhibit-startup)}}}
 {{{cindex(~overview~\\\, STARTUP keyword)}}}
 {{{cindex(~content~\\\, STARTUP keyword)}}}
 {{{cindex(~showall~\\\, STARTUP keyword)}}}
@@ -656,12 +657,16 @@ configured through the variable ~org-startup-folded~, or on a
 per-file basis by adding one of the following lines anywhere in the
 buffer:
 
-#+begin_src org 
+#+begin_example
   ,#+STARTUP: overview
   ,#+STARTUP: content
   ,#+STARTUP: showall
   ,#+STARTUP: showeverything
-#+end_src
+#+end_example
+
+The startup visibility options are ignored when the file is open for the
+first time during the agenda generation: if you want the agenda to honor
+the startup visibility, set {{{code(org-agenda-inhibit-startup)}}} to nil.
 
 {{{cindex(property\\\, VISIBILITY)}}}
 
@@ -752,25 +757,27 @@ The following commands jump to other headlines in the buffer.
 {{{cindex(subtrees\\\, cut and paste)}}}
 
 #+attr_texinfo: :table-type table :indic @asis
-  - {{{kbdkey(M-,RET)}}}, ~org-insert-heading~ :: Insert new heading
-       with same level as current. If the cursor is in a plain list
-       item, a new item is created (see [[Plain lists]]). To force
-       creation of a new headline, use a prefix argument. When this
-       command is used in the middle of a line, the line is split and
-       the rest of the line becomes the new headline.[fn:11] If the
-       command is used at the beginning of a headline, the new
-       headline is created before the current line. If at the
-       beginning of any other line, the content of that line is made
-       the new heading. If the command is used at the end of a folded
-       subtree (i.e., behind the ellipses at the end of a headline),
-       then a headline like the current one will be inserted after the
-       end of the subtree.
+- {{{kbdkey(M-,RET)}}}, ~org-insert-heading~ :: 
 
-       {{{kindex(M-RET)}}}
-       {{{findex(org-insert-heading)}}}
-       {{{vindex(org-M-RET-may-split-line )}}}
+  {{{kindex(M-RET)}}}
+  {{{findex(org-insert-heading)}}}
+  {{{vindex(org-M-RET-may-split-line )}}}
 
-  - {{{kbdkey(C-,RET)}}}, ~org-insert-heading-respect-content~ :: Just
+  Insert a new heading/item with the same level as the one at point.
+  If the cursor is in a plain list item, a new item is created (see
+  [[Plain lists]]).  To prevent this behavior in lists, call the command
+  with a prefix argument.  When this command is used in the middle of
+  a line, the line is split and the rest of the line becomes the new
+  item or headline.[fn:11] If the command is used at the /beginning/
+  of a headline, the new headline is created before the current line.
+  If the command is used at the /end/ of a folded subtree (i.e.,
+  behind the ellipses at the end of a headline), then a headline like
+  the current one will be inserted after the end of the subtree.
+  Calling this command with ~C-u C-u~ will unconditionnally respect
+  the headline's content and create a new item at the end of the
+  parent subtree.
+
+- {{{kbdkey(C-,RET)}}}, ~org-insert-heading-respect-content~ :: Just
        like {{{kbdkey(M-,RET)}}}, except when adding a new heading
        below the current heading, the new heading is placed after the
        body instead of before it. This command works from anywhere in
@@ -779,7 +786,7 @@ The following commands jump to other headlines in the buffer.
        {{{kindex(C-RET)}}}
        {{{findex(org-insert-heading-respect-content)}}}
 
-  - {{{kbdkey(M-S-,RET)}}}, ~org-insert-todo-heading~ :: Insert new
+- {{{kbdkey(M-S-,RET)}}}, ~org-insert-todo-heading~ :: Insert new
        TODO entry with same level as current heading.  See also the
        variable ~org-treat-insert-todo-heading-as-state-change~.
 
@@ -787,7 +794,7 @@ The following commands jump to other headlines in the buffer.
        {{{findex(org-insert-todo-heading)}}}
        {{{vindex(org-treat-insert-todo-heading-as-state-change)}}}
 
-  - {{{kbdkey(C-S-,RET)}}}, ~org-insert-todo-heading-respect-content~ :: Insert
+- {{{kbdkey(C-S-,RET)}}}, ~org-insert-todo-heading-respect-content~ :: Insert
        new TODO entry with same level as current heading. Like
        {{{kbdkey(C-,RET)}}}, the new headline will be inserted after
        the current subtree.
@@ -795,7 +802,7 @@ The following commands jump to other headlines in the buffer.
        {{{kindex(C-S-RET)}}}
        {{{findex(org-insert-todo-heading-respect-content)}}}
 
-  - {{{key(TAB)}}}, ~org-cycle~ :: In a new entry with no text
+- {{{key(TAB)}}}, ~org-cycle~ :: In a new entry with no text
        yet, the first {{{key(TAB)}}} demotes the entry to become a
        child of the previous one. The next {{{key(TAB)}}} makes it a
        parent, and so on, all the way to top level. Yet another
@@ -804,57 +811,69 @@ The following commands jump to other headlines in the buffer.
        {{{kindex(@key{TAB})}}}
        {{{findex(org-cycle)}}}
 
-  - {{{kbdkey(M-,left)}}}, ~org-do-promote~ :: Promote current heading
+- {{{kbdkey(M-,left)}}}, ~org-do-promote~ :: Promote current heading
        by one level.
 
        {{{kindex(M-,left)}}}
        {{{findex(org-do-promote)}}}
 
-  - {{{kbdkey(M-,right)}}}, ~org-do-demote~ :: Demote current heading
+- {{{kbdkey(M-,right)}}}, ~org-do-demote~ :: Demote current heading
        by one level.
 
        {{{kindex(M-,right)}}}
        {{{findex(org-do-demote)}}}
 
-  - {{{kbdkey(M-S-,left)}}}, ~org-promote-subtree~ :: Promote the
+- {{{kbdkey(M-S-,left)}}}, ~org-promote-subtree~ :: Promote the
        current subtree by one level.
 
        {{{kindex(M-S-,left)}}}
        {{{findex(org-promote-subtree)}}}
 
-  - {{{kbdkey(M-S-,right)}}}, ~org-demote-subtree~ :: Demote the
+- {{{kbdkey(M-S-,right)}}}, ~org-demote-subtree~ :: Demote the
        current subtree by one level.
 
        {{{kindex(M-S-,right)}}}
        {{{findex(org-demote-subtree)}}}
 
-  - {{{kbdkey(M-S-,up)}}}, ~org-move-subtree-up~ :: Move subtree up
+- {{{kbdkey(M-S-,up)}}}, ~org-move-subtree-up~ :: Move subtree up
        (swap with previous subtree of same level).
 
        {{{kindex(M-S-,up)}}}
        {{{findex(org-move-subtree-up)}}}
 
-  - {{{kbdkey(M-S-,down)}}}, ~org-move-subtree-down~ :: Move subtree
+- {{{kbdkey(M-S-,down)}}}, ~org-move-subtree-down~ :: Move subtree
        down (swap with next subtree of same level).
 
        {{{kindex(M-S-,down)}}}
        {{{findex(org-move-subtree-down)}}}
 
-  - {{{kbd(C-c C-x C-w)}}}, ~org-cut-subtree~ :: Kill subtree, i.e.,
+- {{{kbd(M-h)}}}, ~org-mark-element~ ::
+
+    Mark the element at point.  Hitting repeatedly will mark
+    subsequent elements of the one just marked.  E.g., hitting
+    {{{kbd(M-h)}}} on a paragraph will mark it, hitting
+    {{{kbd(M-h)}}} immediately again will mark the next one.
+
+- {{{kbd(C-c @)}}}, ~org-mark-subtree~ ::
+
+    Mark the subtree at point.  Hitting repeatedly will mark
+    subsequent subtrees of the same level as the marked subtree.
+ 
+- {{{kbd(C-c C-x C-w)}}}, ~org-cut-subtree~ :: Kill subtree, i.e.,
        remove it from buffer but save in kill ring. With a numeric
        prefix argument N, kill N sequential subtrees.
 
        {{{kindex(C-c C-x C-w)}}}
        {{{findex(org-cut-subtree)}}}
 
-  - {{{kbd(C-c C-x M-w)}}}, ~org-copy-subtree~ :: Copy subtree to kill
+- {{{kbd(C-c C-x M-w)}}}, ~org-copy-subtree~ :: Copy subtree to kill
        ring.  With a numeric prefix argument N, copy the N sequential
        subtrees.
 
        {{{kindex(C-c C-x M-w)}}}
        {{{findex(org-copy-subtree)}}}
 
-  - {{{kbd(C-c C-x C-y)}}}, ~org-paste-subtree~ :: Yank subtree from
+- {{{kbd(C-c C-x C-y)}}}, ~org-paste-subtree~ :: Yank subtree from
        kill ring. This does modify the level of the subtree to make
        sure the tree fits in nicely at the yank position. The yank
        level can also be specified with a numeric prefix argument, or
@@ -863,7 +882,7 @@ The following commands jump to other headlines in the buffer.
        {{{kindex(C-c C-x C-y)}}}
        {{{findex(org-paste-subtree)}}}
 
-  - {{{kbd(C-y)}}}, ~org-yank~ :: Depending on the variables
+- {{{kbd(C-y)}}}, ~org-yank~ :: Depending on the variables
        ~org-yank-adjusted-subtrees~ and ~org-yank-folded-subtrees~,
        Org's internal ~yank~ command will paste subtrees folded and in
        a clever way, using the same command as {{{kbd(C-c C-x C-y)}}}.
@@ -881,7 +900,7 @@ The following commands jump to other headlines in the buffer.
        {{{vindex(org-yank-adjusted-subtrees)}}}
        {{{vindex(org-yank-folded-subtrees)}}} 
 
-  - {{{kbd(C-c C-x c)}}}, ~org-clone-subtree-with-time-shift~ :: Clone
+- {{{kbd(C-c C-x c)}}}, ~org-clone-subtree-with-time-shift~ :: Clone
        a subtree by making a number of sibling copies of it. You will
        be prompted for the number of copies to make, and you can also
        specify if any timestamps in the entry should be shifted.  This
@@ -892,13 +911,13 @@ The following commands jump to other headlines in the buffer.
        {{{kindex(C-c C-x c)}}}
        {{{findex(org-clone-subtree-with-time-shift)}}}
 
-  - {{{kbd(C-c C-w)}}}, ~org-refile~ :: Refile entry or region to a
+- {{{kbd(C-c C-w)}}}, ~org-refile~ :: Refile entry or region to a
        different location. See [[Refile and copy]].
 
        {{{kindex(C-c C-w)}}}
        {{{findex(org-refile)}}}
 
-  - {{{kbd(C-c ^)}}}, ~org-sort~ :: Sort same-level entries.  When
+- {{{kbd(C-c ^)}}}, ~org-sort~ :: Sort same-level entries.  When
        there is an active region, all entries in the region will be
        sorted.  Otherwise the children of the current headline are
        sorted.  The command prompts for the sorting method, which can
@@ -913,24 +932,24 @@ The following commands jump to other headlines in the buffer.
        {{{kindex(C-c ^)}}}
        {{{findex(org-sort)}}}
 
-  - {{{kbd(C-x n s)}}}, ~org-narrow-to-subtree~ :: Narrow buffer to
+- {{{kbd(C-x n s)}}}, ~org-narrow-to-subtree~ :: Narrow buffer to
        current subtree.
 
        {{{kindex(C-x n s)}}}
        {{{findex(org-narrow-to-subtree)}}}
 
-  - {{{kbd(C-x n b)}}}, ~org-narrow-to-block~ :: Narrow buffer to
+- {{{kbd(C-x n b)}}}, ~org-narrow-to-block~ :: Narrow buffer to
        current block.
 
        {{{kindex(C-x n b)}}}
        {{{findex(org-narrow-to-block)}}}
 
-  - {{{kbd(C-x n w)}}}, ~widen~ :: Widen buffer to remove narrowing.
+- {{{kbd(C-x n w)}}}, ~widen~ :: Widen buffer to remove narrowing.
 
        {{{kindex(C-x n w)}}}
        {{{findex(widen)}}}
 
-  - {{{kbd(C-c *)}}}, ~org-toggle-heading~ :: Turn a normal line or
+- {{{kbd(C-c *)}}}, ~org-toggle-heading~ :: Turn a normal line or
        plain list item into a headline (so that it becomes a
        subheading at its location). Also turn a headline into a normal
        line by removing the stars. If there is an active region, turn
@@ -1355,12 +1374,12 @@ blocks folded at startup by configuring the variable
 Org mode supports the creation of footnotes. In contrast to the
 {{{file(footnote.el)}}} package, Org mode's footnotes are designed for
 work on a larger document, not only for one-off documents like emails.
-The basic syntax is similar to the one used by
-{{{file(footnote.el)}}}, i.e., a footnote is defined in a paragraph
-that is started by a footnote marker in square brackets in column 0,
-no indentation allowed. If you need a paragraph break inside a
-footnote, use the LaTeX idiom ~\par~. The footnote reference is simply
-the marker in square brackets, inside text. For example:
+
+A footnote is started by a footnote marker in square brackets in
+column 0, no indentation allowed.  It ends at the next footnote
+definition, headline, or after two consecutive empty lines.  The
+footnote reference is simply the marker in square brackets, inside
+text. For example:
 
 #+begin_example
    The Org homepage[fn:1] now looks a lot better than it used to.
@@ -1586,8 +1605,8 @@ you, configure the variables ~org-enable-table-editor~ and
     :DESCRIPTION: Navigating and tidying
     :END:
 #+attr_texinfo: :table-type table :indic @asis
-- {{{kbd(C-c C-c)}}}, ~org-table-align~ :: Re-align the table without
-     moving the cursor.
+- {{{kbd(C-c C-c)}}}, ~org-table-align~ :: Re-align the table and
+     don't move to another field.
 
      {{{kindex(C-c C-c)}}}
      {{{findex(org-table-align)}}}
@@ -1904,7 +1923,7 @@ a per-file basis with:
 If you would like to overrule the automatic alignment of number-rich
 columns to the right and of string-rich columns to the left, you can
 use ~<r>~, ~<c>~ or ~<l>~ in a similar fashion.[fn:24] You may also
-combine alignment and field width like this: ~<l10>~.
+combine alignment and field width like this: ~<r10>~.
 
 A line that only contains these formatting cookies will be removed
 automatically when exporting the document.
@@ -2082,8 +2101,8 @@ with ~@~ in order to be interpreted correctly).  Examples:
   - $<<<..$>>   :: start in third column, continue to the one but last
   - @2$1..@4$3  ::  six fields between these two fields (same as
                    ~A2..C4~)
-  - @-1$-2..@-1 :: three numbers from the column to the left, 2 up to
-                   current row
+  - @-1$-2..@-1 :: three fiels in the row above, starting from two
+                   columns on the left
   - @I..II      ::  between first and second hline, short for ~@I..@II~
 
 
@@ -2205,16 +2224,27 @@ tables compact.  The default settings can be configured using the
 variable ~org-calc-default-modes~.
 
 #+attr_texinfo: :table-type table :indic @code
-  - p20 :: set the internal Calc calculation precision to 20 digits
-  - n3 s3 e2 f4 :: normal, scientific, engineering, or fixed format of
+  - p20 :: Set the internal Calc calculation precision to 20 digits.
+
+  - n3 s3 e2 f4 :: Set normal, scientific, engineering, or fixed format of
                    the result of Calc passed back to Org. Calc
                    formatting is unlimited in precision as long as the
                    Calc calculation precision is greater.
-  - D R :: angle modes: degrees, radians
-  - F S :: fraction and symbolic modes
-  - N :: interpret all fields as numbers, use 0 for non-numbers
-  - E :: keep empty fields in ranges
-  - L :: literal
+
+  - D R :: Set angle modes to degrees, radians.
+
+  - F S :: Set fraction and symbolic modes.
+
+  - E :: Keep empty fields in ranges and use ~nan~ (not a number) in
+         Calc formulas for empty fields in range references and for
+         empty field references; else suppress empty fields in range
+         references and use 0 for empty field references, see also the
+         notes for [[References][Range references]].
+
+  - N :: Interpret all fields as numbers, use 0 for non-numbers; N has
+         higher precedence than E (for the value of the field).
+
+  - L :: Set literal mode, for Lisp formulas only.
 
 {{{noindent}}} Unless you use large integer numbers or
 high-precision-calculation and -display for floating point numbers you
@@ -2232,16 +2262,18 @@ Calc already do the formatting.[fn:29] A few examples:
        {{{file(constants.el)}}}
   - tan($1);Dp3s1    :: Compute in degrees, precision 3, display SCI 1
   - sin($1);Dp3%.1e  :: Same, but use ~printf~ specifier for display
-  - vmean($2..$7)    :: Compute column range mean, using vector
-       function
+  - vmean($2..$7)    :: Compute column range mean, suppress empty fields
   - vmean($2..$7);EN :: Same, but treat empty fields as 0
   - taylor($3,x=7,2) :: Taylor series of $3, at x=7, second degree
 
-Calc also contains a complete set of logical operations.  For example
+Calc also contains a complete set of logical operations, e.g.:
 
-#+attr_texinfo: :table-type table :indic @code
-  - if($1<20,teen,string("")) ::  "teen" if age $1 less than 20, else empty
-
+#+begin_example
+     if($1 < 20, teen, string(""))
+                          "teen" if age $1 is less than 20, else empty
+     if("$1" = "nan" || "$2" = "nan", string(""), $1 + $2); E
+                          sum of first two columns unless one or both empty
+#+end_example
 
 Note that you can also use two org-specific flags ~T~ and ~t~ for
 durations computations [[Duration and time values]].
@@ -2295,7 +2327,7 @@ Add columns 1 and 2, equivalent to Calc's ~$1+$2~:
   '(+ $1 $2);N
 #+end_src
 
-Compute the sum of columns 1-4, like Calc's ~vsum($1..$4)~}:
+Compute the sum of columns 1--4, like Calc's ~vsum($1..$4)~:
 #+header: :exports code
 #+header: :eval no
 #+begin_src emacs-lisp
@@ -2804,7 +2836,7 @@ The marking characters have the following meaning:
          Unmarked lines will be left alone by this command.
   - * :: Selects this line for global recalculation with {{{kbd(C-u C-c *)}}}, but not for automatic recalculation.  Use this
          when automatic recalculation slows down editing too much.
-  - :: Unmarked lines are exempt from recalculation with {{{kbd(C-u C-c *)}}}.  All lines that should be recalculated should be
+  - w :: Unmarked lines are exempt from recalculation with {{{kbd(C-u C-c *)}}}.  All lines that should be recalculated should be
        marked with ~#~ or ~*~.
   - / :: Do not export this line.  Useful for lines that contain the
          narrowing ~<N>~ markers or column group markers.
@@ -2838,8 +2870,8 @@ functions.
 {{{cindex(#+PLOT)}}}
 
 Org-Plot can produce 2D and 3D graphs of information stored in org
-tables using [[http://www.gnuplot.info/][Gnuplot]] and [[http://cars9.uchicago.edu/~ravel/software/gnuplot-mode.html][gnuplot-mode]]. To see this in action, ensure
-that you have both Gnuplot and Gnuplot-mode installed on your system,
+tables using [[http://www.gnuplot.info/][Gnuplot]] and [[http://xafs.org/BruceRavel/GnuplotMode][gnuplot-mode]]. To see this in action, ensure
+that you have both Gnuplot and Gnuplot mode installed on your system,
 then call ~org-plot/gnuplot~ on the following table.
 
 #+begin_src org
@@ -3125,13 +3157,13 @@ insert it into an Org file, and to follow the link.
          target.  Otherwise it points to the current headline, which
          will also be the description.[fn:34]
 
-         {{{vindex(org-link-to-org-use-id)}}}
+         {{{vindex(org-id-link-to-org-use-id)}}}
          {{{cindex(property\\\, CUSTOM_ID)}}}
          {{{cindex(property\\\, ID)}}}
 
          If the headline has a ~CUSTOM_ID~ property, a link to this
          custom ID will be stored.  In addition or alternatively
-         (depending on the value of ~org-link-to-org-use-id~), a
+         (depending on the value of ~org-id-link-to-org-use-id~), a
          globally unique ~ID~ property will be created and/or used to
          construct a link.[fn:176]  So using this command in Org buffers will
          potentially create two links: a human-readable link from the
@@ -3551,6 +3583,7 @@ are:
 
   {{{kindex(C-c C-t)}}}
   {{{cindex(cycling\\\, of TODO states)}}}
+  {{{vindex(org-use-fast-todo-selection)}}}
 
   Rotate the TODO state of the current item among
 
@@ -3558,6 +3591,11 @@ are:
      ,-> (unmarked) -> TODO -> DONE --.
      '--------------------------------'
   #+end_example
+
+ If TODO keywords have fast access keys (see [[Fast access to TODO
+ states]]), you will be prompted for a TODO keyword through the fast
+ selection interface; this is the default behavior when
+ ~org-use-fast-todo-selection~ is non-nil.
 
  The same rotation can also be done ``remotely'' from the timeline and
  agenda buffers with the {{{kbd(t)}}} command key (see [[Agenda commands]]).
@@ -3956,7 +3994,7 @@ module {{{file(org-depend.el)}}}.
 
 Org mode can automatically record a timestamp and possibly a note when
 you mark a TODO item as DONE, or even each time you change the state of
-a TODO item.  This system is highly configurable, settings can be on a
+a TODO item.  This system is highly configurable; settings can be on a
 per-keyword basis and can be localized to a file or even a subtree.  For
 information on how to clock working time for a task, see [[Clocking work time]].
 
@@ -4333,7 +4371,7 @@ of) a large number of subtasks (see [[Checkboxes]]).
 Every item in a plain list (see [[Plain lists]]) can be made into a
 checkbox by starting it with the string {{{samp([ ])}}}.[fn:52] This
 feature is similar to TODO items (see [[TODO items]]), but is more
-lightweight. Checkboxes are not included into the global TODO list, so
+lightweight. Checkboxes are not included in the global TODO list, so
 they are often great to split a task into a number of simple steps. Or
 you can use them in a shopping list. To toggle a checkbox, use
 {{{kbd(C-c C-c)}}}, or use the mouse (thanks to Piotr Zielinski's
@@ -4499,9 +4537,9 @@ like this:[fn:55]
 {{{vindex(org-use-tag-inheritance)}}}
 {{{vindex(org-tags-exclude-from-inheritance)}}}
 
-{{{noindent}}} To limit tag inheritance to specific tags, or to turn
-it off entirely, use the variables ~org-use-tag-inheritance~ and
-~org-tags-exclude-from-inheritance~.
+{{{noindent}}} To limit tag inheritance to specific tags, use
+~org-tags-exclude-from-inheritance~.  To turn it off entirely, use
+~org-use-tag-inheritance~.
 
 {{{vindex(org-tags-match-list-sublevels)}}}
 
@@ -4511,6 +4549,14 @@ form) match as well.[fn:56] The list of matches may then become very
 long. If you only want to see the first tags match in a subtree,
 configure the variable ~org-tags-match-list-sublevels~ (not
 recommended).
+
+Tag inheritance is relevant when the agenda search tries to match a
+tag, either in the ~tags~ or ~tags-todo~ agenda types.  In other agenda
+types, ~org-use-tag-inheritance~ has no effect.  Still, you may want to
+have your tags correctly set in the agenda, so that tag filtering works
+fine, with inherited tags.  Set ~org-agenda-use-tag-inheritance~ to
+control this: the default value includes all agenda types, but setting
+this to nil can really speed up agenda generation.
 
 ** Setting tags
    :PROPERTIES:
@@ -4848,6 +4894,9 @@ file, use a line like:
 #+begin_example
    ,#+PROPERTY: NDisks_ALL 1 2 3 4
 #+end_example
+
+Unlike properties set from a special drawer, you have to refresh the
+buffer with {{{kbd(C-c C-c)}}} to activate these changes.
 
 If you want to add to the value of an existing property, append a ~+~
 to the property name. The following results in the property ~var~
@@ -5230,8 +5279,8 @@ property will all display the same summary information.
 The ~est+~ summary type requires further explanation. It is used for
 combining estimates, expressed as low-high ranges. For example,
 instead of estimating a particular task will take 5 days, you might
-estimate it as 5-6 days if you're fairly confident you know how much
-work is required, or 1-10 days if you don't really know what needs to
+estimate it as 5--6 days if you're fairly confident you know how much
+work is required, or 1--10 days if you don't really know what needs to
 be done. Both ranges average at 5.5 days, but the first represents a
 more predictable delivery.
 
@@ -5242,7 +5291,7 @@ estimate from the sum. For example, suppose you had ten tasks, each of
 which was estimated at 0.5 to 2 days of work. Straight addition
 produces an estimate of 5 to 20 days, representing what to expect if
 everything goes either extremely well or extremely poorly. In
-contrast, ~est+~ estimates the full job more realistically, at 10-15
+contrast, ~est+~ estimates the full job more realistically, at 10--15
 days.
 
 Here is an example for a complete columns definition, along with allowed
@@ -5602,7 +5651,7 @@ the agenda (see [[Weekly/daily agenda]]). We distinguish:
 
   #+begin_example
      ,* 22:00-23:00 The nerd meeting on every 2nd Thursday of the month
-       <%%(org-float t 4 2)>
+       <%%(diary-float t 4 2)>
   #+end_example
 
 - Time/Date range ::
@@ -5947,9 +5996,12 @@ A timestamp may be preceded by special keywords to facilitate planning:
 
   You can specify a different lead time for warnings for a specific
   deadlines using the following syntax. Here is an example with a
-  warning period of 5 days ~DEADLINE: <2004-02-29 Sun -5d>~.
+  warning period of 5 days ~DEADLINE: <2004-02-29 Sun -5d>~.  This
+  warning is deactivated if the task gets scheduled and you set
+  ~org-agenda-skip-deadline-prewarning-if-scheduled~ to ~t~.
 
 - ~SCHEDULED~ ::
+
   {{{cindex(SCHEDULED keyword)}}}
 
   Meaning: you are planning to start working on that task on the given
@@ -5968,26 +6020,33 @@ A timestamp may be preceded by special keywords to facilitate planning:
   #+end_example
 
   {{{noindent}}}
+
+  If you want to /delay/ the display of this task in the agenda, use
+  ~SCHEDULED: <2004-12-25 Sat -2d>~: the task is still scheduled on the
+  25th but will appear two days later.  In case the task contains a
+  repeater, the delay is considered to affect all occurrences; if you
+  want it to affect only the first scheduled occurrence of the task, use
+  ~--2d~ instead.  See ~org-scheduled-delay-days~ and
+  ~org-agenda-skip-scheduled-delay-if-deadline~ for details on how to
+  control this globally or per agenda.
+
   *Important:* Scheduling an item in Org mode should /not/ be
   understood in the same way that we understand /scheduling a meeting/.
   Setting a date for a meeting is just a simple appointment, you should
   mark this entry with a simple plain timestamp, to get this item shown
-  on the date where it applies.  This is a frequent misunderstanding by
+  on the date where it applies.  This is frequently misunderstood by
   Org users.  In Org mode, /scheduling/ means setting a date when you
   want to start working on an action item.
 
 
 You may use timestamps with repeaters in scheduling and deadline
 entries.  Org mode will issue early and late warnings based on the
-assumption that the timestamp represents the /nearest instance/ of
-the repeater.  However, the use of diary sexp entries like
-
-~<%%(org-float t 42)>~
-
-in scheduling and deadline timestamps is limited.  Org mode does not
-know enough about the internals of each sexp function to issue early and
-late warnings.  However, it will show the item on each day where the
-sexp entry matches.
+assumption that the timestamp represents the /nearest instance/ of the
+repeater.  However, the use of diary sexp entries like
+~<%%(diary-float t 42)>~ in scheduling and deadline timestamps is
+limited.  Org mode does not know enough about the internals of each
+sexp function to issue early and late warnings.  However, it will show
+the item on each day where the sexp entry matches.
 
 *** Inserting deadline/schedule
     :PROPERTIES:
@@ -6037,6 +6096,7 @@ an item:[fn:66]
   {{{kindex(C-c / d)}}}
   {{{cindex(sparse tree\\\, for deadlines)}}}
   {{{vindex(org-deadline-warning-days)}}}
+  {{{vindex(org-agenda-skip-deadline-prewarning-if-scheduled)}}}
 
   Create a sparse tree with all deadlines that are either past-due, or
   which will become due within ~org-deadline-warning-days~. With
@@ -6058,7 +6118,7 @@ an item:[fn:66]
 
 
 Note that ~org-schedule~ and ~org-deadline~ supports setting the date
-by indicating a relative time: e.g. +1d will set the date to the next
+by indicating a relative time: e.g., +1d will set the date to the next
 day after today, and --1w will set the date to the previous week
 before any current timestamp.
 
@@ -6413,6 +6473,10 @@ be selected:
 
   A time string specifying when to stop considering times.
 
+- wstart :: 
+
+  The starting day of the week.  The default is 1 for Monday.
+
 - :step  ::  
 
   Set to ~week~ or ~day~ to split the table into chunks. To use this,
@@ -6538,6 +6602,7 @@ last week would be:
 
 {{{cindex(resolve idle time)}}}
 {{{cindex(idle\\\, resolve\\\, dangling)}}}
+{{{vindex(org-clock-x11idle-program-name)}}}
 
 If you clock in on a work item, and then walk away from your
 computer---perhaps to take a phone call---you often need to
@@ -8849,7 +8914,7 @@ the other commands, the cursor needs to be in the desired line.
   a year may be encoded in the prefix argument as well. For example,
   {{{kbd(200712 d)}}} will jump to January 12, 2007. If such a year
   specification has only one or two digits, it will be mapped to the
-  interval 1938-2037.
+  interval 1938--2037.
 
 - {{{kbd(v w)}}} or short {{{kbd(w)}}}, ~org-agenda-week-view~ ::
 
@@ -8864,7 +8929,7 @@ the other commands, the cursor needs to be in the desired line.
   year may be encoded in the prefix argument as well. For example,
   {{{kbd(200712 w)}}} will jump to week 12 in 2007. If such a year
   specification has only one or two digits, it will be mapped to the
-  interval 1938-2037.
+  interval 1938--2037.
 
 - {{{kbd(v m)}}}, ~org-agenda-month-view~ ::
 
@@ -8877,7 +8942,7 @@ the other commands, the cursor needs to be in the desired line.
   month. When setting month view, a year may be encoded in the prefix
   argument as well. For example, {{{kbd(200712 m)}}} will jump to
   December, 2007. If such a year specification has only one or two
-  digits, it will be mapped to the interval 1938-2037.
+  digits, it will be mapped to the interval 1938--2037.
 
 - {{{kbd(v y)}}}, ~org-agenda-year-view~ ::
 
@@ -9128,7 +9193,7 @@ the other commands, the cursor needs to be in the desired line.
   index of an effort estimate in your array of allowed values, where
   {{{kbd(0)}}} means the 10th value. The filter will then restrict to
   entries with effort smaller-or-equal, equal, or larger-or-equal than
-  the selected value. If the digits 0-9 are not used as fast access keys
+  the selected value. If the digits 0--9 are not used as fast access keys
   to tags, you can also simply press the index digit directly without an
   operator. In this case, {{{kbd(<)}}} will be assumed. For application
   of the operator, entries without a defined effort will be treated
@@ -16552,7 +16617,7 @@ effective only when the file is visited again in a new Emacs session.
   {{{vindex(org-default-priority)}}}
 
   This line sets the limits and the default for the priorities. All
-  three must be either letters A-Z or numbers 0-9. The highest priority
+  three must be either letters A-Z or numbers 0--9. The highest priority
   must have a lower ASCII number than the lowest priority.
 
 - {{{kbd(#+PROPERTY: Property_Name Value)}}} ::
@@ -18922,7 +18987,7 @@ the tree.
 
 This manual is for Org version {{{value(VERSION)}}}.
 
-Copyright (C) 2004-2013  Free Software Foundation, Inc.
+Copyright (C) 2004--2013  Free Software Foundation, Inc.
 
 #+BEGIN_QUOTE
 Permission is granted to copy, distribute and/or modify this document
@@ -19578,7 +19643,7 @@ only the exact headline will be matched. If the value is
 if it is not found, then the user will be queried to create it.
 
 [fn:34] If the headline contains a timestamp, it will be removed from
-the link and result in a wrong link -- you should avoid putting a
+the link and result in a wrong link---you should avoid putting a
 timestamp in the headline.
 
 [fn:35] Note that you don't have to use this command to insert a link.
@@ -19745,9 +19810,11 @@ line---the line is broken here only to fit it into the manual.
 [fn:79] On computers using Mac OS X, idleness is based on actual user
 idleness, not just Emacs' idle time. For X11, you can install a
 utility program {{{file(x11idle.c)}}}, available in the
-~contrib/scripts~ directory of the Org git distribution, to get the
-same general treatment of idleness. On other systems, idle time refers
-to Emacs idle time only.
+~contrib/scripts~ directory of the Org git distribution, or install
+the {{{file(xprintidle)}}} package and set it to the variable
+~org-clock-x11idle-program-name~ if you are running Debian, to get the
+same general treatment of idleness.  On other systems, idle time
+refers to Emacs idle time only.
 
 [fn:80] You may change the property being used with the variable
 ~org-effort-property~.
