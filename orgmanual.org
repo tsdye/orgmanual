@@ -8804,7 +8804,7 @@ removing the risk that your agenda and note files may diverge.
 Some commands can be executed with mouse clicks on agenda lines.  For
 the other commands, the cursor needs to be in the desired line.
 
-*** FIXME Motion2
+*** Agenda motion
 {{{cindex(motion commands in agenda)}}}
 
 #+attr_texinfo: :table-type table :indic @asis
@@ -9181,8 +9181,8 @@ the other commands, the cursor needs to be in the desired line.
   #+header: :eval no
   #+header: :exports code
   #+begin_src emacs-lisp
-  (setq org-global-properties
-      '(("Effort_ALL". "0 0:10 0:30 1:00 2:00 3:00 4:00")))
+    (setq org-global-properties
+          '(("Effort_ALL". "0 0:10 0:30 1:00 2:00 3:00 4:00")))
   #+end_src
 
   You can then filter for an effort by first typing an operator, one of
@@ -9212,22 +9212,23 @@ the other commands, the cursor needs to be in the desired line.
   #+header: :eval no
   #+header: :exports code
   #+begin_src emacs-lisp
-  (defun org-my-auto-exclude-function (tag)
-    (and (cond
-          ((string= tag "Net")
-           (/= 0 (call-process "/sbin/ping" nil nil nil
-                               "-c1" "-q" "-t1" "mail.gnu.org")))
-          ((or (string= tag "Errand") (string= tag "Call"))
-           (let ((hour (nth 2 (decode-time))))
-             (or (< hour 8) (> hour 21)))))
-         (concat "-" tag)))
-  (setq org-agenda-auto-exclude-function 'org-my-auto-exclude-function)
+    (defun org-my-auto-exclude-function (tag)
+      (and (cond
+            ((string= tag "Net")
+             (/= 0 (call-process "/sbin/ping" nil nil nil
+                                 "-c1" "-q" "-t1" "mail.gnu.org")))
+            ((or (string= tag "Errand") (string= tag "Call"))
+             (let ((hour (nth 2 (decode-time))))
+               (or (< hour 8) (> hour 21)))))
+           (concat "-" tag)))
+    (setq org-agenda-auto-exclude-function 'org-my-auto-exclude-function)
   #+end_src
 
 - ~\~ ~org-agenda-filter-by-tag-refine~ ::
 
-  {{{kindex(XXX)}}}
+  #+comment: {{{kindex(XXX)}}}
   #+comment: Should be \
+  @@info:kindex \\@@
 
   Narrow the current agenda filter by an additional condition. When
   called with prefix arg, remove the entries that /do/ have the tag, or
@@ -9351,8 +9352,9 @@ the other commands, the cursor needs to be in the desired line.
 
 - {{{kbd(,)}}} ::
 
-  {{{kindex(XXX)}}}
+  #+comment: {{{kindex(XXX)}}}
   #+comment: Should be a comma
+  @@info:kindex ,@@
 
   Set the priority for the current item (~org-agenda-priority~). Org
   mode prompts for the priority character. If you reply with
@@ -10689,11 +10691,13 @@ If you would like to see entities displayed as UTF8 characters, use the
 following command:[fn:108]
 
 #+attr_texinfo: :table-type table :indic @asis
-- {{{kbd(C-c C-x XXX)}}} ::
+- @@info:@kbd{C-c C-x XXX}@@ ::
 
-  {{{kindex(C-c C-x XXX)}}}
+  #+comment: {{{kindex(C-c C-x XXX)}}}
   #+comment: Should be \
   
+  @@info:kindex C-c C-x \\
+
   Toggle display of entities as UTF-8 characters. This does not change
   the buffer content which remains plain ASCII, but it overlays the
   UTF-8 character for display purposes only.
@@ -10734,14 +10738,15 @@ or use, on a per-file basis:
 subscript, but ~a_{b}~ will.
 
 #+attr_texinfo: :table-type table :indic @asis
-- {{{kbd(C-c C-x XXX)}}} ::
+- @@info:@kbd{C-c C-x \\}@@ ::
 
-  {{{kindex(C-c C-x XXX)}}}
+  #+comment: {{{kindex(C-c C-x XXX)}}}
   #+comment: Should be \
+  @@info:@kindex C-c C-x \@@
 
   In addition to showing entities as UTF-8 characters, this command will
   also format sub- and superscripts in a WYSIWYM way.
-
+     
 *** LaTeX fragments
     :PROPERTIES:
     :DESCRIPTION: Complex formulas made easy
@@ -15902,7 +15907,7 @@ buffer and use the {{{key(TAB)}}} key to complete text right there.
 
     Complete TODO keywords.
 
-  - After {{{kbd(XXX)}}} :: 
+  - After @@info:@kbd{\}@@ :: 
     #+comment: Should be \
 
     Complete TeX symbols supported by the exporter.
@@ -16760,7 +16765,7 @@ with other code out there.
     Edit a {{{file(table.el)}}} table. Works when the cursor is in a
     table.el table.
 
-  - {{{kbd(C-c XXX)}}}, ~org-table-create-with-table.el~ ::
+  - @@info:@kbd{C-c ~}@@, ~org-table-create-with-table.el~ ::
 
     {{{kindex(C-c ~)}}}
     #+comment: Should be ~

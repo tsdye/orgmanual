@@ -307,7 +307,7 @@ Presentation and sorting
 
 Agenda commands
 
-* Motion2::
+* Agenda motion::
 * View/Go to Org file::
 * Change display::
 * Secondary filtering and query editing::
@@ -8294,7 +8294,7 @@ the other commands, the cursor needs to be in the desired line.
 
 * Menu:
 
-* Motion2::
+* Agenda motion::
 * View/Go to Org file::
 * Change display::
 * Secondary filtering and query editing::
@@ -8305,10 +8305,10 @@ the other commands, the cursor needs to be in the desired line.
 * Quit and exit::
 
 
-File: orgmanual.info,  Node: Motion2,  Next: View/Go to Org file,  Up: Agenda commands
+File: orgmanual.info,  Node: Agenda motion,  Next: View/Go to Org file,  Up: Agenda commands
 
-10.5.1 Motion2
---------------
+10.5.1 Agenda motion
+--------------------
 
 `n', `org-agenda-next-line'
      Next line (same as <down> and `C-n').
@@ -8318,7 +8318,7 @@ File: orgmanual.info,  Node: Motion2,  Next: View/Go to Org file,  Up: Agenda co
 
 
 
-File: orgmanual.info,  Node: View/Go to Org file,  Next: Change display,  Prev: Motion2,  Up: Agenda commands
+File: orgmanual.info,  Node: View/Go to Org file,  Next: Change display,  Prev: Agenda motion,  Up: Agenda commands
 
 10.5.2 View/Go to Org file
 --------------------------
@@ -8552,7 +8552,7 @@ File: orgmanual.info,  Node: Secondary filtering and query editing,  Next: Remot
      In order to filter for effort estimates, you should set up allowed
      efforts globally, for example:
           (setq org-global-properties
-              '(("Effort_ALL". "0 0:10 0:30 1:00 2:00 3:00 4:00")))
+                '(("Effort_ALL". "0 0:10 0:30 1:00 2:00 3:00 4:00")))
 
      You can then filter for an effort by first typing an operator, one
      of `<', `>', and `=', and then the one-digit index of an effort
@@ -8590,6 +8590,8 @@ File: orgmanual.info,  Node: Secondary filtering and query editing,  Next: Remot
           (setq org-agenda-auto-exclude-function 'org-my-auto-exclude-function)
 
 `\' `org-agenda-filter-by-tag-refine'
+     kindex \\
+
      Narrow the current agenda filter by an additional condition. When
      called with prefix arg, remove the entries that _do_ have the tag,
      or that do match the effort criterion. You can achieve the same
@@ -8673,6 +8675,8 @@ File: orgmanual.info,  Node: Remote editing,  Next: Bulk remote editing selected
      the agenda, change a tag for all headings in the region.
 
 `'
+     kindex ,
+
      Set the priority for the current item (`org-agenda-priority'). Org
      mode prompts for the priority character. If you reply with <SPC>,
      the priority cookie is removed from the entry.
@@ -9806,6 +9810,7 @@ or a compact set of dots.
 the following command:(1)
 
 `C-c C-x XXX'
+     @@info:kindex C-c C-x
      Toggle display of entities as UTF-8 characters. This does not
      change the buffer content which remains plain ASCII, but it
      overlays the UTF-8 character for display purposes only.
@@ -9844,7 +9849,7 @@ convention, or use, on a per-file basis:
 With this setting, `a_b' will not be interpreted as a subscript, but
 `a_{b}' will.
 
-`C-c C-x XXX'
+`C-c C-x \\'
      In addition to showing entities as UTF-8 characters, this command
      will also format sub- and superscripts in a WYSIWYM way.
 
@@ -14561,7 +14566,7 @@ buffer and use the <TAB> key to complete text right there.
     `At the beginning of a headline'
           Complete TODO keywords.
 
-    `After XXX'
+    `After \'
           Complete TeX symbols supported by the exporter.
 
     `After `*''
@@ -15338,7 +15343,7 @@ File: orgmanual.info,  Node: Cooperation,  Next: Conflicts,  Up: Interaction
           Edit a `table.el' table. Works when the cursor is in a
           table.el table.
 
-    `C-c XXX, `org-table-create-with-table.el''
+    `C-c ~, `org-table-create-with-table.el''
           Insert a `table.el' table. If there is already a table at
           point, this command converts it between the `table.el' format
           and the Org mode format. See the documentation string of the
@@ -17271,7 +17276,7 @@ Concept index
 * capture <1>:                           Capture - Refile - Archive.
                                                               (line   6)
 * capture:                               Capture.             (line   6)
-* capturing, from agenda:                Remote editing.      (line 124)
+* capturing, from agenda:                Remote editing.      (line 126)
 * category:                              Categories.          (line   6)
 * category filtering, in agenda:         Secondary filtering and query editing.
                                                               (line   6)
@@ -17667,7 +17672,7 @@ Concept index
 * mode, for calc:                        Formula syntax for Calc.
                                                               (line  13)
 * Moreland, Richard:                     MobileOrg.           (line   6)
-* motion commands in agenda:             Motion2.             (line   6)
+* motion commands in agenda:             Agenda motion.       (line   6)
 * motion, between headlines:             Motion.              (line   6)
 * name, of column or field <1>:          Named references.    (line   6)
 * name, of column or field:              Remote references.   (line   6)
@@ -18136,60 +18141,59 @@ Key index
 * %:                                     Bulk remote editing selected entries.
                                                               (line  11)
 * ':                                     CDLaTeX mode.        (line  49)
-* +:                                     Remote editing.      (line  67)
-* -:                                     Remote editing.      (line  72)
+* +:                                     Remote editing.      (line  69)
+* -:                                     Remote editing.      (line  74)
 * .:                                     Change display.      (line  61)
 * /:                                     Secondary filtering and query editing.
                                                               (line  13)
 * 1..9:                                  Using column view.   (line  41)
 * ::                                     Remote editing.      (line  55)
 * ;:                                     Countdown timer.     (line   6)
-* < <1>:                                 Agenda files.        (line  59)
+* < <1>:                                 Secondary filtering and query editing.
+                                                              (line   7)
 * < <2>:                                 The date/time prompt.
                                                               (line  87)
-* < <3>:                                 Secondary filtering and query editing.
-                                                              (line   7)
-* <:                                     Using column view.   (line  69)
+* < <3>:                                 Using column view.   (line  69)
+* <:                                     Agenda files.        (line  59)
 * <RET> <1>:                             Setting tags.        (line 120)
 * <RET> <2>:                             The date/time prompt.
                                                               (line  87)
 * <RET>:                                 View/Go to Org file. (line  18)
-* <SPC> <1>:                             Setting tags.        (line 117)
-* <SPC>:                                 View/Go to Org file. (line   7)
-* <TAB> <1>:                             Re-aligning and field motion.
+* <SPC> <1>:                             View/Go to Org file. (line   7)
+* <SPC>:                                 Setting tags.        (line 117)
+* <TAB> <1>:                             Setting tags.        (line 111)
+* <TAB> <2>:                             Structure editing.   (line  41)
+* <TAB> <3>:                             CDLaTeX mode.        (line  26)
+* <TAB> <4>:                             Re-aligning and field motion.
                                                               (line  13)
-* <TAB> <2>:                             CDLaTeX mode.        (line  26)
-* <TAB> <3>:                             Setting tags.        (line 111)
-* <TAB> <4>:                             View/Go to Org file. (line  15)
-* <TAB>:                                 Structure editing.   (line  41)
-* > <1>:                                 Agenda files.        (line  65)
-* > <2>:                                 Remote editing.      (line 107)
-* >:                                     The date/time prompt.
+* <TAB>:                                 View/Go to Org file. (line  15)
+* > <1>:                                 The date/time prompt.
                                                               (line  87)
+* > <2>:                                 Agenda files.        (line  65)
+* >:                                     Remote editing.      (line 109)
 * ?:                                     Pulling from MobileOrg.
                                                               (line  35)
-* [ <1>:                                 Secondary filtering and query editing.
-                                                              (line  78)
-* [:                                     Change display.      (line  85)
+* [ <1>:                                 Change display.      (line  85)
+* [:                                     Secondary filtering and query editing.
+                                                              (line  80)
 * ]:                                     Secondary filtering and query editing.
-                                                              (line  78)
+                                                              (line  80)
 * ^:                                     CDLaTeX mode.        (line  37)
 * _:                                     CDLaTeX mode.        (line  37)
 * `:                                     CDLaTeX mode.        (line  44)
-* a <1>:                                 Remote editing.      (line  33)
-* a <2>:                                 Easy templates.      (line  16)
-* a:                                     Using column view.   (line  60)
-* A <1>:                                 Change display.      (line   7)
+* a:                                     Easy templates.      (line  16)
 * A:                                     Easy templates.      (line  16)
+* a:                                     Using column view.   (line  60)
+* A:                                     Change display.      (line   7)
+* a:                                     Remote editing.      (line  33)
 * a-z...:                                Setting tags.        (line 105)
+* b:                                     Change display.      (line  58)
 * B:                                     Bulk remote editing selected entries.
                                                               (line  20)
-* b:                                     Change display.      (line  58)
-* c <1>:                                 Calendar commands.   (line   7)
-* c:                                     Easy templates.      (line  16)
 * C:                                     Resolving idle time. (line  43)
-* c:                                     Calendar commands.   (line  10)
+* c:                                     Easy templates.      (line  16)
 * C:                                     Calendar commands.   (line  42)
+* c:                                     Calendar commands.   (line   7)
 * C-:                                    Agenda files.        (line  25)
 * C-#:                                   Advanced features.   (line  16)
 * C-':                                   Agenda files.        (line  25)
@@ -18203,21 +18207,21 @@ Key index
 * C-c %:                                 Handling links.      (line 151)
 * C-c &:                                 Handling links.      (line 156)
 * C-c ' <1>:                             Editing source code. (line   6)
-* C-c ' <2>:                             Literal examples.    (line  71)
-* C-c ' <3>:                             Cooperation.         (line  64)
-* C-c ' <4>:                             Include files.       (line  40)
-* C-c ':                                 Editing and debugging formulas.
+* C-c ' <2>:                             Editing and debugging formulas.
                                                               (line  46)
-* C-c * <1>:                             Structure editing.   (line 137)
+* C-c ' <3>:                             Include files.       (line  40)
+* C-c ' <4>:                             Cooperation.         (line  64)
+* C-c ':                                 Literal examples.    (line  71)
+* C-c * <1>:                             Plain lists.         (line 145)
 * C-c * <2>:                             Updating the table.  (line  18)
-* C-c *:                                 Plain lists.         (line 145)
+* C-c *:                                 Structure editing.   (line 137)
 * C-c +:                                 Calculations.        (line  11)
 * C-c - <1>:                             Column and row editing.
                                                               (line  35)
 * C-c -:                                 Plain lists.         (line 140)
 * C-c .:                                 Creating timestamps. (line  11)
-* C-c / <1>:                             Conflicts.           (line  85)
-* C-c /:                                 Sparse trees.        (line  19)
+* C-c / <1>:                             Sparse trees.        (line  19)
+* C-c /:                                 Conflicts.           (line  85)
 * C-c / a:                               Inserting deadline/schedule.
                                                               (line  42)
 * C-c / b:                               Inserting deadline/schedule.
@@ -18230,23 +18234,23 @@ Key index
 * C-c / t:                               TODO basics.         (line  42)
 * C-c ;:                                 Comment lines.       (line  13)
 * C-c <:                                 Creating timestamps. (line  32)
-* C-c = <1>:                             Editing and debugging formulas.
+* C-c = <1>:                             Column formulas.     (line  44)
+* C-c =:                                 Editing and debugging formulas.
                                                               (line  18)
-* C-c =:                                 Column formulas.     (line  44)
 * C-c >:                                 Creating timestamps. (line  36)
 * C-c ?:                                 Editing and debugging formulas.
                                                               (line  28)
 * C-c [:                                 Agenda files.        (line  16)
 * C-c ]:                                 Agenda files.        (line  22)
-* C-c ^ <1>:                             Structure editing.   (line 119)
-* C-c ^ <2>:                             Column and row editing.
+* C-c ^ <1>:                             Column and row editing.
                                                               (line  51)
-* C-c ^:                                 Plain lists.         (line 159)
+* C-c ^ <2>:                             Plain lists.         (line 159)
+* C-c ^:                                 Structure editing.   (line 119)
 * C-c `:                                 Misc.                (line  16)
 * C-c a:                                 Keybindings and commands.
                                                               (line   6)
-* C-c a ! <1>:                           Agenda dispatcher.   (line  40)
-* C-c a !:                               Stuck projects.      (line  17)
+* C-c a ! <1>:                           Stuck projects.      (line  17)
+* C-c a !:                               Agenda dispatcher.   (line  40)
 * C-c a #:                               Agenda dispatcher.   (line  40)
 * C-c a *:                               Agenda dispatcher.   (line  54)
 * C-c a /:                               Agenda dispatcher.   (line  33)
@@ -18257,15 +18261,15 @@ Key index
 * C-c a a:                               Agenda dispatcher.   (line  14)
 * C-c a C:                               Storing searches.    (line  11)
 * C-c a L:                               Agenda dispatcher.   (line  24)
-* C-c a m <1>:                           Property searches.   (line  15)
 * C-c a m:                               Agenda dispatcher.   (line  20)
+* C-c a M:                               Property searches.   (line  19)
+* C-c a m:                               Property searches.   (line  15)
 * C-c a M <1>:                           Tag searches.        (line  19)
-* C-c a M <2>:                           Property searches.   (line  19)
 * C-c a M:                               Agenda dispatcher.   (line  20)
 * C-c a m:                               Tag searches.        (line  15)
 * C-c a s:                               Agenda dispatcher.   (line  28)
+* C-c a t:                               TODO basics.         (line  53)
 * C-c a T:                               Agenda dispatcher.   (line  17)
-* C-c a t <1>:                           TODO basics.         (line  53)
 * C-c a t:                               Agenda dispatcher.   (line  17)
 * C-c c <1>:                             Keybindings and commands.
                                                               (line   6)
@@ -18273,7 +18277,7 @@ Key index
 * C-c c C:                               Capture templates.   (line  11)
 * C-c C-*:                               Plain lists.         (line 150)
 * C-c C-a <1>:                           Attachments.         (line  27)
-* C-c C-a:                               Remote editing.      (line  80)
+* C-c C-a:                               Remote editing.      (line  82)
 * C-c C-a a:                             Attachments.         (line  32)
 * C-c C-a c:                             Attachments.         (line  38)
 * C-c C-a d:                             Attachments.         (line  65)
@@ -18288,40 +18292,40 @@ Key index
 * C-c C-a o:                             Attachments.         (line  49)
 * C-c C-a s:                             Attachments.         (line  72)
 * C-c C-a z:                             Attachments.         (line  45)
-* C-c C-b <1>:                           Motion.              (line  20)
-* C-c C-b:                               Beamer class export. (line  86)
-* C-c C-c <1>:                           Capturing column view.
-                                                              (line  78)
-* C-c C-c <2>:                           Creating timestamps. (line  29)
-* C-c C-c <3>:                           Evaluating code blocks.
-                                                              (line  19)
-* C-c C-c <4>:                           Using capture.       (line  16)
-* C-c C-c <5>:                           The clock table.     (line  19)
-* C-c C-c <6>:                           Previewing LaTeX fragments.
-                                                              (line  18)
-* C-c C-c <7>:                           Clocking commands.   (line  54)
-* C-c C-c <8>:                           Key bindings and useful functions.
+* C-c C-b <1>:                           Beamer class export. (line  86)
+* C-c C-b:                               Motion.              (line  20)
+* C-c C-c <1>:                           Re-aligning and field motion.
                                                               (line   9)
-* C-c C-c <9>:                           Creating footnotes.  (line 107)
-* C-c C-c <10>:                          Editing and debugging formulas.
-                                                              (line  94)
-* C-c C-c <11>:                          Property syntax.     (line  95)
-* C-c C-c <12>:                          Using column view.   (line  53)
-* C-c C-c <13>:                          Setting tags.        (line  21)
-* C-c C-c <14>:                          Clocking commands.   (line  54)
-* C-c C-c <15>:                          Re-aligning and field motion.
-                                                              (line   9)
-* C-c C-c <16>:                          Cooperation.         (line  54)
-* C-c C-c <17>:                          The very busy C-c C-c key.
+* C-c C-c <2>:                           Creating footnotes.  (line 107)
+* C-c C-c <3>:                           Plain lists.         (line 128)
+* C-c C-c <4>:                           Setting tags.        (line  21)
+* C-c C-c <5>:                           Clocking commands.   (line  54)
+* C-c C-c <6>:                           The very busy C-c C-c key.
                                                               (line   6)
-* C-c C-c:                               Plain lists.         (line 128)
+* C-c C-c <7>:                           Property syntax.     (line  95)
+* C-c C-c <8>:                           Editing and debugging formulas.
+                                                              (line  51)
+* C-c C-c <9>:                           Capturing column view.
+                                                              (line  78)
+* C-c C-c <10>:                          Using capture.       (line  16)
+* C-c C-c <11>:                          Evaluating code blocks.
+                                                              (line  19)
+* C-c C-c <12>:                          Creating timestamps. (line  29)
+* C-c C-c <13>:                          The clock table.     (line  19)
+* C-c C-c <14>:                          Clocking commands.   (line  54)
+* C-c C-c <15>:                          Cooperation.         (line  54)
+* C-c C-c <16>:                          Previewing LaTeX fragments.
+                                                              (line  18)
+* C-c C-c <17>:                          Using column view.   (line  53)
+* C-c C-c:                               Key bindings and useful functions.
+                                                              (line   9)
 * C-c C-c c:                             Property syntax.     (line 112)
 * C-c C-c d:                             Property syntax.     (line 106)
 * C-c C-c D:                             Property syntax.     (line 109)
 * C-c C-c s:                             Property syntax.     (line  99)
-* C-c C-d <1>:                           Inserting deadline/schedule.
+* C-c C-d <1>:                           Remote editing.      (line  89)
+* C-c C-d:                               Inserting deadline/schedule.
                                                               (line  10)
-* C-c C-d:                               Remote editing.      (line  87)
 * C-c C-e:                               The export dispatcher.
                                                               (line  13)
 * C-c C-e A:                             ASCII/Latin-1/UTF-8 export.
@@ -18337,20 +18341,20 @@ Key index
                                                               (line  19)
 * C-c C-e F:                             Triggering publication.
                                                               (line  16)
-* C-c C-e H:                             HTML export commands.
-                                                              (line  19)
 * C-c C-e h:                             HTML export commands.
                                                               (line   7)
+* C-c C-e H:                             HTML export commands.
+                                                              (line  19)
 * C-c C-e i:                             iCalendar export.    (line  33)
 * C-c C-e I:                             iCalendar export.    (line  37)
-* C-c C-e l:                             LaTeX/PDF export commands.
-                                                              (line   7)
 * C-c C-e L:                             LaTeX/PDF export commands.
                                                               (line  16)
-* C-c C-e N:                             ASCII/Latin-1/UTF-8 export.
-                                                              (line  26)
+* C-c C-e l:                             LaTeX/PDF export commands.
+                                                              (line   7)
 * C-c C-e n:                             ASCII/Latin-1/UTF-8 export.
                                                               (line  23)
+* C-c C-e N:                             ASCII/Latin-1/UTF-8 export.
+                                                              (line  26)
 * C-c C-e o:                             ODT export commands. (line   7)
 * C-c C-e O:                             ODT export commands. (line  21)
 * C-c C-e P:                             Triggering publication.
@@ -18371,9 +18375,9 @@ Key index
                                                               (line  36)
 * C-c C-e v b:                           HTML export commands.
                                                               (line  28)
-* C-c C-e v H:                           HTML export commands.
-                                                              (line  28)
 * C-c C-e v h:                           HTML export commands.
+                                                              (line  28)
+* C-c C-e v H:                           HTML export commands.
                                                               (line  28)
 * C-c C-e v n:                           ASCII/Latin-1/UTF-8 export.
                                                               (line  36)
@@ -18385,29 +18389,29 @@ Key index
                                                               (line   9)
 * C-c C-f:                               Motion.              (line  17)
 * C-c C-j:                               Motion.              (line  28)
-* C-c C-k <1>:                           Visibility cycling.  (line  49)
-* C-c C-k:                               Using capture.       (line  32)
+* C-c C-k <1>:                           Using capture.       (line  32)
+* C-c C-k:                               Visibility cycling.  (line  49)
 * C-c C-l:                               Handling links.      (line  76)
 * C-c C-n:                               Motion.              (line  11)
-* C-c C-o <1>:                           View/Go to Org file. (line  35)
-* C-c C-o <2>:                           Key bindings and useful functions.
+* C-c C-o <1>:                           Creating timestamps. (line  41)
+* C-c C-o <2>:                           Creating footnotes.  (line 112)
+* C-c C-o <3>:                           Key bindings and useful functions.
                                                               (line   9)
-* C-c C-o <3>:                           sep.                 (line   6)
-* C-c C-o <4>:                           Creating footnotes.  (line 112)
-* C-c C-o <5>:                           Handling links.      (line 128)
-* C-c C-o:                               Creating timestamps. (line  41)
+* C-c C-o <4>:                           Handling links.      (line 128)
+* C-c C-o <5>:                           sep.                 (line   6)
+* C-c C-o:                               View/Go to Org file. (line  35)
 * C-c C-p:                               Motion.              (line  14)
-* C-c C-q <1>:                           Setting tags.        (line  11)
-* C-c C-q:                               Editing and debugging formulas.
+* C-c C-q <1>:                           Editing and debugging formulas.
                                                               (line  54)
+* C-c C-q:                               Setting tags.        (line  11)
 * C-c C-r <1>:                           Editing and debugging formulas.
                                                               (line  58)
 * C-c C-r:                               Visibility cycling.  (line  45)
 * C-c C-s <1>:                           Inserting deadline/schedule.
                                                               (line  18)
-* C-c C-s:                               Remote editing.      (line  83)
-* C-c C-t <1>:                           TODO basics.         (line  14)
-* C-c C-t:                               Clocking commands.   (line  70)
+* C-c C-s:                               Remote editing.      (line  85)
+* C-c C-t <1>:                           Clocking commands.   (line  70)
+* C-c C-t:                               TODO basics.         (line  14)
 * C-c C-u:                               Motion.              (line  23)
 * C-c C-v a:                             Key bindings and useful functions.
                                                               (line  20)
@@ -18431,9 +18435,9 @@ Key index
                                                               (line  20)
 * C-c C-v C-h:                           Key bindings and useful functions.
                                                               (line  20)
-* C-c C-v C-I:                           Key bindings and useful functions.
-                                                              (line  20)
 * C-c C-v C-i:                           Key bindings and useful functions.
+                                                              (line  20)
+* C-c C-v C-I:                           Key bindings and useful functions.
                                                               (line  20)
 * C-c C-v C-j:                           Key bindings and useful functions.
                                                               (line  20)
@@ -18461,10 +18465,10 @@ Key index
                                                               (line  20)
 * C-c C-v d:                             Key bindings and useful functions.
                                                               (line  20)
-* C-c C-v e <1>:                         Key bindings and useful functions.
-                                                              (line  20)
-* C-c C-v e:                             Evaluating code blocks.
+* C-c C-v e <1>:                         Evaluating code blocks.
                                                               (line  19)
+* C-c C-v e:                             Key bindings and useful functions.
+                                                              (line  20)
 * C-c C-v f <1>:                         Key bindings and useful functions.
                                                               (line  20)
 * C-c C-v f:                             Functions for tangling.
@@ -18492,10 +18496,10 @@ Key index
                                                               (line  20)
 * C-c C-v s:                             Key bindings and useful functions.
                                                               (line  20)
-* C-c C-v t <1>:                         Key bindings and useful functions.
-                                                              (line  20)
-* C-c C-v t:                             Functions for tangling.
+* C-c C-v t <1>:                         Functions for tangling.
                                                               (line   7)
+* C-c C-v t:                             Key bindings and useful functions.
+                                                              (line  20)
 * C-c C-v u:                             Key bindings and useful functions.
                                                               (line  20)
 * C-c C-v v:                             Key bindings and useful functions.
@@ -18504,10 +18508,10 @@ Key index
                                                               (line  20)
 * C-c C-v z:                             Key bindings and useful functions.
                                                               (line  20)
-* C-c C-w <1>:                           Using capture.       (line  23)
-* C-c C-w <2>:                           Refile and copy.     (line  17)
-* C-c C-w <3>:                           Remote editing.      (line  30)
-* C-c C-w:                               Structure editing.   (line 107)
+* C-c C-w <1>:                           Remote editing.      (line  30)
+* C-c C-w <2>:                           Structure editing.   (line 107)
+* C-c C-w <3>:                           Refile and copy.     (line  17)
+* C-c C-w:                               Using capture.       (line  23)
 * C-c C-x:                               Relative timer.      (line  24)
 * C-c C-x -:                             Relative timer.      (line  16)
 * C-c C-x .:                             Relative timer.      (line  11)
@@ -18516,20 +18520,22 @@ Key index
 * C-c C-x <:                             Agenda files.        (line  43)
 * C-c C-x > <1>:                         Agenda files.        (line  52)
 * C-c C-x >:                             Change display.      (line 153)
+* C-c C-x \:                             Subscripts and superscripts.
+                                                              (line  28)
 * C-c C-x A <1>:                         Internal archiving.  (line  55)
 * C-c C-x A:                             Remote editing.      (line  41)
 * C-c C-x a <1>:                         Remote editing.      (line  38)
 * C-c C-x a:                             Internal archiving.  (line  40)
-* C-c C-x b <1>:                         Visibility cycling.  (line  59)
-* C-c C-x b:                             View/Go to Org file. (line  28)
+* C-c C-x b <1>:                         View/Go to Org file. (line  28)
+* C-c C-x b:                             Visibility cycling.  (line  59)
 * C-c C-x c:                             Structure editing.   (line 103)
 * C-c C-x C-a <1>:                       Archiving.           (line  12)
 * C-c C-x C-a:                           Remote editing.      (line  33)
 * C-c C-x C-c <1>:                       Using column view.   (line   9)
 * C-c C-x C-c:                           Change display.      (line 144)
 * C-c C-x C-d:                           Clocking commands.   (line  83)
-* C-c C-x C-e <1>:                       Effort estimates.    (line  20)
-* C-c C-x C-e:                           Clocking commands.   (line  51)
+* C-c C-x C-e <1>:                       Clocking commands.   (line  51)
+* C-c C-x C-e:                           Effort estimates.    (line  20)
 * C-c C-x C-i:                           Clocking commands.   (line   7)
 * C-c C-x C-j:                           Clocking commands.   (line  78)
 * C-c C-x C-k:                           Inserting deadline/schedule.
@@ -18554,20 +18560,17 @@ Key index
 * C-c C-x d:                             Drawers.             (line   6)
 * C-c C-x e:                             Effort estimates.    (line  15)
 * C-c C-x f:                             Creating footnotes.  (line  55)
-* C-c C-x G:                             RSS feeds.           (line  28)
 * C-c C-x g:                             RSS feeds.           (line  24)
+* C-c C-x G:                             RSS feeds.           (line  28)
 * C-c C-x i:                             Capturing column view.
                                                               (line  74)
 * C-c C-x M-w <1>:                       Structure editing.   (line  77)
 * C-c C-x M-w:                           Regions.             (line  12)
-* C-c C-x o <1>:                         TODO dependencies.   (line  30)
-* C-c C-x o:                             Checkboxes.          (line  82)
-* C-c C-x p <1>:                         Property syntax.     (line  86)
-* C-c C-x p:                             Header arguments in Org mode properties.
+* C-c C-x o <1>:                         Checkboxes.          (line  82)
+* C-c C-x o:                             TODO dependencies.   (line  30)
+* C-c C-x p <1>:                         Header arguments in Org mode properties.
                                                               (line  24)
-* C-c C-x XXX <1>:                       Special symbols.     (line  32)
-* C-c C-x XXX:                           Subscripts and superscripts.
-                                                              (line  28)
+* C-c C-x p:                             Property syntax.     (line  86)
 * C-c C-y <1>:                           Creating timestamps. (line  60)
 * C-c C-y:                               Clocking commands.   (line  54)
 * C-c C-z:                               Drawers.             (line  38)
@@ -18584,16 +18587,16 @@ Key index
                                                               (line  18)
 * C-c |:                                 Misc.                (line  30)
 * C-c }:                                 Editing and debugging formulas.
-                                                              (line  34)
+                                                              (line  87)
 * C-c ~:                                 Cooperation.         (line  68)
 * C-k:                                   Remote editing.      (line  24)
 * C-RET:                                 Structure editing.   (line  26)
 * C-S-<left> <1>:                        Multiple sets in one file.
                                                               (line  26)
 * C-S-<left>:                            Remote editing.      (line  21)
-* C-S-<right> <1>:                       Multiple sets in one file.
+* C-S-<right> <1>:                       Remote editing.      (line  18)
+* C-S-<right>:                           Multiple sets in one file.
                                                               (line  26)
-* C-S-<right>:                           Remote editing.      (line  18)
 * C-S-<up/down>:                         Clocking commands.   (line  59)
 * C-S-RET:                               Structure editing.   (line  35)
 * C-u C-c !:                             Creating timestamps. (line  23)
@@ -18611,9 +18614,9 @@ Key index
 * C-u C-c C-x:                           Relative timer.      (line  28)
 * C-u C-c C-x a:                         Internal archiving.  (line  45)
 * C-u C-c C-x C-s:                       Moving subtrees.     (line  14)
-* C-u C-c C-x C-u <1>:                   Dynamic blocks.      (line  25)
-* C-u C-c C-x C-u <2>:                   Capturing column view.
+* C-u C-c C-x C-u <1>:                   Capturing column view.
                                                               (line  82)
+* C-u C-c C-x C-u <2>:                   Dynamic blocks.      (line  25)
 * C-u C-c C-x C-u:                       The clock table.     (line  23)
 * C-u C-u C-c *:                         Updating the table.  (line  29)
 * C-u C-u C-c =:                         Editing and debugging formulas.
@@ -18633,9 +18636,9 @@ Key index
                                                               (line   9)
 * C-v:                                   The date/time prompt.
                                                               (line  87)
-* C-x C-s <1>:                           Editing and debugging formulas.
+* C-x C-s <1>:                           Change display.      (line 140)
+* C-x C-s:                               Editing and debugging formulas.
                                                               (line  51)
-* C-x C-s:                               Change display.      (line 140)
 * C-x C-w:                               Exporting to a file. (line   7)
 * C-x n b:                               Structure editing.   (line 125)
 * C-x n s:                               Structure editing.   (line 122)
@@ -18643,43 +18646,43 @@ Key index
 * C-y:                                   Structure editing.   (line  95)
 * D:                                     Change display.      (line  70)
 * d:                                     Change display.      (line  14)
-* e:                                     Easy templates.      (line  16)
 * E:                                     Change display.      (line 118)
+* e <1>:                                 Easy templates.      (line  16)
 * e:                                     Using column view.   (line  47)
 * F:                                     View/Go to Org file. (line  21)
 * f:                                     Change display.      (line  52)
-* g <1>:                                 Using column view.   (line  25)
-* g:                                     Change display.      (line 137)
+* g:                                     Using column view.   (line  25)
 * G:                                     Change display.      (line 126)
-* h:                                     Easy templates.      (line  16)
+* g:                                     Change display.      (line 137)
 * H <1>:                                 Easy templates.      (line  16)
 * H:                                     Calendar commands.   (line  46)
-* I <1>:                                 Remote editing.      (line 111)
-* I:                                     Easy templates.      (line  16)
-* i <1>:                                 Calendar commands.   (line  14)
+* h:                                     Easy templates.      (line  16)
+* i:                                     Calendar commands.   (line  14)
+* I:                                     Remote editing.      (line 113)
 * i:                                     Easy templates.      (line  16)
-* J <1>:                                 Change display.      (line  67)
-* J:                                     Remote editing.      (line 121)
+* I:                                     Easy templates.      (line  16)
+* J <1>:                                 Remote editing.      (line 123)
+* J:                                     Change display.      (line  67)
 * j:                                     Change display.      (line  64)
-* k <1>:                                 Remote editing.      (line 124)
-* k:                                     Resolving idle time. (line  20)
+* k <1>:                                 Resolving idle time. (line  20)
+* k:                                     Remote editing.      (line 126)
 * K:                                     Resolving idle time. (line  26)
 * k a:                                   Inserting deadline/schedule.
                                                               (line  26)
 * k s:                                   Inserting deadline/schedule.
                                                               (line  26)
+* l <1>:                                 Easy templates.      (line  16)
 * l:                                     Change display.      (line  74)
-* L:                                     View/Go to Org file. (line  12)
-* l:                                     Easy templates.      (line  16)
+* L <1>:                                 View/Go to Org file. (line  12)
 * L:                                     Easy templates.      (line  16)
+* M:                                     Calendar commands.   (line  33)
 * m:                                     Bulk remote editing selected entries.
                                                               (line   7)
-* M:                                     Calendar commands.   (line  33)
 * M-:                                    Structure editing.   (line  47)
 * M-<RET>:                               Relative timer.      (line  20)
-* M-<TAB> <1>:                           Per-file keywords.   (line  26)
-* M-<TAB> <2>:                           Setting tags.        (line   6)
-* M-<TAB> <3>:                           Completion.          (line  17)
+* M-<TAB> <1>:                           Completion.          (line  17)
+* M-<TAB> <2>:                           Per-file keywords.   (line  26)
+* M-<TAB> <3>:                           Setting tags.        (line   6)
 * M-<TAB>:                               Property syntax.     (line  82)
 * M-a:                                   Re-aligning and field motion.
                                                               (line  25)
@@ -18696,36 +18699,36 @@ Key index
 * M-g M-p:                               Sparse trees.        (line  37)
 * M-g n:                                 Sparse trees.        (line  34)
 * M-g p:                                 Sparse trees.        (line  37)
-* M-left <1>:                            Plain lists.         (line 110)
-* M-left:                                Column and row editing.
+* M-left <1>:                            Column and row editing.
                                                               (line   7)
+* M-left:                                Plain lists.         (line 110)
 * M-RET <1>:                             Plain lists.         (line  85)
-* M-RET <2>:                             Structure editing.   (line   7)
-* M-RET:                                 Regions.             (line  33)
+* M-RET <2>:                             Regions.             (line  33)
+* M-RET:                                 Structure editing.   (line   7)
 * M-right <1>:                           Column and row editing.
                                                               (line  10)
 * M-right:                               Plain lists.         (line 110)
-* M-S-:                                  Structure editing.   (line  50)
+* M-S-:                                  Structure editing.   (line  53)
 * M-S-<left>:                            The date/time prompt.
                                                               (line  87)
 * M-S-<right>:                           The date/time prompt.
                                                               (line  87)
-* M-S-down <1>:                          Column and row editing.
-                                                              (line  31)
-* M-S-down:                              Editing and debugging formulas.
+* M-S-down <1>:                          Editing and debugging formulas.
                                                               (line  78)
+* M-S-down:                              Column and row editing.
+                                                              (line  31)
 * M-S-left <1>:                          Plain lists.         (line 118)
 * M-S-left:                              Column and row editing.
                                                               (line  13)
-* M-S-RET <1>:                           Plain lists.         (line  93)
-* M-S-RET:                               Structure editing.   (line  30)
-* M-S-right <1>:                         Column and row editing.
+* M-S-RET <1>:                           Structure editing.   (line  30)
+* M-S-RET:                               Plain lists.         (line  93)
+* M-S-right <1>:                         Plain lists.         (line 118)
+* M-S-right:                             Column and row editing.
                                                               (line  16)
-* M-S-right:                             Plain lists.         (line 118)
-* M-S-up <1>:                            Column and row editing.
-                                                              (line  27)
-* M-S-up:                                Editing and debugging formulas.
+* M-S-up <1>:                            Editing and debugging formulas.
                                                               (line  75)
+* M-S-up:                                Column and row editing.
+                                                              (line  27)
 * M-TAB:                                 Editing and debugging formulas.
                                                               (line  67)
 * M-up <1>:                              Plain lists.         (line 106)
@@ -18735,28 +18738,28 @@ Key index
                                                               (line  19)
 * M-v:                                   The date/time prompt.
                                                               (line  87)
-* mouse-1 <1>:                           The date/time prompt.
+* mouse-1 <1>:                           Creating footnotes.  (line 112)
+* mouse-1 <2>:                           Handling links.      (line 137)
+* mouse-1:                               The date/time prompt.
                                                               (line  87)
-* mouse-1 <2>:                           Creating footnotes.  (line 112)
-* mouse-1:                               Handling links.      (line 137)
-* mouse-2 <1>:                           Handling links.      (line 137)
+* mouse-2 <1>:                           View/Go to Org file. (line  15)
 * mouse-2 <2>:                           Creating footnotes.  (line 112)
-* mouse-2:                               View/Go to Org file. (line  15)
+* mouse-2:                               Handling links.      (line 137)
 * mouse-3 <1>:                           Handling links.      (line 141)
 * mouse-3:                               View/Go to Org file. (line   7)
-* n <1>:                                 Using column view.   (line  44)
-* n:                                     Motion2.             (line   7)
+* n <1>:                                 Agenda motion.       (line   7)
+* n:                                     Using column view.   (line  44)
+* O:                                     Remote editing.      (line 117)
 * o:                                     Change display.      (line  11)
-* O:                                     Remote editing.      (line 115)
-* P:                                     Remote editing.      (line  64)
-* p:                                     Motion2.             (line  10)
-* q <1>:                                 Quit and exit.       (line   7)
-* q <2>:                                 Easy templates.      (line  16)
-* q:                                     Using column view.   (line  28)
-* r <1>:                                 Using column view.   (line  21)
-* r <2>:                                 Global TODO list.    (line  25)
-* r:                                     Change display.      (line 130)
+* p:                                     Agenda motion.       (line  10)
+* P:                                     Remote editing.      (line  66)
+* q <1>:                                 Easy templates.      (line  16)
+* q <2>:                                 Using column view.   (line  28)
+* q:                                     Quit and exit.       (line   7)
+* r:                                     Using column view.   (line  21)
 * R:                                     Change display.      (line  99)
+* r <1>:                                 Global TODO list.    (line  25)
+* r:                                     Change display.      (line 130)
 * RET <1>:                               Re-aligning and field motion.
                                                               (line  21)
 * RET:                                   Handling links.      (line 132)
@@ -18768,56 +18771,56 @@ Key index
 * S-<down>:                              The date/time prompt.
                                                               (line  87)
 * S-<left> <1>:                          Creating timestamps. (line  45)
-* S-<left> <2>:                          Multiple sets in one file.
-                                                              (line  33)
-* S-<left> <3>:                          Using column view.   (line  37)
-* S-<left> <4>:                          Remote editing.      (line 103)
-* S-<left> <5>:                          The date/time prompt.
+* S-<left> <2>:                          The date/time prompt.
                                                               (line  87)
+* S-<left> <3>:                          Remote editing.      (line 105)
+* S-<left> <4>:                          Using column view.   (line  37)
+* S-<left> <5>:                          Multiple sets in one file.
+                                                              (line  33)
 * S-<left>:                              TODO basics.         (line  34)
-* S-<right> <1>:                         The date/time prompt.
+* S-<right> <1>:                         Remote editing.      (line  92)
+* S-<right> <2>:                         Property syntax.     (line 103)
+* S-<right> <3>:                         The date/time prompt.
                                                               (line  87)
-* S-<right> <2>:                         Using column view.   (line  37)
-* S-<right> <3>:                         Multiple sets in one file.
-                                                              (line  33)
-* S-<right> <4>:                         Property syntax.     (line 103)
+* S-<right> <4>:                         Using column view.   (line  37)
 * S-<right> <5>:                         TODO basics.         (line  34)
-* S-<right>:                             Remote editing.      (line  90)
-* S-<up> <1>:                            The date/time prompt.
+* S-<right>:                             Multiple sets in one file.
+                                                              (line  33)
+* S-<up> <1>:                            Creating timestamps. (line  49)
+* S-<up>:                                The date/time prompt.
                                                               (line  87)
-* S-<up>:                                Creating timestamps. (line  49)
-* S-down <1>:                            Editing and debugging formulas.
+* S-down <1>:                            Plain lists.         (line 101)
+* S-down:                                Editing and debugging formulas.
                                                               (line  72)
-* S-down:                                Plain lists.         (line 101)
-* S-left <1>:                            Plain lists.         (line 155)
-* S-left:                                Editing and debugging formulas.
+* S-left <1>:                            Editing and debugging formulas.
                                                               (line  72)
+* S-left:                                Plain lists.         (line 155)
 * S-M-<left>:                            Using column view.   (line  75)
 * S-M-<RET>:                             TODO basics.         (line  61)
 * S-M-<right>:                           Using column view.   (line  72)
 * S-M-<up/down>:                         Clocking commands.   (line  63)
 * S-RET:                                 Calculations.        (line  21)
-* S-right <1>:                           Editing and debugging formulas.
+* S-right <1>:                           Plain lists.         (line 155)
+* S-right:                               Editing and debugging formulas.
                                                               (line  72)
-* S-right:                               Plain lists.         (line 155)
 * S-TAB <1>:                             Visibility cycling.  (line  24)
 * S-TAB:                                 Re-aligning and field motion.
                                                               (line  16)
-* S-up <1>:                              Editing and debugging formulas.
+* S-up <1>:                              Plain lists.         (line 101)
+* S-up:                                  Editing and debugging formulas.
                                                               (line  72)
-* S-up:                                  Plain lists.         (line 101)
 * T:                                     Remote editing.      (line  50)
 * t:                                     Remote editing.      (line  14)
-* TAB <1>:                               Editing and debugging formulas.
+* TAB <1>:                               Plain lists.         (line  72)
+* TAB <2>:                               Editing and debugging formulas.
                                                               (line  64)
-* TAB <2>:                               Visibility cycling.  (line  11)
-* TAB:                                   Plain lists.         (line  72)
+* TAB:                                   Visibility cycling.  (line  11)
 * U:                                     Bulk remote editing selected entries.
                                                               (line  17)
 * u:                                     Bulk remote editing selected entries.
                                                               (line  14)
-* v <1>:                                 Using column view.   (line  56)
-* v:                                     Easy templates.      (line  16)
+* v <1>:                                 Easy templates.      (line  16)
+* v:                                     Using column view.   (line  56)
 * v <SPC>:                               Change display.      (line  49)
 * v [:                                   Change display.      (line  85)
 * v a:                                   Change display.      (line  89)
@@ -18831,16 +18834,13 @@ Key index
 * v w:                                   Change display.      (line  24)
 * v y:                                   Change display.      (line  43)
 * w:                                     Change display.      (line  24)
+* X:                                     Remote editing.      (line 120)
 * x:                                     Quit and exit.       (line  10)
-* X:                                     Remote editing.      (line 118)
-* XXX <1>:                               Remote editing.      (line  59)
-* XXX:                                   Secondary filtering and query editing.
-                                                              (line  71)
-* z:                                     Remote editing.      (line  75)
+* z:                                     Remote editing.      (line  77)
 * {:                                     Secondary filtering and query editing.
-                                                              (line  78)
+                                                              (line  80)
 * }:                                     Secondary filtering and query editing.
-                                                              (line  78)
+                                                              (line  80)
 
 
 File: orgmanual.info,  Node: Command and function index,  Next: Variable index,  Prev: Key index,  Up: Top
@@ -19161,7 +19161,7 @@ org-customize <RET>' and then click yourself through the tree.
 * org-capture-bookmark:                  Using capture.       (line  51)
 * org-capture-templates-contexts:        Templates in contexts.
                                                               (line   6)
-* org-capture-use-agenda-date:           Remote editing.      (line 124)
+* org-capture-use-agenda-date:           Remote editing.      (line 126)
 * org-clock-continuously <1>:            Clocking commands.   (line   7)
 * org-clock-continuously:                Continuous clocking. (line   6)
 * org-clock-idle-time:                   Resolving idle time. (line  11)
@@ -19407,7 +19407,7 @@ org-customize <RET>' and then click yourself through the tree.
                                                               (line  26)
 * org-log-done <2>:                      In-buffer settings.  (line 128)
 * org-log-done:                          Change display.      (line  74)
-* org-log-into-drawer <1>:               Remote editing.      (line  75)
+* org-log-into-drawer <1>:               Remote editing.      (line  77)
 * org-log-into-drawer:                   Tracking TODO state changes.
                                                               (line   6)
 * org-log-note-clock-out <1>:            In-buffer settings.  (line 128)
@@ -19553,538 +19553,538 @@ org-customize <RET>' and then click yourself through the tree.
 
 Tag Table:
 Node: Top1314
-Node: Introduction24612
-Node: Summary25145
-Ref: Summary-Footnote-128155
-Node: Installation28223
-Node: Install from the Emacs package system28864
-Node: Download Org as an archive29607
-Node: Use the Org git repository30575
-Ref: Use the Org git repository-Footnote-132176
-Node: Activation32261
-Ref: Activation-Footnote-134100
-Node: Feedback34226
-Ref: Feedback-Footnote-136745
-Node: How to create a useful backtrace36871
-Node: Conventions38100
-Node: Three types of keywords38462
-Ref: Three types of keywords-Footnote-139458
-Node: Keybindings and commands39550
-Node: Document structure40489
-Node: Outlines41418
-Node: Headlines42055
-Ref: Headlines-Footnote-143087
-Node: Visibility cycling43341
-Ref: Visibility cycling-Footnote-146868
-Ref: Visibility cycling-Footnote-246918
-Node: Motion47229
-Node: Structure editing48550
-Ref: Structure editing-Footnote-155221
-Node: Sparse trees55321
-Ref: Sparse trees-Footnote-157805
-Ref: Sparse trees-Footnote-258011
-Ref: Sparse trees-Footnote-358083
-Node: Plain lists58198
-Ref: Plain lists-Footnote-165665
-Ref: Plain lists-Footnote-266019
-Ref: Plain lists-Footnote-366115
-Ref: Plain lists-Footnote-466357
-Ref: Plain lists-Footnote-566519
-Ref: Plain lists-Footnote-666577
-Ref: Plain lists-Footnote-766692
-Ref: Plain lists-Footnote-866792
-Ref: Plain lists-Footnote-966894
-Node: Drawers66960
-Ref: Drawers-Footnote-168573
-Node: Blocks68679
-Node: Creating footnotes69273
-Ref: Creating footnotes-Footnote-173780
-Ref: Creating footnotes-Footnote-273878
-Node: Orgstruct mode73977
-Node: Tables75094
-Node: Built-in table editor75745
-Ref: Built-in table editor-Footnote-177725
-Node: Creation and conversion77825
-Node: Re-aligning and field motion78755
-Node: Column and row editing79712
-Node: Regions81615
-Node: Calculations83117
-Node: Misc83998
-Node: Column width and alignment86323
-Ref: Column width and alignment-Footnote-188859
-Ref: Column width and alignment-Footnote-288905
-Node: Column groups89002
-Node: The Orgtbl mode minor mode90568
-Node: The spreadsheet91409
-Node: References92951
-Node: Field references93731
-Ref: Field references-Footnote-196147
-Ref: Field references-Footnote-296370
-Node: Range references96642
-Ref: ..97339
-Node: Field coordinates in formulas97951
-Ref: Field coordinates in formulas-Footnote-198757
-Node: Named references98860
-Ref: Named references-Footnote-199987
-Node: Remote references100287
-Node: Formula syntax for Calc100970
-Ref: Formula syntax for Calc-Footnote-1104374
-Ref: Formula syntax for Calc-Footnote-2104518
-Node: Emacs Lisp forms as formulas104841
-Node: Duration and time values106585
-Node: Field and range formulas107642
-Node: Column formulas110064
-Node: Lookup functions112191
-Node: Editing and debugging formulas114134
-Node: Debugging formulas118296
-Node: Updating the table118864
-Node: Advanced features120211
-Ref: Advanced features-Footnote-1124705
-Node: Org-Plot124813
-Node: Hyperlinks127676
-Node: Link format128506
-Node: Internal links129742
-Ref: Internal links-Footnote-1131527
-Ref: Internal links-Footnote-2131713
-Node: Radio targets131951
-Node: External links132662
-Ref: External links-Footnote-1135886
-Node: Handling links136277
-Ref: Handling links-Footnote-1144972
-Ref: Handling links-Footnote-2145133
-Ref: Handling links-Footnote-3145301
-Ref: Handling links-Footnote-4145595
-Ref: Handling links-Footnote-5145840
-Ref: Handling links-Footnote-6145917
-Ref: Handling links-Footnote-7145992
-Node: Using links outside Org146141
-Node: Link abbreviations146637
-Node: Search options149333
-Ref: Search options-Footnote-1151309
-Node: Custom searches151390
-Node: TODO items152390
-Ref: TODO items-Footnote-1153508
-Node: TODO basics153622
-Node: TODO extensions156432
-Node: Workflow states157447
-Ref: Workflow states-Footnote-1158734
-Node: TODO types158846
-Ref: TODO types-Footnote-1160431
-Node: Multiple sets in one file160513
-Node: Fast access to TODO states162361
-Ref: Fast access to TODO states-Footnote-1163244
-Ref: Fast access to TODO states-Footnote-2163328
-Node: Per-file keywords163622
-Ref: Per-file keywords-Footnote-1164957
-Node: Faces for TODO keywords165157
-Node: TODO dependencies166213
-Node: Progress logging168404
-Node: Closing items169127
-Ref: Closing items-Footnote-1170188
-Ref: Closing items-Footnote-2170258
-Node: Tracking TODO state changes170332
-Ref: Tracking TODO state changes-Footnote-1173336
-Ref: Tracking TODO state changes-Footnote-2173394
-Ref: Tracking TODO state changes-Footnote-3173537
-Node: Tracking your habits173824
-Node: Priorities178008
-Ref: Priorities-Footnote-1180009
-Node: Breaking down tasks180078
-Ref: Breaking down tasks-Footnote-1182001
-Node: Checkboxes182097
-Ref: Checkboxes-Footnote-1186571
-Ref: Checkboxes-Footnote-2186694
-Ref: Checkboxes-Footnote-3186870
-Node: Tags186984
-Node: Tag inheritance187994
-Ref: Tag inheritance-Footnote-1189803
-Ref: Tag inheritance-Footnote-2189903
-Node: Setting tags190033
-Ref: Setting tags-Footnote-1196297
-Node: Tag searches196379
-Node: Properties and columns197604
-Node: Property syntax199048
-Node: Special properties203032
-Node: Property searches205185
-Node: Property inheritance206611
-Node: Column view208446
-Node: Defining columns209695
-Node: Scope of column definitions210084
-Node: Column attributes210978
-Ref: Column attributes-Footnote-1215514
-Node: Using column view215647
-Node: Capturing column view218449
-Ref: Capturing column view-Footnote-1222226
-Node: Property API222362
-Node: Dates and times222717
-Node: Timestamps223704
-Ref: Timestamps-Footnote-1226018
-Ref: Timestamps-Footnote-2226317
-Node: Creating timestamps227082
-Node: The date/time prompt229854
-Ref: The date/time prompt-Footnote-1234765
-Ref: The date/time prompt-Footnote-2234927
-Ref: The date/time prompt-Footnote-3235033
-Node: Custom time format235127
-Node: Deadlines and scheduling236869
-Ref: Deadlines and scheduling-Footnote-1240243
-Node: Inserting deadline/schedule240397
-Ref: Inserting deadline/schedule-Footnote-1242629
-Ref: Inserting deadline/schedule-Footnote-2242780
-Ref: Inserting deadline/schedule-Footnote-3242893
-Node: Repeated tasks243006
-Ref: Repeated tasks-Footnote-1246394
-Ref: Repeated tasks-Footnote-2246643
-Node: Clocking work time246842
-Ref: Clocking work time-Footnote-1248069
-Ref: Clocking work time-Footnote-2248212
-Node: Clocking commands248350
-Ref: Clocking commands-Footnote-1253262
-Ref: Clocking commands-Footnote-2253369
-Ref: Clocking commands-Footnote-3253447
-Ref: Clocking commands-Footnote-4253505
-Node: The clock table253584
-Ref: The clock table-Footnote-1259854
-Ref: The clock table-Footnote-2259948
-Node: Resolving idle time260073
-Ref: Resolving idle time-Footnote-1263385
-Node: Continuous clocking263853
-Node: Effort estimates264448
-Ref: Effort estimates-Footnote-1267202
-Ref: Effort estimates-Footnote-2267290
-Node: Relative timer267397
-Node: Countdown timer269175
-Node: Capture - Refile - Archive269677
-Node: Capture270679
-Node: Setting up capture271758
-Ref: Setting up capture-Footnote-1272177
-Node: Using capture272243
-Node: Capture templates274641
-Node: Template elements276600
-Node: Template expansion282270
-Ref: Template expansion-Footnote-1285324
-Ref: Template expansion-Footnote-2285411
-Ref: Template expansion-Footnote-3285597
-Node: Templates in contexts285695
-Node: Attachments286558
-Ref: Attachments-Footnote-1289908
-Node: RSS feeds290058
-Node: Protocols291624
-Node: Refile and copy292311
-Ref: Refile and copy-Footnote-1294519
-Node: Archiving294620
-Node: Moving subtrees295326
-Ref: Moving subtrees-Footnote-1297128
-Node: Internal archiving297569
-Node: Agenda views300206
-Node: Agenda files302430
-Ref: Agenda files-Footnote-1305190
-Ref: Agenda files-Footnote-2305339
-Node: Agenda dispatcher305532
-Ref: Agenda dispatcher-Footnote-1308403
-Ref: Agenda dispatcher-Footnote-2308497
-Node: Built-in agenda views308599
-Node: Weekly/daily agenda309253
-Ref: Weekly/daily agenda-Footnote-1310583
-Node: Calendar/Diary integration310814
-Ref: Calendar/Diary integration-Footnote-1312974
-Node: Anniversaries from BBDB313124
-Node: Appointment reminders314636
-Node: Global TODO list315277
-Node: Matching tags and properties317821
-Ref: Matching tags and properties-Footnote-1324546
-Node: Timeline for a single file324630
-Node: Search view325347
-Node: Stuck projects326660
-Node: Presentation and sorting328709
-Node: Categories329611
-Ref: Categories-Footnote-1330391
-Node: Time-of-day specifications330825
-Node: Sorting of agenda items332696
-Node: Agenda commands334258
-Node: Motion2335201
-Node: View/Go to Org file335473
-Node: Change display337083
-Ref: Change display-Footnote-1344133
-Node: Secondary filtering and query editing344214
-Ref: Secondary filtering and query editing-Footnote-1348791
-Node: Remote editing349204
-Node: Bulk remote editing selected entries354116
-Ref: Bulk remote editing selected entries-Footnote-1357080
-Node: Calendar commands357180
-Ref: Calendar commands-Footnote-1359466
-Node: Exporting to a file359560
-Node: Quit and exit360353
-Node: Custom agenda views360773
-Node: Storing searches361438
-Ref: Storing searches-Footnote-1364059
-Node: Block agenda364176
-Node: Setting options for custom commands365441
-Node: Exporting agenda views369088
-Ref: Exporting agenda views-Footnote-1373971
-Ref: Exporting agenda views-Footnote-2374185
-Ref: Exporting agenda views-Footnote-3374372
-Node: Using column view in the agenda374454
-Ref: Agenda-column-view374643
-Node: Markup for rich export377545
-Node: Structural markup elements378535
-Node: Document title379217
-Node: Headings and sections379832
-Node: Table of contents380528
-Node: Lists381830
-Node: Paragraphs382143
-Node: Footnote markup383194
-Node: Emphasis and monospace383564
-Node: Horizontal rules384205
-Node: Comment lines384527
-Node: Images and tables385060
-Node: Literal examples386643
-Ref: Literal examples-Footnote-1390555
-Ref: Literal examples-Footnote-2390892
-Ref: Literal examples-Footnote-3391067
-Ref: Literal examples-Footnote-4391248
-Ref: Literal examples-Footnote-5391493
-Node: Include files391587
-Node: Index entries393120
-Node: Macro replacement393591
-Node: Embedded LaTeX394454
-Ref: Embedded LaTeX-Footnote-1395421
-Node: Special symbols395609
-Ref: Special symbols-Footnote-1397202
-Node: Subscripts and superscripts397357
-Node: LaTeX fragments398605
-Ref: LaTeX fragments-Footnote-1401228
-Ref: LaTeX fragments-Footnote-2401401
-Ref: LaTeX fragments-Footnote-3401768
-Node: Previewing LaTeX fragments401944
-Node: CDLaTeX mode403155
-Ref: CDLaTeX mode-Footnote-1405602
-Node: Exporting405750
-Node: Selective export407195
-Node: Export options408291
-Ref: Export options-Footnote-1412822
-Ref: Export options-Footnote-2412923
-Node: The export dispatcher413018
-Ref: The export dispatcher-Footnote-1414315
-Node: ASCII/Latin-1/UTF-8 export414413
-Ref: ASCII/Latin-1/UTF-8 export-Footnote-1416870
-Ref: ASCII/Latin-1/UTF-8 export-Footnote-2416928
-Node: HTML export416980
-Node: HTML export commands418010
-Ref: HTML export commands-Footnote-1419942
-Ref: HTML export commands-Footnote-2420000
-Node: HTML preamble and postamble420052
-Node: Quoting HTML tags421352
-Node: Links in HTML export422024
-Node: Tables in HTML export423166
-Node: Images in HTML export423736
-Ref: Images in HTML export-Footnote-1425016
-Node: Math formatting in HTML export425071
-Ref: Math formatting in HTML export-Footnote-1426356
-Node: Text areas in HTML export426654
-Node: CSS support427480
-Ref: CSS support-Footnote-1430235
-Ref: CSS support-Footnote-2430407
-Node: JavaScript support430598
-Node: LaTeX and PDF export434071
-Ref: LaTeX and PDF export-Footnote-1435100
-Node: LaTeX/PDF export commands435350
-Ref: LaTeX/PDF export commands-Footnote-1437240
-Ref: LaTeX/PDF export commands-Footnote-2437298
-Node: Header and sectioning437350
-Ref: Header and sectioning-Footnote-1438633
-Node: Quoting LaTeX code438745
-Node: Tables in LaTeX export439368
-Node: Images in LaTeX export440374
-Ref: Images in LaTeX export-Footnote-1442488
-Node: Beamer class export442708
-Node: OpenDocument Text export448277
-Ref: OpenDocument Text export-Footnote-1449462
-Ref: OpenDocument Text export-Footnote-2449516
-Node: Pre-requisites for ODT export449665
-Node: ODT export commands450001
-Ref: x-export-to-odt450206
-Ref: ODT export commands-Footnote-1451212
-Ref: ODT export commands-Footnote-2451273
-Node: Extending ODT export451325
-Node: Automatically exporting to other formats452413
-Ref: x-export-to-other-formats452658
-Node: Converting between document formats453106
-Node: Applying custom styles453799
-Node: Links in ODT export455865
-Node: Tables in ODT export456524
-Ref: Tables in ODT export-Footnote-1458627
-Node: Images in ODT export458721
-Ref: Images in ODT export-Footnote-1461191
-Node: Math formatting in ODT export461423
-Node: Working with LaTeX math snippets461896
-Ref: Working with LaTeX math snippets-Footnote-1463905
-Node: Working with MathML or OpenDocument formula files463981
-Node: Labels and captions in ODT export464553
-Node: Literal examples in ODT export465980
-Ref: Literal examples in ODT export-Footnote-1466912
-Node: Advanced topics in ODT export467023
-Node: Configuring a document converter467789
-Node: Working with OpenDocument style files469184
-Ref: x-orgodtstyles-xml469912
-Ref: x-orgodtcontenttemplate-xml470194
-Ref: x-overriding-factory-styles470756
-Ref: x-org-export-odt-styles-file471008
-Ref: x-org-export-odt-content-template-file471870
-Node: Creating one-off styles471974
-Node: Customizing tables in ODT export474103
-Ref: Customizing tables in ODT export-Footnote-1479667
-Ref: Customizing tables in ODT export-Footnote-2479776
-Ref: Customizing tables in ODT export-Footnote-3479832
-Node: Validating OpenDocument XML479882
-Ref: Validating OpenDocument XML-Footnote-1480965
-Node: iCalendar export481016
-Ref: iCalendar export-Footnote-1483704
-Ref: iCalendar export-Footnote-2483794
-Ref: iCalendar export-Footnote-3483894
-Node: Publishing484031
-Node: Configuration484909
-Node: Project alist485683
-Node: Sources and destinations486763
-Node: Selecting files488044
-Node: Publishing action488962
-Ref: Publishing action-Footnote-1490741
-Node: Publishing options491104
-Node: Publishing links494570
-Node: Site map496254
-Node: Generating an index498614
-Node: Uploading files499195
-Node: Sample configuration500965
-Node: Simple example501465
-Node: Complex example502068
-Node: Triggering publication504082
-Node: Working with source code505053
-Node: Structure of code blocks506693
-Ref: Structure of code blocks-Footnote-1508517
-Node: Editing source code508612
-Node: Exporting code blocks510181
-Node: Extracting source code511926
-Node: Header arguments for tangling512571
-Node: Functions for tangling513147
-Node: Hooks for tangling513574
-Node: Evaluating code blocks513958
-Ref: Evaluating code blocks-Footnote-1517285
-Ref: Evaluating code blocks-Footnote-2517580
-Node: Library of Babel517708
-Node: Languages518694
-Node: Header arguments521029
-Node: Using header arguments521524
-Node: System-wide header arguments522270
-Node: Language-specific header arguments523080
-Node: Buffer-wide header arguments523511
-Node: Header arguments in Org mode properties524220
-Node: Code block specific header arguments525343
-Node: Header arguments in function calls527125
-Node: Specific header arguments527908
-Node: var530083
-Ref: Alternate-argument-syntax532926
-Ref: Indexable-variable-values533253
-Ref: Emacs-Lisp-evaluation-of-variables535204
-Ref: var-Footnote-1535980
-Node: results536160
-Ref: Collection536812
-Ref: Type537466
-Ref: Handling539680
-Node: file540531
-Node: file-desc541446
-Node: dir541915
-Ref: Remote-execution542985
-Ref: Further-points544014
-Node: exports544788
-Node: tangle545440
-Node: mkdirp546253
-Node: comments546588
-Node: padline547721
-Node: no-expand548259
-Node: session548754
-Node: noweb549205
-Ref: Noweb-prefix-lines550788
-Node: noweb-ref551307
-Ref: noweb-ref-Footnote-1552666
-Node: noweb-sep552798
-Node: cache553097
-Node: sep554762
-Node: hlines555338
-Node: colnames556780
-Node: rownames558196
-Node: shebang559332
-Node: eval559733
-Node: wrap560837
-Node: Results of evaluation561266
-Node: Non-session562281
-Ref: Non-session-Footnote-1563218
-Node: Session563324
-Ref: Session-Footnote-1565208
-Node: Noweb reference syntax565395
-Node: Key bindings and useful functions567041
-Node: Batch execution569162
-Node: Miscellaneous570107
-Node: Completion570948
-Node: Easy templates572931
-Node: Speed keys574522
-Node: Code evaluation security575357
-Node: Customization578025
-Node: In-buffer settings578628
-Ref: In-buffer settings-Footnote-1588352
-Node: The very busy C-c C-c key588401
-Node: Clean view590395
-Ref: Clean view-Footnote-1594270
-Ref: Clean view-Footnote-2594332
-Ref: Clean view-Footnote-3594526
-Ref: Clean view-Footnote-4594587
-Ref: Clean view-Footnote-5594699
-Ref: Clean view-Footnote-6594754
-Node: TTY keys594879
-Node: Interaction596818
-Node: Cooperation597183
-Node: Conflicts600946
-Node: org-crypt605165
-Node: Hacking606476
-Node: Hooks607361
-Node: Add-on packages607772
-Node: Adding hyperlink types608323
-Node: Context-sensitive commands612258
-Ref: Context-sensitive commands-Footnote-1613843
-Node: Tables in arbitrary syntax613989
-Node: Radio tables615394
-Node: A LaTeX example618030
-Ref: A LaTeX example-Footnote-1621776
-Ref: A LaTeX example-Footnote-2621924
-Node: Translator functions622358
-Ref: Translator functions-Footnote-1625595
-Node: Radio lists625683
-Node: Dynamic blocks626773
-Node: Special agenda views628978
-Ref: x-agenda-skip-entry-regexp632438
-Ref: Special agenda views-Footnote-1633240
-Node: Speeding up your agendas633375
-Node: Extracting agenda information634489
-Node: Using the property API638410
-Node: Using the mapping API641734
-Node: MobileOrg646100
-Node: Setting up the staging area647768
-Ref: Setting up the staging area-Footnote-1648852
-Ref: Setting up the staging area-Footnote-2649153
-Node: Pushing to MobileOrg649414
-Ref: Pushing to MobileOrg-Footnote-1650421
-Ref: Pushing to MobileOrg-Footnote-2650508
-Ref: Pushing to MobileOrg-Footnote-3650924
-Node: Pulling from MobileOrg650996
-Ref: Pulling from MobileOrg-Footnote-1653419
-Ref: Pulling from MobileOrg-Footnote-2653488
-Node: Acknowledgments653862
-Node: From Carsten654085
-Node: From Bastien657422
-Node: List of contributions659355
-Node: Concept index668346
-Node: Key index744337
-Node: Command and function index795898
-Node: Variable index809629
+Node: Introduction24618
+Node: Summary25151
+Ref: Summary-Footnote-128161
+Node: Installation28229
+Node: Install from the Emacs package system28870
+Node: Download Org as an archive29613
+Node: Use the Org git repository30581
+Ref: Use the Org git repository-Footnote-132182
+Node: Activation32267
+Ref: Activation-Footnote-134106
+Node: Feedback34232
+Ref: Feedback-Footnote-136751
+Node: How to create a useful backtrace36877
+Node: Conventions38106
+Node: Three types of keywords38468
+Ref: Three types of keywords-Footnote-139464
+Node: Keybindings and commands39556
+Node: Document structure40495
+Node: Outlines41424
+Node: Headlines42061
+Ref: Headlines-Footnote-143093
+Node: Visibility cycling43347
+Ref: Visibility cycling-Footnote-146874
+Ref: Visibility cycling-Footnote-246924
+Node: Motion47235
+Node: Structure editing48556
+Ref: Structure editing-Footnote-155227
+Node: Sparse trees55327
+Ref: Sparse trees-Footnote-157811
+Ref: Sparse trees-Footnote-258017
+Ref: Sparse trees-Footnote-358089
+Node: Plain lists58204
+Ref: Plain lists-Footnote-165671
+Ref: Plain lists-Footnote-266025
+Ref: Plain lists-Footnote-366121
+Ref: Plain lists-Footnote-466363
+Ref: Plain lists-Footnote-566525
+Ref: Plain lists-Footnote-666583
+Ref: Plain lists-Footnote-766698
+Ref: Plain lists-Footnote-866798
+Ref: Plain lists-Footnote-966900
+Node: Drawers66966
+Ref: Drawers-Footnote-168579
+Node: Blocks68685
+Node: Creating footnotes69279
+Ref: Creating footnotes-Footnote-173786
+Ref: Creating footnotes-Footnote-273884
+Node: Orgstruct mode73983
+Node: Tables75100
+Node: Built-in table editor75751
+Ref: Built-in table editor-Footnote-177731
+Node: Creation and conversion77831
+Node: Re-aligning and field motion78761
+Node: Column and row editing79718
+Node: Regions81621
+Node: Calculations83123
+Node: Misc84004
+Node: Column width and alignment86329
+Ref: Column width and alignment-Footnote-188865
+Ref: Column width and alignment-Footnote-288911
+Node: Column groups89008
+Node: The Orgtbl mode minor mode90574
+Node: The spreadsheet91415
+Node: References92957
+Node: Field references93737
+Ref: Field references-Footnote-196153
+Ref: Field references-Footnote-296376
+Node: Range references96648
+Ref: ..97345
+Node: Field coordinates in formulas97957
+Ref: Field coordinates in formulas-Footnote-198763
+Node: Named references98866
+Ref: Named references-Footnote-199993
+Node: Remote references100293
+Node: Formula syntax for Calc100976
+Ref: Formula syntax for Calc-Footnote-1104380
+Ref: Formula syntax for Calc-Footnote-2104524
+Node: Emacs Lisp forms as formulas104847
+Node: Duration and time values106591
+Node: Field and range formulas107648
+Node: Column formulas110070
+Node: Lookup functions112197
+Node: Editing and debugging formulas114140
+Node: Debugging formulas118302
+Node: Updating the table118870
+Node: Advanced features120217
+Ref: Advanced features-Footnote-1124711
+Node: Org-Plot124819
+Node: Hyperlinks127682
+Node: Link format128512
+Node: Internal links129748
+Ref: Internal links-Footnote-1131533
+Ref: Internal links-Footnote-2131719
+Node: Radio targets131957
+Node: External links132668
+Ref: External links-Footnote-1135892
+Node: Handling links136283
+Ref: Handling links-Footnote-1144978
+Ref: Handling links-Footnote-2145139
+Ref: Handling links-Footnote-3145307
+Ref: Handling links-Footnote-4145601
+Ref: Handling links-Footnote-5145846
+Ref: Handling links-Footnote-6145923
+Ref: Handling links-Footnote-7145998
+Node: Using links outside Org146147
+Node: Link abbreviations146643
+Node: Search options149339
+Ref: Search options-Footnote-1151315
+Node: Custom searches151396
+Node: TODO items152396
+Ref: TODO items-Footnote-1153514
+Node: TODO basics153628
+Node: TODO extensions156438
+Node: Workflow states157453
+Ref: Workflow states-Footnote-1158740
+Node: TODO types158852
+Ref: TODO types-Footnote-1160437
+Node: Multiple sets in one file160519
+Node: Fast access to TODO states162367
+Ref: Fast access to TODO states-Footnote-1163250
+Ref: Fast access to TODO states-Footnote-2163334
+Node: Per-file keywords163628
+Ref: Per-file keywords-Footnote-1164963
+Node: Faces for TODO keywords165163
+Node: TODO dependencies166219
+Node: Progress logging168410
+Node: Closing items169133
+Ref: Closing items-Footnote-1170194
+Ref: Closing items-Footnote-2170264
+Node: Tracking TODO state changes170338
+Ref: Tracking TODO state changes-Footnote-1173342
+Ref: Tracking TODO state changes-Footnote-2173400
+Ref: Tracking TODO state changes-Footnote-3173543
+Node: Tracking your habits173830
+Node: Priorities178014
+Ref: Priorities-Footnote-1180015
+Node: Breaking down tasks180084
+Ref: Breaking down tasks-Footnote-1182007
+Node: Checkboxes182103
+Ref: Checkboxes-Footnote-1186577
+Ref: Checkboxes-Footnote-2186700
+Ref: Checkboxes-Footnote-3186876
+Node: Tags186990
+Node: Tag inheritance188000
+Ref: Tag inheritance-Footnote-1189809
+Ref: Tag inheritance-Footnote-2189909
+Node: Setting tags190039
+Ref: Setting tags-Footnote-1196303
+Node: Tag searches196385
+Node: Properties and columns197610
+Node: Property syntax199054
+Node: Special properties203038
+Node: Property searches205191
+Node: Property inheritance206617
+Node: Column view208452
+Node: Defining columns209701
+Node: Scope of column definitions210090
+Node: Column attributes210984
+Ref: Column attributes-Footnote-1215520
+Node: Using column view215653
+Node: Capturing column view218455
+Ref: Capturing column view-Footnote-1222232
+Node: Property API222368
+Node: Dates and times222723
+Node: Timestamps223710
+Ref: Timestamps-Footnote-1226024
+Ref: Timestamps-Footnote-2226323
+Node: Creating timestamps227088
+Node: The date/time prompt229860
+Ref: The date/time prompt-Footnote-1234771
+Ref: The date/time prompt-Footnote-2234933
+Ref: The date/time prompt-Footnote-3235039
+Node: Custom time format235133
+Node: Deadlines and scheduling236875
+Ref: Deadlines and scheduling-Footnote-1240249
+Node: Inserting deadline/schedule240403
+Ref: Inserting deadline/schedule-Footnote-1242635
+Ref: Inserting deadline/schedule-Footnote-2242786
+Ref: Inserting deadline/schedule-Footnote-3242899
+Node: Repeated tasks243012
+Ref: Repeated tasks-Footnote-1246400
+Ref: Repeated tasks-Footnote-2246649
+Node: Clocking work time246848
+Ref: Clocking work time-Footnote-1248075
+Ref: Clocking work time-Footnote-2248218
+Node: Clocking commands248356
+Ref: Clocking commands-Footnote-1253268
+Ref: Clocking commands-Footnote-2253375
+Ref: Clocking commands-Footnote-3253453
+Ref: Clocking commands-Footnote-4253511
+Node: The clock table253590
+Ref: The clock table-Footnote-1259860
+Ref: The clock table-Footnote-2259954
+Node: Resolving idle time260079
+Ref: Resolving idle time-Footnote-1263391
+Node: Continuous clocking263859
+Node: Effort estimates264454
+Ref: Effort estimates-Footnote-1267208
+Ref: Effort estimates-Footnote-2267296
+Node: Relative timer267403
+Node: Countdown timer269181
+Node: Capture - Refile - Archive269683
+Node: Capture270685
+Node: Setting up capture271764
+Ref: Setting up capture-Footnote-1272183
+Node: Using capture272249
+Node: Capture templates274647
+Node: Template elements276606
+Node: Template expansion282276
+Ref: Template expansion-Footnote-1285330
+Ref: Template expansion-Footnote-2285417
+Ref: Template expansion-Footnote-3285603
+Node: Templates in contexts285701
+Node: Attachments286564
+Ref: Attachments-Footnote-1289914
+Node: RSS feeds290064
+Node: Protocols291630
+Node: Refile and copy292317
+Ref: Refile and copy-Footnote-1294525
+Node: Archiving294626
+Node: Moving subtrees295332
+Ref: Moving subtrees-Footnote-1297134
+Node: Internal archiving297575
+Node: Agenda views300212
+Node: Agenda files302436
+Ref: Agenda files-Footnote-1305196
+Ref: Agenda files-Footnote-2305345
+Node: Agenda dispatcher305538
+Ref: Agenda dispatcher-Footnote-1308409
+Ref: Agenda dispatcher-Footnote-2308503
+Node: Built-in agenda views308605
+Node: Weekly/daily agenda309259
+Ref: Weekly/daily agenda-Footnote-1310589
+Node: Calendar/Diary integration310820
+Ref: Calendar/Diary integration-Footnote-1312980
+Node: Anniversaries from BBDB313130
+Node: Appointment reminders314642
+Node: Global TODO list315283
+Node: Matching tags and properties317827
+Ref: Matching tags and properties-Footnote-1324552
+Node: Timeline for a single file324636
+Node: Search view325353
+Node: Stuck projects326666
+Node: Presentation and sorting328715
+Node: Categories329617
+Ref: Categories-Footnote-1330397
+Node: Time-of-day specifications330831
+Node: Sorting of agenda items332702
+Node: Agenda commands334264
+Node: Agenda motion335213
+Node: View/Go to Org file335503
+Node: Change display337119
+Ref: Change display-Footnote-1344169
+Node: Secondary filtering and query editing344250
+Ref: Secondary filtering and query editing-Footnote-1348845
+Node: Remote editing349258
+Node: Bulk remote editing selected entries354185
+Ref: Bulk remote editing selected entries-Footnote-1357149
+Node: Calendar commands357249
+Ref: Calendar commands-Footnote-1359535
+Node: Exporting to a file359629
+Node: Quit and exit360422
+Node: Custom agenda views360842
+Node: Storing searches361507
+Ref: Storing searches-Footnote-1364128
+Node: Block agenda364245
+Node: Setting options for custom commands365510
+Node: Exporting agenda views369157
+Ref: Exporting agenda views-Footnote-1374040
+Ref: Exporting agenda views-Footnote-2374254
+Ref: Exporting agenda views-Footnote-3374441
+Node: Using column view in the agenda374523
+Ref: Agenda-column-view374712
+Node: Markup for rich export377614
+Node: Structural markup elements378604
+Node: Document title379286
+Node: Headings and sections379901
+Node: Table of contents380597
+Node: Lists381899
+Node: Paragraphs382212
+Node: Footnote markup383263
+Node: Emphasis and monospace383633
+Node: Horizontal rules384274
+Node: Comment lines384596
+Node: Images and tables385129
+Node: Literal examples386712
+Ref: Literal examples-Footnote-1390624
+Ref: Literal examples-Footnote-2390961
+Ref: Literal examples-Footnote-3391136
+Ref: Literal examples-Footnote-4391317
+Ref: Literal examples-Footnote-5391562
+Node: Include files391656
+Node: Index entries393189
+Node: Macro replacement393660
+Node: Embedded LaTeX394523
+Ref: Embedded LaTeX-Footnote-1395490
+Node: Special symbols395678
+Ref: Special symbols-Footnote-1397298
+Node: Subscripts and superscripts397453
+Node: LaTeX fragments398700
+Ref: LaTeX fragments-Footnote-1401323
+Ref: LaTeX fragments-Footnote-2401496
+Ref: LaTeX fragments-Footnote-3401863
+Node: Previewing LaTeX fragments402039
+Node: CDLaTeX mode403250
+Ref: CDLaTeX mode-Footnote-1405697
+Node: Exporting405845
+Node: Selective export407290
+Node: Export options408386
+Ref: Export options-Footnote-1412917
+Ref: Export options-Footnote-2413018
+Node: The export dispatcher413113
+Ref: The export dispatcher-Footnote-1414410
+Node: ASCII/Latin-1/UTF-8 export414508
+Ref: ASCII/Latin-1/UTF-8 export-Footnote-1416965
+Ref: ASCII/Latin-1/UTF-8 export-Footnote-2417023
+Node: HTML export417075
+Node: HTML export commands418105
+Ref: HTML export commands-Footnote-1420037
+Ref: HTML export commands-Footnote-2420095
+Node: HTML preamble and postamble420147
+Node: Quoting HTML tags421447
+Node: Links in HTML export422119
+Node: Tables in HTML export423261
+Node: Images in HTML export423831
+Ref: Images in HTML export-Footnote-1425111
+Node: Math formatting in HTML export425166
+Ref: Math formatting in HTML export-Footnote-1426451
+Node: Text areas in HTML export426749
+Node: CSS support427575
+Ref: CSS support-Footnote-1430330
+Ref: CSS support-Footnote-2430502
+Node: JavaScript support430693
+Node: LaTeX and PDF export434166
+Ref: LaTeX and PDF export-Footnote-1435195
+Node: LaTeX/PDF export commands435445
+Ref: LaTeX/PDF export commands-Footnote-1437335
+Ref: LaTeX/PDF export commands-Footnote-2437393
+Node: Header and sectioning437445
+Ref: Header and sectioning-Footnote-1438728
+Node: Quoting LaTeX code438840
+Node: Tables in LaTeX export439463
+Node: Images in LaTeX export440469
+Ref: Images in LaTeX export-Footnote-1442583
+Node: Beamer class export442803
+Node: OpenDocument Text export448372
+Ref: OpenDocument Text export-Footnote-1449557
+Ref: OpenDocument Text export-Footnote-2449611
+Node: Pre-requisites for ODT export449760
+Node: ODT export commands450096
+Ref: x-export-to-odt450301
+Ref: ODT export commands-Footnote-1451307
+Ref: ODT export commands-Footnote-2451368
+Node: Extending ODT export451420
+Node: Automatically exporting to other formats452508
+Ref: x-export-to-other-formats452753
+Node: Converting between document formats453201
+Node: Applying custom styles453894
+Node: Links in ODT export455960
+Node: Tables in ODT export456619
+Ref: Tables in ODT export-Footnote-1458722
+Node: Images in ODT export458816
+Ref: Images in ODT export-Footnote-1461286
+Node: Math formatting in ODT export461518
+Node: Working with LaTeX math snippets461991
+Ref: Working with LaTeX math snippets-Footnote-1464000
+Node: Working with MathML or OpenDocument formula files464076
+Node: Labels and captions in ODT export464648
+Node: Literal examples in ODT export466075
+Ref: Literal examples in ODT export-Footnote-1467007
+Node: Advanced topics in ODT export467118
+Node: Configuring a document converter467884
+Node: Working with OpenDocument style files469279
+Ref: x-orgodtstyles-xml470007
+Ref: x-orgodtcontenttemplate-xml470289
+Ref: x-overriding-factory-styles470851
+Ref: x-org-export-odt-styles-file471103
+Ref: x-org-export-odt-content-template-file471965
+Node: Creating one-off styles472069
+Node: Customizing tables in ODT export474198
+Ref: Customizing tables in ODT export-Footnote-1479762
+Ref: Customizing tables in ODT export-Footnote-2479871
+Ref: Customizing tables in ODT export-Footnote-3479927
+Node: Validating OpenDocument XML479977
+Ref: Validating OpenDocument XML-Footnote-1481060
+Node: iCalendar export481111
+Ref: iCalendar export-Footnote-1483799
+Ref: iCalendar export-Footnote-2483889
+Ref: iCalendar export-Footnote-3483989
+Node: Publishing484126
+Node: Configuration485004
+Node: Project alist485778
+Node: Sources and destinations486858
+Node: Selecting files488139
+Node: Publishing action489057
+Ref: Publishing action-Footnote-1490836
+Node: Publishing options491199
+Node: Publishing links494665
+Node: Site map496349
+Node: Generating an index498709
+Node: Uploading files499290
+Node: Sample configuration501060
+Node: Simple example501560
+Node: Complex example502163
+Node: Triggering publication504177
+Node: Working with source code505148
+Node: Structure of code blocks506788
+Ref: Structure of code blocks-Footnote-1508612
+Node: Editing source code508707
+Node: Exporting code blocks510276
+Node: Extracting source code512021
+Node: Header arguments for tangling512666
+Node: Functions for tangling513242
+Node: Hooks for tangling513669
+Node: Evaluating code blocks514053
+Ref: Evaluating code blocks-Footnote-1517380
+Ref: Evaluating code blocks-Footnote-2517675
+Node: Library of Babel517803
+Node: Languages518789
+Node: Header arguments521124
+Node: Using header arguments521619
+Node: System-wide header arguments522365
+Node: Language-specific header arguments523175
+Node: Buffer-wide header arguments523606
+Node: Header arguments in Org mode properties524315
+Node: Code block specific header arguments525438
+Node: Header arguments in function calls527220
+Node: Specific header arguments528003
+Node: var530178
+Ref: Alternate-argument-syntax533021
+Ref: Indexable-variable-values533348
+Ref: Emacs-Lisp-evaluation-of-variables535299
+Ref: var-Footnote-1536075
+Node: results536255
+Ref: Collection536907
+Ref: Type537561
+Ref: Handling539775
+Node: file540626
+Node: file-desc541541
+Node: dir542010
+Ref: Remote-execution543080
+Ref: Further-points544109
+Node: exports544883
+Node: tangle545535
+Node: mkdirp546348
+Node: comments546683
+Node: padline547816
+Node: no-expand548354
+Node: session548849
+Node: noweb549300
+Ref: Noweb-prefix-lines550883
+Node: noweb-ref551402
+Ref: noweb-ref-Footnote-1552761
+Node: noweb-sep552893
+Node: cache553192
+Node: sep554857
+Node: hlines555433
+Node: colnames556875
+Node: rownames558291
+Node: shebang559427
+Node: eval559828
+Node: wrap560932
+Node: Results of evaluation561361
+Node: Non-session562376
+Ref: Non-session-Footnote-1563313
+Node: Session563419
+Ref: Session-Footnote-1565303
+Node: Noweb reference syntax565490
+Node: Key bindings and useful functions567136
+Node: Batch execution569257
+Node: Miscellaneous570202
+Node: Completion571043
+Node: Easy templates573024
+Node: Speed keys574615
+Node: Code evaluation security575450
+Node: Customization578118
+Node: In-buffer settings578721
+Ref: In-buffer settings-Footnote-1588445
+Node: The very busy C-c C-c key588494
+Node: Clean view590488
+Ref: Clean view-Footnote-1594363
+Ref: Clean view-Footnote-2594425
+Ref: Clean view-Footnote-3594619
+Ref: Clean view-Footnote-4594680
+Ref: Clean view-Footnote-5594792
+Ref: Clean view-Footnote-6594847
+Node: TTY keys594972
+Node: Interaction596911
+Node: Cooperation597276
+Node: Conflicts601037
+Node: org-crypt605256
+Node: Hacking606567
+Node: Hooks607452
+Node: Add-on packages607863
+Node: Adding hyperlink types608414
+Node: Context-sensitive commands612349
+Ref: Context-sensitive commands-Footnote-1613934
+Node: Tables in arbitrary syntax614080
+Node: Radio tables615485
+Node: A LaTeX example618121
+Ref: A LaTeX example-Footnote-1621867
+Ref: A LaTeX example-Footnote-2622015
+Node: Translator functions622449
+Ref: Translator functions-Footnote-1625686
+Node: Radio lists625774
+Node: Dynamic blocks626864
+Node: Special agenda views629069
+Ref: x-agenda-skip-entry-regexp632529
+Ref: Special agenda views-Footnote-1633331
+Node: Speeding up your agendas633466
+Node: Extracting agenda information634580
+Node: Using the property API638501
+Node: Using the mapping API641825
+Node: MobileOrg646191
+Node: Setting up the staging area647859
+Ref: Setting up the staging area-Footnote-1648943
+Ref: Setting up the staging area-Footnote-2649244
+Node: Pushing to MobileOrg649505
+Ref: Pushing to MobileOrg-Footnote-1650512
+Ref: Pushing to MobileOrg-Footnote-2650599
+Ref: Pushing to MobileOrg-Footnote-3651015
+Node: Pulling from MobileOrg651087
+Ref: Pulling from MobileOrg-Footnote-1653510
+Ref: Pulling from MobileOrg-Footnote-2653579
+Node: Acknowledgments653953
+Node: From Carsten654176
+Node: From Bastien657513
+Node: List of contributions659446
+Node: Concept index668437
+Node: Key index744428
+Node: Command and function index795617
+Node: Variable index809348
 
 End Tag Table
 
