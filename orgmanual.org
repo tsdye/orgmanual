@@ -6878,26 +6878,23 @@ and fast.
    :DESCRIPTION: Capturing new stuff
    :END:
 {{{cindex(capture)}}}
+{{{cindex(Wiegley\\\, John)}}}
 
-Org's method for capturing new items is heavily inspired by John
-Wiegley excellent remember package. Up to version 6.36 Org used a
-special setup for {{{file(remember.el)}}}.  The file {{{file(org-remember.el)}}}
-is still part of Org mode for backward compatibility with existing
-setups. You can find the documentation for org-remember at
-[[http://orgmode.org/org-remember.pdf]].
+Capture lets you quickly store notes with little interruption of your
+work flow.  Org's method for capturing new items is heavily inspired
+by John Wiegley's excellent {{{file(remember.el)}}} package. Up to
+version 6.36 Org used a special setup for {{{file(remember.el)}}},
+then replaced it with {{{file(org-remember.el)}}}.  As of Org version
+8.0, {{{file(org-remember.el)}}} has been completely replaced by
+{{{file(org-capture.el)}}}. 
 
-The new capturing setup described here is preferred and should be used by new
-users.  To convert your ~org-remember-templates~, run the following command:
-{{{kbdspckey(M-x org-capture-import-remember-templates,RET)}}}
-
-{{{noindent}}} and then customize the new variable with 
-{{{kbd(M-x customize-variable org-capture-templates)}}}, check the result, and
-save the customization. You can then use both remember and capture
-until you are familiar with the new mechanism.
-
-Capture lets you quickly store notes with little interruption of your work
-flow.  The basic process of capturing is very similar to remember, but Org
-does enhance it with templates and more.
+If your configuration depends on {{{file(org-remember.el)}}}, you need
+to update it and use the setup described below.  To convert your
+~org-remember-templates~, run the command {{{kbdspckey(M-x
+org-capture-import-remember-templates,RET)}}} and then customize the
+new variable with {{{kbd(M-x customize-variable
+org-capture-templates)}}}, check the result, and save the
+customization.
 
 *** Setting up capture
     :PROPERTIES:
@@ -6927,7 +6924,7 @@ a global key for capturing new material.[fn:81]
   {{{cindex(date tree)}}}
 
   Call the command ~org-capture~. Note that this keybinding is global
-  and not active by default - you need to install it. If you have
+  and not active by default: you need to install it. If you have
   templates defined (see [[Capture templates]], it will offer these
   templates for selection or use a new Org outline node as the default
   template. It will insert the template into the target file and switch
@@ -9669,13 +9666,15 @@ the other commands, the cursor needs to be in the desired line.
   {{{vindex(org-agenda-exporter-settings)}}}
 
   Write the agenda view to a file. Depending on the extension of the
-  selected file name, the view will be exported as HTML (extension
-  {{{file(.html)}}} or {{{file(.htm)}}}), Postscript (extension
-  {{{file(.ps)}}}), PDF (extension {{{file(.pdf)}}}), and plain text
-  (any other extension). When called with a {{{kbd(C-u)}}} prefix
-  argument, immediately open the newly created file. Use the variable
-  ~org-agenda-exporter-settings~ to set options for {{{file(ps-print)}}}
-  and for {{{file(htmlize)}}} to be used during export.
+  selected file name, the view will be exported as HTML
+  ({{{file(.html)}}} or {{{file(.htm)}}}), Postscript ({{{file(.ps)}}}),
+  PDF ({{{file(.pdf)}}}), Org ({{{file(.org)}}}. and plain text (any
+  other extension).  When exporting to Org, only the body of original
+  headlines are exported, not subtrees or inherited tags.  When called
+  with a {{{kbd(C-u)}}} prefix argument, immediately open the newly
+  created file. Use the variable ~org-agenda-exporter-settings~ to set
+  options for {{{file(ps-print)}}} and for {{{file(htmlize)}}} to be
+  used during export.
 
 *** Quit and exit
 #+attr_texinfo: :table-type table :indic @asis
@@ -9718,6 +9717,13 @@ current buffer).
 
 {{{kindex(C-c a C)}}}
 {{{vindex(org-agenda-custom-commands)}}}
+{{{cindex(agenda views, main example)}}}
+{{{cindex(tags, as an agenda view)}}}
+{{{cindex(todo, as an agenda view)}}}
+{{{cindex(tags-todo)}}}
+{{{cindex(todo-tree)}}}
+{{{cindex(occur-tree)}}}
+{{{cindex(tags-tree)}}}
 
 Custom commands are configured in the variable
 ~org-agenda-custom-commands~. You can customize this variable, for
@@ -9787,6 +9793,8 @@ used for the matching. The example above will therefore define:
   additional key ({{{kbd(l)}}}, {{{kbd(p)}}} or {{{kbd(k)}}}) to select
   a name (Lisa, Peter, or Kim) as additional tag to match.
 
+Note that the ~*-tree~ agenda views need to be called from an Org
+buffer as they operate on the current buffer only.
 
 *** Block agenda
     :PROPERTIES:
@@ -10147,9 +10155,9 @@ This causes the following issues:
 
 When exporting Org mode documents, the exporter tries to reflect the
 structure of the document as accurately as possible in the backend.
-Since export targets like HTML, LaTeX, or DocBook allow much richer
-formatting, Org mode has rules on how to prepare text for rich export.
-This section summarizes the markup rules used in an Org mode buffer.
+Since export targets like HTML or LaTeX allow much richer formatting,
+Org mode has rules on how to prepare text for rich export.  This
+section summarizes the markup rules used in an Org mode buffer.
 
 ** Structural markup elements
    :PROPERTIES:
@@ -10170,11 +10178,9 @@ special line:
    ,#+TITLE: This is the title of the document
 #+end_example
 
-{{{noindent}}} If this line does not exist, the title is derived from
-the first non-empty, non-comment line in the buffer. If no such line
-exists, or if you have turned off exporting of the text before the
-first headline (see below), the title will be the file name without
-extension.
+{{{noindent}}} If this line does not exist, the title will be the name
+of the file associated with the Org buffer, without extension, or the
+buffer name.
 
 {{{cindex(property\\\, EXPORT_TITLE)}}}
 
@@ -10208,56 +10214,36 @@ change the location of this switch globally by setting the variable
     :DESCRIPTION: The if and where of the table of contents
     :END:
 {{{cindex(table of contents\\\, markup rules)}}}
-
+{{{cindex(#+TOC)}}}
 {{{vindex(org-export-with-toc)}}}
 
 The table of contents is normally inserted directly before the first
-headline of the file. If you would like to get it to a different
-location, insert the string ~[TABLE-OF-CONTENTS]~ on a line by itself
-at the desired location. The depth of the table of contents is by
-default the same as the number of headline levels, but you can choose
-a smaller number, or turn off the table of contents entirely, by
-configuring the variable ~org-export-with-toc~, or on a per-file basis
-with the ~toc~ option:
+headline of the file.  If you would like to get it to a different
+location, insert ~#+TOC: headlines~ at the desired location.  The depth
+of the table of contents is by default the same as the number of
+headline levels, but you can choose a smaller number, or turn off the
+table of contents entirely, by configuring the variable
+~org-export-with-toc~, or on a per-file basis with a line like one of
+those in the following example:
 
 #+begin_example
    ,#+OPTIONS: toc:2          (only to two levels in TOC)
+   ,#+TOC: headlines 2        (the same, at a specific location)
    ,#+OPTIONS: toc:nil        (no TOC at all)
 #+end_example
 
-*** Initial text
-    :PROPERTIES:
-    :DESCRIPTION: Text before the first heading?
-    :TITLE:    Text before the first headline
-    :END:
-{{{cindex(text before first headline\\\, markup rules)}}}
-{{{cindex(#+TEXT)}}}
-
-Org mode normally exports the text before the first headline, and even uses
-the first line as the document title.  The text will be fully marked up.  If
-you need to include literal HTML, LaTeX, or DocBook code, use the special
-constructs described below in the sections for the individual exporters.
-
-{{{vindex(org-export-skip-text-before-1st-heading)}}}
-
-Some people like to use the space before the first headline for setup
-and internal links and therefore would like to control the exported
-text before the first headline in a different way. You can do so by
-setting the variable ~org-export-skip-text-before-1st-heading~ to ~t~.
-On a per-file basis, you can get the same effect with
-{{{samp(#+OPTIONS: skip:t)}}}.
-
-{{{noindent}}}
-
-If you still want to have some text before the first headline, use the
-~#+TEXT~ construct:
+The same ~TOC~ keyword can also generate a list of all tables
+(resp. a listings) with a caption in the buffer.
 
 #+begin_example
-   ,#+OPTIONS: skip:t
-   ,#+TEXT: This text will go before the *first* headline.
-   ,#+TEXT: [TABLE-OF-CONTENTS]
-   ,#+TEXT: This goes between the table of contents and the *first* headline
+   ,#+TOC: listings           (build a list of listings)
+   ,#+TOC: tables             (build a list of tables)
 #+end_example
+
+The headline's title usually determines its corresponding entry in a
+table of contents.  However, it is possible to specify an alternative
+title by setting the ~ALT_TITLE~ property accordingly.  It will then
+be used when building the table.
 
 *** Lists
     :PROPERTIES:
@@ -10338,11 +10324,18 @@ multiple footnotes side by side.
 {{{cindex(verbatim text\\\, markup rules)}}}
 {{{cindex(code text\\\, markup rules)}}}
 {{{cindex(strike-through text\\\, markup rules)}}}
+{{{vindex(org-fontify-emphasized-text)}}}
+{{{vindex(org-emphasis-regex-components)}}}
 
 You can make words **bold**, //italic//, _underlined_, ~=code=~
 and ~~verbatim~~, and, if you must, {{{samp(+strike-through+)}}}.  Text
 in the code and verbatim string is not processed for Org mode specific
 syntax; it is exported verbatim.
+
+To turn off fontification for marked up text, you can set
+~org-fontify-emphasized-text~ to ~nil~.  To fine tune which characters
+are allowed before and after the special characters, see
+~org-emphasis-regexp-components~.
 
 *** Horizontal rules
     :PROPERTIES:
@@ -10407,8 +10400,8 @@ Optionally, the caption can take the form:
 
 {{{cindex(inlined images\\\, markup rules)}}}
 
-Some backends (HTML, LaTeX, and DocBook) allow you to directly
-include images into the exported document. Org does this, if a link to
+Some backends (HTML and LaTeX) allow you to directly
+include images into the exported document. Org does this if a link to
 an image files does not have a description part, for example
 ~[[./img/a.jpg]]~. If you wish to define a caption for the image and maybe
 a label for internal cross references, make sure that the link is on a
@@ -10763,13 +10756,14 @@ exporting to LaTeX, the code is obviously left as it is. When
 exporting to HTML, Org invokes the [[http://www.mathjax.org][MathJax library]] (see [[Math
 formatting in HTML export]]) to process and display the math.[fn:109]
 Finally, it can also process the mathematical expressions into images
-that can be displayed in a browser or in DocBook documents.[fn:110]
+that can be displayed in a browser.[fn:110]
 
 LaTeX fragments don't need any special marking at all.  The following
 snippets will be identified as LaTeX source code:
 
-- Environments of any kind.[fn:111]  The only requirement is that the
-  ~\begin~ statement appears on a new line, preceded by only whitespace.
+- Environments of any kind.[fn:111] The only requirement is that the
+  ~\begin~ and ~\end~ statements each appear on a new line, at the
+  beginning of the line or after whitespaces only.
 
 - Text within the usual LaTeX math delimiters. To avoid conflicts
   with currency specifications, single ~$~ characters are
@@ -10804,7 +10798,7 @@ converter.
 
 LaTeX processing can be configured with the variable
 ~org-export-with-LaTeX-fragments~. The default setting is ~t~ which
-means {{{file(MathJax)}}} for HTML, and no processing for DocBook,
+means {{{file(MathJax)}}} for HTML, and no processing for
 ASCII and LaTeX backends. You can also set this variable on a
 per-file basis using one of these lines:
 
@@ -10859,6 +10853,19 @@ You can customize the variable ~org-format-latex-options~ to influence
 some aspects of the preview. In particular, the ~:scale~ (and for HTML
 export, ~:html-scale~) property can be used to adjust the size of the
 preview images.
+
+You can turn on the previewing of all LaTeX fragments in a file with
+the following line:
+
+#+begin_example
+   #+STARTUP: latexpreview
+#+end_example
+
+To disable it, simply use the following line:
+
+#+begin_example
+   #+STARTUP: nolatexpreview
+#+end_example
 
 *** CDLaTeX mode
     :PROPERTIES:
@@ -10945,21 +10952,16 @@ details see the documentation of CDLaTeX mode):
   :END:
 {{{cindex(exporting)}}}
 
-Org mode documents can be exported into a variety of other formats.
-For printing and sharing of notes, ASCII export produces a readable
-and simple version of an Org file. HTML export allows you to publish a
-notes file on the web, while the XOXO format provides a solid base for
-exchange with a broad range of other applications. LaTeX export
-lets you use Org mode and its structured editing functions to easily
-create LaTeX files. DocBook export makes it possible to convert Org
-files to many other formats using DocBook tools. OpenDocument Text
+Org mode documents can be exported into a variety of other formats.  For
+printing and sharing notes, ASCII export produces a readable and simple
+version of an Org file.  HTML export allows you to publish a notes file
+on the web.  LaTeX export lets you use Org mode and its structured
+editing functions to easily create LaTeX files.  OpenDocument Text
 (ODT) export allows seamless collaboration across organizational
-boundaries. For project management you can create gantt and resource
-charts by using TaskJuggler export. To incorporate entries with
-associated times like deadlines or appointments into a desktop
-calendar program like iCal, Org mode can also produce extracts in the
-iCalendar format. Currently, Org mode only supports export, not import
-of these different formats.
+boundaries.  To incorporate entries with associated times like
+deadlines or appointments into a desktop calendar program like iCal,
+Org mode can also produce extracts in the iCalendar format.  Currently,
+Org mode only supports export, not import of these different formats.
 
 Org supports export of selected regions when ~transient-mark-mode~ is
 enabled (default in Emacs 23).
@@ -11030,11 +11032,10 @@ a separate file which can be included using ~#+SETUPFILE~.
 {{{cindex(#+TEXT)}}}
 {{{cindex(#+OPTIONS)}}}
 {{{cindex(#+BIND)}}}
-{{{cindex(#+LINK_UP)}}}
-{{{cindex(#+LINK_HOME)}}}
-{{{cindex(#+EXPORT_SELECT_TAGS)}}}
-{{{cindex(#+EXPORT_EXCLUDE_TAGS)}}}
-{{{cindex(#+XSLT)}}}
+{{{cindex(#+HTML_LINK_UP)}}}
+{{{cindex(#+HTML_LINK_HOME)}}}
+{{{cindex(#+SELECT_TAGS)}}}
+{{{cindex(#+EXCLUDE_TAGS)}}}
 {{{cindex(#+LaTeX_HEADER)}}}
 {{{vindex(user-full-name)}}}
 {{{vindex(user-mail-address)}}}
@@ -11085,14 +11086,14 @@ a separate file which can be included using ~#+SETUPFILE~.
 
 - #+BIND: ::       
 
-  Lisp-var lisp-val, e.g., org-export-latex-low-levels itemize. You need
+  Lisp-var lisp-val, e.g., org-latex-low-levels itemize. You need
   to confirm using these, or configure ~org-export-allow-BIND~.
 
-- #+LINK_UP: ::    
+- #+HTML_LINK_UP: ::    
 
   The ``up'' link of an exported page.
 
-- #+LINK_HOME: ::  
+- #+HTML_LINK_HOME: ::  
 
   The ``home'' link of an exported page.
 
@@ -11100,18 +11101,13 @@ a separate file which can be included using ~#+SETUPFILE~.
 
   Extra line(s) for the LaTeX header, like ~\usepackage{xyz}~.
 
-- #+EXPORT_SELECT_TAGS: ::  
+- #+SELECT_TAGS: ::  
 
   Tags that select a tree for export.
 
-- #+EXPORT_EXCLUDE_TAGS: :: 
+- #+EXCLUDE_TAGS: :: 
 
   Tags that exclude a tree from export.
-
-- #+XSLT: ::       
-
-  The XSLT stylesheet used by DocBook exporter to generate FO file.
-
 
 
 {{{noindent}}} The ~#+OPTIONS~ line is a compact form to specify
@@ -11486,11 +11482,11 @@ the rest as list items.
     :PROPERTIES:
     :DESCRIPTION: How to insert a preamble and postamble
     :END:
-{{{vindex(org-export-html-preamble)}}}
-{{{vindex(org-export-html-postamble)}}}
-{{{vindex(org-export-html-preamble-format)}}}
-{{{vindex(org-export-html-postamble-format)}}}
-{{{vindex(org-export-html-validation-link)}}}
+{{{vindex(org-html-preamble)}}}
+{{{vindex(org-html-postamble)}}}
+{{{vindex(org-html-preamble-format)}}}
+{{{vindex(org-html-postamble-format)}}}
+{{{vindex(org-html-validation-link)}}}
 {{{vindex(org-export-author-info)}}}
 {{{vindex(org-export-email-info)}}}
 {{{vindex(org-export-creator-info)}}}
@@ -11498,25 +11494,25 @@ the rest as list items.
 
 The HTML exporter lets you define a preamble and a postamble.
 
-The default value for ~org-export-html-preamble~ is ~t~, which means
+The default value for ~org-html-preamble~ is ~t~, which means
 that the preamble is inserted depending on the relevant format string
-in ~org-export-html-preamble-format~.
+in ~org-html-preamble-format~.
 
-Setting ~org-export-html-preamble~ to a string will override the default
+Setting ~org-html-preamble~ to a string will override the default
 format string.  Setting it to a function, will insert the output of the
 function, which must be a string; such a function takes no argument but you
 can check against the value of ~opt-plist~, which contains the list of
 publishing properties for the current file.  Setting to ~nil~ will not
 insert any preamble.
 
-The default value for ~org-export-html-postamble~ is
+The default value for ~org-html-postamble~ is
 {{{samp('auto)}}}, which means that the HTML exporter will look for
 the value of ~org-export-author-info~, ~org-export-email-info~,
 ~org-export-creator-info~ and ~org-export-time-stamp-file~,
-~org-export-html-validation-link~ and build the postamble from these
-values. Setting ~org-export-html-postamble~ to ~t~ will insert the
+~org-html-validation-link~ and build the postamble from these
+values. Setting ~org-html-postamble~ to ~t~ will insert the
 postamble from the relevant format string found in
-~org-export-html-postamble-format~. Setting it to ~nil~ will not
+~org-html-postamble-format~. Setting it to ~nil~ will not
 insert any postamble.
 
 *** Quoting HTML tags
@@ -11581,10 +11577,10 @@ the ~<a>~ or ~<img>~ tags. Here is an example that sets ~title~ and
     :DESCRIPTION: How to modify the formatting of tables
     :END:
 {{{cindex(tables\\\, in HTML)}}}
-{{{vindex(org-export-html-table-tag)}}}
+{{{vindex(org-html-table-tag)}}}
 
 Org mode tables are exported to HTML using the table tag defined in
-~org-export-html-table-tag~. The default setting makes tables without
+~org-html-table-tag~. The default setting makes tables without
 cell borders and frame. If you would like to change this for
 individual tables, place something like the following before the
 table:
@@ -11602,7 +11598,7 @@ table:
     :END:
 {{{cindex(images\\\, inline in HTML)}}}
 {{{cindex(inlining images in HTML)}}}
-{{{vindex(org-export-html-inline-images)}}}
+{{{vindex(org-html-inline-images)}}}
 
 HTML export can inline images given as links in the Org file, and it
 can make an image the clickable part of a link. By default, images are
@@ -11645,15 +11641,15 @@ which should work out of the box with Org mode installation because
 ~http://orgmode.org~ serves {{{file(MathJax)}}} for Org mode users for
 small applications and for testing purposes.[fn:121] To configure
 {{{file(MathJax)}}}, use the variable
-~org-export-html-mathjax-options~ or insert something like the
+~org-html-mathjax-options~ or insert something like the
 following into the buffer:
 
 #+begin_example
-   ,#+MATHJAX: align:"left" mathml:t path:"/MathJax/MathJax.js"
+   ,#+HTML_MATHJAX: align:"left" mathml:t path:"/MathJax/MathJax.js"
 #+end_example
 
 {{{noindent}}} See the docstring of the variable
-~org-export-html-mathjax-options~ for the meaning of the parameters in
+~org-html-mathjax-options~ for the meaning of the parameters in
 this line.
 
 If you prefer, you can also request that LaTeX fragments are
@@ -11696,8 +11692,8 @@ text area, which default to the number of lines in the example, and
     :END:
 {{{cindex(CSS\\\, for HTML export)}}}
 {{{cindex(HTML export\\\, CSS)}}}
-{{{vindex(org-export-html-todo-kwd-class-prefix)}}}
-{{{vindex(org-export-html-tag-class-prefix)}}}
+{{{vindex(org-html-todo-kwd-class-prefix)}}}
+{{{vindex(org-html-tag-class-prefix)}}}
 
 You can also give style information for the exported file. The HTML
 exporter assigns the following special CSS classes to appropriate
@@ -11734,22 +11730,25 @@ etc.[fn:122]
 - .footnum ::           footnote number in footnote definition (always <sup>)
 
 
-{{{vindex(org-export-html-style-default)}}}
-{{{vindex(org-export-html-style-include-default)}}}
-{{{vindex(org-export-html-style)}}}
-{{{vindex(org-export-html-extra)}}}
-{{{vindex(org-export-html-style-default)}}}
+{{{vindex(org-html-style-default)}}}
+{{{vindex(org-html-head-include-default-style)}}}
+{{{vindex(org-html-style)}}}
+{{{vindex(org-html-extra)}}}
+{{{vindex(org-html-style-default)}}}
+{{{cindex(#+HTML_INCLUDE_STYLE)}}}
 
 Each exported file contains a compact default style that defines these
-classes in a basic way.[fn:123]  You may overwrite these
-settings, or add to them by using the variables ~org-export-html-style~
-(for Org-wide settings) and ~org-export-html-style-extra~ (for more
-fine-grained settings, like file-local settings).  To set the latter variable
-individually for each file, you can use a ~#+STYLE:~ line:
+classes in a basic way.[fn:123] You may overwrite these settings, or
+add to them by using the variables ~org-html-head~ and
+~org-html-head-extra~.  You can override the global values of these
+variables for each file by using these keywords:
 
-{{{cindex(#+STYLE)}}}
+{{{cindex(#+HTML_HEAD)}}}
+{{{cindex(#+HTML_HEAD_EXTRA)}}}
 #+begin_example
-   ,#+STYLE: <link rel="stylesheet" type="text/css" href="stylesheet.css" />
+   #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="style1.css" />
+   #+HTML_HEAD_EXTRA: <link rel="alternate stylesheet" type="text/css" href="\
+style2.css" />
 #+end_example
 
 {{{noindent}}} For longer style definitions, you can use several such
@@ -11854,13 +11853,13 @@ line above, you can set the following viewing options:
   only one such button will be present.
 
 
-{{{vindex(org-infojs-options)}}}
-{{{vindex(org-export-html-use-infojs)}}}
+{{{vindex(org-html-infojs-options)}}}
+{{{vindex(org-html-use-infojs)}}}
 
 {{{noindent}}} You can choose default values for these options by
-customizing the variable ~org-infojs-options~. If you always want to
+customizing the variable ~org-html-infojs-options~. If you always want to
 apply the script to your pages, configure the variable
-~org-export-html-use-infojs~.
+~org-html-use-infojs~.
 
 ** LaTeX and PDF export
    :PROPERTIES:
@@ -11966,10 +11965,10 @@ exports the rest as list items.
 
 By default, the LaTeX output uses the class ~article~.
 
-{{{vindex(org-export-latex-default-class)}}}
-{{{vindex(org-export-latex-classes)}}}
-{{{vindex(org-export-latex-default-packages-alist)}}}
-{{{vindex(org-export-latex-packages-alist)}}}
+{{{vindex(org-latex-default-class)}}}
+{{{vindex(org-latex-classes)}}}
+{{{vindex(org-latex-default-packages-alist)}}}
+{{{vindex(org-latex-packages-alist)}}}
 {{{cindex(#+LaTeX_HEADER)}}}
 {{{cindex(#+LaTeX_CLASS)}}}
 {{{cindex(#+LaTeX_CLASS_OPTIONS)}}}
@@ -11977,10 +11976,10 @@ By default, the LaTeX output uses the class ~article~.
 {{{cindex(property\\\, LaTeX_CLASS_OPTIONS)}}}
 
 You can change this globally by setting a different value for
-~org-export-latex-default-class~ or locally by adding an option like
+~org-latex-default-class~ or locally by adding an option like
 ~#+LaTeX_CLASS: myclass~ in your file, or with a ~:LaTeX_CLASS:~
 property that applies when exporting a region containing only this
-(sub)tree. The class must be listed in ~org-export-latex-classes~.
+(sub)tree. The class must be listed in ~org-latex-classes~.
 This variable defines a header template for each class, and allows you
 to define the sectioning structure for each class.[fn:127] You can
 also define your own classes there. ~#+LaTeX_CLASS_OPTIONS~ or a
@@ -11988,7 +11987,7 @@ also define your own classes there. ~#+LaTeX_CLASS_OPTIONS~ or a
 ~\documentclass~ macro. The options to documentclass have to be
 provided, as expected by LaTeX, within square brackets. You can
 also use ~#+LaTeX_HEADER: \usepackage{xyz}~ to add lines to the
-header. See the docstring of ~org-export-latex-classes~ for more
+header. See the docstring of ~org-latex-classes~ for more
 information. An example is shown below.
 
 #+begin_example
@@ -12258,222 +12257,6 @@ Here is a simple example Org document that is intended for beamer export.
 
 For more information, see the documentation on Worg.
 
-** DocBook export
-   :PROPERTIES:
-   :DESCRIPTION: Exporting to DocBook
-   :END:
-{{{cindex(DocBook export)}}}
-{{{cindex(PDF export)}}}
-{{{cindex(Cui\\\, Baoqiu)}}}
-
-Org contains a DocBook exporter written by Baoqiu Cui.  Once an Org file is
-exported to DocBook format, it can be further processed to produce other
-formats, including PDF, HTML, man pages, etc., using many available DocBook
-tools and stylesheets.
-
-Currently DocBook exporter only supports DocBook V5.0.
-
-*** DocBook export commands
-    :PROPERTIES:
-    :DESCRIPTION: How to invoke DocBook export
-    :END:
-{{{cindex(region\\\, active)}}}
-{{{cindex(active region)}}}
-{{{cindex(transient-mark-mode)}}}
-
-#+attr_texinfo: :table-type table :indic @asis
-- {{{kbd(C-c C-e D)}}}, ~org-export-as-docbook~ ::
-
-  {{{kindex(C-c C-e D)}}}
-  {{{cindex(property EXPORT_FILE_NAME)}}}
-
-  Export as a DocBook file. For an Org file, {{{file(myfile.org)}}}, the
-  DocBook XML file will be {{{file(myfile.xml)}}}. The file will be
-  overwritten without warning. If there is an active region, only the
-  region will be exported.[fn:129] If the selected region is a single
-  tree, the tree head will become the document title.[fn:130] If the
-  tree head entry has, or inherits, an ~EXPORT_FILE_NAME~ property, that
-  name will be used for the export.
-
-- {{{kbd(C-c C-e V)}}}, ~org-export-as-docbook-pdf-and-open~ ::
-
-  {{{kindex(C-c C-e V)}}}
-
-  Export as a DocBook file, process to PDF, then open the resulting PDF
-  file.
-
-  {{{vindex(org-export-docbook-xslt-proc-command)}}}
-  {{{vindex(org-export-docbook-xsl-fo-proc-command)}}}
-
-  Note that, in order to produce PDF output based on an exported DocBook
-  file, you need to have XSLT processor and XSL-FO processor software
-  installed on your system. Check variables
-  ~org-export-docbook-xslt-proc-command~ and
-  ~org-export-docbook-xsl-fo-proc-command~.
-
-  {{{vindex(org-export-docbook-xslt-stylesheet)}}}
-
-  The stylesheet argument ~%s~ in variable
-  ~org-export-docbook-xslt-proc-command~ is replaced by the value of
-  variable ~org-export-docbook-xslt-stylesheet~, which needs to be set by
-  the user.  You can also overrule this global setting on a per-file basis by
-  adding an in-buffer setting ~#+XSLT:~ to the Org file.
-
-- {{{kbd(C-c C-e v D)}}} ::
-
-  {{{kindex(C-c C-e v D)}}}
-
-  Export only the visible part of the document.
-
-*** Quoting DocBook code
-    :PROPERTIES:
-    :DESCRIPTION: Incorporating DocBook code in Org files
-    :END:
-You can quote DocBook code in Org files and copy it verbatim into exported
-DocBook file with the following constructs:
-
-{{{cindex(#+DOCBOOK)}}}
-{{{cindex(#+BEGIN_DOCBOOK)}}}
-#+begin_example
-   ,#+DOCBOOK: Literal DocBook code for export
-#+end_example
-
-{{{noindent}}} or
-{{{cindex(#+BEGIN_DOCBOOK)}}}
-
-#+begin_example
-   ,#+BEGIN_DOCBOOK
-   All lines between these markers are exported by DocBook exporter
-   literally.
-   ,#+END_DOCBOOK
-#+end_example
-
-For example, you can use the following lines to include a DocBook warning
-admonition.  As to what this warning says, you should pay attention to the
-document context when quoting DocBook code in Org files.  You may make
-exported DocBook XML files invalid by not quoting DocBook code correctly.
-
-#+begin_example
-   ,#+BEGIN_DOCBOOK
-   <warning>
-     <para>You should know what you are doing when quoting DocBook XML code
-     in your Org file.  Invalid DocBook XML may be generated by
-     DocBook exporter if you are not careful!</para>
-   </warning>
-   ,#+END_DOCBOOK
-#+end_example
-
-*** Recursive sections
-    :PROPERTIES:
-    :DESCRIPTION: Recursive sections in DocBook
-    :END:
-{{{cindex(DocBook recursive sections)}}}
-
-DocBook exporter exports Org files as articles using the ~article~
-element in DocBook. Recursive sections, i.e., ~section~ elements, are
-used in exported articles. Top level headlines in Org files are
-exported as top level sections, and lower level headlines are exported
-as nested sections. The entire structure of Org files will be exported
-completely, no matter how many nested levels of headlines there are.
-
-Using recursive sections makes it easy to port and reuse exported
-DocBook code in other DocBook document types like ~book~ or ~set~.
-
-*** Tables in DocBook export
-    :PROPERTIES:
-    :DESCRIPTION: Tables are exported as HTML tables
-    :END:
-{{{cindex(tables\\\, in DocBook export)}}}
-
-Tables in Org files are exported as HTML tables, which have been
-supported since DocBook V4.3.
-
-If a table does not have a caption, an informal table is generated
-using the ~informaltable~ element; otherwise, a formal table will be
-generated using the ~table~ element.
-
-*** Images in DocBook export
-    :PROPERTIES:
-    :DESCRIPTION: How to insert figures into DocBook output
-    :END:
-{{{cindex(images\\\, inline in DocBook)}}}
-{{{cindex(inlining images in DocBook)}}}
-
-Images that are linked to without a description part in the link, like
-{{{samp([[file:img.jpg]])}}} or {{{samp([[./img.jpg]])}}}, will be exported to
-DocBook using ~mediaobject~ elements. Each ~mediaobject~ element
-contains an ~imageobject~ that wraps an ~imagedata~ element. If you
-have specified a caption for an image as described in [[Images and
-tables]], a ~caption~ element will be added in ~mediaobject~. If a label
-is also specified, it will be exported as an ~xml:id~ attribute of the
-~mediaobject~ element.
-
-{{{vindex(org-export-docbook-default-image-attributes)}}}
-
-Image attributes supported by the ~imagedata~ element, like ~align~ or
-~width~, can be specified in two ways: you can either customize
-variable ~org-export-docbook-default-image-attributes~ or use the
-~#+ATTR_DOCBOOK:~ line. Attributes specified in variable
-~org-export-docbook-default-image-attributes~ are applied to all
-inline images in the Org file to be exported (unless they are
-overridden by image attributes specified in ~#+ATTR_DOCBOOK:~ lines).
-
-The ~#+ATTR_DOCBOOK:~ line can be used to specify additional image
-attributes or override default image attributes for individual images.
-If the same attribute appears in both the ~#+ATTR_DOCBOOK:~ line and
-variable ~org-export-docbook-default-image-attributes~, the former
-takes precedence. Here is an example about how image attributes can be
-set:
-
-{{{cindex(#+CAPTION)}}}
-{{{cindex(#+LABEL)}}}
-{{{cindex(#+ATTR_DOCBOOK)}}}
-#+begin_example
-   ,#+CAPTION:    The logo of Org mode
-   ,#+LABEL:      unicorn-svg
-   ,#+ATTR_DOCBOOK: scalefit="1" width="100%" depth="100%"
-   [[./img/org-mode-unicorn.svg]]
-#+end_example
-
-{{{vindex(org-export-docbook-inline-image-extensions)}}}
-
-By default, DocBook exporter recognizes the following image file
-types: {{{file(jpeg)}}}, {{{file(jpg)}}}, {{{file(png)}}},
-{{{file(gif)}}}, and {{{file(svg)}}}. You can customize variable
-~org-export-docbook-inline-image-extensions~ to add more types to this
-list as long as DocBook supports them.
-
-*** Special characters
-    :PROPERTIES:
-    :DESCRIPTION: How to handle special characters
-    :TITLE:    Special characters in DocBook export
-    :END:
-{{{vindex(org-export-docbook-doctype)}}}
-{{{vindex(org-entities)}}}
-
-Special characters that are written in TeX-like syntax, such as
-~\alpha~, ~\Gamma~, and ~\Zeta~, are supported by DocBook exporter.
-These characters are rewritten to XML entities, like ~&alpha;~,
-~&Gamma;~, and ~&Zeta;~, based on the list saved in variable
-~org-entities~. As long as the generated DocBook file includes the
-corresponding entities, these special characters are recognized.
-
-You can customize variable ~org-export-docbook-doctype~ to include the
-entities you need. For example, you can set variable
-~org-export-docbook-doctype~ to the following value to recognize all
-special characters included in XHTML entities:
-
-#+begin_example
-   "<!DOCTYPE article [
-   <!ENTITY % xhtml1-symbol PUBLIC
-   \"-//W3C//ENTITIES Symbol for HTML//EN//XML\"
-   \"http://www.w3.org/2003/entities/2007/xhtml1-symbol.ent\"
-   >
-   %xhtml1-symbol;
-   ]>
-   "
-#+end_example
-
 ** OpenDocument Text export
    :PROPERTIES:
    :DESCRIPTION: Exporting to OpenDocument Text
@@ -12667,7 +12450,7 @@ templates that are directly derived from the factory settings.
     :PROPERTIES:
     :DESCRIPTION: How links will be interpreted and formatted
     :END:
-{{{cindex(tables\\\, in DocBook export)}}}
+{{{cindex(links\\\, in ODT export)}}}
 
 ODT exporter creates native cross-references for internal links. It
 creates Internet-style links for all other links.
@@ -12685,7 +12468,7 @@ with a cross-reference and sequence number of the labeled entity. See
     :DESCRIPTION: How tables are exported
     :END:
 
-{{{cindex(tables\\\, in DocBook export)}}}
+{{{cindex(tables\\\, in ODT export)}}}
 
 Export of native Org mode tables (see [[Tables]]) and simple
 {{{file(table.el)}}} tables is supported. However, export of complex
@@ -12823,7 +12606,7 @@ The examples below illustrate the various possibilities.
 
 You can control the manner in which an image is anchored by setting
 the ~:anchor~ property of it's ~#+ATTR_ODT~ line. You can specify one
-of the the following three values for the ~:anchor~ property -
+of the the following three values for the ~:anchor~ property:
 {{{samp("as-char")}}}, {{{samp("paragraph")}}} and {{{samp("page")}}}.
 
 To create an image that is anchored to a page, do the following:
@@ -13369,222 +13152,6 @@ the variable ~org-export-odt-schema-dir~ to point to that directory.
 The ODT exporter will take care of updating the
 ~rng-schema-locating-files~ for you.
 
-** TaskJuggler export
-   :PROPERTIES:
-   :DESCRIPTION: Exporting to TaskJuggler
-   :END:
-{{{cindex(TaskJuggler export)}}}
-{{{cindex(Project management)}}}
-
-[[http://www.taskjuggler.org/][TaskJuggler]] is a project management tool. It provides an optimizing
-scheduler that computes your project time lines and resource
-assignments based on the project outline and the constraints that you
-have provided.
-
-The TaskJuggler exporter is a bit different from other exporters, such
-as the ~HTML~ and LaTeX exporters for example, in that it does not
-export all the nodes of a document or strictly follow the order of the
-nodes in the document.
-
-Instead the TaskJuggler exporter looks for a tree that defines the
-tasks and optionally trees that define the resources and reports for
-this project. It then creates a TaskJuggler file based on these trees
-and the attributes defined in all the nodes.
-
-*** TaskJuggler export commands
-    :PROPERTIES:
-    :DESCRIPTION: Key bindings for TaskJuggler export
-    :END:
-
-#+attr_texinfo: :table-type table :indic @asis
-- {{{kbd(C-c C-e j)}}}, ~org-export-as-taskjuggler~ ::
-
-  {{{kindex(C-c C-e j)}}}
-
-  Export as a TaskJuggler file.
-
-- {{{kbd(C-c C-e J)}}}, ~org-export-as-taskjuggler-and-open~ ::
-
-  {{{kindex(C-c C-e J)}}}
-
-  Export as a TaskJuggler file and then open the file with TaskJugglerUI
-  (only for TaskJugglerUI 2.x).
-
-*** Tasks
-    :PROPERTIES:
-    :DESCRIPTION: Marking tasks for TaskJuggler export
-    :END:
-{{{vindex(org-export-taskjuggler-project-tag)}}}
-
-Create your tasks as you usually do with Org mode. Assign efforts to
-each task using properties (it is easiest to do this in the column
-view). You should end up with something similar to the example by
-Peter Jones in
-[[http://www.contextualdevelopment.com/static/artifacts/articles/2008/project-planning/project-planning.org]].
-Now mark the top node of your tasks with a tag named
-~:taskjuggler_project:~ (or whatever you customized
-~org-export-taskjuggler-project-tag~ to). You are now ready to export
-the project plan with {{{kbd(C-c C-e J)}}} which will export the
-project plan and open a gantt chart in TaskJugglerUI.
-
-*** Resources
-    :PROPERTIES:
-    :DESCRIPTION: Define TaskJuggler resources
-    :END:
-{{{vindex(org-export-taskjuggler-resource-tag)}}}
-
-Next you can define resources and assign those to work on specific
-tasks. You can group your resources hierarchically. Tag the top node
-of the resources with ~:taskjuggler_resource:~ (or whatever you
-customized ~org-export-taskjuggler-resource-tag~ to). You can
-optionally assign an identifier (named {{{samp(resource_id)}}}) to the
-resources (using the standard Org properties commands, see [[Property
-syntax]]) or you can let the exporter generate identifiers automatically
-(the exporter picks the first word of the headline as the identifier
-as long as it is unique---see the documentation of
-~org-taskjuggler-get-unique-id~). Using that identifier you can then
-allocate resources to tasks. This is again done with the
-{{{samp(allocate)}}} property on the tasks. Do this in column view or
-when on the task type 
-{{{ksksksk(C-c C-x p allocate,RET,<resource_id>,RET)}}}.
-
-Once the allocations are done you can again export to TaskJuggler and
-check in the Resource Allocation Graph which person is working on what
-task at what time.
-
-*** Export of properties
-    :PROPERTIES:
-    :DESCRIPTION: Which properties will be exported?
-    :END:
-
-The exporter also takes TODO state information into consideration,
-i.e., if a task is marked as done it will have the corresponding
-attribute in TaskJuggler ({{{samp(complete 100)}}}). Scheduling
-information is also taken into account to set start/end dates for
-tasks.
-
-The exporter will also export any property on a task resource or
-resource node which is known to TaskJuggler, such as
-{{{samp(limits)}}}, {{{samp(vacation)}}}, {{{samp(shift)}}},
-{{{samp(booking)}}}, {{{samp(efficiency)}}}, {{{samp(journalentry)}}},
-{{{samp(rate)}}} for resources or {{{samp(account)}}},
-{{{samp(start)}}}, {{{samp(note)}}}, {{{samp(duration)}}},
-{{{samp(end)}}}, {{{samp(journalentry)}}}, {{{samp(milestone)}}},
-{{{samp(reference)}}}, {{{samp(responsible)}}},
-{{{samp(scheduling)}}}, etc for tasks.
-
-*** Dependencies
-    :PROPERTIES:
-    :DESCRIPTION: How the exporter handles dependencies
-    :END:
-
-The exporter will handle dependencies that are defined in the tasks
-either with the {{{samp(ORDERED)}}} attribute (see [[TODO dependencies]]),
-with the {{{samp(BLOCKER)}}} attribute (see {{{file(org-depend.el)}}})
-or alternatively with a {{{samp(depends)}}} attribute. Both the
-{{{samp(BLOCKER)}}} and the {{{samp(depends)}}} attribute can be
-either {{{samp(previous-sibling)}}} or a reference to an identifier
-(named {{{samp(task_id)}}}) which is defined for another task in the
-project. {{{samp(BLOCKER)}}} and the {{{samp(depends)}}} attribute can
-define multiple dependencies separated by either space or comma. You
-can also specify optional attributes on the dependency by simply
-appending it. The following examples should illustrate this:
-
-#+begin_example
-   ,* Preparation
-   ,  :PROPERTIES:
-   ,  :task_id:  preparation
-   ,  :ORDERED:  t
-   ,  :END:
-   ,* Training material
-   ,  :PROPERTIES:
-   ,  :task_id:  training_material
-   ,  :ORDERED:  t
-   ,  :END:
-   ,** Markup Guidelines
-   ,   :PROPERTIES:
-   ,   :Effort:   2d
-   ,   :END:
-   ,** Workflow Guidelines
-   ,   :PROPERTIES:
-   ,   :Effort:   2d
-   ,   :END:
-   ,* Presentation
-   ,  :PROPERTIES:
-   ,  :Effort:   2d
-   ,  :BLOCKER:  training_material { gapduration 1d } preparation
-   ,  :END:
-#+end_example
-
-*** Reports
-    :PROPERTIES:
-    :DESCRIPTION: Gantt charts, etc.
-    :END:
-{{{vindex(org-export-taskjuggler-default-reports)}}}
-
-TaskJuggler can produce many kinds of reports (e.g., gantt chart,
-resource allocation, etc). The user defines what kind of reports
-should be generated for a project in the TaskJuggler file. By default,
-the exporter will automatically insert some pre-set reports in the
-file. These defaults are defined in
-~org-export-taskjuggler-default-reports~. They can be modified using
-customize along with a number of other options. For a more complete
-list, see 
-{{{ksksksk(M-x customize-group,RET,org-export-taskjuggler,RET)}}}.
-
-Alternately, the user can tag a tree with
-~org-export-taskjuggler-report-tag~, and define reports in sub-nodes,
-similarly to what is done with tasks or resources. The properties used
-for report generation are defined in
-~org-export-taskjuggler-valid-report-attributes~. In addition, a
-special property named {{{samp(report-kind)}}} is used to define the
-kind of report one wants to generate (by default, a
-{{{samp(taskreport)}}}).
-
-For more information and examples see the Org-taskjuggler tutorial at
-[[http://orgmode.org/worg/org-tutorials/org-taskjuggler.html]].
-
-** Freemind export
-   :PROPERTIES:
-   :DESCRIPTION: Exporting to Freemind mind maps
-   :END:
-{{{cindex(Freemind export)}}}
-{{{cindex(mind map)}}}
-
-The Freemind exporter was written by Lennart Borgman.
-
-#+attr_texinfo: :table-type table :indic @asis
-- {{{kbd(C-c C-e m)}}}, ~org-export-as-freemind~ ::
-
-  {{{kindex(C-c C-e m)}}}
-
-  Export as a Freemind mind map. For an Org file {{{file(myfile.org)}}},
-  the Freemind file will be {{{file(myfile.mm)}}}.
-
-** XOXO export
-   :PROPERTIES:
-   :DESCRIPTION: Exporting to XOXO
-   :END:
-{{{cindex(XOXO export)}}}
-
-Org mode contains an exporter that produces XOXO-style output.
-Currently, this exporter only handles the general outline structure
-and does not interpret any additional Org mode features.
-
-#+attr_texinfo: :table-type table :indic @asis
-- {{{kbd(C-c C-e x)}}}, ~org-export-as-xoxo~ ::
-
-  {{{kindex(C-c C-e x)}}}
-
-  Export as an XOXO file. For an Org file {{{file(myfile.org)}}}, the
-  XOXO file will be {{{file(myfile.html)}}}.
-
-- {{{kbd(C-c C-e v x)}}} ::
-
-  {{{kindex(C-c C-e v x)}}}
-
-  Export only the visible part of the document.
-
 ** iCalendar export
    :PROPERTIES:
    :DESCRIPTION: Exporting to iCalendar format
@@ -13809,12 +13376,12 @@ following properties:
 Publishing means that a file is copied to the destination directory and
 possibly transformed in the process.  The default transformation is to export
 Org files as HTML files, and this is done by the function
-~org-publish-org-to-html~ which calls the HTML exporter (see [[HTML
+~org-html-publish-to-html~ which calls the HTML exporter (see [[HTML
 export]]).  But you also can publish your content as PDF files using
-~org-publish-org-to-pdf~, or as ~ascii~, ~latin1~ or
+~org-latex-publish-to-pdf~, or as ~ascii~, ~latin1~ or
 ~utf8~ encoded files using the corresponding functions.  If you want to
 publish the Org file itself, but with /archived/, /commented/, and
-/tag-excluded/ trees removed, use ~org-publish-org-to-org~ and set the
+/tag-excluded/ trees removed, use ~org-org-publish-to-org~ and set the
 parameters ~:plain-source~ and/or ~:htmlized-source~.  This will
 produce {{{file(file.org)}}} and {{{file(file.org.html)}}} in the publishing
 directory.[fn:146]  Other files like images only need to be copied to the
@@ -13855,8 +13422,8 @@ variables in Org.  The table below lists these properties along
 with the variable they belong to.  See the documentation string for the
 respective variable for details.
 
-{{{vindex(org-export-html-link-up)}}}
-{{{vindex(org-export-html-link-home)}}}
+{{{vindex(org-html-link-up)}}}
+{{{vindex(org-html-link-home)}}}
 {{{vindex(org-export-default-language)}}}
 {{{vindex(org-display-custom-times)}}}
 {{{vindex(org-export-headline-levels)}}}
@@ -13886,27 +13453,27 @@ respective variable for details.
 {{{vindex(org-export-time-stamp-file)}}}
 {{{vindex(org-export-with-tables)}}}
 {{{vindex(org-export-highlight-first-table-line)}}}
-{{{vindex(org-export-html-style-include-default)}}}
-{{{vindex(org-export-html-style-include-scripts)}}}
-{{{vindex(org-export-html-style)}}}
-{{{vindex(org-export-html-style-extra)}}}
-{{{vindex(org-export-html-link-org-files-as-html)}}}
-{{{vindex(org-export-html-inline-images)}}}
-{{{vindex(org-export-html-extension)}}}
-{{{vindex(org-export-html-table-tag)}}}
-{{{vindex(org-export-html-expand)}}}
-{{{vindex(org-export-html-with-timestamp)}}}
+{{{vindex(org-html-head-include-default-style)}}}
+{{{vindex(org-html-style-include-scripts)}}}
+{{{vindex(org-html-style)}}}
+{{{vindex(org-html-style-extra)}}}
+{{{vindex(org-html-link-org-files-as-html)}}}
+{{{vindex(org-html-inline-images)}}}
+{{{vindex(org-html-extension)}}}
+{{{vindex(org-html-table-tag)}}}
+{{{vindex(org-html-expand)}}}
+{{{vindex(org-html-with-timestamp)}}}
 {{{vindex(org-export-publishing-directory)}}}
-{{{vindex(org-export-html-preamble)}}}
-{{{vindex(org-export-html-postamble)}}}
+{{{vindex(org-html-preamble)}}}
+{{{vindex(org-html-postamble)}}}
 {{{vindex(user-full-name)}}}
 {{{vindex(user-mail-address)}}}
 {{{vindex(org-export-select-tags)}}}
 {{{vindex(org-export-exclude-tags)}}}
 
 #+attr_texinfo: :table-type table :indic @asis
-- ~:link-up~ :: ~org-export-html-link-up~
-- ~:link-home~ :: ~org-export-html-link-home~
+- ~:link-up~ :: ~org-html-link-up~
+- ~:link-home~ :: ~org-html-link-home~
 - ~:language~ :: ~org-export-default-language~
 - ~:customtime~ :: ~org-display-custom-times~
 - ~:headline-levels~ :: ~org-export-headline-levels~
@@ -13926,7 +13493,7 @@ respective variable for details.
 - ~:priority~ :: ~org-export-with-priority~
 - ~:TeX-macros~ :: ~org-export-with-TeX-macros~
 - ~:LaTeX-fragments~ :: ~org-export-with-LaTeX-fragments~
-- ~:latex-listings~ :: ~org-export-latex-listings~
+- ~:latex-listings~ :: ~org-latex-listings~
 - ~:skip-before-1st-heading~ :: ~org-export-skip-text-before-1st-heading~
 - ~:fixed-width~ :: ~org-export-with-fixed-width~
 - ~:timestamps~ :: ~org-export-with-timestamps~
@@ -13937,23 +13504,23 @@ respective variable for details.
 - ~:creator-info~ :: ~org-export-creator-info~
 - ~:tables~ :: ~org-export-with-tables~
 - ~:table-auto-headline~ :: ~org-export-highlight-first-table-line~
-- ~:style-include-default~ :: ~org-export-html-style-include-default~
-- ~:style-include-scripts~ :: ~org-export-html-style-include-scripts~
-- ~:style~ :: ~org-export-html-style~
-- ~:style-extra~ :: ~org-export-html-style-extra~
-- ~:convert-org-links~ :: ~org-export-html-link-org-files-as-html~
-- ~:inline-images~ :: ~org-export-html-inline-images~
-- ~:html-extension~ :: ~org-export-html-extension~
-- ~:html-preamble~ :: ~org-export-html-preamble~
-- ~:html-postamble~ :: ~org-export-html-postamble~
-- ~:xml-declaration~ :: ~org-export-html-xml-declaration~
-- ~:html-table-tag~ :: ~org-export-html-table-tag~
-- ~:expand-quoted-html~ :: ~org-export-html-expand~
-- ~:timestamp~ :: ~org-export-html-with-timestamp~
+- ~:style-include-default~ :: ~org-html-head-include-default-style~
+- ~:style-include-scripts~ :: ~org-html-style-include-scripts~
+- ~:style~ :: ~org-html-style~
+- ~:style-extra~ :: ~org-html-style-extra~
+- ~:convert-org-links~ :: ~org-html-link-org-files-as-html~
+- ~:inline-images~ :: ~org-html-inline-images~
+- ~:html-extension~ :: ~org-html-extension~
+- ~:html-preamble~ :: ~org-html-preamble~
+- ~:html-postamble~ :: ~org-html-postamble~
+- ~:xml-declaration~ :: ~org-html-xml-declaration~
+- ~:html-table-tag~ :: ~org-html-table-tag~
+- ~:expand-quoted-html~ :: ~org-html-expand~
+- ~:timestamp~ :: ~org-html-with-timestamp~
 - ~:publishing-directory~ :: ~org-export-publishing-directory~
 - ~:select-tags~ :: ~org-export-select-tags~
 - ~:exclude-tags~ :: ~org-export-exclude-tags~
-- ~:latex-image-options~ :: ~org-export-latex-image-default-option~
+- ~:latex-image-options~ :: ~org-latex-image-default-option~
 
 
 Most of the ~org-export-with-*~ variables have the same effect in both
@@ -14199,7 +13766,7 @@ right place on the web server, and publishing images to it.
           :base-directory "~/org/"
           :base-extension "org"
           :publishing-directory "/ssh:user@@host:~/html/notebook/"
-          :publishing-function org-publish-org-to-html
+          :publishing-function org-html-publish-to-html
           :exclude "PrivatePage.org"   ;; regexp
           :headline-levels 3
           :section-numbers nil
@@ -15526,10 +15093,9 @@ code file.
 
 - ~org~ ::
 
-  Include text from the Org mode file as a comment.
-
-  The text is picked from the leading context of the tangled code and is
-  limited by the nearest headline or source block as the case may be.
+  Include text from the Org mode file as a comment.  The text is picked
+  from the leading context of the tangled code and is limited by the
+  nearest headline or source block as the case may be.
 
 - ~both~ ::
 
@@ -15800,7 +15366,8 @@ or hlines. The ~:hlines~ argument to a code block accepts the values
   Strips horizontal lines from the input table. In most languages this
   is the desired effect because an ~hline~ symbol is interpreted as an
   unbound variable and raises an error. Setting ~:hlines no~ or relying
-  on the default value yields the following results.
+  on the default value yields the following results.  Note that the
+  ~:hline~ header argument has no effect for Emacs Lisp code blocks.
 
   #+begin_example
      #+TBLNAME: many-cols
@@ -15902,8 +15469,12 @@ names may be handled directly in Emacs Lisp.
 :DESCRIPTION: Handle row names in tables
 :END:
 
-The ~:rownames~ header argument can take on the values ~yes~
-or ~no~, with a default value of ~no~.
+The ~:rownames~ header argument can take on the values ~yes~ or ~no~,
+with a default value of ~no~.  Note that Emacs Lisp code +blocks
+ignore the ~:rownames~ header argument entirely given the ease
+with which tables with row names may be handled directly in Emacs
+Lisp.
+
 
 #+attr_texinfo: :table-type table :indic @asis
 - ~no~ ::
@@ -16689,16 +16260,17 @@ effective only when the file is visited again in a new Emacs session.
 
   {{{vindex(org-startup-with-inline-images)}}}
 
-  When visiting a file, inline images can be automatically displayed.
-  The corresponding variable is ~org-startup-with-inline-images~, with a
-  default value ~nil~ to avoid delays when visiting a file.
+  When visiting a file, LaTeX fragments can be converted to images
+  automatically.  The variable ~org-startup-with-latex-preview~ which
+  controls this behavior, is set to ~nil~ by default to avoid delays on
+  startup.
 
-  {{{cindex(@code{inlineimages}\\\, STARTUP keyword)}}}
-  {{{cindex(@code{noinlineimages}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{latexpreview}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{nolatexpreview}\\\, STARTUP keyword)}}}
 
   #+attr_texinfo: :table-type table :indic @asis
-  - ~inlineimages~   show inline images
-  - ~noinlineimages~ don't show inline images on startup
+  - ~latexpreview~ ::  preview LaTeX fragments
+  - ~nolatexpreview~ :: don't preview LaTeX fragments
 
   {{{vindex(org-log-done)}}}
   {{{vindex(org-log-note-clock-out)}}}
@@ -16725,6 +16297,10 @@ effective only when the file is visited again in a new Emacs session.
   {{{cindex(@code{logrefile}\\\, STARTUP keyword)}}}
   {{{cindex(@code{lognoterefile}\\\, STARTUP keyword)}}}
   {{{cindex(@code{nologrefile}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{logdrawer}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{nologdrawer}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{logstatesreversed}\\\, STARTUP keyword)}}}
+  {{{cindex(@code{nologstatesreversed}\\\, STARTUP keyword)}}}
 
   #+attr_texinfo: :table-type table :indic @asis
   - ~logdone~ ::            record a timestamp when an item is marked DONE
@@ -16744,6 +16320,10 @@ effective only when the file is visited again in a new Emacs session.
   - ~logrefile~ ::          record a timestamp when refiling
   - ~lognoterefile~ ::      record a note when refiling
   - ~nologrefile~ ::        do not record when refiling
+  - ~logdrawer~ ::          store log in drawer
+  - ~nologdrawer~ ::        store log outside of drawer
+  - ~logstatesreversed~ ::  reverse the order of states notes
+  - ~nologstatesreversed~ :: do not reverse the order of states notes
 
   {{{vindex(org-hide-leading-stars)}}}
   {{{vindex(org-odd-levels-only)}}}
@@ -16854,7 +16434,7 @@ effective only when the file is visited again in a new Emacs session.
 
   This line contains the formulas for the table directly above the line.
 
-- {{{kbd(#+TITLE:)}}}, {{{kbd(#+AUTHOR:)}}}, {{{kbd(#+EMAIL:)}}}, {{{kbd(#+LANGUAGE:)}}}, {{{kbd(#+TEXT:)}}}, {{{kbd(#+DATE:)}}}, {{{kbd(#+OPTIONS:)}}}, {{{kbd(#+BIND:)}}}, {{{kbd(#+XSLT:)}}}, {{{kbd(#+DESCRIPTION:)}}}, {{{kbd(#+KEYWORDS:)}}}, {{{kbd(#+LaTeX_HEADER:)}}}, {{{kbd(#+STYLE:)}}}, {{{kbd(#+LINK_UP:)}}}, {{{kbd(#+LINK_HOME:)}}}, {{{kbd(#+EXPORT_SELECT_TAGS:)}}}, {{{kbd(#+EXPORT_EXCLUDE_TAGS:)}}}
+- {{{kbd(#+TITLE:)}}}, {{{kbd(#+AUTHOR:)}}}, {{{kbd(#+EMAIL:)}}}, {{{kbd(#+LANGUAGE:)}}}, {{{kbd(#+TEXT:)}}}, {{{kbd(#+DATE:)}}}, {{{kbd(#+OPTIONS:)}}}, {{{kbd(#+BIND:)}}}, {{{kbd(#+DESCRIPTION:)}}}, {{{kbd(#+KEYWORDS:)}}}, {{{kbd(#+LaTeX_HEADER:)}}}, {{{kbd(#+HTML_HEAD:)}}}, {{{kbd(#+HTML_LINK_UP:)}}}, {{{kbd(#+HTML_LINK_HOME:)}}}, {{{kbd(#+SELECT_TAGS:)}}}, {{{kbd(#+EXCLUDE_TAGS:)}}}
 
   These lines provide settings for exporting files.  For more details see
   [[Export options]].
@@ -17283,15 +16863,15 @@ region even if the cursor moves across a special context.
   function:
 
   #+begin_src emacs-lisp
-  (defun yas/org-very-safe-expand ()
-         (let ((yas/fallback-behavior 'return-nil)) (yas/expand)))
+    (defun yas/org-very-safe-expand ()
+      (let ((yas/fallback-behavior 'return-nil)) (yas/expand)))
   #+end_src
 
   Then, tell Org mode what to do with the new function:
 
   #+begin_src emacs-lisp
-  (add-hook 'org-mode-hook
-            (lambda ()
+    (add-hook 'org-mode-hook
+              (lambda ()
                 (make-variable-buffer-local 'yas/trigger-key)
                 (setq yas/trigger-key [tab])
                 (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
@@ -17900,7 +17480,7 @@ LaTeX file:
    \end{comment}
 #+end_example
 
-Pressing `C-c C-c' on ~a new house~ will insert the converted
+Pressing {{{kbd(C-c C-c)}}} on ~a new house~ will insert the converted
 LaTeX list between the two marker lines.
 
 ** Dynamic blocks
@@ -17965,10 +17545,10 @@ this:
 #+header: :eval no
 #+header: :exports code
 #+begin_src emacs-lisp
-(defun org-dblock-write:block-update-time (params)
-   (let ((fmt (or (plist-get params :format) "%d. %m. %Y")))
-     (insert "Last block update at: "
-             (format-time-string fmt (current-time)))))
+  (defun org-dblock-write:block-update-time (params)
+    (let ((fmt (or (plist-get params :format) "%d. %m. %Y")))
+      (insert "Last block update at: "
+              (format-time-string fmt (current-time)))))
 #+end_src
 
 If you want to make sure that all dynamic blocks are always
@@ -18108,6 +17688,38 @@ like this, even without defining a special function:
                                 'regexp ":waiting:"))
     (org-agenda-overriding-header "Projects waiting for something: "))))
 #+end_src
+
+** Speeding up your agendas
+
+When your Org files grow in both number and size, agenda commands may
+start to become slow.  Below are some tips on how to speed up the
+agenda commands.
+
+  1. Reduce the number of Org agenda files: this will reduce the
+     slowness caused by accessing a hard drive.
+
+  2. Reduce the number of DONE and archived headlines: this way the
+     agenda does not need to skip them.
+
+  3. Inhibit the dimming of blocked tasks:
+     #+begin_src emacs-lisp
+       (setq org-agenda-dim-blocked-tasks nil)
+     #+end_src
+	
+  4. Inhibit agenda files startup options:
+     #+begin_src emacs-lisp
+       (setq org-agenda-inhibit-startup nil)
+     #+end_src
+
+  5. Disable tag inheritance in agenda:
+     #+begin_src emacs-lisp
+       (setq org-agenda-use-tag-inheritance nil)
+     #+end_src
+
+You can set these options for specific agenda views only.  See the
+docstrings of these variables for details on why they affect the
+agenda generation, and this dedicated [[http://orgmode.org/worg/agenda-optimization.html][Word page]] for further
+explanation.
 
 ** Extracting agenda information
    :PROPERTIES:
@@ -18433,7 +18045,7 @@ Entries in comment trees and in archive trees will be ignored.
 #+header: :eval no
 #+header: :exports code
 #+begin_src emacs-lisp
-(org-map-entries
+  (org-map-entries
    '(org-todo "UPCOMING")
    "+TOMORROW" 'file 'archive 'comment)
 #+end_src
@@ -18444,7 +18056,7 @@ The following example counts the number of entries with TODO keyword
 #+header: :eval no
 #+header: :exports code
 #+begin_src emacs-lisp
-(length (org-map-entries t "/+WAITING" 'agenda))
+  (length (org-map-entries t "/+WAITING" 'agenda))
 #+end_src
 
 * MobileOrg
@@ -18685,19 +18297,11 @@ co-maintainers, either of the code or the community:
   has been outstanding, and opened the doors for many new ideas and
   features.
 
-- Jambunathan K ::
-
-  Jambunathan contributed the ODT exporter, definitly a killer feature
-  of Org mode. He also contributed the new HTML exporter, which is
-  another core feature of Org. Here too, I knew I could rely on him to
-  fix bugs in these areas and to patiently explain the users what was
-  the problems and solutions.
-
 - Achim Gratz ::
 
   Achim rewrote the building process of Org, turning some /ad hoc/ tools
   into a flexible and conceptually clean process. He patiently coped
-  with the many hicups that such a change can create for users.
+  with the many hiccups that such a change can create for users.
 
 - Nick Dokos ::
 
@@ -18707,13 +18311,18 @@ co-maintainers, either of the code or the community:
   without him.
 
 
-I received support from so many users that it is clearly impossible to be
-fair when shortlisting a few of them---but Org's history would not be
-complete if the ones above were not mentioned in this manual.
+I received support from so many users that it is clearly impossible to
+be fair when shortlisting a few of them, but Org's history would not
+be complete if the ones above were not mentioned in this manual.
 
 ** List of contributions
 
 - Russel Adams came up with the idea for drawers.
+
+- Suvayu Ali has steadily helped on the mailing list, providing useful
+  feedback on many features and several patches.
+
+- Luis Anaya wrote `ox-man.el'.
 
 - Thomas Baumann wrote {{{file(org-bbdb.el)}}} and {{{file(org-mhe.el)}}}.
 
@@ -18725,6 +18334,10 @@ complete if the ones above were not mentioned in this manual.
 - Jan Böcker wrote {{{file(org-docview.el)}}}.
 
 - Brad Bozarth showed how to pull RSS feed data into Org mode files.
+
+- Michael Brand helped by reporting many bugs and testing many
+  features.  He also implemented the distinction between empty fields
+  and 0-value fields in Org's spreadsheets.
 
 - Tom Breton wrote {{{file(org-choose.el)}}}.
 
@@ -18740,7 +18353,9 @@ complete if the ones above were not mentioned in this manual.
 
 - Sacha Chua suggested copying some linking code from Planner.
 
-- Baoqiu Cui contributed the DocBook exporter.
+- Baoqiu Cui contributed the DocBook exporter, which was deleted from
+  Org 8.0.  You can now export to Texinfo and export the
+  {{{file(.texi)}}} file to DocBook using ~makeinfo~.
 
 - Eddward DeVilla proposed and tested checkbox statistics.  He also
   came up with the idea of properties, and that there should be an API
@@ -18757,7 +18372,8 @@ complete if the ones above were not mentioned in this manual.
 
 -  Christian Egli converted the documentation into Texinfo format,
    inspired the agenda, patched CSS formatting into the HTML exporter,
-   and wrote {{{file(org-taskjuggler.el)}}}.
+   and wrote {{{file(org-taskjuggler.el)}}}, which has been rewritten
+   by Nicolas Goaziou as {{{file(ox-taskjuggler.el)}}} for Org 8.0.
 
 - David Emery provided a patch for custom CSS support in exported
   HTML agendas.
@@ -18783,7 +18399,9 @@ complete if the ones above were not mentioned in this manual.
 
 - Niels Giesen had the idea to automatically archive DONE trees.
 
-- Nicolas Goaziou rewrote much of the plain list code.
+- Nicolas Goaziou rewrote much of the plain list code.  He also wrote
+  `org-element.el' and `org-export.el', which were huge steps forward
+  in implementing a clean framework for Org exporters.
 
 - Kai Grossjohann pointed out key-binding conflicts with other packages.
 
@@ -18853,6 +18471,9 @@ complete if the ones above were not mentioned in this manual.
 - Pete Phillips helped during the development of the TAGS feature,
   and provided frequent feedback.
 
+- Francesco Pizzolante provided patches that helped speeding up the
+  agenda generation.
+
 - Martin Pohlack provided the code snippet to bundle character
   insertion into bundles of 20 for undo.
 
@@ -18877,6 +18498,9 @@ complete if the ones above were not mentioned in this manual.
 
 - Christian Schlauer proposed angular brackets around links, among
   other things.
+
+- Christopher Schmidt reworked `orgstruct-mode' so that users can
+  enjoy folding in non-org buffers by using Org headlines in comments.
 
 - Paul Sexton wrote {{{file(org-ctags.el)}}}.
 
@@ -18910,7 +18534,8 @@ complete if the ones above were not mentioned in this manual.
 - David O'Toole wrote {{{file(org-publish.el)}}} and drafted the
   manual chapter about publishing.
 
-- Jambunathan K contributed the ODT exporter.
+- Jambunathan K contributed the ODT exporter and rewrote the HTML
+  exporter. 
 
 - Sebastien Vauban reported many issues with LaTeX and BEAMER
   export and enabled source code highlighting in Gnus.
@@ -19907,7 +19532,7 @@ for examples.
 version 1.34 of the {{{file(htmlize.el)}}} package, which is
 distributed with Org). Fontified code chunks in LaTeX can be
 achieved using either the listings package or the [[http://code.google.com/p/minted][minted]] package.
-Refer to ~org-export-latex-listings~ documentation for details.
+Refer to ~org-latex-listings~ documentation for details.
 
 [fn:103] Code in {{{samp(src)}}} blocks may also be evaluated either
 interactively or on export. See see [[Working with source code]] for more
@@ -19972,7 +19597,7 @@ several ~#+OPTIONS~ lines.
 
 [fn:119] To select the current subtree, use {{{kbd(C-c @)}}}.
 
-[fn:120] But see the variable ~org-export-html-inline-images~.
+[fn:120] But see the variable ~org-html-inline-images~.
 
 [fn:121] If you plan to use this regularly or on pages with
 significant page views, you should install MathJax on your own server
@@ -19981,27 +19606,27 @@ can be found on the MathJax website, see
 [[http://www.mathjax.org/resources/docs/?installation.html]].
 
 [fn:122] If the classes on TODO keywords and tags lead to conflicts,
-use the variables ~org-export-html-todo-kwd-class-prefix~ and
-~org-export-html-tag-class-prefix~ to make them unique.
+use the variables ~org-html-todo-kwd-class-prefix~ and
+~org-html-tag-class-prefix~ to make them unique.
 
 [fn:123] This style is defined in the constant
-~org-export-html-style-default~, which you should not modify. To turn
+~org-html-style-default~, which you should not modify. To turn
 inclusion of these defaults off, customize
-~org-export-html-style-include-default~.
+~org-html-head-include-default-style~.
 
 [fn:124] The default LaTeX output is designed for processing with
 ~pdftex~ or LaTeX. It includes packages that are not compatible
 with ~xetex~ and possibly ~luatex~. See the variables
-~org-export-latex-default-packages-alist~ and
-~org-export-latex-packages-alist~.
+~org-latex-default-packages-alist~ and
+~org-latex-packages-alist~.
 
 [fn:125] This requires ~transient-mark-mode~ be turned on.
 
 [fn:126] To select the current subtree, use {{{kbd(C-c @)}}}.
 
 [fn:127] Into which the values of
-~org-export-latex-default-packages-alist~ and
-~org-export-latex-packages-alist~ are spliced.
+~org-latex-default-packages-alist~ and
+~org-latex-packages-alist~ are spliced.
 
 [fn:128] One can also take advantage of this option to pass other,
 unrelated options into the figure or table environment. For an example
