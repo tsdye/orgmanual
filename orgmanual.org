@@ -11874,13 +11874,12 @@ apply the script to your pages, configure the variable
 {{{cindex(PDF export)}}}
 {{{cindex(Guerry\\\, Bastien)}}}
 
-Org mode contains a LaTeX exporter written by Bastien Guerry. With
-further processing, this backend is also used to produce PDF
-output.[fn:124] Since the LaTeX output uses {{{file(hyperref)}}} to
-implement links and cross references, the PDF output file will be
-fully linked. Beware of the fact that your ~org~ file has to be
-properly structured in order to be correctly exported: respect the
-hierarchy of sections.
+Org mode contains a LaTeX exporter. With further processing, this
+backend is also used to produce PDF output.[fn:124] Since the LaTeX
+output uses {{{file(hyperref)}}} to implement links and cross
+references, the PDF output file will be fully linked. Beware of the
+fact that your ~org~ file has to be properly structured in order to be
+correctly exported: respect the hierarchy of sections.
 
 *** LaTeX/PDF export commands
     :PROPERTIES:
