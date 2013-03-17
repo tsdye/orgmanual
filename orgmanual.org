@@ -18638,8 +18638,11 @@ license to the document, as described in section 6 of the license.
 #+END_QUOTE
 
 * Instructions for use                                             :noexport:
-- [ ] Execute [[Editing setup][this source code block]]
-- [ ] Asynchronously generate the info file, `C-e i i'
+
+Use the build system.
+
+cd path/to/org-mode
+make orgmanual
 
 * Improvements and fixes [8/12] 				   :noexport:
 - [X] Jon will fix detailed node listing
