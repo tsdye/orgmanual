@@ -18827,7 +18827,7 @@ There should be a section about smart-quotes too.
 #+header: :eval no-export
 #+begin_src emacs-lisp
 (require 'ox-texinfo)
-(define-key org-mode-map (kbd "C-c e") 'org-export-dispatch)
+; (define-key org-mode-map (kbd "C-c e") 'org-export-dispatch)
 (setq org-src-preserve-indentation t)
 (setq org-export-in-background t)
 (setq org-export-async-debug t)
