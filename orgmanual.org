@@ -11872,7 +11872,6 @@ apply the script to your pages, configure the variable
    :END:
 {{{cindex(@LaTeX{} export)}}}
 {{{cindex(PDF export)}}}
-{{{cindex(Guerry\\\, Bastien)}}}
 
 Org mode contains a LaTeX exporter. With further processing, this
 backend is also used to produce PDF output.[fn:124] Since the LaTeX
@@ -18821,6 +18820,13 @@ There should be a section about smart-quotes too.
 
 **** TODO Add smart quotes section
 
+* Bastien's instructions
+~$ cd ~/git/org-mode
+~$ git checkout master
+~$ git pull
+~$ git log --since="2013-01-01" --no-merges doc/org.texi
+[Get the last commit in this log, e.g. xxxxxx]
+~$ git diff xxxxxx.. doc/org.texi
 * Org-mode setup 						   :noexport:
 ** Editing setup
 #+name: setup-editing
